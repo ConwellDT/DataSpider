@@ -1,0 +1,4 @@
+﻿
+2021-11-04  kwc
+			DateTime 형식인 경우 UTC 값으로 변환하도록 수정함.
+			updatevalue = datetime.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss.fffZ");

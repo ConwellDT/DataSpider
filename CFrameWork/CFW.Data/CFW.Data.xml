@@ -1,0 +1,517 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CFW.Data</name>
+    </assembly>
+    <members>
+        <member name="T:CFW.Data.OracleDBDef">
+            <summary>
+            OracleDBDef에 대한 요약 설명입니다.
+            </summary>
+        </member>
+        <member name="F:CFW.Data.OracleDBDef.ORAMID_GOOD">
+            <summary>
+            DB error code : Normal
+            </summary>
+        </member>
+        <member name="F:CFW.Data.OracleDBDef.ORAMID_NOCONN">
+            <summary>
+             DB error code : Disconnect
+            </summary>
+        </member>
+        <member name="F:CFW.Data.OracleDBDef.ORAMID_NOCONN1">
+            <summary>
+            DB error code : Disconnect1
+            </summary>
+        </member>
+        <member name="F:CFW.Data.OracleDBDef.ORAMID_NOCONN2">
+            <summary>
+            DB error code : Disconnect2
+            </summary>
+        </member>
+        <member name="F:CFW.Data.OracleDBDef.ORAMID_NOCONN3">
+            <summary>
+            DB error code : Disconnect3
+            </summary>
+        </member>
+        <member name="F:CFW.Data.OracleDBDef.ORAMID_NOCONN4">
+            <summary>
+            DB error code : Disconnect4
+            </summary>
+        </member>
+        <member name="F:CFW.Data.OracleDBDef.ORAMID_NOCONN5">
+            <summary>
+            DB error code : Disconnect5
+            </summary>
+        </member>
+        <member name="F:CFW.Data.OracleDBDef.ORAMID_NOCONN6">
+            <summary>
+            DB error code : Disconnect6
+            </summary>
+        </member>
+        <member name="F:CFW.Data.OracleDBDef.ORAMID_NOCONN7">
+            <summary>
+            DB error code : Disconnect7
+            </summary>
+        </member>
+        <member name="F:CFW.Data.OracleDBDef.ORAMID_NOFOUND">
+            <summary>
+            DB error code : No data found
+            </summary>
+        </member>
+        <member name="F:CFW.Data.OracleDBDef.ORAMID_QUENODATA">
+            <summary>
+            DB error code : No data found(AQ)
+            </summary>
+        </member>
+        <member name="F:CFW.Data.OracleDBDef.ORAMID_OVERLAP">
+            <summary>
+            DB error code : Unique constraint 
+            </summary>
+        </member>
+        <member name="F:CFW.Data.OracleDBDef.ORAMID_LOCK">
+            <summary>
+            DB error code : Database lock 
+            </summary>
+        </member>
+        <member name="M:CFW.Data.OracleDBDef.#ctor">
+            <summary>
+            OracleDBDef 생성자 입니다.
+            </summary>
+        </member>
+        <member name="T:CFW.Data.OracleDbAgent">
+            <summary>
+            Class1에 대한 요약 설명입니다.
+            </summary>
+        </member>
+        <member name="M:CFW.Data.OracleDbAgent.#ctor">
+            <summary>
+            생성자입니다.
+            </summary>
+        </member>
+        <member name="M:CFW.Data.OracleDbAgent.GetOracleConnection">
+            <summary>
+            OracleConnection을 가져옵니다.
+            </summary>
+            <returns>OracleConnection</returns>
+        </member>
+        <member name="M:CFW.Data.OracleDbAgent.DBConnectState">
+            <summary>
+            DB 커넥션 상태를 가져옵니다.
+            </summary>
+            <returns>DB 커넥션 상태</returns>
+        </member>
+        <member name="M:CFW.Data.OracleDbAgent.DBConnect(System.String,System.String,System.String)">
+            <summary>
+            DBConnect
+            </summary>
+            <param name="p_strUSER">UserName</param>
+            <param name="p_strPW">PassWord</param>
+            <param name="p_strAlias">Alias</param>
+            <returns></returns>
+        </member>
+        <member name="M:CFW.Data.OracleDbAgent.DBConnect(System.String,System.String,System.String,System.String@,System.String@)">
+            <summary>
+            DBConnect
+            </summary>
+            <param name="p_strUSER">UserName</param>
+            <param name="p_strPW">PassWord</param>
+            <param name="p_strAlias">Alias</param>
+            <param name="p_strErrCode">ErrorCode(out)</param>
+            <param name="p_strErrText">ErrorText(out)</param>
+            <returns></returns>
+        </member>
+        <member name="M:CFW.Data.OracleDbAgent.DBDisConnect">
+            <summary>
+            DB 연결을 끊습니다.
+            </summary>
+        </member>
+        <member name="M:CFW.Data.OracleDbAgent.DBDisConnect(System.String@,System.String@)">
+            <summary>
+            DB 연결을 끊습니다.
+            </summary>
+            <param name="p_strErrCode">ErrorCode(out)</param>
+            <param name="p_strErrText">ErrorText(out)</param>
+            <returns></returns>
+        </member>
+        <member name="M:CFW.Data.OracleDbAgent.Commit">
+            <summary>
+            Commit
+            </summary>
+        </member>
+        <member name="M:CFW.Data.OracleDbAgent.Commit(System.String@,System.String@)">
+            <summary>
+            Commit
+            </summary>
+            <param name="p_strErrCode">ErrorCode(out)</param>
+            <param name="p_strErrText">ErrorText(out)</param>
+            <returns>성공여부</returns>
+        </member>
+        <member name="M:CFW.Data.OracleDbAgent.RollBack">
+            <summary>
+            RollBack
+            </summary>
+        </member>
+        <member name="M:CFW.Data.OracleDbAgent.RollBack(System.String@,System.String@)">
+            <summary>
+            RollBack
+            </summary>
+            <param name="p_strErrCode">ErrorCode(out)</param>
+            <param name="p_strErrText">ErrorText(out)</param>
+            <returns>성공여부</returns>
+        </member>
+        <member name="M:CFW.Data.OracleDbAgent.GetErrorCode(System.Exception,System.String@,System.String@)">
+            <summary>
+            GetErrorCode
+            </summary>
+            <param name="e">Exception</param>
+            <param name="p_strErrCode">ErrorCode(out)</param>
+            <param name="p_strErrText">ErrorText(out)</param>
+        </member>
+        <member name="M:CFW.Data.OracleDbAgent.IsDBNoConnErrCode(System.String)">
+            <summary>
+            IsDBNoConnErrCode
+            </summary>
+            <param name="p_strErrCode">ErrorCode</param>
+            <returns></returns>
+        </member>
+        <member name="M:CFW.Data.OracleDbAgent.MessageFormat(System.Exception,System.String,System.String,System.String,System.String@,System.String@,System.String)">
+            <summary>
+            해당 에러 메시지를 형식에 맞게 변경시킨다. 
+            </summary>
+            <param name="e">Exception 변수</param>
+            <param name="p_strTitle">Title</param>
+            <param name="p_strAction">Action</param>
+            <param name="p_strAdjust">Adjus</param>
+            <param name="p_strErrCode">Error Code</param>
+            <param name="p_strErrText">Error Text</param>
+            <param name="p_strCondition">Condition</param>
+        </member>
+        <member name="M:CFW.Data.OracleDbAgent.MessageFormat(System.String,System.String,System.String,System.String@,System.String)">
+            <summary>
+            해당 메시지를 형식에 맞게 변경시킨다.
+            </summary>
+            <param name="p_strTitle">Title</param>
+            <param name="p_strAction">Action</param>
+            <param name="p_strAdjust">Adjus</param>
+            <param name="p_strErrText">Error Text</param>
+            <param name="p_strCondition">Condition</param>
+        </member>
+        <member name="M:CFW.Data.OracleDbAgent.ExecuteNonQuery(System.String,System.String@,System.String@)">
+            <summary>
+            SQL문을 실행합니다.
+            </summary>
+            <param name="p_strSQL">SQL문</param>
+            <param name="p_strErrCode">Error Code(out)</param>
+            <param name="p_strErrText">Error Text(out)</param>
+            <returns>성공여부</returns>
+        </member>
+        <member name="M:CFW.Data.OracleDbAgent.ExecuteNonQuery(System.String,System.Int32,System.String@,System.String@)">
+            <summary>
+            SQL문을 실행합니다.
+            </summary>
+            <param name="p_strSQL">SQL문</param>
+            <param name="p_nLongSize">InitialLONGFetchSize</param>
+            <param name="p_strErrCode">Error Code(out)</param>
+            <param name="p_strErrText">Error Text(out)</param>
+            <returns>성공여부</returns>
+        </member>
+        <member name="M:CFW.Data.OracleDbAgent.ExecuteReader(System.String,System.String@,System.String@)">
+            <summary>
+            SQL문을 실행합니다.
+            OracleDataReader 형태로 데이터 반환합니다.
+            </summary>
+            <param name="p_strSQL">SQL문</param>
+            <param name="p_strErrCode">Error Code(out)</param>
+            <param name="p_strErrText">Error Text(out)</param>
+            <returns>OracleDataReader</returns>
+        </member>
+        <member name="M:CFW.Data.OracleDbAgent.ExecuteReader(System.String,System.Int32,System.String@,System.String@)">
+            <summary>
+            SQL문을 실행합니다.
+            OracleDataReader 형태로 데이터 반환합니다.
+            </summary>
+            <param name="p_strSQL">SQL문</param>
+            <param name="p_nLongSize">InitialLONGFetchSize</param>
+            <param name="p_strErrCode">Error Code(out)</param>
+            <param name="p_strErrText">Error Text(out)</param>
+            <returns></returns>
+        </member>
+        <member name="M:CFW.Data.OracleDbAgent.ExecuteScalar(System.String,System.Int32@,System.String@,System.String@)">
+            <summary>
+            SQL문을 실행합니다.
+            </summary>
+            <param name="p_strSQL">SQL문</param>
+            <param name="p_nValue">int Value(out)</param>
+            <param name="p_strErrCode">Error Code(out)</param>
+            <param name="p_strErrText">Error Text(out)</param>
+            <returns></returns>
+        </member>
+        <member name="M:CFW.Data.OracleDbAgent.ExecuteScalar(System.String,System.Int64@,System.String@,System.String@)">
+            <summary>
+            SQL문을 실행합니다.
+            </summary>
+            <param name="p_strSQL">SQL문</param>
+            <param name="p_lgValue">long Value(out)</param>
+            <param name="p_strErrCode">Error Code(out)</param>
+            <param name="p_strErrText">Error Text(out)</param>
+            <returns>성공여부</returns>
+        </member>
+        <member name="M:CFW.Data.OracleDbAgent.ExecuteScalar(System.String,System.String@,System.String@,System.String@)">
+            <summary>
+            SQL문을 실행합니다.
+            </summary>
+            <param name="p_strSQL">SQL문</param>
+            <param name="p_strValue">string Value(out)</param>
+            <param name="p_strErrCode">Error Code(out)</param>
+            <param name="p_strErrText">Error Text(out)</param>
+            <returns>성공여부</returns>
+        </member>
+        <member name="T:CFW.Data.OracleDbAccess">
+            <summary>
+            OracleDbAccess에 대한 요약 설명입니다.
+            </summary>
+        </member>
+        <member name="M:CFW.Data.OracleDbAccess.#ctor">
+            <summary>
+            OracleDbAccess 생성자 입니다.
+            </summary>
+        </member>
+        <member name="F:CFW.Data.OracleDbAccess.m_cfgPath">
+            <summary>
+            connectionHint 를 사용하여 Connection String 생성해야됨. 
+            </summary>		
+        </member>
+        <member name="F:CFW.Data.OracleDbAccess.strConnectionStringE">
+            <summary>
+            엔진 ConnectionString 입니다.
+            </summary>
+        </member>
+        <member name="F:CFW.Data.OracleDbAccess.strConnectionStringV">
+            <summary>
+            완성차 ConnectionString 입니다.
+            </summary>
+        </member>
+        <member name="F:CFW.Data.OracleDbAccess.strConnectionStringS">
+            <summary>
+            프레스 ConnectionString 입니다.
+            </summary>
+        </member>
+        <member name="F:CFW.Data.OracleDbAccess.strConnectionStringP">
+            <summary>
+            설비 현황 ConnectionString 입니다.
+            </summary>
+        </member>
+        <member name="F:CFW.Data.OracleDbAccess.strConnectionStringQ">
+            <summary>
+            품질 현황 ConnectionString 입니다.
+            </summary>
+        </member>
+        <member name="F:CFW.Data.OracleDbAccess.strConnectionStringT">
+            <summary>
+            변속기 ConnectionString 입니다.
+            </summary>
+        </member>
+        <member name="M:CFW.Data.OracleDbAccess.Execute(System.String,System.String,Oracle.DataAccess.Client.OracleParameter[],System.Data.CommandType)">
+            <summary>
+            SQL 문을 실행한다
+            </summary>
+            <param name="connectionHint"></param>
+            <param name="commandText"></param>
+            <param name="oraParameters"></param>
+            <param name="commandType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CFW.Data.OracleDbAccess.Execute(System.String,System.Int32,System.String,Oracle.DataAccess.Client.OracleParameter[],System.Data.CommandType)">
+            <summary>
+            SQL 문을 실행한다
+            </summary>
+            <param name="connectionHint"></param>
+            <param name="commandTimeout"></param>
+            <param name="commandText"></param>
+            <param name="oraParameters"></param>
+            <param name="commandType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CFW.Data.OracleDbAccess.ExecuteScalar(System.String,System.String,Oracle.DataAccess.Client.OracleParameter[],System.Data.CommandType)">
+            <summary>
+            ExecuteScalar
+            </summary>
+            <param name="connectionHint"></param>
+            <param name="commandText"></param>
+            <param name="oraParameters"></param>
+            <param name="commandType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CFW.Data.OracleDbAccess.ExecuteScalar(System.String,System.Int32,System.String,Oracle.DataAccess.Client.OracleParameter[],System.Data.CommandType)">
+            <summary>oraParameters
+            ExecuteScalar
+            </summary>
+            <param name="connectionHint"></param>
+            <param name="commandTimeout"></param>
+            <param name="commandText"></param>
+            <param name="oraParameters"></param>
+            <param name="commandType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CFW.Data.OracleDbAccess.ExecuteMultiple(System.String,System.String,Oracle.DataAccess.Client.OracleParameter[],System.String[0:,0:],System.Data.CommandType)">
+            <summary>
+            동일 SQL 문을 다른 입력 파라미터값으로 여러번 실행한다.
+            </summary>
+            <param name="connectionHint"></param>
+            <param name="commandText"></param>
+            <param name="oraParameters"></param>
+            <param name="paramValues"></param>
+            <param name="commandType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CFW.Data.OracleDbAccess.ExecuteMultiple(System.String,System.Int32,System.String,Oracle.DataAccess.Client.OracleParameter[],System.String[0:,0:],System.Data.CommandType)">
+            <summary>
+            동일 SQL 문을 다른 입력 파라미터값으로 여러번 실행한다.
+            </summary>
+            <param name="connectionHint"></param>
+            <param name="commandTimeout"></param>
+            <param name="commandText"></param>
+            <param name="oraParameters"></param>
+            <param name="paramValues"></param>
+            <param name="commandType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CFW.Data.OracleDbAccess.GetDataSet(System.String,System.String,Oracle.DataAccess.Client.OracleParameter[],System.Data.CommandType)">
+            <summary>
+            DataSet 형태로 데이터 반환
+            </summary>
+            <param name="connectionHint"></param>
+            <param name="commandText"></param>
+            <param name="oraParameters"></param>
+            <param name="commandType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CFW.Data.OracleDbAccess.GetDataSet(System.String,System.Int32,System.String,Oracle.DataAccess.Client.OracleParameter[],System.Data.CommandType)">
+            <summary>
+            DataSet 형태로 데이터 반환
+            </summary>
+            <param name="connectionHint"></param>
+            <param name="commandTimeout"></param>
+            <param name="commandText"></param>
+            <param name="oraParameters"></param>
+            <param name="commandType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CFW.Data.OracleDbAccess.GetOracleDataReader(System.String,System.Int32,System.String,Oracle.DataAccess.Client.OracleParameter[],System.Data.CommandType)">
+            <summary>
+            OracleDataReader 형태로 데이터 반환
+            </summary>
+            <param name="connectionHint"></param>
+            <param name="commandTimeout"></param>
+            <param name="commandText"></param>
+            <param name="oraParameters"></param>
+            <param name="commandType"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CFW.Data.CONNECTIONTYPE">
+            <summary>
+            CONNECTIONTYPE
+            </summary>
+        </member>
+        <member name="F:CFW.Data.CONNECTIONTYPE.ENGINE">
+            <summary>
+            Engine
+            </summary>
+        </member>
+        <member name="F:CFW.Data.CONNECTIONTYPE.VEHICLE">
+            <summary>
+            Vehicle
+            </summary>
+        </member>
+        <member name="F:CFW.Data.CONNECTIONTYPE.PRESS">
+            <summary>
+            Press
+            </summary>
+        </member>
+        <member name="F:CFW.Data.CONNECTIONTYPE.PEMS">
+            <summary>
+            EQUIPMENT 
+            2007.05.14 / 설비현황 커넥션 추가
+            </summary>
+            2007.05.14 
+        </member>
+        <member name="F:CFW.Data.CONNECTIONTYPE.QUALITY">
+            <summary>
+            Qulity 
+            2008.02.19 한주희 / 품질 커넥션 추가
+            </summary>
+        </member>
+        <member name="F:CFW.Data.CONNECTIONTYPE.TRANSMISSION">
+            <summary>
+            Transmission  
+            2008.03.12 한주희/ 품질 커넥션 추가
+            </summary>
+        </member>
+        <member name="T:CFW.Data.OracleComDB">
+            <summary>
+            ComDB에 대한 요약 설명입니다.
+            </summary>
+        </member>
+        <member name="M:CFW.Data.OracleComDB.#ctor">
+            <summary>
+            OracleComDB 생성자입니다.
+            </summary>
+        </member>
+        <member name="M:CFW.Data.OracleComDB.GetMsgListWeb(System.String,System.String@,System.String@)">
+            <summary>
+            DB Message를 로드합니다.
+            2007.08.29 by 한주희  Web 로그인 시 한번만 Message 로드함  
+            </summary>
+            <param name="languageType">language Type</param>
+            <param name="sErrCode">Error Code(out)</param>
+            <param name="sErrText">Error Text(out)</param>
+            <returns>메시지 DataSet</returns>
+        </member>
+        <member name="M:CFW.Data.OracleComDB.GetMsgListWeb(System.String,System.String,System.String@,System.String@)">
+            <summary>
+            DB Message를 로드합니다.
+            2008.08.29 by 한주희  Web 로그인 시 한번만 Dictionary 로드함  (HMI 요구 사항 로그인시 접속할 DB 지정 ) 
+            </summary>
+            <param name="languageType">language Type</param>
+            <param name="languageType">DB Type</param>
+            <param name="sErrCode">Error Code(out)</param>
+            <param name="sErrText">Error Text(out)</param>
+            <returns>메시지 DataSet</returns>
+        </member>
+        <member name="M:CFW.Data.OracleComDB.GetDicListWeb(System.String)">
+            <summary>
+            Dictionary를 로드합니다.
+            2007.08.29 by 한주희  Web 로그인 시 한번만 Dictionary 로드함  
+            </summary>
+            <param name="languageType">language Type</param>
+            <returns>Dictionary DataSet</returns>
+        </member>
+        <member name="M:CFW.Data.OracleComDB.GetDicListWeb(System.String,System.String)">
+            <summary>
+            Dictionary를 로드합니다.
+            2007.08.29 by 한주희  Web 로그인 시 한번만 Dictionary 로드함  
+            2008.08.29 by 한주희  Web 로그인 시 한번만 Dictionary 로드함  (HMI 요구 사항 로그인시 접속할 DB 지정 ) 
+            </summary>
+            <param name="languageType">language Type</param>
+            <param name="dbType">DB Type</param>
+            <returns>Dictionary DataSet</returns>
+        </member>
+        <member name="M:CFW.Data.OracleComDB.GetMsgList(System.String,System.String@,System.String@)">
+            <summary>
+            DB Message를 로드합니다.
+            </summary>
+            <param name="languageType">language Type</param>
+            <param name="sErrCode">Error Code(out)</param>
+            <param name="sErrText">Error Text(out)</param>
+            <returns>메시지 DataSet</returns>
+        </member>
+        <member name="M:CFW.Data.OracleComDB.GetDicList(System.String)">
+            <summary>
+            Dictionary를 로드합니다.
+            </summary>
+            <param name="languageType">language Type</param>
+            <returns>Dictionary DataSet</returns>
+        </member>
+    </members>
+</doc>

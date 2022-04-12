@@ -1,0 +1,11 @@
+C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC02.PT\obj\Debug\DataSpider.PC02.PT.Properties.Resources.resources
+C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC02.PT\obj\Debug\DataSpider.PC02.PT.PC02F01.resources
+C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC02.PT\obj\Debug\DataSpider.PC02.PT.csproj.GenerateResource.cache
+C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC02.PT\obj\Debug\DataSpider.PC02.PT.csproj.CoreCompileInputs.cache
+C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\EXE\DataSpider\DataSpiderPC02.exe.config
+C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\EXE\DataSpider\DataSpiderPC02.exe
+C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\EXE\DataSpider\DataSpiderPC02.pdb
+C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC02.PT\obj\Debug\DataSpider.PC02.PT.csproj.CopyComplete
+C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC02.PT\obj\Debug\DataSpiderPC02.exe
+C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC02.PT\obj\Debug\DataSpiderPC02.pdb
+C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC02.PT\obj\Debug\DataSpider.PC02.PT.csproj.AssemblyReference.cache

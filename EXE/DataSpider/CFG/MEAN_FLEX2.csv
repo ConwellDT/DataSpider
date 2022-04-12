@@ -1,0 +1,101 @@
+﻿;TagName, StartWith, Not Contains1, Not Contains2, space 수,"size (-1=라인전체, -2=공백을 찾음)"
+DateTime,Date & Time:,,,1,-1
+AnalyzerID,Analyzer ID:,,,1,-1
+Operator,Operator:,,,1,-1
+SampleType,Sample Type:,,,1,-1
+VesselID,Vessel ID:,,,1,-1
+BatchID,Batch ID:,,,1,-1
+CellType,Cell Type:,,,1,-1
+SampleID,Sample ID:,,,1,-1
+VesselTemperature,Vessel Temperature (°C):,,,1,-1
+VesselPressure,Vessel Pressure (psi):,,,1,-1
+SpargingO2,Sparging O2%:,,,1,-1
+ChemistryDilutionRatio,Chemistry Dilution Ratio:,,,1,-1
+SampleTime,Sample Time:,,,1,-1
+PreDilutionMultiplier,Pre-Dilution Multiplier:,,,1,-1
+CellInspectionType,Cell Inspection Type:,,,1,-1
+CellDensityDilution,Cell Density Dilution:,,,1,-1
+pHValue,pH,@,/,1,-2
+pHUnits,pH,@,/,2,-2
+pHLowerLimit,pH,@,/,3,-2
+pHUpperLimit,pH,@,/,4,-2
+pHStatus,pH,@,/,5,-2
+PO2Value,PO2,@,,1,-2
+PO2Units,PO2,@,,2,-2
+PO2LowerLimit,PO2,@,,3,-2
+PO2UpperLimit,PO2,@,,4,-2
+PO2Status,PO2,@,,5,-2
+PCO2Value,PCO2,@,,1,-2
+PCO2Units,PCO2,@,,2,-2
+PCO2LowerLimit,PCO2,@,,3,-2
+PCO2UpperLimit,PCO2,@,,4,-2
+PCO2Status,PCO2,@,,5,-2
+GlnValue,Gln,,,1,-2
+GlnUnits,Gln,,,2,8
+GlnLowerLimit,Gln,,,5,-2
+GlnUpperLimit,Gln,,,6,-2
+GlnStatus,Gln,,,7,-2
+GluValue,Glu,Gluc,,1,-2
+GluUnits,Glu,Gluc,,2,8
+GluLowerLimit,Glu,Gluc,,5,-2
+GluUpperLimit,Glu,Gluc,,6,-2
+GluStatus,Glu,Gluc,,7,-2
+GlucValue,Gluc,,,1,-2
+GlucUnits,Gluc,,,2,5
+GlucLowerLimit,Gluc,,,5,-2
+GlucUpperLimit,Gluc,,,6,-2
+GlucStatus,Gluc,,,7,-2
+LacValue,Lac,,,1,-2
+LacUnits,Lac,,,2,5
+LacLowerLimit,Lac,,,5,-2
+LacUpperLimit,Lac,,,6,-2
+LacStatus,Lac,,,7,-2
+NH4+Value,NH4+,,,1,-2
+NH4+Units,NH4+,,,2,8
+NH4+LowerLimit,NH4+,,,5,-2
+NH4+UpperLimit,NH4+,,,6,-2
+NH4+Status,NH4+,,,7,-2
+Na+Value,Na+,,,1,-2
+Na+Units,Na+,,,2,8
+Na+LowerLimit,Na+,,,5,-2
+Na+UpperLimit,Na+,,,6,-2
+Na+Status,Na+,,,7,-2
+K+Value,K+,,,1,-2
+K+Units,K+,,,2,8
+K+LowerLimit,K+,,,5,-2
+K+UpperLimit,K+,,,6,-2
+K+Status,K+,,,7,-2
+Ca++Value,Ca++,,,1,-2
+Ca++Units,Ca++,,,2,8
+Ca++LowerLimit,Ca++,,,5,-2
+Ca++UpperLimit,Ca++,,,6,-2
+Ca++Status,Ca++,,,7,-2
+OsmValue,Osm,Osmometer,,1,-2
+OsmUnits,Osm,Osmometer,,2,9
+OsmLowerLimit,Osm,Osmometer,,5,-2
+OsmUpperLimit,Osm,Osmometer,,6,-2
+OsmStatus,Osm,Osmometer,,7,-2
+pH@Temp,pH @ Temp,,,1,-2
+pH@TempUnits,pH @ Temp,,,2,-1
+PO2@Temp,PO2 @ Temp,,,1,-2
+PO2@TempUnits,PO2 @ Temp,,,2,-1
+PCO@Temp,PCO2 @ Temp,,,1,-2
+PCO@TempUnits,PCO2 @ Temp,,,2,-1
+O2Saturation,O2 Saturation,CO2,,1,-2
+O2SaturationUnits,O2 Saturation,CO2,,2,-1
+CO2Saturation,CO2 Saturation,,,1,-2
+CO2SaturationUnits,CO2 Saturation,,,2,-1
+HCO3,HCO3,,,1,-2
+HCO3Units,HCO3,,,2,-1
+ViableDensityValue,Viable Density,,,1,-2
+ViableDensityUnits,Viable Density,,,2,-1
+TotalDensityValue,Total Density,,,1,-2
+TotalDensityUnits,Total Density,,,2,-1
+ViabilityValue,Viability,,,1,-2
+ViabilityUnits,Viability,,,2,-1
+TotalLiveCountValue,Total Live Count,,,1,-1
+TotalCellCountValue,Total Cell Count,,,1,-1
+AvgLIveDiameterValue,Avg. Live Diameter,,,1,-2
+AvgLIveDiameterUnits,Avg. Live Diameter,,,2,-1
+LiveCellStdDeviationValue,Live Cell Std. Deviation,,,1,-2
+LiveCellStdDeviationUnits,Live Cell Std. Deviation,,,2,-1

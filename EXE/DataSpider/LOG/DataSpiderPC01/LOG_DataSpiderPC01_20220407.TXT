@@ -1,0 +1,215 @@
+﻿[2022/04/07 12:00:50] [DEBUG] - [PC01F01_Load] System.NullReferenceException: 개체 참조가 개체의 인스턴스로 설정되지 않았습니다.
+   위치: DataSpider.PC01.PT.PC01F01.PC01F01_Load(Object sender, EventArgs e) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 168
+﻿[2022/04/07 13:16:37] [DEBUG] - [PC01F01_Load] 1
+﻿[2022/04/07 13:16:37] [DEBUG] - [PC01F01_Load] 2
+﻿[2022/04/07 13:16:39] [DEBUG] - [PC01F01_Load] 3
+﻿[2022/04/07 13:16:56] [DEBUG] - [PC01F01_Load] 1
+﻿[2022/04/07 13:16:56] [DEBUG] - [PC01F01_Load] 2
+﻿[2022/04/07 13:16:59] [DEBUG] - [PC01F01_Load] 3
+﻿[2022/04/07 13:18:07] [DEBUG] - [PC01F01_Load] 1
+﻿[2022/04/07 13:18:07] [DEBUG] - [PC01F01_Load] 2
+﻿[2022/04/07 13:18:10] [DEBUG] - [PC01F01_Load] 3
+﻿[2022/04/07 13:20:43] [DEBUG] - [PC01F01_Load] 1
+﻿[2022/04/07 13:20:43] [DEBUG] - [PC01F01_Load] 2
+﻿[2022/04/07 13:20:44] [DEBUG] - [PC01F01_Load] 3
+﻿[2022/04/07 13:21:04] [ERROR] - [ThreadCheckRequest] GetRequest Error OR No Data - System.IndexOutOfRangeException: 0 테이블을 찾을 수 없습니다.
+   위치: System.Data.DataTableCollection.get_Item(Int32 index)
+   위치: DataSpider.PC00.PT.PC00Z01.GetRequest(String equipName, String serverCode, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 175
+﻿[2022/04/07 13:21:09] [ERROR] - [ThreadCheckRequest] GetRequest Error OR No Data - System.IndexOutOfRangeException: 0 테이블을 찾을 수 없습니다.
+   위치: System.Data.DataTableCollection.get_Item(Int32 index)
+   위치: DataSpider.PC00.PT.PC00Z01.GetRequest(String equipName, String serverCode, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 175
+﻿[2022/04/07 13:21:14] [ERROR] - [ThreadCheckRequest] GetRequest Error OR No Data - System.IndexOutOfRangeException: 0 테이블을 찾을 수 없습니다.
+   위치: System.Data.DataTableCollection.get_Item(Int32 index)
+   위치: DataSpider.PC00.PT.PC00Z01.GetRequest(String equipName, String serverCode, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 175
+﻿[2022/04/07 13:21:19] [ERROR] - [ThreadCheckRequest] GetRequest Error OR No Data - System.IndexOutOfRangeException: 0 테이블을 찾을 수 없습니다.
+   위치: System.Data.DataTableCollection.get_Item(Int32 index)
+   위치: DataSpider.PC00.PT.PC00Z01.GetRequest(String equipName, String serverCode, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 175
+﻿[2022/04/07 13:21:24] [ERROR] - [ThreadCheckRequest] GetRequest Error OR No Data - System.IndexOutOfRangeException: 0 테이블을 찾을 수 없습니다.
+   위치: System.Data.DataTableCollection.get_Item(Int32 index)
+   위치: DataSpider.PC00.PT.PC00Z01.GetRequest(String equipName, String serverCode, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 175
+﻿[2022/04/07 13:21:29] [ERROR] - [ThreadCheckRequest] GetRequest Error OR No Data - System.IndexOutOfRangeException: 0 테이블을 찾을 수 없습니다.
+   위치: System.Data.DataTableCollection.get_Item(Int32 index)
+   위치: DataSpider.PC00.PT.PC00Z01.GetRequest(String equipName, String serverCode, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 175
+﻿[2022/04/07 13:21:34] [ERROR] - [ThreadCheckRequest] GetRequest Error OR No Data - System.IndexOutOfRangeException: 0 테이블을 찾을 수 없습니다.
+   위치: System.Data.DataTableCollection.get_Item(Int32 index)
+   위치: DataSpider.PC00.PT.PC00Z01.GetRequest(String equipName, String serverCode, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 175
+﻿[2022/04/07 13:21:39] [ERROR] - [ThreadCheckRequest] GetRequest Error OR No Data - System.IndexOutOfRangeException: 0 테이블을 찾을 수 없습니다.
+   위치: System.Data.DataTableCollection.get_Item(Int32 index)
+   위치: DataSpider.PC00.PT.PC00Z01.GetRequest(String equipName, String serverCode, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 175
+﻿[2022/04/07 13:21:44] [ERROR] - [ThreadCheckRequest] GetRequest Error OR No Data - System.IndexOutOfRangeException: 0 테이블을 찾을 수 없습니다.
+   위치: System.Data.DataTableCollection.get_Item(Int32 index)
+   위치: DataSpider.PC00.PT.PC00Z01.GetRequest(String equipName, String serverCode, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 175
+﻿[2022/04/07 13:21:49] [ERROR] - [ThreadCheckRequest] GetRequest Error OR No Data - System.IndexOutOfRangeException: 0 테이블을 찾을 수 없습니다.
+   위치: System.Data.DataTableCollection.get_Item(Int32 index)
+   위치: DataSpider.PC00.PT.PC00Z01.GetRequest(String equipName, String serverCode, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 175
+﻿[2022/04/07 13:21:54] [ERROR] - [ThreadCheckRequest] GetRequest Error OR No Data - System.IndexOutOfRangeException: 0 테이블을 찾을 수 없습니다.
+   위치: System.Data.DataTableCollection.get_Item(Int32 index)
+   위치: DataSpider.PC00.PT.PC00Z01.GetRequest(String equipName, String serverCode, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 175
+﻿[2022/04/07 13:21:59] [ERROR] - [ThreadCheckRequest] GetRequest Error OR No Data - System.IndexOutOfRangeException: 0 테이블을 찾을 수 없습니다.
+   위치: System.Data.DataTableCollection.get_Item(Int32 index)
+   위치: DataSpider.PC00.PT.PC00Z01.GetRequest(String equipName, String serverCode, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 175
+﻿[2022/04/07 13:22:04] [ERROR] - [ThreadCheckRequest] GetRequest Error OR No Data - System.IndexOutOfRangeException: 0 테이블을 찾을 수 없습니다.
+   위치: System.Data.DataTableCollection.get_Item(Int32 index)
+   위치: DataSpider.PC00.PT.PC00Z01.GetRequest(String equipName, String serverCode, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 175
+﻿[2022/04/07 13:22:09] [ERROR] - [ThreadCheckRequest] GetRequest Error OR No Data - System.IndexOutOfRangeException: 0 테이블을 찾을 수 없습니다.
+   위치: System.Data.DataTableCollection.get_Item(Int32 index)
+   위치: DataSpider.PC00.PT.PC00Z01.GetRequest(String equipName, String serverCode, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 175
+﻿[2022/04/07 13:22:14] [ERROR] - [ThreadCheckRequest] GetRequest Error OR No Data - System.IndexOutOfRangeException: 0 테이블을 찾을 수 없습니다.
+   위치: System.Data.DataTableCollection.get_Item(Int32 index)
+   위치: DataSpider.PC00.PT.PC00Z01.GetRequest(String equipName, String serverCode, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 175
+﻿[2022/04/07 13:22:19] [ERROR] - [ThreadCheckRequest] GetRequest Error OR No Data - System.IndexOutOfRangeException: 0 테이블을 찾을 수 없습니다.
+   위치: System.Data.DataTableCollection.get_Item(Int32 index)
+   위치: DataSpider.PC00.PT.PC00Z01.GetRequest(String equipName, String serverCode, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 175
+﻿[2022/04/07 13:22:24] [ERROR] - [ThreadCheckRequest] GetRequest Error OR No Data - System.IndexOutOfRangeException: 0 테이블을 찾을 수 없습니다.
+   위치: System.Data.DataTableCollection.get_Item(Int32 index)
+   위치: DataSpider.PC00.PT.PC00Z01.GetRequest(String equipName, String serverCode, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 175
+﻿[2022/04/07 13:22:29] [ERROR] - [ThreadCheckRequest] GetRequest Error OR No Data - System.IndexOutOfRangeException: 0 테이블을 찾을 수 없습니다.
+   위치: System.Data.DataTableCollection.get_Item(Int32 index)
+   위치: DataSpider.PC00.PT.PC00Z01.GetRequest(String equipName, String serverCode, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 175
+﻿[2022/04/07 13:22:34] [ERROR] - [ThreadCheckRequest] GetRequest Error OR No Data - System.IndexOutOfRangeException: 0 테이블을 찾을 수 없습니다.
+   위치: System.Data.DataTableCollection.get_Item(Int32 index)
+   위치: DataSpider.PC00.PT.PC00Z01.GetRequest(String equipName, String serverCode, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 175
+﻿[2022/04/07 13:22:39] [ERROR] - [ThreadCheckRequest] GetRequest Error OR No Data - System.IndexOutOfRangeException: 0 테이블을 찾을 수 없습니다.
+   위치: System.Data.DataTableCollection.get_Item(Int32 index)
+   위치: DataSpider.PC00.PT.PC00Z01.GetRequest(String equipName, String serverCode, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 175
+﻿[2022/04/07 13:22:44] [ERROR] - [ThreadCheckRequest] GetRequest Error OR No Data - System.IndexOutOfRangeException: 0 테이블을 찾을 수 없습니다.
+   위치: System.Data.DataTableCollection.get_Item(Int32 index)
+   위치: DataSpider.PC00.PT.PC00Z01.GetRequest(String equipName, String serverCode, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 175
+﻿[2022/04/07 13:22:49] [ERROR] - [ThreadCheckRequest] GetRequest Error OR No Data - System.IndexOutOfRangeException: 0 테이블을 찾을 수 없습니다.
+   위치: System.Data.DataTableCollection.get_Item(Int32 index)
+   위치: DataSpider.PC00.PT.PC00Z01.GetRequest(String equipName, String serverCode, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 175
+﻿[2022/04/07 13:22:54] [ERROR] - [ThreadCheckRequest] GetRequest Error OR No Data - System.IndexOutOfRangeException: 0 테이블을 찾을 수 없습니다.
+   위치: System.Data.DataTableCollection.get_Item(Int32 index)
+   위치: DataSpider.PC00.PT.PC00Z01.GetRequest(String equipName, String serverCode, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 175
+﻿[2022/04/07 13:22:59] [ERROR] - [ThreadCheckRequest] GetRequest Error OR No Data - System.IndexOutOfRangeException: 0 테이블을 찾을 수 없습니다.
+   위치: System.Data.DataTableCollection.get_Item(Int32 index)
+   위치: DataSpider.PC00.PT.PC00Z01.GetRequest(String equipName, String serverCode, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 175
+﻿[2022/04/07 13:23:05] [ERROR] - [ThreadCheckRequest] GetRequest Error OR No Data - System.IndexOutOfRangeException: 0 테이블을 찾을 수 없습니다.
+   위치: System.Data.DataTableCollection.get_Item(Int32 index)
+   위치: DataSpider.PC00.PT.PC00Z01.GetRequest(String equipName, String serverCode, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 175
+﻿[2022/04/07 13:23:10] [ERROR] - [ThreadCheckRequest] GetRequest Error OR No Data - System.IndexOutOfRangeException: 0 테이블을 찾을 수 없습니다.
+   위치: System.Data.DataTableCollection.get_Item(Int32 index)
+   위치: DataSpider.PC00.PT.PC00Z01.GetRequest(String equipName, String serverCode, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 175
+﻿[2022/04/07 13:23:15] [ERROR] - [ThreadCheckRequest] GetRequest Error OR No Data - System.IndexOutOfRangeException: 0 테이블을 찾을 수 없습니다.
+   위치: System.Data.DataTableCollection.get_Item(Int32 index)
+   위치: DataSpider.PC00.PT.PC00Z01.GetRequest(String equipName, String serverCode, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 175
+﻿[2022/04/07 13:23:20] [ERROR] - [ThreadCheckRequest] GetRequest Error OR No Data - System.IndexOutOfRangeException: 0 테이블을 찾을 수 없습니다.
+   위치: System.Data.DataTableCollection.get_Item(Int32 index)
+   위치: DataSpider.PC00.PT.PC00Z01.GetRequest(String equipName, String serverCode, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 175
+﻿[2022/04/07 13:23:25] [ERROR] - [ThreadCheckRequest] GetRequest Error OR No Data - System.IndexOutOfRangeException: 0 테이블을 찾을 수 없습니다.
+   위치: System.Data.DataTableCollection.get_Item(Int32 index)
+   위치: DataSpider.PC00.PT.PC00Z01.GetRequest(String equipName, String serverCode, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 175
+﻿[2022/04/07 13:23:30] [ERROR] - [ThreadCheckRequest] GetRequest Error OR No Data - System.IndexOutOfRangeException: 0 테이블을 찾을 수 없습니다.
+   위치: System.Data.DataTableCollection.get_Item(Int32 index)
+   위치: DataSpider.PC00.PT.PC00Z01.GetRequest(String equipName, String serverCode, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 175
+﻿[2022/04/07 13:23:35] [ERROR] - [ThreadCheckRequest] GetRequest Error OR No Data - System.IndexOutOfRangeException: 0 테이블을 찾을 수 없습니다.
+   위치: System.Data.DataTableCollection.get_Item(Int32 index)
+   위치: DataSpider.PC00.PT.PC00Z01.GetRequest(String equipName, String serverCode, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 175
+﻿[2022/04/07 13:23:40] [ERROR] - [ThreadCheckRequest] GetRequest Error OR No Data - System.IndexOutOfRangeException: 0 테이블을 찾을 수 없습니다.
+   위치: System.Data.DataTableCollection.get_Item(Int32 index)
+   위치: DataSpider.PC00.PT.PC00Z01.GetRequest(String equipName, String serverCode, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 175
+﻿[2022/04/07 13:23:45] [ERROR] - [ThreadCheckRequest] GetRequest Error OR No Data - System.IndexOutOfRangeException: 0 테이블을 찾을 수 없습니다.
+   위치: System.Data.DataTableCollection.get_Item(Int32 index)
+   위치: DataSpider.PC00.PT.PC00Z01.GetRequest(String equipName, String serverCode, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 175
+﻿[2022/04/07 13:23:50] [ERROR] - [ThreadCheckRequest] GetRequest Error OR No Data - System.IndexOutOfRangeException: 0 테이블을 찾을 수 없습니다.
+   위치: System.Data.DataTableCollection.get_Item(Int32 index)
+   위치: DataSpider.PC00.PT.PC00Z01.GetRequest(String equipName, String serverCode, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 175
+﻿[2022/04/07 13:23:55] [ERROR] - [ThreadCheckRequest] GetRequest Error OR No Data - System.IndexOutOfRangeException: 0 테이블을 찾을 수 없습니다.
+   위치: System.Data.DataTableCollection.get_Item(Int32 index)
+   위치: DataSpider.PC00.PT.PC00Z01.GetRequest(String equipName, String serverCode, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 175
+﻿[2022/04/07 13:24:00] [ERROR] - [ThreadCheckRequest] GetRequest Error OR No Data - System.IndexOutOfRangeException: 0 테이블을 찾을 수 없습니다.
+   위치: System.Data.DataTableCollection.get_Item(Int32 index)
+   위치: DataSpider.PC00.PT.PC00Z01.GetRequest(String equipName, String serverCode, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 175
+﻿[2022/04/07 13:24:05] [ERROR] - [ThreadCheckRequest] GetRequest Error OR No Data - System.IndexOutOfRangeException: 0 테이블을 찾을 수 없습니다.
+   위치: System.Data.DataTableCollection.get_Item(Int32 index)
+   위치: DataSpider.PC00.PT.PC00Z01.GetRequest(String equipName, String serverCode, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 175
+﻿[2022/04/07 13:24:10] [ERROR] - [ThreadCheckRequest] GetRequest Error OR No Data - System.IndexOutOfRangeException: 0 테이블을 찾을 수 없습니다.
+   위치: System.Data.DataTableCollection.get_Item(Int32 index)
+   위치: DataSpider.PC00.PT.PC00Z01.GetRequest(String equipName, String serverCode, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 175
+﻿[2022/04/07 13:24:15] [ERROR] - [ThreadCheckRequest] GetRequest Error OR No Data - System.IndexOutOfRangeException: 0 테이블을 찾을 수 없습니다.
+   위치: System.Data.DataTableCollection.get_Item(Int32 index)
+   위치: DataSpider.PC00.PT.PC00Z01.GetRequest(String equipName, String serverCode, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 175
+﻿[2022/04/07 13:24:20] [ERROR] - [ThreadCheckRequest] GetRequest Error OR No Data - System.IndexOutOfRangeException: 0 테이블을 찾을 수 없습니다.
+   위치: System.Data.DataTableCollection.get_Item(Int32 index)
+   위치: DataSpider.PC00.PT.PC00Z01.GetRequest(String equipName, String serverCode, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 175
+﻿[2022/04/07 13:24:25] [ERROR] - [ThreadCheckRequest] GetRequest Error OR No Data - System.IndexOutOfRangeException: 0 테이블을 찾을 수 없습니다.
+   위치: System.Data.DataTableCollection.get_Item(Int32 index)
+   위치: DataSpider.PC00.PT.PC00Z01.GetRequest(String equipName, String serverCode, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 175
+﻿[2022/04/07 13:24:30] [ERROR] - [ThreadCheckRequest] GetRequest Error OR No Data - System.IndexOutOfRangeException: 0 테이블을 찾을 수 없습니다.
+   위치: System.Data.DataTableCollection.get_Item(Int32 index)
+   위치: DataSpider.PC00.PT.PC00Z01.GetRequest(String equipName, String serverCode, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 175
+﻿[2022/04/07 13:24:35] [ERROR] - [ThreadCheckRequest] GetRequest Error OR No Data - System.IndexOutOfRangeException: 0 테이블을 찾을 수 없습니다.
+   위치: System.Data.DataTableCollection.get_Item(Int32 index)
+   위치: DataSpider.PC00.PT.PC00Z01.GetRequest(String equipName, String serverCode, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 175
+﻿[2022/04/07 13:24:40] [ERROR] - [ThreadCheckRequest] GetRequest Error OR No Data - System.IndexOutOfRangeException: 0 테이블을 찾을 수 없습니다.
+   위치: System.Data.DataTableCollection.get_Item(Int32 index)
+   위치: DataSpider.PC00.PT.PC00Z01.GetRequest(String equipName, String serverCode, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 175
+﻿[2022/04/07 13:24:45] [ERROR] - [ThreadCheckRequest] GetRequest Error OR No Data - System.IndexOutOfRangeException: 0 테이블을 찾을 수 없습니다.
+   위치: System.Data.DataTableCollection.get_Item(Int32 index)
+   위치: DataSpider.PC00.PT.PC00Z01.GetRequest(String equipName, String serverCode, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 175
+﻿[2022/04/07 13:24:50] [ERROR] - [ThreadCheckRequest] GetRequest Error OR No Data - System.IndexOutOfRangeException: 0 테이블을 찾을 수 없습니다.
+   위치: System.Data.DataTableCollection.get_Item(Int32 index)
+   위치: DataSpider.PC00.PT.PC00Z01.GetRequest(String equipName, String serverCode, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 175
+﻿[2022/04/07 13:24:55] [ERROR] - [ThreadCheckRequest] GetRequest Error OR No Data - System.IndexOutOfRangeException: 0 테이블을 찾을 수 없습니다.
+   위치: System.Data.DataTableCollection.get_Item(Int32 index)
+   위치: DataSpider.PC00.PT.PC00Z01.GetRequest(String equipName, String serverCode, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 175
+﻿[2022/04/07 13:25:00] [ERROR] - [ThreadCheckRequest] GetRequest Error OR No Data - System.IndexOutOfRangeException: 0 테이블을 찾을 수 없습니다.
+   위치: System.Data.DataTableCollection.get_Item(Int32 index)
+   위치: DataSpider.PC00.PT.PC00Z01.GetRequest(String equipName, String serverCode, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 175
+﻿[2022/04/07 13:25:05] [ERROR] - [ThreadCheckRequest] GetRequest Error OR No Data - System.IndexOutOfRangeException: 0 테이블을 찾을 수 없습니다.
+   위치: System.Data.DataTableCollection.get_Item(Int32 index)
+   위치: DataSpider.PC00.PT.PC00Z01.GetRequest(String equipName, String serverCode, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 175
+﻿[2022/04/07 13:25:10] [ERROR] - [ThreadCheckRequest] GetRequest Error OR No Data - System.IndexOutOfRangeException: 0 테이블을 찾을 수 없습니다.
+   위치: System.Data.DataTableCollection.get_Item(Int32 index)
+   위치: DataSpider.PC00.PT.PC00Z01.GetRequest(String equipName, String serverCode, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 175
+﻿[2022/04/07 13:25:15] [ERROR] - [ThreadCheckRequest] GetRequest Error OR No Data - System.IndexOutOfRangeException: 0 테이블을 찾을 수 없습니다.
+   위치: System.Data.DataTableCollection.get_Item(Int32 index)
+   위치: DataSpider.PC00.PT.PC00Z01.GetRequest(String equipName, String serverCode, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 175
+﻿[2022/04/07 13:25:20] [ERROR] - [ThreadCheckRequest] GetRequest Error OR No Data - System.IndexOutOfRangeException: 0 테이블을 찾을 수 없습니다.
+   위치: System.Data.DataTableCollection.get_Item(Int32 index)
+   위치: DataSpider.PC00.PT.PC00Z01.GetRequest(String equipName, String serverCode, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 175
+﻿[2022/04/07 13:25:25] [ERROR] - [ThreadCheckRequest] GetRequest Error OR No Data - System.IndexOutOfRangeException: 0 테이블을 찾을 수 없습니다.
+   위치: System.Data.DataTableCollection.get_Item(Int32 index)
+   위치: DataSpider.PC00.PT.PC00Z01.GetRequest(String equipName, String serverCode, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 175
+﻿[2022/04/07 13:25:30] [ERROR] - [ThreadCheckRequest] GetRequest Error OR No Data - System.IndexOutOfRangeException: 0 테이블을 찾을 수 없습니다.
+   위치: System.Data.DataTableCollection.get_Item(Int32 index)
+   위치: DataSpider.PC00.PT.PC00Z01.GetRequest(String equipName, String serverCode, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 175
+﻿[2022/04/07 13:25:35] [ERROR] - [ThreadCheckRequest] GetRequest Error OR No Data - System.IndexOutOfRangeException: 0 테이블을 찾을 수 없습니다.
+   위치: System.Data.DataTableCollection.get_Item(Int32 index)
+   위치: DataSpider.PC00.PT.PC00Z01.GetRequest(String equipName, String serverCode, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 175
+﻿[2022/04/07 13:25:40] [ERROR] - [ThreadCheckRequest] GetRequest Error OR No Data - System.IndexOutOfRangeException: 0 테이블을 찾을 수 없습니다.
+   위치: System.Data.DataTableCollection.get_Item(Int32 index)
+   위치: DataSpider.PC00.PT.PC00Z01.GetRequest(String equipName, String serverCode, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 175
+﻿[2022/04/07 13:25:45] [ERROR] - [ThreadCheckRequest] GetRequest Error OR No Data - System.IndexOutOfRangeException: 0 테이블을 찾을 수 없습니다.
+   위치: System.Data.DataTableCollection.get_Item(Int32 index)
+   위치: DataSpider.PC00.PT.PC00Z01.GetRequest(String equipName, String serverCode, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 175
+﻿[2022/04/07 17:10:24] [DEBUG] - [PC01F01_Load] 1
+﻿[2022/04/07 17:10:24] [DEBUG] - [PC01F01_Load] 2
+﻿[2022/04/07 17:10:24] [DEBUG] - [PC01F01_Load] 3
+﻿[2022/04/07 17:14:35] [DEBUG] - [PC01F01_Load] 1
+﻿[2022/04/07 17:14:37] [DEBUG] - [PC01F01_Load] 2
+﻿[2022/04/07 17:14:38] [DEBUG] - [PC01F01_Load] 3
+﻿[2022/04/07 17:15:49] [DEBUG] - [PC01F01_Load] 1
+﻿[2022/04/07 17:15:49] [DEBUG] - [PC01F01_Load] 2
+﻿[2022/04/07 17:15:49] [DEBUG] - [PC01F01_Load] 3
+﻿[2022/04/07 17:19:28] [DEBUG] - [PC01F01_Load] 1
+﻿[2022/04/07 17:19:28] [DEBUG] - [PC01F01_Load] 2
+﻿[2022/04/07 17:19:28] [DEBUG] - [PC01F01_Load] 3
+﻿[2022/04/07 17:34:18] [DEBUG] - [PC01F01_Load] 1
+﻿[2022/04/07 17:34:18] [DEBUG] - [PC01F01_Load] 2
+﻿[2022/04/07 17:34:18] [DEBUG] - [PC01F01_Load] 3
+﻿[2022/04/07 17:49:40] [DEBUG] - [PC01F01_Load] 1
+﻿[2022/04/07 17:49:40] [DEBUG] - [PC01F01_Load] 2
+﻿[2022/04/07 17:49:40] [DEBUG] - [PC01F01_Load] 3
+﻿[2022/04/07 17:51:37] [DEBUG] - [PC01F01_Load] 1
+﻿[2022/04/07 17:51:37] [DEBUG] - [PC01F01_Load] 2
+﻿[2022/04/07 17:51:37] [DEBUG] - [PC01F01_Load] 3
+﻿[2022/04/07 17:52:49] [DEBUG] - [PC01F01_Load] 1
+﻿[2022/04/07 17:52:49] [DEBUG] - [PC01F01_Load] 2
+﻿[2022/04/07 17:52:49] [DEBUG] - [PC01F01_Load] 3
+﻿[2022/04/07 17:53:39] [DEBUG] - [PC01F01_Load] 1
+﻿[2022/04/07 17:53:39] [DEBUG] - [PC01F01_Load] 2
+﻿[2022/04/07 17:53:39] [DEBUG] - [PC01F01_Load] 3
+﻿[2022/04/07 18:00:33] [DEBUG] - [PC01F01_Load] 1
+﻿[2022/04/07 18:00:33] [DEBUG] - [PC01F01_Load] 2
+﻿[2022/04/07 18:00:33] [DEBUG] - [PC01F01_Load] 3

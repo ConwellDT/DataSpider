@@ -1,0 +1,757 @@
+﻿[2022/04/07 13:21:04] [ERROR] - [.ctor] PI Server Connection - OSIsoft.AF.PI.PIConnectionException: [11001] 알려진 호스트가 없습니다.
+   위치: OSIsoft.AF.PI.PIException.ConvertAndThrowException(PIServer piServer, Exception ex, String message)
+   위치: OSIsoft.AF.PI.PIServer.RemoteConnect(AFConnectionPreference preference, NetworkCredential credential, PIAuthenticationMode authenticationMode)
+   위치: OSIsoft.AF.PI.PIServer.InternalConnect(Int32 numRetries, IWin32Window owner, AFConnectionPreference preference, NetworkCredential credential, PIAuthenticationMode authenticationMode, Boolean checkConnectingAsSameUser)
+   위치: OSIsoft.AF.PI.PIServer.AutoConnect(Boolean allowDirectConnect, Boolean force)
+   위치: OSIsoft.AF.PI.PIServer.Connect(Boolean force)
+   위치: DataSpider.PC00.PT.EquipmentDataProcess..ctor(String filePath, FormListViewMsg _listViewMsg, Encoding _dataEncoding) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00M01.cs:줄 526
+﻿[2022/04/07 17:34:49] [ERROR] - [.ctor] PI Server Connection - OSIsoft.AF.PI.PIConnectionException: [11001] 알려진 호스트가 없습니다. ---> System.AggregateException: 하나 이상의 오류가 발생했습니다. ---> OSIsoft.AF.PI.PIConnectionException: [11001] 알려진 호스트가 없습니다.
+   --- 내부 예외 스택 추적의 끝 ---
+   --- 내부 예외 스택 추적의 끝 ---
+   위치: OSIsoft.AF.PI.PIException.ConvertAndThrowException(PIServer piServer, Exception ex, String message)
+   위치: OSIsoft.AF.PI.PIServer.RemoteConnect(AFConnectionPreference preference, NetworkCredential credential, PIAuthenticationMode authenticationMode)
+   위치: OSIsoft.AF.PI.PIServer.InternalConnect(Int32 numRetries, IWin32Window owner, AFConnectionPreference preference, NetworkCredential credential, PIAuthenticationMode authenticationMode, Boolean checkConnectingAsSameUser)
+   위치: OSIsoft.AF.PI.PIServer.AutoConnect(Boolean allowDirectConnect, Boolean force)
+   위치: OSIsoft.AF.PI.PIServer.Connect(Boolean force)
+   위치: DataSpider.PC00.PT.EquipmentDataProcess..ctor(String filePath, FormListViewMsg _listViewMsg, Encoding _dataEncoding) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00M01.cs:줄 526
+﻿[2022/04/07 17:53:45] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_GROSS_UNIT) - Line string is empty (Line : 5, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 17:53:45] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_GROSS_VAL) - Line string is empty (Line : 5, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 17:53:45] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_TARE_UNIT) - Line string is empty (Line : 4, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 17:53:45] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_TARE_VAL) - Line string is empty (Line : 4, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 17:55:39] [ERROR] - [SavePI] Data transfer to PI server failed.[OSIsoft.AF.PI.PIException: [-11414] Buffered point does not accept new events   위치: OSIsoft.AF.PI.PIException.ConvertAndThrowException(PIServer piServer, Exception ex, String message)   위치: OSIsoft.AF.PI.PIPoint.UpdateValueInternalBufferIfPossible(Events mdaEvents, AFUpdateOption option)   위치: OSIsoft.AF.PI.PIPoint.UpdateValue(AFValue value, AFUpdateOption option, AFBufferOption bufferOption)   위치: OSIsoft.AF.PI.PIPoint.UpdateValue(AFValue value, AFUpdateOption option)   위치: DataSpider.PC00.PT.EquipmentDataProcess.SetPIValue(String pointName, Object pointValue, DateTime mTime, String& _strErrText) 파일 C:project콘웰삼성바이오로직스svn_new02.DataSpiderDataSpider.PC00.PTPC00M01.cs:줄 737 - P4SB-PSC-1101_NET_UNIT - P4SB-PSC-1101_NET_UNIT.PV/g]
+﻿[2022/04/07 17:57:44] [ERROR] - [SavePI] Data transfer to PI server failed.[OSIsoft.AF.PI.PIException: [-11414] Buffered point does not accept new events   위치: OSIsoft.AF.PI.PIException.ConvertAndThrowException(PIServer piServer, Exception ex, String message)   위치: OSIsoft.AF.PI.PIPoint.UpdateValueInternalBufferIfPossible(Events mdaEvents, AFUpdateOption option)   위치: OSIsoft.AF.PI.PIPoint.UpdateValue(AFValue value, AFUpdateOption option, AFBufferOption bufferOption)   위치: OSIsoft.AF.PI.PIPoint.UpdateValue(AFValue value, AFUpdateOption option)   위치: DataSpider.PC00.PT.EquipmentDataProcess.SetPIValue(String pointName, Object pointValue, DateTime mTime, String& _strErrText) 파일 C:project콘웰삼성바이오로직스svn_new02.DataSpiderDataSpider.PC00.PTPC00M01.cs:줄 737 - P4SB-PSC-1101_NET_VAL - P4SB-PSC-1101_NET_VAL.PV/+28.04]
+﻿[2022/04/07 18:02:51] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_GROSS_UNIT) - Line string is empty (Line : 5, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:02:51] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_GROSS_VAL) - Line string is empty (Line : 5, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:02:51] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_TARE_UNIT) - Line string is empty (Line : 4, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:02:51] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_TARE_VAL) - Line string is empty (Line : 4, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:03:20] [INFO] - [SavePI] The data transfer to the PI server was successful.[P4SB-PSC-1101_NET_UNIT - P4SB-PSC-1101_NET_UNIT.PV/g]
+﻿[2022/04/07 18:03:36] [INFO] - [SavePI] The data transfer to the PI server was successful.[P4SB-PSC-1101_NET_VAL - P4SB-PSC-1101_NET_VAL.PV/-0.01]
+﻿[2022/04/07 18:03:44] [INFO] - [SavePI] The data transfer to the PI server was successful.[P4SB-PSC-1101_SVRTIME - P4SB-PSC-1101_SVRTIME.PV/2022-04-07 18:02:51]
+﻿[2022/04/07 18:03:46] [INFO] - [SavePI] The data transfer to the PI server was successful.[P4SB-PSC-1101_USER_ID - P4SB-PSC-1101_USER_ID.PV/관리자]
+﻿[2022/04/07 18:03:46] [ERROR] - [SaveDBHistory] DB insert failed. (P4SB-PSC-1101_NET_UNIT,2022-04-07 18:02:12.000,Y,2022-04-07 18:02:51.522,g) - System.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'HI_SEQ', table 'DataSpider.dbo.HI_MEASURE_RESULT_BK'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+   위치: System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   위치: System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   위치: System.Data.SqlClient.SqlCommand.RunExecuteNonQueryTds(String methodName, Boolean async, Int32 timeout, Boolean asyncWrite)
+   위치: System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   위치: System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   위치: CFW.Data.MsSqlDbAccess.ExecuteNonQuery(String commandText, SqlParameter[] oraParameters, CommandType commandType, String& p_strErrCode, String& p_strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.Source\CFrameWork\CFW.Data\MsSqlDbAccess.cs:줄 311
+   위치: DataSpider.PC00.PT.PC00Z01.InsertResult(String _strTagName, String _strDateTime, String _strValue, String _piIFFlag, String _piIFDateTime, String remark, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 114
+ClientConnectionId:7cae0329-83e1-4017-99cd-6d3babd6a6b7
+Error Number:515,State:2,Class:16
+﻿[2022/04/07 18:03:46] [ERROR] - [SaveDBHistory] DB insert failed. (P4SB-PSC-1101_NET_VAL,2022-04-07 18:02:12.000,Y,2022-04-07 18:02:51.522,-0.01) - System.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'HI_SEQ', table 'DataSpider.dbo.HI_MEASURE_RESULT_BK'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+   위치: System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   위치: System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   위치: System.Data.SqlClient.SqlCommand.RunExecuteNonQueryTds(String methodName, Boolean async, Int32 timeout, Boolean asyncWrite)
+   위치: System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   위치: System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   위치: CFW.Data.MsSqlDbAccess.ExecuteNonQuery(String commandText, SqlParameter[] oraParameters, CommandType commandType, String& p_strErrCode, String& p_strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.Source\CFrameWork\CFW.Data\MsSqlDbAccess.cs:줄 311
+   위치: DataSpider.PC00.PT.PC00Z01.InsertResult(String _strTagName, String _strDateTime, String _strValue, String _piIFFlag, String _piIFDateTime, String remark, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 114
+ClientConnectionId:7cae0329-83e1-4017-99cd-6d3babd6a6b7
+Error Number:515,State:2,Class:16
+﻿[2022/04/07 18:03:46] [ERROR] - [SaveDBHistory] DB insert failed. (P4SB-PSC-1101_SVRTIME,2022-04-07 18:02:12.000,Y,2022-04-07 18:02:51.522,2022-04-07 18:02:51) - System.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'HI_SEQ', table 'DataSpider.dbo.HI_MEASURE_RESULT_BK'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+   위치: System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   위치: System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   위치: System.Data.SqlClient.SqlCommand.RunExecuteNonQueryTds(String methodName, Boolean async, Int32 timeout, Boolean asyncWrite)
+   위치: System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   위치: System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   위치: CFW.Data.MsSqlDbAccess.ExecuteNonQuery(String commandText, SqlParameter[] oraParameters, CommandType commandType, String& p_strErrCode, String& p_strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.Source\CFrameWork\CFW.Data\MsSqlDbAccess.cs:줄 311
+   위치: DataSpider.PC00.PT.PC00Z01.InsertResult(String _strTagName, String _strDateTime, String _strValue, String _piIFFlag, String _piIFDateTime, String remark, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 114
+ClientConnectionId:7cae0329-83e1-4017-99cd-6d3babd6a6b7
+Error Number:515,State:2,Class:16
+﻿[2022/04/07 18:03:46] [ERROR] - [SaveDBHistory] DB insert failed. (P4SB-PSC-1101_USER_ID,2022-04-07 18:02:12.000,Y,2022-04-07 18:02:51.522,관리자) - System.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'HI_SEQ', table 'DataSpider.dbo.HI_MEASURE_RESULT_BK'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+   위치: System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   위치: System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   위치: System.Data.SqlClient.SqlCommand.RunExecuteNonQueryTds(String methodName, Boolean async, Int32 timeout, Boolean asyncWrite)
+   위치: System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   위치: System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   위치: CFW.Data.MsSqlDbAccess.ExecuteNonQuery(String commandText, SqlParameter[] oraParameters, CommandType commandType, String& p_strErrCode, String& p_strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.Source\CFrameWork\CFW.Data\MsSqlDbAccess.cs:줄 311
+   위치: DataSpider.PC00.PT.PC00Z01.InsertResult(String _strTagName, String _strDateTime, String _strValue, String _piIFFlag, String _piIFDateTime, String remark, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 114
+ClientConnectionId:7cae0329-83e1-4017-99cd-6d3babd6a6b7
+Error Number:515,State:2,Class:16
+﻿[2022/04/07 18:03:46] [INFO] - [SaveFile] File saved. (C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\EXE\DataSpider\Data\SC_MCA\20220407180346484.ttv) P4SB-PSC-1101_NET_UNIT,2022-04-07 18:02:12.000,Y,2022-04-07 18:02:51.522,g
+P4SB-PSC-1101_NET_VAL,2022-04-07 18:02:12.000,Y,2022-04-07 18:02:51.522,-0.01
+P4SB-PSC-1101_SVRTIME,2022-04-07 18:02:12.000,Y,2022-04-07 18:02:51.522,2022-04-07 18:02:51
+P4SB-PSC-1101_USER_ID,2022-04-07 18:02:12.000,Y,2022-04-07 18:02:51.522,관리자
+
+﻿[2022/04/07 18:03:46] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_GROSS_UNIT) - Line string is empty (Line : 5, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:03:46] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_GROSS_VAL) - Line string is empty (Line : 5, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:03:53] [INFO] - [SavePI] The data transfer to the PI server was successful.[P4SB-PSC-1101_TARE_UNIT - P4SB-PSC-1101_TARE_UNIT.PV/g]
+﻿[2022/04/07 18:03:58] [INFO] - [SavePI] The data transfer to the PI server was successful.[P4SB-PSC-1101_TARE_VAL - P4SB-PSC-1101_TARE_VAL.PV/+39.10]
+﻿[2022/04/07 18:03:58] [ERROR] - [SaveDBHistory] DB insert failed. (P4SB-PSC-1101_TARE_UNIT,2022-04-07 18:02:12.000,Y,2022-04-07 18:03:46.531,g) - System.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'HI_SEQ', table 'DataSpider.dbo.HI_MEASURE_RESULT_BK'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+   위치: System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   위치: System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   위치: System.Data.SqlClient.SqlCommand.RunExecuteNonQueryTds(String methodName, Boolean async, Int32 timeout, Boolean asyncWrite)
+   위치: System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   위치: System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   위치: CFW.Data.MsSqlDbAccess.ExecuteNonQuery(String commandText, SqlParameter[] oraParameters, CommandType commandType, String& p_strErrCode, String& p_strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.Source\CFrameWork\CFW.Data\MsSqlDbAccess.cs:줄 311
+   위치: DataSpider.PC00.PT.PC00Z01.InsertResult(String _strTagName, String _strDateTime, String _strValue, String _piIFFlag, String _piIFDateTime, String remark, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 114
+ClientConnectionId:7cae0329-83e1-4017-99cd-6d3babd6a6b7
+Error Number:515,State:2,Class:16
+﻿[2022/04/07 18:03:58] [ERROR] - [SaveDBHistory] DB insert failed. (P4SB-PSC-1101_TARE_VAL,2022-04-07 18:02:12.000,Y,2022-04-07 18:03:46.531,+39.10) - System.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'HI_SEQ', table 'DataSpider.dbo.HI_MEASURE_RESULT_BK'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+   위치: System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   위치: System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   위치: System.Data.SqlClient.SqlCommand.RunExecuteNonQueryTds(String methodName, Boolean async, Int32 timeout, Boolean asyncWrite)
+   위치: System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   위치: System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   위치: CFW.Data.MsSqlDbAccess.ExecuteNonQuery(String commandText, SqlParameter[] oraParameters, CommandType commandType, String& p_strErrCode, String& p_strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.Source\CFrameWork\CFW.Data\MsSqlDbAccess.cs:줄 311
+   위치: DataSpider.PC00.PT.PC00Z01.InsertResult(String _strTagName, String _strDateTime, String _strValue, String _piIFFlag, String _piIFDateTime, String remark, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 114
+ClientConnectionId:7cae0329-83e1-4017-99cd-6d3babd6a6b7
+Error Number:515,State:2,Class:16
+﻿[2022/04/07 18:03:58] [INFO] - [SaveFile] File saved. (C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\EXE\DataSpider\Data\SC_MCA\20220407180358502.ttv) P4SB-PSC-1101_TARE_UNIT,2022-04-07 18:02:12.000,Y,2022-04-07 18:03:46.531,g
+P4SB-PSC-1101_TARE_VAL,2022-04-07 18:02:12.000,Y,2022-04-07 18:03:46.531,+39.10
+
+﻿[2022/04/07 18:03:58] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_GROSS_UNIT) - Line string is empty (Line : 5, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:03:58] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_GROSS_VAL) - Line string is empty (Line : 5, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:03:58] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_TARE_UNIT) - Line string is empty (Line : 4, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:03:58] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_TARE_VAL) - Line string is empty (Line : 4, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:03:58] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_GROSS_UNIT) - Line string is empty (Line : 5, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:03:58] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_GROSS_VAL) - Line string is empty (Line : 5, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:04:05] [INFO] - [SavePI] The data transfer to the PI server was successful.[P4SB-PSC-1101_GROSS_UNIT - P4SB-PSC-1101_GROSS_UNIT.PV/g]
+﻿[2022/04/07 18:04:05] [INFO] - [SavePI] The data transfer to the PI server was successful.[P4SB-PSC-1101_GROSS_VAL - P4SB-PSC-1101_GROSS_VAL.PV/+39.09]
+﻿[2022/04/07 18:04:05] [ERROR] - [SaveDBHistory] DB insert failed. (P4SB-PSC-1101_GROSS_UNIT,2022-04-07 18:02:12.000,Y,2022-04-07 18:03:58.644,g) - System.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'HI_SEQ', table 'DataSpider.dbo.HI_MEASURE_RESULT_BK'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+   위치: System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   위치: System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   위치: System.Data.SqlClient.SqlCommand.RunExecuteNonQueryTds(String methodName, Boolean async, Int32 timeout, Boolean asyncWrite)
+   위치: System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   위치: System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   위치: CFW.Data.MsSqlDbAccess.ExecuteNonQuery(String commandText, SqlParameter[] oraParameters, CommandType commandType, String& p_strErrCode, String& p_strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.Source\CFrameWork\CFW.Data\MsSqlDbAccess.cs:줄 311
+   위치: DataSpider.PC00.PT.PC00Z01.InsertResult(String _strTagName, String _strDateTime, String _strValue, String _piIFFlag, String _piIFDateTime, String remark, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 114
+ClientConnectionId:d4693f83-4058-45e8-9d17-4ab5c496e95f
+Error Number:515,State:2,Class:16
+﻿[2022/04/07 18:04:05] [ERROR] - [SaveDBHistory] DB insert failed. (P4SB-PSC-1101_GROSS_VAL,2022-04-07 18:02:12.000,Y,2022-04-07 18:03:58.644,+39.09) - System.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'HI_SEQ', table 'DataSpider.dbo.HI_MEASURE_RESULT_BK'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+   위치: System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   위치: System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   위치: System.Data.SqlClient.SqlCommand.RunExecuteNonQueryTds(String methodName, Boolean async, Int32 timeout, Boolean asyncWrite)
+   위치: System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   위치: System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   위치: CFW.Data.MsSqlDbAccess.ExecuteNonQuery(String commandText, SqlParameter[] oraParameters, CommandType commandType, String& p_strErrCode, String& p_strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.Source\CFrameWork\CFW.Data\MsSqlDbAccess.cs:줄 311
+   위치: DataSpider.PC00.PT.PC00Z01.InsertResult(String _strTagName, String _strDateTime, String _strValue, String _piIFFlag, String _piIFDateTime, String remark, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 114
+ClientConnectionId:d4693f83-4058-45e8-9d17-4ab5c496e95f
+Error Number:515,State:2,Class:16
+﻿[2022/04/07 18:04:05] [INFO] - [SaveFile] File saved. (C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\EXE\DataSpider\Data\SC_MCA\20220407180405202.ttv) P4SB-PSC-1101_GROSS_UNIT,2022-04-07 18:02:12.000,Y,2022-04-07 18:03:58.644,g
+P4SB-PSC-1101_GROSS_VAL,2022-04-07 18:02:12.000,Y,2022-04-07 18:03:58.644,+39.09
+
+﻿[2022/04/07 18:06:02] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_GROSS_UNIT) - Line string is empty (Line : 5, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:06:02] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_GROSS_VAL) - Line string is empty (Line : 5, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:06:02] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_TARE_UNIT) - Line string is empty (Line : 4, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:06:02] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_TARE_VAL) - Line string is empty (Line : 4, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:06:02] [INFO] - [SavePI] The data transfer to the PI server was successful.[P4SB-PSC-1101_NET_UNIT - P4SB-PSC-1101_NET_UNIT.PV/g]
+﻿[2022/04/07 18:06:02] [INFO] - [SavePI] The data transfer to the PI server was successful.[P4SB-PSC-1101_NET_VAL - P4SB-PSC-1101_NET_VAL.PV/-0.02]
+﻿[2022/04/07 18:06:02] [INFO] - [SavePI] The data transfer to the PI server was successful.[P4SB-PSC-1101_SVRTIME - P4SB-PSC-1101_SVRTIME.PV/2022-04-07 18:06:02]
+﻿[2022/04/07 18:06:02] [INFO] - [SavePI] The data transfer to the PI server was successful.[P4SB-PSC-1101_USER_ID - P4SB-PSC-1101_USER_ID.PV/관리자]
+﻿[2022/04/07 18:06:02] [ERROR] - [SaveDBHistory] DB insert failed. (P4SB-PSC-1101_NET_UNIT,2022-04-07 18:05:22.000,Y,2022-04-07 18:06:02.267,g) - System.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'HI_SEQ', table 'DataSpider.dbo.HI_MEASURE_RESULT_BK'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+   위치: System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   위치: System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   위치: System.Data.SqlClient.SqlCommand.RunExecuteNonQueryTds(String methodName, Boolean async, Int32 timeout, Boolean asyncWrite)
+   위치: System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   위치: System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   위치: CFW.Data.MsSqlDbAccess.ExecuteNonQuery(String commandText, SqlParameter[] oraParameters, CommandType commandType, String& p_strErrCode, String& p_strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.Source\CFrameWork\CFW.Data\MsSqlDbAccess.cs:줄 311
+   위치: DataSpider.PC00.PT.PC00Z01.InsertResult(String _strTagName, String _strDateTime, String _strValue, String _piIFFlag, String _piIFDateTime, String remark, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 114
+ClientConnectionId:d4693f83-4058-45e8-9d17-4ab5c496e95f
+Error Number:515,State:2,Class:16
+﻿[2022/04/07 18:06:02] [ERROR] - [SaveDBHistory] DB insert failed. (P4SB-PSC-1101_NET_VAL,2022-04-07 18:05:22.000,Y,2022-04-07 18:06:02.267,-0.02) - System.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'HI_SEQ', table 'DataSpider.dbo.HI_MEASURE_RESULT_BK'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+   위치: System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   위치: System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   위치: System.Data.SqlClient.SqlCommand.RunExecuteNonQueryTds(String methodName, Boolean async, Int32 timeout, Boolean asyncWrite)
+   위치: System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   위치: System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   위치: CFW.Data.MsSqlDbAccess.ExecuteNonQuery(String commandText, SqlParameter[] oraParameters, CommandType commandType, String& p_strErrCode, String& p_strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.Source\CFrameWork\CFW.Data\MsSqlDbAccess.cs:줄 311
+   위치: DataSpider.PC00.PT.PC00Z01.InsertResult(String _strTagName, String _strDateTime, String _strValue, String _piIFFlag, String _piIFDateTime, String remark, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 114
+ClientConnectionId:d4693f83-4058-45e8-9d17-4ab5c496e95f
+Error Number:515,State:2,Class:16
+﻿[2022/04/07 18:06:02] [ERROR] - [SaveDBHistory] DB insert failed. (P4SB-PSC-1101_SVRTIME,2022-04-07 18:05:22.000,Y,2022-04-07 18:06:02.267,2022-04-07 18:06:02) - System.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'HI_SEQ', table 'DataSpider.dbo.HI_MEASURE_RESULT_BK'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+   위치: System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   위치: System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   위치: System.Data.SqlClient.SqlCommand.RunExecuteNonQueryTds(String methodName, Boolean async, Int32 timeout, Boolean asyncWrite)
+   위치: System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   위치: System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   위치: CFW.Data.MsSqlDbAccess.ExecuteNonQuery(String commandText, SqlParameter[] oraParameters, CommandType commandType, String& p_strErrCode, String& p_strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.Source\CFrameWork\CFW.Data\MsSqlDbAccess.cs:줄 311
+   위치: DataSpider.PC00.PT.PC00Z01.InsertResult(String _strTagName, String _strDateTime, String _strValue, String _piIFFlag, String _piIFDateTime, String remark, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 114
+ClientConnectionId:d4693f83-4058-45e8-9d17-4ab5c496e95f
+Error Number:515,State:2,Class:16
+﻿[2022/04/07 18:06:02] [ERROR] - [SaveDBHistory] DB insert failed. (P4SB-PSC-1101_USER_ID,2022-04-07 18:05:22.000,Y,2022-04-07 18:06:02.267,관리자) - System.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'HI_SEQ', table 'DataSpider.dbo.HI_MEASURE_RESULT_BK'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+   위치: System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   위치: System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   위치: System.Data.SqlClient.SqlCommand.RunExecuteNonQueryTds(String methodName, Boolean async, Int32 timeout, Boolean asyncWrite)
+   위치: System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   위치: System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   위치: CFW.Data.MsSqlDbAccess.ExecuteNonQuery(String commandText, SqlParameter[] oraParameters, CommandType commandType, String& p_strErrCode, String& p_strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.Source\CFrameWork\CFW.Data\MsSqlDbAccess.cs:줄 311
+   위치: DataSpider.PC00.PT.PC00Z01.InsertResult(String _strTagName, String _strDateTime, String _strValue, String _piIFFlag, String _piIFDateTime, String remark, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 114
+ClientConnectionId:d4693f83-4058-45e8-9d17-4ab5c496e95f
+Error Number:515,State:2,Class:16
+﻿[2022/04/07 18:06:02] [INFO] - [SaveFile] File saved. (C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\EXE\DataSpider\Data\SC_MCA\20220407180602344.ttv) P4SB-PSC-1101_NET_UNIT,2022-04-07 18:05:22.000,Y,2022-04-07 18:06:02.267,g
+P4SB-PSC-1101_NET_VAL,2022-04-07 18:05:22.000,Y,2022-04-07 18:06:02.267,-0.02
+P4SB-PSC-1101_SVRTIME,2022-04-07 18:05:22.000,Y,2022-04-07 18:06:02.267,2022-04-07 18:06:02
+P4SB-PSC-1101_USER_ID,2022-04-07 18:05:22.000,Y,2022-04-07 18:06:02.267,관리자
+
+﻿[2022/04/07 18:06:02] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_GROSS_UNIT) - Line string is empty (Line : 5, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:06:02] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_GROSS_VAL) - Line string is empty (Line : 5, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:06:02] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_TARE_UNIT) - Line string is empty (Line : 4, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:06:02] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_TARE_VAL) - Line string is empty (Line : 4, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:06:02] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_GROSS_UNIT) - Line string is empty (Line : 5, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:06:02] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_GROSS_VAL) - Line string is empty (Line : 5, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:06:02] [INFO] - [SavePI] The data transfer to the PI server was successful.[P4SB-PSC-1101_TARE_UNIT - P4SB-PSC-1101_TARE_UNIT.PV/g]
+﻿[2022/04/07 18:06:02] [INFO] - [SavePI] The data transfer to the PI server was successful.[P4SB-PSC-1101_TARE_VAL - P4SB-PSC-1101_TARE_VAL.PV/+39.10]
+﻿[2022/04/07 18:06:02] [ERROR] - [SaveDBHistory] DB insert failed. (P4SB-PSC-1101_TARE_UNIT,2022-04-07 18:05:22.000,Y,2022-04-07 18:06:02.436,g) - System.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'HI_SEQ', table 'DataSpider.dbo.HI_MEASURE_RESULT_BK'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+   위치: System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   위치: System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   위치: System.Data.SqlClient.SqlCommand.RunExecuteNonQueryTds(String methodName, Boolean async, Int32 timeout, Boolean asyncWrite)
+   위치: System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   위치: System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   위치: CFW.Data.MsSqlDbAccess.ExecuteNonQuery(String commandText, SqlParameter[] oraParameters, CommandType commandType, String& p_strErrCode, String& p_strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.Source\CFrameWork\CFW.Data\MsSqlDbAccess.cs:줄 311
+   위치: DataSpider.PC00.PT.PC00Z01.InsertResult(String _strTagName, String _strDateTime, String _strValue, String _piIFFlag, String _piIFDateTime, String remark, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 114
+ClientConnectionId:d4693f83-4058-45e8-9d17-4ab5c496e95f
+Error Number:515,State:2,Class:16
+﻿[2022/04/07 18:06:02] [ERROR] - [SaveDBHistory] DB insert failed. (P4SB-PSC-1101_TARE_VAL,2022-04-07 18:05:22.000,Y,2022-04-07 18:06:02.436,+39.10) - System.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'HI_SEQ', table 'DataSpider.dbo.HI_MEASURE_RESULT_BK'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+   위치: System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   위치: System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   위치: System.Data.SqlClient.SqlCommand.RunExecuteNonQueryTds(String methodName, Boolean async, Int32 timeout, Boolean asyncWrite)
+   위치: System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   위치: System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   위치: CFW.Data.MsSqlDbAccess.ExecuteNonQuery(String commandText, SqlParameter[] oraParameters, CommandType commandType, String& p_strErrCode, String& p_strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.Source\CFrameWork\CFW.Data\MsSqlDbAccess.cs:줄 311
+   위치: DataSpider.PC00.PT.PC00Z01.InsertResult(String _strTagName, String _strDateTime, String _strValue, String _piIFFlag, String _piIFDateTime, String remark, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 114
+ClientConnectionId:d4693f83-4058-45e8-9d17-4ab5c496e95f
+Error Number:515,State:2,Class:16
+﻿[2022/04/07 18:06:02] [INFO] - [SaveFile] File saved. (C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\EXE\DataSpider\Data\SC_MCA\20220407180602477.ttv) P4SB-PSC-1101_TARE_UNIT,2022-04-07 18:05:22.000,Y,2022-04-07 18:06:02.436,g
+P4SB-PSC-1101_TARE_VAL,2022-04-07 18:05:22.000,Y,2022-04-07 18:06:02.436,+39.10
+
+﻿[2022/04/07 18:06:02] [INFO] - [SavePI] The data transfer to the PI server was successful.[P4SB-PSC-1101_GROSS_UNIT - P4SB-PSC-1101_GROSS_UNIT.PV/g]
+﻿[2022/04/07 18:06:02] [INFO] - [SavePI] The data transfer to the PI server was successful.[P4SB-PSC-1101_GROSS_VAL - P4SB-PSC-1101_GROSS_VAL.PV/+39.08]
+﻿[2022/04/07 18:06:02] [ERROR] - [SaveDBHistory] DB insert failed. (P4SB-PSC-1101_GROSS_UNIT,2022-04-07 18:05:22.000,Y,2022-04-07 18:06:02.513,g) - System.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'HI_SEQ', table 'DataSpider.dbo.HI_MEASURE_RESULT_BK'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+   위치: System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   위치: System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   위치: System.Data.SqlClient.SqlCommand.RunExecuteNonQueryTds(String methodName, Boolean async, Int32 timeout, Boolean asyncWrite)
+   위치: System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   위치: System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   위치: CFW.Data.MsSqlDbAccess.ExecuteNonQuery(String commandText, SqlParameter[] oraParameters, CommandType commandType, String& p_strErrCode, String& p_strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.Source\CFrameWork\CFW.Data\MsSqlDbAccess.cs:줄 311
+   위치: DataSpider.PC00.PT.PC00Z01.InsertResult(String _strTagName, String _strDateTime, String _strValue, String _piIFFlag, String _piIFDateTime, String remark, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 114
+ClientConnectionId:d4693f83-4058-45e8-9d17-4ab5c496e95f
+Error Number:515,State:2,Class:16
+﻿[2022/04/07 18:06:02] [ERROR] - [SaveDBHistory] DB insert failed. (P4SB-PSC-1101_GROSS_VAL,2022-04-07 18:05:22.000,Y,2022-04-07 18:06:02.513,+39.08) - System.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'HI_SEQ', table 'DataSpider.dbo.HI_MEASURE_RESULT_BK'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+   위치: System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   위치: System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   위치: System.Data.SqlClient.SqlCommand.RunExecuteNonQueryTds(String methodName, Boolean async, Int32 timeout, Boolean asyncWrite)
+   위치: System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   위치: System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   위치: CFW.Data.MsSqlDbAccess.ExecuteNonQuery(String commandText, SqlParameter[] oraParameters, CommandType commandType, String& p_strErrCode, String& p_strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.Source\CFrameWork\CFW.Data\MsSqlDbAccess.cs:줄 311
+   위치: DataSpider.PC00.PT.PC00Z01.InsertResult(String _strTagName, String _strDateTime, String _strValue, String _piIFFlag, String _piIFDateTime, String remark, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 114
+ClientConnectionId:d4693f83-4058-45e8-9d17-4ab5c496e95f
+Error Number:515,State:2,Class:16
+﻿[2022/04/07 18:06:02] [INFO] - [SaveFile] File saved. (C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\EXE\DataSpider\Data\SC_MCA\20220407180602548.ttv) P4SB-PSC-1101_GROSS_UNIT,2022-04-07 18:05:22.000,Y,2022-04-07 18:06:02.513,g
+P4SB-PSC-1101_GROSS_VAL,2022-04-07 18:05:22.000,Y,2022-04-07 18:06:02.513,+39.08
+
+﻿[2022/04/07 18:06:22] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_GROSS_UNIT) - Line string is empty (Line : 5, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:06:22] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_GROSS_VAL) - Line string is empty (Line : 5, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:06:22] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_TARE_UNIT) - Line string is empty (Line : 4, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:06:22] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_TARE_VAL) - Line string is empty (Line : 4, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:06:42] [INFO] - [SavePI] The data transfer to the PI server was successful.[P4SB-PSC-1101_NET_UNIT - P4SB-PSC-1101_NET_UNIT.PV/g]
+﻿[2022/04/07 18:08:30] [INFO] - [SavePI] The data transfer to the PI server was successful.[P4SB-PSC-1101_NET_VAL - P4SB-PSC-1101_NET_VAL.PV/0.00]
+﻿[2022/04/07 18:10:17] [INFO] - [SavePI] The data transfer to the PI server was successful.[P4SB-PSC-1101_SVRTIME - P4SB-PSC-1101_SVRTIME.PV/2022-04-07 18:06:22]
+﻿[2022/04/07 18:10:19] [INFO] - [SavePI] The data transfer to the PI server was successful.[P4SB-PSC-1101_USER_ID - P4SB-PSC-1101_USER_ID.PV/관리자]
+﻿[2022/04/07 18:10:19] [ERROR] - [SaveDBHistory] DB insert failed. (P4SB-PSC-1101_NET_UNIT,2022-04-07 18:05:43.000,Y,2022-04-07 18:06:22.866,g) - System.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'HI_SEQ', table 'DataSpider.dbo.HI_MEASURE_RESULT_BK'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+   위치: System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   위치: System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   위치: System.Data.SqlClient.SqlCommand.RunExecuteNonQueryTds(String methodName, Boolean async, Int32 timeout, Boolean asyncWrite)
+   위치: System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   위치: System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   위치: CFW.Data.MsSqlDbAccess.ExecuteNonQuery(String commandText, SqlParameter[] oraParameters, CommandType commandType, String& p_strErrCode, String& p_strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.Source\CFrameWork\CFW.Data\MsSqlDbAccess.cs:줄 311
+   위치: DataSpider.PC00.PT.PC00Z01.InsertResult(String _strTagName, String _strDateTime, String _strValue, String _piIFFlag, String _piIFDateTime, String remark, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 114
+ClientConnectionId:7cae0329-83e1-4017-99cd-6d3babd6a6b7
+Error Number:515,State:2,Class:16
+﻿[2022/04/07 18:10:19] [ERROR] - [SaveDBHistory] DB insert failed. (P4SB-PSC-1101_NET_VAL,2022-04-07 18:05:43.000,Y,2022-04-07 18:06:22.866,0.00) - System.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'HI_SEQ', table 'DataSpider.dbo.HI_MEASURE_RESULT_BK'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+   위치: System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   위치: System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   위치: System.Data.SqlClient.SqlCommand.RunExecuteNonQueryTds(String methodName, Boolean async, Int32 timeout, Boolean asyncWrite)
+   위치: System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   위치: System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   위치: CFW.Data.MsSqlDbAccess.ExecuteNonQuery(String commandText, SqlParameter[] oraParameters, CommandType commandType, String& p_strErrCode, String& p_strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.Source\CFrameWork\CFW.Data\MsSqlDbAccess.cs:줄 311
+   위치: DataSpider.PC00.PT.PC00Z01.InsertResult(String _strTagName, String _strDateTime, String _strValue, String _piIFFlag, String _piIFDateTime, String remark, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 114
+ClientConnectionId:7cae0329-83e1-4017-99cd-6d3babd6a6b7
+Error Number:515,State:2,Class:16
+﻿[2022/04/07 18:10:19] [ERROR] - [SaveDBHistory] DB insert failed. (P4SB-PSC-1101_SVRTIME,2022-04-07 18:05:43.000,Y,2022-04-07 18:06:22.866,2022-04-07 18:06:22) - System.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'HI_SEQ', table 'DataSpider.dbo.HI_MEASURE_RESULT_BK'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+   위치: System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   위치: System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   위치: System.Data.SqlClient.SqlCommand.RunExecuteNonQueryTds(String methodName, Boolean async, Int32 timeout, Boolean asyncWrite)
+   위치: System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   위치: System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   위치: CFW.Data.MsSqlDbAccess.ExecuteNonQuery(String commandText, SqlParameter[] oraParameters, CommandType commandType, String& p_strErrCode, String& p_strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.Source\CFrameWork\CFW.Data\MsSqlDbAccess.cs:줄 311
+   위치: DataSpider.PC00.PT.PC00Z01.InsertResult(String _strTagName, String _strDateTime, String _strValue, String _piIFFlag, String _piIFDateTime, String remark, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 114
+ClientConnectionId:7cae0329-83e1-4017-99cd-6d3babd6a6b7
+Error Number:515,State:2,Class:16
+﻿[2022/04/07 18:10:19] [ERROR] - [SaveDBHistory] DB insert failed. (P4SB-PSC-1101_USER_ID,2022-04-07 18:05:43.000,Y,2022-04-07 18:06:22.866,관리자) - System.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'HI_SEQ', table 'DataSpider.dbo.HI_MEASURE_RESULT_BK'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+   위치: System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   위치: System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   위치: System.Data.SqlClient.SqlCommand.RunExecuteNonQueryTds(String methodName, Boolean async, Int32 timeout, Boolean asyncWrite)
+   위치: System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   위치: System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   위치: CFW.Data.MsSqlDbAccess.ExecuteNonQuery(String commandText, SqlParameter[] oraParameters, CommandType commandType, String& p_strErrCode, String& p_strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.Source\CFrameWork\CFW.Data\MsSqlDbAccess.cs:줄 311
+   위치: DataSpider.PC00.PT.PC00Z01.InsertResult(String _strTagName, String _strDateTime, String _strValue, String _piIFFlag, String _piIFDateTime, String remark, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 114
+ClientConnectionId:7cae0329-83e1-4017-99cd-6d3babd6a6b7
+Error Number:515,State:2,Class:16
+﻿[2022/04/07 18:10:19] [INFO] - [SaveFile] File saved. (C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\EXE\DataSpider\Data\SC_MCA\20220407181019700.ttv) P4SB-PSC-1101_NET_UNIT,2022-04-07 18:05:43.000,Y,2022-04-07 18:06:22.866,g
+P4SB-PSC-1101_NET_VAL,2022-04-07 18:05:43.000,Y,2022-04-07 18:06:22.866,0.00
+P4SB-PSC-1101_SVRTIME,2022-04-07 18:05:43.000,Y,2022-04-07 18:06:22.866,2022-04-07 18:06:22
+P4SB-PSC-1101_USER_ID,2022-04-07 18:05:43.000,Y,2022-04-07 18:06:22.866,관리자
+
+﻿[2022/04/07 18:10:19] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_GROSS_UNIT) - Line string is empty (Line : 5, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:10:19] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_GROSS_VAL) - Line string is empty (Line : 5, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:10:19] [INFO] - [SavePI] The data transfer to the PI server was successful.[P4SB-PSC-1101_TARE_UNIT - P4SB-PSC-1101_TARE_UNIT.PV/g]
+﻿[2022/04/07 18:10:20] [INFO] - [SavePI] The data transfer to the PI server was successful.[P4SB-PSC-1101_TARE_VAL - P4SB-PSC-1101_TARE_VAL.PV/+39.10]
+﻿[2022/04/07 18:10:20] [ERROR] - [SaveDBHistory] DB insert failed. (P4SB-PSC-1101_TARE_UNIT,2022-04-07 18:05:43.000,Y,2022-04-07 18:10:19.755,g) - System.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'HI_SEQ', table 'DataSpider.dbo.HI_MEASURE_RESULT_BK'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+   위치: System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   위치: System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   위치: System.Data.SqlClient.SqlCommand.RunExecuteNonQueryTds(String methodName, Boolean async, Int32 timeout, Boolean asyncWrite)
+   위치: System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   위치: System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   위치: CFW.Data.MsSqlDbAccess.ExecuteNonQuery(String commandText, SqlParameter[] oraParameters, CommandType commandType, String& p_strErrCode, String& p_strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.Source\CFrameWork\CFW.Data\MsSqlDbAccess.cs:줄 311
+   위치: DataSpider.PC00.PT.PC00Z01.InsertResult(String _strTagName, String _strDateTime, String _strValue, String _piIFFlag, String _piIFDateTime, String remark, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 114
+ClientConnectionId:7cae0329-83e1-4017-99cd-6d3babd6a6b7
+Error Number:515,State:2,Class:16
+﻿[2022/04/07 18:10:20] [ERROR] - [SaveDBHistory] DB insert failed. (P4SB-PSC-1101_TARE_VAL,2022-04-07 18:05:43.000,Y,2022-04-07 18:10:19.755,+39.10) - System.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'HI_SEQ', table 'DataSpider.dbo.HI_MEASURE_RESULT_BK'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+   위치: System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   위치: System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   위치: System.Data.SqlClient.SqlCommand.RunExecuteNonQueryTds(String methodName, Boolean async, Int32 timeout, Boolean asyncWrite)
+   위치: System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   위치: System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   위치: CFW.Data.MsSqlDbAccess.ExecuteNonQuery(String commandText, SqlParameter[] oraParameters, CommandType commandType, String& p_strErrCode, String& p_strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.Source\CFrameWork\CFW.Data\MsSqlDbAccess.cs:줄 311
+   위치: DataSpider.PC00.PT.PC00Z01.InsertResult(String _strTagName, String _strDateTime, String _strValue, String _piIFFlag, String _piIFDateTime, String remark, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 114
+ClientConnectionId:7cae0329-83e1-4017-99cd-6d3babd6a6b7
+Error Number:515,State:2,Class:16
+﻿[2022/04/07 18:10:20] [INFO] - [SaveFile] File saved. (C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\EXE\DataSpider\Data\SC_MCA\20220407181020062.ttv) P4SB-PSC-1101_TARE_UNIT,2022-04-07 18:05:43.000,Y,2022-04-07 18:10:19.755,g
+P4SB-PSC-1101_TARE_VAL,2022-04-07 18:05:43.000,Y,2022-04-07 18:10:19.755,+39.10
+
+﻿[2022/04/07 18:10:20] [INFO] - [SavePI] The data transfer to the PI server was successful.[P4SB-PSC-1101_GROSS_UNIT - P4SB-PSC-1101_GROSS_UNIT.PV/g]
+﻿[2022/04/07 18:10:20] [INFO] - [SavePI] The data transfer to the PI server was successful.[P4SB-PSC-1101_GROSS_VAL - P4SB-PSC-1101_GROSS_VAL.PV/+39.10]
+﻿[2022/04/07 18:10:20] [ERROR] - [SaveDBHistory] DB insert failed. (P4SB-PSC-1101_GROSS_UNIT,2022-04-07 18:05:43.000,Y,2022-04-07 18:10:20.107,g) - System.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'HI_SEQ', table 'DataSpider.dbo.HI_MEASURE_RESULT_BK'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+   위치: System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   위치: System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   위치: System.Data.SqlClient.SqlCommand.RunExecuteNonQueryTds(String methodName, Boolean async, Int32 timeout, Boolean asyncWrite)
+   위치: System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   위치: System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   위치: CFW.Data.MsSqlDbAccess.ExecuteNonQuery(String commandText, SqlParameter[] oraParameters, CommandType commandType, String& p_strErrCode, String& p_strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.Source\CFrameWork\CFW.Data\MsSqlDbAccess.cs:줄 311
+   위치: DataSpider.PC00.PT.PC00Z01.InsertResult(String _strTagName, String _strDateTime, String _strValue, String _piIFFlag, String _piIFDateTime, String remark, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 114
+ClientConnectionId:7cae0329-83e1-4017-99cd-6d3babd6a6b7
+Error Number:515,State:2,Class:16
+﻿[2022/04/07 18:10:20] [ERROR] - [SaveDBHistory] DB insert failed. (P4SB-PSC-1101_GROSS_VAL,2022-04-07 18:05:43.000,Y,2022-04-07 18:10:20.107,+39.10) - System.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'HI_SEQ', table 'DataSpider.dbo.HI_MEASURE_RESULT_BK'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+   위치: System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   위치: System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   위치: System.Data.SqlClient.SqlCommand.RunExecuteNonQueryTds(String methodName, Boolean async, Int32 timeout, Boolean asyncWrite)
+   위치: System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   위치: System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   위치: CFW.Data.MsSqlDbAccess.ExecuteNonQuery(String commandText, SqlParameter[] oraParameters, CommandType commandType, String& p_strErrCode, String& p_strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.Source\CFrameWork\CFW.Data\MsSqlDbAccess.cs:줄 311
+   위치: DataSpider.PC00.PT.PC00Z01.InsertResult(String _strTagName, String _strDateTime, String _strValue, String _piIFFlag, String _piIFDateTime, String remark, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 114
+ClientConnectionId:7cae0329-83e1-4017-99cd-6d3babd6a6b7
+Error Number:515,State:2,Class:16
+﻿[2022/04/07 18:10:20] [INFO] - [SaveFile] File saved. (C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\EXE\DataSpider\Data\SC_MCA\20220407181020568.ttv) P4SB-PSC-1101_GROSS_UNIT,2022-04-07 18:05:43.000,Y,2022-04-07 18:10:20.107,g
+P4SB-PSC-1101_GROSS_VAL,2022-04-07 18:05:43.000,Y,2022-04-07 18:10:20.107,+39.10
+
+﻿[2022/04/07 18:10:20] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_GROSS_UNIT) - Line string is empty (Line : 5, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:10:20] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_GROSS_VAL) - Line string is empty (Line : 5, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:10:20] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_TARE_UNIT) - Line string is empty (Line : 4, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:10:20] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_TARE_VAL) - Line string is empty (Line : 4, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:10:20] [INFO] - [SavePI] The data transfer to the PI server was successful.[P4SB-PSC-1101_NET_UNIT - P4SB-PSC-1101_NET_UNIT.PV/g]
+﻿[2022/04/07 18:10:20] [INFO] - [SavePI] The data transfer to the PI server was successful.[P4SB-PSC-1101_NET_VAL - P4SB-PSC-1101_NET_VAL.PV/+0.02]
+﻿[2022/04/07 18:10:21] [INFO] - [SavePI] The data transfer to the PI server was successful.[P4SB-PSC-1101_SVRTIME - P4SB-PSC-1101_SVRTIME.PV/2022-04-07 18:10:20]
+﻿[2022/04/07 18:10:21] [INFO] - [SavePI] The data transfer to the PI server was successful.[P4SB-PSC-1101_USER_ID - P4SB-PSC-1101_USER_ID.PV/P4S-SC-9998]
+﻿[2022/04/07 18:10:21] [ERROR] - [SaveDBHistory] DB insert failed. (P4SB-PSC-1101_NET_UNIT,2022-04-07 18:09:37.000,Y,2022-04-07 18:10:20.638,g) - System.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'HI_SEQ', table 'DataSpider.dbo.HI_MEASURE_RESULT_BK'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+   위치: System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   위치: System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   위치: System.Data.SqlClient.SqlCommand.RunExecuteNonQueryTds(String methodName, Boolean async, Int32 timeout, Boolean asyncWrite)
+   위치: System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   위치: System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   위치: CFW.Data.MsSqlDbAccess.ExecuteNonQuery(String commandText, SqlParameter[] oraParameters, CommandType commandType, String& p_strErrCode, String& p_strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.Source\CFrameWork\CFW.Data\MsSqlDbAccess.cs:줄 311
+   위치: DataSpider.PC00.PT.PC00Z01.InsertResult(String _strTagName, String _strDateTime, String _strValue, String _piIFFlag, String _piIFDateTime, String remark, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 114
+ClientConnectionId:7cae0329-83e1-4017-99cd-6d3babd6a6b7
+Error Number:515,State:2,Class:16
+﻿[2022/04/07 18:10:21] [ERROR] - [SaveDBHistory] DB insert failed. (P4SB-PSC-1101_NET_VAL,2022-04-07 18:09:37.000,Y,2022-04-07 18:10:20.638,+0.02) - System.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'HI_SEQ', table 'DataSpider.dbo.HI_MEASURE_RESULT_BK'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+   위치: System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   위치: System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   위치: System.Data.SqlClient.SqlCommand.RunExecuteNonQueryTds(String methodName, Boolean async, Int32 timeout, Boolean asyncWrite)
+   위치: System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   위치: System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   위치: CFW.Data.MsSqlDbAccess.ExecuteNonQuery(String commandText, SqlParameter[] oraParameters, CommandType commandType, String& p_strErrCode, String& p_strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.Source\CFrameWork\CFW.Data\MsSqlDbAccess.cs:줄 311
+   위치: DataSpider.PC00.PT.PC00Z01.InsertResult(String _strTagName, String _strDateTime, String _strValue, String _piIFFlag, String _piIFDateTime, String remark, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 114
+ClientConnectionId:7cae0329-83e1-4017-99cd-6d3babd6a6b7
+Error Number:515,State:2,Class:16
+﻿[2022/04/07 18:10:21] [ERROR] - [SaveDBHistory] DB insert failed. (P4SB-PSC-1101_SVRTIME,2022-04-07 18:09:37.000,Y,2022-04-07 18:10:20.638,2022-04-07 18:10:20) - System.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'HI_SEQ', table 'DataSpider.dbo.HI_MEASURE_RESULT_BK'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+   위치: System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   위치: System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   위치: System.Data.SqlClient.SqlCommand.RunExecuteNonQueryTds(String methodName, Boolean async, Int32 timeout, Boolean asyncWrite)
+   위치: System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   위치: System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   위치: CFW.Data.MsSqlDbAccess.ExecuteNonQuery(String commandText, SqlParameter[] oraParameters, CommandType commandType, String& p_strErrCode, String& p_strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.Source\CFrameWork\CFW.Data\MsSqlDbAccess.cs:줄 311
+   위치: DataSpider.PC00.PT.PC00Z01.InsertResult(String _strTagName, String _strDateTime, String _strValue, String _piIFFlag, String _piIFDateTime, String remark, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 114
+ClientConnectionId:7cae0329-83e1-4017-99cd-6d3babd6a6b7
+Error Number:515,State:2,Class:16
+﻿[2022/04/07 18:10:21] [ERROR] - [SaveDBHistory] DB insert failed. (P4SB-PSC-1101_USER_ID,2022-04-07 18:09:37.000,Y,2022-04-07 18:10:20.638,P4S-SC-9998) - System.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'HI_SEQ', table 'DataSpider.dbo.HI_MEASURE_RESULT_BK'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+   위치: System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   위치: System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   위치: System.Data.SqlClient.SqlCommand.RunExecuteNonQueryTds(String methodName, Boolean async, Int32 timeout, Boolean asyncWrite)
+   위치: System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   위치: System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   위치: CFW.Data.MsSqlDbAccess.ExecuteNonQuery(String commandText, SqlParameter[] oraParameters, CommandType commandType, String& p_strErrCode, String& p_strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.Source\CFrameWork\CFW.Data\MsSqlDbAccess.cs:줄 311
+   위치: DataSpider.PC00.PT.PC00Z01.InsertResult(String _strTagName, String _strDateTime, String _strValue, String _piIFFlag, String _piIFDateTime, String remark, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 114
+ClientConnectionId:7cae0329-83e1-4017-99cd-6d3babd6a6b7
+Error Number:515,State:2,Class:16
+﻿[2022/04/07 18:10:21] [INFO] - [SaveFile] File saved. (C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\EXE\DataSpider\Data\SC_MCA\20220407181021274.ttv) P4SB-PSC-1101_NET_UNIT,2022-04-07 18:09:37.000,Y,2022-04-07 18:10:20.638,g
+P4SB-PSC-1101_NET_VAL,2022-04-07 18:09:37.000,Y,2022-04-07 18:10:20.638,+0.02
+P4SB-PSC-1101_SVRTIME,2022-04-07 18:09:37.000,Y,2022-04-07 18:10:20.638,2022-04-07 18:10:20
+P4SB-PSC-1101_USER_ID,2022-04-07 18:09:37.000,Y,2022-04-07 18:10:20.638,P4S-SC-9998
+
+﻿[2022/04/07 18:10:21] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_GROSS_UNIT) - Line string is empty (Line : 5, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:10:21] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_GROSS_VAL) - Line string is empty (Line : 5, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:10:24] [INFO] - [SavePI] The data transfer to the PI server was successful.[P4SB-PSC-1101_TARE_UNIT - P4SB-PSC-1101_TARE_UNIT.PV/g]
+﻿[2022/04/07 18:10:24] [INFO] - [SavePI] The data transfer to the PI server was successful.[P4SB-PSC-1101_TARE_VAL - P4SB-PSC-1101_TARE_VAL.PV/+39.10]
+﻿[2022/04/07 18:10:24] [ERROR] - [SaveDBHistory] DB insert failed. (P4SB-PSC-1101_TARE_UNIT,2022-04-07 18:09:37.000,Y,2022-04-07 18:10:21.324,g) - System.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'HI_SEQ', table 'DataSpider.dbo.HI_MEASURE_RESULT_BK'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+   위치: System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   위치: System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   위치: System.Data.SqlClient.SqlCommand.RunExecuteNonQueryTds(String methodName, Boolean async, Int32 timeout, Boolean asyncWrite)
+   위치: System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   위치: System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   위치: CFW.Data.MsSqlDbAccess.ExecuteNonQuery(String commandText, SqlParameter[] oraParameters, CommandType commandType, String& p_strErrCode, String& p_strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.Source\CFrameWork\CFW.Data\MsSqlDbAccess.cs:줄 311
+   위치: DataSpider.PC00.PT.PC00Z01.InsertResult(String _strTagName, String _strDateTime, String _strValue, String _piIFFlag, String _piIFDateTime, String remark, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 114
+ClientConnectionId:7cae0329-83e1-4017-99cd-6d3babd6a6b7
+Error Number:515,State:2,Class:16
+﻿[2022/04/07 18:10:24] [ERROR] - [SaveDBHistory] DB insert failed. (P4SB-PSC-1101_TARE_VAL,2022-04-07 18:09:37.000,Y,2022-04-07 18:10:21.324,+39.10) - System.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'HI_SEQ', table 'DataSpider.dbo.HI_MEASURE_RESULT_BK'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+   위치: System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   위치: System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   위치: System.Data.SqlClient.SqlCommand.RunExecuteNonQueryTds(String methodName, Boolean async, Int32 timeout, Boolean asyncWrite)
+   위치: System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   위치: System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   위치: CFW.Data.MsSqlDbAccess.ExecuteNonQuery(String commandText, SqlParameter[] oraParameters, CommandType commandType, String& p_strErrCode, String& p_strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.Source\CFrameWork\CFW.Data\MsSqlDbAccess.cs:줄 311
+   위치: DataSpider.PC00.PT.PC00Z01.InsertResult(String _strTagName, String _strDateTime, String _strValue, String _piIFFlag, String _piIFDateTime, String remark, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 114
+ClientConnectionId:7cae0329-83e1-4017-99cd-6d3babd6a6b7
+Error Number:515,State:2,Class:16
+﻿[2022/04/07 18:10:24] [INFO] - [SaveFile] File saved. (C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\EXE\DataSpider\Data\SC_MCA\20220407181024433.ttv) P4SB-PSC-1101_TARE_UNIT,2022-04-07 18:09:37.000,Y,2022-04-07 18:10:21.324,g
+P4SB-PSC-1101_TARE_VAL,2022-04-07 18:09:37.000,Y,2022-04-07 18:10:21.324,+39.10
+
+﻿[2022/04/07 18:10:24] [INFO] - [SavePI] The data transfer to the PI server was successful.[P4SB-PSC-1101_GROSS_UNIT - P4SB-PSC-1101_GROSS_UNIT.PV/g]
+﻿[2022/04/07 18:10:24] [INFO] - [SavePI] The data transfer to the PI server was successful.[P4SB-PSC-1101_GROSS_VAL - P4SB-PSC-1101_GROSS_VAL.PV/+39.12]
+﻿[2022/04/07 18:10:24] [ERROR] - [SaveDBHistory] DB insert failed. (P4SB-PSC-1101_GROSS_UNIT,2022-04-07 18:09:37.000,Y,2022-04-07 18:10:24.483,g) - System.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'HI_SEQ', table 'DataSpider.dbo.HI_MEASURE_RESULT_BK'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+   위치: System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   위치: System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   위치: System.Data.SqlClient.SqlCommand.RunExecuteNonQueryTds(String methodName, Boolean async, Int32 timeout, Boolean asyncWrite)
+   위치: System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   위치: System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   위치: CFW.Data.MsSqlDbAccess.ExecuteNonQuery(String commandText, SqlParameter[] oraParameters, CommandType commandType, String& p_strErrCode, String& p_strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.Source\CFrameWork\CFW.Data\MsSqlDbAccess.cs:줄 311
+   위치: DataSpider.PC00.PT.PC00Z01.InsertResult(String _strTagName, String _strDateTime, String _strValue, String _piIFFlag, String _piIFDateTime, String remark, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 114
+ClientConnectionId:7cae0329-83e1-4017-99cd-6d3babd6a6b7
+Error Number:515,State:2,Class:16
+﻿[2022/04/07 18:10:24] [ERROR] - [SaveDBHistory] DB insert failed. (P4SB-PSC-1101_GROSS_VAL,2022-04-07 18:09:37.000,Y,2022-04-07 18:10:24.483,+39.12) - System.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'HI_SEQ', table 'DataSpider.dbo.HI_MEASURE_RESULT_BK'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+   위치: System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   위치: System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   위치: System.Data.SqlClient.SqlCommand.RunExecuteNonQueryTds(String methodName, Boolean async, Int32 timeout, Boolean asyncWrite)
+   위치: System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   위치: System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   위치: CFW.Data.MsSqlDbAccess.ExecuteNonQuery(String commandText, SqlParameter[] oraParameters, CommandType commandType, String& p_strErrCode, String& p_strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.Source\CFrameWork\CFW.Data\MsSqlDbAccess.cs:줄 311
+   위치: DataSpider.PC00.PT.PC00Z01.InsertResult(String _strTagName, String _strDateTime, String _strValue, String _piIFFlag, String _piIFDateTime, String remark, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 114
+ClientConnectionId:7cae0329-83e1-4017-99cd-6d3babd6a6b7
+Error Number:515,State:2,Class:16
+﻿[2022/04/07 18:10:24] [INFO] - [SaveFile] File saved. (C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\EXE\DataSpider\Data\SC_MCA\20220407181024523.ttv) P4SB-PSC-1101_GROSS_UNIT,2022-04-07 18:09:37.000,Y,2022-04-07 18:10:24.483,g
+P4SB-PSC-1101_GROSS_VAL,2022-04-07 18:09:37.000,Y,2022-04-07 18:10:24.483,+39.12
+
+﻿[2022/04/07 18:18:18] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_GROSS_UNIT) - Line string is empty (Line : 5, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:18:18] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_GROSS_VAL) - Line string is empty (Line : 5, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:18:18] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_TARE_UNIT) - Line string is empty (Line : 4, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:18:18] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_TARE_VAL) - Line string is empty (Line : 4, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:18:18] [INFO] - [SavePI] The data transfer to the PI server was successful.[P4SB-PSC-1101_NET_UNIT - P4SB-PSC-1101_NET_UNIT.PV/g]
+﻿[2022/04/07 18:18:18] [INFO] - [SavePI] The data transfer to the PI server was successful.[P4SB-PSC-1101_NET_VAL - P4SB-PSC-1101_NET_VAL.PV/+10.88]
+﻿[2022/04/07 18:18:18] [INFO] - [SavePI] The data transfer to the PI server was successful.[P4SB-PSC-1101_SVRTIME - P4SB-PSC-1101_SVRTIME.PV/2022-04-07 18:18:18]
+﻿[2022/04/07 18:18:18] [INFO] - [SavePI] The data transfer to the PI server was successful.[P4SB-PSC-1101_USER_ID - P4SB-PSC-1101_USER_ID.PV/P4S-SC-9998]
+﻿[2022/04/07 18:18:18] [ERROR] - [SaveDBHistory] DB insert failed. (P4SB-PSC-1101_NET_UNIT,2022-04-07 18:17:39.000,Y,2022-04-07 18:18:18.229,g) - System.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'HI_SEQ', table 'DataSpider.dbo.HI_MEASURE_RESULT_BK'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+   위치: System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   위치: System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   위치: System.Data.SqlClient.SqlCommand.RunExecuteNonQueryTds(String methodName, Boolean async, Int32 timeout, Boolean asyncWrite)
+   위치: System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   위치: System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   위치: CFW.Data.MsSqlDbAccess.ExecuteNonQuery(String commandText, SqlParameter[] oraParameters, CommandType commandType, String& p_strErrCode, String& p_strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.Source\CFrameWork\CFW.Data\MsSqlDbAccess.cs:줄 311
+   위치: DataSpider.PC00.PT.PC00Z01.InsertResult(String _strTagName, String _strDateTime, String _strValue, String _piIFFlag, String _piIFDateTime, String remark, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 114
+ClientConnectionId:7cae0329-83e1-4017-99cd-6d3babd6a6b7
+Error Number:515,State:2,Class:16
+﻿[2022/04/07 18:18:18] [ERROR] - [SaveDBHistory] DB insert failed. (P4SB-PSC-1101_NET_VAL,2022-04-07 18:17:39.000,Y,2022-04-07 18:18:18.229,+10.88) - System.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'HI_SEQ', table 'DataSpider.dbo.HI_MEASURE_RESULT_BK'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+   위치: System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   위치: System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   위치: System.Data.SqlClient.SqlCommand.RunExecuteNonQueryTds(String methodName, Boolean async, Int32 timeout, Boolean asyncWrite)
+   위치: System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   위치: System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   위치: CFW.Data.MsSqlDbAccess.ExecuteNonQuery(String commandText, SqlParameter[] oraParameters, CommandType commandType, String& p_strErrCode, String& p_strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.Source\CFrameWork\CFW.Data\MsSqlDbAccess.cs:줄 311
+   위치: DataSpider.PC00.PT.PC00Z01.InsertResult(String _strTagName, String _strDateTime, String _strValue, String _piIFFlag, String _piIFDateTime, String remark, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 114
+ClientConnectionId:7cae0329-83e1-4017-99cd-6d3babd6a6b7
+Error Number:515,State:2,Class:16
+﻿[2022/04/07 18:18:18] [ERROR] - [SaveDBHistory] DB insert failed. (P4SB-PSC-1101_SVRTIME,2022-04-07 18:17:39.000,Y,2022-04-07 18:18:18.229,2022-04-07 18:18:18) - System.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'HI_SEQ', table 'DataSpider.dbo.HI_MEASURE_RESULT_BK'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+   위치: System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   위치: System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   위치: System.Data.SqlClient.SqlCommand.RunExecuteNonQueryTds(String methodName, Boolean async, Int32 timeout, Boolean asyncWrite)
+   위치: System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   위치: System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   위치: CFW.Data.MsSqlDbAccess.ExecuteNonQuery(String commandText, SqlParameter[] oraParameters, CommandType commandType, String& p_strErrCode, String& p_strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.Source\CFrameWork\CFW.Data\MsSqlDbAccess.cs:줄 311
+   위치: DataSpider.PC00.PT.PC00Z01.InsertResult(String _strTagName, String _strDateTime, String _strValue, String _piIFFlag, String _piIFDateTime, String remark, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 114
+ClientConnectionId:7cae0329-83e1-4017-99cd-6d3babd6a6b7
+Error Number:515,State:2,Class:16
+﻿[2022/04/07 18:18:18] [ERROR] - [SaveDBHistory] DB insert failed. (P4SB-PSC-1101_USER_ID,2022-04-07 18:17:39.000,Y,2022-04-07 18:18:18.229,P4S-SC-9998) - System.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'HI_SEQ', table 'DataSpider.dbo.HI_MEASURE_RESULT_BK'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+   위치: System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   위치: System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   위치: System.Data.SqlClient.SqlCommand.RunExecuteNonQueryTds(String methodName, Boolean async, Int32 timeout, Boolean asyncWrite)
+   위치: System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   위치: System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   위치: CFW.Data.MsSqlDbAccess.ExecuteNonQuery(String commandText, SqlParameter[] oraParameters, CommandType commandType, String& p_strErrCode, String& p_strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.Source\CFrameWork\CFW.Data\MsSqlDbAccess.cs:줄 311
+   위치: DataSpider.PC00.PT.PC00Z01.InsertResult(String _strTagName, String _strDateTime, String _strValue, String _piIFFlag, String _piIFDateTime, String remark, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 114
+ClientConnectionId:7cae0329-83e1-4017-99cd-6d3babd6a6b7
+Error Number:515,State:2,Class:16
+﻿[2022/04/07 18:18:18] [INFO] - [SaveFile] File saved. (C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\EXE\DataSpider\Data\SC_MCA\20220407181818335.ttv) P4SB-PSC-1101_NET_UNIT,2022-04-07 18:17:39.000,Y,2022-04-07 18:18:18.229,g
+P4SB-PSC-1101_NET_VAL,2022-04-07 18:17:39.000,Y,2022-04-07 18:18:18.229,+10.88
+P4SB-PSC-1101_SVRTIME,2022-04-07 18:17:39.000,Y,2022-04-07 18:18:18.229,2022-04-07 18:18:18
+P4SB-PSC-1101_USER_ID,2022-04-07 18:17:39.000,Y,2022-04-07 18:18:18.229,P4S-SC-9998
+
+﻿[2022/04/07 18:18:18] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_GROSS_UNIT) - Line string is empty (Line : 5, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:18:18] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_GROSS_VAL) - Line string is empty (Line : 5, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:18:18] [INFO] - [SavePI] The data transfer to the PI server was successful.[P4SB-PSC-1101_TARE_UNIT - P4SB-PSC-1101_TARE_UNIT.PV/g]
+﻿[2022/04/07 18:18:18] [INFO] - [SavePI] The data transfer to the PI server was successful.[P4SB-PSC-1101_TARE_VAL - P4SB-PSC-1101_TARE_VAL.PV/+39.10]
+﻿[2022/04/07 18:18:18] [ERROR] - [SaveDBHistory] DB insert failed. (P4SB-PSC-1101_TARE_UNIT,2022-04-07 18:17:39.000,Y,2022-04-07 18:18:18.371,g) - System.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'HI_SEQ', table 'DataSpider.dbo.HI_MEASURE_RESULT_BK'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+   위치: System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   위치: System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   위치: System.Data.SqlClient.SqlCommand.RunExecuteNonQueryTds(String methodName, Boolean async, Int32 timeout, Boolean asyncWrite)
+   위치: System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   위치: System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   위치: CFW.Data.MsSqlDbAccess.ExecuteNonQuery(String commandText, SqlParameter[] oraParameters, CommandType commandType, String& p_strErrCode, String& p_strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.Source\CFrameWork\CFW.Data\MsSqlDbAccess.cs:줄 311
+   위치: DataSpider.PC00.PT.PC00Z01.InsertResult(String _strTagName, String _strDateTime, String _strValue, String _piIFFlag, String _piIFDateTime, String remark, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 114
+ClientConnectionId:7cae0329-83e1-4017-99cd-6d3babd6a6b7
+Error Number:515,State:2,Class:16
+﻿[2022/04/07 18:18:18] [ERROR] - [SaveDBHistory] DB insert failed. (P4SB-PSC-1101_TARE_VAL,2022-04-07 18:17:39.000,Y,2022-04-07 18:18:18.371,+39.10) - System.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'HI_SEQ', table 'DataSpider.dbo.HI_MEASURE_RESULT_BK'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+   위치: System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   위치: System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   위치: System.Data.SqlClient.SqlCommand.RunExecuteNonQueryTds(String methodName, Boolean async, Int32 timeout, Boolean asyncWrite)
+   위치: System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   위치: System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   위치: CFW.Data.MsSqlDbAccess.ExecuteNonQuery(String commandText, SqlParameter[] oraParameters, CommandType commandType, String& p_strErrCode, String& p_strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.Source\CFrameWork\CFW.Data\MsSqlDbAccess.cs:줄 311
+   위치: DataSpider.PC00.PT.PC00Z01.InsertResult(String _strTagName, String _strDateTime, String _strValue, String _piIFFlag, String _piIFDateTime, String remark, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 114
+ClientConnectionId:7cae0329-83e1-4017-99cd-6d3babd6a6b7
+Error Number:515,State:2,Class:16
+﻿[2022/04/07 18:18:18] [INFO] - [SaveFile] File saved. (C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\EXE\DataSpider\Data\SC_MCA\20220407181818404.ttv) P4SB-PSC-1101_TARE_UNIT,2022-04-07 18:17:39.000,Y,2022-04-07 18:18:18.371,g
+P4SB-PSC-1101_TARE_VAL,2022-04-07 18:17:39.000,Y,2022-04-07 18:18:18.371,+39.10
+
+﻿[2022/04/07 18:18:18] [INFO] - [SavePI] The data transfer to the PI server was successful.[P4SB-PSC-1101_GROSS_UNIT - P4SB-PSC-1101_GROSS_UNIT.PV/g]
+﻿[2022/04/07 18:18:18] [INFO] - [SavePI] The data transfer to the PI server was successful.[P4SB-PSC-1101_GROSS_VAL - P4SB-PSC-1101_GROSS_VAL.PV/+49.98]
+﻿[2022/04/07 18:18:18] [ERROR] - [SaveDBHistory] DB insert failed. (P4SB-PSC-1101_GROSS_UNIT,2022-04-07 18:17:39.000,Y,2022-04-07 18:18:18.438,g) - System.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'HI_SEQ', table 'DataSpider.dbo.HI_MEASURE_RESULT_BK'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+   위치: System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   위치: System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   위치: System.Data.SqlClient.SqlCommand.RunExecuteNonQueryTds(String methodName, Boolean async, Int32 timeout, Boolean asyncWrite)
+   위치: System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   위치: System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   위치: CFW.Data.MsSqlDbAccess.ExecuteNonQuery(String commandText, SqlParameter[] oraParameters, CommandType commandType, String& p_strErrCode, String& p_strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.Source\CFrameWork\CFW.Data\MsSqlDbAccess.cs:줄 311
+   위치: DataSpider.PC00.PT.PC00Z01.InsertResult(String _strTagName, String _strDateTime, String _strValue, String _piIFFlag, String _piIFDateTime, String remark, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 114
+ClientConnectionId:7cae0329-83e1-4017-99cd-6d3babd6a6b7
+Error Number:515,State:2,Class:16
+﻿[2022/04/07 18:18:18] [ERROR] - [SaveDBHistory] DB insert failed. (P4SB-PSC-1101_GROSS_VAL,2022-04-07 18:17:39.000,Y,2022-04-07 18:18:18.438,+49.98) - System.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'HI_SEQ', table 'DataSpider.dbo.HI_MEASURE_RESULT_BK'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+   위치: System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   위치: System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   위치: System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   위치: System.Data.SqlClient.SqlCommand.RunExecuteNonQueryTds(String methodName, Boolean async, Int32 timeout, Boolean asyncWrite)
+   위치: System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   위치: System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   위치: CFW.Data.MsSqlDbAccess.ExecuteNonQuery(String commandText, SqlParameter[] oraParameters, CommandType commandType, String& p_strErrCode, String& p_strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.Source\CFrameWork\CFW.Data\MsSqlDbAccess.cs:줄 311
+   위치: DataSpider.PC00.PT.PC00Z01.InsertResult(String _strTagName, String _strDateTime, String _strValue, String _piIFFlag, String _piIFDateTime, String remark, String& _strErrCode, String& _strErrText) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00Z01.cs:줄 114
+ClientConnectionId:7cae0329-83e1-4017-99cd-6d3babd6a6b7
+Error Number:515,State:2,Class:16
+﻿[2022/04/07 18:18:18] [INFO] - [SaveFile] File saved. (C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\EXE\DataSpider\Data\SC_MCA\20220407181818470.ttv) P4SB-PSC-1101_GROSS_UNIT,2022-04-07 18:17:39.000,Y,2022-04-07 18:18:18.438,g
+P4SB-PSC-1101_GROSS_VAL,2022-04-07 18:17:39.000,Y,2022-04-07 18:18:18.438,+49.98
+
+﻿[2022/04/07 18:22:24] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_GROSS_UNIT) - Line string is empty (Line : 5, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:22:24] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_GROSS_VAL) - Line string is empty (Line : 5, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:22:24] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_TARE_UNIT) - Line string is empty (Line : 4, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:22:24] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_TARE_VAL) - Line string is empty (Line : 4, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:22:24] [INFO] - [SavePI] The data transfer to the PI server was successful.[P4SB-PSC-1101_NET_UNIT - P4SB-PSC-1101_NET_UNIT.PV/g]
+﻿[2022/04/07 18:22:24] [INFO] - [SavePI] The data transfer to the PI server was successful.[P4SB-PSC-1101_NET_VAL - P4SB-PSC-1101_NET_VAL.PV/+10.90]
+﻿[2022/04/07 18:22:24] [INFO] - [SavePI] The data transfer to the PI server was successful.[P4SB-PSC-1101_SVRTIME - P4SB-PSC-1101_SVRTIME.PV/2022-04-07 18:22:24]
+﻿[2022/04/07 18:22:24] [INFO] - [SavePI] The data transfer to the PI server was successful.[P4SB-PSC-1101_USER_ID - P4SB-PSC-1101_USER_ID.PV/P4S-SC-9998]
+﻿[2022/04/07 18:22:24] [INFO] - [SaveDBHistory] DB inserted. (P4SB-PSC-1101_NET_UNIT,2022-04-07 18:21:45.000,Y,2022-04-07 18:22:24.757,g)
+﻿[2022/04/07 18:22:24] [INFO] - [SaveDBHistory] DB inserted. (P4SB-PSC-1101_NET_VAL,2022-04-07 18:21:45.000,Y,2022-04-07 18:22:24.757,+10.90)
+﻿[2022/04/07 18:22:24] [INFO] - [SaveDBHistory] DB inserted. (P4SB-PSC-1101_SVRTIME,2022-04-07 18:21:45.000,Y,2022-04-07 18:22:24.757,2022-04-07 18:22:24)
+﻿[2022/04/07 18:22:24] [INFO] - [SaveDBHistory] DB inserted. (P4SB-PSC-1101_USER_ID,2022-04-07 18:21:45.000,Y,2022-04-07 18:22:24.757,P4S-SC-9998)
+﻿[2022/04/07 18:22:24] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_GROSS_UNIT) - Line string is empty (Line : 5, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:22:24] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_GROSS_VAL) - Line string is empty (Line : 5, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:22:24] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_TARE_UNIT) - Line string is empty (Line : 4, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:22:24] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_TARE_VAL) - Line string is empty (Line : 4, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:22:24] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_GROSS_UNIT) - Line string is empty (Line : 5, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:22:24] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_GROSS_VAL) - Line string is empty (Line : 5, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:22:24] [INFO] - [SavePI] The data transfer to the PI server was successful.[P4SB-PSC-1101_TARE_UNIT - P4SB-PSC-1101_TARE_UNIT.PV/g]
+﻿[2022/04/07 18:22:25] [INFO] - [SavePI] The data transfer to the PI server was successful.[P4SB-PSC-1101_TARE_VAL - P4SB-PSC-1101_TARE_VAL.PV/+39.10]
+﻿[2022/04/07 18:22:25] [INFO] - [SaveDBHistory] DB inserted. (P4SB-PSC-1101_TARE_UNIT,2022-04-07 18:21:45.000,Y,2022-04-07 18:22:24.980,g)
+﻿[2022/04/07 18:22:25] [INFO] - [SaveDBHistory] DB inserted. (P4SB-PSC-1101_TARE_VAL,2022-04-07 18:21:45.000,Y,2022-04-07 18:22:24.980,+39.10)
+﻿[2022/04/07 18:22:25] [INFO] - [SavePI] The data transfer to the PI server was successful.[P4SB-PSC-1101_GROSS_UNIT - P4SB-PSC-1101_GROSS_UNIT.PV/g]
+﻿[2022/04/07 18:22:25] [INFO] - [SavePI] The data transfer to the PI server was successful.[P4SB-PSC-1101_GROSS_VAL - P4SB-PSC-1101_GROSS_VAL.PV/+50.00]
+﻿[2022/04/07 18:22:25] [INFO] - [SaveDBHistory] DB inserted. (P4SB-PSC-1101_GROSS_UNIT,2022-04-07 18:21:45.000,Y,2022-04-07 18:22:25.054,g)
+﻿[2022/04/07 18:22:25] [INFO] - [SaveDBHistory] DB inserted. (P4SB-PSC-1101_GROSS_VAL,2022-04-07 18:21:45.000,Y,2022-04-07 18:22:25.054,+50.00)
+﻿[2022/04/07 18:23:00] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_GROSS_UNIT) - Line string is empty (Line : 5, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:23:00] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_GROSS_VAL) - Line string is empty (Line : 5, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:23:00] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_TARE_UNIT) - Line string is empty (Line : 4, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:23:00] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_TARE_VAL) - Line string is empty (Line : 4, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:23:00] [INFO] - [SavePI] The data transfer to the PI server was successful.[P4SB-PSC-1101_NET_UNIT - P4SB-PSC-1101_NET_UNIT.PV/g]
+﻿[2022/04/07 18:23:00] [INFO] - [SavePI] The data transfer to the PI server was successful.[P4SB-PSC-1101_NET_VAL - P4SB-PSC-1101_NET_VAL.PV/+10.91]
+﻿[2022/04/07 18:23:00] [INFO] - [SavePI] The data transfer to the PI server was successful.[P4SB-PSC-1101_SVRTIME - P4SB-PSC-1101_SVRTIME.PV/2022-04-07 18:23:00]
+﻿[2022/04/07 18:23:00] [INFO] - [SavePI] The data transfer to the PI server was successful.[P4SB-PSC-1101_USER_ID - P4SB-PSC-1101_USER_ID.PV/P4S-SC-9998]
+﻿[2022/04/07 18:23:00] [INFO] - [SaveDBHistory] DB inserted. (P4SB-PSC-1101_NET_UNIT,2022-04-07 18:22:20.000,Y,2022-04-07 18:23:00.565,g)
+﻿[2022/04/07 18:23:00] [INFO] - [SaveDBHistory] DB inserted. (P4SB-PSC-1101_NET_VAL,2022-04-07 18:22:20.000,Y,2022-04-07 18:23:00.565,+10.91)
+﻿[2022/04/07 18:23:00] [INFO] - [SaveDBHistory] DB inserted. (P4SB-PSC-1101_SVRTIME,2022-04-07 18:22:20.000,Y,2022-04-07 18:23:00.565,2022-04-07 18:23:00)
+﻿[2022/04/07 18:23:00] [INFO] - [SaveDBHistory] DB inserted. (P4SB-PSC-1101_USER_ID,2022-04-07 18:22:20.000,Y,2022-04-07 18:23:00.565,P4S-SC-9998)
+﻿[2022/04/07 18:23:00] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_GROSS_UNIT) - Line string is empty (Line : 5, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:23:00] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_GROSS_VAL) - Line string is empty (Line : 5, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:23:00] [INFO] - [SavePI] The data transfer to the PI server was successful.[P4SB-PSC-1101_TARE_UNIT - P4SB-PSC-1101_TARE_UNIT.PV/g]
+﻿[2022/04/07 18:23:00] [INFO] - [SavePI] The data transfer to the PI server was successful.[P4SB-PSC-1101_TARE_VAL - P4SB-PSC-1101_TARE_VAL.PV/+39.10]
+﻿[2022/04/07 18:23:00] [INFO] - [SaveDBHistory] DB inserted. (P4SB-PSC-1101_TARE_UNIT,2022-04-07 18:22:20.000,Y,2022-04-07 18:23:00.712,g)
+﻿[2022/04/07 18:23:00] [INFO] - [SaveDBHistory] DB inserted. (P4SB-PSC-1101_TARE_VAL,2022-04-07 18:22:20.000,Y,2022-04-07 18:23:00.712,+39.10)
+﻿[2022/04/07 18:23:00] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_GROSS_UNIT) - Line string is empty (Line : 5, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:23:00] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_GROSS_VAL) - Line string is empty (Line : 5, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:23:00] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_TARE_UNIT) - Line string is empty (Line : 4, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:23:00] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_TARE_VAL) - Line string is empty (Line : 4, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:23:00] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_GROSS_UNIT) - Line string is empty (Line : 5, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:23:00] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_GROSS_VAL) - Line string is empty (Line : 5, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:23:00] [INFO] - [SavePI] The data transfer to the PI server was successful.[P4SB-PSC-1101_GROSS_UNIT - P4SB-PSC-1101_GROSS_UNIT.PV/g]
+﻿[2022/04/07 18:23:00] [INFO] - [SavePI] The data transfer to the PI server was successful.[P4SB-PSC-1101_GROSS_VAL - P4SB-PSC-1101_GROSS_VAL.PV/+50.01]
+﻿[2022/04/07 18:23:00] [INFO] - [SaveDBHistory] DB inserted. (P4SB-PSC-1101_GROSS_UNIT,2022-04-07 18:22:20.000,Y,2022-04-07 18:23:00.895,g)
+﻿[2022/04/07 18:23:00] [INFO] - [SaveDBHistory] DB inserted. (P4SB-PSC-1101_GROSS_VAL,2022-04-07 18:22:20.000,Y,2022-04-07 18:23:00.895,+50.01)
+﻿[2022/04/07 18:23:26] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_GROSS_UNIT) - Line string is empty (Line : 5, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:23:26] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_GROSS_VAL) - Line string is empty (Line : 5, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:23:26] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_TARE_UNIT) - Line string is empty (Line : 4, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:23:26] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_TARE_VAL) - Line string is empty (Line : 4, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:23:26] [INFO] - [SavePI] The data transfer to the PI server was successful.[P4SB-PSC-1101_NET_UNIT - P4SB-PSC-1101_NET_UNIT.PV/g]
+﻿[2022/04/07 18:23:26] [INFO] - [SavePI] The data transfer to the PI server was successful.[P4SB-PSC-1101_NET_VAL - P4SB-PSC-1101_NET_VAL.PV/+13.56]
+﻿[2022/04/07 18:23:26] [INFO] - [SavePI] The data transfer to the PI server was successful.[P4SB-PSC-1101_SVRTIME - P4SB-PSC-1101_SVRTIME.PV/2022-04-07 18:23:26]
+﻿[2022/04/07 18:23:26] [INFO] - [SavePI] The data transfer to the PI server was successful.[P4SB-PSC-1101_USER_ID - P4SB-PSC-1101_USER_ID.PV/P4S-SC-9998]
+﻿[2022/04/07 18:23:26] [INFO] - [SaveDBHistory] DB inserted. (P4SB-PSC-1101_NET_UNIT,2022-04-07 18:22:46.000,Y,2022-04-07 18:23:26.285,g)
+﻿[2022/04/07 18:23:26] [INFO] - [SaveDBHistory] DB inserted. (P4SB-PSC-1101_NET_VAL,2022-04-07 18:22:46.000,Y,2022-04-07 18:23:26.285,+13.56)
+﻿[2022/04/07 18:23:26] [INFO] - [SaveDBHistory] DB inserted. (P4SB-PSC-1101_SVRTIME,2022-04-07 18:22:46.000,Y,2022-04-07 18:23:26.285,2022-04-07 18:23:26)
+﻿[2022/04/07 18:23:26] [INFO] - [SaveDBHistory] DB inserted. (P4SB-PSC-1101_USER_ID,2022-04-07 18:22:46.000,Y,2022-04-07 18:23:26.285,P4S-SC-9998)
+﻿[2022/04/07 18:23:26] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_GROSS_UNIT) - Line string is empty (Line : 5, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:23:26] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_GROSS_VAL) - Line string is empty (Line : 5, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:23:26] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_TARE_UNIT) - Line string is empty (Line : 4, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:23:26] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_TARE_VAL) - Line string is empty (Line : 4, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:23:26] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_GROSS_UNIT) - Line string is empty (Line : 5, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:23:26] [ERROR] - [DataProcess] An error occurred while processing data for TAG (P4SB-PSC-1101_GROSS_VAL) - Line string is empty (Line : 5, Offset : 1, Size : -1, Replace TAG : )
+﻿[2022/04/07 18:23:26] [INFO] - [SavePI] The data transfer to the PI server was successful.[P4SB-PSC-1101_TARE_UNIT - P4SB-PSC-1101_TARE_UNIT.PV/g]
+﻿[2022/04/07 18:23:26] [INFO] - [SavePI] The data transfer to the PI server was successful.[P4SB-PSC-1101_TARE_VAL - P4SB-PSC-1101_TARE_VAL.PV/+39.10]
+﻿[2022/04/07 18:23:26] [INFO] - [SaveDBHistory] DB inserted. (P4SB-PSC-1101_TARE_UNIT,2022-04-07 18:22:46.000,Y,2022-04-07 18:23:26.434,g)
+﻿[2022/04/07 18:23:26] [INFO] - [SaveDBHistory] DB inserted. (P4SB-PSC-1101_TARE_VAL,2022-04-07 18:22:46.000,Y,2022-04-07 18:23:26.434,+39.10)
+﻿[2022/04/07 18:23:26] [INFO] - [SavePI] The data transfer to the PI server was successful.[P4SB-PSC-1101_GROSS_UNIT - P4SB-PSC-1101_GROSS_UNIT.PV/g]
+﻿[2022/04/07 18:23:26] [INFO] - [SavePI] The data transfer to the PI server was successful.[P4SB-PSC-1101_GROSS_VAL - P4SB-PSC-1101_GROSS_VAL.PV/+52.66]
+﻿[2022/04/07 18:23:26] [INFO] - [SaveDBHistory] DB inserted. (P4SB-PSC-1101_GROSS_UNIT,2022-04-07 18:22:46.000,Y,2022-04-07 18:23:26.489,g)
+﻿[2022/04/07 18:23:26] [INFO] - [SaveDBHistory] DB inserted. (P4SB-PSC-1101_GROSS_VAL,2022-04-07 18:22:46.000,Y,2022-04-07 18:23:26.489,+52.66)

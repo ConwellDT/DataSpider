@@ -1,0 +1,45 @@
+﻿2021-11-25  kwc
+			DataSpider MANAGER TREE ROOT의 상태 변경이 안되는 문제
+					treeView1.BeginUpdate();
+                    UpdateTreeNodeState(treeView1.Nodes[0] as TreeNode_SBL);
+					treeView1.EndUpdate();
+
+					위의 코드를 아래의 코드로 변경 // 상태변경이 빠진 것으로 판단.
+
+			        treeView1.BeginUpdate();
+                    UpdateTreeNodeState(treeView1.Nodes[0] as TreeNode_SBL);
+                    //20211125 kwc
+                    UpdateTreeNodeStateForEqType(treeView1.Nodes[0] as TreeNode_SBL);
+                    treeView1.EndUpdate();
+
+2021-11-25  kwc
+			DataSpider MANAGER TREEVIEW 화면에서 Refresh Button이 항상 Enable되도록 변경함.
+
+2021-11-25  kwc
+			3공장 DataSpider.Manager프로그램의 status 표시는  
+			DB#1 STATUS
+			DB#2 STATUS
+			DB#3 STATUS
+			DB PGM STATUS
+			PI PGM STATUS
+			등 5가지가 표시된다. 
+
+			#1,#2, #GMP 공장에는
+			DB#1 STATUS
+			DB PGM STATUS
+			PI PGM STATUS
+			만 표시되어야 한다.
+
+			수정방안 :
+			1)app.config에 파라미터 추가
+			    <add key="Db1StatusEnable" value="y" />
+				<add key="Db2StatusEnable" value="y" />
+				<add key="Db3StatusEnable" value="y" />
+				<add key="DbPgmStatusEnable" value="y" />
+				<add key="PiPgmStatusEnable" value="y" />
+			2) 위의 파라미터 설정에 따라 Visible 상태 변경
+			
+
+2021-11-10  kwc
+			DataSpider.MANAGER 프로그램의 CurrentTagValueMonitorDGV.cs 을 수정함.
+			FilterForm 화면을 추가함.

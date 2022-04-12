@@ -1,0 +1,16 @@
+﻿20211123 kwc
+1. OSMOMETER의 측정값 자리에 문자열이 들어오는 경우의 처리
+	1. 현재는 측정값 자리에 "Out of Range"  문자열이 들어오면 Event로 처리함. 
+	2. 등록된 목록에 대해 동일한 방법으로 처리할 수 있음.
+	3. 수정방안
+		a. OM_3320.ini 에 아래의 내용 추가
+		EVENT_STRING_COUNT=2
+		EVENT_STRING00=Range
+		EVENT_STRING01=Freeze
+		b. PC00B02.cpp 수정
+			i. protected List<string> m_EventStringList = new List<string>(); 추가
+			ii. ReadConfig() 수정 : EVENT_STRING 처리하도록 수정
+			
+		c. PC01S03.cpp 수정
+			i. protected override void ParseMessage(string Msg) 수정
+			ii. if( ln.Contains("Out of Range") )  => if( m_EventStringList.Exists(x=>ln.Contains(x))

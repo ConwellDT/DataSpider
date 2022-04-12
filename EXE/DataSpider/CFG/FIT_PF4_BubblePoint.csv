@@ -1,0 +1,43 @@
+DateTime,/TestResult/Data/Parameter[@Name="TimeStart"]/text()
+PartNumber,/TestResult/Data/Parameter[@Name="PartNumber"]/text()
+Sw_Ver,/TestResult/Data/Parameter[@Name="SwVer"]/text()
+SerialResultNumber,/TestResult/@Id
+Function,/TestResult/@TestName
+TestProgram,/TestResult/Data/Parameter[@Name="TestProgram"]/text()
+Operator,/TestResult/Data/Parameter[@Name="OperatorName"]/text()
+ProductionArea,/TestResult/Data/Parameter[@Name="ProductionArea"]/text()
+TagNo,/TestResult/Data/Parameter[@Label="Tag No."]/text()
+FilterLine,/TestResult/Data/Parameter[@Label="Filter line"]/text()
+EquipmentNo,/TestResult/Data/Parameter[@Label="Equipment No."]/text()
+ControlNo,/TestResult/Data/Parameter[@Name="Option3"]/text()
+ProductName,/TestResult/Data/Parameter[@Name="ProductName"]/text()
+ProductBatchNo,/TestResult/Data/Parameter[@Name="ProductBatchNo"]/text()
+FilterPartNumber,/TestResult/Data/Parameter[@Name="TestItem"]/text()
+NumberOfFilters,/TestResult/Data/Parameter[@Name="FilterCount"]/text()
+FilterSerialNumber,/TestResult/Data/Parameter[@Name="FilterSerialNo"]/descendant::text()
+FilterHousing,/TestResult/Data/Parameter[@Name="FilterHousing"]/text()
+WettingLiquid,/TestResult/Data/Parameter[@Name="WettingLiquid"]/text()
+TestGas,/TestResult/Data/Parameter[@Name="TestGas"]/text()
+ModuleFactor,/TestResult/Data/Parameter[@Name="ModuleFactor"]/text()
+PreStabilizationPressure,/TestResult/Data/Parameter[@Name="PSPressure"]/text()
+PreStabilizationPressureUnits,/TestResult/Data/Parameter[@Name="PSPressure"]/@Units
+PreStabilizationTime,/TestResult/Data/Parameter[@Name="PSTime"]/text()
+PreStabilizationTimeUnits,/TestResult/Data/Parameter[@Name="PSTime"]/@Units
+MinimumBp,/TestResult/Data/Parameter[@Name="TestPressure"]/text()
+MinimumBpUnits,/TestResult/Data/Parameter[@Name="TestPressure"]/@Units
+MaximumPressure,/TestResult/Data/Parameter[@Name="MaxPressure"]/text()
+MaximumPressureUnits,/TestResult/Data/Parameter[@Name="MaxPressure"]/@Units
+Result,/TestResult/Result/text()
+MeasuredBp,/TestResult/Data/Parameter[@Name="ResultBP"]/text()
+MeasuredBpUnits,/TestResult/Data/Parameter[@Name="ResultBP"]/@Units
+TestCompleted,/TestResult/Data/Parameter[@Name="TimeEnd"]/text()
+StartTest,/TestResult/Actions/StartTest/text()
+StartTestBy,/TestResult/Actions/StartTest/@By
+StartTestOn,/TestResult/Actions/StartTest/@On
+Comment,/TestResult/Actions/Comment/text()
+CommentBy,/TestResult/Actions/Comment/@By
+CommentOn,/TestResult/Actions/Comment/@On
+Signature,/TestResult/Actions/Signature/text()
+SignatureBy,/TestResult/Actions/Signature/@By
+SignatureOn,/TestResult/Actions/Signature/@On
+SignatureLevel,/TestResult/Actions/Signature/@Level

@@ -1,0 +1,25 @@
+DateTime,/TestResult/Data/Parameter[@Name="TimeStart"]/text()
+PartNumber,/TestResult/Data/Parameter[@Name="PartNumber"]/text()
+Sw_Ver,/TestResult/Data/Parameter[@Name="SwVer"]/text()
+SerialResultNumber,/TestResult/@Id
+Function,/TestResult/@TestName
+LastCalibrated,/TestResult/Data/Parameter/Item[@Tag="Last calibrated"]/text()
+LastBackup,/TestResult/Data/Parameter/Item[@Tag="Last backup"]/text()
+CalibrationDataVerification,/TestResult/Data/Parameter/Item[@Tag="Calibration data verification"]/text()
+ElectricalTests,/TestResult/Data/Parameter/Item[@Tag="Electrical tests"]/text()
+LinePressureCheck,/TestResult/Data/Parameter/Item[@Tag="Line pressure check"]/text()
+PressureRegulatorCheck,/TestResult/Data/Parameter/Item[@Tag="Pressure regulator check"]/text()
+PressureTransducerCheck,/TestResult/Data/Parameter/Item[@Tag="Pressure transducer check"]/text()
+InternalLeakTest,/TestResult/Data/Parameter/Item[@Tag="Internal leak test"]/text()
+ValveTest,/TestResult/Data/Parameter/Item[@Tag="Valve test"]/text()
+Result,/TestResult/Result/text()
+StartTest,/TestResult/Actions/StartTest/text()
+StartTestBy,/TestResult/Actions/StartTest/@By
+StartTestOn,/TestResult/Actions/StartTest/@On
+Comment,/TestResult/Actions/Comment/text()
+CommentBy,/TestResult/Actions/Comment/@By
+CommentOn,/TestResult/Actions/Comment/@On
+Signature,/TestResult/Actions/Signature/text()
+SignatureBy,/TestResult/Actions/Signature/@By
+SignatureOn,/TestResult/Actions/Signature/@On
+SignatureLevel,/TestResult/Actions/Signature/@Level

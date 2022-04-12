@@ -1,0 +1,5 @@
+﻿[2022/04/07 17:17:40] [DEBUG] - [PC03F01_FormClosing] System.ArgumentNullException: 값은 null일 수 없습니다.
+매개 변수 이름: source
+   위치: System.Linq.Enumerable.Count[TSource](IEnumerable`1 source)
+   위치: DataSpider.PC03.PT.PC03F01.PC03F01_FormClosing(Object sender, FormClosingEventArgs e) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC03.PT\PC03F01.cs:줄 226
+﻿[2022/04/07 17:17:40] [DEBUG] - [PC03F01_FormClosing] Program Close

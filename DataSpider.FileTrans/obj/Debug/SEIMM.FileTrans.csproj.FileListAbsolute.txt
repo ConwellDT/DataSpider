@@ -1,0 +1,47 @@
+C:\project\콘웰\삼성바이오로직스\svn_new\02.Source\SEIMM.FileTrans\bin\Debug\SEIMM.FileTrans.exe.config
+C:\project\콘웰\삼성바이오로직스\svn_new\02.Source\SEIMM.FileTrans\bin\Debug\SEIMM.FileTrans.exe
+C:\project\콘웰\삼성바이오로직스\svn_new\02.Source\SEIMM.FileTrans\bin\Debug\SEIMM.FileTrans.pdb
+C:\project\콘웰\삼성바이오로직스\svn_new\02.Source\SEIMM.FileTrans\bin\Debug\CFW.Common.dll
+C:\project\콘웰\삼성바이오로직스\svn_new\02.Source\SEIMM.FileTrans\bin\Debug\LibraryWH.dll
+C:\project\콘웰\삼성바이오로직스\svn_new\02.Source\SEIMM.FileTrans\bin\Debug\CFW.Common.pdb
+C:\project\콘웰\삼성바이오로직스\svn_new\02.Source\SEIMM.FileTrans\bin\Debug\CFW.Common.xml
+C:\project\콘웰\삼성바이오로직스\svn_new\02.Source\SEIMM.FileTrans\bin\Debug\LibraryWH.pdb
+C:\project\콘웰\삼성바이오로직스\svn_new\02.Source\SEIMM.FileTrans\obj\Debug\SEIMM.FileTrans.frmMain.resources
+C:\project\콘웰\삼성바이오로직스\svn_new\02.Source\SEIMM.FileTrans\obj\Debug\SEIMM.FileTrans.Properties.Resources.resources
+C:\project\콘웰\삼성바이오로직스\svn_new\02.Source\SEIMM.FileTrans\obj\Debug\SEIMM.FileTrans.csproj.GenerateResource.cache
+C:\project\콘웰\삼성바이오로직스\svn_new\02.Source\SEIMM.FileTrans\obj\Debug\SEIMM.FileTrans.csproj.CoreCompileInputs.cache
+C:\project\콘웰\삼성바이오로직스\svn_new\02.Source\SEIMM.FileTrans\obj\Debug\SEIMM.FileTrans.exe
+C:\project\콘웰\삼성바이오로직스\svn_new\02.Source\SEIMM.FileTrans\obj\Debug\SEIMM.FileTrans.pdb
+C:\project\콘웰\삼성바이오로직스\svn_new\02.Source\SEIMM.FileTrans\obj\Debug\SEIMM.FileTrans.csproj.AssemblyReference.cache
+C:\project\콘웰\삼성바이오로직스\svn_new\02.Source - P4\SEIMM.FileTrans\bin\Debug\SEIMM.FileTrans.exe.config
+C:\project\콘웰\삼성바이오로직스\svn_new\02.Source - P4\SEIMM.FileTrans\bin\Debug\SEIMM.FileTrans.exe
+C:\project\콘웰\삼성바이오로직스\svn_new\02.Source - P4\SEIMM.FileTrans\bin\Debug\SEIMM.FileTrans.pdb
+C:\project\콘웰\삼성바이오로직스\svn_new\02.Source - P4\SEIMM.FileTrans\bin\Debug\CFW.Common.dll
+C:\project\콘웰\삼성바이오로직스\svn_new\02.Source - P4\SEIMM.FileTrans\bin\Debug\LibraryWH.dll
+C:\project\콘웰\삼성바이오로직스\svn_new\02.Source - P4\SEIMM.FileTrans\bin\Debug\CFW.Common.pdb
+C:\project\콘웰\삼성바이오로직스\svn_new\02.Source - P4\SEIMM.FileTrans\bin\Debug\CFW.Common.xml
+C:\project\콘웰\삼성바이오로직스\svn_new\02.Source - P4\SEIMM.FileTrans\bin\Debug\LibraryWH.pdb
+C:\project\콘웰\삼성바이오로직스\svn_new\02.Source - P4\SEIMM.FileTrans\obj\Debug\SEIMM.FileTrans.csproj.AssemblyReference.cache
+C:\project\콘웰\삼성바이오로직스\svn_new\02.Source - P4\SEIMM.FileTrans\obj\Debug\SEIMM.FileTrans.frmMain.resources
+C:\project\콘웰\삼성바이오로직스\svn_new\02.Source - P4\SEIMM.FileTrans\obj\Debug\SEIMM.FileTrans.Properties.Resources.resources
+C:\project\콘웰\삼성바이오로직스\svn_new\02.Source - P4\SEIMM.FileTrans\obj\Debug\SEIMM.FileTrans.csproj.GenerateResource.cache
+C:\project\콘웰\삼성바이오로직스\svn_new\02.Source - P4\SEIMM.FileTrans\obj\Debug\SEIMM.FileTrans.csproj.CoreCompileInputs.cache
+C:\project\콘웰\삼성바이오로직스\svn_new\02.Source - P4\SEIMM.FileTrans\obj\Debug\SEIMM.FileTrans.csproj.CopyComplete
+C:\project\콘웰\삼성바이오로직스\svn_new\02.Source - P4\SEIMM.FileTrans\obj\Debug\SEIMM.FileTrans.exe
+C:\project\콘웰\삼성바이오로직스\svn_new\02.Source - P4\SEIMM.FileTrans\obj\Debug\SEIMM.FileTrans.pdb
+C:\project\콘웰\삼성바이오로직스\svn_new\02.Source - P4\SEIMM.FileTrans\bin\Debug\WeifenLuo.WinFormsUI.Docking.dll
+D:\Project\20220207_삼성바이오로직스_4공장_DATASPIDER\10. SVN\02.Source - P4\SEIMM.FileTrans\bin\Debug\SEIMM.FileTrans.exe.config
+D:\Project\20220207_삼성바이오로직스_4공장_DATASPIDER\10. SVN\02.Source - P4\SEIMM.FileTrans\bin\Debug\SEIMM.FileTrans.exe
+D:\Project\20220207_삼성바이오로직스_4공장_DATASPIDER\10. SVN\02.Source - P4\SEIMM.FileTrans\bin\Debug\SEIMM.FileTrans.pdb
+D:\Project\20220207_삼성바이오로직스_4공장_DATASPIDER\10. SVN\02.Source - P4\SEIMM.FileTrans\bin\Debug\CFW.Common.dll
+D:\Project\20220207_삼성바이오로직스_4공장_DATASPIDER\10. SVN\02.Source - P4\SEIMM.FileTrans\bin\Debug\LibraryWH.dll
+D:\Project\20220207_삼성바이오로직스_4공장_DATASPIDER\10. SVN\02.Source - P4\SEIMM.FileTrans\bin\Debug\CFW.Common.pdb
+D:\Project\20220207_삼성바이오로직스_4공장_DATASPIDER\10. SVN\02.Source - P4\SEIMM.FileTrans\bin\Debug\CFW.Common.xml
+D:\Project\20220207_삼성바이오로직스_4공장_DATASPIDER\10. SVN\02.Source - P4\SEIMM.FileTrans\bin\Debug\LibraryWH.pdb
+D:\Project\20220207_삼성바이오로직스_4공장_DATASPIDER\10. SVN\02.Source - P4\SEIMM.FileTrans\obj\Debug\SEIMM.FileTrans.csproj.AssemblyReference.cache
+D:\Project\20220207_삼성바이오로직스_4공장_DATASPIDER\10. SVN\02.Source - P4\SEIMM.FileTrans\obj\Debug\SEIMM.FileTrans.frmMain.resources
+D:\Project\20220207_삼성바이오로직스_4공장_DATASPIDER\10. SVN\02.Source - P4\SEIMM.FileTrans\obj\Debug\SEIMM.FileTrans.Properties.Resources.resources
+D:\Project\20220207_삼성바이오로직스_4공장_DATASPIDER\10. SVN\02.Source - P4\SEIMM.FileTrans\obj\Debug\SEIMM.FileTrans.csproj.GenerateResource.cache
+D:\Project\20220207_삼성바이오로직스_4공장_DATASPIDER\10. SVN\02.Source - P4\SEIMM.FileTrans\obj\Debug\SEIMM.FileTrans.csproj.CoreCompileInputs.cache
+D:\Project\20220207_삼성바이오로직스_4공장_DATASPIDER\10. SVN\02.Source - P4\SEIMM.FileTrans\obj\Debug\SEIMM.FileTrans.exe
+D:\Project\20220207_삼성바이오로직스_4공장_DATASPIDER\10. SVN\02.Source - P4\SEIMM.FileTrans\obj\Debug\SEIMM.FileTrans.pdb

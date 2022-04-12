@@ -1,0 +1,1158 @@
+﻿[2022/04/11 13:45:27] [DEBUG] - [PC01F01_Load] 1
+﻿[2022/04/11 13:45:27] [DEBUG] - [PC01F01_Load] 1
+﻿[2022/04/11 13:45:27] [DEBUG] - [PC01F01_Load] 2
+﻿[2022/04/11 13:45:27] [DEBUG] - [PC01F01_Load] 2
+﻿[2022/04/11 13:45:27] [DEBUG] - [PC01F01_Load] 3
+﻿[2022/04/11 13:45:27] [DEBUG] - [PC01F01_Load] 3
+﻿[2022/04/11 13:54:59] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 13:54:59] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 13:55:00] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 13:55:00] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 13:55:01] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 13:55:01] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 13:55:02] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '1'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 13:55:02] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '1'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 13:55:02] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 13:55:02] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 13:55:03] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 13:55:03] [DEBUG] - [cellDataChangeStatus] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChangeStatus(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 889
+﻿[2022/04/11 13:55:03] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 13:55:03] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 13:57:15] [DEBUG] - [PC01F01_Load] 1
+﻿[2022/04/11 13:57:15] [DEBUG] - [PC01F01_Load] 1
+﻿[2022/04/11 13:57:15] [DEBUG] - [PC01F01_Load] 2
+﻿[2022/04/11 13:57:15] [DEBUG] - [PC01F01_Load] 3
+﻿[2022/04/11 14:09:07] [DEBUG] - [Terminate] Program Close
+﻿[2022/04/11 14:09:08] [DEBUG] - [listViewMsg] System.ComponentModel.InvalidAsynchronousStateException: 메서드를 호출하는 동안 오류가 발생했습니다. 대상 스레드가 더 이상 존재하지 않습니다.
+   위치: System.Windows.Forms.Control.WaitForWaitHandle(WaitHandle waitHandle)
+   위치: System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)
+   위치: System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)
+   위치: DataSpider.PC01.PT.PC01F01.listViewMsg(String pstrProcID, String pMsg, Boolean pbGridView, Int32 pnCurNo, Int32 pnSubItemNo, Boolean pbLogView, String pstrType) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 848
+﻿[2022/04/11 14:10:15] [DEBUG] - [PC01F01_Load] 1
+﻿[2022/04/11 14:10:15] [DEBUG] - [PC01F01_Load] 2
+﻿[2022/04/11 14:10:15] [DEBUG] - [PC01F01_Load] 3
+﻿[2022/04/11 14:22:07] [DEBUG] - [Terminate] Program Close
+﻿[2022/04/11 14:23:15] [DEBUG] - [PC01F01_Load] 1
+﻿[2022/04/11 14:23:15] [DEBUG] - [PC01F01_Load] 2
+﻿[2022/04/11 14:23:15] [DEBUG] - [PC01F01_Load] 3
+﻿[2022/04/11 14:31:05] [DEBUG] - [PC01F01_Load] 1
+﻿[2022/04/11 14:31:05] [DEBUG] - [PC01F01_Load] 2
+﻿[2022/04/11 14:31:05] [DEBUG] - [PC01F01_Load] 3
+﻿[2022/04/11 14:35:05] [DEBUG] - [Terminate] Program Close
+﻿[2022/04/11 14:36:15] [DEBUG] - [PC01F01_Load] 1
+﻿[2022/04/11 14:36:15] [DEBUG] - [PC01F01_Load] 2
+﻿[2022/04/11 14:36:15] [DEBUG] - [PC01F01_Load] 3
+﻿[2022/04/11 14:39:00] [DEBUG] - [PC01F01_Load] 1
+﻿[2022/04/11 14:39:00] [DEBUG] - [PC01F01_Load] 2
+﻿[2022/04/11 14:39:00] [DEBUG] - [PC01F01_Load] 3
+﻿[2022/04/11 14:39:37] [DEBUG] - [PC01F01_Load] 1
+﻿[2022/04/11 14:39:37] [DEBUG] - [PC01F01_Load] 2
+﻿[2022/04/11 14:39:37] [DEBUG] - [PC01F01_Load] 3
+﻿[2022/04/11 14:40:17] [DEBUG] - [Terminate] Program Close
+﻿[2022/04/11 14:48:06] [DEBUG] - [Terminate] Program Close
+﻿[2022/04/11 14:49:15] [DEBUG] - [PC01F01_Load] 1
+﻿[2022/04/11 14:49:15] [DEBUG] - [PC01F01_Load] 2
+﻿[2022/04/11 14:49:15] [DEBUG] - [PC01F01_Load] 3
+﻿[2022/04/11 14:54:02] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 14:54:02] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 14:54:02] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 14:54:02] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 14:54:03] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '1'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 14:54:03] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '1'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 14:54:03] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 14:54:03] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 14:54:03] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 14:54:03] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 14:54:04] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 14:54:04] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 14:54:04] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 14:54:04] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 14:54:05] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 14:54:05] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 14:54:05] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 14:54:05] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 14:54:06] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 14:54:06] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 14:54:06] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 14:54:06] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 14:54:07] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 14:54:07] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 14:54:07] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 14:54:07] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 14:54:08] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 14:54:08] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 14:54:08] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 14:54:08] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 14:55:55] [DEBUG] - [PC01F01_Load] 1
+﻿[2022/04/11 14:55:55] [DEBUG] - [PC01F01_Load] 2
+﻿[2022/04/11 14:55:55] [DEBUG] - [PC01F01_Load] 3
+﻿[2022/04/11 14:56:05] [DEBUG] - [PC01F01_Load] 1
+﻿[2022/04/11 14:56:05] [DEBUG] - [PC01F01_Load] 2
+﻿[2022/04/11 14:56:05] [DEBUG] - [PC01F01_Load] 3
+﻿[2022/04/11 15:07:57] [DEBUG] - [Terminate] Program Close
+﻿[2022/04/11 15:07:58] [DEBUG] - [listViewMsg] System.ComponentModel.InvalidAsynchronousStateException: 메서드를 호출하는 동안 오류가 발생했습니다. 대상 스레드가 더 이상 존재하지 않습니다.
+   위치: System.Windows.Forms.Control.WaitForWaitHandle(WaitHandle waitHandle)
+   위치: System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)
+   위치: System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)
+   위치: DataSpider.PC01.PT.PC01F01.listViewMsg(String pstrProcID, String pMsg, Boolean pbGridView, Int32 pnCurNo, Int32 pnSubItemNo, Boolean pbLogView, String pstrType) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 848
+﻿[2022/04/11 15:09:05] [DEBUG] - [PC01F01_Load] 1
+﻿[2022/04/11 15:09:05] [DEBUG] - [PC01F01_Load] 2
+﻿[2022/04/11 15:09:05] [DEBUG] - [PC01F01_Load] 3
+﻿[2022/04/11 15:20:57] [DEBUG] - [Terminate] Program Close
+﻿[2022/04/11 15:22:05] [DEBUG] - [PC01F01_Load] 1
+﻿[2022/04/11 15:22:05] [DEBUG] - [PC01F01_Load] 2
+﻿[2022/04/11 15:22:05] [DEBUG] - [PC01F01_Load] 3
+﻿[2022/04/11 15:33:54] [DEBUG] - [PC01F01_Load] 1
+﻿[2022/04/11 15:33:54] [DEBUG] - [PC01F01_Load] 2
+﻿[2022/04/11 15:33:54] [DEBUG] - [PC01F01_Load] 3
+﻿[2022/04/11 15:36:15] [DEBUG] - [PC01F01_Load] 1
+﻿[2022/04/11 15:36:16] [DEBUG] - [PC01F01_Load] 2
+﻿[2022/04/11 15:36:16] [DEBUG] - [PC01F01_Load] 3
+﻿[2022/04/11 15:43:19] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:19] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:19] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:19] [DEBUG] - [listViewMsg] System.ComponentModel.InvalidAsynchronousStateException: 메서드를 호출하는 동안 오류가 발생했습니다. 대상 스레드가 더 이상 존재하지 않습니다.
+   위치: System.Windows.Forms.Control.WaitForWaitHandle(WaitHandle waitHandle)
+   위치: System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)
+   위치: System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)
+   위치: DataSpider.PC01.PT.PC01F01.listViewMsg(String pstrProcID, String pMsg, Boolean pbGridView, Int32 pnCurNo, Int32 pnSubItemNo, Boolean pbLogView, String pstrType) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 848
+﻿[2022/04/11 15:43:20] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:20] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:20] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:20] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:20] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:21] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:21] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:21] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:21] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '1'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:21] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '1'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:21] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:21] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:22] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:22] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:22] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:22] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:22] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:23] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:23] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:23] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:23] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:23] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:23] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:23] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:24] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:24] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:24] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:24] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:24] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:24] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:25] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:25] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:25] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:25] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:25] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:25] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:26] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:26] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:26] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '1'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:26] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '1'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:26] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:26] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:26] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:26] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:27] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '1'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:27] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '1'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:27] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:27] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:27] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:27] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:27] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:27] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:27] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:27] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:28] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:28] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:28] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:28] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:28] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:28] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:29] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:29] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:29] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '1'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:29] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '1'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:29] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:29] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:29] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:29] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:29] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:30] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:30] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:30] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:30] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:30] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:30] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:30] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:30] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:31] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:31] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:31] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:31] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:31] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:31] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:31] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:31] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:32] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:32] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:32] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:32] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:32] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:32] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:32] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:32] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:32] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '1'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:32] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '1'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:33] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:33] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:33] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:33] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:33] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:33] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:33] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:33] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:34] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:34] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:34] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:34] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:34] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:34] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:34] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:34] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:35] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:35] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:35] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:35] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:35] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:35] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:35] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:35] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:36] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:36] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:36] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:36] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:36] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:36] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:36] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:36] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:37] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:37] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:37] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '1'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:37] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '1'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:37] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:37] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:37] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:37] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:37] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:37] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:38] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '1'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:38] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '1'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:38] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:38] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:38] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:38] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:38] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:38] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:38] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:38] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:39] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:39] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:39] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:39] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:39] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:39] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:39] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:39] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:40] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:40] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:40] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '1'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:40] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '1'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:40] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:40] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:40] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:40] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:40] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:40] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:41] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:41] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:41] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:41] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:41] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:41] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:41] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:41] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:42] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:42] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:42] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:42] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:42] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:42] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:42] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:42] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:43] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:43] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:43] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '1'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:43] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '1'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:43] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:43] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:43] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:43] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:44] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:44] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:44] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:44] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:44] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:44] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:45] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:45] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:45] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:45] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:45] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:45] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:46] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:46] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:46] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:46] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:47] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:47] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:47] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:47] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:48] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:48] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:48] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:48] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:49] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '1'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:49] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '1'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:49] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:49] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:50] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:50] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:51] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:43:51] [DEBUG] - [cellDataChange] System.ArgumentOutOfRangeException: '0'의 InvalidArgument=Value는 'index'에 사용할 수 없습니다.
+매개 변수 이름: index
+   위치: System.Windows.Forms.ListView.ListViewItemCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.cellDataChange(Int32 nItemNo, Int32 nSubitemNo, String strMsg) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 873
+﻿[2022/04/11 15:45:06] [DEBUG] - [PC01F01_Load] 1
+﻿[2022/04/11 15:45:06] [DEBUG] - [PC01F01_Load] 2
+﻿[2022/04/11 15:45:06] [DEBUG] - [PC01F01_Load] 3
+﻿[2022/04/11 15:45:06] [DEBUG] - [PC01F01_Load] 1
+﻿[2022/04/11 15:45:06] [DEBUG] - [PC01F01_Load] 2
+﻿[2022/04/11 15:45:06] [DEBUG] - [PC01F01_Load] 3
+﻿[2022/04/11 15:45:06] [DEBUG] - [PC01F01_Load] 1
+﻿[2022/04/11 15:45:06] [DEBUG] - [PC01F01_Load] 2
+﻿[2022/04/11 15:45:06] [DEBUG] - [PC01F01_Load] 3
+﻿[2022/04/11 15:46:05] [DEBUG] - [PC01F01_Load] 1
+﻿[2022/04/11 15:46:05] [DEBUG] - [PC01F01_Load] 2
+﻿[2022/04/11 15:46:05] [DEBUG] - [PC01F01_Load] 3
+﻿[2022/04/11 15:48:40] [DEBUG] - [PC01F01_Load] 1
+﻿[2022/04/11 15:48:41] [DEBUG] - [PC01F01_Load] 2
+﻿[2022/04/11 15:48:41] [DEBUG] - [PC01F01_Load] 3

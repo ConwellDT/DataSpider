@@ -1,0 +1,60 @@
+C:\KMM1TAS_bak\Assembly\CFW.Data.XML
+C:\KMM1TAS_bak\Assembly\CFW.Data.dll
+C:\KMM1TAS_bak\Assembly\CFW.Data.pdb
+C:\KMM1TAS_bak\DEV\CFrameWork\CFW.Data\obj\Debug\ResolveAssemblyReference.cache
+C:\KMM1TAS_bak\DEV\CFrameWork\CFW.Data\obj\Debug\CFW.Data.dll
+C:\KMM1TAS_bak\DEV\CFrameWork\CFW.Data\obj\Debug\CFW.Data.pdb
+C:\KMM1TAS\DEV\CFrameWork\CFW.Data\obj\Debug\ResolveAssemblyReference.cache
+C:\KMM1TAS\DEV\CFrameWork\CFW.Data\obj\Debug\CFW.Data.dll
+C:\KMM1TAS\DEV\CFrameWork\CFW.Data\obj\Debug\CFW.Data.pdb
+C:\KMM1TAS\Assembly\CFW.Data.XML
+C:\KMM1TAS\Assembly\CFW.Data.dll
+C:\KMM1TAS\Assembly\CFW.Data.pdb
+C:\KMM1TAS\DEV\01.CFrameWork\CFW.Data\obj\Debug\ResolveAssemblyReference.cache
+C:\KMM1TAS\DEV\01.CFrameWork\CFW.Data\obj\Debug\CFW.Data.dll
+C:\KMM1TAS\DEV\01.CFrameWork\CFW.Data\obj\Debug\CFW.Data.pdb
+C:\Hyundai_Kefico\DEV\01.CFrameWork\CFW.Data\obj\Debug\CFW.Data.csprojResolveAssemblyReference.cache
+C:\Hyundai_Kefico\DEV\01.CFrameWork\CFW.Data\obj\Debug\CFW.Data.dll
+C:\Hyundai_Kefico\DEV\01.CFrameWork\CFW.Data\obj\Debug\CFW.Data.pdb
+C:\Hyundai_Kefico\Assembly\CFW.Data.XML
+C:\Hyundai_Kefico\Assembly\CFW.Data.dll
+C:\Hyundai_Kefico\Assembly\CFW.Data.pdb
+C:\202002_HK_ALIS\02.소스\04.Assembly\CFW.Data.XML
+C:\202002_HK_ALIS\02.소스\04.Assembly\CFW.Data.dll
+C:\202002_HK_ALIS\02.소스\04.Assembly\CFW.Data.pdb
+C:\202002_HK_ALIS\02.소스\01.FW\01.CFrameWork\CFW.Data\obj\Debug\CFW.Data.csprojResolveAssemblyReference.cache
+C:\202002_HK_ALIS\02.소스\01.FW\01.CFrameWork\CFW.Data\obj\Debug\CFW.Data.dll
+C:\202002_HK_ALIS\02.소스\01.FW\01.CFrameWork\CFW.Data\obj\Debug\CFW.Data.pdb
+D:\HK_ALIS\02.소스\04.Assembly\CFW.Data.XML
+D:\HK_ALIS\02.소스\04.Assembly\CFW.Data.dll
+D:\HK_ALIS\02.소스\04.Assembly\CFW.Data.pdb
+D:\HK_ALIS\02.소스\01.FW\01.CFrameWork\CFW.Data\obj\Debug\CFW.Data.csprojAssemblyReference.cache
+D:\HK_ALIS\02.소스\01.FW\01.CFrameWork\CFW.Data\obj\Debug\CFW.Data.csproj.CoreCompileInputs.cache
+D:\HK_ALIS\02.소스\01.FW\01.CFrameWork\CFW.Data\obj\Debug\CFW.Data.csproj.CopyComplete
+D:\HK_ALIS\02.소스\01.FW\01.CFrameWork\CFW.Data\obj\Debug\CFW.Data.dll
+D:\HK_ALIS\02.소스\01.FW\01.CFrameWork\CFW.Data\obj\Debug\CFW.Data.pdb
+E:\01.Work Document\01.소스\32.삼성바이오\01.CFrameWork\CFW.Data\obj\Debug\CFW.Data.csprojResolveAssemblyReference.cache
+E:\01.Work Document\01.소스\32.삼성바이오\01.CFrameWork\CFW.Data\obj\Debug\CFW.Data.dll
+E:\01.Work Document\01.소스\32.삼성바이오\01.CFrameWork\CFW.Data\obj\Debug\CFW.Data.pdb
+E:\01.Work Document\01.소스\04.Assembly\CFW.Data.XML
+E:\01.Work Document\01.소스\04.Assembly\CFW.Data.dll
+E:\01.Work Document\01.소스\04.Assembly\CFW.Data.pdb
+D:\Project\20201229_콘웰_삼성바이오로직스_EquipmentMiddlewareInterface\20. SVN\04.Assembly\CFW.Data.XML
+D:\Project\20201229_콘웰_삼성바이오로직스_EquipmentMiddlewareInterface\20. SVN\04.Assembly\CFW.Data.dll
+D:\Project\20201229_콘웰_삼성바이오로직스_EquipmentMiddlewareInterface\20. SVN\04.Assembly\CFW.Data.pdb
+D:\Project\20201229_콘웰_삼성바이오로직스_EquipmentMiddlewareInterface\20. SVN\02.Source\CFrameWork\CFW.Data\obj\Debug\CFW.Data.csprojAssemblyReference.cache
+D:\Project\20201229_콘웰_삼성바이오로직스_EquipmentMiddlewareInterface\20. SVN\02.Source\CFrameWork\CFW.Data\obj\Debug\CFW.Data.csproj.CoreCompileInputs.cache
+D:\Project\20201229_콘웰_삼성바이오로직스_EquipmentMiddlewareInterface\20. SVN\02.Source\CFrameWork\CFW.Data\obj\Debug\CFW.Data.csproj.CopyComplete
+D:\Project\20201229_콘웰_삼성바이오로직스_EquipmentMiddlewareInterface\20. SVN\02.Source\CFrameWork\CFW.Data\obj\Debug\CFW.Data.dll
+D:\Project\20201229_콘웰_삼성바이오로직스_EquipmentMiddlewareInterface\20. SVN\02.Source\CFrameWork\CFW.Data\obj\Debug\CFW.Data.pdb
+D:\Project\20201229_콘웰_삼성바이오로직스_EquipmentMiddlewareInterface\20. SVN\02.Source\Assembly\CFW.Data.XML
+D:\Project\20201229_콘웰_삼성바이오로직스_EquipmentMiddlewareInterface\20. SVN\02.Source\Assembly\CFW.Data.dll
+D:\Project\20201229_콘웰_삼성바이오로직스_EquipmentMiddlewareInterface\20. SVN\02.Source\Assembly\CFW.Data.pdb
+C:\project\콘웰\삼성바이오로직스\svn_new\02.Source\Assembly\CFW.Data.XML
+C:\project\콘웰\삼성바이오로직스\svn_new\02.Source\Assembly\CFW.Data.dll
+C:\project\콘웰\삼성바이오로직스\svn_new\02.Source\Assembly\CFW.Data.pdb
+C:\project\콘웰\삼성바이오로직스\svn_new\02.Source\CFrameWork\CFW.Data\obj\Debug\CFW.Data.csproj.AssemblyReference.cache
+C:\project\콘웰\삼성바이오로직스\svn_new\02.Source\CFrameWork\CFW.Data\obj\Debug\CFW.Data.csproj.CoreCompileInputs.cache
+C:\project\콘웰\삼성바이오로직스\svn_new\02.Source\CFrameWork\CFW.Data\obj\Debug\CFW.Data.csproj.CopyComplete
+C:\project\콘웰\삼성바이오로직스\svn_new\02.Source\CFrameWork\CFW.Data\obj\Debug\CFW.Data.dll
+C:\project\콘웰\삼성바이오로직스\svn_new\02.Source\CFrameWork\CFW.Data\obj\Debug\CFW.Data.pdb

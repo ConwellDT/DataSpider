@@ -1,0 +1,6 @@
+﻿2021-11-23  kwc
+	        if (tagname == "MSR_SAMPLE_TIME" || tagname == "QC_SAMPLE_TIME")
+            {
+                EnQueue(MSGTYPE.MEASURE, $"SVRTIME,{datetime},{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}");
+            }
+            위 코드에서 datetime은 sourcetime을 사용하였음.

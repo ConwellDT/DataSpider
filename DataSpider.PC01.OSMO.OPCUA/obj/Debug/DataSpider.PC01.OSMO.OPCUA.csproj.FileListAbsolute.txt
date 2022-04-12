@@ -1,0 +1,15 @@
+C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.OSMO.OPCUA\obj\Debug\DataSpider.PC01.OSMO.OPCUA.csproj.AssemblyReference.cache
+C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.OSMO.OPCUA\obj\Debug\SEIMMPC01.OSMO.OPCUA.exe.config
+C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.OSMO.OPCUA\obj\Debug\SEIMM.PC01.PT.Properties.Resources.resources
+C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.OSMO.OPCUA\obj\Debug\DataSpider.PC01.PT.PC01F01.resources
+C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.OSMO.OPCUA\obj\Debug\DataSpider.PC01.OSMO.OPCUA.csproj.GenerateResource.cache
+C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.OSMO.OPCUA\obj\Debug\DataSpider.PC01.OSMO.OPCUA.csproj.CoreCompileInputs.cache
+C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.OSMO.OPCUA\obj\Debug\SEIMMPC01.OSMO.OPCUA.exe
+C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.OSMO.OPCUA\obj\Debug\SEIMMPC01.OSMO.OPCUA.pdb
+C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\EXE\SEIMM\SEIMMPC01.OSMO.OPCUA.exe.config
+C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\EXE\SEIMM\SEIMMPC01.OSMO.OPCUA.exe
+C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\EXE\SEIMM\SEIMMPC01.OSMO.OPCUA.pdb
+C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.OSMO.OPCUA\obj\Debug\DataSpider.PC01.OSMO.OPCUA.csproj.CopyComplete
+C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\EXE\DataSpider\SEIMMPC01.OSMO.OPCUA.exe.config
+C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\EXE\DataSpider\SEIMMPC01.OSMO.OPCUA.exe
+C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\EXE\DataSpider\SEIMMPC01.OSMO.OPCUA.pdb

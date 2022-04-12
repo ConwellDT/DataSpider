@@ -1,0 +1,29 @@
+﻿
+
+
+2021-10-27
+완료 레코드 아이디가 줄어드는 현상으로 인해 수정요청
+수정안: 
+	완료 레코드 아이디가 변경되면 이전 레코드 아이디 값을 한번 읽고 현재 레코드 아이디 값을 읽는다.
+예상문제점: 
+	프로그램이 OFF상태일 때 완료된 레코드 아이디들은 읽을 방법이 없다. 
+
+	<- INI CONFIGURATION에 FromTestID~ToTestID까지 요구 레코드 아이디 범위를 설정하면 이에 대한 처리를 수행할 수 있다.
+	   FromTestID=ToTestID="" 인 경우는 수정안에 의해 동작  
+
+	   LastTestID : 프로그램이 처리한 마지막 TestID
+	   FromTestID : 사용자가 처리를 요구한 시작 TestID
+	   ToTestID   : 사용자가 처리를 요구한 끝   TestID
+	   ini file time : ini 파일이 수정된 시간.
+	   LastTestCompleted.Value : 마지막 테스트 완료된 값
+
+	   1) 프로그램이 시작할 때 ini configuration 읽는다. LastTestID, FromTestID, ToTestID, ini file time
+	   2) LastTestID와 LastTestCompleted.Value 가 같으면 할일이 없으므로
+			FromTestID/ToTestID가 >0 이면 
+				FromTestID를 처리하고  FromTestID=FromTestID+1 로 만든다. FromTestID>ToTestID 이면 FromTestID=ToTestID=0 로 만든다.
+	   3) LastTestID와 LastTestCompleted.Value 가 다르면 
+			LastTestID, LastTestCompleted.Value 를 처리하고 LastTestID = LastTestCompleted.Value 로 만든다.
+
+
+
+

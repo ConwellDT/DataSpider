@@ -1,0 +1,16 @@
+C:\project\콘웰\삼성바이오로직스\svn_new\02.Source - P4\Assembly\OpcUaClient.dll.config
+C:\project\콘웰\삼성바이오로직스\svn_new\02.Source - P4\Assembly\OpcUaClient.dll
+C:\project\콘웰\삼성바이오로직스\svn_new\02.Source - P4\Assembly\OpcUaClient.pdb
+C:\project\콘웰\삼성바이오로직스\svn_new\02.Source - P4\OpcUaClient\obj\Debug\OpcUaClient.csproj.CoreCompileInputs.cache
+C:\project\콘웰\삼성바이오로직스\svn_new\02.Source - P4\OpcUaClient\obj\Debug\OpcUaClient.csproj.CopyComplete
+C:\project\콘웰\삼성바이오로직스\svn_new\02.Source - P4\OpcUaClient\obj\Debug\OpcUaClient.dll
+C:\project\콘웰\삼성바이오로직스\svn_new\02.Source - P4\OpcUaClient\obj\Debug\OpcUaClient.pdb
+C:\project\콘웰\삼성바이오로직스\svn_new\02.Source - P4\OpcUaClient\obj\Debug\OpcUaClient.csproj.AssemblyReference.cache
+C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\Assembly\OpcUaClient.dll.config
+C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\Assembly\OpcUaClient.dll
+C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\Assembly\OpcUaClient.pdb
+C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\OpcUaClient\obj\Debug\OpcUaClient.csproj.CoreCompileInputs.cache
+C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\OpcUaClient\obj\Debug\OpcUaClient.csproj.CopyComplete
+C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\OpcUaClient\obj\Debug\OpcUaClient.dll
+C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\OpcUaClient\obj\Debug\OpcUaClient.pdb
+C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\OpcUaClient\obj\Debug\OpcUaClient.csproj.AssemblyReference.cache

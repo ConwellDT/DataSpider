@@ -1,0 +1,429 @@
+﻿[2022/04/11 13:45:39] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 13:45:40] [INFO] - [ThreadJob] Thread started
+﻿[2022/04/11 13:45:40] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 13:45:50] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 13:45:51] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 13:46:01] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 13:46:02] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 13:46:12] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 13:46:13] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 13:46:23] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 13:46:24] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 13:46:34] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 13:46:35] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 13:46:45] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 13:46:46] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 13:46:56] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 13:46:57] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 13:47:07] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 13:47:08] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 13:47:18] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 13:47:19] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 13:47:29] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 13:47:30] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 13:47:40] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 13:47:41] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 13:47:51] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 13:47:52] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 13:48:02] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 13:48:03] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 13:48:13] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 13:48:14] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 13:48:24] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 13:48:25] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 13:48:35] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 13:48:36] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 13:48:46] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 13:48:47] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 13:48:57] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 13:48:58] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 13:49:08] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 13:49:09] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 13:49:19] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 13:49:20] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 13:49:30] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 13:49:31] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 13:49:41] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 13:49:42] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 13:49:52] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 13:49:53] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 13:50:03] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 13:50:04] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 13:50:14] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 13:50:15] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 13:50:25] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 13:50:26] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 13:50:36] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 13:50:37] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 13:50:47] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 13:50:48] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 13:50:58] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 13:51:00] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 13:51:10] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 13:51:11] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 13:51:21] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 13:51:22] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 13:51:32] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 13:51:33] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 13:51:43] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 13:51:44] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 13:51:54] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 13:51:55] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 13:52:05] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 13:52:06] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 13:52:16] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 13:52:17] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 13:52:27] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 13:52:28] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 13:52:38] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 13:52:39] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 13:52:49] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 13:52:50] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 13:53:00] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 13:53:01] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 13:53:11] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 13:53:12] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 13:53:22] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 13:53:23] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 13:53:33] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 13:53:34] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 13:53:44] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 13:53:45] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 13:53:55] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 13:53:56] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 13:54:06] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 13:54:07] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 13:54:17] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 13:54:18] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 13:54:28] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 13:54:29] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 13:54:39] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 13:54:40] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 13:54:50] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 13:54:51] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 13:55:01] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 13:55:02] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 14:31:16] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 14:31:17] [INFO] - [ThreadJob] Thread started
+﻿[2022/04/11 14:31:17] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 14:31:27] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 14:31:28] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 14:31:38] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 14:31:39] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 14:31:49] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 14:31:50] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 14:32:00] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 14:32:01] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 14:32:11] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 14:32:12] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 14:32:22] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 14:32:23] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 14:32:33] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 14:32:34] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 14:32:44] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 14:32:45] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 14:32:55] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 14:32:56] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 14:33:06] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 14:33:07] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 14:33:17] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 14:33:18] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 14:33:28] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 14:33:29] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 14:33:39] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 14:33:40] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 14:33:50] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 14:33:51] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 14:34:01] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 14:34:02] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 14:34:12] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 14:34:13] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 14:34:23] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 14:34:24] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 14:34:34] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 14:34:35] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 14:34:45] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 14:34:46] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 14:34:56] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 14:34:57] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 14:35:07] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 14:35:08] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 14:35:18] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 14:35:19] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 14:35:29] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 14:35:30] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 14:35:40] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 14:35:41] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 14:35:51] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 14:35:52] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 14:36:02] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 14:36:03] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 14:36:13] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 14:36:14] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 14:36:24] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 14:36:25] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 14:36:35] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 14:36:36] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 14:36:46] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 14:36:47] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 14:36:57] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 14:36:58] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 14:37:08] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 14:37:09] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 14:37:19] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 14:37:20] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 14:37:30] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 14:37:31] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 14:37:41] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 14:37:42] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 14:37:52] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 14:37:53] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 14:38:03] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 14:38:04] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 14:38:14] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 14:38:15] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 14:38:26] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 14:38:27] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 14:38:37] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 14:38:38] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 14:38:48] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 14:39:11] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 14:39:13] [INFO] - [ThreadJob] Thread started
+﻿[2022/04/11 14:39:13] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 14:39:23] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 14:39:48] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 14:39:49] [INFO] - [ThreadJob] Thread started
+﻿[2022/04/11 14:39:49] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 14:39:59] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 14:40:00] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 14:40:10] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 14:40:11] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 14:40:17] [ERROR] - [Connect] Exception in Connect - (System.Threading.ThreadAbortException: 스레드가 중단되었습니다.
+   위치: System.Threading.WaitHandle.WaitOneNative(SafeHandle waitableSafeHandle, UInt32 millisecondsTimeout, Boolean hasThreadAffinity, Boolean exitContext)
+   위치: System.Threading.WaitHandle.InternalWaitOne(SafeHandle waitableSafeHandle, Int64 millisecondsTimeout, Boolean hasThreadAffinity, Boolean exitContext)
+   위치: System.Threading.WaitHandle.WaitOne(Int32 millisecondsTimeout, Boolean exitContext)
+   위치: System.Threading.WaitHandle.WaitOne(Int32 millisecondsTimeout)
+   위치: DataSpider.PC00.PT.PC00B02.Connect() 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00B02.cs:줄 275)
+﻿[2022/04/11 14:40:17] [ERROR] - [ThreadJob] Exception in ThreadJob - (System.Threading.ThreadAbortException: 스레드가 중단되었습니다.
+   위치: DataSpider.PC00.PT.PC00B02.Connect() 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\PC00B02.cs:줄 321
+   위치: DataSpider.PC01.PT.PC01S18.ThreadJob() 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01S18.cs:줄 183)
+﻿[2022/04/11 15:36:27] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:36:28] [INFO] - [ThreadJob] Thread started
+﻿[2022/04/11 15:36:28] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:36:38] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:36:39] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:36:49] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:36:50] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:37:00] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:37:01] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:37:11] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:37:12] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:37:22] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:37:23] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:37:33] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:37:34] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:37:44] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:37:45] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:37:55] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:37:56] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:38:06] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:38:07] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:38:17] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:38:18] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:38:28] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:38:29] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:38:39] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:38:40] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:38:50] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:38:51] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:39:01] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:39:02] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:39:12] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:39:13] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:39:23] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:39:24] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:39:34] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:39:35] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:39:45] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:39:46] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:39:56] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:39:57] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:40:07] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:40:08] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:40:18] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:40:19] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:40:29] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:40:30] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:40:40] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:40:41] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:40:51] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:40:52] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:41:02] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:41:03] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:41:13] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:41:14] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:41:24] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:41:25] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:41:35] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:41:36] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:41:46] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:41:47] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:41:57] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:41:58] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:42:08] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:42:09] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:42:19] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:42:20] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:42:30] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:42:31] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:42:41] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:42:42] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:42:52] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:42:53] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:43:03] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:43:05] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:43:15] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:43:16] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:43:26] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:43:27] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:43:37] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:43:38] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:43:48] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:43:49] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:46:16] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:46:17] [INFO] - [ThreadJob] Thread started
+﻿[2022/04/11 15:46:17] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:46:27] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:46:28] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:46:38] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:46:39] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:46:49] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:46:50] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:47:00] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:47:01] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:47:11] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:47:12] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:47:22] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:47:24] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:47:34] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:47:35] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:47:45] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:47:46] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:47:56] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:47:57] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:48:07] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:48:08] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:48:18] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:48:19] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:48:29] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:48:30] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:48:40] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:48:41] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:48:51] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:48:52] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:49:02] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:49:03] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:49:13] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:49:14] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:49:24] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:49:25] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:49:35] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:49:36] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:49:46] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:49:47] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:49:57] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:49:58] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:50:08] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:50:09] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:50:19] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:50:20] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:50:30] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:50:31] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:50:41] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:50:42] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:50:52] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:50:53] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:51:03] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:51:04] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:51:14] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:51:15] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:51:25] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:51:26] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:51:36] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:51:37] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:51:47] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:51:48] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:51:58] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:51:59] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:52:09] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:52:10] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:52:20] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:52:21] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:52:31] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:52:32] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:52:42] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:52:43] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:52:53] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:52:54] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:53:04] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:53:05] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:53:15] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:53:16] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:53:26] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:53:27] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:53:37] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:53:38] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:53:48] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:53:49] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:53:59] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:54:00] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:54:11] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:54:12] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:54:22] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:54:23] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:54:33] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:54:34] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:54:44] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:54:45] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:54:55] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:54:56] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:55:06] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:55:07] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:55:17] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:55:18] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:55:28] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:55:29] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:55:39] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:55:40] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:55:50] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:55:51] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:56:01] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:56:02] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:56:12] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:56:13] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:56:23] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:56:24] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:56:34] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:56:35] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:56:45] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:56:46] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:56:56] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:56:57] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:57:07] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:57:08] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:57:18] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:57:19] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:57:29] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:57:30] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:57:40] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:57:41] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:57:51] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:57:52] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:58:02] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:58:03] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:58:13] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:58:14] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:58:24] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:58:25] [ERROR] - [ThreadJob] Disconnected. Try to connect
+﻿[2022/04/11 15:58:35] [INFO] - [ConnectCallback] state.workSocket.Connected = FALSE in ConnectCallback
+﻿[2022/04/11 15:58:36] [ERROR] - [ThreadJob] Disconnected. Try to connect

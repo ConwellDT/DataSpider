@@ -1,0 +1,343 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3B784C03-DC01-486B-9991-CE426E883963}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>DataSpider</RootNamespace>
+    <AssemblyName>DataSpider</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>false</Deterministic>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>게시\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\EXE\DataSpider\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\EXE\DataSpider\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>
+    </ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CFW.Common, Version=15.4.1.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Assembly\CFW.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="CFW.Configuration, Version=15.4.1.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Assembly\CFW.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="CFW.Data, Version=15.4.1.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Assembly\CFW.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="LibraryWH, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Assembly\LibraryWH.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AboutBox_Conwell.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutBox_Conwell.Designer.cs">
+      <DependentUpon>AboutBox_Conwell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AboutBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutBox.Designer.cs">
+      <DependentUpon>AboutBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CheckDBStatus.cs" />
+    <Compile Include="Form_LogIn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_LogIn.Designer.cs">
+      <DependentUpon>Form_LogIn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Splash.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Splash.Designer.cs">
+      <DependentUpon>Form_Splash.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MonitorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MonitorForm.Designer.cs">
+      <DependentUpon>MonitorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="UserMonitor\ConfigSystem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserMonitor\ConfigSystem.Designer.cs">
+      <DependentUpon>ConfigSystem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserMonitor\ConfigTagGroup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserMonitor\ConfigTagGroup.Designer.cs">
+      <DependentUpon>ConfigTagGroup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserMonitor\CurrentTagValueMonitorDGV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserMonitor\CurrentTagValueMonitorDGV.Designer.cs">
+      <DependentUpon>CurrentTagValueMonitorDGV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserMonitor\FilterForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserMonitor\FilterForm.Designer.cs">
+      <DependentUpon>FilterForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserMonitor\LogListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserMonitor\LogListForm.Designer.cs">
+      <DependentUpon>LogListForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserMonitor\PIAlarmMonitor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserMonitor\PIAlarmMonitor.Designer.cs">
+      <DependentUpon>PIAlarmMonitor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserMonitor\Form_Find.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserMonitor\Form_Find.Designer.cs">
+      <DependentUpon>Form_Find.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserMonitor\SetRefreshInterval.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserMonitor\SetRefreshInterval.Designer.cs">
+      <DependentUpon>SetRefreshInterval.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserMonitor\TagGroupInfoEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserMonitor\TagGroupInfoEdit.Designer.cs">
+      <DependentUpon>TagGroupInfoEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserMonitor\TAGValueHistoryPopupDGV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserMonitor\TAGValueHistoryPopupDGV.Designer.cs">
+      <DependentUpon>TAGValueHistoryPopupDGV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserMonitor\UserAddEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserMonitor\UserAddEdit.Designer.cs">
+      <DependentUpon>UserAddEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserMonitor\TagAddEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserMonitor\TagAddEdit.Designer.cs">
+      <DependentUpon>TagAddEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserMonitor\EquipmentAddEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserMonitor\EquipmentAddEdit.Designer.cs">
+      <DependentUpon>EquipmentAddEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserMonitor\TAGValueHistoryPopup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserMonitor\TAGValueHistoryPopup.Designer.cs">
+      <DependentUpon>TAGValueHistoryPopup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserMonitor\CurrentTagValueMonitor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserMonitor\CurrentTagValueMonitor.Designer.cs">
+      <DependentUpon>CurrentTagValueMonitor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserMonitor\EquipmentMonitor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserMonitor\EquipmentMonitor.Designer.cs">
+      <DependentUpon>EquipmentMonitor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserMonitor\SBL.cs" />
+    <Compile Include="UserMonitor\SBLCtrl.cs" />
+    <Compile Include="UserMonitor\SBLData.cs" />
+    <Compile Include="UserMonitor\SysUser.cs" />
+    <Compile Include="UserMonitor\TreeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserMonitor\TreeForm.Designer.cs">
+      <DependentUpon>TreeForm.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="AboutBox_Conwell.resx">
+      <DependentUpon>AboutBox_Conwell.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AboutBox.resx">
+      <DependentUpon>AboutBox.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_LogIn.resx">
+      <DependentUpon>Form_LogIn.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Splash.resx">
+      <DependentUpon>Form_Splash.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MonitorForm.resx">
+      <DependentUpon>MonitorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <SubType>Designer</SubType>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserMonitor\ConfigSystem.resx">
+      <DependentUpon>ConfigSystem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserMonitor\ConfigTagGroup.resx">
+      <DependentUpon>ConfigTagGroup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserMonitor\CurrentTagValueMonitorDGV.resx">
+      <DependentUpon>CurrentTagValueMonitorDGV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserMonitor\FilterForm.resx">
+      <DependentUpon>FilterForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserMonitor\LogListForm.resx">
+      <DependentUpon>LogListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserMonitor\PIAlarmMonitor.resx">
+      <DependentUpon>PIAlarmMonitor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserMonitor\Form_Find.resx">
+      <DependentUpon>Form_Find.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserMonitor\SetRefreshInterval.resx">
+      <DependentUpon>SetRefreshInterval.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserMonitor\TagGroupInfoEdit.resx">
+      <DependentUpon>TagGroupInfoEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserMonitor\TAGValueHistoryPopupDGV.resx">
+      <DependentUpon>TAGValueHistoryPopupDGV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserMonitor\UserAddEdit.resx">
+      <DependentUpon>UserAddEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserMonitor\TagAddEdit.resx">
+      <DependentUpon>TagAddEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserMonitor\EquipmentAddEdit.resx">
+      <DependentUpon>EquipmentAddEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserMonitor\TAGValueHistoryPopup.resx">
+      <DependentUpon>TAGValueHistoryPopup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserMonitor\CurrentTagValueMonitor.resx">
+      <DependentUpon>CurrentTagValueMonitor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserMonitor\EquipmentMonitor.resx">
+      <DependentUpon>EquipmentMonitor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserMonitor\TreeForm.resx">
+      <DependentUpon>TreeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\EQAddEditBk.bmp" />
+    <None Include="Resources\TagGroupConfig.bmp" />
+    <None Include="Resources\TagAddEditBK.bmp" />
+    <Content Include="UpdateLog.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.8">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.8%28x86 및 x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataSpider.PC00.PT\DataSpider.PC00.PT.csproj">
+      <Project>{8F9640E0-96F9-4723-8AEC-CD681924F0F9}</Project>
+      <Name>DataSpider.PC00.PT</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

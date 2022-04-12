@@ -1,0 +1,51 @@
+C:\KMM1TAS\DEV\CFrameWork\CFW.Common.Message\bin\Debug\CFW.Common.Message.dll
+C:\KMM1TAS\DEV\CFrameWork\CFW.Common.Message\bin\Debug\CFW.Common.Message.pdb
+C:\KMM1TAS\DEV\CFrameWork\CFW.Common.Message\bin\Debug\CFW.Common.dll
+C:\KMM1TAS\DEV\CFrameWork\CFW.Common.Message\bin\Debug\CFW.Configuration.dll
+C:\KMM1TAS\DEV\CFrameWork\CFW.Common.Message\bin\Debug\CFW.Data.dll
+C:\KMM1TAS\DEV\CFrameWork\CFW.Common.Message\bin\Debug\CFW.Common.pdb
+C:\KMM1TAS\DEV\CFrameWork\CFW.Common.Message\bin\Debug\CFW.Common.xml
+C:\KMM1TAS\DEV\CFrameWork\CFW.Common.Message\bin\Debug\CFW.Data.pdb
+C:\KMM1TAS\DEV\CFrameWork\CFW.Common.Message\bin\Debug\CFW.Data.xml
+C:\KMM1TAS\DEV\CFrameWork\CFW.Common.Message\bin\Debug\CFW.Configuration.pdb
+C:\KMM1TAS_bak\Assembly\CFW.Common.Message.XML
+C:\KMM1TAS_bak\Assembly\CFW.Common.Message.dll
+C:\KMM1TAS_bak\Assembly\CFW.Common.Message.pdb
+C:\KMM1TAS_bak\DEV\CFrameWork\CFW.Common.Message\obj\Debug\ResolveAssemblyReference.cache
+C:\KMM1TAS_bak\DEV\CFrameWork\CFW.Common.Message\obj\Debug\CFW.Common.Message.dll
+C:\KMM1TAS_bak\DEV\CFrameWork\CFW.Common.Message\obj\Debug\CFW.Common.Message.pdb
+C:\KMM1TAS\DEV\CFrameWork\CFW.Common.Message\obj\Debug\ResolveAssemblyReference.cache
+C:\KMM1TAS\DEV\CFrameWork\CFW.Common.Message\obj\Debug\CFW.Common.Message.dll
+C:\KMM1TAS\DEV\CFrameWork\CFW.Common.Message\obj\Debug\CFW.Common.Message.pdb
+C:\KMM1TAS\DEV\01.CFrameWork\CFW.Common.Message\obj\Debug\ResolveAssemblyReference.cache
+C:\KMM1TAS\Assembly\CFW.Common.Message.XML
+C:\KMM1TAS\Assembly\CFW.Common.Message.dll
+C:\KMM1TAS\Assembly\CFW.Common.Message.pdb
+C:\KMM1TAS\DEV\01.CFrameWork\CFW.Common.Message\obj\Debug\CFW.Common.Message.dll
+C:\KMM1TAS\DEV\01.CFrameWork\CFW.Common.Message\obj\Debug\CFW.Common.Message.pdb
+C:\Hyundai_Kefico\DEV\01.CFrameWork\CFW.Common.Message\obj\Debug\CFW.Common.Message.csprojResolveAssemblyReference.cache
+C:\Hyundai_Kefico\DEV\01.CFrameWork\CFW.Common.Message\obj\Debug\CFW.Common.Message.dll
+C:\Hyundai_Kefico\DEV\01.CFrameWork\CFW.Common.Message\obj\Debug\CFW.Common.Message.pdb
+C:\Hyundai_Kefico\Assembly\CFW.Common.Message.XML
+C:\Hyundai_Kefico\Assembly\CFW.Common.Message.dll
+C:\Hyundai_Kefico\Assembly\CFW.Common.Message.pdb
+C:\202002_HK_ALIS\02.소스\01.FW\01.CFrameWork\CFW.Common.Message\obj\Debug\CFW.Common.Message.csprojResolveAssemblyReference.cache
+C:\202002_HK_ALIS\02.소스\01.FW\01.CFrameWork\CFW.Common.Message\obj\Debug\CFW.Common.Message.dll
+C:\202002_HK_ALIS\02.소스\01.FW\01.CFrameWork\CFW.Common.Message\obj\Debug\CFW.Common.Message.pdb
+C:\202002_HK_ALIS\02.소스\04.Assembly\CFW.Common.Message.XML
+C:\202002_HK_ALIS\02.소스\04.Assembly\CFW.Common.Message.dll
+C:\202002_HK_ALIS\02.소스\04.Assembly\CFW.Common.Message.pdb
+E:\01.Work Document\01.소스\32.삼성바이오\01.CFrameWork\CFW.Common.Message\obj\Debug\CFW.Common.Message.csprojResolveAssemblyReference.cache
+E:\01.Work Document\01.소스\32.삼성바이오\01.CFrameWork\CFW.Common.Message\obj\Debug\CFW.Common.Message.dll
+E:\01.Work Document\01.소스\32.삼성바이오\01.CFrameWork\CFW.Common.Message\obj\Debug\CFW.Common.Message.pdb
+E:\01.Work Document\01.소스\04.Assembly\CFW.Common.Message.XML
+E:\01.Work Document\01.소스\04.Assembly\CFW.Common.Message.dll
+E:\01.Work Document\01.소스\04.Assembly\CFW.Common.Message.pdb
+D:\Project\20201229_콘웰_삼성바이오로직스_EquipmentMiddlewareInterface\20. SVN\02.Source\CFrameWork\CFW.Common.Message\obj\Debug\CFW.Common.Message.csprojAssemblyReference.cache
+D:\Project\20201229_콘웰_삼성바이오로직스_EquipmentMiddlewareInterface\20. SVN\02.Source\CFrameWork\CFW.Common.Message\obj\Debug\CFW.Common.Message.csproj.CoreCompileInputs.cache
+D:\Project\20201229_콘웰_삼성바이오로직스_EquipmentMiddlewareInterface\20. SVN\02.Source\CFrameWork\CFW.Common.Message\obj\Debug\CFW.Common.Message.dll
+D:\Project\20201229_콘웰_삼성바이오로직스_EquipmentMiddlewareInterface\20. SVN\02.Source\CFrameWork\CFW.Common.Message\obj\Debug\CFW.Common.Message.pdb
+D:\Project\20201229_콘웰_삼성바이오로직스_EquipmentMiddlewareInterface\20. SVN\02.Source\Assembly\CFW.Common.Message.XML
+D:\Project\20201229_콘웰_삼성바이오로직스_EquipmentMiddlewareInterface\20. SVN\02.Source\Assembly\CFW.Common.Message.dll
+D:\Project\20201229_콘웰_삼성바이오로직스_EquipmentMiddlewareInterface\20. SVN\02.Source\Assembly\CFW.Common.Message.pdb
+D:\Project\20201229_콘웰_삼성바이오로직스_EquipmentMiddlewareInterface\20. SVN\02.Source\CFrameWork\CFW.Common.Message\obj\Debug\CFW.Common.Message.csproj.CopyComplete

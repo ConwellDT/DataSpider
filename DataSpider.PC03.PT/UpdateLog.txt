@@ -1,0 +1,16 @@
+﻿2021-11-30 kwc
+			i. DataSpiderPC03.EXE 프로그램 종료시  프로그램 동작확인
+				1) 기존 7초간 정지하는 부분을 0.1초간 정지하도록 수정
+				2) 7초에 한번 상태 업데이트 하도록 프로그램 수정
+				3) Common 테이블에 있는 장비목록 만큼 Thread가 생성되도록 되어 있음.
+					a) Common테이블의 장비 목록을 삭제할 필요 있음.
+					
+			ii. DataSpiderPC03.EXE 프로그램 실행 중 CONNECTION_01의 상태 업데이트 하는지 확인 
+			<- (정상으로 표시되어야 함)
+			<- PI 접속 안되는 경우 EXCEPTION 발생해서 점프함.
+			<- 같은 장소에서 Try-Catch를 선언해서 처리함.
+
+2021-11-04 kwc
+	void ThreadJob() 함수에서 Sleep 시간 조정
+		처리할 레코드가 있는 경우 Sleep   if (i % 10 == 9) Thread.Sleep(1);
+		처리할 레코드가 없는 경우 Sleep    m_Thd.Join(1000);

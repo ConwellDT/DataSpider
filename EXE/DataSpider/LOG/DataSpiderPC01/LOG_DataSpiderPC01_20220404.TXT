@@ -1,0 +1,173 @@
+﻿[2022/04/04 14:04:14] [DEBUG] - [PC01F01_Load] System.IndexOutOfRangeException: 위치 0에 행이 없습니다.
+   위치: System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   위치: System.Data.DataRowCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.PC01F01_Load(Object sender, EventArgs e) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 157
+﻿[2022/04/04 14:08:55] [DEBUG] - [PC01F01_FormClosing] System.NullReferenceException: 개체 참조가 개체의 인스턴스로 설정되지 않았습니다.
+   위치: DataSpider.PC01.PT.PC01F01.PC01F01_FormClosing(Object sender, FormClosingEventArgs e) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 385
+﻿[2022/04/04 14:08:55] [DEBUG] - [PC01F01_FormClosing] Program Close
+﻿[2022/04/04 14:08:55] [DEBUG] - [PC01F01_FormClosing] System.NullReferenceException: 개체 참조가 개체의 인스턴스로 설정되지 않았습니다.
+   위치: DataSpider.PC01.PT.PC01F01.PC01F01_FormClosing(Object sender, FormClosingEventArgs e) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 385
+﻿[2022/04/04 14:08:55] [DEBUG] - [PC01F01_FormClosing] Program Close
+﻿[2022/04/04 14:09:00] [DEBUG] - [PC01F01_Load] System.IndexOutOfRangeException: 위치 0에 행이 없습니다.
+   위치: System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   위치: System.Data.DataRowCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.PC01F01_Load(Object sender, EventArgs e) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 157
+﻿[2022/04/04 14:09:04] [DEBUG] - [PC01F01_FormClosing] System.NullReferenceException: 개체 참조가 개체의 인스턴스로 설정되지 않았습니다.
+   위치: DataSpider.PC01.PT.PC01F01.PC01F01_FormClosing(Object sender, FormClosingEventArgs e) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 385
+﻿[2022/04/04 14:09:04] [DEBUG] - [PC01F01_FormClosing] Program Close
+﻿[2022/04/04 14:09:04] [DEBUG] - [PC01F01_FormClosing] System.NullReferenceException: 개체 참조가 개체의 인스턴스로 설정되지 않았습니다.
+   위치: DataSpider.PC01.PT.PC01F01.PC01F01_FormClosing(Object sender, FormClosingEventArgs e) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 385
+﻿[2022/04/04 14:09:04] [DEBUG] - [PC01F01_FormClosing] Program Close
+﻿[2022/04/04 14:09:36] [DEBUG] - [PC01F01_Load] System.IndexOutOfRangeException: 위치 0에 행이 없습니다.
+   위치: System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   위치: System.Data.DataRowCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.PC01F01_Load(Object sender, EventArgs e) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 157
+﻿[2022/04/04 14:10:00] [DEBUG] - [PC01F01_Load] System.IndexOutOfRangeException: 위치 0에 행이 없습니다.
+   위치: System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   위치: System.Data.DataRowCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.PC01F01_Load(Object sender, EventArgs e) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 157
+﻿[2022/04/04 14:10:33] [DEBUG] - [PC01F01_Load] System.IndexOutOfRangeException: 위치 0에 행이 없습니다.
+   위치: System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   위치: System.Data.DataRowCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.PC01F01_Load(Object sender, EventArgs e) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 157
+﻿[2022/04/04 14:11:06] [DEBUG] - [PC01F01_Load] System.IndexOutOfRangeException: 위치 0에 행이 없습니다.
+   위치: System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   위치: System.Data.DataRowCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.PC01F01_Load(Object sender, EventArgs e) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 157
+﻿[2022/04/04 14:11:36] [DEBUG] - [PC01F01_Load] System.IndexOutOfRangeException: 위치 0에 행이 없습니다.
+   위치: System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   위치: System.Data.DataRowCollection.get_Item(Int32 index)
+   위치: DataSpider.PC01.PT.PC01F01.PC01F01_Load(Object sender, EventArgs e) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 157
+﻿[2022/04/04 14:12:57] [DEBUG] - [PC01F01_Load] 1
+﻿[2022/04/04 14:12:57] [DEBUG] - [PC01F01_Load] 2
+﻿[2022/04/04 14:13:01] [DEBUG] - [PC01F01_Load] 3
+﻿[2022/04/04 14:21:10] [DEBUG] - [listViewMsg] System.Threading.ThreadAbortException: 스레드가 중단되었습니다.
+   위치: System.Threading.WaitHandle.WaitOneNative(SafeHandle waitableSafeHandle, UInt32 millisecondsTimeout, Boolean hasThreadAffinity, Boolean exitContext)
+   위치: System.Threading.WaitHandle.InternalWaitOne(SafeHandle waitableSafeHandle, Int64 millisecondsTimeout, Boolean hasThreadAffinity, Boolean exitContext)
+   위치: System.Threading.WaitHandle.WaitOne(Int32 millisecondsTimeout, Boolean exitContext)
+   위치: System.Windows.Forms.Control.WaitForWaitHandle(WaitHandle waitHandle)
+   위치: System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)
+   위치: System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)
+   위치: DataSpider.PC01.PT.PC01F01.listViewMsg(String pstrProcID, String pMsg, Boolean pbGridView, Int32 pnCurNo, Int32 pnSubItemNo, Boolean pbLogView, String pstrType) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 695
+﻿[2022/04/04 14:21:11] [DEBUG] - [PC01F01_FormClosing] Program Close
+﻿[2022/04/04 14:21:12] [DEBUG] - [PC01F01_FormClosing] Program Close
+﻿[2022/04/04 14:21:12] [DEBUG] - [listViewMsg] System.ObjectDisposedException: 삭제된 개체에 액세스할 수 없습니다.
+개체 이름: 'PC01F01'
+   위치: System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)
+   위치: System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)
+   위치: DataSpider.PC01.PT.PC01F01.listViewMsg(String pstrProcID, String pMsg, Boolean pbGridView, Int32 pnCurNo, Int32 pnSubItemNo, Boolean pbLogView, String pstrType) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 695
+﻿[2022/04/04 14:21:13] [DEBUG] - [listViewMsg] System.ComponentModel.InvalidAsynchronousStateException: 메서드를 호출하는 동안 오류가 발생했습니다. 대상 스레드가 더 이상 존재하지 않습니다.
+   위치: System.Windows.Forms.Control.WaitForWaitHandle(WaitHandle waitHandle)
+   위치: System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)
+   위치: System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)
+   위치: DataSpider.PC01.PT.PC01F01.listViewMsg(String pstrProcID, String pMsg, Boolean pbGridView, Int32 pnCurNo, Int32 pnSubItemNo, Boolean pbLogView, String pstrType) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 695
+﻿[2022/04/04 14:21:17] [DEBUG] - [PC01F01_Load] 1
+﻿[2022/04/04 14:21:17] [DEBUG] - [PC01F01_Load] 2
+﻿[2022/04/04 14:21:17] [DEBUG] - [PC01F01_Load] 3
+﻿[2022/04/04 14:22:38] [DEBUG] - [listViewMsg] System.Threading.ThreadAbortException: 스레드가 중단되었습니다.
+   위치: System.Threading.WaitHandle.WaitOneNative(SafeHandle waitableSafeHandle, UInt32 millisecondsTimeout, Boolean hasThreadAffinity, Boolean exitContext)
+   위치: System.Threading.WaitHandle.InternalWaitOne(SafeHandle waitableSafeHandle, Int64 millisecondsTimeout, Boolean hasThreadAffinity, Boolean exitContext)
+   위치: System.Threading.WaitHandle.WaitOne(Int32 millisecondsTimeout, Boolean exitContext)
+   위치: System.Windows.Forms.Control.WaitForWaitHandle(WaitHandle waitHandle)
+   위치: System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)
+   위치: System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)
+   위치: DataSpider.PC01.PT.PC01F01.listViewMsg(String pstrProcID, String pMsg, Boolean pbGridView, Int32 pnCurNo, Int32 pnSubItemNo, Boolean pbLogView, String pstrType) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 695
+﻿[2022/04/04 14:22:40] [DEBUG] - [listViewMsg] System.Threading.ThreadAbortException: 스레드가 중단되었습니다.
+   위치: System.Threading.WaitHandle.WaitOneNative(SafeHandle waitableSafeHandle, UInt32 millisecondsTimeout, Boolean hasThreadAffinity, Boolean exitContext)
+   위치: System.Threading.WaitHandle.InternalWaitOne(SafeHandle waitableSafeHandle, Int64 millisecondsTimeout, Boolean hasThreadAffinity, Boolean exitContext)
+   위치: System.Threading.WaitHandle.WaitOne(Int32 millisecondsTimeout, Boolean exitContext)
+   위치: System.Windows.Forms.Control.WaitForWaitHandle(WaitHandle waitHandle)
+   위치: System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)
+   위치: System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)
+   위치: DataSpider.PC01.PT.PC01F01.listViewMsg(String pstrProcID, String pMsg, Boolean pbGridView, Int32 pnCurNo, Int32 pnSubItemNo, Boolean pbLogView, String pstrType) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 695
+﻿[2022/04/04 14:22:40] [DEBUG] - [PC01F01_FormClosing] Program Close
+﻿[2022/04/04 14:22:42] [DEBUG] - [PC01F01_FormClosing] Program Close
+﻿[2022/04/04 14:22:42] [DEBUG] - [listViewMsg] System.ObjectDisposedException: 삭제된 개체에 액세스할 수 없습니다.
+개체 이름: 'PC01F01'
+   위치: System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)
+   위치: DataSpider.PC01.PT.PC01F01.listViewMsg(String pstrProcID, String pMsg, Boolean pbGridView, Int32 pnCurNo, Int32 pnSubItemNo, Boolean pbLogView, String pstrType) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 695
+   위치: System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)
+   위치: DataSpider.PC01.PT.PC01F01.listViewMsg(String pstrProcID, String pMsg, Boolean pbGridView, Int32 pnCurNo, Int32 pnSubItemNo, Boolean pbLogView, String pstrType) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 695
+﻿[2022/04/04 14:22:46] [DEBUG] - [PC01F01_Load] 1
+﻿[2022/04/04 14:22:46] [DEBUG] - [PC01F01_Load] 2
+﻿[2022/04/04 14:22:46] [DEBUG] - [PC01F01_Load] 3
+﻿[2022/04/04 15:06:29] [DEBUG] - [listViewMsg] System.Threading.ThreadAbortException: 스레드가 중단되었습니다.
+   위치: System.Threading.WaitHandle.WaitOneNative(SafeHandle waitableSafeHandle, UInt32 millisecondsTimeout, Boolean hasThreadAffinity, Boolean exitContext)
+   위치: System.Threading.WaitHandle.InternalWaitOne(SafeHandle waitableSafeHandle, Int64 millisecondsTimeout, Boolean hasThreadAffinity, Boolean exitContext)
+   위치: System.Threading.WaitHandle.WaitOne(Int32 millisecondsTimeout, Boolean exitContext)
+   위치: System.Windows.Forms.Control.WaitForWaitHandle(WaitHandle waitHandle)
+   위치: System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)
+   위치: System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)
+   위치: DataSpider.PC01.PT.PC01F01.listViewMsg(String pstrProcID, String pMsg, Boolean pbGridView, Int32 pnCurNo, Int32 pnSubItemNo, Boolean pbLogView, String pstrType) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 695
+﻿[2022/04/04 15:06:31] [DEBUG] - [PC01F01_FormClosing] Program Close
+﻿[2022/04/04 15:06:31] [DEBUG] - [PC01F01_FormClosing] Program Close
+﻿[2022/04/04 15:06:31] [DEBUG] - [listViewMsg] System.ObjectDisposedException: 삭제된 개체에 액세스할 수 없습니다.
+개체 이름: 'PC01F01'
+   위치: System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)
+   위치: System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)
+   위치: DataSpider.PC01.PT.PC01F01.listViewMsg(String pstrProcID, String pMsg, Boolean pbGridView, Int32 pnCurNo, Int32 pnSubItemNo, Boolean pbLogView, String pstrType) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 695
+﻿[2022/04/04 15:06:31] [DEBUG] - [listViewMsg] System.ObjectDisposedException: 삭제된 개체에 액세스할 수 없습니다.
+개체 이름: 'PC01F01'
+   위치: System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)
+   위치: System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)
+   위치: DataSpider.PC01.PT.PC01F01.listViewMsg(String pstrProcID, String pMsg, Boolean pbGridView, Int32 pnCurNo, Int32 pnSubItemNo, Boolean pbLogView, String pstrType) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 695
+﻿[2022/04/04 15:06:31] [DEBUG] - [PC01F01_FormClosing] Program Close
+﻿[2022/04/04 15:06:43] [DEBUG] - [PC01F01_Load] 1
+﻿[2022/04/04 15:06:43] [DEBUG] - [PC01F01_Load] 2
+﻿[2022/04/04 15:06:43] [DEBUG] - [PC01F01_Load] 3
+﻿[2022/04/04 15:07:11] [DEBUG] - [listViewMsg] System.Threading.ThreadAbortException: 스레드가 중단되었습니다.
+   위치: System.Threading.WaitHandle.WaitOneNative(SafeHandle waitableSafeHandle, UInt32 millisecondsTimeout, Boolean hasThreadAffinity, Boolean exitContext)
+   위치: System.Threading.WaitHandle.InternalWaitOne(SafeHandle waitableSafeHandle, Int64 millisecondsTimeout, Boolean hasThreadAffinity, Boolean exitContext)
+   위치: System.Threading.WaitHandle.WaitOne(Int32 millisecondsTimeout, Boolean exitContext)
+   위치: System.Windows.Forms.Control.WaitForWaitHandle(WaitHandle waitHandle)
+   위치: System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)
+   위치: System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)
+   위치: DataSpider.PC01.PT.PC01F01.listViewMsg(String pstrProcID, String pMsg, Boolean pbGridView, Int32 pnCurNo, Int32 pnSubItemNo, Boolean pbLogView, String pstrType) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 695
+﻿[2022/04/04 15:07:12] [DEBUG] - [listViewMsg] System.Threading.ThreadAbortException: 스레드가 중단되었습니다.
+   위치: System.Threading.WaitHandle.WaitOneNative(SafeHandle waitableSafeHandle, UInt32 millisecondsTimeout, Boolean hasThreadAffinity, Boolean exitContext)
+   위치: System.Threading.WaitHandle.InternalWaitOne(SafeHandle waitableSafeHandle, Int64 millisecondsTimeout, Boolean hasThreadAffinity, Boolean exitContext)
+   위치: System.Threading.WaitHandle.WaitOne(Int32 millisecondsTimeout, Boolean exitContext)
+   위치: System.Windows.Forms.Control.WaitForWaitHandle(WaitHandle waitHandle)
+   위치: System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)
+   위치: System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)
+   위치: DataSpider.PC01.PT.PC01F01.listViewMsg(String pstrProcID, String pMsg, Boolean pbGridView, Int32 pnCurNo, Int32 pnSubItemNo, Boolean pbLogView, String pstrType) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 695
+﻿[2022/04/04 15:07:13] [DEBUG] - [PC01F01_FormClosing] Program Close
+﻿[2022/04/04 15:07:15] [DEBUG] - [PC01F01_FormClosing] Program Close
+﻿[2022/04/04 15:07:15] [DEBUG] - [listViewMsg] System.ObjectDisposedException: 삭제된 개체에 액세스할 수 없습니다.
+개체 이름: 'PC01F01'
+   위치: System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)
+   위치: System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)
+   위치: DataSpider.PC01.PT.PC01F01.listViewMsg(String pstrProcID, String pMsg, Boolean pbGridView, Int32 pnCurNo, Int32 pnSubItemNo, Boolean pbLogView, String pstrType) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 695
+﻿[2022/04/04 15:08:50] [DEBUG] - [PC01F01_Load] 1
+﻿[2022/04/04 15:08:50] [DEBUG] - [PC01F01_Load] 2
+﻿[2022/04/04 15:08:50] [DEBUG] - [PC01F01_Load] 3
+﻿[2022/04/04 15:37:15] [DEBUG] - [listViewMsg] System.Threading.ThreadAbortException: 스레드가 중단되었습니다.
+   위치: System.Threading.WaitHandle.WaitOneNative(SafeHandle waitableSafeHandle, UInt32 millisecondsTimeout, Boolean hasThreadAffinity, Boolean exitContext)
+   위치: System.Threading.WaitHandle.InternalWaitOne(SafeHandle waitableSafeHandle, Int64 millisecondsTimeout, Boolean hasThreadAffinity, Boolean exitContext)
+   위치: System.Threading.WaitHandle.WaitOne(Int32 millisecondsTimeout, Boolean exitContext)
+   위치: System.Windows.Forms.Control.WaitForWaitHandle(WaitHandle waitHandle)
+   위치: System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)
+   위치: System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)
+   위치: DataSpider.PC01.PT.PC01F01.listViewMsg(String pstrProcID, String pMsg, Boolean pbGridView, Int32 pnCurNo, Int32 pnSubItemNo, Boolean pbLogView, String pstrType) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 695
+﻿[2022/04/04 15:37:16] [DEBUG] - [listViewMsg] System.Threading.ThreadAbortException: 스레드가 중단되었습니다.
+   위치: System.Threading.WaitHandle.WaitOneNative(SafeHandle waitableSafeHandle, UInt32 millisecondsTimeout, Boolean hasThreadAffinity, Boolean exitContext)
+   위치: System.Threading.WaitHandle.InternalWaitOne(SafeHandle waitableSafeHandle, Int64 millisecondsTimeout, Boolean hasThreadAffinity, Boolean exitContext)
+   위치: System.Threading.WaitHandle.WaitOne(Int32 millisecondsTimeout, Boolean exitContext)
+   위치: System.Windows.Forms.Control.WaitForWaitHandle(WaitHandle waitHandle)
+   위치: System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)
+   위치: System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)
+   위치: DataSpider.PC01.PT.PC01F01.listViewMsg(String pstrProcID, String pMsg, Boolean pbGridView, Int32 pnCurNo, Int32 pnSubItemNo, Boolean pbLogView, String pstrType) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 695
+﻿[2022/04/04 15:37:17] [DEBUG] - [PC01F01_FormClosing] Program Close
+﻿[2022/04/04 15:37:19] [DEBUG] - [PC01F01_FormClosing] Program Close
+﻿[2022/04/04 15:37:19] [DEBUG] - [listViewMsg] System.ObjectDisposedException: 삭제된 개체에 액세스할 수 없습니다.
+개체 이름: 'PC01F01'
+   위치: System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)
+   위치: System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)
+   위치: DataSpider.PC01.PT.PC01F01.listViewMsg(String pstrProcID, String pMsg, Boolean pbGridView, Int32 pnCurNo, Int32 pnSubItemNo, Boolean pbLogView, String pstrType) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 695
+   위치: DataSpider.PC01.PT.PC01F01.listViewMsg(String pstrProcID, String pMsg, Boolean pbGridView, Int32 pnCurNo, Int32 pnSubItemNo, Boolean pbLogView, String pstrType) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 695
+﻿[2022/04/04 15:37:19] [DEBUG] - [listViewMsg] System.ObjectDisposedException: 삭제된 개체에 액세스할 수 없습니다.
+개체 이름: 'PC01F01'
+   위치: System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)
+   위치: System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)
+   위치: DataSpider.PC01.PT.PC01F01.listViewMsg(String pstrProcID, String pMsg, Boolean pbGridView, Int32 pnCurNo, Int32 pnSubItemNo, Boolean pbLogView, String pstrType) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 695
+   위치: DataSpider.PC01.PT.PC01F01.listViewMsg(String pstrProcID, String pMsg, Boolean pbGridView, Int32 pnCurNo, Int32 pnSubItemNo, Boolean pbLogView, String pstrType) 파일 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\PC01F01.cs:줄 695

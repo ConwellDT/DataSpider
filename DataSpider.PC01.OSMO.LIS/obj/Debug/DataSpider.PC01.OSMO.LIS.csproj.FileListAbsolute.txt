@@ -1,0 +1,12 @@
+C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.OSMO.LIS\obj\Debug\DataSpider.PC01.OSMO.LIS.csproj.AssemblyReference.cache
+C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.OSMO.LIS\obj\Debug\DataSpiderPC01.OSMO.LIS.exe.config
+C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.OSMO.LIS\obj\Debug\DataSpider.PC01.PT.Properties.Resources.resources
+C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.OSMO.LIS\obj\Debug\DataSpider.PC01.PT.PC01F01.resources
+C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.OSMO.LIS\obj\Debug\DataSpider.PC01.OSMO.LIS.csproj.GenerateResource.cache
+C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.OSMO.LIS\obj\Debug\DataSpider.PC01.OSMO.LIS.csproj.CoreCompileInputs.cache
+C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\EXE\DataSpider\DataSpiderPC01.OSMO.LIS.exe.config
+C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\EXE\DataSpider\DataSpiderPC01.OSMO.LIS.exe
+C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\EXE\DataSpider\DataSpiderPC01.OSMO.LIS.pdb
+C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.OSMO.LIS\obj\Debug\DataSpider.PC01.OSMO.LIS.csproj.CopyComplete
+C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.OSMO.LIS\obj\Debug\DataSpiderPC01.OSMO.LIS.exe
+C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.OSMO.LIS\obj\Debug\DataSpiderPC01.OSMO.LIS.pdb
