@@ -437,7 +437,7 @@ namespace DataSpider
                 if (DialogResult.Yes.Equals(MessageBox.Show("Do you want to log out ?", "Log Out", MessageBoxButtons.YesNo)))
                 {
                     UserAuthentication.LogOut();
-                    toolStripLabel_User.Text = "Not logged in";
+                    toolStripLabel_User.Text = "User";// "Not logged in";
                     toolStripButton_Log.Text = "Log In";
                     OnUserLoginChanged?.Invoke();
                     adminToolStripMenuItem.Visible = userToolStripMenuItem.Visible = false;
