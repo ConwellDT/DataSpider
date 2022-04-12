@@ -734,9 +734,9 @@ namespace DataSpider.PC00.PT
 
                 //2021.05.20 변경요청 [김현지 프로]
                 //point.UpdateValue(value, OSIsoft.AF.Data.AFUpdateOption.Replace);
-                point.UpdateValue(value, OSIsoft.AF.Data.AFUpdateOption.Insert);
+                //point.UpdateValue(value, OSIsoft.AF.Data.AFUpdateOption.Insert);
                 // 버퍼 미사용 옵션
-                //point.UpdateValue(value, OSIsoft.AF.Data.AFUpdateOption.Insert, OSIsoft.AF.Data.AFBufferOption.DoNotBuffer);
+                point.UpdateValue(value, OSIsoft.AF.Data.AFUpdateOption.Insert, OSIsoft.AF.Data.AFBufferOption.DoNotBuffer);
 
             }
             catch (Exception ex)
