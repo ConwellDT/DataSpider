@@ -4,3 +4,10 @@ C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00
 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\obj\Debug\DataSpider.PC00.PT.csproj.CopyComplete
 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\obj\Debug\DataSpider.PC00.PT.dll
 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC00.PT\obj\Debug\DataSpider.PC00.PT.pdb
+D:\GitHub\DataSpider\Assembly\DataSpider.PC00.PT.dll
+D:\GitHub\DataSpider\Assembly\DataSpider.PC00.PT.pdb
+D:\GitHub\DataSpider\DataSpider.PC00.PT\obj\Debug\DataSpider.PC00.PT.csproj.AssemblyReference.cache
+D:\GitHub\DataSpider\DataSpider.PC00.PT\obj\Debug\DataSpider.PC00.PT.csproj.CoreCompileInputs.cache
+D:\GitHub\DataSpider\DataSpider.PC00.PT\obj\Debug\DataSpider.PC00.PT.csproj.CopyComplete
+D:\GitHub\DataSpider\DataSpider.PC00.PT\obj\Debug\DataSpider.PC00.PT.dll
+D:\GitHub\DataSpider\DataSpider.PC00.PT\obj\Debug\DataSpider.PC00.PT.pdb

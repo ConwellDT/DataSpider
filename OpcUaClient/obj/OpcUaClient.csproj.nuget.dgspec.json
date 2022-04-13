@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\project\\콘웰\\삼성바이오로직스\\svn_new\\02.DataSpider\\OpcUaClient\\OpcUaClient.csproj": {}
+    "D:\\GitHub\\DataSpider\\OpcUaClient\\OpcUaClient.csproj": {}
   },
   "projects": {
-    "C:\\project\\콘웰\\삼성바이오로직스\\svn_new\\02.DataSpider\\OpcUaClient\\OpcUaClient.csproj": {
+    "D:\\GitHub\\DataSpider\\OpcUaClient\\OpcUaClient.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\project\\콘웰\\삼성바이오로직스\\svn_new\\02.DataSpider\\OpcUaClient\\OpcUaClient.csproj",
+        "projectUniqueName": "D:\\GitHub\\DataSpider\\OpcUaClient\\OpcUaClient.csproj",
         "projectName": "OpcUaClient",
-        "projectPath": "C:\\project\\콘웰\\삼성바이오로직스\\svn_new\\02.DataSpider\\OpcUaClient\\OpcUaClient.csproj",
-        "packagesPath": "C:\\Users\\kalbe\\.nuget\\packages\\",
-        "outputPath": "C:\\project\\콘웰\\삼성바이오로직스\\svn_new\\02.DataSpider\\OpcUaClient\\obj\\",
+        "projectPath": "D:\\GitHub\\DataSpider\\OpcUaClient\\OpcUaClient.csproj",
+        "packagesPath": "C:\\Users\\fansu\\.nuget\\packages\\",
+        "outputPath": "D:\\GitHub\\DataSpider\\OpcUaClient\\obj\\",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
         "fallbackFolders": [
@@ -19,7 +19,7 @@
           "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\kalbe\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\fansu\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"

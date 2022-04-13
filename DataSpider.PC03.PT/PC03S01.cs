@@ -95,6 +95,7 @@ namespace DataSpider.PC03.PT
                             for (int i = 0; i < dtResult.Rows.Count; i++)
                             {
                                 int strSeq = int.Parse(dtResult.Rows[i]["HI_SEQ"].ToString());
+                                int ifCount = int.Parse(dtResult.Rows[i]["IF_COUNT"].ToString());
                                 string pointName = dtResult.Rows[i]["PI_TAG_NM"].ToString();
                                 object pointValue = dtResult.Rows[i]["MEASURE_VALUE"].ToString();
 
@@ -122,7 +123,7 @@ namespace DataSpider.PC03.PT
                                     }
 
 
-                                    result = m_sqlBiz.UpdateMeasureResult(strSeq, strFlag, errMsg, ref errCode, ref errText);
+                                    result = m_sqlBiz.UpdateMeasureResult(strSeq, strFlag, ifCount, errMsg, ref errCode, ref errText);
                                     if (!result)
                                     {
                                         break;

@@ -13,3 +13,16 @@ C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01
 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\EXE\DataSpider\SEIMMPC01.OSMO.OPCUA.exe.config
 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\EXE\DataSpider\SEIMMPC01.OSMO.OPCUA.exe
 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\EXE\DataSpider\SEIMMPC01.OSMO.OPCUA.pdb
+D:\GitHub\DataSpider\EXE\DataSpider\SEIMMPC01.OSMO.OPCUA.exe.config
+D:\GitHub\DataSpider\EXE\DataSpider\SEIMMPC01.OSMO.OPCUA.exe
+D:\GitHub\DataSpider\EXE\DataSpider\SEIMMPC01.OSMO.OPCUA.pdb
+D:\GitHub\DataSpider\DataSpider.PC01.OSMO.OPCUA\obj\Debug\DataSpider.PC01.OSMO.OPCUA.csproj.AssemblyReference.cache
+D:\GitHub\DataSpider\DataSpider.PC01.OSMO.OPCUA\obj\Debug\DataSpider.PC01.OSMO.OPCUA.csproj.SuggestedBindingRedirects.cache
+D:\GitHub\DataSpider\DataSpider.PC01.OSMO.OPCUA\obj\Debug\SEIMMPC01.OSMO.OPCUA.exe.config
+D:\GitHub\DataSpider\DataSpider.PC01.OSMO.OPCUA\obj\Debug\SEIMM.PC01.PT.Properties.Resources.resources
+D:\GitHub\DataSpider\DataSpider.PC01.OSMO.OPCUA\obj\Debug\DataSpider.PC01.PT.PC01F01.resources
+D:\GitHub\DataSpider\DataSpider.PC01.OSMO.OPCUA\obj\Debug\DataSpider.PC01.OSMO.OPCUA.csproj.GenerateResource.cache
+D:\GitHub\DataSpider\DataSpider.PC01.OSMO.OPCUA\obj\Debug\DataSpider.PC01.OSMO.OPCUA.csproj.CoreCompileInputs.cache
+D:\GitHub\DataSpider\DataSpider.PC01.OSMO.OPCUA\obj\Debug\DataSpider.PC01.OSMO.OPCUA.csproj.CopyComplete
+D:\GitHub\DataSpider\DataSpider.PC01.OSMO.OPCUA\obj\Debug\SEIMMPC01.OSMO.OPCUA.exe
+D:\GitHub\DataSpider\DataSpider.PC01.OSMO.OPCUA\obj\Debug\SEIMMPC01.OSMO.OPCUA.pdb

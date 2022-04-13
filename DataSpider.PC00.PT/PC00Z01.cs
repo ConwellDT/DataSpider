@@ -389,12 +389,12 @@ namespace DataSpider.PC00.PT
             return result;
         }
 
-        public bool UpdateMeasureResult(int hiSeq, string strFlag, string errMsg, ref string _strErrCode, ref string _strErrText)
+        public bool UpdateMeasureResult(int hiSeq, string strFlag, int if_count, string errMsg, ref string _strErrCode, ref string _strErrText)
         {
             try
             {
                 StringBuilder strQuery = new StringBuilder();
-                strQuery.Append($"EXEC UpdateMeasureResult1 '{hiSeq}','{strFlag}','{errMsg}' ");
+                strQuery.Append($"EXEC UpdateMeasureResult1 {hiSeq},'{strFlag}', {if_count}, '{errMsg}' ");
 
                 bool result = CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref _strErrCode, ref _strErrText);
                 return result;
@@ -405,6 +405,7 @@ namespace DataSpider.PC00.PT
                 return false;
             }
         }
+
         /// <summary>
         /// 장비별 상태를 확인하기 위해 MA_EQUIPMENT_CD.ProgDateTime 에 현재시간을 업데이트
         /// </summary>

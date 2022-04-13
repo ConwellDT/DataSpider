@@ -10,3 +10,16 @@ C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\EXE\DataSpider\
 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\obj\Debug\DataSpider.PC01.PT.csproj.CopyComplete
 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\obj\Debug\DataSpiderPC01.exe
 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\DataSpider.PC01.PT\obj\Debug\DataSpiderPC01.pdb
+D:\GitHub\DataSpider\DataSpider.PC01.PT\obj\Debug\DataSpider.PC01.PT.csproj.AssemblyReference.cache
+D:\GitHub\DataSpider\DataSpider.PC01.PT\obj\Debug\DataSpider.PC01.PT.csproj.SuggestedBindingRedirects.cache
+D:\GitHub\DataSpider\DataSpider.PC01.PT\obj\Debug\DataSpiderPC01.exe.config
+D:\GitHub\DataSpider\DataSpider.PC01.PT\obj\Debug\DataSpiderPC01.exe
+D:\GitHub\DataSpider\DataSpider.PC01.PT\obj\Debug\DataSpiderPC01.pdb
+D:\GitHub\DataSpider\EXE\DataSpider\DataSpiderPC01.exe.config
+D:\GitHub\DataSpider\EXE\DataSpider\DataSpiderPC01.exe
+D:\GitHub\DataSpider\EXE\DataSpider\DataSpiderPC01.pdb
+D:\GitHub\DataSpider\DataSpider.PC01.PT\obj\Debug\DataSpider.PC01.PT.Properties.Resources.resources
+D:\GitHub\DataSpider\DataSpider.PC01.PT\obj\Debug\DataSpider.PC01.PT.PC01F01.resources
+D:\GitHub\DataSpider\DataSpider.PC01.PT\obj\Debug\DataSpider.PC01.PT.csproj.GenerateResource.cache
+D:\GitHub\DataSpider\DataSpider.PC01.PT\obj\Debug\DataSpider.PC01.PT.csproj.CoreCompileInputs.cache
+D:\GitHub\DataSpider\DataSpider.PC01.PT\obj\Debug\DataSpider.PC01.PT.csproj.CopyComplete

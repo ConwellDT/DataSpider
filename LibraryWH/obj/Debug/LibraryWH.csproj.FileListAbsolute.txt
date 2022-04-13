@@ -27,3 +27,13 @@ C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\LibraryWH\obj\D
 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\LibraryWH\obj\Debug\LibraryWH.csproj.CoreCompileInputs.cache
 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\LibraryWH\obj\Debug\LibraryWH.dll
 C:\project\콘웰\삼성바이오로직스\svn_new\02.DataSpider\LibraryWH\obj\Debug\LibraryWH.pdb
+D:\GitHub\DataSpider\Assembly\LibraryWH.dll
+D:\GitHub\DataSpider\Assembly\LibraryWH.pdb
+D:\GitHub\DataSpider\LibraryWH\obj\Debug\LibraryWH.csproj.AssemblyReference.cache
+D:\GitHub\DataSpider\LibraryWH\obj\Debug\LibraryWH.FormCtrl.Form1.resources
+D:\GitHub\DataSpider\LibraryWH\obj\Debug\LibraryWH.FormCtrl.PanelForm.resources
+D:\GitHub\DataSpider\LibraryWH\obj\Debug\LibraryWH.FormCtrl.TabFromCtrl.resources
+D:\GitHub\DataSpider\LibraryWH\obj\Debug\LibraryWH.csproj.GenerateResource.cache
+D:\GitHub\DataSpider\LibraryWH\obj\Debug\LibraryWH.csproj.CoreCompileInputs.cache
+D:\GitHub\DataSpider\LibraryWH\obj\Debug\LibraryWH.dll
+D:\GitHub\DataSpider\LibraryWH\obj\Debug\LibraryWH.pdb
