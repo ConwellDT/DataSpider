@@ -1,14 +1,14 @@
 {
   "format": 1,
   "restore": {
-    "D:\\GitHub\\DataSpider\\DataSpider.PC01.OSMO.LIS\\DataSpider.PC01.OSMO.LIS.csproj": {}
+    "C:\\Users\\kalbe\\source\\repos\\DataSpider\\DataSpider.PC01.OSMO.LIS\\DataSpider.PC01.OSMO.LIS.csproj": {}
   },
   "projects": {
-    "D:\\GitHub\\DataSpider\\DataSpider.PC00.PT\\DataSpider.PC00.PT.csproj": {
+    "C:\\Users\\kalbe\\source\\repos\\DataSpider\\DataSpider.PC00.PT\\DataSpider.PC00.PT.csproj": {
       "restore": {
-        "projectUniqueName": "D:\\GitHub\\DataSpider\\DataSpider.PC00.PT\\DataSpider.PC00.PT.csproj",
+        "projectUniqueName": "C:\\Users\\kalbe\\source\\repos\\DataSpider\\DataSpider.PC00.PT\\DataSpider.PC00.PT.csproj",
         "projectName": "DataSpider.PC00.PT",
-        "projectPath": "D:\\GitHub\\DataSpider\\DataSpider.PC00.PT\\DataSpider.PC00.PT.csproj",
+        "projectPath": "C:\\Users\\kalbe\\source\\repos\\DataSpider\\DataSpider.PC00.PT\\DataSpider.PC00.PT.csproj",
         "frameworks": {
           "net48": {
             "projectReferences": {}
@@ -19,14 +19,14 @@
         "net48": {}
       }
     },
-    "D:\\GitHub\\DataSpider\\DataSpider.PC01.OSMO.LIS\\DataSpider.PC01.OSMO.LIS.csproj": {
+    "C:\\Users\\kalbe\\source\\repos\\DataSpider\\DataSpider.PC01.OSMO.LIS\\DataSpider.PC01.OSMO.LIS.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\GitHub\\DataSpider\\DataSpider.PC01.OSMO.LIS\\DataSpider.PC01.OSMO.LIS.csproj",
+        "projectUniqueName": "C:\\Users\\kalbe\\source\\repos\\DataSpider\\DataSpider.PC01.OSMO.LIS\\DataSpider.PC01.OSMO.LIS.csproj",
         "projectName": "DataSpiderPC01.OSMO.LIS",
-        "projectPath": "D:\\GitHub\\DataSpider\\DataSpider.PC01.OSMO.LIS\\DataSpider.PC01.OSMO.LIS.csproj",
-        "packagesPath": "C:\\Users\\fansu\\.nuget\\packages\\",
-        "outputPath": "D:\\GitHub\\DataSpider\\DataSpider.PC01.OSMO.LIS\\obj\\",
+        "projectPath": "C:\\Users\\kalbe\\source\\repos\\DataSpider\\DataSpider.PC01.OSMO.LIS\\DataSpider.PC01.OSMO.LIS.csproj",
+        "packagesPath": "C:\\Users\\kalbe\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\kalbe\\source\\repos\\DataSpider\\DataSpider.PC01.OSMO.LIS\\obj\\",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
         "fallbackFolders": [
@@ -34,7 +34,7 @@
           "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\fansu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\kalbe\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
@@ -49,11 +49,11 @@
         "frameworks": {
           "net48": {
             "projectReferences": {
-              "D:\\GitHub\\DataSpider\\DataSpider.PC00.PT\\DataSpider.PC00.PT.csproj": {
-                "projectPath": "D:\\GitHub\\DataSpider\\DataSpider.PC00.PT\\DataSpider.PC00.PT.csproj"
+              "C:\\Users\\kalbe\\source\\repos\\DataSpider\\DataSpider.PC00.PT\\DataSpider.PC00.PT.csproj": {
+                "projectPath": "C:\\Users\\kalbe\\source\\repos\\DataSpider\\DataSpider.PC00.PT\\DataSpider.PC00.PT.csproj"
               },
-              "D:\\GitHub\\DataSpider\\OpcUaClient\\OpcUaClient.csproj": {
-                "projectPath": "D:\\GitHub\\DataSpider\\OpcUaClient\\OpcUaClient.csproj"
+              "C:\\Users\\kalbe\\source\\repos\\DataSpider\\OpcUaClient\\OpcUaClient.csproj": {
+                "projectPath": "C:\\Users\\kalbe\\source\\repos\\DataSpider\\OpcUaClient\\OpcUaClient.csproj"
               }
             }
           }
@@ -157,14 +157,14 @@
         }
       }
     },
-    "D:\\GitHub\\DataSpider\\OpcUaClient\\OpcUaClient.csproj": {
+    "C:\\Users\\kalbe\\source\\repos\\DataSpider\\OpcUaClient\\OpcUaClient.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\GitHub\\DataSpider\\OpcUaClient\\OpcUaClient.csproj",
+        "projectUniqueName": "C:\\Users\\kalbe\\source\\repos\\DataSpider\\OpcUaClient\\OpcUaClient.csproj",
         "projectName": "OpcUaClient",
-        "projectPath": "D:\\GitHub\\DataSpider\\OpcUaClient\\OpcUaClient.csproj",
-        "packagesPath": "C:\\Users\\fansu\\.nuget\\packages\\",
-        "outputPath": "D:\\GitHub\\DataSpider\\OpcUaClient\\obj\\",
+        "projectPath": "C:\\Users\\kalbe\\source\\repos\\DataSpider\\OpcUaClient\\OpcUaClient.csproj",
+        "packagesPath": "C:\\Users\\kalbe\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\kalbe\\source\\repos\\DataSpider\\OpcUaClient\\obj\\",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
         "fallbackFolders": [
@@ -172,7 +172,7 @@
           "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\fansu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\kalbe\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
