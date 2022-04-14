@@ -204,14 +204,11 @@ namespace DataSpider
 
             ////////////////////////////////////////////////////
 
-            dbStatus = new CheckDBStatus[3];
-            for (int i = 0; i < dbStatus.Length; i++)
-            {
-                dbStatus[i] = new CheckDBStatus($"DB{i+1}", 60 * 1000);
-                dbStatus[i].DBConnectionString = CFW.Common.SecurityUtil.DecryptString(CFW.Configuration.ConfigManager.Default.ReadConfig("connectionStrings", $"SQL_ConnectionString{i + 1}"));
-                dbStatus[i].OnDBStatusChanged += OnDBStatusChanged;
-                dbStatus[i].Start();
-            }
+            dbStatus = new CheckDBStatus[1];
+            dbStatus[0] = new CheckDBStatus($"DB", 60 * 1000);
+            dbStatus[0].DBConnectionString = CFW.Common.SecurityUtil.DecryptString(CFW.Configuration.ConfigManager.Default.ReadConfig("connectionStrings", $"SQL_ConnectionString"));
+            dbStatus[0].OnDBStatusChanged += OnDBStatusChanged;
+            dbStatus[0].Start();
             splash?.Stop();
         }
 
