@@ -11,3 +11,10 @@ D:\GitHub\DataSpider\DataSpider.PC00.PT\obj\Debug\DataSpider.PC00.PT.csproj.Core
 D:\GitHub\DataSpider\DataSpider.PC00.PT\obj\Debug\DataSpider.PC00.PT.csproj.CopyComplete
 D:\GitHub\DataSpider\DataSpider.PC00.PT\obj\Debug\DataSpider.PC00.PT.dll
 D:\GitHub\DataSpider\DataSpider.PC00.PT\obj\Debug\DataSpider.PC00.PT.pdb
+C:\Users\kalbe\source\repos\DataSpider\Assembly\DataSpider.PC00.PT.dll
+C:\Users\kalbe\source\repos\DataSpider\Assembly\DataSpider.PC00.PT.pdb
+C:\Users\kalbe\source\repos\DataSpider\DataSpider.PC00.PT\obj\Debug\DataSpider.PC00.PT.csproj.AssemblyReference.cache
+C:\Users\kalbe\source\repos\DataSpider\DataSpider.PC00.PT\obj\Debug\DataSpider.PC00.PT.csproj.CoreCompileInputs.cache
+C:\Users\kalbe\source\repos\DataSpider\DataSpider.PC00.PT\obj\Debug\DataSpider.PC00.PT.csproj.CopyComplete
+C:\Users\kalbe\source\repos\DataSpider\DataSpider.PC00.PT\obj\Debug\DataSpider.PC00.PT.dll
+C:\Users\kalbe\source\repos\DataSpider\DataSpider.PC00.PT\obj\Debug\DataSpider.PC00.PT.pdb
