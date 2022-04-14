@@ -312,7 +312,7 @@ namespace DataSpider.PC00.PT
             try
             {
                 StringBuilder strQuery = new StringBuilder();
-                strQuery.Append($"EXEC GetCommonCode '{codeGroup}'");
+                strQuery.Append($"EXEC GetCommonCode '{codeGroup}', ''");
 
                 DataSet ds = CFW.Data.MsSqlDbAccess.GetDataSet(strQuery.ToString(), null, CommandType.Text, ref _strErrCode, ref _strErrText);
                 if (ds != null && ds.Tables[0] != null)
@@ -332,7 +332,7 @@ namespace DataSpider.PC00.PT
             try
             {
                 StringBuilder strQuery = new StringBuilder();
-                strQuery.Append($"EXEC GetCommonCode2 '{codeGroup}', '{code}'");
+                strQuery.Append($"EXEC GetCommonCode '{codeGroup}', '{code}'");
 
                 DataSet ds = CFW.Data.MsSqlDbAccess.GetDataSet(strQuery.ToString(), null, CommandType.Text, ref _strErrCode, ref _strErrText);
                 if (ds != null && ds.Tables[0] != null)
@@ -1007,17 +1007,32 @@ namespace DataSpider.PC00.PT
         {
             string errCode = string.Empty;
             string errText = string.Empty;
-            StringBuilder strQuery = new StringBuilder();
-            int MyId = -1;
-            strQuery = new StringBuilder();
-            strQuery.Append($" SELECT CODE_VALUE FROM MA_COMMON_CD WHERE CD_GRP='SERVER_CODE' AND CODE='{serverName}' ");
-            DataTable MyIdTbl = GetTableInfo(strQuery.ToString(), ref errCode, ref errText);
-            if (MyIdTbl == null) return MyId;
-            if (MyIdTbl.Rows.Count > 0) MyId = int.Parse(MyIdTbl.Rows[0]["CODE_VALUE"].ToString());
-            return MyId;
+            //StringBuilder strQuery = new StringBuilder();
+            //int MyId = -1;
+            //strQuery = new StringBuilder();
+            //strQuery.Append($" SELECT CODE_VALUE FROM MA_COMMON_CD WHERE CD_GRP='SERVER_CODE' AND CODE='{serverName}' ");
+            //DataTable MyIdTbl = GetTableInfo(strQuery.ToString(), ref errCode, ref errText);
+            //if (MyIdTbl == null) return MyId;
+            //if (MyIdTbl.Rows.Count > 0) MyId = int.Parse(MyIdTbl.Rows[0]["CODE_VALUE"].ToString());
+            //return MyId;
+
+            int result = -1;
+            try
+            {
+                DataTable dtResult = GetCommonCode("SERVER_CODE", serverName, ref errCode, ref errText);
+                if (dtResult != null && dtResult.Rows.Count > 0)
+                {
+                    if (!int.TryParse(dtResult.Rows[0]["CODE_VALUE"].ToString(), out result))
+                    {
+                        result = -1;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+            return result;
         }
-
-
         ////////////////////
     }
 }
