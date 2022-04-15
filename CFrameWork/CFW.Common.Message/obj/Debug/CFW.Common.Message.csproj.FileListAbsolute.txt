@@ -53,3 +53,7 @@ C:\Users\kalbe\source\repos\DataSpider\CFrameWork\CFW.Common.Message\obj\Debug\C
 C:\Users\kalbe\source\repos\DataSpider\CFrameWork\CFW.Common.Message\obj\Debug\CFW.Common.Message.csproj.CoreCompileInputs.cache
 C:\Users\kalbe\source\repos\DataSpider\CFrameWork\CFW.Common.Message\obj\Debug\CFW.Common.Message.dll
 C:\Users\kalbe\source\repos\DataSpider\CFrameWork\CFW.Common.Message\obj\Debug\CFW.Common.Message.pdb
+C:\Users\kalbe\source\repos\DataSpider\Assembly\CFW.Common.Message.XML
+C:\Users\kalbe\source\repos\DataSpider\Assembly\CFW.Common.Message.dll
+C:\Users\kalbe\source\repos\DataSpider\Assembly\CFW.Common.Message.pdb
+C:\Users\kalbe\source\repos\DataSpider\CFrameWork\CFW.Common.Message\obj\Debug\CFW.Common.Message.csproj.CopyComplete
