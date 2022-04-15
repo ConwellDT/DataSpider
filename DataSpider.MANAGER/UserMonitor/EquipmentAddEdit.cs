@@ -8,25 +8,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Runtime.InteropServices;
 
 namespace DataSpider.UserMonitor
 {
     public partial class EquipmentAddEdit : Form
     {
-        #region Using Win32 DLL
-        public const int WM_NCLBUTTONDOWN = 0xA1;
-        public const int HT_CAPTION = 0x2;
-        [DllImportAttribute("user32.dll")]
-        public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
-        [DllImportAttribute("user32.dll")]
-        public static extern bool ReleaseCapture();
-        #endregion
-
         private PC00Z01 sqlBiz = new PC00Z01();
         private readonly string EquipName = string.Empty;
         private readonly string EquipTypeName = string.Empty;
-
         //
         // 2022. 2. 15 : Han, Ilho
         //  Add copy functionality
@@ -42,13 +31,10 @@ namespace DataSpider.UserMonitor
             EquipName = equipName;
             EquipTypeName = equipTypeName;
             EditModeCopy = bEditModeCopy;
-
-            
         }
         public EquipmentAddEdit(SBL node, bool bEditModeCopy = false)
         {
             InitializeComponent();
-            
             if (node is Eq)
             {
                 EquipName = node.Name;
@@ -64,12 +50,6 @@ namespace DataSpider.UserMonitor
         private void EquipmentAddEdit_Load(object sender, EventArgs e)
         {
             InitControls();
-        }
-
-        private void label_Title_MouseDown(object sender, MouseEventArgs e)
-        {
-            ReleaseCapture();
-            SendMessage(this.Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
         }
 
         private void InitControls()
@@ -123,7 +103,7 @@ namespace DataSpider.UserMonitor
                 if (!string.IsNullOrWhiteSpace(EquipTypeName))
                 {
                     comboBox_EquipType.SelectedValue = dtEquiptype.Select($"CODE_NM = '{EquipTypeName}'")[0]["CODE"].ToString();
-                    comboBox_InterfaceType.SelectedValue = dtInterfacetype.Select($"CODE_NM = 'TCP/IP'")[0]["CODE"].ToString();
+                    comboBox_InterfaceType.SelectedValue = dtInterfacetype.Select($"CODE_NM = '{EquipTypeName}'")[0]["CODE"].ToString();
                 }
                 foreach (Control ctrl in this.Controls)
                 {
@@ -141,6 +121,8 @@ namespace DataSpider.UserMonitor
                 {
                     this.Text = "Equipmemt Info";
                     label_Title.Text = $"Equipmemt [ {EquipName} ]";
+                    button_Save.Visible = false;
+                    button_Cancel.Text = "Close";
                 }
                 else
                 {
@@ -300,36 +282,7 @@ namespace DataSpider.UserMonitor
             }
         }
 
-        private void textBox_EquipName_TextChanged(object sender, EventArgs e)
-        {
-            if( EditModeCopy == true)
-            {
-                for (int nR = 0; nR < dataGridTagInfo.Rows.Count; nR++)
-                {
-                    DataGridViewRow row = dataGridTagInfo.Rows[nR];
-
-                    if (row != null && row.Cells.Count > 0 )
-                    {
-                        if (row.Cells["Tag Name"].Value != null)
-                        {
-                            String strTag = row.Cells["Tag Name"].Value.ToString();
-                            int nPos = strTag.IndexOf("_", 0);
-                            if (nPos >= 0) row.Cells["Tag Name"].Value = textBox_EquipName.Text + strTag.Substring(nPos, strTag.Length - nPos);
-                            else row.Cells["Tag Name"].Value = textBox_EquipName.Text;
-                        }
-                        if (row.Cells["PI Tag Name"].Value != null)
-                        {
-                            String strTag = row.Cells["PI Tag Name"].Value.ToString();
-                            int nPos = strTag.IndexOf("_", 0);
-                            if (nPos >= 0) row.Cells["PI Tag Name"].Value = textBox_EquipName.Text + strTag.Substring(nPos, strTag.Length - nPos);
-                            else row.Cells["PI Tag Name"].Value = textBox_EquipName.Text;
-                        }
-                    }
-                }
-            }
-        }
-
-        private void pictureBoxBTSave_Click(object sender, EventArgs e)
+        private void button_Save_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(textBox_EquipName.Text))
             {
@@ -354,13 +307,13 @@ namespace DataSpider.UserMonitor
 
                 DataRow[] drSelectEquip = null;
 
-                if (AddMode == true || EditModeCopy == true) // Check EQ Exist
+                if ( AddMode == true || EditModeCopy == true ) // Check EQ Exist
                 {
                     DataTable dtEquipment = sqlBiz.GetEquipmentInfo("", "", true, ref strErrCode, ref strErrText);
 
                     //drSelectEquip = dtEquipment.Select($"EQUIP_NM = '{textBox_EquipName.Text.Trim()}' AND EQUIP_TYPE = '{comboBox_EquipType.SelectedValue.ToString()}'");
                     drSelectEquip = dtEquipment.Select($"EQUIP_NM = '{textBox_EquipName.Text.Trim()}'");
-                    if (drSelectEquip != null && drSelectEquip.Length > 0)
+                    if (drSelectEquip  != null && drSelectEquip.Length > 0 )
                     {
                         MessageBox.Show($"Equipment Name ({textBox_EquipName.Text}) already exist", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return;
@@ -380,7 +333,7 @@ namespace DataSpider.UserMonitor
 
                     List<String> tagNameList = new List<string>();
 
-                    for (int nR = 0; nR < dataGridTagInfo.Rows.Count; nR++)
+                    for ( int nR = 0; nR < dataGridTagInfo.Rows.Count; nR ++ )
                     {
                         DataGridViewRow row = dataGridTagInfo.Rows[nR];
 
@@ -415,16 +368,16 @@ namespace DataSpider.UserMonitor
 
                     DataTable dtTagInDB = sqlBiz.GetTagInfoByEquip(textBox_EquipName.Text.Trim(), ref strErrCode, ref strErrText);
 
-                    for (int nR = 0; nR < dtTagInDB.Rows.Count; nR++)
+                    for( int nR = 0; nR < dtTagInDB.Rows.Count; nR ++ )
                     {
                         DataRow rowInDB = dtTagInDB.Rows[nR];
 
                         String strTagFound = tagNameList.Find(s => s == rowInDB["Tag Name"].ToString().Trim());
 
-                        if (strTagFound == null)
+                        if( strTagFound == null )
                         {
-                            if (sqlBiz.DeleteTagInfo(rowInDB["Tag Name"].ToString().Trim(), ref strErrCode, ref strErrText) == false)
-                            {
+                           if( sqlBiz.DeleteTagInfo(rowInDB["Tag Name"].ToString().Trim(), ref strErrCode, ref strErrText) == false )
+                           {
                                 MessageBox.Show($"Tag {rowInDB["Tag Name"].ToString().Trim()} 삭제 중 {strErrText} 오류가 발생하였습니다.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
                         }
@@ -449,17 +402,17 @@ namespace DataSpider.UserMonitor
 
                     //        try
                     //        {
-                    //            String[] strSectionNames = PC00U01.GetSectionNames(strIniName);
+                    //            String [] strSectionNames = PC00U01.GetSectionNames(strIniName);
 
-                    //            if (strSectionNames.Length > 0)
+                    //            if( strSectionNames.Length > 0)
                     //            {
-                    //                String[] strKeys = PC00U01.GetEntryNames(strSectionNames[0], strIniName);
+                    //                String[] strKeys = PC00U01.GetEntryNames( strSectionNames[0], strIniName);
 
-                    //                foreach (String strKey in strKeys)
+                    //                foreach( String strKey in strKeys )
                     //                {
                     //                    String strVal = PC00U01.ReadConfigValue(strKey, strSectionNames[0], strIniName);
 
-                    //                    if (PC00U01.WriteConfigValue(strKey, textBox_EquipName.Text.Trim(), strIniName, strVal) == false)
+                    //                    if( PC00U01.WriteConfigValue(strKey, textBox_EquipName.Text.Trim(), strIniName, strVal) == false )
                     //                    {
                     //                        MessageBox.Show($"Key {strKey}  저장 중 오류가 발생하였습니다.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
 
@@ -493,12 +446,41 @@ namespace DataSpider.UserMonitor
             }
         }
 
-        private void pictureBoxBTCancel_Click(object sender, EventArgs e)
+        private void button_Cancel_Click(object sender, EventArgs e)
         {
             if (UserAuthentication.UserLevel.Equals(UserLevel.UnAuthorized) || DialogResult.Yes.Equals(MessageBox.Show($"Do you want to exit without saving ?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)))
             {
                 DialogResult = DialogResult.Cancel;
                 this.Close();
+            }
+        }
+
+        private void textBox_EquipName_TextChanged(object sender, EventArgs e)
+        {
+            if( EditModeCopy == true)
+            {
+                for (int nR = 0; nR < dataGridTagInfo.Rows.Count; nR++)
+                {
+                    DataGridViewRow row = dataGridTagInfo.Rows[nR];
+
+                    if (row != null && row.Cells.Count > 0 )
+                    {
+                        if (row.Cells["Tag Name"].Value != null)
+                        {
+                            String strTag = row.Cells["Tag Name"].Value.ToString();
+                            int nPos = strTag.IndexOf("_", 0);
+                            if (nPos >= 0) row.Cells["Tag Name"].Value = textBox_EquipName.Text + strTag.Substring(nPos, strTag.Length - nPos);
+                            else row.Cells["Tag Name"].Value = textBox_EquipName.Text;
+                        }
+                        if (row.Cells["PI Tag Name"].Value != null)
+                        {
+                            String strTag = row.Cells["PI Tag Name"].Value.ToString();
+                            int nPos = strTag.IndexOf("_", 0);
+                            if (nPos >= 0) row.Cells["PI Tag Name"].Value = textBox_EquipName.Text + strTag.Substring(nPos, strTag.Length - nPos);
+                            else row.Cells["PI Tag Name"].Value = textBox_EquipName.Text;
+                        }
+                    }
+                }
             }
         }
     }

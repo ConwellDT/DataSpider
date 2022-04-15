@@ -8,24 +8,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Runtime.InteropServices;
 
 namespace DataSpider.UserMonitor
 {
     public partial class TagAddEdit : Form
     {
-        #region Using Win32 DLL
-        public const int WM_NCLBUTTONDOWN = 0xA1;
-        public const int HT_CAPTION = 0x2;
-        [DllImportAttribute("user32.dll")]
-        public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
-        [DllImportAttribute("user32.dll")]
-        public static extern bool ReleaseCapture();
-
-        [DllImportAttribute("user32.dll")]
-        private static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
-        #endregion
-
         private PC00Z01 sqlBiz = new PC00Z01();
         private readonly string TagName = string.Empty;
         private readonly string EquipName = string.Empty;
@@ -78,6 +65,8 @@ namespace DataSpider.UserMonitor
                 {
                     this.Text = "Tag Info";
                     label_Title.Text = $"Tag [ {TagName} - {dtTag.Rows[0]["EQUIP_NM"]} ]";
+                    button_Save.Visible = false;
+                    button_Cancel.Text = "Close";
                 }
                 else
                 {
@@ -98,7 +87,28 @@ namespace DataSpider.UserMonitor
         }
 
         private void button_Save_Click(object sender, EventArgs e)
-        {  
+        {
+            if (!CheckItem())
+            {
+                return;
+            }
+            string message = AddMode ? $"를 추가하시겠습니까?" : "를 저장하시겠습니까?";
+            if (DialogResult.Yes.Equals(MessageBox.Show($"{textBox_TagName.Text} {message}", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)))
+            {
+                string strErrCode = string.Empty;
+                string strErrText = string.Empty;
+                if (sqlBiz.InsertUpdateTagInfo(AddMode, textBox_TagName.Text.Trim(), textBox_MessageType.Text.Trim(), comboBox_Equipment.SelectedValue.ToString(), textBox_Description.Text.Trim(),
+                    textBox_PITagName.Text.Trim(), textBox_ValuePosition.Text.Trim(), textBox_DatePosition.Text.Trim(), textBox_TimePosition.Text.Trim(), textBox_ItemName.Text.Trim(), ref strErrCode, ref strErrText))
+                {
+                    MessageBox.Show($"저장 되었습니다.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    DialogResult = DialogResult.OK;
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show($"저장 중 오류가 발생하였습니다. [{strErrText}]", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
 
         private bool CheckItem()
@@ -140,47 +150,12 @@ namespace DataSpider.UserMonitor
         }
 
         private void button_Cancel_Click(object sender, EventArgs e)
-        { 
-        }
-
-        private void labelBTSave_Click(object sender, EventArgs e)
-        {
-            if (!CheckItem())
-            {
-                return;
-            }
-            string message = AddMode ? $"를 추가하시겠습니까?" : "를 저장하시겠습니까?";
-            if (DialogResult.Yes.Equals(MessageBox.Show($"{textBox_TagName.Text} {message}", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)))
-            {
-                string strErrCode = string.Empty;
-                string strErrText = string.Empty;
-                if (sqlBiz.InsertUpdateTagInfo(AddMode, textBox_TagName.Text.Trim(), textBox_MessageType.Text.Trim(), comboBox_Equipment.SelectedValue.ToString(), textBox_Description.Text.Trim(),
-                    textBox_PITagName.Text.Trim(), textBox_ValuePosition.Text.Trim(), textBox_DatePosition.Text.Trim(), textBox_TimePosition.Text.Trim(), textBox_ItemName.Text.Trim(), ref strErrCode, ref strErrText))
-                {
-                    MessageBox.Show($"저장 되었습니다.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    DialogResult = DialogResult.OK;
-                    this.Close();
-                }
-                else
-                {
-                    MessageBox.Show($"저장 중 오류가 발생하였습니다. [{strErrText}]", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
-
-        private void labelBTCancel_Click(object sender, EventArgs e)
         {
             if (UserAuthentication.UserLevel.Equals(UserLevel.UnAuthorized) || DialogResult.Yes.Equals(MessageBox.Show($"Do you want to exit without saving ?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)))
             {
                 DialogResult = DialogResult.Cancel;
                 this.Close();
             }
-        }
-
-        private void label_Title_MouseDown(object sender, MouseEventArgs e)
-        {
-            ReleaseCapture();
-            SendMessage(this.Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
         }
     }
 }
