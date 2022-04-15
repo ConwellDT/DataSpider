@@ -78,7 +78,6 @@ C:\Users\kalbe\source\repos\DataSpider\DataSpider.SampleCollector\bin\Debug\CFW.
 C:\Users\kalbe\source\repos\DataSpider\DataSpider.SampleCollector\bin\Debug\CFW.Data.xml
 C:\Users\kalbe\source\repos\DataSpider\DataSpider.SampleCollector\bin\Debug\DataSpider.PC00.PT.pdb
 C:\Users\kalbe\source\repos\DataSpider\DataSpider.SampleCollector\bin\Debug\MySql.Data.xml
-C:\Users\kalbe\source\repos\DataSpider\DataSpider.SampleCollector\bin\Debug\OSIsoft.AFSDK.xml
 C:\Users\kalbe\source\repos\DataSpider\DataSpider.SampleCollector\bin\Debug\CFW.Common.Message.pdb
 C:\Users\kalbe\source\repos\DataSpider\DataSpider.SampleCollector\bin\Debug\CFW.Common.Message.xml
 C:\Users\kalbe\source\repos\DataSpider\DataSpider.SampleCollector\obj\Debug\DataSpider.SampleCollector.csproj.AssemblyReference.cache

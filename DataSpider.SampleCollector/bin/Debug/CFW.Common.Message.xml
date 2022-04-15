@@ -1,0 +1,512 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CFW.Common.Message</name>
+    </assembly>
+    <members>
+        <member name="T:CFW.Common.Dictionary">
+            <summary>
+            Dictionary에 대한 요약 설명입니다.
+            </summary>
+        </member>
+        <member name="M:CFW.Common.Dictionary.#ctor">
+            <summary>
+            생성자입니다.
+            </summary>
+        </member>
+        <member name="M:CFW.Common.Dictionary.SearchStaticDic(System.String)">
+            <summary>
+            로드 된 Dictionary Hashtable에서 DicID로 검색하여 설정 된 언어타입에 맞는 값을 리턴합니다.
+            </summary>
+            <remarks>Web에서 사용됩니다.</remarks>
+            <param name="dicID">Dictionary ID</param>
+            <returns>다국어 처리 값</returns>
+        </member>
+        <member name="M:CFW.Common.Dictionary.SearchStaticDicWeb(System.String,System.String)">
+            <summary>
+            로드 된 Dictionary Hashtable에서 DicID로 검색하여 설정 된 언어타입에 맞는 값을 리턴합니다.
+            로그인시 선택한 언어로 Dictionary 조회 
+            </summary>
+            <remarks>Web에서 사용됩니다.</remarks>
+            <param name="dicID">Dictionary ID</param>
+            <returns>다국어 처리 값</returns>
+        </member>
+        <member name="M:CFW.Common.Dictionary.LoadStaticDicList">
+            <summary>
+            Load dictionary
+            </summary>       
+        </member>
+        <member name="T:CFW.Common.clsDicInfo">
+            <summary>
+            clsMsgInfo Structure - 메시지 정보 구조체
+            C_DICTIONARY_DF 테이블 구조에 따라 DIC_NM_KO_KR, DIC_NM_EN_US
+            </summary>
+        </member>
+        <member name="T:CFW.Common.Logging">
+            <summary>
+            TODO : static 함수 제거
+            </summary>
+        </member>
+        <member name="M:CFW.Common.Logging.#ctor">
+            <summary>
+            생성자입니다.
+            </summary>
+        </member>
+        <member name="P:CFW.Common.Logging.LogFilePath">
+            <summary>
+            로그 파일 경로를 설정하거나 값을 읽어올 수 있습니다
+            </summary>
+        </member>
+        <member name="P:CFW.Common.Logging.LogSaveDays">
+            <summary>
+            로그 저장 일수를 설정하거나 값을 읽어올 수 있습니다.
+            </summary>
+        </member>
+        <member name="P:CFW.Common.Logging.UserID">
+            <summary>
+            사용자 아이디를 설정하거나 읽어올 수 있습니다.
+            </summary>
+        </member>
+        <member name="M:CFW.Common.Logging.WriteEventLog(System.String,System.String,System.Diagnostics.EventLogEntryType,System.String)">
+            <summary>
+            로그를 이벤트 표시기에 씁니다.
+            </summary>
+            <param name="eventLog">"응용 프로그램", "보안", "시스템" 이 아닌 다른 위치로 지정할 수 있습니다.</param>
+            <param name="eventLogSource">이벤트 소스명입니다.</param>
+            <param name="logType">이벤트 종류입니다.정보/경고/오류 등의 카테고리가 있습니다.</param>
+            <param name="contents">로그 내용입니다.</param>
+        </member>
+        <member name="M:CFW.Common.Logging.MakeDisplayData(System.String,CFW.Common.clsMsgInfo,CFW.Common.clsProgramLogInfo,CFW.Common.clsSourceInfo,System.String[],System.DateTime)">
+            <summary>
+            화면에 Display 될 형식에 맞추어 문자 생성
+            </summary>
+            <returns>Display 생성 문자</returns>
+        </member>
+        <member name="M:CFW.Common.Logging.MakeLogData(System.String,CFW.Common.clsMsgInfo,CFW.Common.clsProgramLogInfo,CFW.Common.clsSourceInfo,System.String[],System.DateTime)">
+            <summary>
+            형식에 상관없이 데이터를 구분자를 이용하여 string 생성 
+            </summary>
+            <param name="msgID">메시지 ID</param>
+            <param name="msgInfo">메시지 정보</param>
+            <param name="programLogInfo">프로그램 정보</param>
+            <param name="sourceInfo">소스 정보</param>
+            <param name="arg">추가 메시지</param>
+            <param name="dt">시스템 시간</param>
+            <returns></returns>
+        </member>
+        <member name="M:CFW.Common.Logging.MakeFileLogData(System.String,CFW.Common.clsMsgInfo,CFW.Common.clsProgramLogInfo,CFW.Common.clsSourceInfo,System.String[],System.DateTime)">
+            <summary>
+            형식에 상관없이 데이터를 구분자를 이용하여 string 생성
+            </summary>
+            <param name="msgID">메시지 ID</param>
+            <param name="msgInfo">메시지 정보</param>
+            <param name="programLogInfo">프로그램 정보</param>
+            <param name="sourceInfo">소스 정보</param>
+            <param name="arg">추가 메시지</param>
+            <param name="dt">시스템 시간</param>
+            <returns></returns>
+        </member>
+        <member name="M:CFW.Common.Logging.UpdateMsgInfo(CFW.Common.clsMsgInfo@,System.String[],System.String)">
+            <summary>
+            추가된 정보로 Msg 정보 Update
+            </summary>
+            <param name="msgInfo">메시지 정보</param>
+            <param name="args">추가 정보</param>
+            <param name="type">메시지 레벨</param>
+        </member>
+        <member name="M:CFW.Common.Logging.WriteStringDataToFile(System.String,System.String)">
+            <summary>
+            구분자로 구성된 String File에 쓰기
+            
+            구분자	: CFW.Common.Constant.DATA_DELIMITER
+            폴더명	: Parameter filePath + 구분자를 기준으로 3번째(zero base)값 (없으면 Unknown)
+            파일명	: 구분자를 기준으로 4번째값 (없으면 Unknown)
+            		  + _구분자를 기준으로 0번째 값 : LOG(L) / Status(나머지) 
+            		  + _현재 일자.txt
+            내용	: Parameter dataString
+            </summary>
+            <param name="dataString">구분자로 이루어진 데이터</param>
+            <param name="filePath">파일 저장 경로</param>
+        </member>
+        <member name="M:CFW.Common.Logging.WriteLogInMultiThread(System.String,System.String,CFW.Common.clsProgramLogInfo,CFW.Common.clsSourceInfo,System.String[])">
+            <summary>
+            터미널 프로그램 구동 시 Multi Thread 환경에서 로깅을 남김니다. 
+            </summary>
+            <param name="type">메시지유형</param>
+            <param name="msgID">메시지 아이디</param>
+            <param name="programLogInfo">DB연결Hint, 로깅 간격(초), ProgramID, ProcessID</param>
+            <param name="sourceInfo">로깅 소스 정보 구조체</param>
+            <param name="args">추가 파라메터</param>
+            <returns>메시지 구조체</returns>
+            <example>
+            CFW.Common.Logging.WriteLogInMultiThread(pEventInfo.Level,pEventInfo.MsgID, 3, pEventInfo.ProgramID,
+            pEventInfo.ProcessID,pLogWrite.GetSouceInfo(),m_languageType);
+            </example>
+            <returns></returns>
+        </member>
+        <member name="M:CFW.Common.Logging.WriteLogInMultiThread(System.String,CFW.Common.clsProgramLogInfo,CFW.Common.clsSourceInfo,System.String[])">
+            <summary>
+            터미널 프로그램 구동 시 Multi Thread 환경에서 로깅을 남김니다. 
+            </summary>
+            <param name="msgID">메시지 아이디</param>
+            <param name="programLogInfo">DB연결Hint, 로깅 간격(초), ProgramID, ProcessID</param>
+            <param name="sourceInfo">로깅 소스 정보 구조체</param>
+            <param name="args">추가 파라메터</param>
+            <returns></returns>
+        </member>
+        <member name="M:CFW.Common.Logging.WriteLog(System.String,System.String,CFW.Common.clsProgramLogInfo,CFW.Common.clsSourceInfo,System.String[])">
+            <summary>
+            데몬 프로그램 구동 시 로깅을 남김니다.
+            </summary>
+            <param name="type">메시지유형</param>
+            <param name="msgID">메시지 아이디</param>
+            <param name="programLogInfo">DB연결Hint, 로깅 간격(초), ProgramID, ProcessID</param>
+            <param name="sourceInfo">로깅 소스 정보 구조체</param>
+            <param name="args">추가 파라메터</param>
+            <returns>메시지 문자열</returns>
+            <example>
+            CFW.Common.Logging.WriteLog("E", "AC8113", m_programLogInfo,m_FileLog.GetSouceInfo(),);
+            </example>
+            <returns></returns>
+        </member>
+        <member name="M:CFW.Common.Logging.WriteLog(System.String,CFW.Common.clsProgramLogInfo,CFW.Common.clsSourceInfo,System.String[])">
+            <summary>
+            데몬 프로그램 구동 시 로깅을 남김니다.
+            </summary>
+            <param name="msgID">메시지 아이디</param>
+            <param name="programLogInfo">DB연결Hint, 로깅 간격(초), ProgramID, ProcessID</param>
+            <param name="sourceInfo">로깅 소스 정보 구조체</param>
+            <param name="args">추가 파라미터</param>
+            <returns></returns>
+        </member>
+        <member name="T:CFW.Common.Logging.clsDelLogFile">
+            <summary>
+            Log 삭제 클래스
+            </summary>
+        </member>
+        <member name="M:CFW.Common.Logging.clsDelLogFile.#ctor(System.String,System.String,System.Int32,System.String)">
+            <summary>
+            clsLogDelete - 삭제 정보 변수 할당
+            </summary>
+            <param name="sFilePath">Log 파일 경로</param>
+            <param name="sProcessID">Process ID</param>
+            <param name="nLogSaveDays">LogSaveDays</param>
+        </member>
+        <member name="M:CFW.Common.Logging.clsDelLogFile.DelProcLogFile">
+            <summary>
+            DelProcLogFile-로그 삭제(Terminal)
+            </summary>
+        </member>
+        <member name="M:CFW.Common.Logging.DeleteOldFile(System.String,System.String,System.String,System.Int32,System.String)">
+            <summary>
+            기존 파일 중 날짜 범위에서 벗어나는 파일 삭제
+            </summary>
+            <param name="programID"></param>
+            <param name="processID">프로세스 ID</param>
+            <param name="filePath">파일 경로</param>
+            <param name="logSaveDays">날짜 범위(day)</param>
+        </member>
+        <member name="M:CFW.Common.Logging.GetSourceInfo">
+            <summary>
+            GetSourceInfo
+            </summary>
+            <returns>로그 소스파일 정보</returns>
+        </member>
+        <member name="T:CFW.Common.clsMessage">
+            <summary>
+            clsMessage Structure - 메시지 구조체
+            </summary>
+        </member>
+        <member name="T:CFW.Common.clsSourceInfo">
+            <summary>
+            clsSourceInfo Structure - 소스파일 정보
+            </summary>
+        </member>
+        <member name="T:CFW.Common.clsProgramLogInfo">
+            <summary>
+            Logging 에서 사용할 Program 정보
+            </summary>
+        </member>
+        <member name="F:CFW.Common.clsProgramLogInfo.DBInfo">
+            <summary>
+            DB연결 Hint(V,E,S) 기본값:V
+            </summary>
+        </member>
+        <member name="F:CFW.Common.clsProgramLogInfo.LogTerm">
+            <summary>
+            로깅 남기는 시간 간격(초단위)
+            </summary>
+        </member>
+        <member name="F:CFW.Common.clsProgramLogInfo.ProgramID">
+            <summary>
+            프로그램 ID
+            </summary>
+        </member>
+        <member name="F:CFW.Common.clsProgramLogInfo.ProcessID">
+            <summary>
+            프로세스 ID
+            </summary>
+        </member>
+        <member name="T:CFW.Common.LOG">
+            <summary>
+            LOG control code 추상 클래스
+            Define System Area
+            Define usage of messages
+            Define level of messages
+            Define DB Commit
+            </summary>
+        </member>
+        <member name="T:CFW.Common.Messaging">
+            <summary>
+            Messaging에 대한 요약 설명입니다.
+            2007.08.29 by 한주희 기존의 매소드는 cs 버젼으로 그대로 유지하여 데몬과 터미널에서 
+            기존과 동일한 매소드를 사용하고 
+            WEB 용도의 별도의 매소드를 신규 개발하여 사용함  ( SearchMsgStrWEB , LoadStaticMsgList, ReadMsgFromDBWeb,ReadMsgFromXmlWeb  ) 
+            </summary>
+            
+        </member>
+        <member name="F:CFW.Common.Messaging.COLUMN_DELIMITER">
+            <summary>
+            컬럼 구분자 정의입니다.
+            </summary>
+        </member>
+        <member name="F:CFW.Common.Messaging.MESSAGE_CODE_REGEX">
+            <summary>
+            메시지 코드 정규식 정의입니다.
+            </summary>
+        </member>
+        <member name="M:CFW.Common.Messaging.#ctor">
+            <summary>
+            Messaging 생성자입니다.
+            </summary>
+        </member>
+        <member name="M:CFW.Common.Messaging.GetErrorMessage(System.Exception)">
+            <summary>
+            에러 메시지 가져옵니다.
+            </summary>
+            <param name="ex">Exception</param>
+            <example>
+            Throw New Exception( SearchMsg(sMsgID, languageType) );
+            </example>
+            <remarks>
+            일반 메시지를 출력하기 위해 Exception은 발생시키지 않습니다.
+            </remarks>
+            <returns>에러 메시지</returns>
+        </member>
+        <member name="M:CFW.Common.Messaging.GetErrorMessage(System.Exception,System.String)">
+            <summary>
+            에러 메시지 (정보) 가져옵니다.
+            </summary>
+            <param name="ex">Exception</param>
+            <param name="msgID">메시지ID</param>
+            <example>
+            catch(Exception ex)
+            {
+            	sErrMsg = CFW.Common.Messaging.GetErrorMessage(ex, "TO1100");
+                this.textBox1.Text = sErrMsg;
+            }
+            </example>
+            <returns>에러 메시지(정보)</returns>
+        </member>
+        <member name="M:CFW.Common.Messaging.GetErrorMessage(System.Exception,System.String,System.String[])">
+            <summary>
+            메시지 ID에 해당하는 메시지와 Error에 대한 상세 정보를 가져옴.
+            </summary>
+            <param name="ex">Exception</param>
+            <param name="msgID">메시지ID</param>
+            <param name="args">추가메시지</param>
+            <example>
+            catch(Exception ex)
+            {
+            	sErrMsg = CFW.Common.Messaging.GetErrorMessage(ex, "TO1100" ,new string[]{"PgmID2045"});
+                this.textBox1.Text = sErrMsg;
+            }
+            </example>
+            <returns>에러 메시지(상세정보)</returns>
+        </member>
+        <member name="M:CFW.Common.Messaging.SearchMsgStrWEB(System.String,System.String)">
+            <summary>
+            로드 된 Hashtable에서 메시지 아이디를 키값으로 검색한 메시지구조체를 리턴합니다
+             2007.10.05 by 한주희  
+            </summary>
+            <param name="msgID">메시지 ID</param>
+            <returns>검색된 메시지 구조체</returns>
+        </member>
+        <member name="M:CFW.Common.Messaging.SearchMsgWEB(System.String,System.String)">
+            <summary>
+            로드 된 Hashtable에서 메시지 아이디를 키값으로 검색한 메시지를 string 형태로 리턴합니다
+            </summary>
+            <param name="msgID">메시지 ID</param>
+            <returns>검색된 메시지 구조체</returns>
+        </member>
+        <member name="M:CFW.Common.Messaging.SearchMsgStrWEB(System.String,System.String[],System.String)">
+            <summary>
+            로드 된 Hashtable에서 메시지 아이디를 키값으로 검색한 메시지구조체를 리턴합니다
+            </summary>
+            <param name="msgID">메시지 ID</param>
+            <param name="args">추가 메시지</param>
+            <param name="langtype">언어종류</param>
+            <returns>검색된 메시지 구조체</returns>
+        </member>
+        <member name="M:CFW.Common.Messaging.SearchMsgStr(System.String)">
+            <summary>
+            로드 된 Hashtable에서 메시지 아이디를 키값으로 검색한 메시지구조체를 리턴합니다
+            조회될 언어를 지정 하지 않음 
+            </summary>
+            <param name="msgID">메시지 ID</param>
+            <returns>검색된 메시지 구조체</returns>
+        </member>
+        <member name="M:CFW.Common.Messaging.SearchMsgStr(System.String,System.String[])">
+            <summary>
+            로드 된 Hashtable에서 메시지 아이디를 키값으로 검색한 메시지구조체를 리턴합니다
+            /// 조회될 언어를 지정 하지 않음 
+            </summary>
+            <param name="msgID">메시지 ID</param>
+            <param name="args">추가 메시지</param>
+            <returns>검색된 메시지 구조체</returns>
+        </member>
+        <member name="M:CFW.Common.Messaging.SearchMsg(System.String,System.String[])">
+            <summary>
+            로드 된 Hashtable에서 메시지 아이디를 키값으로 검색한 메시지문자열을 리턴합니다. 
+            </summary>
+            <param name="msgID">메시지 ID</param>
+            <param name="args">추가 메시지</param>
+            <returns>검색된 메시지</returns>
+        </member>
+        <member name="M:CFW.Common.Messaging.SearchMsg(System.String)">
+            <summary>
+            로드 된 Hashtable에서 메시지 아이디를 키값으로 검색한 메시지문자열을 리턴합니다. 
+            </summary>
+            <param name="msgID">메시지 ID</param>
+            <returns>검색된 메시지</returns>
+        </member>
+        <member name="M:CFW.Common.Messaging.getDefaultLanguage">
+            <summary>
+            환경설정파일에 설정된 기본 언어값을 읽어옵니다.
+            </summary>
+            <returns>기본언어 설정값</returns>
+        </member>
+        <member name="M:CFW.Common.Messaging.LoadStaticMsgList(System.String)">
+            <summary>
+            메시지 테이블에서 메시지를 읽어오거나 DB 연결 실패 시 XML 메시지 파일에서 메시지를 읽어옵니다.
+             2007.09.12 by 한주희  Web 로그인 시 한번만 Dictionary 로드함  
+            </summary>
+            <remarks>Web</remarks>
+            <param name="languageType"></param>
+        </member>
+        <member name="M:CFW.Common.Messaging.ReadMsgFromDB(System.Data.DataSet)">
+            <summary>
+            메시지 테이블에서 메시지를 읽어오거나 DB 연결 실패 시 XML 메시지 파일에서 메시지를 읽어옵니다.
+             2008.08.29 by 한주희  Web 로그인 시 한번만 Dictionary 로드함  (HMI 요구 사항 로그인시 접속할 DB 지정 ) 
+            </summary>
+            <remarks>Web</remarks>
+            <param name="languageType"></param>
+        </member>
+        <member name="T:CFW.Common.clsMsgInfo">
+            <summary>
+            clsMsgInfo Structure - 메시지 정보 구조체
+            C_DICTIONARY_DF 테이블 구조에 따라 MSG_TEXT_KO_KR, MSG_TEXT_EN_US
+            </summary>
+        </member>
+        <member name="F:CFW.Common.clsMsgInfo.MsgGrp">
+            <summary>
+            메시지 그룹
+            </summary>
+        </member>
+        <member name="F:CFW.Common.clsMsgInfo.MsgText">
+            <summary>
+            메시지(기본 - Logging 사용)
+            </summary>
+        </member>
+        <member name="F:CFW.Common.clsMsgInfo.Dbflg">
+            <summary>
+            DB 저장여부
+            </summary>
+        </member>
+        <member name="F:CFW.Common.clsMsgInfo.MsgType">
+            <summary>
+            메시지 유형
+            </summary>
+        </member>
+        <member name="F:CFW.Common.clsMsgInfo.MsgLocal">
+            <summary>
+            사용자 정의 Language Text
+            </summary>
+        </member>
+        <member name="F:CFW.Common.clsMsgInfo.MsgTextKo">
+            <summary>
+            한국어 Language Text
+            </summary>
+        </member>
+        <member name="F:CFW.Common.clsMsgInfo.MsgTextEn">
+            <summary>
+            영어 Language Text
+            </summary>
+        </member>
+        <member name="F:CFW.Common.clsMsgInfo.MsgTextCh">
+            <summary>
+            중국어 Language Text
+            </summary>
+        </member>
+        <member name="F:CFW.Common.clsMsgInfo.MsgTextLo">
+            <summary>
+            Local Language Text
+            </summary>
+        </member>
+        <member name="T:CFW.Common.MSG">
+            <summary>
+            메시지 타입
+            </summary>
+        </member>
+        <member name="F:CFW.Common.MSG.LEVEL_NONE">
+            <summary>
+            Information
+            </summary>
+        </member>
+        <member name="F:CFW.Common.MSG.LEVEL_INFO">
+            <summary>
+            Information
+            </summary>
+        </member>
+        <member name="F:CFW.Common.MSG.LEVEL_ALARM">
+            <summary>
+            Alarm, warnning
+            </summary>
+        </member>
+        <member name="F:CFW.Common.MSG.LEVEL_ERROR">
+            <summary>
+            error
+            </summary>
+        </member>
+        <member name="F:CFW.Common.MSG.LEVEL_CONFIRM">
+            <summary>
+            confirm
+            </summary>
+        </member>
+        <member name="T:CFW.Common.clsErrorInfo">
+            <summary>
+            에러 정보
+            </summary>
+        </member>
+        <member name="F:CFW.Common.clsErrorInfo.MsgID">
+            <summary>
+            메시지 아이디
+            </summary>
+        </member>
+        <member name="F:CFW.Common.clsErrorInfo.Msg">
+            <summary>
+            메시지
+            </summary>
+        </member>
+        <member name="F:CFW.Common.clsErrorInfo.ErrorDetail">
+            <summary>
+            에러 상세 정보
+            </summary>
+        </member>
+        <member name="T:CFW.Common.LanguageType">
+            <summary>
+            언어 타입
+            </summary>
+        </member>
+    </members>
+</doc>

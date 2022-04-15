@@ -154,11 +154,11 @@ namespace DataSpider.UserMonitor
                 comboBox_InterfaceType.SelectedValue = int.Parse(drEquipment["IF_TYPE"].ToString());
 
                 dataGridTagInfo.Rows.Clear();
+                textBox_ConnectionInfo.Text = drEquipment["CONNECTION_INFO"].ToString();
 
                 if (EditModeCopy == false)
                 {
                     textBox_EquipName.Text = drEquipment["EQUIP_NM"].ToString();
-                    textBox_ConnectionInfo.Text = drEquipment["CONNECTION_INFO"].ToString();
 
                     for (int nR = 0; nR < dtTagList.Rows.Count; nR++)
                     {
@@ -183,44 +183,44 @@ namespace DataSpider.UserMonitor
                 }
                 else
                 {
-                    int[] nSPos = { -1, -1, -1 };
+                    //int[] nSPos = { -1, -1, -1 };
 
-                    String strConStr = drEquipment["CONNECTION_INFO"].ToString();
+                    //String strConStr = drEquipment["CONNECTION_INFO"].ToString();
 
-                    nSPos[0] = strConStr.IndexOf("Data Source", 0);
-                    if(nSPos[0] < 0 ) nSPos[0] = strConStr.IndexOf("data source", 0);
-                    if (nSPos[0] < 0) nSPos[0] = strConStr.IndexOf("Data source", 0);
-                    if (nSPos[0] < 0) nSPos[0] = strConStr.IndexOf("data Source", 0);
+                    //nSPos[0] = strConStr.IndexOf("Data Source", 0);
+                    //if (nSPos[0] < 0) nSPos[0] = strConStr.IndexOf("data source", 0);
+                    //if (nSPos[0] < 0) nSPos[0] = strConStr.IndexOf("Data source", 0);
+                    //if (nSPos[0] < 0) nSPos[0] = strConStr.IndexOf("data Source", 0);
 
-                    if (nSPos[0] >= 0)
-                    {
-                        nSPos[1] = strConStr.IndexOf("=", nSPos[0] + 1);
-                        nSPos[2] = strConStr.IndexOf(";", nSPos[1] + 1);
+                    //if (nSPos[0] >= 0)
+                    //{
+                    //    nSPos[1] = strConStr.IndexOf("=", nSPos[0] + 1);
+                    //    nSPos[2] = strConStr.IndexOf(";", nSPos[1] + 1);
 
-                        textBox_ConnectionInfo.Text = strConStr.Substring(nSPos[0], nSPos[1] - nSPos[0]) + "= XXX.XXX.XXX.XXX" + strConStr.Substring(nSPos[2], strConStr.Length - nSPos[2]);
-                    }
-                    else
-                    {
-                        nSPos[0] = strConStr.IndexOf(@"\\", 0);
+                    //    textBox_ConnectionInfo.Text = strConStr.Substring(nSPos[0], nSPos[1] - nSPos[0]) + "= XXX.XXX.XXX.XXX" + strConStr.Substring(nSPos[2], strConStr.Length - nSPos[2]);
+                    //}
+                    //else
+                    //{
+                    //    nSPos[0] = strConStr.IndexOf(@"\\", 0);
 
-                        if (nSPos[0] >= 0)
-                        {
-                            nSPos[1] = strConStr.IndexOf(@"\", nSPos[0] + 2);
+                    //    if (nSPos[0] >= 0)
+                    //    {
+                    //        nSPos[1] = strConStr.IndexOf(@"\", nSPos[0] + 2);
 
-                            if (nSPos[1] > 0)
-                            {
-                                textBox_ConnectionInfo.Text = @"\\" + "XXX.XXX.XXX.XXX" + strConStr.Substring(nSPos[1], strConStr.Length - nSPos[1]);
-                            }
-                            else
-                            {
-                                textBox_ConnectionInfo.Text = @"\\XXX.XXX.XXX.XXX\";
-                            }
-                        }
-                        else
-                        {
-                            textBox_ConnectionInfo.Text = String.Empty;
-                        }
-                    }
+                    //        if (nSPos[1] > 0)
+                    //        {
+                    //            textBox_ConnectionInfo.Text = @"\\" + "XXX.XXX.XXX.XXX" + strConStr.Substring(nSPos[1], strConStr.Length - nSPos[1]);
+                    //        }
+                    //        else
+                    //        {
+                    //            textBox_ConnectionInfo.Text = @"\\XXX.XXX.XXX.XXX\";
+                    //        }
+                    //    }
+                    //    else
+                    //    {
+                    //        textBox_ConnectionInfo.Text = String.Empty;
+                    //    }
+                    //}
 
                     textBox_EquipName.Text = String.Empty;
 
