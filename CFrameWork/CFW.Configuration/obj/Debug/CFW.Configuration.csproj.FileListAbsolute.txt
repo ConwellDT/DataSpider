@@ -49,3 +49,10 @@ D:\Work\콘웰\Project_svn\02.Source - P4\CFrameWork\CFW.Configuration\obj\Debug
 D:\Work\콘웰\Project_svn\02.Source - P4\CFrameWork\CFW.Configuration\obj\Debug\CFW.Configuration.csproj.CoreCompileInputs.cache
 D:\Work\콘웰\Project_svn\02.Source - P4\CFrameWork\CFW.Configuration\obj\Debug\CFW.Configuration.dll
 D:\Work\콘웰\Project_svn\02.Source - P4\CFrameWork\CFW.Configuration\obj\Debug\CFW.Configuration.pdb
+C:\Users\kalbe\source\repos\DataSpider\Assembly\CFW.Configuration.XML
+C:\Users\kalbe\source\repos\DataSpider\Assembly\CFW.Configuration.dll
+C:\Users\kalbe\source\repos\DataSpider\Assembly\CFW.Configuration.pdb
+C:\Users\kalbe\source\repos\DataSpider\CFrameWork\CFW.Configuration\obj\Debug\CFW.Configuration.csproj.AssemblyReference.cache
+C:\Users\kalbe\source\repos\DataSpider\CFrameWork\CFW.Configuration\obj\Debug\CFW.Configuration.csproj.CoreCompileInputs.cache
+C:\Users\kalbe\source\repos\DataSpider\CFrameWork\CFW.Configuration\obj\Debug\CFW.Configuration.dll
+C:\Users\kalbe\source\repos\DataSpider\CFrameWork\CFW.Configuration\obj\Debug\CFW.Configuration.pdb

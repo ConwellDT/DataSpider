@@ -23,3 +23,16 @@ D:\GitHub\DataSpider\DataSpider.PC01.OSMO.LIS\obj\Debug\DataSpider.PC01.OSMO.LIS
 D:\GitHub\DataSpider\DataSpider.PC01.OSMO.LIS\obj\Debug\DataSpider.PC01.OSMO.LIS.csproj.CopyComplete
 D:\GitHub\DataSpider\DataSpider.PC01.OSMO.LIS\obj\Debug\DataSpiderPC01.OSMO.LIS.exe
 D:\GitHub\DataSpider\DataSpider.PC01.OSMO.LIS\obj\Debug\DataSpiderPC01.OSMO.LIS.pdb
+C:\Users\kalbe\source\repos\DataSpider\EXE\DataSpider\DataSpiderPC01.OSMO.LIS.exe.config
+C:\Users\kalbe\source\repos\DataSpider\EXE\DataSpider\DataSpiderPC01.OSMO.LIS.exe
+C:\Users\kalbe\source\repos\DataSpider\EXE\DataSpider\DataSpiderPC01.OSMO.LIS.pdb
+C:\Users\kalbe\source\repos\DataSpider\DataSpider.PC01.OSMO.LIS\obj\Debug\DataSpider.PC01.OSMO.LIS.csproj.AssemblyReference.cache
+C:\Users\kalbe\source\repos\DataSpider\DataSpider.PC01.OSMO.LIS\obj\Debug\DataSpider.PC01.OSMO.LIS.csproj.SuggestedBindingRedirects.cache
+C:\Users\kalbe\source\repos\DataSpider\DataSpider.PC01.OSMO.LIS\obj\Debug\DataSpiderPC01.OSMO.LIS.exe.config
+C:\Users\kalbe\source\repos\DataSpider\DataSpider.PC01.OSMO.LIS\obj\Debug\DataSpider.PC01.PT.Properties.Resources.resources
+C:\Users\kalbe\source\repos\DataSpider\DataSpider.PC01.OSMO.LIS\obj\Debug\DataSpider.PC01.PT.PC01F01.resources
+C:\Users\kalbe\source\repos\DataSpider\DataSpider.PC01.OSMO.LIS\obj\Debug\DataSpider.PC01.OSMO.LIS.csproj.GenerateResource.cache
+C:\Users\kalbe\source\repos\DataSpider\DataSpider.PC01.OSMO.LIS\obj\Debug\DataSpider.PC01.OSMO.LIS.csproj.CoreCompileInputs.cache
+C:\Users\kalbe\source\repos\DataSpider\DataSpider.PC01.OSMO.LIS\obj\Debug\DataSpider.PC01.OSMO.LIS.csproj.CopyComplete
+C:\Users\kalbe\source\repos\DataSpider\DataSpider.PC01.OSMO.LIS\obj\Debug\DataSpiderPC01.OSMO.LIS.exe
+C:\Users\kalbe\source\repos\DataSpider\DataSpider.PC01.OSMO.LIS\obj\Debug\DataSpiderPC01.OSMO.LIS.pdb

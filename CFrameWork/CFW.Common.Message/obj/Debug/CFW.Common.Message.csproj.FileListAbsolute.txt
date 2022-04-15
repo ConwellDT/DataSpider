@@ -49,3 +49,7 @@ D:\Project\20201229_콘웰_삼성바이오로직스_EquipmentMiddlewareInterface
 D:\Project\20201229_콘웰_삼성바이오로직스_EquipmentMiddlewareInterface\20. SVN\02.Source\Assembly\CFW.Common.Message.dll
 D:\Project\20201229_콘웰_삼성바이오로직스_EquipmentMiddlewareInterface\20. SVN\02.Source\Assembly\CFW.Common.Message.pdb
 D:\Project\20201229_콘웰_삼성바이오로직스_EquipmentMiddlewareInterface\20. SVN\02.Source\CFrameWork\CFW.Common.Message\obj\Debug\CFW.Common.Message.csproj.CopyComplete
+C:\Users\kalbe\source\repos\DataSpider\CFrameWork\CFW.Common.Message\obj\Debug\CFW.Common.Message.csproj.AssemblyReference.cache
+C:\Users\kalbe\source\repos\DataSpider\CFrameWork\CFW.Common.Message\obj\Debug\CFW.Common.Message.csproj.CoreCompileInputs.cache
+C:\Users\kalbe\source\repos\DataSpider\CFrameWork\CFW.Common.Message\obj\Debug\CFW.Common.Message.dll
+C:\Users\kalbe\source\repos\DataSpider\CFrameWork\CFW.Common.Message\obj\Debug\CFW.Common.Message.pdb

@@ -8484,14 +8484,20 @@
     </member>
     <member name="F:OSIsoft.AF.PIExportMode.StrongReferences">
       <summary>
-            Export this object and all objects it contains.  
+            Export this object and all objects it contains. Objects being referenced by the object
+            being exported will not be included. For example if an element or event frame is being exported,
+            only child elements or child event frames will be exported, not those being referenced by it.
+            This flag should not be used with either the <b>AllReferences</b> or <b>NoReferences</b> flags. If it is used with one of them,
+            <b>StrongReferences</b> will be ignored and the other flag will be used for the export operation.
             This option applies only to XML export.
             </summary>
     </member>
     <member name="F:OSIsoft.AF.PIExportMode.AllReferences">
       <summary>
-            Export this object and all objects it references.
-            This flag cannot be set if the <b>NoReferences</b> flag is set.
+            Export this object and all objects it contains or references.
+            This flag cannot be set if the <b>NoReferences</b> flag is set. This flag should not be used with
+            the <b>StrongReferences</b> flag. If it is, <b>StrongReferences</b> will be ignored and <b>AllReferences</b>
+            will be used for the export operation.
             This option applies only to XML export.  The OSIsoft.AF.xsd file, located
             in the default x86 installation folder of AF Client, documents the type 
             of references which are included for each major AF type.
@@ -8499,8 +8505,11 @@
     </member>
     <member name="F:OSIsoft.AF.PIExportMode.NoReferences">
       <summary>
-            Export this object only. For example, AF Attributes of an AF Element will not be included.
-            This flag cannot be set if the <b>AllReferences</b> flag is set.
+            Export this object only without referenced objects. Top-level attributes, analyses, and notification rules will be included for elements.
+            Top-level attributes will be included for event frames. Child or referenced elements, child or referenced event frames, and child
+            attributes will not be included.
+            This flag cannot be set if the <b>AllReferences</b> flag is set. This flag should not be used with the <b>StrongReferences</b> flag.
+            If it is, <b>StrongReferences</b> will be ignored and <b>NoReferences</b> will be used for the export operation.
             This option applies only to XML export.
             </summary>
     </member>
@@ -14448,7 +14457,7 @@
       <param name="analyses">Analyses to queue for calculation. Cannot be null nor empty.</param>
       <param name="timeRange">Time range to calculate.</param>
       <param name="mode">Calculation mode to specify what to do with the existing data.</param>
-      <returns>A handle to the queued calculations. The upcoming releases will support using it to check the queued calculation status.</returns>
+      <returns>A handle to the queued calculations.</returns>
       <exception cref="T:System.InvalidOperationException">This exception is thrown when connection to the analysis service fails for any reason.</exception>
       <exception cref="T:System.ArgumentNullException">This exception is thrown when <paramref name="analyses" /> is null.</exception>
       <exception cref="T:System.ArgumentException">This exception is thrown when the start time of <paramref name="timeRange" /> is after its end time.</exception>
@@ -21387,7 +21396,7 @@
             For example, specifying -25 over a 24 hour period will produce an hourly value.
             </item><item>
             If the number of values requested is greater than zero, 
-            than the method will behave like the PI SDK's PIData.PlotValues method.  
+            the method will behave like the PlotValues method.
             This method is designed to return 
             a set of values over a time period that will produce the most accurate plot while minimizing 
             the amount of data returned.  The number of intervals specifies the number of pixels that need to be
@@ -21440,7 +21449,7 @@
             For example, specifying -25 over a 24 hour period will produce an hourly value.
             </item><item>
             If the number of values requested is greater than zero, 
-            than the method will behave like the PI SDK's PIData.PlotValues method.  
+            the method will behave like the PlotValues method.
             This method is designed to return 
             a set of values over a time period that will produce the most accurate plot while minimizing 
             the amount of data returned.  The number of intervals specifies the number of pixels that need to be
@@ -23544,7 +23553,7 @@
             For example, specifying -25 over a 24 hour period will produce an hourly value.
             </item><item>
             If the number of values requested is greater than zero, 
-            than the method will behave like the PI SDK's PIData.PlotValues method.  
+            the method will behave like the PlotValues method.
             This method is designed to return 
             a set of values over a time period that will produce the most accurate plot while minimizing 
             the amount of data returned.  The number of intervals specifies the number of pixels that need to be
@@ -39212,14 +39221,12 @@
             Gets the current level of verification required for an <see cref="T:OSIsoft.AF.AFPlugIn" /> to be loaded from the server.
             </summary>
       <param name="system">
-            The setting will be read from the specified <see cref="T:OSIsoft.AF.PISystem" />.
+            The setting will be read from the specified <see cref="T:OSIsoft.AF.PISystem" /> or use 
+            <see cref="F:OSIsoft.AF.AFVerifySignatureLevel.RequireSigned" /> if no PISystem is specified.
             </param>
       <returns>
             Returns the current <see cref="T:OSIsoft.AF.AFVerifySignatureLevel" /> setting from the server.
             </returns>
-      <exception cref="T:System.ArgumentNullException">
-            This exception is thrown when attempting to execute on a<see cref="T:OSIsoft.AF.PISystem" /> that is null or deleted.
-            </exception>
     </member>
     <member name="M:OSIsoft.AF.Diagnostics.AFAdmin.GetTrustedProviders(OSIsoft.AF.PISystem)">
       <summary>
@@ -58543,7 +58550,10 @@
             </param>
       <param name="query">
             The search query string. This will be parsed into tokens and initialize
-            the <see cref="P:OSIsoft.AF.Search.AFSearch.TokenCollection" /> property.
+            the <see cref="P:OSIsoft.AF.Search.AFSearch.TokenCollection" /> property. Strings will be interpreted 
+            with the <see cref="M:OSIsoft.AF.Time.AFTime.Parse(System.String,OSIsoft.AF.Time.AFTime,System.IFormatProvider)" /> method so that 
+            relative formats with intervals ("*", "T+3h", etc.) are also supported. Relative time 
+            intervals are based on the database's QueryDate.
             </param>
     </member>
     <member name="M:OSIsoft.AF.Search.AFAnalysisSearch.FindAnalyses(System.Int32,System.Boolean,System.Int32)">
@@ -58682,7 +58692,10 @@
             </param>
       <param name="query">
             The search query string. This will be parsed into tokens and initialize
-            the <see cref="P:OSIsoft.AF.Search.AFSearch.TokenCollection" /> property.
+            the <see cref="P:OSIsoft.AF.Search.AFSearch.TokenCollection" /> property. Strings will be interpreted 
+            with the <see cref="M:OSIsoft.AF.Time.AFTime.Parse(System.String,OSIsoft.AF.Time.AFTime,System.IFormatProvider)" /> method so that 
+            relative formats with intervals ("*", "T+3h", etc.) are also supported. Relative time 
+            intervals are based on the database's QueryDate.
             </param>
     </member>
     <member name="M:OSIsoft.AF.Search.AFAnalysisTemplateSearch.FindAnalysisTemplates(System.Int32,System.Boolean,System.Int32)">
@@ -58796,7 +58809,10 @@
             </param>
       <param name="query">
             The optional search query string. If specified, this will add additional search filters to the
-            generated search query in addition to the ones for the specified mode and times.
+            generated search query in addition to the ones for the specified mode and times. Strings will be interpreted 
+            with the <see cref="M:OSIsoft.AF.Time.AFTime.Parse(System.String,OSIsoft.AF.Time.AFTime,System.IFormatProvider)" /> method so that 
+            relative formats with intervals ("*", "T+3h", etc.) are also supported. Relative time 
+            intervals are based on the database's QueryDate.
             </param>
     </member>
     <member name="M:OSIsoft.AF.Search.AFAttributeSearch.#ctor(OSIsoft.AF.AFDatabase,System.String,OSIsoft.AF.EventFrame.AFEventFrameSearchMode,OSIsoft.AF.Time.AFTime,System.String)">
@@ -58826,7 +58842,10 @@
             </param>
       <param name="query">
             The optional search query string. If specified, this will add additional search filters to the
-            generated search query in addition to the ones for the specified mode and times.
+            generated search query in addition to the ones for the specified mode and times. Strings will be interpreted 
+            with the <see cref="M:OSIsoft.AF.Time.AFTime.Parse(System.String,OSIsoft.AF.Time.AFTime,System.IFormatProvider)" /> method so that 
+            relative formats with intervals ("*", "T+3h", etc.) are also supported. Relative time 
+            intervals are based on the database's QueryDate.
             </param>
     </member>
     <member name="M:OSIsoft.AF.Search.AFAttributeSearch.#ctor(OSIsoft.AF.AFDatabase,System.String,System.Collections.Generic.IList{OSIsoft.AF.Search.AFSearchToken})">
@@ -58888,7 +58907,10 @@
             </param>
       <param name="query">
             The search query string. This will be parsed into tokens and initialize
-            the <see cref="P:OSIsoft.AF.Search.AFSearch.TokenCollection" /> property.
+            the <see cref="P:OSIsoft.AF.Search.AFSearch.TokenCollection" /> property. Strings will be interpreted 
+            with the <see cref="M:OSIsoft.AF.Time.AFTime.Parse(System.String,OSIsoft.AF.Time.AFTime,System.IFormatProvider)" /> method so that 
+            relative formats with intervals ("*", "T+3h", etc.) are also supported. Relative time 
+            intervals are based on the database's QueryDate.
             </param>
     </member>
     <member name="M:OSIsoft.AF.Search.AFAttributeSearch.FindAttributes(System.Int32,System.Int32)">
@@ -59024,7 +59046,10 @@
             </param>
       <param name="query">
             The optional search query string. If specified, this will add additional search filters to the
-            generated search query in addition to the ones for the specified mode and times.
+            generated search query in addition to the ones for the specified mode and times. Strings will be interpreted 
+            with the <see cref="M:OSIsoft.AF.Time.AFTime.Parse(System.String,OSIsoft.AF.Time.AFTime,System.IFormatProvider)" /> method so that 
+            relative formats with intervals ("*", "T+3h", etc.) are also supported. Relative time 
+            intervals are based on the database's QueryDate.
             </param>
     </member>
     <member name="M:OSIsoft.AF.Search.AFCaseSearch.#ctor(OSIsoft.AF.AFDatabase,System.String,OSIsoft.AF.EventFrame.AFEventFrameSearchMode,OSIsoft.AF.Time.AFTime,System.Collections.Generic.IList{OSIsoft.AF.Search.AFSearchTokenBase})">
@@ -59086,7 +59111,10 @@
             </param>
       <param name="query">
             The optional search query string. If specified, this will add additional search filters to the
-            generated search query in addition to the ones for the specified mode and times.
+            generated search query in addition to the ones for the specified mode and times. Strings will be interpreted 
+            with the <see cref="M:OSIsoft.AF.Time.AFTime.Parse(System.String,OSIsoft.AF.Time.AFTime,System.IFormatProvider)" /> method so that 
+            relative formats with intervals ("*", "T+3h", etc.) are also supported. Relative time 
+            intervals are based on the database's QueryDate.
             </param>
     </member>
     <member name="M:OSIsoft.AF.Search.AFCaseSearch.#ctor(OSIsoft.AF.AFDatabase,System.String,System.Collections.Generic.IList{OSIsoft.AF.Search.AFSearchToken})">
@@ -59147,7 +59175,10 @@
             </param>
       <param name="query">
             The search query string. This will be parsed into tokens and initialize
-            the <see cref="P:OSIsoft.AF.Search.AFSearch.TokenCollection" /> property.
+            the <see cref="P:OSIsoft.AF.Search.AFSearch.TokenCollection" /> property. Strings will be interpreted 
+            with the <see cref="M:OSIsoft.AF.Time.AFTime.Parse(System.String,OSIsoft.AF.Time.AFTime,System.IFormatProvider)" /> method so that 
+            relative formats with intervals ("*", "T+3h", etc.) are also supported. Relative time 
+            intervals are based on the database's QueryDate.
             </param>
     </member>
     <member name="M:OSIsoft.AF.Search.AFCaseSearch.FindCases(System.Int32,System.Boolean,System.Int32)">
@@ -59286,7 +59317,10 @@
             </param>
       <param name="query">
             The search query string. This will be parsed into tokens and initialize
-            the <see cref="P:OSIsoft.AF.Search.AFSearch.TokenCollection" /> property.
+            the <see cref="P:OSIsoft.AF.Search.AFSearch.TokenCollection" /> property. Strings will be interpreted 
+            with the <see cref="M:OSIsoft.AF.Time.AFTime.Parse(System.String,OSIsoft.AF.Time.AFTime,System.IFormatProvider)" /> method so that 
+            relative formats with intervals ("*", "T+3h", etc.) are also supported. Relative time 
+            intervals are based on the database's QueryDate.
             </param>
     </member>
     <member name="M:OSIsoft.AF.Search.AFElementSearch.FindElements(System.Int32,System.Boolean,System.Int32)">
@@ -59438,7 +59472,10 @@
             </param>
       <param name="query">
             The optional search query string. If specified, this will add additional search filters to the
-            generated search query in addition to the ones for the specified mode and times.
+            generated search query in addition to the ones for the specified mode and times. Strings will be interpreted 
+            with the <see cref="M:OSIsoft.AF.Time.AFTime.Parse(System.String,OSIsoft.AF.Time.AFTime,System.IFormatProvider)" /> method so that 
+            relative formats with intervals ("*", "T+3h", etc.) are also supported. Relative time 
+            intervals are based on the database's QueryDate.
             </param>
     </member>
     <member name="M:OSIsoft.AF.Search.AFEventFrameSearch.#ctor(OSIsoft.AF.AFDatabase,System.String,OSIsoft.AF.EventFrame.AFEventFrameSearchMode,OSIsoft.AF.Time.AFTime,System.Collections.Generic.IList{OSIsoft.AF.Search.AFSearchTokenBase})">
@@ -59500,7 +59537,10 @@
             </param>
       <param name="query">
             The optional search query string. If specified, this will add additional search filters to the
-            generated search query in addition to the ones for the specified mode and times.
+            generated search query in addition to the ones for the specified mode and times. Strings will be interpreted 
+            with the <see cref="M:OSIsoft.AF.Time.AFTime.Parse(System.String,OSIsoft.AF.Time.AFTime,System.IFormatProvider)" /> method so that 
+            relative formats with intervals ("*", "T+3h", etc.) are also supported. Relative time 
+            intervals are based on the database's QueryDate.
             </param>
     </member>
     <member name="M:OSIsoft.AF.Search.AFEventFrameSearch.#ctor(OSIsoft.AF.AFDatabase,System.String,System.Collections.Generic.IList{OSIsoft.AF.Search.AFSearchToken})">
@@ -59561,7 +59601,10 @@
             </param>
       <param name="query">
             The search query string. This will be parsed into tokens and initialize
-            the <see cref="P:OSIsoft.AF.Search.AFSearch.TokenCollection" /> property.
+            the <see cref="P:OSIsoft.AF.Search.AFSearch.TokenCollection" /> property. Strings will be interpreted 
+            with the <see cref="M:OSIsoft.AF.Time.AFTime.Parse(System.String,OSIsoft.AF.Time.AFTime,System.IFormatProvider)" /> method so that 
+            relative formats with intervals ("*", "T+3h", etc.) are also supported. Relative time 
+            intervals are based on the database's QueryDate.
             </param>
     </member>
     <member name="M:OSIsoft.AF.Search.AFEventFrameSearch.FindEventFrames(System.Int32,System.Boolean,System.Int32)">
@@ -59700,7 +59743,10 @@
             </param>
       <param name="query">
             The search query string. This will be parsed into tokens and initialize
-            the <see cref="P:OSIsoft.AF.Search.AFSearch.TokenCollection" /> property.
+            the <see cref="P:OSIsoft.AF.Search.AFSearch.TokenCollection" /> property. Strings will be interpreted 
+            with the <see cref="M:OSIsoft.AF.Time.AFTime.Parse(System.String,OSIsoft.AF.Time.AFTime,System.IFormatProvider)" /> method so that 
+            relative formats with intervals ("*", "T+3h", etc.) are also supported. Relative time 
+            intervals are based on the database's QueryDate.
             </param>
     </member>
     <member name="M:OSIsoft.AF.Search.AFNotificationContactTemplateSearch.FindNotificationContactTemplates(System.Int32,System.Boolean,System.Int32)">
@@ -59829,7 +59875,10 @@
             </param>
       <param name="query">
             The search query string. This will be parsed into tokens and initialize
-            the <see cref="P:OSIsoft.AF.Search.AFSearch.TokenCollection" /> property.
+            the <see cref="P:OSIsoft.AF.Search.AFSearch.TokenCollection" /> property. Strings will be interpreted 
+            with the <see cref="M:OSIsoft.AF.Time.AFTime.Parse(System.String,OSIsoft.AF.Time.AFTime,System.IFormatProvider)" /> method so that 
+            relative formats with intervals ("*", "T+3h", etc.) are also supported. Relative time 
+            intervals are based on the database's QueryDate.
             </param>
     </member>
     <member name="M:OSIsoft.AF.Search.AFNotificationRuleSearch.FindNotificationRules(System.Int32,System.Boolean,System.Int32)">
@@ -59968,7 +60017,10 @@
             </param>
       <param name="query">
             The search query string. This will be parsed into tokens and initialize
-            the <see cref="P:OSIsoft.AF.Search.AFSearch.TokenCollection" /> property.
+            the <see cref="P:OSIsoft.AF.Search.AFSearch.TokenCollection" /> property. Strings will be interpreted 
+            with the <see cref="M:OSIsoft.AF.Time.AFTime.Parse(System.String,OSIsoft.AF.Time.AFTime,System.IFormatProvider)" /> method so that 
+            relative formats with intervals ("*", "T+3h", etc.) are also supported. Relative time 
+            intervals are based on the database's QueryDate.
             </param>
     </member>
     <member name="M:OSIsoft.AF.Search.AFNotificationRuleTemplateSearch.FindNotificationRuleTemplates(System.Int32,System.Boolean,System.Int32)">
@@ -60362,7 +60414,10 @@
             Parses the specified search query into search tokens which can be used to search for objects.
             </summary>
       <param name="query">
-            The search query to be parsed.
+            The search query to be parsed. Strings will be interpreted 
+            with the <see cref="M:OSIsoft.AF.Time.AFTime.Parse(System.String,OSIsoft.AF.Time.AFTime,System.IFormatProvider)" /> method so that 
+            relative formats with intervals ("*", "T+3h", etc.) are also supported. Relative time 
+            intervals are based on the database's QueryDate.
             </param>
       <returns>
             Returns a list of search tokens representing the parts of the parsed query.
@@ -60373,7 +60428,10 @@
             Parses the specified search query into search tokens which can be used to search for objects.
             </summary>
       <param name="query">
-            The search query to be parsed.
+            The search query to be parsed. Strings will be interpreted 
+            with the <see cref="M:OSIsoft.AF.Time.AFTime.Parse(System.String,OSIsoft.AF.Time.AFTime,System.IFormatProvider)" /> method so that 
+            relative formats with intervals ("*", "T+3h", etc.) are also supported. Relative time 
+            intervals are based on the database's QueryDate.
             </param>
       <returns>
             Returns a list of search tokens representing the parts of the parsed query.
@@ -62401,7 +62459,10 @@
             </param>
       <param name="query">
             The optional search query string. If specified, this will add additional search filters to the
-            generated search query in addition to the ones for the specified mode and times.
+            generated search query in addition to the ones for the specified mode and times. Strings will be interpreted 
+            with the <see cref="M:OSIsoft.AF.Time.AFTime.Parse(System.String,OSIsoft.AF.Time.AFTime,System.IFormatProvider)" /> method so that 
+            relative formats with intervals ("*", "T+3h", etc.) are also supported. Relative time 
+            intervals are based on the database's QueryDate.
             </param>
     </member>
     <member name="M:OSIsoft.AF.Search.AFTransferSearch.#ctor(OSIsoft.AF.AFDatabase,System.String,OSIsoft.AF.EventFrame.AFEventFrameSearchMode,OSIsoft.AF.Time.AFTime,System.Collections.Generic.IList{OSIsoft.AF.Search.AFSearchTokenBase})">
@@ -62463,7 +62524,10 @@
             </param>
       <param name="query">
             The optional search query string. If specified, this will add additional search filters to the
-            generated search query in addition to the ones for the specified mode and times.
+            generated search query in addition to the ones for the specified mode and times. Strings will be interpreted 
+            with the <see cref="M:OSIsoft.AF.Time.AFTime.Parse(System.String,OSIsoft.AF.Time.AFTime,System.IFormatProvider)" /> method so that 
+            relative formats with intervals ("*", "T+3h", etc.) are also supported. Relative time 
+            intervals are based on the database's QueryDate.
             </param>
     </member>
     <member name="M:OSIsoft.AF.Search.AFTransferSearch.#ctor(OSIsoft.AF.AFDatabase,System.String,System.Collections.Generic.IList{OSIsoft.AF.Search.AFSearchToken})">
@@ -62524,7 +62588,10 @@
             </param>
       <param name="query">
             The search query string. This will be parsed into tokens and initialize
-            the <see cref="P:OSIsoft.AF.Search.AFSearch.TokenCollection" /> property.
+            the <see cref="P:OSIsoft.AF.Search.AFSearch.TokenCollection" /> property. Strings will be interpreted 
+            with the <see cref="M:OSIsoft.AF.Time.AFTime.Parse(System.String,OSIsoft.AF.Time.AFTime,System.IFormatProvider)" /> method so that 
+            relative formats with intervals ("*", "T+3h", etc.) are also supported. Relative time 
+            intervals are based on the database's QueryDate.
             </param>
     </member>
     <member name="M:OSIsoft.AF.Search.AFTransferSearch.FindTransfers(System.Int32,System.Boolean,System.Int32)">

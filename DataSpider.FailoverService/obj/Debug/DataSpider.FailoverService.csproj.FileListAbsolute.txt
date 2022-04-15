@@ -23,3 +23,16 @@ D:\GitHub\DataSpider\DataSpider.FailoverService\obj\Debug\DataSpider.FailoverSer
 D:\GitHub\DataSpider\DataSpider.FailoverService\obj\Debug\DataSpider.FailoverService.csproj.CopyComplete
 D:\GitHub\DataSpider\DataSpider.FailoverService\obj\Debug\DataSpider.FailoverService.exe
 D:\GitHub\DataSpider\DataSpider.FailoverService\obj\Debug\DataSpider.FailoverService.pdb
+C:\Users\kalbe\source\repos\DataSpider\EXE\DataSpider\App.config
+C:\Users\kalbe\source\repos\DataSpider\EXE\DataSpider\DataSpider.FailoverService.exe.config
+C:\Users\kalbe\source\repos\DataSpider\EXE\DataSpider\DataSpider.FailoverService.exe
+C:\Users\kalbe\source\repos\DataSpider\EXE\DataSpider\DataSpider.FailoverService.pdb
+C:\Users\kalbe\source\repos\DataSpider\DataSpider.FailoverService\obj\Debug\DataSpider.FailoverService.csproj.AssemblyReference.cache
+C:\Users\kalbe\source\repos\DataSpider\DataSpider.FailoverService\obj\Debug\DataSpider.FailoverService.csproj.SuggestedBindingRedirects.cache
+C:\Users\kalbe\source\repos\DataSpider\DataSpider.FailoverService\obj\Debug\DataSpider.FailoverService.FailoverService.resources
+C:\Users\kalbe\source\repos\DataSpider\DataSpider.FailoverService\obj\Debug\DataSpider.FailoverService.ProjectInstaller.resources
+C:\Users\kalbe\source\repos\DataSpider\DataSpider.FailoverService\obj\Debug\DataSpider.FailoverService.csproj.GenerateResource.cache
+C:\Users\kalbe\source\repos\DataSpider\DataSpider.FailoverService\obj\Debug\DataSpider.FailoverService.csproj.CoreCompileInputs.cache
+C:\Users\kalbe\source\repos\DataSpider\DataSpider.FailoverService\obj\Debug\DataSpider.FailoverService.csproj.CopyComplete
+C:\Users\kalbe\source\repos\DataSpider\DataSpider.FailoverService\obj\Debug\DataSpider.FailoverService.exe
+C:\Users\kalbe\source\repos\DataSpider\DataSpider.FailoverService\obj\Debug\DataSpider.FailoverService.pdb

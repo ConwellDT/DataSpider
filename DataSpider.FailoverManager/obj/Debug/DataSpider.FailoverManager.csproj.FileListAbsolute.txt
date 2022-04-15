@@ -42,3 +42,15 @@ D:\GitHub\DataSpider\DataSpider.FailoverManager\obj\Debug\DataSpider.FailoverMan
 D:\GitHub\DataSpider\DataSpider.FailoverManager\obj\Debug\DataSpider.FailoverManager.csproj.CopyComplete
 D:\GitHub\DataSpider\DataSpider.FailoverManager\obj\Debug\DataSpider.FailoverManager.exe
 D:\GitHub\DataSpider\DataSpider.FailoverManager\obj\Debug\DataSpider.FailoverManager.pdb
+C:\Users\kalbe\source\repos\DataSpider\DataSpider.FailoverManager\obj\Debug\DataSpider.FailoverManager.csproj.AssemblyReference.cache
+C:\Users\kalbe\source\repos\DataSpider\DataSpider.FailoverManager\obj\Debug\DataSpider.FailoverManager.csproj.SuggestedBindingRedirects.cache
+C:\Users\kalbe\source\repos\DataSpider\DataSpider.FailoverManager\obj\Debug\DataSpider.FailoverManager.MainForm.resources
+C:\Users\kalbe\source\repos\DataSpider\DataSpider.FailoverManager\obj\Debug\DataSpider.FailoverManager.Properties.Resources.resources
+C:\Users\kalbe\source\repos\DataSpider\DataSpider.FailoverManager\obj\Debug\DataSpider.FailoverManager.csproj.GenerateResource.cache
+C:\Users\kalbe\source\repos\DataSpider\DataSpider.FailoverManager\obj\Debug\DataSpider.FailoverManager.csproj.CoreCompileInputs.cache
+C:\Users\kalbe\source\repos\DataSpider\DataSpider.FailoverManager\obj\Debug\DataSpider.FailoverManager.exe
+C:\Users\kalbe\source\repos\DataSpider\DataSpider.FailoverManager\obj\Debug\DataSpider.FailoverManager.pdb
+C:\Users\kalbe\source\repos\DataSpider\EXE\DataSpider\DataSpider.FailoverManager.exe.config
+C:\Users\kalbe\source\repos\DataSpider\EXE\DataSpider\DataSpider.FailoverManager.exe
+C:\Users\kalbe\source\repos\DataSpider\EXE\DataSpider\DataSpider.FailoverManager.pdb
+C:\Users\kalbe\source\repos\DataSpider\DataSpider.FailoverManager\obj\Debug\DataSpider.FailoverManager.csproj.CopyComplete
