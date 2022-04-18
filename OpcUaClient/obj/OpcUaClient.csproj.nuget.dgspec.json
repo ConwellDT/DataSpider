@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\kalbe\\source\\repos\\DataSpider\\OpcUaClient\\OpcUaClient.csproj": {}
+    "D:\\GitHub\\DataSpider\\OpcUaClient\\OpcUaClient.csproj": {}
   },
   "projects": {
-    "C:\\Users\\kalbe\\source\\repos\\DataSpider\\OpcUaClient\\OpcUaClient.csproj": {
+    "D:\\GitHub\\DataSpider\\OpcUaClient\\OpcUaClient.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\kalbe\\source\\repos\\DataSpider\\OpcUaClient\\OpcUaClient.csproj",
+        "projectUniqueName": "D:\\GitHub\\DataSpider\\OpcUaClient\\OpcUaClient.csproj",
         "projectName": "OpcUaClient",
-        "projectPath": "C:\\Users\\kalbe\\source\\repos\\DataSpider\\OpcUaClient\\OpcUaClient.csproj",
-        "packagesPath": "C:\\Users\\kalbe\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\kalbe\\source\\repos\\DataSpider\\OpcUaClient\\obj\\",
+        "projectPath": "D:\\GitHub\\DataSpider\\OpcUaClient\\OpcUaClient.csproj",
+        "packagesPath": "C:\\Users\\fansu\\.nuget\\packages\\",
+        "outputPath": "D:\\GitHub\\DataSpider\\OpcUaClient\\obj\\",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
         "fallbackFolders": [
@@ -19,7 +19,7 @@
           "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\kalbe\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\fansu\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
