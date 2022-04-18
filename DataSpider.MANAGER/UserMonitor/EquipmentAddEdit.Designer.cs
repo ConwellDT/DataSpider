@@ -41,6 +41,9 @@ namespace DataSpider.UserMonitor
             this.tableLayoutPanel_Contents = new System.Windows.Forms.TableLayoutPanel();
             this.dataGridTagInfo = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel_EquipInfo = new System.Windows.Forms.TableLayoutPanel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.comboBox_InterfaceType = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.panel17 = new System.Windows.Forms.Panel();
             this.comboBox_UseFlag = new System.Windows.Forms.ComboBox();
             this.panel16 = new System.Windows.Forms.Panel();
@@ -68,9 +71,6 @@ namespace DataSpider.UserMonitor
             this.comboBox_EquipType = new System.Windows.Forms.ComboBox();
             this.panel7 = new System.Windows.Forms.Panel();
             this.textBox_EquipName = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.comboBox_InterfaceType = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel_Main.SuspendLayout();
             this.panelBottomMenu.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -80,6 +80,7 @@ namespace DataSpider.UserMonitor
             this.tableLayoutPanel_Contents.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridTagInfo)).BeginInit();
             this.tableLayoutPanel_EquipInfo.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.panel17.SuspendLayout();
             this.panel16.SuspendLayout();
             this.panel15.SuspendLayout();
@@ -93,7 +94,6 @@ namespace DataSpider.UserMonitor
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel7.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel_Main
@@ -269,6 +269,37 @@ namespace DataSpider.UserMonitor
             this.tableLayoutPanel_EquipInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel_EquipInfo.Size = new System.Drawing.Size(496, 419);
             this.tableLayoutPanel_EquipInfo.TabIndex = 0;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.comboBox_InterfaceType);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(132, 55);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(360, 44);
+            this.panel1.TabIndex = 15;
+            // 
+            // comboBox_InterfaceType
+            // 
+            this.comboBox_InterfaceType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBox_InterfaceType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_InterfaceType.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.comboBox_InterfaceType.FormattingEnabled = true;
+            this.comboBox_InterfaceType.Location = new System.Drawing.Point(0, 7);
+            this.comboBox_InterfaceType.Name = "comboBox_InterfaceType";
+            this.comboBox_InterfaceType.Size = new System.Drawing.Size(360, 29);
+            this.comboBox_InterfaceType.TabIndex = 0;
+            // 
+            // label8
+            // 
+            this.label8.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label8.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label8.Location = new System.Drawing.Point(4, 52);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(121, 50);
+            this.label8.TabIndex = 14;
+            this.label8.Text = "Interface Type";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel17
             // 
@@ -536,37 +567,6 @@ namespace DataSpider.UserMonitor
             this.textBox_EquipName.TabIndex = 0;
             this.textBox_EquipName.TextChanged += new System.EventHandler(this.textBox_EquipName_TextChanged);
             // 
-            // label8
-            // 
-            this.label8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label8.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label8.Location = new System.Drawing.Point(4, 52);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(121, 50);
-            this.label8.TabIndex = 14;
-            this.label8.Text = "Interface Type";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.comboBox_InterfaceType);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(132, 55);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(360, 44);
-            this.panel1.TabIndex = 15;
-            // 
-            // comboBox_InterfaceType
-            // 
-            this.comboBox_InterfaceType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox_InterfaceType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox_InterfaceType.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.comboBox_InterfaceType.FormattingEnabled = true;
-            this.comboBox_InterfaceType.Location = new System.Drawing.Point(0, 7);
-            this.comboBox_InterfaceType.Name = "comboBox_InterfaceType";
-            this.comboBox_InterfaceType.Size = new System.Drawing.Size(360, 29);
-            this.comboBox_InterfaceType.TabIndex = 0;
-            // 
             // EquipmentAddEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -590,6 +590,7 @@ namespace DataSpider.UserMonitor
             this.tableLayoutPanel_Contents.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridTagInfo)).EndInit();
             this.tableLayoutPanel_EquipInfo.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             this.panel17.ResumeLayout(false);
             this.panel16.ResumeLayout(false);
             this.panel15.ResumeLayout(false);
@@ -607,7 +608,6 @@ namespace DataSpider.UserMonitor
             this.panel4.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
             this.panel7.PerformLayout();
-            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

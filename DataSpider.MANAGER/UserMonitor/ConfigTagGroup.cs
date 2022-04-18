@@ -8,24 +8,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Runtime.InteropServices;
 
 namespace DataSpider.UserMonitor
 {
     public partial class ConfigTagGroup : Form
     {
-        #region Using Win32 DLL
-        public const int WM_NCLBUTTONDOWN = 0xA1;
-        public const int HT_CAPTION = 0x2;
-        [DllImportAttribute("user32.dll")]
-        public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
-        [DllImportAttribute("user32.dll")]
-        public static extern bool ReleaseCapture();
-
-        [DllImportAttribute("user32.dll")]
-        private static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
-        #endregion
-
         private PC00Z01 sqlBiz = new PC00Z01();
 
         public ConfigTagGroup()
@@ -36,12 +23,6 @@ namespace DataSpider.UserMonitor
         private void ConfigTagGroup_Load(object sender, EventArgs e)
         {
             InitControls();
-        }
-
-        private void labelTitle_MouseDown(object sender, MouseEventArgs e)
-        {
-            ReleaseCapture();
-            SendMessage(this.Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
         }
 
         private void InitControls()
@@ -63,6 +44,15 @@ namespace DataSpider.UserMonitor
             }
         }
 
+        private void comboBox_EquipType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ShowEQTypeSelected();
+        }
+
+        private void comboBoxGroupSel_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ShowGroupInfoSelected();
+        }
         private void ShowGroupInfoSelected()
         {
             string strErrCode = string.Empty;
@@ -76,7 +66,7 @@ namespace DataSpider.UserMonitor
                 string selGrpName = selRow["GROUP_NM"].ToString();
                 string selGrpDesc = selRow["GROUP_DESC"].ToString();
 
-                labelGroupDesc.Text = selGrpDesc;
+                label_GroupDesc.Text = selGrpDesc;
 
                 DataTable dtEquiptype = sqlBiz.GetCommonCode("EQUIP_TYPE", ref strErrCode, ref strErrText);
 
@@ -111,7 +101,6 @@ namespace DataSpider.UserMonitor
                 MessageBox.Show("No group created yet", $"Group info", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
-
         private void ShowEQTypeSelected()
         {
             string strErrCode = string.Empty;
@@ -182,19 +171,9 @@ namespace DataSpider.UserMonitor
                 MessageBox.Show(strErrText, $"Equipment type read fail", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
-
-        private void comboBox_EquipType_SelectedIndexChanged(object sender, EventArgs e)
+        private void button_Add_Click(object sender, EventArgs e)
         {
-            ShowEQTypeSelected();
-        }
 
-        private void comboBoxGroupSel_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ShowGroupInfoSelected();
-        }
-
-        private void labelBTAdd_Click(object sender, EventArgs e)
-        {
             string strErrCode = string.Empty;
             string strErrText = string.Empty;
 
@@ -244,8 +223,9 @@ namespace DataSpider.UserMonitor
             }
         }
 
-        private void labelBTEdit_Click(object sender, EventArgs e)
+        private void button_Edit_Click(object sender, EventArgs e)
         {
+
             string strErrCode = string.Empty;
             string strErrText = string.Empty;
 
@@ -357,8 +337,9 @@ namespace DataSpider.UserMonitor
             }
         }
 
-        private void labelBTRemove_Click(object sender, EventArgs e)
+        private void button_Remove_Click(object sender, EventArgs e)
         {
+
             string strErrCode = string.Empty;
             string strErrText = string.Empty;
 
@@ -401,7 +382,7 @@ namespace DataSpider.UserMonitor
             ShowEQTypeSelected();
         }
 
-        private void labelBTSelectAll_Click(object sender, EventArgs e)
+        private void button_SelectAll_Click(object sender, EventArgs e)
         {
             for (int nL = 0; nL < checkedLBoxTagList.Items.Count; nL++)
             {
@@ -409,7 +390,7 @@ namespace DataSpider.UserMonitor
             }
         }
 
-        private void labelBTDeselectAll_Click(object sender, EventArgs e)
+        private void button_DeselectAll_Click(object sender, EventArgs e)
         {
             for (int nL = 0; nL < checkedLBoxTagList.Items.Count; nL++)
             {
@@ -417,7 +398,7 @@ namespace DataSpider.UserMonitor
             }
         }
 
-        private void labelBTExit_Click(object sender, EventArgs e)
+        private void button_Close_Click(object sender, EventArgs e)
         {
             this.Close();
         }
