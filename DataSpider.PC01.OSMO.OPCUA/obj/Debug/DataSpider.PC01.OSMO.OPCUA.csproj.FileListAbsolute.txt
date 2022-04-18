@@ -26,3 +26,16 @@ D:\GitHub\DataSpider\DataSpider.PC01.OSMO.OPCUA\obj\Debug\DataSpider.PC01.OSMO.O
 D:\GitHub\DataSpider\DataSpider.PC01.OSMO.OPCUA\obj\Debug\DataSpider.PC01.OSMO.OPCUA.csproj.CopyComplete
 D:\GitHub\DataSpider\DataSpider.PC01.OSMO.OPCUA\obj\Debug\SEIMMPC01.OSMO.OPCUA.exe
 D:\GitHub\DataSpider\DataSpider.PC01.OSMO.OPCUA\obj\Debug\SEIMMPC01.OSMO.OPCUA.pdb
+C:\Users\kalbe\source\repos\DataSpider\EXE\DataSpider\SEIMMPC01.OSMO.OPCUA.exe.config
+C:\Users\kalbe\source\repos\DataSpider\EXE\DataSpider\SEIMMPC01.OSMO.OPCUA.exe
+C:\Users\kalbe\source\repos\DataSpider\EXE\DataSpider\SEIMMPC01.OSMO.OPCUA.pdb
+C:\Users\kalbe\source\repos\DataSpider\DataSpider.PC01.OSMO.OPCUA\obj\Debug\DataSpider.PC01.OSMO.OPCUA.csproj.AssemblyReference.cache
+C:\Users\kalbe\source\repos\DataSpider\DataSpider.PC01.OSMO.OPCUA\obj\Debug\DataSpider.PC01.OSMO.OPCUA.csproj.SuggestedBindingRedirects.cache
+C:\Users\kalbe\source\repos\DataSpider\DataSpider.PC01.OSMO.OPCUA\obj\Debug\SEIMMPC01.OSMO.OPCUA.exe.config
+C:\Users\kalbe\source\repos\DataSpider\DataSpider.PC01.OSMO.OPCUA\obj\Debug\SEIMM.PC01.PT.Properties.Resources.resources
+C:\Users\kalbe\source\repos\DataSpider\DataSpider.PC01.OSMO.OPCUA\obj\Debug\DataSpider.PC01.PT.PC01F01.resources
+C:\Users\kalbe\source\repos\DataSpider\DataSpider.PC01.OSMO.OPCUA\obj\Debug\DataSpider.PC01.OSMO.OPCUA.csproj.GenerateResource.cache
+C:\Users\kalbe\source\repos\DataSpider\DataSpider.PC01.OSMO.OPCUA\obj\Debug\DataSpider.PC01.OSMO.OPCUA.csproj.CoreCompileInputs.cache
+C:\Users\kalbe\source\repos\DataSpider\DataSpider.PC01.OSMO.OPCUA\obj\Debug\DataSpider.PC01.OSMO.OPCUA.csproj.CopyComplete
+C:\Users\kalbe\source\repos\DataSpider\DataSpider.PC01.OSMO.OPCUA\obj\Debug\SEIMMPC01.OSMO.OPCUA.exe
+C:\Users\kalbe\source\repos\DataSpider\DataSpider.PC01.OSMO.OPCUA\obj\Debug\SEIMMPC01.OSMO.OPCUA.pdb

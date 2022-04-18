@@ -23,3 +23,16 @@ D:\GitHub\DataSpider\DataSpider.PC01.PT\obj\Debug\DataSpider.PC01.PT.PC01F01.res
 D:\GitHub\DataSpider\DataSpider.PC01.PT\obj\Debug\DataSpider.PC01.PT.csproj.GenerateResource.cache
 D:\GitHub\DataSpider\DataSpider.PC01.PT\obj\Debug\DataSpider.PC01.PT.csproj.CoreCompileInputs.cache
 D:\GitHub\DataSpider\DataSpider.PC01.PT\obj\Debug\DataSpider.PC01.PT.csproj.CopyComplete
+C:\Users\kalbe\source\repos\DataSpider\EXE\DataSpider\DataSpiderPC01.exe.config
+C:\Users\kalbe\source\repos\DataSpider\EXE\DataSpider\DataSpiderPC01.exe
+C:\Users\kalbe\source\repos\DataSpider\EXE\DataSpider\DataSpiderPC01.pdb
+C:\Users\kalbe\source\repos\DataSpider\DataSpider.PC01.PT\obj\Debug\DataSpider.PC01.PT.csproj.AssemblyReference.cache
+C:\Users\kalbe\source\repos\DataSpider\DataSpider.PC01.PT\obj\Debug\DataSpider.PC01.PT.csproj.SuggestedBindingRedirects.cache
+C:\Users\kalbe\source\repos\DataSpider\DataSpider.PC01.PT\obj\Debug\DataSpiderPC01.exe.config
+C:\Users\kalbe\source\repos\DataSpider\DataSpider.PC01.PT\obj\Debug\DataSpider.PC01.PT.Properties.Resources.resources
+C:\Users\kalbe\source\repos\DataSpider\DataSpider.PC01.PT\obj\Debug\DataSpider.PC01.PT.PC01F01.resources
+C:\Users\kalbe\source\repos\DataSpider\DataSpider.PC01.PT\obj\Debug\DataSpider.PC01.PT.csproj.GenerateResource.cache
+C:\Users\kalbe\source\repos\DataSpider\DataSpider.PC01.PT\obj\Debug\DataSpider.PC01.PT.csproj.CoreCompileInputs.cache
+C:\Users\kalbe\source\repos\DataSpider\DataSpider.PC01.PT\obj\Debug\DataSpider.PC01.PT.csproj.CopyComplete
+C:\Users\kalbe\source\repos\DataSpider\DataSpider.PC01.PT\obj\Debug\DataSpiderPC01.exe
+C:\Users\kalbe\source\repos\DataSpider\DataSpider.PC01.PT\obj\Debug\DataSpiderPC01.pdb

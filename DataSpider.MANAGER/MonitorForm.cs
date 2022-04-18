@@ -482,15 +482,9 @@ namespace DataSpider
 
         private void ReadStatusConfig()
         {
-            m_bDb1StatusEnable = ConfigHelper.GetAppSetting("Db1StatusEnable").Trim().ToUpper().Equals("Y");
-            if (m_bDb1StatusEnable) toolStripStatusLabel_DB1_Status.Visible = true;
-            else toolStripStatusLabel_DB1_Status.Visible = false;
-            m_bDb2StatusEnable = ConfigHelper.GetAppSetting("Db2StatusEnable").Trim().ToUpper().Equals("Y");
-            if (m_bDb2StatusEnable) toolStripStatusLabel_DB2_Status.Visible = true;
-            else toolStripStatusLabel_DB2_Status.Visible = false;
-            m_bDb3StatusEnable = ConfigHelper.GetAppSetting("Db3StatusEnable").Trim().ToUpper().Equals("Y");
-            if (m_bDb3StatusEnable) toolStripStatusLabel_DB3_Status.Visible = true;
-            else toolStripStatusLabel_DB3_Status.Visible = false;
+            toolStripStatusLabel_DB1_Status.Visible = true;
+            toolStripStatusLabel_DB2_Status.Visible = false;
+            toolStripStatusLabel_DB3_Status.Visible = false;
 
             m_bDbPgmStatusEnable = ConfigHelper.GetAppSetting("DbPgmStatusEnable").Trim().ToUpper().Equals("Y");
             if (m_bDbPgmStatusEnable) toolStripStatusLabel_DBPGM_Status.Visible = true;

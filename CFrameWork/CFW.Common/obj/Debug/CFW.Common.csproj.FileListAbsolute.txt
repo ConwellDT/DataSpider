@@ -45,3 +45,11 @@ C:\project\콘웰\삼성바이오로직스\svn_new\02.Source\CFrameWork\CFW.Comm
 C:\project\콘웰\삼성바이오로직스\svn_new\02.Source\CFrameWork\CFW.Common\obj\Debug\CFW.Common.csproj.CopyComplete
 C:\project\콘웰\삼성바이오로직스\svn_new\02.Source\CFrameWork\CFW.Common\obj\Debug\CFW.Common.dll
 C:\project\콘웰\삼성바이오로직스\svn_new\02.Source\CFrameWork\CFW.Common\obj\Debug\CFW.Common.pdb
+C:\Users\kalbe\source\repos\DataSpider\Assembly\CFW.Common.XML
+C:\Users\kalbe\source\repos\DataSpider\Assembly\CFW.Common.dll
+C:\Users\kalbe\source\repos\DataSpider\Assembly\CFW.Common.pdb
+C:\Users\kalbe\source\repos\DataSpider\CFrameWork\CFW.Common\obj\Debug\CFW.Common.csproj.AssemblyReference.cache
+C:\Users\kalbe\source\repos\DataSpider\CFrameWork\CFW.Common\obj\Debug\CFW.Common.csproj.CoreCompileInputs.cache
+C:\Users\kalbe\source\repos\DataSpider\CFrameWork\CFW.Common\obj\Debug\CFW.Common.dll
+C:\Users\kalbe\source\repos\DataSpider\CFrameWork\CFW.Common\obj\Debug\CFW.Common.pdb
+C:\Users\kalbe\source\repos\DataSpider\CFrameWork\CFW.Common\obj\Debug\CFW.Common.csproj.CopyComplete
