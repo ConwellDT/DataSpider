@@ -1,8 +1,8 @@
 Assembly/
-DataSpider.FailoverManager\obj/
-DataSpider.FailoverService\obj/
-DataSpider.FileTrans\obj/
-DataSpider.MANAGER\obj/
+DataSpider.FailoverManager/obj/
+DataSpider.FailoverService/obj/
+DataSpider.FileTrans/obj/
+DataSpider.MANAGER/obj/
 DataSpider.PC00.PT/obj/
 DataSpider.PC01.PT/obj/
 DataSpider.PC02.PT/obj/
