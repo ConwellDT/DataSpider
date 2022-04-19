@@ -506,17 +506,6 @@ namespace DataSpider.UserMonitor
             threadDataRefresh = null;
         }
 
-        private void listView_Main_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            if (dataGridView_Main.SelectedRows.Count < 1)
-            {
-                return;
-            }
-            string tagName = dataGridView_Main.SelectedRows[0].Cells[3].Value.ToString();
-            TAGValueHistoryPopupDGV form = new TAGValueHistoryPopupDGV(tagName);
-            form.ShowDialog(this);
-        }
-
         private void ValueHistoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (dataGridView_Main.SelectedRows.Count < 1)
