@@ -132,7 +132,7 @@ namespace DataSpider.UserMonitor
                 {
                     int.TryParse(dr[0]["Status Code"].ToString(), out int code);
                     node.Obj.State = (IF_STATUS)code;
-                    node.Text = $"{node.Obj.Name} ({dr[0]["Tag Count"]}) [{node.Obj.State}]";
+                    node.Text = $"{node.Obj.Name} [{dr[0]["Active Server"]}] ({dr[0]["Tag Count"]}) [{node.Obj.State}]";
                 }
             }
             else if (node.Obj is EqType)
