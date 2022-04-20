@@ -33,6 +33,7 @@ namespace DataSpider.PC01.PT
         IDictionary<string, string> m_ForwardFlow = new Dictionary<string, string>();
         IDictionary<string, string> m_SelfTest = new Dictionary<string, string>();
         IDictionary<string, string> m_WaterIntrusion = new Dictionary<string, string>();
+        IDictionary<string, string> m_PressureDecay = new Dictionary<string, string>();
 
         private DateTime m_LastWriteTime = DateTime.MinValue;
         private UInt32 m_LastEnqueuedRecord = 0;
@@ -285,6 +286,18 @@ namespace DataSpider.PC01.PT
                         }
                         EnQueue(MSGTYPE.MEASURE, ssb.ToString());
                         break;
+                    case "Pressure Decay":
+                        dataString = GetData(outputArguments[0].ToString(), m_PressureDecay["DateTime"]);
+                        PC00U01.TryParseExact(dataString, out dtDateTime);
+                        ssb.Clear();
+                        ssb.AppendLine($"{typeName}_SVRTIME, {dtDateTime:yyyy-MM-dd HH:mm:ss}, {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}");
+                        foreach (KeyValuePair<string, string> kvp in m_PressureDecay)
+                        {
+                            dataString = GetData(outputArguments[0].ToString(), kvp.Value);
+                            ssb.AppendLine($"{typeName}_{kvp.Key.ToUpper()}, {dtDateTime:yyyy-MM-dd HH:mm:ss}, {dataString}");
+                        }
+                        EnQueue(MSGTYPE.MEASURE, ssb.ToString());
+                        break;
                     default:
                         listViewMsg.UpdateMsg($"Unknown Test Name !", false, true, true, PC00D01.MSGTERR);
                         break;
@@ -460,6 +473,19 @@ namespace DataSpider.PC01.PT
                     if (spline.Length > 1)
                     {
                         m_WaterIntrusion.Add(spline[0].Trim(), spline[1].Trim());
+                    }
+                }
+            }
+            path = $@".\Cfg\{m_Type}_PressureDecay.csv";
+            m_WaterIntrusion.Clear();
+            using (StreamReader file = new StreamReader(path))
+            {
+                while ((line = file.ReadLine()) != null)
+                {
+                    string[] spline = line.Split(',');
+                    if (spline.Length > 1)
+                    {
+                        m_PressureDecay.Add(spline[0].Trim(), spline[1].Trim());
                     }
                 }
             }
