@@ -284,7 +284,7 @@ namespace DataSpider.PC01.PT
                         listViewMsg.UpdateMsg($"OPC UA Not Connected. Try to connect.", false, true, true, PC00D01.MSGTERR);
                         Thread.Sleep(5000);
                         InitOpcUaClient();
-                        m_soloVpe.ReadCfgData($@".\Cfg\{m_Name}_Config.csv");
+                        m_soloVpe.ReadCfgData($@".\Cfg\{m_Type}_Config.csv");
                         dtNormalTime = DateTime.Now;
                     }
                     else
