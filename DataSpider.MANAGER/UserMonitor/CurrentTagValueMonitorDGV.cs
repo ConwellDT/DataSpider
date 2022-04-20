@@ -44,8 +44,8 @@ namespace DataSpider.UserMonitor
         private string TagNameFilter = "";
         private DateTime DateTimeFilterCurMin = DateTime.MinValue;
         private DateTime DateTimeFilterCurMax = DateTime.MinValue;
-        private DateTime DateTimeFilterHistMin = DateTime.MinValue;
-        private DateTime DateTimeFilterHistMax = DateTime.MinValue;
+        private DateTime DateTimeFilterHistMin = DateTime.Now.AddDays(-30);// DateTime.MinValue;
+        private DateTime DateTimeFilterHistMax = DateTime.Now;// DateTime.MinValue;
         private string DescriptionFilter = "";
 
         public CurrentTagValueMonitorDGV()
@@ -229,18 +229,19 @@ namespace DataSpider.UserMonitor
                     }
                 }
             }
-            if (DateTimeFilterCurMin > DateTime.MinValue && DateTimeFilterCurMax > DateTime.MinValue && DateTimeFilterCurMin < DateTimeFilterCurMax)
-            {
-                if (String.IsNullOrEmpty(strFileterStr) == false) strFileterStr += " AND ";
-                if (DateTimeFilterCurMin == DateTimeFilterCurMax)
-                {
-                    strFileterStr += $"([Measure DateTime] = '{DateTimeFilterCurMin.ToString("yyyy-MM-dd HH:mm:ss.ff")}') ";
-                }
-                else
-                {
-                    strFileterStr += $"([Measure DateTime] > '{DateTimeFilterCurMin.ToString("yyyy-MM-dd HH:mm:ss.ff")}' AND [Measure DateTime] < '{DateTimeFilterCurMax.ToString("yyyy-MM-dd HH:mm:ss.ff")}') ";
-                }
-            }
+            // 20220420, SHS, 최근값 조회하는데 시간이 왜 필요 ?
+            //if (DateTimeFilterCurMin > DateTime.MinValue && DateTimeFilterCurMax > DateTime.MinValue && DateTimeFilterCurMin < DateTimeFilterCurMax)
+            //{
+            //    if (String.IsNullOrEmpty(strFileterStr) == false) strFileterStr += " AND ";
+            //    if (DateTimeFilterCurMin == DateTimeFilterCurMax)
+            //    {
+            //        strFileterStr += $"([Measure DateTime] = '{DateTimeFilterCurMin.ToString("yyyy-MM-dd HH:mm:ss.fff")}') ";
+            //    }
+            //    else
+            //    {
+            //        strFileterStr += $"([Measure DateTime] > '{DateTimeFilterCurMin.ToString("yyyy-MM-dd HH:mm:ss.fff")}' AND [Measure DateTime] < '{DateTimeFilterCurMax.ToString("yyyy-MM-dd HH:mm:ss.fff")}') ";
+            //    }
+            //}
             if (String.IsNullOrEmpty(strFileterStr) == false) strFileterStr += " AND ";
             strFileterStr += $"[Description] LIKE '%{DescriptionFilter}%'  ";
 
@@ -269,9 +270,10 @@ namespace DataSpider.UserMonitor
 
         private void GetTagHistoryValues()
         {
+            dataGridView_Main.DataSource = null;//.Rows.Clear();
             if (String.IsNullOrEmpty(equipName.Trim()) == true)
             {
-                MessageBox.Show("Equipment is not selected", "History Data Display", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //MessageBox.Show("Equipment is not selected", "History Data Display", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -284,8 +286,8 @@ namespace DataSpider.UserMonitor
 
             String selGrpName = comboBoxTagGroupSel.SelectedValue.ToString();
 
-            DateTime minDate = DateTime.Now.AddDays(-60);
-            DateTime maxDate = DateTime.Now;
+            DateTime minDate;
+            DateTime maxDate;
             if (DateTimeFilterHistMin > DateTime.MinValue && DateTimeFilterHistMax > DateTime.MinValue && (DateTimeFilterHistMax > DateTimeFilterHistMin))
             {
                 minDate = DateTimeFilterHistMin;
@@ -293,7 +295,7 @@ namespace DataSpider.UserMonitor
             }
             else
             {
-                minDate = DateTime.Now.AddDays(-60);
+                minDate = DateTime.Now.AddDays(-30);
                 maxDate = DateTime.Now;
             }
 
@@ -325,43 +327,52 @@ namespace DataSpider.UserMonitor
                         if (dtTagHistory != null) dtTagHistory.Dispose();
                     }
                 }
+            }
+            else
+            {
+                DataTable dtTagValueHistory = sqlBiz.GetTagValueHistoryByEquip(equipName, minDate.ToString("yyyy-MM-dd HH:mm:ss.fff"), maxDate.ToString("yyyy-MM-dd HH:mm:ss.fff"), ref strErrCode, ref strErrText);
 
-                if (dtHistoryData != null && dtHistoryData.Rows.Count > 0)
+                if (strErrCode == null || strErrCode == string.Empty)
                 {
-                    dtHistoryData.DefaultView.Sort = "MEASURE_DATE DESC";
-
-
-                    int nHoriScrollOffset = dataGridView_Main.HorizontalScrollingOffset;
-                    int nRowIndex = dataGridView_Main.FirstDisplayedScrollingRowIndex;
-
-                    dataGridView_Main.DataSource = dtHistoryData;
-
-                    if (dtHistoryData.Rows.Count > 0)
+                    if (dtTagValueHistory != null && dtTagValueHistory.Rows.Count > 0)
                     {
-                        dataGridView_Main.HorizontalScrollingOffset = nHoriScrollOffset;
-
-                        if (dtHistoryData.Rows.Count > nRowIndex)
-                        {
-                            dataGridView_Main.FirstDisplayedScrollingRowIndex = nRowIndex;
-                        }
-                        else
-                        {
-                            dataGridView_Main.FirstDisplayedScrollingRowIndex = 0;
-                        }
+                        dtHistoryData = dtTagValueHistory;
                     }
+
+                    if (dtTagValueHistory != null) dtTagValueHistory.Dispose();
                 }
-                else
+            }
+
+            if (dtHistoryData != null && dtHistoryData.Rows.Count > 0)
+            {
+                dtHistoryData.DefaultView.Sort = "MEASURE_DATE DESC";
+
+
+                int nHoriScrollOffset = dataGridView_Main.HorizontalScrollingOffset;
+                int nRowIndex = dataGridView_Main.FirstDisplayedScrollingRowIndex;
+
+                dataGridView_Main.DataSource = dtHistoryData;
+
+                if (dtHistoryData.Rows.Count > 0)
                 {
-                    String strMsg = $"{equipName}:{selGrpName}:{minDate} ~ {maxDate} - No data exist";
-                    MessageBox.Show(strMsg, "History Data Display", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    dataGridView_Main.HorizontalScrollingOffset = nHoriScrollOffset;
+
+                    if (dtHistoryData.Rows.Count > nRowIndex)
+                    {
+                        dataGridView_Main.FirstDisplayedScrollingRowIndex = nRowIndex;
+                    }
+                    else
+                    {
+                        dataGridView_Main.FirstDisplayedScrollingRowIndex = 0;
+                    }
                 }
             }
             else
             {
-                MessageBox.Show("Tag group is not selected", "History Data Display", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                String strMsg = $"Equipment : {equipName}, TagGroup : {selGrpName}, Period : {minDate} ~ {maxDate} - No data exist";
+                MessageBox.Show(strMsg, "History Data Display", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
-
         private void GetProgramStatus()
         {
             // 20210428, SHS, 값 업데이트 쓰레드 처리위해
@@ -504,17 +515,6 @@ namespace DataSpider.UserMonitor
                 }
             }
             threadDataRefresh = null;
-        }
-
-        private void listView_Main_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            if (dataGridView_Main.SelectedRows.Count < 1)
-            {
-                return;
-            }
-            string tagName = dataGridView_Main.SelectedRows[0].Cells[3].Value.ToString();
-            TAGValueHistoryPopupDGV form = new TAGValueHistoryPopupDGV(tagName);
-            form.ShowDialog(this);
         }
 
         private void ValueHistoryToolStripMenuItem_Click(object sender, EventArgs e)

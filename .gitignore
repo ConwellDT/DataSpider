@@ -1,0 +1,39 @@
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# Visual Studio 2015/2017 cache/options directory
+.vs/
+
+Assembly/
+DataSpider.FailoverManager/obj/
+DataSpider.FailoverService/obj/
+DataSpider.FileTrans/obj/
+DataSpider.MANAGER/obj/
+DataSpider.PC00.PT/obj/
+DataSpider.PC01.PT/obj/
+DataSpider.PC02.PT/obj/
+DataSpider.PC03.PT/obj/
+DataSpider.SampleCollector/obj/
+LibraryWH/obj/
+OpcUaClient/obj/
+EXE/

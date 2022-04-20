@@ -38,7 +38,7 @@ namespace DataSpider.UserMonitor
                     dateTimePickerTimeMin.Value = DateTime.Now;
                 }
 
-                textBoxDateTimeSelMin.Text = dtSelDateTimeMin.ToString("yyyy-MM-dd HH:mm:ss.ff");
+                textBoxDateTimeSelMin.Text = dtSelDateTimeMin.ToString("yyyy-MM-dd HH:mm:ss.fff");
             }
         }
 
@@ -59,7 +59,7 @@ namespace DataSpider.UserMonitor
                     dateTimePickerTimeMax.Value = DateTime.Now;
                 }
 
-                textBoxDateTimeSelMax.Text = dtSelDateTimeMax.ToString("yyyy-MM-dd HH:mm:ss.ff");
+                textBoxDateTimeSelMax.Text = dtSelDateTimeMax.ToString("yyyy-MM-dd HH:mm:ss.fff");
             }
         }
 
@@ -84,7 +84,7 @@ namespace DataSpider.UserMonitor
 
         private void FilterForm_Load(object sender, EventArgs e)
         {
-            textBoxDateTimeSelMin.Text = dtSelDateTimeMin.ToString("yyyy-MM-dd HH:mm:ss.ff");
+            textBoxDateTimeSelMin.Text = dtSelDateTimeMin.ToString("yyyy-MM-dd HH:mm:ss.fff");
             dateTimePickerTimeMin.ShowUpDown = true;
             dateTimePickerTimeMax.ShowUpDown = true;
         }
@@ -100,7 +100,7 @@ namespace DataSpider.UserMonitor
             dtSelDateTimeMin = new DateTime(dateTimePickerDateMin.Value.Year, dateTimePickerDateMin.Value.Month, dateTimePickerDateMin.Value.Day,
                                      nH, nM, nS);
 
-            textBoxDateTimeSelMin.Text = dtSelDateTimeMin.ToString("yyyy-MM-dd HH:mm:ss.ff");
+            textBoxDateTimeSelMin.Text = dtSelDateTimeMin.ToString("yyyy-MM-dd HH:mm:ss.fff");
         }
 
         private void dateTimePickerTimeMin_ValueChanged(object sender, EventArgs e)
@@ -114,7 +114,7 @@ namespace DataSpider.UserMonitor
             dtSelDateTimeMin = new DateTime( nY, nM, nD, 
                                           dateTimePickerTimeMin.Value.Hour, dateTimePickerTimeMin.Value.Minute, dateTimePickerTimeMin.Value.Second);
 
-            textBoxDateTimeSelMin.Text = dtSelDateTimeMin.ToString("yyyy-MM-dd HH:mm:ss.ff");
+            textBoxDateTimeSelMin.Text = dtSelDateTimeMin.ToString("yyyy-MM-dd HH:mm:ss.fff");
         }
 
         private void dateTimePickerDateMax_ValueChanged(object sender, EventArgs e)
@@ -128,7 +128,7 @@ namespace DataSpider.UserMonitor
             dtSelDateTimeMax = new DateTime(dateTimePickerDateMax.Value.Year, dateTimePickerDateMax.Value.Month, dateTimePickerDateMax.Value.Day,
                                      nH, nM, nS);
 
-            textBoxDateTimeSelMax.Text = dtSelDateTimeMax.ToString("yyyy-MM-dd HH:mm:ss.ff");
+            textBoxDateTimeSelMax.Text = dtSelDateTimeMax.ToString("yyyy-MM-dd HH:mm:ss.fff");
         }
 
         private void dateTimePickerTimeMax_ValueChanged(object sender, EventArgs e)
@@ -142,7 +142,7 @@ namespace DataSpider.UserMonitor
             dtSelDateTimeMax = new DateTime(nY, nM, nD,
                                           dateTimePickerTimeMax.Value.Hour, dateTimePickerTimeMax.Value.Minute, dateTimePickerTimeMax.Value.Second);
 
-            textBoxDateTimeSelMax.Text = dtSelDateTimeMax.ToString("yyyy-MM-dd HH:mm:ss.ff");
+            textBoxDateTimeSelMax.Text = dtSelDateTimeMax.ToString("yyyy-MM-dd HH:mm:ss.fff");
         }
 
         private void textBoxDateTimeSelMin_TextChanged(object sender, EventArgs e)

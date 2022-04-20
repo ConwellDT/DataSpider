@@ -132,7 +132,7 @@ namespace DataSpider.UserMonitor
                 {
                     int.TryParse(dr[0]["Status Code"].ToString(), out int code);
                     node.Obj.State = (IF_STATUS)code;
-                    node.Text = $"{node.Obj.Name} ({dr[0]["Tag Count"]}) [{node.Obj.State}]";
+                    node.Text = $"{node.Obj.Name} [{dr[0]["Active Server"]}] ({dr[0]["Tag Count"]}) [{node.Obj.State}]";
                 }
             }
             else if (node.Obj is EqType)
@@ -171,8 +171,12 @@ namespace DataSpider.UserMonitor
 
                     List<Eq> listEq = eqTypeNode.EqLists;
                     int normalCount = listEq.FindAll(e => e.State.Equals(IF_STATUS.Normal)).Count;
-
-                    if (normalCount != listEq.Count)
+                    // 20220420, SHS, 해당 장비타입에 장비가 없으면 Unknown 으로 표시
+                    if (listEq.Count < 1)
+                    {
+                        eqTypeNode.State = IF_STATUS.Unknown;
+                    }
+                    else if (normalCount != listEq.Count)
                     {
                         eqTypeNode.State = IF_STATUS.Stop;
                     }
@@ -180,12 +184,12 @@ namespace DataSpider.UserMonitor
                     {
                         eqTypeNode.State = IF_STATUS.Normal;
                     }
-
+                    // 20220420, SHS
                     //대상 서버 장비가 아닌경우 표시
-                    int UnKnownCount = listEq.FindAll(e => e.State.Equals(IF_STATUS.Unknown)).Count;
+                    //int UnKnownCount = listEq.FindAll(e => e.State.Equals(IF_STATUS.Unknown)).Count;
 
-                    if (UnKnownCount == listEq.Count)
-                        eqTypeNode.State = IF_STATUS.Unknown;
+                    //if (UnKnownCount == listEq.Count)
+                    //    eqTypeNode.State = IF_STATUS.Unknown;
 
                     node.Text = $"{node.Obj.Name} ({node.Obj.Description}) [{normalCount}/{listEq.Count}]";
                 }

@@ -196,7 +196,7 @@ namespace DataSpider
             int MY_ID = sqlBiz.GetServerId(Environment.MachineName);
             if (MY_ID == -1)
             {
-                MessageBox.Show(strErrText, $"Server Code is not exist in database", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"Server Code is not exist in database", this.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Application.Exit();
             }
             strSvrCode = (MY_ID == 0) ? "P" : "S";
@@ -389,7 +389,7 @@ namespace DataSpider
             currentTagValueMonitor.threadStop = true;
             PIMonitor.threadStop = true;
 
-            for (int i = 0; i < dbStatus.Length; i++)
+            for (int i = 0; i < dbStatus?.Length; i++)
             {
                 dbStatus[i].Stop();
             }
