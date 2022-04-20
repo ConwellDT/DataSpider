@@ -128,24 +128,17 @@ namespace DataSpider.PC01.PT
                         {
                             listViewMsg.UpdateMsg($"Current m_LastEnqueuedRecord :{m_LastEnqueuedRecord}", false, true, true, PC00D01.MSGTINF);
                             listViewMsg.UpdateMsg($"Received LastTestCompleted :{m_CurrentRecord}", false, true, true, PC00D01.MSGTINF);
-                            //if (ProcessMethod(m_LastEnqueuedRecord) == true)
-                            //{
-                                //listViewMsg.UpdateMsg($" ProcessMethod({m_LastEnqueuedRecord})-OK ", false, true, true, PC00D01.MSGTINF);
-                                if (ProcessMethod(m_CurrentRecord) == true)
-                                {
-                                    listViewMsg.UpdateMsg($" ProcessMethod({m_CurrentRecord})-OK ", false, true, true, PC00D01.MSGTINF);
-                                    m_LastEnqueuedRecord = m_CurrentRecord;
-                                    SetLastEnqueuedRecord(m_LastEnqueuedRecord);
-                                }
-                                else
-                                {
-                                    listViewMsg.UpdateMsg($" ProcessMethod({m_CurrentRecord})- NG ", false, true, true, PC00D01.MSGTINF);
-                                }
-                            //}
-                            //else
-                            //{
-                            //    listViewMsg.UpdateMsg($" ProcessMethod({m_LastEnqueuedRecord})- NG ", false, true, true, PC00D01.MSGTINF);
-                            //}
+
+                            if (ProcessMethod(m_CurrentRecord) == true)
+                            {
+                                listViewMsg.UpdateMsg($" ProcessMethod({m_CurrentRecord})-OK ", false, true, true, PC00D01.MSGTINF);
+                                m_LastEnqueuedRecord = m_CurrentRecord;
+                                SetLastEnqueuedRecord(m_LastEnqueuedRecord);
+                            }
+                            else
+                            {
+                                listViewMsg.UpdateMsg($" ProcessMethod({m_CurrentRecord})- NG ", false, true, true, PC00D01.MSGTINF);
+                            }
                         }
                         else
                         {// m_LastEnqueuedRecord == m_CurrentRecord  => Nothing To Do => FromRecord/ToRecord 처리
