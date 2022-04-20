@@ -137,12 +137,14 @@ namespace DataSpider.UserMonitor
             }
             else if (node.Obj is EqType)
             {
-                UpdateTreeNodeStateForEqType(node);
-
                 List<Eq> listEq = (node.Obj as EqType).EqLists;
                 int normalCount = listEq.FindAll(e => e.State.Equals(IF_STATUS.Normal)).Count;
 
-                if (normalCount != listEq.Count)
+                if (listEq.Count < 1)
+                {
+                    node.Obj.State = IF_STATUS.Unknown;
+                }
+                else if (normalCount != listEq.Count)
                 {
                     node.Obj.State = IF_STATUS.Stop;
                 }
@@ -155,49 +157,6 @@ namespace DataSpider.UserMonitor
             }
             else
                 node.Obj.State = IF_STATUS.Normal;
-        }
-
-        /// <summary>
-        /// 프로그램 런/스탑 시 해당 장비타입 상태만 업데이트 (프로그램 상태, 연결장비 종합상태, 연결장비 연결수량 등)
-        /// </summary>
-        /// <param name="node"></param>
-        private void UpdateTreeNodeStateForEqType(TreeNode_SBL node)
-        {
-            try
-            {
-                if (node.Obj is EqType)
-                {
-                    EqType eqTypeNode = node.Obj as EqType;
-
-                    List<Eq> listEq = eqTypeNode.EqLists;
-                    int normalCount = listEq.FindAll(e => e.State.Equals(IF_STATUS.Normal)).Count;
-                    // 20220420, SHS, 해당 장비타입에 장비가 없으면 Unknown 으로 표시
-                    if (listEq.Count < 1)
-                    {
-                        eqTypeNode.State = IF_STATUS.Unknown;
-                    }
-                    else if (normalCount != listEq.Count)
-                    {
-                        eqTypeNode.State = IF_STATUS.Stop;
-                    }
-                    else
-                    {
-                        eqTypeNode.State = IF_STATUS.Normal;
-                    }
-                    // 20220420, SHS
-                    //대상 서버 장비가 아닌경우 표시
-                    //int UnKnownCount = listEq.FindAll(e => e.State.Equals(IF_STATUS.Unknown)).Count;
-
-                    //if (UnKnownCount == listEq.Count)
-                    //    eqTypeNode.State = IF_STATUS.Unknown;
-
-                    node.Text = $"{node.Obj.Name} ({node.Obj.Description}) [{normalCount}/{listEq.Count}]";
-                }
-            }
-            catch (Exception ex)
-            {
-
-            }
         }
 
 
