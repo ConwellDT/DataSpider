@@ -419,6 +419,11 @@ namespace DataSpider.PC01.PT
             catch (Opc.Ua.ServiceResultException ex)
             {
                 listViewMsg.UpdateMsg($"Exception in OPC Call - {ex.Message}", false, true, true, PC00D01.MSGTINF);
+                if (ex.Message.Contains("Could not encode outgoing message"))
+                {
+                    listViewMsg.UpdateMsg($"Exception in OPC Call - DaqID:{ToBeProcessedDaqID} - Processing Skip!", false, true, true, PC00D01.MSGTINF);
+                    return true;
+                }
                 return false;
             }
             if (outputArguments != null && outputArguments.Count >= 1)

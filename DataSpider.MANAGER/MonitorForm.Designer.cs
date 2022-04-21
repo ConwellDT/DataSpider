@@ -91,8 +91,8 @@ namespace DataSpider
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.pDispView);
-            this.splitContainer1.Size = new System.Drawing.Size(1430, 653);
-            this.splitContainer1.SplitterDistance = 377;
+            this.splitContainer1.Size = new System.Drawing.Size(1144, 530);
+            this.splitContainer1.SplitterDistance = 301;
             this.splitContainer1.TabIndex = 2;
             // 
             // pPanelView
@@ -102,7 +102,7 @@ namespace DataSpider
             this.pPanelView.Location = new System.Drawing.Point(0, 0);
             this.pPanelView.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.pPanelView.Name = "pPanelView";
-            this.pPanelView.Size = new System.Drawing.Size(377, 653);
+            this.pPanelView.Size = new System.Drawing.Size(301, 530);
             this.pPanelView.TabIndex = 1;
             // 
             // pDispView
@@ -112,7 +112,7 @@ namespace DataSpider
             this.pDispView.Location = new System.Drawing.Point(0, 0);
             this.pDispView.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.pDispView.Name = "pDispView";
-            this.pDispView.Size = new System.Drawing.Size(1049, 653);
+            this.pDispView.Size = new System.Drawing.Size(839, 530);
             this.pDispView.TabIndex = 0;
             // 
             // menuStrip1
@@ -256,7 +256,7 @@ namespace DataSpider
             this.toolStripSeparator3});
             this.toolStrip2.Location = new System.Drawing.Point(0, 30);
             this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(1430, 39);
+            this.toolStrip2.Size = new System.Drawing.Size(1144, 31);
             this.toolStrip2.TabIndex = 6;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -266,7 +266,7 @@ namespace DataSpider
             this.toolStripButton_ExpandAll.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton_ExpandAll.Image")));
             this.toolStripButton_ExpandAll.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton_ExpandAll.Name = "toolStripButton_ExpandAll";
-            this.toolStripButton_ExpandAll.Size = new System.Drawing.Size(29, 36);
+            this.toolStripButton_ExpandAll.Size = new System.Drawing.Size(29, 28);
             this.toolStripButton_ExpandAll.Text = "Expand All";
             this.toolStripButton_ExpandAll.ToolTipText = "Expand All";
             this.toolStripButton_ExpandAll.Click += new System.EventHandler(this.toolStripButton_ExpandAll_Click);
@@ -277,7 +277,7 @@ namespace DataSpider
             this.toolStripButton_CollapseAll.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton_CollapseAll.Image")));
             this.toolStripButton_CollapseAll.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton_CollapseAll.Name = "toolStripButton_CollapseAll";
-            this.toolStripButton_CollapseAll.Size = new System.Drawing.Size(29, 36);
+            this.toolStripButton_CollapseAll.Size = new System.Drawing.Size(29, 28);
             this.toolStripButton_CollapseAll.Text = "Collapse All";
             this.toolStripButton_CollapseAll.ToolTipText = "Collapse All";
             this.toolStripButton_CollapseAll.Click += new System.EventHandler(this.toolStripButton_CollapseAll_Click);
@@ -285,7 +285,7 @@ namespace DataSpider
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 39);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 31);
             // 
             // toolStripButton_Log
             // 
@@ -293,19 +293,19 @@ namespace DataSpider
             this.toolStripButton_Log.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton_Log.Image")));
             this.toolStripButton_Log.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton_Log.Name = "toolStripButton_Log";
-            this.toolStripButton_Log.Size = new System.Drawing.Size(56, 36);
+            this.toolStripButton_Log.Size = new System.Drawing.Size(56, 28);
             this.toolStripButton_Log.Text = "Log In";
             this.toolStripButton_Log.Click += new System.EventHandler(this.toolStripButton_Log_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 39);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 31);
             // 
             // toolStripLabel_User
             // 
             this.toolStripLabel_User.Name = "toolStripLabel_User";
-            this.toolStripLabel_User.Size = new System.Drawing.Size(39, 36);
+            this.toolStripLabel_User.Size = new System.Drawing.Size(39, 28);
             this.toolStripLabel_User.Text = "User";
             this.toolStripLabel_User.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.toolStripLabel_User.Click += new System.EventHandler(this.toolStripLabel_User_Click);
@@ -313,16 +313,16 @@ namespace DataSpider
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 39);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 31);
             // 
             // panel1
             // 
             this.panel1.Controls.Add(this.splitContainer1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 86);
+            this.panel1.Location = new System.Drawing.Point(0, 61);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1430, 653);
+            this.panel1.Size = new System.Drawing.Size(1144, 530);
             this.panel1.TabIndex = 7;
             // 
             // statusStrip1
@@ -386,7 +386,7 @@ namespace DataSpider
             // toolStripStatusLabel4
             // 
             this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            this.toolStripStatusLabel4.Size = new System.Drawing.Size(466, 25);
+            this.toolStripStatusLabel4.Size = new System.Drawing.Size(505, 25);
             this.toolStripStatusLabel4.Spring = true;
             this.toolStripStatusLabel4.Text = "  ";
             this.toolStripStatusLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
