@@ -194,7 +194,9 @@ namespace DataSpider.PC01.PT
             DataTable dtRequest = null;
 
             Thread.Sleep(3000);
-            //ShowHideForm(false);
+            string errCode = string.Empty, errText = string.Empty;
+            m_SqlBiz.ExecuteNonQuery($" UPDATE MA_FAILOVER_CD SET HIDE_SHOW=0  WHERE EQUIP_NM='{equipName}'  ", ref errCode, ref errText);
+            ShowHideForm(false);
 
             while (!bTerminated)
             {
@@ -497,11 +499,11 @@ namespace DataSpider.PC01.PT
         {
             try
             {
-                m_SqlBiz.ExecuteNonQuery($"Update MA_FAILOVER_CD SET PROG_STATUS=99 WHERE EQUIP_NM = {equipName} and FAILOVER_MODE=0", ref strErrCode, ref strErrText);
+                m_SqlBiz.ExecuteNonQuery($"Update MA_FAILOVER_CD SET PROG_STATUS=99 WHERE EQUIP_NM = {equipName}", ref strErrCode, ref strErrText);
                 bTerminated = true;
                 thDataProcess.bTerminal = true;
 
-                for (int i = 0; i < thProcess.Count(); i++)
+                for (int i = 0; i < thProcess?.Count(); i++)
                 {
                     thProcess[i].bTerminal = true;
                 }
@@ -511,7 +513,7 @@ namespace DataSpider.PC01.PT
                     thDataProcess.m_Thd.Abort();
                 }
 
-                for (int i = 0; i < thProcess.Count(); i++)
+                for (int i = 0; i < thProcess?.Count(); i++)
                 {
                     if (thProcess[i].m_Thd != null && !thProcess[i].m_Thd.Join(1000))
                     {
@@ -1122,13 +1124,16 @@ namespace DataSpider.PC01.PT
         // Exit Button Click Event (btnExit_Click)
         void btnExit_Click(object sender, EventArgs e)
         {
-            DialogResult dialogResult = MessageBox.Show(PC00D01.MSGP0001, PC00D01.MSGP0002, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            string errCode = string.Empty, errText = string.Empty;
+            m_SqlBiz.ExecuteNonQuery($" UPDATE MA_FAILOVER_CD SET HIDE_SHOW=0  WHERE EQUIP_NM='{equipName}'  ", ref errCode, ref errText);
+            ShowHideForm(false);
+            //DialogResult dialogResult = MessageBox.Show(PC00D01.MSGP0001, PC00D01.MSGP0002, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-            if (dialogResult == DialogResult.Yes)
-            {
-                //this.Close();
-                Terminate();
-            }
+            //if (dialogResult == DialogResult.Yes)
+            //{
+            //    //this.Close();
+            //    Terminate();
+            //}
         }
 
         // Icon Tray Button Click Event (m_niIcon_Click)

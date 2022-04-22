@@ -23,7 +23,7 @@ namespace DataSpider.UserMonitor
         private string equipType = string.Empty;
         private string equipName = string.Empty;
         private int selectedIndex = 0;
-        private int autoRefreshInterval = 30;
+        private int autoRefreshInterval = 10;
         private bool formSelected = false;
         private bool needResizeColumn = true;
         private DateTime dtLastRefreshed = DateTime.MinValue;
@@ -76,7 +76,7 @@ namespace DataSpider.UserMonitor
 
             if (!int.TryParse(ConfigHelper.GetAppSetting("TagAutoRefreshInterval").Trim(), out autoRefreshInterval))
             {
-                autoRefreshInterval = 30;
+                autoRefreshInterval = 10;
             }
             checkBox_AutoRefresh.Text = "Auto Refresh(" + autoRefreshInterval.ToString() + "s)";
             //timerRefresh.Tick += TimerRefresh_Tick;
@@ -369,8 +369,8 @@ namespace DataSpider.UserMonitor
             }
             else
             {
-                String strMsg = $"Equipment : {equipName}, TagGroup : {selGrpName}, Period : {minDate} ~ {maxDate} - No data exist";
-                MessageBox.Show(strMsg, "History Data Display", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //String strMsg = $"Equipment : {equipName}, TagGroup : {selGrpName}, Period : {minDate} ~ {maxDate} - No data exist";
+                //MessageBox.Show(strMsg, "History Data Display", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
         private void GetProgramStatus()

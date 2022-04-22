@@ -128,8 +128,8 @@ namespace DataSpider.PC00.PT
                 }
                 Thread.Sleep(1000);
             }
-            UpdateEquipmentProgDateTime(IF_STATUS.Stop);
             Disconnect();
+            UpdateEquipmentProgDateTime(IF_STATUS.Stop);
             listViewMsg.UpdateStatus(false);
             listViewMsg.UpdateMsg("Thread finished");
         }
@@ -405,7 +405,7 @@ namespace DataSpider.PC00.PT
                 {
                     IsConnected = false;
                     listViewMsg.UpdateMsg($"state.workSocket.Connected={state.workSocket.Connected} in ReadCallback", false, true, true, PC00D01.MSGTINF);
-                    state.workSocket.Shutdown(SocketShutdown.Both);
+                    //state.workSocket.Shutdown(SocketShutdown.Both);
                     state.workSocket.Close();
                     return;
                 }

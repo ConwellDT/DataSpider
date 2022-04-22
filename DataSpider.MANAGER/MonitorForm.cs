@@ -447,7 +447,7 @@ namespace DataSpider
                 {
                     if (UserAuthentication.IsAuthorized)
                     {
-                        toolStripLabel_User.Text = $"{UserAuthentication.UserID} ({UserAuthentication.UserName}) - {UserAuthentication.UserLevel}";
+                        toolStripLabel_User.Text = $"{UserAuthentication.UserID}";// ({UserAuthentication.UserName})";// - {UserAuthentication.UserLevel}";
                         toolStripButton_Log.Text = "Log Out";
                         OnUserLoginChanged?.Invoke();
                         userToolStripMenuItem.Visible = true;

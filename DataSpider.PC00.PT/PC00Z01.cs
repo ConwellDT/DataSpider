@@ -394,7 +394,7 @@ namespace DataSpider.PC00.PT
             try
             {
                 StringBuilder strQuery = new StringBuilder();
-                strQuery.Append($"EXEC UpdateMeasureResult1 {hiSeq},'{strFlag}', {if_count}, '{errMsg}' ");
+                strQuery.Append($"EXEC UpdateMeasureResult {hiSeq},'{strFlag}', {if_count}, '{errMsg}' ");
 
                 bool result = CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref _strErrCode, ref _strErrText);
                 return result;
@@ -429,13 +429,29 @@ namespace DataSpider.PC00.PT
                 return false;
             }
         }
-
-        public bool UpdateEquipmentProgDateTime2(string equipName, int status, ref string _strErrCode, ref string _strErrText)
+        public bool UpdateEquipmentProgDateTimePC02(string equipName, int status, ref string _strErrCode, ref string _strErrText)
         {
             try
             {
                 StringBuilder strQuery = new StringBuilder();
-                strQuery.Append($"EXEC UpdateEquipmentProgDateTime2 '{equipName}', {status} ");
+                strQuery.Append($"EXEC UpdateEquipmentProgDateTimePC02 '{equipName}', {status} ");
+
+                bool result = CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref _strErrCode, ref _strErrText);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                _strErrText = ex.ToString();
+                return false;
+            }
+        }
+
+        public bool UpdateEquipmentProgDateTimePC03(string equipName, int status, ref string _strErrCode, ref string _strErrText)
+        {
+            try
+            {
+                StringBuilder strQuery = new StringBuilder();
+                strQuery.Append($"EXEC UpdateEquipmentProgDateTimePC03 '{equipName}', {status} ");
 
                 bool result = CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref _strErrCode, ref _strErrText);
                 return result;

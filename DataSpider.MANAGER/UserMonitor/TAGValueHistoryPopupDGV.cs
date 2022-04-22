@@ -20,7 +20,7 @@ namespace DataSpider.UserMonitor
         private string equipType;
         private string equipName;
         private string logviewProgram = "NotePad";
-        public TAGValueHistoryPopupDGV(string _tagName = "", int _periodDays = 0)
+        public TAGValueHistoryPopupDGV(string _tagName = "", int _periodDays = 60)
         {
             InitializeComponent();
             tagName = _tagName;

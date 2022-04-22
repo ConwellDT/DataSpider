@@ -21,7 +21,7 @@ namespace DataSpider.UserMonitor
         private PC00Z01 sqlBiz = new PC00Z01();
         private string equipType = string.Empty;
         private int selectedIndex = 0;
-        private int autoRefreshInterval = 30;
+        private int autoRefreshInterval = 10;
         private bool formSelected = false;
         private bool needResizeColumn = true;
         private DateTime dtLastRefreshed = DateTime.MinValue;
@@ -53,7 +53,7 @@ namespace DataSpider.UserMonitor
 
             if (!int.TryParse(ConfigHelper.GetAppSetting("EquipmentAutoRefreshInterval").Trim(), out autoRefreshInterval))
             {
-                autoRefreshInterval = 30;
+                autoRefreshInterval = 10;
             }
             textBox_RefreshInterval.Text = autoRefreshInterval.ToString();
             //textBox_RefreshInterval.TextChanged += textBox_RefreshInterval_TextChanged;

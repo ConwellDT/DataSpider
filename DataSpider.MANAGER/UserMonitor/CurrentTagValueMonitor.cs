@@ -20,7 +20,7 @@ namespace DataSpider.UserMonitor
         private string equipType = string.Empty;
         private string equipName = string.Empty;
         private int selectedIndex = 0;
-        private int autoRefreshInterval = 30;
+        private int autoRefreshInterval = 10;
         private bool formSelected = false;
         private bool needResizeColumn = true;
         private DateTime dtLastRefreshed = DateTime.MinValue;
@@ -57,7 +57,7 @@ namespace DataSpider.UserMonitor
 
             if (!int.TryParse(ConfigHelper.GetAppSetting("TagAutoRefreshInterval").Trim(), out autoRefreshInterval))
             {
-                autoRefreshInterval = 30;
+                autoRefreshInterval = 10;
             }
             textBox_RefreshInterval.Text = autoRefreshInterval.ToString();
             //timerRefresh.Tick += TimerRefresh_Tick;

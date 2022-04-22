@@ -129,7 +129,7 @@ namespace DataSpider.PC03.PT
 
             try
             {
-                lbTitle.Text = $"{this.ProductName} - PI Interface";
+                lbTitle.Text = $"{Application.ProductName} - PI Interface";
                 //label_Version.Text = $"V.{Assembly.GetExecutingAssembly().GetName().Version}";
 
                 // DB 연결 
@@ -184,7 +184,7 @@ namespace DataSpider.PC03.PT
             try
             {
                 _PIserver = PIServer.FindPIServer(_PIStstem, serverName);
-                _PIserver.Connect();
+                _PIserver?.Connect();
             }
             catch(Exception ex)
             {
@@ -1034,24 +1034,13 @@ namespace DataSpider.PC03.PT
 
         public void ThreadChkPI()
         {
-            string errCode = string.Empty;
-            string errText = string.Empty;
-            string pierrText = string.Empty;
-            bool result = true;
             DateTime dtUpdateTime = DateTime.Now;
+
+            string strEqName = Application.ProductName;
 
             while (!bTerminated)
             {
-                string strSvrName = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
 
-                string strEqName = "PI_CONNECTION_01";
-
-                if (strSvrName.Substring(0,11) == "SYS-PLC-017")
-                    strEqName = "PI_CONNECTION_01";
-                else if (strSvrName.Substring(0, 11) == "SYS-PLC-018")
-                    strEqName = "PI_CONNECTION_02";
-                else if (strSvrName.Substring(0, 11) == "SYS-PLC-019")
-                    strEqName = "PI_CONNECTION_03";
 
                 try
                 {
@@ -1077,6 +1066,7 @@ namespace DataSpider.PC03.PT
                     m_ThdChkPI.Join(100);
                 }
             }
+            UpdateEquipmentProgDateTime(strEqName, IF_STATUS.Unknown);
         }
 
         protected bool UpdateEquipmentProgDateTime(string strEqName, IF_STATUS status = IF_STATUS.Normal)
@@ -1084,7 +1074,7 @@ namespace DataSpider.PC03.PT
             string errCode = string.Empty;
             string errText = string.Empty;
 
-            return this.m_SqlBiz.UpdateEquipmentProgDateTime(strEqName, (int)status, ref errCode, ref errText);
+            return this.m_SqlBiz.UpdateEquipmentProgDateTimePC03(strEqName, (int)status, ref errCode, ref errText);
 
         }
     }
