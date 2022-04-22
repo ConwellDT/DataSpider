@@ -40,13 +40,17 @@ namespace DataSpider.PC01.PT
         private string typeName = "MSR";
         private StringBuilder ssb = new StringBuilder();
 
+
+        // 2022-04-20 데이터 변경
+        // L0  <-   뒤에서 부터 0번째
+        // *   <-   전부를 붙여서 출력하는 기능
         public class SoloVpe
         {
             const int ARRAY0 = 0;
             const int PROPERTY1 = 1;
             const int ARRAY1 = 2;
             const int PROPERTY2 = 3;
-            
+
             public int newDaqID;
             public string newSampleName;
             public string newLDAPUserID;
@@ -77,13 +81,13 @@ namespace DataSpider.PC01.PT
 
                 document = JsonDocument.Parse(jsonString);
                 root = document.RootElement;
-                if (root.ValueKind != JsonValueKind.Array  || root.GetArrayLength() == 0 ) return;
-                
+                if (root.ValueKind != JsonValueKind.Array || root.GetArrayLength() == 0) return;
+
                 newDaqID = int.MaxValue;
                 foreach (JsonElement jElement in root.EnumerateArray())
                 {
                     DaqID = jElement.GetProperty("ID").GetInt32();
-                    
+
                     if (DaqID > currentDaqID && DaqID < newDaqID)
                     {
                         if (jElement.GetProperty("RunEnd").GetString() != null)
@@ -119,10 +123,25 @@ namespace DataSpider.PC01.PT
                     root = document.RootElement;
                     if (root.ValueKind != JsonValueKind.Array) return retValue;
 
+
                     if (int.TryParse(list[ARRAY0], out nArray0) == false)
                     {
-                        if (list[ARRAY1].Contains("#LAST"))
+                        if (list[ARRAY0].Contains("#LAST"))
+                        {
                             nArray0 = root.GetArrayLength() - 1;
+                        }
+                        else if (list[ARRAY0].Contains("L"))
+                        {
+                            char[] charsToTrim = { 'L', ' ' };
+                            string val = list[ARRAY0].Trim(charsToTrim);
+                            if (int.TryParse(val, out nArray0) == false)
+                            {
+                                nArray0 = -1;
+                            }
+                            else
+                                nArray0 = root.GetArrayLength() - 1 - nArray0;
+
+                        }
                         else
                             nArray0 = -1;
                     }
@@ -142,16 +161,28 @@ namespace DataSpider.PC01.PT
 
                         if (string.IsNullOrWhiteSpace(list[PROPERTY2]) == false) // Property2가 있음.
                         {
-                            if (int.TryParse(list[ARRAY1], out nArray1) == false)
+                            if (list[ARRAY1].Contains("*"))
                             {
-                                if (list[ARRAY1].Contains("#LAST"))
-                                    nArray1 = jjElement.GetArrayLength() - 1;
-                                else
-                                    nArray0 = -1;
+                                for (int nLen = 0; nLen < jjElement.GetArrayLength(); nLen++)
+                                {
+                                    jjjElement = jjElement[jjElement.GetArrayLength() - nLen - 1].GetProperty(list[PROPERTY2]);
+                                    retValue += " " + jjjElement.ToString() + " ,";
+                                }
+                                if (retValue.Length > 0) retValue = retValue.Substring(0, retValue.Length - 1);
                             }
-                            if (nArray1 >= 0) jjjElement = jjElement[nArray1].GetProperty(list[PROPERTY2]); //Property2
-                            else jjjElement = jjElement.GetProperty(list[PROPERTY2]); //Property2
-                            retValue = jjjElement.ToString();
+                            else
+                            {
+                                if (int.TryParse(list[ARRAY1], out nArray1) == false)
+                                {
+                                    if (list[ARRAY1].Contains("#LAST"))
+                                        nArray1 = jjElement.GetArrayLength() - 1;
+                                    else
+                                        nArray0 = -1;
+                                }
+                                if (nArray1 >= 0) jjjElement = jjElement[nArray1].GetProperty(list[PROPERTY2]); //Property2
+                                else jjjElement = jjElement.GetProperty(list[PROPERTY2]); //Property2
+                                retValue = jjjElement.ToString();
+                            }
                         }
                         else
                         {
@@ -169,7 +200,7 @@ namespace DataSpider.PC01.PT
 
             public void ReadCfgData(string configFile)
             {
-                List<string> keyValue = null;               
+                List<string> keyValue = null;
                 string line;
                 try
                 {
@@ -202,6 +233,7 @@ namespace DataSpider.PC01.PT
             }
 
         }
+
 
         public PC01S14() : base()
         {
@@ -252,7 +284,7 @@ namespace DataSpider.PC01.PT
                         listViewMsg.UpdateMsg($"OPC UA Not Connected. Try to connect.", false, true, true, PC00D01.MSGTERR);
                         Thread.Sleep(5000);
                         InitOpcUaClient();
-                        m_soloVpe.ReadCfgData($@".\Cfg\{m_Name}_Config.csv");
+                        m_soloVpe.ReadCfgData($@".\Cfg\{m_Type}_Config.csv");
                         dtNormalTime = DateTime.Now;
                     }
                     else
@@ -387,6 +419,11 @@ namespace DataSpider.PC01.PT
             catch (Opc.Ua.ServiceResultException ex)
             {
                 listViewMsg.UpdateMsg($"Exception in OPC Call - {ex.Message}", false, true, true, PC00D01.MSGTINF);
+                if (ex.Message.Contains("Could not encode outgoing message"))
+                {
+                    listViewMsg.UpdateMsg($"Exception in OPC Call - DaqID:{ToBeProcessedDaqID} - Processing Skip!", false, true, true, PC00D01.MSGTINF);
+                    return true;
+                }
                 return false;
             }
             if (outputArguments != null && outputArguments.Count >= 1)
