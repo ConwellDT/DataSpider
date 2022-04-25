@@ -5631,18 +5631,18 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\kalbe\\.nuget\\packages\\": {},
+    "C:\\Users\\fansu\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
     "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\kalbe\\source\\repos\\DataSpider\\DataSpider.PC01.PT\\DataSpider.PC01.PT.csproj",
+      "projectUniqueName": "D:\\GitHub\\DataSpider\\DataSpider.PC01.PT\\DataSpider.PC01.PT.csproj",
       "projectName": "DataSpiderPC01",
-      "projectPath": "C:\\Users\\kalbe\\source\\repos\\DataSpider\\DataSpider.PC01.PT\\DataSpider.PC01.PT.csproj",
-      "packagesPath": "C:\\Users\\kalbe\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\kalbe\\source\\repos\\DataSpider\\DataSpider.PC01.PT\\obj\\",
+      "projectPath": "D:\\GitHub\\DataSpider\\DataSpider.PC01.PT\\DataSpider.PC01.PT.csproj",
+      "packagesPath": "C:\\Users\\fansu\\.nuget\\packages\\",
+      "outputPath": "D:\\GitHub\\DataSpider\\DataSpider.PC01.PT\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "fallbackFolders": [
@@ -5650,7 +5650,7 @@
         "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
       ],
       "configFilePaths": [
-        "C:\\Users\\kalbe\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\fansu\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
@@ -5665,11 +5665,11 @@
       "frameworks": {
         "net48": {
           "projectReferences": {
-            "C:\\Users\\kalbe\\source\\repos\\DataSpider\\DataSpider.PC00.PT\\DataSpider.PC00.PT.csproj": {
-              "projectPath": "C:\\Users\\kalbe\\source\\repos\\DataSpider\\DataSpider.PC00.PT\\DataSpider.PC00.PT.csproj"
+            "D:\\GitHub\\DataSpider\\DataSpider.PC00.PT\\DataSpider.PC00.PT.csproj": {
+              "projectPath": "D:\\GitHub\\DataSpider\\DataSpider.PC00.PT\\DataSpider.PC00.PT.csproj"
             },
-            "C:\\Users\\kalbe\\source\\repos\\DataSpider\\OpcUaClient\\OpcUaClient.csproj": {
-              "projectPath": "C:\\Users\\kalbe\\source\\repos\\DataSpider\\OpcUaClient\\OpcUaClient.csproj"
+            "D:\\GitHub\\DataSpider\\OpcUaClient\\OpcUaClient.csproj": {
+              "projectPath": "D:\\GitHub\\DataSpider\\OpcUaClient\\OpcUaClient.csproj"
             }
           }
         }

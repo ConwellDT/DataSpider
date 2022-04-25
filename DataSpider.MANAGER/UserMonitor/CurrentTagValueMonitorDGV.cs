@@ -800,17 +800,21 @@ namespace DataSpider.UserMonitor
 
         private void radioButtonHistoryTag_CheckedChanged(object sender, EventArgs e)
         {
+            // Current
             if (radioButtonCurTag.Checked == true)
             {
                 nDBModeCurrent = 1;
 
                 checkBox_AutoRefresh.Checked = true;
+                checkBox_AutoRefresh.Visible = button_SetInterval.Visible = true;
             }
+            // History
             else
             {
                 nDBModeCurrent = 0;
 
                 checkBox_AutoRefresh.Checked = false;
+                checkBox_AutoRefresh.Visible = button_SetInterval.Visible = false;
             }
         }
 
