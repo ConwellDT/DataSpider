@@ -14,7 +14,7 @@ namespace DataSpider.PC00.PT
 
     public abstract class PC00B01
     {
-        protected int UpdateInterval = 30;
+        protected int UpdateInterval = 10;
         protected IF_STATUS lastStatus = IF_STATUS.Stop;
 
         protected DataRow drEquipment = null;

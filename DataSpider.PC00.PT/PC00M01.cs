@@ -523,7 +523,7 @@ namespace DataSpider.PC00.PT
             {
                 m_clsPIInfo = ConfigHelper.GetPIInfo();
                 _PIserver = PIServer.FindPIServer(_PIStstem, m_clsPIInfo.strPI_Server);
-                _PIserver.Connect();
+                _PIserver?.Connect();
             }
             catch (Exception ex)
             {

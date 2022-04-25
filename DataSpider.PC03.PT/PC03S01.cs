@@ -56,7 +56,7 @@ namespace DataSpider.PC03.PT
             try
             {
                 _PIserver = PIServer.FindPIServer(_PIStstem, serverName);
-                _PIserver.Connect();
+                _PIserver?.Connect();
             }
             catch(Exception ex)
             {
@@ -168,11 +168,10 @@ namespace DataSpider.PC03.PT
                     //    m_Thd.Join(5000);
                     //else
                     //m_Thd.Join(1000)
-                   
                 }
             }
+            UpdateEquipmentProgDateTime(IF_STATUS.Unknown);
             mOwner.listViewMsg(m_strEName, PC00D01.OFF, true, m_nCurNo, 1, false, PC00D01.MSGTINF);
-            mOwner.listViewMsg(m_strEName, "Thread Started", false, m_nCurNo, 1, true, PC00D01.MSGTINF);            
         }
 
 
@@ -231,7 +230,7 @@ namespace DataSpider.PC03.PT
             {
                 dtLastUpdateProgDateTime = dtNow;
                 lastStatus = status;
-                return m_sqlBiz.UpdateEquipmentProgDateTime2($"{System.Windows.Forms.Application.ProductName}", (int)status, ref errCode, ref errText);
+                return m_sqlBiz.UpdateEquipmentProgDateTimePC02($"{System.Windows.Forms.Application.ProductName}", (int)status, ref errCode, ref errText);
             }
             return true;
         }

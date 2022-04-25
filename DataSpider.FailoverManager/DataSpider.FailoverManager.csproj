@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>failover03.ico</ApplicationIcon>
+    <ApplicationIcon>Letter-F-icon_34760.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CFW.Common">
@@ -96,7 +96,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="failover02.ico" />
     <Content Include="failover03.ico" />
+    <Content Include="Letter-F-icon_34760.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

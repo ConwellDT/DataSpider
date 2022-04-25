@@ -533,9 +533,9 @@ namespace DataSpider.PC00.PT
 
         public static bool FreePass()
         {
-            UserID = "FreePass";
-            UserName = "FreePass";
-            UserLevel = UserLevel.Manager;
+            UserID = "administrator";
+            UserName = "administrator";
+            UserLevel = UserLevel.Admin;
             IsAuthorized = true;
             return true;
         }

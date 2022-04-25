@@ -219,8 +219,8 @@ namespace DataSpider.PC01.PT
                 }
                 Thread.Sleep(1000);
             }
-            UpdateEquipmentProgDateTime(IF_STATUS.Stop);
             Disconnect();
+            UpdateEquipmentProgDateTime(IF_STATUS.Stop);
             listViewMsg.UpdateStatus(false);
             listViewMsg.UpdateMsg("Thread finished");
         }

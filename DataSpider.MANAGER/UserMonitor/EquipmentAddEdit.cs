@@ -103,7 +103,8 @@ namespace DataSpider.UserMonitor
                 if (!string.IsNullOrWhiteSpace(EquipTypeName))
                 {
                     comboBox_EquipType.SelectedValue = dtEquiptype.Select($"CODE_NM = '{EquipTypeName}'")[0]["CODE"].ToString();
-                    comboBox_InterfaceType.SelectedValue = dtInterfacetype.Select($"CODE_NM = '{EquipTypeName}'")[0]["CODE"].ToString();
+                    //comboBox_InterfaceType.SelectedValue = dtInterfacetype.Select($"CODE_NM = '{EquipTypeName}'")[0]["CODE"].ToString();
+                    comboBox_InterfaceType.SelectedIndex = 0;
                 }
                 foreach (Control ctrl in this.Controls)
                 {
