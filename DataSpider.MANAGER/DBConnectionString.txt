@@ -1,0 +1,5 @@
+﻿<!-- Test Server -->
+<!-- Data Source=192.168.20.229;Initial Catalog=DataSpider;Persist Security Info=True;User ID=SBLADMIN;Password=SBLADMIN#01 --> 
+<add key="SQL_Connectionstring"  value="33kYPWJ9afkjT3hTq/uRxipHADa0BxIUxfznN6czOrn1RAS79K3Uruo4ChAAtR5TCl0fzwUB6MF2nPkcpoRKRgHGE41fvHo2Xrry8AhOhqBLhEpR/ht85XTmOGVEUuciu8qc9mMobAnQK+tT2RHpGcafRAiE9MTj+1vv7tDkYzI5ZZUh1M1sGZrZVECnq5pMmUOqHc/jzCWGi/0lPBJCLbCIRWWZogbPMGV3rZreCQqND9/6rN51EQ5jvA5L6f/kAKZ8hNsOUo333As03aeLzdMppX9mZLWV2h9KYr6N8a/ru3l/jvUL1obqVJ2102l6"/>
+
+

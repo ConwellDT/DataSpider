@@ -157,6 +157,8 @@ namespace DataSpider.UserMonitor
                 dataGridTagInfo.Rows.Clear();
                 textBox_ConnectionInfo.Text = drEquipment["CONNECTION_INFO"].ToString();
 
+                textBox_EquipmentConfig.Text = drEquipment["CONFIG_INFO"].ToString();
+
                 if (EditModeCopy == false)
                 {
                     textBox_EquipName.Text = drEquipment["EQUIP_NM"].ToString();
