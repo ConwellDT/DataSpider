@@ -166,7 +166,7 @@ namespace DataSpider.PC01.PT
                                 for (int nLen = 0; nLen < jjElement.GetArrayLength(); nLen++)
                                 {
                                     jjjElement = jjElement[jjElement.GetArrayLength() - nLen - 1].GetProperty(list[PROPERTY2]);
-                                    retValue += " " + jjjElement.ToString() + " ,";
+                                    retValue += " " + jjjElement.ToString() + " ;";
                                 }
                                 if (retValue.Length > 0) retValue = retValue.Substring(0, retValue.Length - 1);
                             }

@@ -393,10 +393,11 @@ namespace DataSpider.PC01.PT
             XmlNodeList nodeList = xmldoc.SelectNodes(xPath);
             foreach (XmlNode xmlNode in nodeList)
             {
-                retString += xmlNode.Value + " ";
+                retString += xmlNode.Value + " ;";
             }
+            retString= retString.Substring(0, retString.Length - 1);
             //retString = xmlNode?.Value;
-            retString=retString.Replace((char)ASCII.CR, ' ');
+            retString =retString.Replace((char)ASCII.CR, ' ');
             retString=retString.Replace((char)ASCII.LF, ' ');
             return retString.Trim();
         }
