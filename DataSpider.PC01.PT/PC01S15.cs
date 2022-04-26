@@ -122,7 +122,26 @@ namespace DataSpider.PC01.PT
 
             return pDic;
         }
+        public Dictionary<string, cfgData> Deserial<T>(DataRow drConfig, Dictionary<string, cfgData> paramObj) where T : new()
+        {
+            var dicResult = new Dictionary<string, cfgData>();
 
+            string configInfo = drConfig["CONFIG_INFO"]?.ToString();
+            if (!string.IsNullOrWhiteSpace(configInfo))
+            {
+                StreamReader sr = new StreamReader(configInfo);
+                XmlSerializer xmlSer = new XmlSerializer(typeof(T));
+
+                var pList = (T)xmlSer.Deserialize(sr);
+
+                foreach (cfgData pObj in pList as List<cfgData>)
+                {
+                    dicResult[pObj.MeasureType] = pObj;
+                }
+            }
+
+            return dicResult;
+        }
         public cfgSave()
         {
         }
@@ -143,6 +162,17 @@ namespace DataSpider.PC01.PT
             {
                 cfgDictionary = Deserial<List<cfgData>>(sFilePath, cfgDictionary);
 
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show(ex.Message);
+            }
+        }
+        public void xmlLoadData(DataRow drConfig)
+        {
+            try
+            {
+                cfgDictionary = Deserial<List<cfgData>>(drConfig, cfgDictionary);
             }
             catch (Exception ex)
             {
@@ -252,10 +282,8 @@ namespace DataSpider.PC01.PT
         {
             drEquipment = dr;
 
-            string cfgFile = @".\CFG\" + m_Name + ".cfg";
-
-            cfg = new cfgSave(cfgFile);
-            cfg.xmlLoadData(cfgFile);
+            cfg = new cfgSave();
+            cfg.xmlLoadData(drEquipment);
         }
 
 
