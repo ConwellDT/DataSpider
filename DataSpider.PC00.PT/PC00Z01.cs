@@ -627,7 +627,7 @@ namespace DataSpider.PC00.PT
             }
         }
         
-        public bool InsertUpdateEquipmentInfo(bool add, string equipName, string description, string equipType, string interfaceType, string connectionInfo, string extraInfo, string serverName, string useFalg, ref string _strErrCode, ref string _strErrText)
+        public bool InsertUpdateEquipmentInfo(bool add, string equipName, string description, string equipType, string interfaceType, string connectionInfo, string extraInfo, string serverName, string useFalg, string configInfo, ref string _strErrCode, ref string _strErrText)
         {
             try
             {
@@ -640,7 +640,7 @@ namespace DataSpider.PC00.PT
                 {
                     strQuery.Append($"EXEC UpdateEquipmentInfo ");// '{equipName}', '{description}', '{equipType}', '{connectionInfo}', '{extraInfo}', '{serverName}', '{useFalg}', '{UserAuthentication.UserID}'");
                 }
-                strQuery.Append($" '{equipName}', '{description}', '{equipType}', '{interfaceType}', '{connectionInfo}', '{extraInfo}', '{serverName}', '{useFalg}', '{UserAuthentication.UserID}'");
+                strQuery.Append($" '{equipName}', '{description}', '{equipType}', '{interfaceType}', '{connectionInfo}', '{extraInfo}', '{serverName}', '{useFalg}', '{UserAuthentication.UserID}', '{configInfo}'");
                 bool result = CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref _strErrCode, ref _strErrText);
 
                 //

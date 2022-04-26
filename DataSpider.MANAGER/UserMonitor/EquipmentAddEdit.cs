@@ -157,7 +157,7 @@ namespace DataSpider.UserMonitor
                 dataGridTagInfo.Rows.Clear();
                 textBox_ConnectionInfo.Text = drEquipment["CONNECTION_INFO"].ToString();
 
-                textBox_EquipmentConfig.Text = drEquipment["CONFIG_INFO"].ToString();
+                textBox_ConfigInfo.Text = drEquipment["CONFIG_INFO"].ToString();
 
                 if (EditModeCopy == false)
                 {
@@ -318,7 +318,7 @@ namespace DataSpider.UserMonitor
                     drSelectEquip = dtEquipment.Select($"EQUIP_NM = '{textBox_EquipName.Text.Trim()}'");
                     if (drSelectEquip  != null && drSelectEquip.Length > 0 )
                     {
-                        MessageBox.Show($"Equipment Name ({textBox_EquipName.Text}) already exist", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show($"Equipment Name ({textBox_EquipName.Text}) already exists", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return;
                     }
                 }
@@ -328,7 +328,7 @@ namespace DataSpider.UserMonitor
                 if (AddMode == true || EditModeCopy == true) EQSaveMode = true;
 
                 if (sqlBiz.InsertUpdateEquipmentInfo(EQSaveMode, textBox_EquipName.Text.Trim(), textBox_Description.Text.Trim(), comboBox_EquipType.SelectedValue.ToString(), comboBox_InterfaceType.SelectedValue.ToString(),
-                    textBox_ConnectionInfo.Text, textBox_ExtraInfo.Text, comboBox_ServerName.SelectedValue.ToString(), comboBox_UseFlag.Text, ref strErrCode, ref strErrText))
+                    textBox_ConnectionInfo.Text, textBox_ExtraInfo.Text, comboBox_ServerName.SelectedValue.ToString(), comboBox_UseFlag.Text, textBox_ConfigInfo.Text, ref strErrCode, ref strErrText))
                 {
                     // Save Trag Info
                     int nTagSaveFailCount = 0;

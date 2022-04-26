@@ -362,7 +362,7 @@ namespace DataSpider.UserMonitor
                 int MY_ID = sqlBiz.GetServerId(Environment.MachineName);
                 if (MY_ID == -1)
                 {
-                    MessageBox.Show("", $"Server Code is not exist in database", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("", $"Server Code does not exist in database", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Application.Exit();
                 }
 
@@ -515,7 +515,7 @@ namespace DataSpider.UserMonitor
             int MY_ID = sqlBiz.GetServerId(Environment.MachineName);
             if (MY_ID == -1)
             {
-                MessageBox.Show("", $"Server Code is not exist in database", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("", $"Server Code does not exist in database", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Application.Exit();
             }
             strQuery.Append($" UPDATE MA_FAILOVER_CD SET FAILOVER_MODE=0 WHERE EQUIP_NM='{equipName}'  ");
@@ -705,7 +705,7 @@ namespace DataSpider.UserMonitor
             int MY_ID = sqlBiz.GetServerId(Environment.MachineName);
             if (MY_ID == -1)
             {
-                MessageBox.Show("", $"Server Code is not exist in database", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("", $"Server Code does not exist in database", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Application.Exit();
             }
             strQuery.Append($" UPDATE MA_FAILOVER_CD SET STOP_REQ{MY_ID}=1  WHERE EQUIP_NM='{equipName}'  ");
@@ -728,7 +728,7 @@ namespace DataSpider.UserMonitor
             int MY_ID = sqlBiz.GetServerId(Environment.MachineName);
             if (MY_ID == -1)
             {
-                MessageBox.Show("", $"Server Code is not exist in database", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("", $"Server Code does not exist in database", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Application.Exit();
             }
             strQuery.Append($" UPDATE MA_FAILOVER_CD SET ACTIVE_SERVER=(ACTIVE_SERVER+1)%2, PROG_STATUS=99  WHERE EQUIP_NM='{equipName}'  ");
@@ -751,7 +751,7 @@ namespace DataSpider.UserMonitor
             int MY_ID = sqlBiz.GetServerId(Environment.MachineName);
             if (MY_ID == -1)
             {
-                MessageBox.Show("", $"Server Code is not exist in database", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("", $"Server Code does not exist in database", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Application.Exit();
             }
             strQuery.Append($" UPDATE MA_FAILOVER_CD SET FAILOVER_MODE=1  WHERE EQUIP_NM='{equipName}'  ");

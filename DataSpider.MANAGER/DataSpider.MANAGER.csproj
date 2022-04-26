@@ -321,6 +321,7 @@
     <None Include="Resources\EQAddEditBk.bmp" />
     <None Include="Resources\TagGroupConfig.bmp" />
     <None Include="Resources\TagAddEditBK.bmp" />
+    <Content Include="DBConnectionString.txt" />
     <Content Include="UpdateLog.txt" />
   </ItemGroup>
   <ItemGroup>

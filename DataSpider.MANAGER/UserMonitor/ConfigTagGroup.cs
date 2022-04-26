@@ -301,7 +301,7 @@ namespace DataSpider.UserMonitor
                 }
                 else
                 {
-                    MessageBox.Show("No group exist yet", $"Group info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("The group doesn't exist yet", $"Group info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
 

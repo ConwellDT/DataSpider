@@ -75,7 +75,7 @@ namespace DataSpider.UserMonitor
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel18 = new System.Windows.Forms.Panel();
             this.label9 = new System.Windows.Forms.Label();
-            this.textBox_EquipmentConfig = new System.Windows.Forms.TextBox();
+            this.textBox_ConfigInfo = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel_Main.SuspendLayout();
             this.panelBottomMenu.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -593,7 +593,7 @@ namespace DataSpider.UserMonitor
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Controls.Add(this.panel18, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.textBox_EquipmentConfig, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.textBox_ConfigInfo, 1, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -619,18 +619,18 @@ namespace DataSpider.UserMonitor
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(144, 156);
             this.label9.TabIndex = 5;
-            this.label9.Text = "Equipment Config";
+            this.label9.Text = "Config Info";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // textBox_EquipmentConfig
+            // textBox_ConfigInfo
             // 
-            this.textBox_EquipmentConfig.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox_EquipmentConfig.Location = new System.Drawing.Point(155, 4);
-            this.textBox_EquipmentConfig.Multiline = true;
-            this.textBox_EquipmentConfig.Name = "textBox_EquipmentConfig";
-            this.textBox_EquipmentConfig.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox_EquipmentConfig.Size = new System.Drawing.Size(1278, 156);
-            this.textBox_EquipmentConfig.TabIndex = 1;
+            this.textBox_ConfigInfo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox_ConfigInfo.Location = new System.Drawing.Point(155, 4);
+            this.textBox_ConfigInfo.Multiline = true;
+            this.textBox_ConfigInfo.Name = "textBox_ConfigInfo";
+            this.textBox_ConfigInfo.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.textBox_ConfigInfo.Size = new System.Drawing.Size(1278, 156);
+            this.textBox_ConfigInfo.TabIndex = 1;
             // 
             // EquipmentAddEdit
             // 
@@ -729,6 +729,6 @@ namespace DataSpider.UserMonitor
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel panel18;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox textBox_EquipmentConfig;
+        private System.Windows.Forms.TextBox textBox_ConfigInfo;
     }
 }
