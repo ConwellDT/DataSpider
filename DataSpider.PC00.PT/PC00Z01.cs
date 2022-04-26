@@ -627,7 +627,7 @@ namespace DataSpider.PC00.PT
             }
         }
         
-        public bool InsertUpdateEquipmentInfo(bool add, string equipName, string description, string equipType, string interfaceType, string connectionInfo, string extraInfo, string serverName, string useFalg, ref string _strErrCode, ref string _strErrText)
+        public bool InsertUpdateEquipmentInfo(bool add, string equipName, string description, string equipType, string interfaceType, string connectionInfo, string extraInfo, string serverName, string useFalg, string configInfo, ref string _strErrCode, ref string _strErrText)
         {
             try
             {
@@ -640,21 +640,28 @@ namespace DataSpider.PC00.PT
                 {
                     strQuery.Append($"EXEC UpdateEquipmentInfo ");// '{equipName}', '{description}', '{equipType}', '{connectionInfo}', '{extraInfo}', '{serverName}', '{useFalg}', '{UserAuthentication.UserID}'");
                 }
-                strQuery.Append($" '{equipName}', '{description}', '{equipType}', '{interfaceType}', '{connectionInfo}', '{extraInfo}', '{serverName}', '{useFalg}', '{UserAuthentication.UserID}'");
+                strQuery.Append($" '{equipName}', '{description}', '{equipType}', '{interfaceType}', '{connectionInfo}', '{extraInfo}', '{serverName}', '{useFalg}', '{UserAuthentication.UserID}', '{configInfo}'");
                 bool result = CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref _strErrCode, ref _strErrText);
 
                 //
                 // 2022. 3. 30: Han, Ilho
                 //      Add row to MA_FAILOVER_CD
                 //
-                if( result == true && add == true)
+                if(result)
                 {
                     int serverId= GetServerId(serverName);
                     if (serverId == -1) serverId = 0;
                     strQuery.Clear();
-                    strQuery.Append($"INSERT INTO [dbo].[MA_FAILOVER_CD]([EQUIP_NM], [FILE_PATH], DEFAULT_SERVER) ");
-                    strQuery.Append($" VALUES ('{equipName}', '.\\DataSpiderPC01.EXE {equipName}', {serverId})");
-
+                    if (add)
+                    {
+                        strQuery.Append($"INSERT INTO [dbo].[MA_FAILOVER_CD]([EQUIP_NM], [FILE_PATH], DEFAULT_SERVER) ");
+                        strQuery.Append($" VALUES ('{equipName}', '.\\DataSpiderPC01.EXE {equipName}', {serverId})");
+                    }
+                    else
+                    {
+                        strQuery.Append($"UPDATE [dbo].[MA_FAILOVER_CD] SET [FILE_PATH] = '.\\DataSpiderPC01.EXE {equipName}', DEFAULT_SERVER = {serverId}) ");
+                        strQuery.Append($" WHERE EQUIP_NM = '{equipName}')");
+                    }
                     result = CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref _strErrCode, ref _strErrText);
                 }
                 ///////////////////////////
