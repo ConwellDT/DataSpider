@@ -96,7 +96,7 @@ namespace DataSpider.PC01.PT
                         InitOpcUaClient();
 
                         // Read Configuration
-                        ReadCfgData();
+                        ReadCfg();
                     }
                     else
                     {
@@ -485,6 +485,37 @@ namespace DataSpider.PC01.PT
             }
         }
 
+        private void GetCodeValueDictionary(DataTable dtConfig, string codeName, IDictionary<string, string> dicConfig)
+        {
+            string[] arrCodeValue = dtConfig.Select($"CODE_NAME = '{codeName}'")?[0]["CODE_VALUE"].ToString().Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+            dicConfig.Clear();
+
+            foreach (string line in arrCodeValue)
+            {
+                string[] spline = line.Split(',');
+                if (spline.Length > 1)
+                {
+                    dicConfig.Add(spline[0].Trim(), spline[1].Trim());
+                }
+            }
+        }
+
+        void ReadCfg()
+        {
+            string strErrCode = string.Empty; string strErrText = string.Empty;
+            DataTable dtConfig = m_sqlBiz.GetCommonCode($"{m_Type}_CONFIG", ref strErrCode, ref strErrText);
+
+            if (dtConfig == null || dtConfig.Rows.Count < 1)
+            {
+                return;
+            }
+            GetCodeValueDictionary(dtConfig, "BubblePoint", m_BubblePoint);
+            GetCodeValueDictionary(dtConfig, "FlowCheck", m_FlowCheck);
+            GetCodeValueDictionary(dtConfig, "ForwardFlow", m_ForwardFlow);
+            GetCodeValueDictionary(dtConfig, "SelfTest", m_SelfTest);
+            GetCodeValueDictionary(dtConfig, "WaterIntrusion", m_WaterIntrusion);
+            GetCodeValueDictionary(dtConfig, "PressureDecay", m_PressureDecay);
+        }
         void InitOpcUaClient()
         {
             try

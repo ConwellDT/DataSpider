@@ -36,7 +36,7 @@ namespace DataSpider.PC01.PT
         public PC01S18(PC01F01 pOwner, DataRow dr, int nCurNo, bool bAutoRun = false) : this(pOwner, dr["EQUIP_TYPE_NM"].ToString(), dr["EQUIP_NM"].ToString(), dr["CONNECTION_INFO"].ToString(), dr["EXTRA_INFO"].ToString(), nCurNo, bAutoRun)
         {
             drEquipment = dr;
-            ReadConfig();
+            ReadConfigInfo();
             InitItemLineConf();
             ReadConnectionInfoForSocket();
             if (m_AutoRun == true)

@@ -152,6 +152,8 @@ namespace DataSpider.PC00.PT
                 listViewMsg.UpdateMsg($"ConnectionInfo error ({m_ConnectionInfo})", false, true, true, PC00D01.MSGTERR);
             }
         }
+
+        // ini 파일 읽기
         protected void ReadConfig()
         {
             string section = m_Name;
@@ -247,6 +249,120 @@ namespace DataSpider.PC00.PT
                 listViewMsg.UpdateMsg($"Exceptioin - ReadConfig ({ex})", false, true, true, PC00D01.MSGTERR);
             }
         }
+        /// <summary>
+        /// MA_EQUIPMENT_CD 테이블 CONFIG_INFO 컬럼값 읽기
+        /// </summary>
+        protected void ReadConfigInfo()
+        {
+            try
+            {
+                if (drEquipment == null)
+                {
+                    return;
+                }
+                Dictionary<string, string> dicConfigInfo = new Dictionary<string, string>();
+                string result = string.Empty;
+                string[] arrConfigInfo = drEquipment["CONFIG_INFO"]?.ToString().Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+                int index = -1;
+                string infoName = string.Empty;
+                foreach (string info in arrConfigInfo)
+                {
+                    index = info.IndexOf("=");
+                    if (index < 0)
+                    {
+                        continue;
+                    }
+                    dicConfigInfo.TryAdd(info.Substring(0, index + 1), info.Substring(index + 1));
+                }
+
+                if (!int.TryParse(dicConfigInfo.TryGetValue("MESSAGE_LINE_COUNT"), out m_MessageLineCount))
+                {
+                    //listViewMsg.UpdateMsg($"MESSAGE_LINE_COUNT setting error.", false, true, true, PC00D01.MSGTERR);
+                }
+                if (!int.TryParse(dicConfigInfo.TryGetValue("START_STRING_COUNT"), out int startStringCount))
+                {
+                    //listViewMsg.UpdateMsg($"START_STRING_COUNT setting error.", false, true, true, PC00D01.MSGTERR);
+                }
+                if (!int.TryParse(dicConfigInfo.TryGetValue("STATUS_STRING_COUNT"), out int statusStringCount))
+                {
+                    //listViewMsg.UpdateMsg($"STATUS_STRING_COUNT setting error.", false, true, true, PC00D01.MSGTERR);
+                }
+                // 20211123 kwc Value자리에 들어오는 문자열 처리를 위해 수정
+                if (!int.TryParse(dicConfigInfo.TryGetValue("EVENT_STRING_COUNT"), out int eventStringCount))
+                {
+                    //listViewMsg.UpdateMsg($"EVENT_STRING_COUNT setting error.", false, true, true, PC00D01.MSGTERR);
+                }
+                if (!int.TryParse(dicConfigInfo.TryGetValue("KEY_STRING_COUNT"), out int keyStringCount))
+                {
+                    //listViewMsg.UpdateMsg($"KEY_STRING_COUNT setting error.", false, true, true, PC00D01.MSGTERR);
+                }
+                if (!int.TryParse(dicConfigInfo.TryGetValue("MAXIMUM_LINE_COUNT"), out maximumLineCount))
+                {
+                    //listViewMsg.UpdateMsg($"MAXIMUM_LINE_COUNT setting error.", false, true, true, PC00D01.MSGTERR);
+                }
+                if (!int.TryParse(dicConfigInfo.TryGetValue("MINIMUM_LINE_COUNT"), out minimumLineCount))
+                {
+                    //listViewMsg.UpdateMsg($"MINIMUM_LINE_COUNT setting error.", false, true, true, PC00D01.MSGTERR);
+                }
+                itemLineConf = dicConfigInfo.TryGetValue("ITEM_LINE_CONF");
+
+                string property, value;
+                for (int nLine = 0; nLine < startStringCount; nLine++)
+                {
+                    property = "START_STRING" + nLine.ToString("D02");
+                    value = dicConfigInfo.TryGetValue(property);
+                    listViewMsg.UpdateMsg($"{property} : {value}");
+                    if (!string.IsNullOrWhiteSpace(value))
+                        m_StartStringList.Add(value);
+                }
+                for (int nLine = 0; nLine < statusStringCount; nLine++)
+                {
+                    property = "STATUS_STRING" + nLine.ToString("D02");
+                    value = dicConfigInfo.TryGetValue(property);
+                    listViewMsg.UpdateMsg($"{property} : {value}");
+                    if (!string.IsNullOrWhiteSpace(value))
+                        m_StatusStringList.Add(value);
+                }
+                // 20211123 kwc Value자리에 들어오는 문자열 처리를 위해 수정
+                for (int nLine = 0; nLine < eventStringCount; nLine++)
+                {
+                    property = "EVENT_STRING" + nLine.ToString("D02");
+                    value = dicConfigInfo.TryGetValue(property);
+                    listViewMsg.UpdateMsg($"{property} : {value}");
+                    if (!string.IsNullOrWhiteSpace(value))
+                        m_EventStringList.Add(value);
+                }
+                for (int nLine = 0; nLine < keyStringCount; nLine++)
+                {
+                    property = "KEY_STRING" + nLine.ToString("D02");
+                    value = dicConfigInfo.TryGetValue(property);
+                    listViewMsg.UpdateMsg($"{property} : {value}");
+                    if (!string.IsNullOrWhiteSpace(value))
+                        m_KeyStringList.Add(value);
+                    property = "LINE_LENGTH" + nLine.ToString("D02");
+                    value = dicConfigInfo.TryGetValue(property);
+                    listViewMsg.UpdateMsg($"{property} : {value}");
+                    if (!string.IsNullOrWhiteSpace(value))
+                    {
+                        int.TryParse(value, out int count);
+                        m_LineLengthList.Add(count);
+                    }
+                }
+                property = "IGNORE_LINE_STRING";
+                value = dicConfigInfo.TryGetValue(property);
+                listViewMsg.UpdateMsg($"{property} : {value}");
+                if (!string.IsNullOrWhiteSpace(value))
+                {
+                    m_IgnoreStringList.AddRange(value.Split(','));
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                listViewMsg.UpdateMsg($"Exceptioin - ReadConfigInfo ({ex})", false, true, true, PC00D01.MSGTERR);
+            }
+        }
+
 
         protected bool IsConnected { get; set; } = false;
         //protected bool IsConnected

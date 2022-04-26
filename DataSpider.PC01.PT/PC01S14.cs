@@ -44,7 +44,7 @@ namespace DataSpider.PC01.PT
         // 2022-04-20 데이터 변경
         // L0  <-   뒤에서 부터 0번째
         // *   <-   전부를 붙여서 출력하는 기능
-        public class SoloVpe
+        public class SoloVpe : PC01S14
         {
             const int ARRAY0 = 0;
             const int PROPERTY1 = 1;
@@ -231,7 +231,40 @@ namespace DataSpider.PC01.PT
                     //listViewMsg.UpdateMsg($"Exceptioin - PC01S14 ({ex})", false, true, true, PC00D01.MSGTERR);
                 }
             }
-
+            public void ReadCfgData(DataRow drConfig)
+            {
+                try
+                {
+                    string configInfo = drConfig["CONFIG_INFO"]?.ToString();
+                    if (string.IsNullOrWhiteSpace(configInfo))
+                    {
+                        return;
+                    }
+                    m_soloVpeDic.Clear();
+                    string[] arrConfig = configInfo.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+                    foreach (string line in arrConfig)
+                    {
+                        if (line.StartsWith(";")) continue;
+                        string[] spline = line.Split(',');
+                        if (spline.Length > 1)
+                        {
+                            List<string> keyValue = new List<string>();
+                            for (int nLine = 1; nLine < 6; nLine++)
+                            {
+                                if (spline.Length <= nLine)
+                                    keyValue.Add("");
+                                else
+                                    keyValue.Add(spline[nLine].Trim());
+                            }
+                            m_soloVpeDic.Add(spline[0].Trim(), keyValue);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    //listViewMsg.UpdateMsg($"Exceptioin - PC01S14 ({ex})", false, true, true, PC00D01.MSGTERR);
+                }
+            }
         }
 
 
@@ -274,6 +307,9 @@ namespace DataSpider.PC01.PT
             m_LastEnqueuedDaqID = GetLastEnqueuedDaqID();
             listViewMsg.UpdateMsg($"Read From Ini File m_LastEnqueuedDaqID :{m_LastEnqueuedDaqID}", false, true, true, PC00D01.MSGTINF);
 
+            string strErrCode = string.Empty, strErrText = string.Empty;
+            DataTable dtConfig = null;
+
             while (!bTerminal)
             {
                 try
@@ -284,7 +320,8 @@ namespace DataSpider.PC01.PT
                         listViewMsg.UpdateMsg($"OPC UA Not Connected. Try to connect.", false, true, true, PC00D01.MSGTERR);
                         Thread.Sleep(5000);
                         InitOpcUaClient();
-                        m_soloVpe.ReadCfgData($@".\Cfg\{m_Type}_Config.csv");
+                        //m_soloVpe.ReadCfgData($@".\Cfg\{m_Type}_Config.csv");
+                        m_soloVpe.ReadCfgData(drEquipment);
                         dtNormalTime = DateTime.Now;
                     }
                     else

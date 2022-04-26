@@ -41,7 +41,7 @@ namespace DataSpider.PC01.PT
             {
                 dataEncoding = Encoding.UTF7;
             }
-            ReadConfig();
+            ReadConfigInfo();
             ReadConnectionInfoForSocket();
             if (m_AutoRun == true)
             {

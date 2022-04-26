@@ -94,8 +94,7 @@ namespace DataSpider.UserMonitor
             {
                 return;
             }
-            string tagName = dataGridView_Main.Rows[e.RowIndex].Cells[3].Value.ToString();
-            TAGValueHistoryPopupDGV form = new TAGValueHistoryPopupDGV(tagName);
+            TAGValueHistoryPopupDGV form = new TAGValueHistoryPopupDGV(radioButtonCurTag.Checked ? dataGridView_Main.Rows[e.RowIndex].Cells[3].Value.ToString() : dataGridView_Main.Rows[e.RowIndex].Cells[1].Value.ToString());
             form.ShowDialog(this);
         }
 

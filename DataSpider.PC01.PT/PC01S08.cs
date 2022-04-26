@@ -118,7 +118,7 @@ namespace DataSpider.PC01.PT
                 myUaClient.CreateSubscription(1000);
                 listViewMsg.UpdateMsg($"myUaClient.CreateSubscription ", false, true, true, PC00D01.MSGTINF);
                 // CSV 파일에 있는 TagName, NodeId 리스트를 MonitoredItem으로 등록하고 
-                ReadCsvFile();
+                ReadCfgData();
                 myUaClient.UpateTagData += UpdateTagValue;
                 myUaClient.LogMsgFunc += LogMsg; 
 
@@ -167,7 +167,33 @@ namespace DataSpider.PC01.PT
                 listViewMsg.UpdateMsg($"Exceptioin - ReadCsvFile ({ex})", false, true, true, PC00D01.MSGTERR);
             }
         }
-
+        void ReadCfgData()
+        {
+            try
+            {
+                string configInfo = drEquipment["CONFIG_INFO"]?.ToString();
+                if (string.IsNullOrWhiteSpace(configInfo))
+                {
+                    return;
+                }
+                string[] arrConfig = configInfo.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+                foreach (string lineData in arrConfig)
+                {
+                    listViewMsg.UpdateMsg($"Data : {lineData}", false, true, true, PC00D01.MSGTINF);
+                    string[] data = lineData.Split(',');
+                    if (data.Length < 2)
+                        continue;
+                    if (string.IsNullOrWhiteSpace(data[0]) || string.IsNullOrWhiteSpace(data[1]))
+                        continue;
+                    myUaClient.AddItem(data[0], data[1]);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                listViewMsg.UpdateMsg($"Exceptioin - ReadCsvFile ({ex})", false, true, true, PC00D01.MSGTERR);
+            }
+        }
         public void UpdateTagValue( string tagname, string value, string datetime, string status)
         {
             //EnQueue(MSGTYPE.MEASURE,$"{tagname},{datetime},{value},{status}");

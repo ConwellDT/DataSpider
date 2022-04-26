@@ -458,6 +458,40 @@ namespace DataSpider.PC00.PT
             PropertyInfo pi = dgvType.GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic);
             pi.SetValue(dgv, setting, null);
         }
+
+        /// <summary>
+        /// Dictionary ContainsKey 를 수행하여 해당 key 가 없으면 Add 하고 리턴 true, 있으면 리턴 false 하는 확장 메서드
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="dic"></param>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static bool TryAdd<T>(this Dictionary<T, T> dic, T key, T value)
+        {
+            if (!dic.ContainsKey(key))
+            {
+                dic.Add(key, value);
+                return true;
+            }
+            return false;
+        }
+        
+        /// <summary>
+        /// Dictionary TrayGetValue 를 수행하여 성공하면 그 값을 리턴하고 실패하면 default 값을 리턴하는 확장 메서드
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="dic"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public static T TryGetValue<T>(this Dictionary<T, T> dic, T key)
+        {
+            if (dic.TryGetValue(key, out T value))
+            {
+                return value;
+            }
+            return default;
+        }
     }
 
     #region app.config 설정을 가져오는 메서드
