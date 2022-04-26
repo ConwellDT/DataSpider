@@ -395,7 +395,8 @@ namespace DataSpider.PC01.PT
             {
                 retString += xmlNode.Value + " ;";
             }
-            retString= retString.Substring(0, retString.Length - 1);
+            if(retString.Length>0)
+                retString= retString.Substring(0, retString.Length - 1);
             //retString = xmlNode?.Value;
             retString =retString.Replace((char)ASCII.CR, ' ');
             retString=retString.Replace((char)ASCII.LF, ' ');
@@ -471,7 +472,7 @@ namespace DataSpider.PC01.PT
                 }
             }
             path = $@".\Cfg\{m_Type}_PressureDecay.csv";
-            m_WaterIntrusion.Clear();
+            m_PressureDecay.Clear();
             using (StreamReader file = new StreamReader(path))
             {
                 while ((line = file.ReadLine()) != null)
