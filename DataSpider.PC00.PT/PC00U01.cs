@@ -12,6 +12,8 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
+using NLog;
+using NLog.Targets;
 
 namespace DataSpider.PC00.PT
 {
@@ -416,6 +418,8 @@ namespace DataSpider.PC00.PT
     {
         private Logging CFWLog = null;
         private string logFileName = string.Empty;
+        private Logger _logger = null;
+
         public FileLog(string fileName)
         {
             logFileName = fileName;
@@ -424,10 +428,22 @@ namespace DataSpider.PC00.PT
         public void WriteLog(string msg, string msgType = PC00D01.MSGTINF, [System.Runtime.CompilerServices.CallerMemberName] string callerName = "")
         {
             CFWLog.LogToFile("LOG", logFileName, msgType, callerName, msg);
+            switch(msgType)
+            {
+                case PC00D01.MSGTERR: _logger.Error(msg); break;
+                case PC00D01.MSGTDBG: _logger.Debug(msg); break;
+                case PC00D01.MSGTINF: _logger.Info(msg); break;
+                default: _logger.Warn(msg); break;
+            }
         }
         public void WriteData(string msg, string msgType, string title)
         {
             CFWLog.LogToFile("DATA", logFileName, msgType, title, msg);
+            _logger.Trace(msg);
+        }
+        public void SetNLogger(Logger logger)
+        {
+            _logger = logger;
         }
     }
 
