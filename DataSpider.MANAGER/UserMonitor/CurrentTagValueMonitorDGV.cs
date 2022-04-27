@@ -90,7 +90,7 @@ namespace DataSpider.UserMonitor
 
         private void DataGridView_Main_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (e.RowIndex < 0 || e.RowIndex >= dataGridView_Main.Rows.Count)
+            if (e.RowIndex < 0 || e.RowIndex >= dataGridView_Main.Rows.Count || nDBModeCurrent==0)
             {
                 return;
             }
