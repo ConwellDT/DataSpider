@@ -458,6 +458,12 @@ namespace DataSpider.PC00.PT
             PropertyInfo pi = dgvType.GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic);
             pi.SetValue(dgv, setting, null);
         }
+        public static void DoubleBuffered(this ListView dgv, bool setting)
+        {
+            Type dgvType = dgv.GetType();
+            PropertyInfo pi = dgvType.GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic);
+            pi.SetValue(dgv, setting, null);
+        }
 
         /// <summary>
         /// Dictionary ContainsKey 를 수행하여 해당 key 가 없으면 Add 하고 리턴 true, 있으면 리턴 false 하는 확장 메서드

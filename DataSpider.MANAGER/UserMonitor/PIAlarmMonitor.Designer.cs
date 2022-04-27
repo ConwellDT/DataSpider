@@ -49,6 +49,9 @@ namespace DataSpider.UserMonitor
             this.label2 = new System.Windows.Forms.Label();
             this.panel7 = new System.Windows.Forms.Panel();
             this.button_SetInterval = new System.Windows.Forms.Button();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.resetIFFlagToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.removePIAlarmToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -57,6 +60,7 @@ namespace DataSpider.UserMonitor
             this.panel5.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel7.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // imageList2
@@ -132,6 +136,7 @@ namespace DataSpider.UserMonitor
             // 
             // listView_Main
             // 
+            this.listView_Main.ContextMenuStrip = this.contextMenuStrip1;
             this.listView_Main.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listView_Main.Font = new System.Drawing.Font("맑은 고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.listView_Main.FullRowSelect = true;
@@ -202,7 +207,7 @@ namespace DataSpider.UserMonitor
             // 
             this.textBox_RefreshInterval.Location = new System.Drawing.Point(0, 5);
             this.textBox_RefreshInterval.Name = "textBox_RefreshInterval";
-            this.textBox_RefreshInterval.Size = new System.Drawing.Size(94, 29);
+            this.textBox_RefreshInterval.Size = new System.Drawing.Size(94, 25);
             this.textBox_RefreshInterval.TabIndex = 1;
             this.textBox_RefreshInterval.Text = "10";
             // 
@@ -264,9 +269,31 @@ namespace DataSpider.UserMonitor
             this.button_SetInterval.UseVisualStyleBackColor = true;
             this.button_SetInterval.Click += new System.EventHandler(this.button_SetInterval_Click);
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.resetIFFlagToolStripMenuItem,
+            this.removePIAlarmToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(168, 48);
+            // 
+            // resetIFFlagToolStripMenuItem
+            // 
+            this.resetIFFlagToolStripMenuItem.Name = "resetIFFlagToolStripMenuItem";
+            this.resetIFFlagToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.resetIFFlagToolStripMenuItem.Text = "Reset IF Flag";
+            this.resetIFFlagToolStripMenuItem.Click += new System.EventHandler(this.resetIFFlagToolStripMenuItem_Click);
+            // 
+            // removePIAlarmToolStripMenuItem
+            // 
+            this.removePIAlarmToolStripMenuItem.Name = "removePIAlarmToolStripMenuItem";
+            this.removePIAlarmToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.removePIAlarmToolStripMenuItem.Text = "Remove PI Alarm";
+            this.removePIAlarmToolStripMenuItem.Click += new System.EventHandler(this.removePIAlarmToolStripMenuItem_Click);
+            // 
             // PIAlarmMonitor
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.ClientSize = new System.Drawing.Size(902, 834);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Font = new System.Drawing.Font("맑은 고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
@@ -285,6 +312,7 @@ namespace DataSpider.UserMonitor
             this.panel5.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -307,5 +335,8 @@ namespace DataSpider.UserMonitor
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.Button button_SetInterval;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem resetIFFlagToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem removePIAlarmToolStripMenuItem;
     }
 }

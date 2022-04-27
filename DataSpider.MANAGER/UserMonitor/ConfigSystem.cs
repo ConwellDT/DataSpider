@@ -19,7 +19,7 @@ namespace DataSpider.UserMonitor
 
         private void ConfigSystem_Load(object sender, EventArgs e)
         {
-            String strConnStr = CFW.Common.SecurityUtil.DecryptString(CFW.Configuration.ConfigManager.Default.ReadConfig("connectionStrings", $"SQL_ConnectionString1"));
+            String strConnStr = CFW.Common.SecurityUtil.DecryptString(CFW.Configuration.ConfigManager.Default.ReadConfig("connectionStrings", $"SQL_ConnectionString"));
 
             textBox_DBConnString.Text = strConnStr;
         }
@@ -110,7 +110,7 @@ namespace DataSpider.UserMonitor
 
         private void buttonChangeDBConn_Click(object sender, EventArgs e)
         {
-            String strConnStr = CFW.Common.SecurityUtil.DecryptString(CFW.Configuration.ConfigManager.Default.ReadConfig("connectionStrings", $"SQL_ConnectionString1"));
+            String strConnStr = CFW.Common.SecurityUtil.DecryptString(CFW.Configuration.ConfigManager.Default.ReadConfig("connectionStrings", $"SQL_ConnectionString"));
 
             DialogResult dialogResult = MessageBox.Show($"If you change the DB connection, the system is shut down.", "Main DB Connection Change", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 

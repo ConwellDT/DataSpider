@@ -1099,7 +1099,45 @@ namespace DataSpider.PC00.PT
             }
             return result;
         }
-        ////////////////////
+        public bool RestPIIFFlag(int hiSeq)
+        {
+            string _strErrCode = string.Empty;
+            string _strErrText = string.Empty;
+
+            try
+            {
+                StringBuilder strQuery = new StringBuilder();
+                strQuery.Append($"UPDATE HI_MEASURE_RESULT SET IF_FLAG = 'N', IF_COUNT = 0 WHERE HI_SEQ = {hiSeq}");
+                
+                bool result = CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref _strErrCode, ref _strErrText);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                _strErrText = ex.ToString();
+                return false;
+            }
+        }
+        public bool RemovePIAlarm(int hiSeq)
+        {
+            string _strErrCode = string.Empty;
+            string _strErrText = string.Empty;
+
+            try
+            {
+                StringBuilder strQuery = new StringBuilder();
+                strQuery.Append($"INSERT INTO HI_MEASURE_RESULT_BK SELECT TAG_NM, MEASURE_VALUE, MEASURE_DATE, 'Z', getdate(), getdate(), '{UserAuthentication.UserID}', REMARK, IF_COUNT FROM HI_MEASURE_RESULT WHERE HI_SEQ = {hiSeq};");
+                strQuery.Append($"DELETE HI_MEASURE_RESULT WHERE HI_SEQ = {hiSeq}");
+
+                bool result = CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref _strErrCode, ref _strErrText);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                _strErrText = ex.ToString();
+                return false;
+            }
+        }
     }
 }
     

@@ -50,14 +50,8 @@ namespace DataSpider.UserMonitor
             }
             textBox_RefreshInterval.Text = autoRefreshInterval.ToString();
 
-            //
-            // 2022. 3. 14 : Han, Ilho
-            //  To activate dadagridview double buffer
-            //
-            Type dgvType = listView_Main.GetType();
-            PropertyInfo pi = dgvType.GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic);
-            pi.SetValue(listView_Main, true, null);
-            ////////////////
+            UserLogInChanged();
+            listView_Main.DoubleBuffered(true);
         }
 
         public void TabControl_SelectedIndexChanged(LibraryWH.FormCtrl.UserForm ctrl)
@@ -277,6 +271,48 @@ namespace DataSpider.UserMonitor
             if (int.TryParse(textBox_RefreshInterval.Text, out int tempInterval))
             {
                 autoRefreshInterval = tempInterval;
+            }
+        }
+        public void UserLogInChanged()
+        {
+            switch (UserAuthentication.UserLevel)
+            {
+                case UserLevel.Admin:
+                case UserLevel.Manager:
+                    foreach (ToolStripItem item in contextMenuStrip1.Items)
+                    {
+                        item.Visible = true;
+                    }
+                    break;
+                default:
+                    foreach (ToolStripItem item in contextMenuStrip1.Items)
+                    {
+                        item.Visible = false;
+                    }
+                    break;
+            }
+        }
+        private void resetIFFlagToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (int.TryParse(listView_Main.SelectedItems[0].Text, out int hiSeq))
+            {
+                if (DialogResult.Yes.Equals(MessageBox.Show("Do you want to reset PI I/F flag ?", "PIAlarm", MessageBoxButtons.YesNo)))
+                {
+                    sqlBiz.RestPIIFFlag(hiSeq);
+                    GetProgramStatus();
+                }
+            }
+        }
+
+        private void removePIAlarmToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (int.TryParse(listView_Main.SelectedItems[0].Text, out int hiSeq))
+            {
+                if (DialogResult.Yes.Equals(MessageBox.Show("Do you want to ignore PI I/F alarm ?", "PIAlarm", MessageBoxButtons.YesNo)))
+                {
+                    sqlBiz.RemovePIAlarm(hiSeq);
+                    GetProgramStatus();
+                }
             }
         }
     }

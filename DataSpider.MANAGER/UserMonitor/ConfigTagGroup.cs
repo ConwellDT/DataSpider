@@ -96,10 +96,6 @@ namespace DataSpider.UserMonitor
                     MessageBox.Show("Group list is empty", $"Group info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
-            else
-            {
-                MessageBox.Show("No group created yet", $"Group info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
         }
         private void ShowEQTypeSelected()
         {
@@ -153,7 +149,7 @@ namespace DataSpider.UserMonitor
                         }
                         else
                         {
-                            MessageBox.Show("No equipment info exist", $"Group info read fail", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            //MessageBox.Show("No equipment info exist", $"Group info read fail", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
                     else
@@ -221,6 +217,7 @@ namespace DataSpider.UserMonitor
                     return;
                 }
             }
+            MessageBox.Show("Tag Group Added.", $"Tag Group", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void button_Edit_Click(object sender, EventArgs e)
@@ -329,6 +326,8 @@ namespace DataSpider.UserMonitor
                     comboBoxGroupSel.DisplayMember = "GROUP_NM";
 
                     ShowGroupInfoSelected();
+                    MessageBox.Show("Tag Group Modified.", $"Tag Group", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                 }
                 else
                 {
@@ -380,6 +379,8 @@ namespace DataSpider.UserMonitor
             }
 
             ShowEQTypeSelected();
+            MessageBox.Show("Tag Group Removed.", $"Tag Group", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
         }
 
         private void button_SelectAll_Click(object sender, EventArgs e)

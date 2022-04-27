@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // 제어됩니다. 어셈블리와 관련된 정보를 수정하려면
 // 이러한 특성 값을 변경하세요.
 [assembly: AssemblyTitle("DataSpider")]
-[assembly: AssemblyDescription("Simple Equipment Interface Middleware Management")]
+[assembly: AssemblyDescription("Data Spider")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("CONWELL Co., Ltd.")]
 [assembly: AssemblyProduct("DataSpider")]
-[assembly: AssemblyCopyright("Copyright © 2021 CONWELL Co., Ltd.")]
+[assembly: AssemblyCopyright("Copyright © 2022 CONWELL Co., Ltd.")]
 [assembly: AssemblyTrademark("DataSpider")]
 [assembly: AssemblyCulture("")]
 

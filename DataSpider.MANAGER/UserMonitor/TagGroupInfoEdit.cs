@@ -70,38 +70,16 @@ namespace DataSpider.UserMonitor
                     }
                     else
                     {
-                        if( strDesc == String.Empty )
-                        {
-                            if( MessageBox.Show($"Description is not exist. Continue anyway?", $"Group name invalid", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.OK )
-                            {
-                                DialogResult = DialogResult.OK;
-                                this.Close();
-                            }
-                        }
-                        else
-                        {
-                            DialogResult = DialogResult.OK;
-                            this.Close();
-                        }
+                        DialogResult = DialogResult.OK;
+                        this.Close();
                     }
                 }
                 else
                 {
                     if (drGroupSel != null && drGroupSel.Length > 0)
                     {
-                        if (strDesc == String.Empty)
-                        {
-                            if (MessageBox.Show($"Description is not exist. Continue anyway?", $"Group name invalid", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.OK)
-                            {
-                                DialogResult = DialogResult.OK;
-                                this.Close();
-                            }
-                        }
-                        else
-                        {
-                            DialogResult = DialogResult.OK;
-                            this.Close();
-                        }
+                        DialogResult = DialogResult.OK;
+                        this.Close();
                     }
                     else
                     {

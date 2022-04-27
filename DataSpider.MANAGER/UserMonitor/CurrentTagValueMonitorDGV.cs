@@ -66,9 +66,9 @@ namespace DataSpider.UserMonitor
             // 2022. 3. 14 : Han, Ilho
             //  To activate dadagridview double buffer
             //
-            Type dgvType = dataGridView_Main.GetType();
-            PropertyInfo pi = dgvType.GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic);
-            pi.SetValue(dataGridView_Main, true, null);
+            //Type dgvType = dataGridView_Main.GetType();
+            //PropertyInfo pi = dgvType.GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic);
+            //pi.SetValue(dataGridView_Main, true, null);
             //////////////////////////
 
             checkBox_AutoRefresh.Checked = ConfigHelper.GetAppSetting("TagAutoRefresh").Trim().ToUpper().Equals("Y");
@@ -269,9 +269,9 @@ namespace DataSpider.UserMonitor
 
         private void GetTagHistoryValues()
         {
-            dataGridView_Main.DataSource = null;//.Rows.Clear();
             if (String.IsNullOrEmpty(equipName.Trim()) == true)
             {
+                dataGridView_Main.DataSource = null;//.Rows.Clear();
                 //MessageBox.Show("Equipment is not selected", "History Data Display", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
@@ -350,7 +350,18 @@ namespace DataSpider.UserMonitor
                 int nHoriScrollOffset = dataGridView_Main.HorizontalScrollingOffset;
                 int nRowIndex = dataGridView_Main.FirstDisplayedScrollingRowIndex;
 
+                //dataGridView_Main.ColumnHeadersVisible = dataGridView_Main.RowHeadersVisible = false;
+                //DataGridViewAutoSizeColumnsMode dgvascm = dataGridView_Main.AutoSizeColumnsMode;
+                //DataGridViewAutoSizeRowsMode dgvasrm = dataGridView_Main.AutoSizeRowsMode;
+                //dataGridView_Main.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.None;
+                //dataGridView_Main.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.None;
+                //dataGridView_Main.SuspendLayout();
                 dataGridView_Main.DataSource = dtHistoryData;
+                //dataGridView_Main.AutoSizeColumnsMode = dgvascm;
+                //dataGridView_Main.AutoSizeRowsMode = dgvasrm;
+                //dataGridView_Main.ColumnHeadersVisible = dataGridView_Main.RowHeadersVisible = true;
+                //dataGridView_Main.ResumeLayout();
+
 
                 if (dtHistoryData.Rows.Count > 0)
                 {
