@@ -41,8 +41,6 @@ namespace DataSpider.PC00.PT
         private DateTime dtLastUpdateProgDateTime = DateTime.MinValue;
         protected Encoding dataEncoding = Encoding.UTF8;
 
-        protected Logger _logger = null;
-
         public PC00B01()
         {
         }
@@ -56,12 +54,11 @@ namespace DataSpider.PC00.PT
             m_nCurNo = nCurNo;
             m_AutoRun = bAutoRun;
 
-            _logger = GetDbLogger(CFW.Data.MsSqlDbDef.ConnectionString, m_Name);
 
             listViewMsg = new FormListViewMsg(m_Owner, m_Name, m_nCurNo, m_Type);
             //fileLog = new FileLog($"{m_Name}_{m_Type}");
             fileLog = new FileLog(!string.IsNullOrWhiteSpace(m_Type) ? $"{m_Type}_{m_Name}" : m_Name);
-            fileLog.SetNLogger(_logger);
+            fileLog.SetDbLogger(CFW.Data.MsSqlDbDef.ConnectionString, m_Name);
 
             //if (m_AutoRun == true)
             //{
@@ -108,36 +105,6 @@ namespace DataSpider.PC00.PT
             return true;
         }
 
-        public Logger GetDbLogger(string connectionString, string EquipName)
-        {
-            DatabaseTarget target = new DatabaseTarget();
-            DatabaseParameterInfo param;
-            //                target.ConnectionString = "Data Source=192.168.20.229;Initial Catalog=DataSpider;Persist Security Info=True;User ID=SBLADMIN;Password=SBLADMIN#01";
-            target.ConnectionString = connectionString;
-            target.CommandText = "INSERT INTO [dbo].[LO_SYSTEM] ([TIMESTAMP],[EQUIP_NM],[MACHINE_NM],[LEVEL],[MESSAGE]) VALUES (@timestamp,@logger,@machinename, @level, @message);";
-            param = new DatabaseParameterInfo();
-            param.Name = "@timestamp";
-            param.Layout = "${date}";
-            target.Parameters.Add(param);
-            param = new DatabaseParameterInfo();
-            param.Name = "@machinename";
-            param.Layout = "${machinename}";
-            target.Parameters.Add(param);
-            param = new DatabaseParameterInfo();
-            param.Name = "@level";
-            param.Layout = "${level}";
-            target.Parameters.Add(param);
-            param = new DatabaseParameterInfo();
-            param.Name = "@logger";
-            param.Layout = "${logger}";
-            target.Parameters.Add(param);
-            param = new DatabaseParameterInfo();
-            param.Name = "@message";
-            param.Layout = "${message}";
-            target.Parameters.Add(param);
-            NLog.Config.SimpleConfigurator.ConfigureForTargetLogging(target, LogLevel.Trace);
-            return LogManager.GetLogger(EquipName);
-        }
 
     }
 }
