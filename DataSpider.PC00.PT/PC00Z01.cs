@@ -512,6 +512,27 @@ namespace DataSpider.PC00.PT
             return result;
         }
 
+        public DataTable GetEquipmentModifiedInfo(ref string _strErrCode, ref string _strErrText)
+        {
+            DataTable result = null;
+            try
+            {
+                StringBuilder strQuery = new StringBuilder();
+                strQuery.Append($"EXEC GetEquipmentModifiedInfo");
+
+                DataSet ds = CFW.Data.MsSqlDbAccess.GetDataSet(strQuery.ToString(), null, CommandType.Text, ref _strErrCode, ref _strErrText);
+                if (ds != null && ds.Tables[0] != null)
+                {
+                    result = ds.Tables[0];
+                }
+            }
+            catch (Exception ex)
+            {
+                _strErrText = ex.ToString();
+            }
+            return result;
+        }
+
         public DataTable GetCurrentTagValue(string equipType, string equipName, ref string _strErrCode, ref string _strErrText)
         {
             DataTable result = null;

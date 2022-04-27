@@ -280,7 +280,10 @@ namespace DataSpider.UserMonitor
                 if (!string.IsNullOrWhiteSpace(equipName))
                 {
                     EquipmentAddEdit form = new EquipmentAddEdit(equipName);
-                    DialogResult.OK.Equals(form.ShowDialog(this));
+                    if (DialogResult.OK.Equals(form.ShowDialog(this)))
+                    {
+                        RefreshTreeView();
+                    }
                 }
             }
         }

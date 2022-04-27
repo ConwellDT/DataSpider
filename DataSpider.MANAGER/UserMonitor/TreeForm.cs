@@ -47,6 +47,9 @@ namespace DataSpider.UserMonitor
         string errCode = string.Empty;
         string errText = string.Empty;
 
+        private DateTime dtLastUpdated = DateTime.MinValue;
+        private int lastEquipmentCount = 0;
+
 
         public TreeForm(MonitorForm _parent)
         {
@@ -82,10 +85,41 @@ namespace DataSpider.UserMonitor
                 }
                 if (dtLastRefreshed.AddSeconds(autoRefreshInterval).CompareTo(DateTime.Now) <= 0)
                 {
-                    UpdateTreeViewState();
+                    if (IsEquipmentUpdated())
+                    {
+                        RefreshTreeView();
+                    }
+                    else
+                    {
+                        UpdateTreeViewState();
+                    }
                 }
                 Thread.Sleep(1000);
             }
+        }
+
+        private bool IsEquipmentUpdated()
+        {
+            bool result = false;
+            string errCode = string.Empty;
+            string errText = string.Empty;
+            DataTable dtEqMod = sql.GetEquipmentModifiedInfo(ref errCode, ref errText);
+            if (dtEqMod != null && dtEqMod.Rows.Count > 0)
+            {
+                if (!DateTime.TryParse(dtEqMod.Rows[0][0].ToString(), out DateTime dt))
+                {
+                    dt = DateTime.MinValue;
+                }
+                int.TryParse(dtEqMod.Rows[0][1].ToString(), out int eqCount);
+
+                if (!dtLastUpdated.Equals(dt) || !lastEquipmentCount.Equals(eqCount))
+                {
+                        dtLastUpdated = dt;
+                        lastEquipmentCount = eqCount;
+                        result = true;
+                }
+            }
+            return result;
         }
 
         /// <summary>
