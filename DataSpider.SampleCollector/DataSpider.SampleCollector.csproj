@@ -42,9 +42,6 @@
     <Reference Include="CFW.Data">
       <HintPath>..\Assembly\CFW.Data.dll</HintPath>
     </Reference>
-    <Reference Include="DataSpider.PC00.PT">
-      <HintPath>..\Assembly\DataSpider.PC00.PT.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -90,6 +87,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataSpider.PC00.PT\DataSpider.PC00.PT.csproj">
+      <Project>{8f9640e0-96f9-4723-8aec-cd681924f0f9}</Project>
+      <Name>DataSpider.PC00.PT</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

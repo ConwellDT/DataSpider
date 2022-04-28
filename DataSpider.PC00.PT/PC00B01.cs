@@ -58,7 +58,7 @@ namespace DataSpider.PC00.PT
             listViewMsg = new FormListViewMsg(m_Owner, m_Name, m_nCurNo, m_Type);
             //fileLog = new FileLog($"{m_Name}_{m_Type}");
             fileLog = new FileLog(!string.IsNullOrWhiteSpace(m_Type) ? $"{m_Type}_{m_Name}" : m_Name);
-            fileLog.SetDbLogger(CFW.Data.MsSqlDbDef.ConnectionString, m_Name);
+            fileLog.SetDbLogger(m_Name);
 
             //if (m_AutoRun == true)
             //{

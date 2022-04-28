@@ -401,7 +401,7 @@ namespace DataSpider.PC00.PT
             processName = name;
             listViewRowNo = rowNo;
             fileLog = new FileLog(!string.IsNullOrWhiteSpace(equipType) ? $"{equipType}_{name}" : name );
-            fileLog.SetDbLogger(CFW.Data.MsSqlDbDef.ConnectionString, name);
+            fileLog.SetDbLogger(name);
         }
         public void UpdateMsg(string msg, bool statusView = true, bool logView = true, bool fileWrite = false, string msgType = PC00D01.MSGTINF, [System.Runtime.CompilerServices.CallerMemberName] string callerName = "")
         {

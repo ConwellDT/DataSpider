@@ -35,6 +35,9 @@
   <PropertyGroup>
     <ApplicationIcon>Letter-F-icon_34760.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>DataSpider.FailoverManager.Program</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="CFW.Common">
       <HintPath>..\Assembly\CFW.Common.dll</HintPath>
@@ -59,6 +62,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Control\PC03C01.cs" />
+    <Compile Include="Control\PC03C02.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\PC03C02.designer.cs">
+      <DependentUpon>PC03C02.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\PC03C03.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\PC03C03.designer.cs">
+      <DependentUpon>PC03C03.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\PC03C04.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

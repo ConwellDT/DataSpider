@@ -349,7 +349,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataSpider.PC00.PT\DataSpider.PC00.PT.csproj">
-      <Project>{8F9640E0-96F9-4723-8AEC-CD681924F0F9}</Project>
+      <Project>{8f9640e0-96f9-4723-8aec-cd681924f0f9}</Project>
       <Name>DataSpider.PC00.PT</Name>
     </ProjectReference>
   </ItemGroup>

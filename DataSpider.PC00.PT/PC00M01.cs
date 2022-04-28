@@ -509,8 +509,8 @@ namespace DataSpider.PC00.PT
         private Encoding dataEncoding = Encoding.UTF8;
 
         protected PC00Z01 m_sqlBiz = new PC00Z01();
-        static PISystem _PIStstem;
-        static PIServer _PIserver;
+        static PISystem _PIStstem = null;
+        static PIServer _PIserver = null;
         private PIInfo m_clsPIInfo;
 
         public EquipmentDataProcess(string filePath, FormListViewMsg _listViewMsg, Encoding _dataEncoding = null)

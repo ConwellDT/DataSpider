@@ -77,7 +77,7 @@ namespace DataSpider.PC03.PT
         #region PC03F01 생성자
         public PC03F01()
         {
-            m_clsLog.SetDbLogger(CFW.Data.MsSqlDbDef.ConnectionString, Application.ProductName);
+            m_clsLog.SetDbLogger(Application.ProductName);
             InitializeComponent();
             PC03F01_Initialize();
         }

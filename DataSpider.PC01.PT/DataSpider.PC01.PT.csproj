@@ -201,13 +201,13 @@
     <Folder Include="_장비인터페이스\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\OpcUaClient\OpcUaClient.csproj">
-      <Project>{932a5470-70a8-4b9f-9fe0-69ecd496d33c}</Project>
-      <Name>OpcUaClient</Name>
-    </ProjectReference>
     <ProjectReference Include="..\DataSpider.PC00.PT\DataSpider.PC00.PT.csproj">
       <Project>{8f9640e0-96f9-4723-8aec-cd681924f0f9}</Project>
       <Name>DataSpider.PC00.PT</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OpcUaClient\OpcUaClient.csproj">
+      <Project>{932a5470-70a8-4b9f-9fe0-69ecd496d33c}</Project>
+      <Name>OpcUaClient</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
