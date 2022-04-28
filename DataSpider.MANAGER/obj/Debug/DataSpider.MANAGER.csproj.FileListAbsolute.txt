@@ -98,3 +98,4 @@ C:\Users\kalbe\source\repos\DataSpider\DataSpider.MANAGER\obj\Debug\DataSpider.M
 C:\Users\kalbe\source\repos\DataSpider\DataSpider.MANAGER\obj\Debug\DataSpider.MANAGER.csproj.CopyComplete
 C:\Users\kalbe\source\repos\DataSpider\DataSpider.MANAGER\obj\Debug\DataSpider.exe
 C:\Users\kalbe\source\repos\DataSpider\DataSpider.MANAGER\obj\Debug\DataSpider.pdb
+D:\GitHub\DataSpider\DataSpider.MANAGER\obj\Debug\DataSpider.UserMonitor.SystemLogView.resources

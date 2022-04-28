@@ -37,6 +37,9 @@ namespace DataSpider.UserMonitor
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.listView_Main = new System.Windows.Forms.ListView();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.resetIFFlagToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.removePIAlarmToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel2 = new System.Windows.Forms.Panel();
             this.button_Refresh = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -49,18 +52,15 @@ namespace DataSpider.UserMonitor
             this.label2 = new System.Windows.Forms.Label();
             this.panel7 = new System.Windows.Forms.Panel();
             this.button_SetInterval = new System.Windows.Forms.Button();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.resetIFFlagToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.removePIAlarmToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel7.SuspendLayout();
-            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // imageList2
@@ -153,6 +153,28 @@ namespace DataSpider.UserMonitor
             this.listView_Main.TabIndex = 1;
             this.listView_Main.UseCompatibleStateImageBehavior = false;
             this.listView_Main.View = System.Windows.Forms.View.Details;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.resetIFFlagToolStripMenuItem,
+            this.removePIAlarmToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(168, 48);
+            // 
+            // resetIFFlagToolStripMenuItem
+            // 
+            this.resetIFFlagToolStripMenuItem.Name = "resetIFFlagToolStripMenuItem";
+            this.resetIFFlagToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.resetIFFlagToolStripMenuItem.Text = "Reset IF Flag";
+            this.resetIFFlagToolStripMenuItem.Click += new System.EventHandler(this.resetIFFlagToolStripMenuItem_Click);
+            // 
+            // removePIAlarmToolStripMenuItem
+            // 
+            this.removePIAlarmToolStripMenuItem.Name = "removePIAlarmToolStripMenuItem";
+            this.removePIAlarmToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.removePIAlarmToolStripMenuItem.Text = "Remove PI Alarm";
+            this.removePIAlarmToolStripMenuItem.Click += new System.EventHandler(this.removePIAlarmToolStripMenuItem_Click);
             // 
             // panel2
             // 
@@ -269,28 +291,6 @@ namespace DataSpider.UserMonitor
             this.button_SetInterval.UseVisualStyleBackColor = true;
             this.button_SetInterval.Click += new System.EventHandler(this.button_SetInterval_Click);
             // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.resetIFFlagToolStripMenuItem,
-            this.removePIAlarmToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(168, 48);
-            // 
-            // resetIFFlagToolStripMenuItem
-            // 
-            this.resetIFFlagToolStripMenuItem.Name = "resetIFFlagToolStripMenuItem";
-            this.resetIFFlagToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
-            this.resetIFFlagToolStripMenuItem.Text = "Reset IF Flag";
-            this.resetIFFlagToolStripMenuItem.Click += new System.EventHandler(this.resetIFFlagToolStripMenuItem_Click);
-            // 
-            // removePIAlarmToolStripMenuItem
-            // 
-            this.removePIAlarmToolStripMenuItem.Name = "removePIAlarmToolStripMenuItem";
-            this.removePIAlarmToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
-            this.removePIAlarmToolStripMenuItem.Text = "Remove PI Alarm";
-            this.removePIAlarmToolStripMenuItem.Click += new System.EventHandler(this.removePIAlarmToolStripMenuItem_Click);
-            // 
             // PIAlarmMonitor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -305,6 +305,7 @@ namespace DataSpider.UserMonitor
             this.Load += new System.EventHandler(this.PIAlarmMonitor_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
+            this.contextMenuStrip1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
@@ -312,7 +313,6 @@ namespace DataSpider.UserMonitor
             this.panel5.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
-            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

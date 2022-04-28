@@ -67,14 +67,6 @@ namespace DataSpider.UserMonitor
             }
         }
 
-        private void TimerRefresh_Tick(object sender, EventArgs e)
-        {
-            if (formSelected)
-            {
-                selectedIndex = listView_Main.SelectedIndices.Count > 0 ? listView_Main.SelectedIndices[0] : 0;
-                GetProgramStatus();
-            }
-        }
         private void ThreadJob()
         {
             Thread.Sleep(1000);
@@ -110,7 +102,9 @@ namespace DataSpider.UserMonitor
                     }
                     string strErrCode = string.Empty;
                     string strErrText = string.Empty;
-                    
+
+                    SetSelectedIndex();
+
                     listView_Main.Items.Clear();
 
                     DataTable dtProgramStatus = sqlBiz.GetPIAlarmStatus(equipType.Trim(), equipName.Trim(), ref strErrCode, ref strErrText);
@@ -314,6 +308,10 @@ namespace DataSpider.UserMonitor
                     GetProgramStatus();
                 }
             }
+        }
+        private void SetSelectedIndex()
+        {
+            selectedIndex = listView_Main.SelectedIndices.Count > 0 ? listView_Main.SelectedIndices[0] : 0;
         }
     }
 }
