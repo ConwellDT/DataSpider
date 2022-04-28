@@ -296,7 +296,7 @@ namespace DataSpider.UserMonitor
         {
             if (int.TryParse(listView_Main.SelectedItems[0].Text, out int hiSeq))
             {
-                if (DialogResult.Yes.Equals(MessageBox.Show("Do you want to reset PI I/F flag ?", "PIAlarm", MessageBoxButtons.YesNo)))
+                if (DialogResult.Yes.Equals(MessageBox.Show("Do you want to reset PI I/F flag ? It will try to save the PI again.", "PIAlarm", MessageBoxButtons.YesNo)))
                 {
                     sqlBiz.RestPIIFFlag(hiSeq);
                     GetProgramStatus();
