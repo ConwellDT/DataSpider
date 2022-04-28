@@ -184,6 +184,7 @@ namespace DataSpider.UserMonitor
             this.comboBoxGroupSel.Name = "comboBoxGroupSel";
             this.comboBoxGroupSel.Size = new System.Drawing.Size(765, 29);
             this.comboBoxGroupSel.TabIndex = 4;
+            this.comboBoxGroupSel.SelectedIndexChanged += new System.EventHandler(this.comboBoxGroupSel_SelectedIndexChanged);
             // 
             // panel8
             // 

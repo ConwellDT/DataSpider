@@ -177,7 +177,7 @@ namespace DataSpider
             //threadStatus.Start();
 
             Text = $"{AssemblyTitle} V.{AssemblyVersion}";
-            adminToolStripMenuItem.Visible = userToolStripMenuItem.Visible = false;
+            configCToolStripMenuItem.Visible = userToolStripMenuItem.Visible = false;
 
             SetSBL();
 
@@ -325,6 +325,7 @@ namespace DataSpider
                 pDispView.AddFormToTab(PIMonitor);
                 pTreeForm.treeViewEQStatus.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(PIMonitor.treeView_AfterSelect);
                 pDispView.OnTabControlSelectedIndexChanged += new TabFromCtrl.OnTabControlSelectedIndexChangedDelegate(PIMonitor.TabControl_SelectedIndexChanged);
+                OnUserLoginChanged += new OnUserLogInChangedDelegate(PIMonitor.UserLogInChanged);
 
                 pDispView.SelectTabIndex(0);
                 equipMonitor.TabControl_SelectedIndexChanged(equipMonitor);
@@ -437,7 +438,8 @@ namespace DataSpider
                     toolStripLabel_User.Text = "User";// "Not logged in";
                     toolStripButton_Log.Text = "Log In";
                     OnUserLoginChanged?.Invoke();
-                    adminToolStripMenuItem.Visible = userToolStripMenuItem.Visible = false;
+                    configCToolStripMenuItem.Visible = userToolStripMenuItem.Visible = false;
+                     
                 }
             }
             else
@@ -451,7 +453,7 @@ namespace DataSpider
                         toolStripButton_Log.Text = "Log Out";
                         OnUserLoginChanged?.Invoke();
                         userToolStripMenuItem.Visible = true;
-                        adminToolStripMenuItem.Visible = UserAuthentication.UserLevel.Equals(UserLevel.Admin);
+                        configCToolStripMenuItem.Visible = UserAuthentication.UserLevel.Equals(UserLevel.Admin);
                     }
                 }
             }

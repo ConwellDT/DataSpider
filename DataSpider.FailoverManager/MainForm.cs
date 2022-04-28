@@ -35,6 +35,7 @@ namespace DataSpider.FailoverManager
             InitializeComponent();
 
             m_Logger = new FileLog("FailoverManager");
+            m_Logger.SetDbLogger("FailoverManager");
         }
 
         private void button1_Click(object sender, EventArgs e)

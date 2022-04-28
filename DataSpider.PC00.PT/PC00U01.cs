@@ -447,6 +447,7 @@ namespace DataSpider.PC00.PT
             CFWLog.LogToFile("DATA", logFileName, msgType, title, msg);
             _logger.Trace(msg);
         }
+
         public void SetDbLogger(string connectionString, string EquipName)
         {
             DatabaseTarget target = new DatabaseTarget();
@@ -475,7 +476,37 @@ namespace DataSpider.PC00.PT
             param.Layout = "${message}";
             target.Parameters.Add(param);
             NLog.Config.SimpleConfigurator.ConfigureForTargetLogging(target, LogLevel.Trace);
-            _logger=LogManager.GetLogger(EquipName);
+            _logger = LogManager.GetLogger(EquipName);
+        }
+        public void SetDbLogger(string EquipName)
+        {
+            DatabaseTarget target = new DatabaseTarget();
+            DatabaseParameterInfo param;
+            //                target.ConnectionString = "Data Source=192.168.20.229;Initial Catalog=DataSpider;Persist Security Info=True;User ID=SBLADMIN;Password=SBLADMIN#01";
+            target.ConnectionString = CFW.Data.MsSqlDbDef.ConnectionString;
+            target.CommandText = "INSERT INTO [dbo].[LO_SYSTEM] ([TIMESTAMP],[EQUIP_NM],[MACHINE_NM],[LEVEL],[MESSAGE]) VALUES (@timestamp,@logger,@machinename, @level, @message);";
+            param = new DatabaseParameterInfo();
+            param.Name = "@timestamp";
+            param.Layout = "${date}";
+            target.Parameters.Add(param);
+            param = new DatabaseParameterInfo();
+            param.Name = "@machinename";
+            param.Layout = "${machinename}";
+            target.Parameters.Add(param);
+            param = new DatabaseParameterInfo();
+            param.Name = "@level";
+            param.Layout = "${level}";
+            target.Parameters.Add(param);
+            param = new DatabaseParameterInfo();
+            param.Name = "@logger";
+            param.Layout = "${logger}";
+            target.Parameters.Add(param);
+            param = new DatabaseParameterInfo();
+            param.Name = "@message";
+            param.Layout = "${message}";
+            target.Parameters.Add(param);
+            NLog.Config.SimpleConfigurator.ConfigureForTargetLogging(target, LogLevel.Trace);
+            _logger = LogManager.GetLogger(EquipName);
         }
 
     }
@@ -502,6 +533,12 @@ namespace DataSpider.PC00.PT
             }
         }
         public static void DoubleBuffered(this DataGridView dgv, bool setting)
+        {
+            Type dgvType = dgv.GetType();
+            PropertyInfo pi = dgvType.GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic);
+            pi.SetValue(dgv, setting, null);
+        }
+        public static void DoubleBuffered(this ListView dgv, bool setting)
         {
             Type dgvType = dgv.GetType();
             PropertyInfo pi = dgvType.GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic);
