@@ -42,18 +42,12 @@ namespace DataSpider.FailoverManager
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.label_Version = new System.Windows.Forms.Label();
-            this.btnMinimize = new System.Windows.Forms.Button();
-            this.btnExit = new System.Windows.Forms.Button();
             this.lbTitle = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.panel6 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.panel8 = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.panel9 = new System.Windows.Forms.Panel();
-            this.LvServerInfo = new DataSpider.PC03.PT.Controls.CWListView();
             this.panel10 = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
             this.panel11 = new System.Windows.Forms.Panel();
@@ -79,8 +73,6 @@ namespace DataSpider.FailoverManager
             this.tableLayoutPanel3.SuspendLayout();
             this.panel6.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
-            this.panel8.SuspendLayout();
-            this.panel9.SuspendLayout();
             this.panel10.SuspendLayout();
             this.panel11.SuspendLayout();
             this.panel14.SuspendLayout();
@@ -180,8 +172,6 @@ namespace DataSpider.FailoverManager
             // panel5
             // 
             this.panel5.Controls.Add(this.label_Version);
-            this.panel5.Controls.Add(this.btnMinimize);
-            this.panel5.Controls.Add(this.btnExit);
             this.panel5.Controls.Add(this.lbTitle);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(76, 3);
@@ -200,32 +190,6 @@ namespace DataSpider.FailoverManager
             this.label_Version.Name = "label_Version";
             this.label_Version.Size = new System.Drawing.Size(0, 20);
             this.label_Version.TabIndex = 4;
-            // 
-            // btnMinimize
-            // 
-            this.btnMinimize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMinimize.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnMinimize.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
-            this.btnMinimize.ForeColor = System.Drawing.Color.Black;
-            this.btnMinimize.Location = new System.Drawing.Point(857, 3);
-            this.btnMinimize.Name = "btnMinimize";
-            this.btnMinimize.Size = new System.Drawing.Size(21, 21);
-            this.btnMinimize.TabIndex = 1;
-            this.btnMinimize.TabStop = false;
-            this.btnMinimize.Text = "_";
-            // 
-            // btnExit
-            // 
-            this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnExit.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
-            this.btnExit.ForeColor = System.Drawing.Color.Black;
-            this.btnExit.Location = new System.Drawing.Point(881, 3);
-            this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(21, 21);
-            this.btnExit.TabIndex = 2;
-            this.btnExit.TabStop = false;
-            this.btnExit.Text = "X";
             // 
             // lbTitle
             // 
@@ -290,74 +254,28 @@ namespace DataSpider.FailoverManager
             // 
             this.tableLayoutPanel4.ColumnCount = 1;
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.Controls.Add(this.panel8, 0, 0);
-            this.tableLayoutPanel4.Controls.Add(this.panel9, 0, 1);
-            this.tableLayoutPanel4.Controls.Add(this.panel10, 0, 2);
-            this.tableLayoutPanel4.Controls.Add(this.panel11, 0, 4);
-            this.tableLayoutPanel4.Controls.Add(this.panel14, 0, 3);
+            this.tableLayoutPanel4.Controls.Add(this.panel10, 0, 0);
+            this.tableLayoutPanel4.Controls.Add(this.panel11, 0, 2);
+            this.tableLayoutPanel4.Controls.Add(this.panel14, 0, 1);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(1);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-            this.tableLayoutPanel4.RowCount = 5;
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 260F));
+            this.tableLayoutPanel4.RowCount = 3;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel4.Size = new System.Drawing.Size(983, 576);
             this.tableLayoutPanel4.TabIndex = 1;
-            // 
-            // panel8
-            // 
-            this.panel8.BackColor = System.Drawing.SystemColors.Control;
-            this.panel8.Controls.Add(this.label2);
-            this.panel8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel8.Location = new System.Drawing.Point(3, 1);
-            this.panel8.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
-            this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(979, 18);
-            this.panel8.TabIndex = 0;
-            // 
-            // label2
-            // 
-            this.label2.BackColor = System.Drawing.Color.RoyalBlue;
-            this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Font = new System.Drawing.Font("Arial", 9.5F, System.Drawing.FontStyle.Bold);
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(0, 0);
-            this.label2.Margin = new System.Windows.Forms.Padding(3, 0, 1, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(979, 18);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Connection Information";
-            // 
-            // panel9
-            // 
-            this.panel9.Controls.Add(this.LvServerInfo);
-            this.panel9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel9.Location = new System.Drawing.Point(3, 21);
-            this.panel9.Margin = new System.Windows.Forms.Padding(3, 1, 1, 3);
-            this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(979, 256);
-            this.panel9.TabIndex = 0;
-            // 
-            // LvServerInfo
-            // 
-            this.LvServerInfo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.LvServerInfo.Font = new System.Drawing.Font("Arial", 9F);
-            this.LvServerInfo.Location = new System.Drawing.Point(0, 0);
-            this.LvServerInfo.Margin = new System.Windows.Forms.Padding(1);
-            this.LvServerInfo.Name = "LvServerInfo";
-            this.LvServerInfo.Size = new System.Drawing.Size(979, 256);
-            this.LvServerInfo.TabIndex = 0;
             // 
             // panel10
             // 
             this.panel10.BackColor = System.Drawing.SystemColors.Control;
             this.panel10.Controls.Add(this.label4);
             this.panel10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel10.Location = new System.Drawing.Point(3, 281);
+            this.panel10.Location = new System.Drawing.Point(3, 1);
             this.panel10.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
             this.panel10.Name = "panel10";
             this.panel10.Size = new System.Drawing.Size(979, 18);
@@ -380,10 +298,10 @@ namespace DataSpider.FailoverManager
             // 
             this.panel11.Controls.Add(this.LvRevLog);
             this.panel11.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel11.Location = new System.Drawing.Point(3, 325);
+            this.panel11.Location = new System.Drawing.Point(3, 45);
             this.panel11.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
             this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(979, 250);
+            this.panel11.Size = new System.Drawing.Size(979, 530);
             this.panel11.TabIndex = 0;
             // 
             // LvRevLog
@@ -394,7 +312,7 @@ namespace DataSpider.FailoverManager
             this.LvRevLog.Location = new System.Drawing.Point(0, 0);
             this.LvRevLog.Margin = new System.Windows.Forms.Padding(3, 3, 1, 1);
             this.LvRevLog.Name = "LvRevLog";
-            this.LvRevLog.Size = new System.Drawing.Size(979, 250);
+            this.LvRevLog.Size = new System.Drawing.Size(979, 530);
             this.LvRevLog.TabIndex = 0;
             // 
             // panel14
@@ -406,7 +324,7 @@ namespace DataSpider.FailoverManager
             this.panel14.Controls.Add(this.btnChange);
             this.panel14.Controls.Add(this.cbDebug);
             this.panel14.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel14.Location = new System.Drawing.Point(3, 300);
+            this.panel14.Location = new System.Drawing.Point(3, 20);
             this.panel14.Margin = new System.Windows.Forms.Padding(3, 0, 1, 0);
             this.panel14.Name = "panel14";
             this.panel14.Size = new System.Drawing.Size(979, 24);
@@ -418,7 +336,7 @@ namespace DataSpider.FailoverManager
             this.tbShowLines.Location = new System.Drawing.Point(854, 3);
             this.tbShowLines.MaxLength = 4;
             this.tbShowLines.Name = "tbShowLines";
-            this.lbShowLines.Size = new System.Drawing.Size(94, 14);
+            this.tbShowLines.Size = new System.Drawing.Size(50, 23);
             this.tbShowLines.TabIndex = 4;
             this.tbShowLines.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -426,7 +344,7 @@ namespace DataSpider.FailoverManager
             // 
             this.lbShowLines.AutoSize = true;
             this.lbShowLines.Font = new System.Drawing.Font("굴림", 8F);
-            this.lbShowLines.Location = new System.Drawing.Point(775, 6);
+            this.lbShowLines.Location = new System.Drawing.Point(759, 6);
             this.lbShowLines.Name = "lbShowLines";
             this.lbShowLines.Size = new System.Drawing.Size(94, 14);
             this.lbShowLines.TabIndex = 3;
@@ -457,7 +375,7 @@ namespace DataSpider.FailoverManager
             // btnChange
             // 
             this.btnChange.Font = new System.Drawing.Font("굴림", 8F);
-            this.btnChange.Location = new System.Drawing.Point(898, 2);
+            this.btnChange.Location = new System.Drawing.Point(912, 2);
             this.btnChange.Name = "btnChange";
             this.btnChange.Size = new System.Drawing.Size(70, 21);
             this.btnChange.TabIndex = 5;
@@ -532,8 +450,6 @@ namespace DataSpider.FailoverManager
             this.tableLayoutPanel3.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
-            this.panel8.ResumeLayout(false);
-            this.panel9.ResumeLayout(false);
             this.panel10.ResumeLayout(false);
             this.panel11.ResumeLayout(false);
             this.panel14.ResumeLayout(false);
@@ -556,18 +472,15 @@ namespace DataSpider.FailoverManager
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Label label_Version;
-        private System.Windows.Forms.Button btnMinimize;
-        private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Label lbTitle;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Label lblRunTime;
+        private System.Windows.Forms.PictureBox pbDbCon;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
-        private System.Windows.Forms.Panel panel8;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Panel panel9;
-        private PC03.PT.Controls.CWListView LvServerInfo;
         private System.Windows.Forms.Panel panel10;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Panel panel11;
@@ -579,9 +492,6 @@ namespace DataSpider.FailoverManager
         private System.Windows.Forms.CheckBox cbError;
         private System.Windows.Forms.Button btnChange;
         private System.Windows.Forms.CheckBox cbDebug;
-        private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Label lblRunTime;
-        private System.Windows.Forms.PictureBox pbDbCon;
     }
 }
 

@@ -18,6 +18,7 @@ namespace DataSpider.FailoverManager
         {
             m_Owner = This;
         }
+
         public void LogToFile(string FileType, string FileName, string p_strStat, string p_strExplain, string p_strLogMsg)
         {
             base.WriteLog(p_strLogMsg, p_strStat, logFileName);
