@@ -422,9 +422,9 @@ namespace DataSpider.PC00.PT
 
     public class FileLog
     {
-        private Logging CFWLog = null;
-        private string logFileName = string.Empty;
-        private Logger _logger = null;
+        protected Logging CFWLog = null;
+        protected string logFileName = string.Empty;
+        protected Logger _logger = null;
 
         public FileLog(string fileName)
         {

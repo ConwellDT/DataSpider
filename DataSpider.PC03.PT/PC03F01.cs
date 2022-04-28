@@ -18,6 +18,7 @@ using OSIsoft.AF.Asset;
 using OSIsoft.AF.Search;
 using OSIsoft.AF.PI;
 using OSIsoft.AF.Time;
+using System.IO;
 
 namespace DataSpider.PC03.PT
 {
@@ -34,7 +35,8 @@ namespace DataSpider.PC03.PT
         DbInfo          m_clsDbInfo;                            // DB Infomation
         PgmRegInfo      m_clsPgmInfo;                           // Program Registration Infomation
         PIInfo          m_clsPIInfo;                            // PI Infomation
-        Logging         m_clsLog = new Logging();
+        //Logging         m_clsLog = new Logging();
+        MyClsLog m_clsLog = new MyClsLog();
 
         MsSqlDbAccess m_clsDBCon;                         // DB Connection
         PC00Z01       m_SqlBiz;
@@ -70,9 +72,25 @@ namespace DataSpider.PC03.PT
 
         #endregion
 
+        public class MyClsLog : FileLog
+        {
+
+
+            public MyClsLog(string fileName ="") : base(fileName)
+            {
+            }
+
+            public void LogToFile(string FileType, string FileName, string p_strStat, string p_strExplain, string p_strLogMsg) 
+            {
+                base.WriteLog(p_strLogMsg, p_strStat, "");
+            }
+        }
+
+
         #region PC03F01 생성자
         public PC03F01()
         {
+            m_clsLog.SetDbLogger(CFW.Data.MsSqlDbDef.ConnectionString, Application.ProductName);
             InitializeComponent();
             PC03F01_Initialize();
         }
@@ -644,6 +662,9 @@ namespace DataSpider.PC03.PT
         {
             try
             {
+
+                this.m_clsLog.LogToFile("LOG", this.m_strLogFileName, pstrType, MethodBase.GetCurrentMethod().Name,$"{pstrProcID}-{pMsg}");
+
                 if (this.InvokeRequired)
                 {
                     listViewMsgCallback d = new listViewMsgCallback(listViewMsg);

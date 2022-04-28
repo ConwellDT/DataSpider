@@ -95,7 +95,7 @@ namespace DataSpider.PC03.PT
                             for (int i = 0; i < dtResult.Rows.Count; i++)
                             {
                                 int strSeq = int.Parse(dtResult.Rows[i]["HI_SEQ"].ToString());
-                                int ifCount = int.Parse(dtResult.Rows[i]["IF_COUNT"].ToString());
+                                int ifCount = 0; int.TryParse(dtResult.Rows[i]["IF_COUNT"].ToString(), out ifCount);
                                 string pointName = dtResult.Rows[i]["PI_TAG_NM"].ToString();
                                 object pointValue = dtResult.Rows[i]["MEASURE_VALUE"].ToString();
 
