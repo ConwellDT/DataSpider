@@ -29,19 +29,27 @@ namespace DataSpider.FailoverManager
         StringBuilder strQuery = new StringBuilder();
         string errCode = string.Empty;
         string errText = string.Empty;
+        System.Windows.Forms.Timer m_tmLogLvUpd;          // Timer (Log ListView Update)
 
         public MainForm()
         {
-            InitializeComponent();
-
             m_Logger = new FileLog("FailoverManager");
             m_Logger.SetDbLogger("FailoverManager");
+
+            InitializeComponent();
+
+            this.m_tmLogLvUpd = new System.Windows.Forms.Timer();
+            this.m_tmLogLvUpd.Interval = PC00D01.ItvLogLvUpd;
+            this.m_tmLogLvUpd.Tick += new EventHandler(m_tmLogLvUpd_Tick);
+
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        // Timer Tick Evnet (Log ListView Update)
+        void m_tmLogLvUpd_Tick(object sender, EventArgs e)
         {
-
+           // ReceivedDataLogListViewUpdate();
         }
+
 
         private void MainForm_Load(object sender, EventArgs e)
         {
@@ -105,7 +113,7 @@ namespace DataSpider.FailoverManager
                                 }
                             }
                         }
-                        textBox1.Text = "";
+                        //textBox1.Text = "";
                         foreach (DataRow dr in dtStatus.Rows)
                         {
                             // 프로그램이 종료되었으면 null
@@ -144,7 +152,7 @@ namespace DataSpider.FailoverManager
                                 { // ActiveServer != MY_ID
                                     if (99 != (int)dr["PROG_STATUS"] )
                                     {
-                                        textBox1.Text += string.Format($"{(string)dr["EQUIP_NM"]} : 0=={(int)dr[$"STOP_REQ{MY_ID}"]}  && {IsProcessTerminated(m_ProcessList[(string)dr["EQUIP_NM"]])}");
+                                        //textBox1.Text += string.Format($"{(string)dr["EQUIP_NM"]} : 0=={(int)dr[$"STOP_REQ{MY_ID}"]}  && {IsProcessTerminated(m_ProcessList[(string)dr["EQUIP_NM"]])}");
                                         if (IsProcessTerminated(m_ProcessList[(string)dr["EQUIP_NM"]]))
                                         {
                                             if (0 < (int)dr[$"STOP_REQ{MY_ID}"])

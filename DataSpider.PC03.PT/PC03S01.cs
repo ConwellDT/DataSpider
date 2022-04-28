@@ -57,6 +57,7 @@ namespace DataSpider.PC03.PT
         public PC03S01(PC03F01 pOwner, string strEquipType, string strEquipName, int nCurNo, bool bAutoRun, PIInfo m_clsPIInfo) : base(pOwner, strEquipType, strEquipName, nCurNo, bAutoRun, m_clsPIInfo)
         {
             m_Logger = new FileLog(m_strEName);
+            m_Logger.SetDbLogger(m_strEName);
 
             #region PI CONNECTION INFO
 
