@@ -17,7 +17,8 @@ namespace DataSpider.FailoverManager
 {
     public partial class MainForm : Form
     {
-        EventLog eventLog = null;
+//        EventLog eventLog = null;
+        FileLog m_Logger = null;
         private PC00Z01 sqlBiz = new PC00Z01();
         public bool m_bTermial = false;
         Thread threadFailover = null;
@@ -32,12 +33,8 @@ namespace DataSpider.FailoverManager
         public MainForm()
         {
             InitializeComponent();
-            if (!EventLog.SourceExists("DataSpider"))
-            {
-                EventLog.CreateEventSource("DataSpider", "FailoverLog");
-            }
-            eventLog = new EventLog("FailoverLog", ".", "DataSpider");
 
+            m_Logger = new FileLog("FailoverManager");
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -54,7 +51,7 @@ namespace DataSpider.FailoverManager
 
         private void FailoverThread()
         {
-            eventLog.WriteEntry($"FailoverThread Start  MY_ID={MY_ID} ");
+            m_Logger.WriteLog($"FailoverThread Start  MY_ID={MY_ID} ");
             string errCode = string.Empty;
             string errText = string.Empty;
             StringBuilder strQuery = new StringBuilder();
@@ -63,7 +60,7 @@ namespace DataSpider.FailoverManager
             string CurDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
 
-            eventLog.WriteEntry(" EXECUTE DSFM_Initialization ");
+            m_Logger.WriteLog(" EXECUTE DSFM_Initialization ");
             strQuery = new StringBuilder();
             strQuery.Append($" EXECUTE DSFM_Initialization ");
             CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref errCode, ref errText);
@@ -94,7 +91,7 @@ namespace DataSpider.FailoverManager
                         if (dtStatus == null) continue;
                         if (dtStatus.Rows.Count != m_ProcessList.Count)
                         {
-                            eventLog.WriteEntry(" ProcessList Changed! ");
+                            m_Logger.WriteLog(" ProcessList Changed! ");
                             Dictionary<string, Process> m_ProcessListOld = m_ProcessList;
                             Process prc = null;
                             m_ProcessList.Clear();
@@ -133,11 +130,11 @@ namespace DataSpider.FailoverManager
                                                     UseShellExecute = true
                                                 });
                                                 m_ProcessList[(string)dr["EQUIP_NM"]] = process;
-                                                eventLog.WriteEntry($" {(string)dr["EQUIP_NM"]} Collector Executed");
+                                                m_Logger.WriteLog($" {(string)dr["EQUIP_NM"]} Collector Executed");
                                             }
                                             catch (Exception ex)
                                             {
-                                                eventLog.WriteEntry($" {ex.ToString()} ");
+                                                m_Logger.WriteLog($" {ex.ToString()} ");
                                             }
                                         }
                                     }
@@ -165,7 +162,7 @@ namespace DataSpider.FailoverManager
                                                 strQuery = new StringBuilder();
                                                 strQuery.Append($" UPDATE MA_FAILOVER_CD SET STOP_REQ{MY_ID}=1, STOP_REQ_TIME{MY_ID}=GETDATE() WHERE EQUIP_NM='{dr["EQUIP_NM"]}'  ");
                                                 CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref errCode, ref errText);
-                                                eventLog.WriteEntry($" {(string)dr["EQUIP_NM"]} {strQuery.ToString()} ");
+                                                m_Logger.WriteLog($" {(string)dr["EQUIP_NM"]} {strQuery.ToString()} ");
                                             }
                                             else
                                             { // STOP_REQ == 1
@@ -180,7 +177,7 @@ namespace DataSpider.FailoverManager
                                                             Process prc = m_ProcessList[(string)dr["EQUIP_NM"]];
                                                             prc.Kill();
                                                             prc.WaitForExit();
-                                                            eventLog.WriteEntry($" {(string)dr["EQUIP_NM"]} Collector Killed");
+                                                            m_Logger.WriteLog($" {(string)dr["EQUIP_NM"]} Collector Killed");
                                                             m_ProcessList[(string)dr["EQUIP_NM"]] = null;
                                                             // STOP_REQ=0
                                                             strQuery = new StringBuilder();
@@ -189,7 +186,7 @@ namespace DataSpider.FailoverManager
                                                         }
                                                         catch (Exception ex)
                                                         {
-                                                            eventLog.WriteEntry($" {ex.ToString()} ");
+                                                            m_Logger.WriteLog($" {ex.ToString()} ");
                                                         }
                                                     }
                                                 }
@@ -215,11 +212,11 @@ namespace DataSpider.FailoverManager
                                                 UseShellExecute = true
                                             });
                                             m_ProcessList[(string)dr["EQUIP_NM"]] = process;
-                                            eventLog.WriteEntry($" {(string)dr["EQUIP_NM"]} Collector Executed");
+                                            m_Logger.WriteLog($" {(string)dr["EQUIP_NM"]} Collector Executed");
                                         }
                                         catch (Exception ex)
                                         {
-                                            eventLog.WriteEntry($" {ex.ToString()} ");
+                                            m_Logger.WriteLog($" {ex.ToString()} ");
                                         }
                                     }
                                     strQuery = new StringBuilder();
@@ -235,11 +232,11 @@ namespace DataSpider.FailoverManager
                                         {
                                             prc.Kill();
                                             prc.WaitForExit();
-                                            eventLog.WriteEntry($" {(string)dr["EQUIP_NM"]} Collector Killed");
+                                            m_Logger.WriteLog($" {(string)dr["EQUIP_NM"]} Collector Killed");
                                         }
                                         catch (Exception ex)
                                         {
-                                            eventLog.WriteEntry($" {ex.ToString()} ");
+                                            m_Logger.WriteLog($" {ex.ToString()} ");
                                         }
                                     }
                                     m_ProcessList[(string)dr["EQUIP_NM"]] = null;
@@ -253,7 +250,7 @@ namespace DataSpider.FailoverManager
                 }
                 catch (Exception ex)
                 {
-                    eventLog.WriteEntry($" {ex.ToString()} ");
+                    m_Logger.WriteLog($" {ex.ToString()} ");
                 }
                 finally
                 {
@@ -268,7 +265,7 @@ namespace DataSpider.FailoverManager
                     strQuery = new StringBuilder();
                     strQuery.Append($" UPDATE MA_FAILOVER_CD SET STOP_REQ{MY_ID}=1, STOP_REQ_TIME{MY_ID}=GETDATE() WHERE EQUIP_NM='{kvp.Key}'  ");
                     CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref errCode, ref errText);
-                    eventLog.WriteEntry($" {kvp.Key} STOP_REQ : {strQuery.ToString()} ");
+                    m_Logger.WriteLog($" {kvp.Key} STOP_REQ : {strQuery.ToString()} ");
                 }
             }
             Thread.Sleep(1000);
@@ -279,10 +276,10 @@ namespace DataSpider.FailoverManager
                 {
                     prc.Kill();
                     prc.WaitForExit();
-                    eventLog.WriteEntry($" {kvp.Key}  Collector Killed ");
+                    m_Logger.WriteLog($" {kvp.Key}  Collector Killed ");
                 }
             }
-            eventLog.WriteEntry("FailoverThread End");
+            m_Logger.WriteLog("FailoverThread End");
         }
 
         public bool IsProcessTerminated(Process prc)
@@ -297,7 +294,7 @@ namespace DataSpider.FailoverManager
         {
             m_bTermial = true;
             Thread.Sleep(1000);
-            eventLog.WriteEntry($"MainForm_FormClosing");
+            m_Logger.WriteLog($"MainForm_FormClosing");
         }
 
         private void btn1_mode_Click(object sender, EventArgs e)
@@ -426,7 +423,7 @@ namespace DataSpider.FailoverManager
         {
             m_bTermial = true;
             Thread.Sleep(1000);
-            eventLog.WriteEntry($"Application.Exit");
+            m_Logger.WriteLog($"Application.Exit");
             Application.Exit();
         }
 
