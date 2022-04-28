@@ -31,6 +31,7 @@ namespace DataSpider
         EquipmentMonitor equipMonitor = null;
         CurrentTagValueMonitorDGV currentTagValueMonitor = null;
         PIAlarmMonitor PIMonitor = null;
+        SystemLogView systemLogview = null;
         Form_Splash splash = null;
         public bool bTerminal = false;
         Thread threadStatus = null;
@@ -326,6 +327,14 @@ namespace DataSpider
                 pTreeForm.treeViewEQStatus.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(PIMonitor.treeView_AfterSelect);
                 pDispView.OnTabControlSelectedIndexChanged += new TabFromCtrl.OnTabControlSelectedIndexChangedDelegate(PIMonitor.TabControl_SelectedIndexChanged);
                 OnUserLoginChanged += new OnUserLogInChangedDelegate(PIMonitor.UserLogInChanged);
+
+                systemLogview = new SystemLogView();
+                systemLogview.Text = "System Log";
+                pDispView.AddFormToTab(systemLogview);
+                //pTreeForm.treeViewEQStatus.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(systemLogview.treeView_AfterSelect);
+                pDispView.OnTabControlSelectedIndexChanged += new TabFromCtrl.OnTabControlSelectedIndexChangedDelegate(systemLogview.TabControl_SelectedIndexChanged);
+                //OnUserLoginChanged += new OnUserLogInChangedDelegate(systemLogview.UserLogInChanged);
+
 
                 pDispView.SelectTabIndex(0);
                 equipMonitor.TabControl_SelectedIndexChanged(equipMonitor);
