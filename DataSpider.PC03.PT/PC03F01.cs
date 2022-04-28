@@ -36,7 +36,7 @@ namespace DataSpider.PC03.PT
         PgmRegInfo      m_clsPgmInfo;                           // Program Registration Infomation
         PIInfo          m_clsPIInfo;                            // PI Infomation
         //Logging         m_clsLog = new Logging();
-        MyClsLog m_clsLog = new MyClsLog();
+        MyClsLog m_clsLog = new MyClsLog(Application.ProductName);
 
         MsSqlDbAccess m_clsDBCon;                         // DB Connection
         PC00Z01       m_SqlBiz;
@@ -72,19 +72,6 @@ namespace DataSpider.PC03.PT
 
         #endregion
 
-        public class MyClsLog : FileLog
-        {
-
-
-            public MyClsLog(string fileName ="") : base(fileName)
-            {
-            }
-
-            public void LogToFile(string FileType, string FileName, string p_strStat, string p_strExplain, string p_strLogMsg) 
-            {
-                base.WriteLog(p_strLogMsg, p_strStat, "");
-            }
-        }
 
 
         #region PC03F01 생성자
@@ -662,9 +649,6 @@ namespace DataSpider.PC03.PT
         {
             try
             {
-
-                this.m_clsLog.LogToFile("LOG", this.m_strLogFileName, pstrType, MethodBase.GetCurrentMethod().Name,$"{pstrProcID}-{pMsg}");
-
                 if (this.InvokeRequired)
                 {
                     listViewMsgCallback d = new listViewMsgCallback(listViewMsg);

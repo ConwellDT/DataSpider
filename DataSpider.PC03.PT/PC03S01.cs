@@ -21,6 +21,19 @@ using OSIsoft.AF.Time;
 
 namespace DataSpider.PC03.PT
 {
+    public class MyClsLog : FileLog
+    {
+
+
+        public MyClsLog(string fileName = "") : base(fileName)
+        {
+        }
+        public void LogToFile(string FileType, string FileName, string p_strStat, string p_strExplain, string p_strLogMsg)
+        {
+            base.WriteLog(p_strLogMsg, p_strStat, logFileName);
+        }
+    }
+
 
     public class PC03S01 : PC03B01
     {
@@ -35,6 +48,7 @@ namespace DataSpider.PC03.PT
         private DateTime dtLastUpdateProgDateTime = DateTime.MinValue;
         protected int UpdateInterval = 30;
         protected IF_STATUS lastStatus = IF_STATUS.Stop;
+        FileLog m_Logger = null;
 
         public PC03S01() : base()
         {
@@ -42,6 +56,8 @@ namespace DataSpider.PC03.PT
                 
         public PC03S01(PC03F01 pOwner, string strEquipType, string strEquipName, int nCurNo, bool bAutoRun, PIInfo m_clsPIInfo) : base(pOwner, strEquipType, strEquipName, nCurNo, bAutoRun, m_clsPIInfo)
         {
+            m_Logger = new FileLog(m_strEName);
+
             #region PI CONNECTION INFO
 
             serverName = m_clsPIInfo.strPI_Server;
@@ -61,6 +77,8 @@ namespace DataSpider.PC03.PT
             catch(Exception ex)
             {
                 mOwner.listViewMsg(m_strEName,$"PI Server Connection - {ex.ToString()} ", false, m_nCurNo, 1, true, PC00D01.MSGTINF);
+                m_Logger.WriteLog($"PI Server Connection - {ex.ToString()} ", PC00D01.MSGTINF, m_strEName);
+                                    
             }
             #endregion           
         }
@@ -75,7 +93,9 @@ namespace DataSpider.PC03.PT
             string CurDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
             mOwner.listViewMsg(m_strEName, PC00D01.ON, true, m_nCurNo, 1, false, PC00D01.MSGTINF);
+            m_Logger.WriteLog(PC00D01.ON, PC00D01.MSGTINF, m_strEName);
             mOwner.listViewMsg(m_strEName, "Thread Started", false, m_nCurNo, 1, true, PC00D01.MSGTINF);
+            m_Logger.WriteLog("Thread Started", PC00D01.MSGTINF, m_strEName);
 
             while (!bTerminal)
             {
@@ -132,11 +152,12 @@ namespace DataSpider.PC03.PT
                                     if (result)
                                     {
                                         mOwner.listViewMsg(m_strEName, string.Format(PC00D01.SucceededtoPI, pointName, pointValue), true, m_nCurNo, 3, true, PC00D01.MSGTINF);
+                                        m_Logger.WriteLog(string.Format(PC00D01.SucceededtoPI, pointName, pointValue), PC00D01.MSGTERR, m_strEName);
                                     }
                                     else
                                     {
                                         mOwner.listViewMsg(m_strEName, string.Format(PC00D01.FailedtoPI, $"{errText} - {pointName}", pointValue), true, m_nCurNo, 3, true, PC00D01.MSGTERR);
-
+                                        m_Logger.WriteLog(string.Format(PC00D01.FailedtoPI, $"{errText} - {pointName}", pointValue), PC00D01.MSGTERR, m_strEName);
                                         UpdateEquipmentProgDateTime(IF_STATUS.InternalError);
                                     }
                                 }
@@ -144,7 +165,7 @@ namespace DataSpider.PC03.PT
                                 {
                                     string errMsg = "매핑된 PI 태그명이 없습니다.";
                                     mOwner.listViewMsg(m_strEName, string.Format(PC00D01.FailedtoPI, $"{errMsg} - {tagName}", pointValue), true, m_nCurNo, 3, true, PC00D01.MSGTERR);
-
+                                    m_Logger.WriteLog(string.Format(PC00D01.FailedtoPI, $"{errMsg} - {tagName}", pointValue), PC00D01.MSGTERR, m_strEName);
                                     UpdateEquipmentProgDateTime(IF_STATUS.NoData);
                                 }
                             }
@@ -158,6 +179,7 @@ namespace DataSpider.PC03.PT
                 catch (Exception ex)
                 {
                     mOwner.listViewMsg(m_strEName, ex.ToString(), true, m_nCurNo, 3, true, PC00D01.MSGTERR);
+                    m_Logger.WriteLog($"ThreadJob - {ex.ToString()} ", PC00D01.MSGTERR, m_strEName);
                     UpdateEquipmentProgDateTime(IF_STATUS.InternalError);
                 }
                 finally
@@ -172,6 +194,7 @@ namespace DataSpider.PC03.PT
             }
             UpdateEquipmentProgDateTime(IF_STATUS.Unknown);
             mOwner.listViewMsg(m_strEName, PC00D01.OFF, true, m_nCurNo, 1, false, PC00D01.MSGTINF);
+            m_Logger.WriteLog(PC00D01.OFF, PC00D01.MSGTINF, m_strEName);
         }
 
 
