@@ -78,6 +78,7 @@
     <Compile Include="Control\PC03C04.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Global.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -114,6 +115,14 @@
   <ItemGroup>
     <Content Include="failover02.ico" />
     <Content Include="failover03.ico" />
+    <Content Include="Image\bak\dbconnected.jpg" />
+    <Content Include="Image\bak\dbdisconnected.jpg" />
+    <Content Include="Image\dbconnected.jpg" />
+    <Content Include="Image\dbdisconnected.jpg" />
+    <Content Include="Image\icon1.ico" />
+    <Content Include="Image\icon2.ico" />
+    <Content Include="Image\icon3.ico" />
+    <Content Include="Image\SBL.jpg" />
     <Content Include="Letter-F-icon_34760.ico" />
   </ItemGroup>
   <ItemGroup>
