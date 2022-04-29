@@ -721,8 +721,8 @@ namespace DataSpider.PC00.PT
                     }
                     else
                     {
-                        strQuery.Append($"UPDATE [dbo].[MA_FAILOVER_CD] SET [FILE_PATH] = '.\\DataSpiderPC01.EXE {equipName}', DEFAULT_SERVER = {serverId}) ");
-                        strQuery.Append($" WHERE EQUIP_NM = '{equipName}')");
+                        strQuery.Append($"UPDATE [dbo].[MA_FAILOVER_CD] SET [FILE_PATH] = '.\\DataSpiderPC01.EXE {equipName}', DEFAULT_SERVER = {serverId} ");
+                        strQuery.Append($" WHERE EQUIP_NM = '{equipName}'");
                     }
                     result = CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref _strErrCode, ref _strErrText);
                 }
