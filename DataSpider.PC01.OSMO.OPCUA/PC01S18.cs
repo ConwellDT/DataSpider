@@ -383,14 +383,15 @@ namespace DataSpider.PC01.PT
         private string GetLastEventDate()
         {
             string LastEventDate;
-            LastEventDate = PC00U01.ReadConfigValue("LastEventDate", m_Name, $@".\CFG\{m_Type}.ini");
+            LastEventDate = m_sqlBiz.ReadSTCommon(m_Name, "LastEventDate"); //PC00U01.ReadConfigValue("LastEventDate", m_Name, $@".\CFG\{m_Type}.ini");
             listViewMsg.UpdateMsg($"Read LastEventDate   : {LastEventDate}", false, true);
             listViewMsg.UpdateMsg($"m_LastEventDate :{LastEventDate}  !", false, true, true, PC00D01.MSGTINF);
             return LastEventDate;
         }
         private bool SetLastEventDate(string LastEventDate)
         {
-            if (!PC00U01.WriteConfigValue("LastEventDate", m_Name, $@".\CFG\{m_Type}.ini", $"{LastEventDate}"))
+            //if (!PC00U01.WriteConfigValue("LastEventDate", m_Name, $@".\CFG\{m_Type}.ini", $"{LastEventDate}"))
+            if (!m_sqlBiz.WriteSTCommon(m_Name, "LastEventDate", $"{LastEventDate}"))
             {
                 listViewMsg.UpdateMsg($"Error to write LastEventDate to INI file", false, true);
                 return false;
@@ -401,14 +402,15 @@ namespace DataSpider.PC01.PT
         private string GetLastResultDate()
         {
             string LastResultDate;
-            LastResultDate = PC00U01.ReadConfigValue("LastResultDate", m_Name, $@".\CFG\{m_Type}.ini");
+            LastResultDate = m_sqlBiz.ReadSTCommon(m_Name, "LastResultDate"); //PC00U01.ReadConfigValue("LastResultDate", m_Name, $@".\CFG\{m_Type}.ini");
             listViewMsg.UpdateMsg($"Read last result Date  : {LastResultDate}", false, true);
             listViewMsg.UpdateMsg($"m_LastResultDate :{LastResultDate}  !", false, true, true, PC00D01.MSGTINF);
             return LastResultDate;
         }
         private bool SetLastResultDate(string LastResultDate)
         {
-            if (!PC00U01.WriteConfigValue("LastResultDate", m_Name, $@".\CFG\{m_Type}.ini", $"{LastResultDate}"))
+            //if (!PC00U01.WriteConfigValue("LastResultDate", m_Name, $@".\CFG\{m_Type}.ini", $"{LastResultDate}"))
+            if (!m_sqlBiz.WriteSTCommon(m_Name, "LastResultDate", $"{LastResultDate}"))
             {
                 listViewMsg.UpdateMsg($"Error to write LastResultDate to INI file", false, true);
                 return false;

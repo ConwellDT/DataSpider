@@ -104,6 +104,47 @@ namespace DataSpider.PC00.PT
         //        return false;
         //    }
         //}
+
+        public string ReadSTCommon(string cdGrp, string code)
+        {
+            string result = string.Empty;
+            string _strErrCode = string.Empty, _strErrText = string.Empty;
+            try
+            {
+                StringBuilder strQuery = new StringBuilder();
+                strQuery.Append($"EXEC GetSTCommon '{cdGrp}', '{code}'");
+
+                DataSet ds = CFW.Data.MsSqlDbAccess.GetDataSet(strQuery.ToString(), null, CommandType.Text, ref _strErrCode, ref _strErrText);
+                if (ds != null && ds.Tables[0] != null)
+                {
+                    result = ds.Tables[0].Rows?[0].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                _strErrText = ex.ToString();
+            }
+            return result;
+        }
+
+        public bool WriteSTCommon(string cdGrp, string code, string value)
+        {
+            string _strErrCode = string.Empty, _strErrText = string.Empty;
+            try
+            {
+                StringBuilder strQuery = new StringBuilder();
+                strQuery.Append($"EXEC MergeSTCommon '{cdGrp}', '{code}', '{value}'");
+
+                bool result = CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref _strErrCode, ref _strErrText);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                _strErrText = ex.ToString();
+            }
+            return false;
+        }
+
         public bool InsertResult(string _strTagName, string _strDateTime, string _strValue, string _piIFFlag, string _piIFDateTime, string remark, ref string _strErrCode, ref string _strErrText)
         {
             try

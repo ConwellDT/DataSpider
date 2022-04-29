@@ -515,7 +515,7 @@ namespace DataSpider.PC01.PT
         private DateTime GetLastEnqueuedDate()
         {
             DateTime LastEnqueuedDate;
-            string strLastEnqueuedDate = PC00U01.ReadConfigValue("LastEnqueuedDate", m_Name, $@".\CFG\{m_Type}.ini");
+            string strLastEnqueuedDate = m_sqlBiz.ReadSTCommon(m_Name, "LastEnqueuedDate"); //PC00U01.ReadConfigValue("LastEnqueuedDate", m_Name, $@".\CFG\{m_Type}.ini");
             DateTime.TryParseExact(strLastEnqueuedDate,"yyyyMMdd", CultureInfo.InvariantCulture, DateTimeStyles.AssumeLocal | DateTimeStyles.AllowInnerWhite, out LastEnqueuedDate);
             if (LastEnqueuedDate < new DateTime(2021, 10, 01))
                 LastEnqueuedDate = new DateTime(2021, 10, 01);
@@ -525,7 +525,8 @@ namespace DataSpider.PC01.PT
         }
         private bool SetLastEnqueuedDate(DateTime LastEnqueuedDate)
         {
-            if (!PC00U01.WriteConfigValue("LastEnqueuedDate", m_Name, $@".\CFG\{m_Type}.ini", $"{LastEnqueuedDate.ToString("yyyyMMdd")}"))
+            //if (!PC00U01.WriteConfigValue("LastEnqueuedDate", m_Name, $@".\CFG\{m_Type}.ini", $"{LastEnqueuedDate.ToString("yyyyMMdd")}"))
+            if (!m_sqlBiz.WriteSTCommon(m_Name, "LastEnqueuedDate", $"{LastEnqueuedDate.ToString("yyyyMMdd")}"))
             {
                 listViewMsg.UpdateMsg($"Error to write LastEnqueuedDate to INI file", false, true);
                 return false;
@@ -537,7 +538,7 @@ namespace DataSpider.PC01.PT
         private int GetLastEnqueuedDaqID()
         {
             int LastEnqueuedDaqID;
-            string strLastEnqueuedDaqID = PC00U01.ReadConfigValue("LastEnqueuedDaqID", m_Name, $@".\CFG\{m_Type}.ini");
+            string strLastEnqueuedDaqID = m_sqlBiz.ReadSTCommon(m_Name, "LastEnqueuedDaqID"); //PC00U01.ReadConfigValue("LastEnqueuedDaqID", m_Name, $@".\CFG\{m_Type}.ini");
             int.TryParse(strLastEnqueuedDaqID, out LastEnqueuedDaqID);
             listViewMsg.UpdateMsg($"Read last enqueued DaqID  : {LastEnqueuedDaqID}", false, true);
             listViewMsg.UpdateMsg($"m_LastEnqueuedDaqID :{LastEnqueuedDaqID} , {strLastEnqueuedDaqID}  !", false, true, true, PC00D01.MSGTINF);
@@ -545,7 +546,8 @@ namespace DataSpider.PC01.PT
         }
         private bool SetLastEnqueuedDaqID(int LastEnqueuedDaqID)
         {
-            if (!PC00U01.WriteConfigValue("LastEnqueuedDaqID", m_Name, $@".\CFG\{m_Type}.ini", $"{LastEnqueuedDaqID}"))
+            //if (!PC00U01.WriteConfigValue("LastEnqueuedDaqID", m_Name, $@".\CFG\{m_Type}.ini", $"{LastEnqueuedDaqID}"))
+            if (!m_sqlBiz.WriteSTCommon(m_Name, "LastEnqueuedDaqID", $"{LastEnqueuedDaqID}"))
             {
                 listViewMsg.UpdateMsg($"Error to write LastEnqueuedDaqID to INI file", false, true);
                 return false;
