@@ -48,6 +48,10 @@ namespace DataSpider.UserMonitor
         private DateTime DateTimeFilterHistMax = DateTime.Now;// DateTime.MinValue;
         private string DescriptionFilter = "";
 
+        DataTable dtTagValueHistory = null;
+        DataTable dtGropTagNames = null;
+        DataTable dtHistoryData = null;
+        DataTable dtTagHistory = null;
         public CurrentTagValueMonitorDGV()
         {
             InitializeComponent();
@@ -191,7 +195,7 @@ namespace DataSpider.UserMonitor
 
                 if (selGrpName != "All")
                 {
-                    DataTable dtGropTagNames = sqlBiz.GetTagGroupInfo(selGrpName, ref strErrCode, ref strErrText);
+                    dtGropTagNames = sqlBiz.GetTagGroupInfo(selGrpName, ref strErrCode, ref strErrText);
                     
                     if (strErrCode == null || strErrCode == string.Empty)
                     {
@@ -279,7 +283,6 @@ namespace DataSpider.UserMonitor
             string strErrCode = string.Empty;
             string strErrText = string.Empty;
 
-            DataTable dtHistoryData = null;
 
             String strFileterStr = String.Empty;
 
@@ -300,7 +303,7 @@ namespace DataSpider.UserMonitor
 
             if (selGrpName != "All")
             {
-                DataTable dtGropTagNames = sqlBiz.GetTagGroupInfo(selGrpName, ref strErrCode, ref strErrText);
+                dtGropTagNames = sqlBiz.GetTagGroupInfo(selGrpName, ref strErrCode, ref strErrText);
 
                 if (strErrCode == null || strErrCode == string.Empty)
                 {
@@ -309,7 +312,7 @@ namespace DataSpider.UserMonitor
                         String strTagName = equipName.Trim() + "_" + dtGropTagNames.Rows[nT]["TAG_NM"].ToString();
 
 
-                        DataTable dtTagHistory = sqlBiz.GetAllTagHistoryValue(strTagName, minDate.ToString("yyyy-MM-dd HH:mm:ss.fff"), maxDate.ToString("yyyy-MM-dd HH:mm:ss.fff"), ref strErrCode, ref strErrText);
+                        dtTagHistory = sqlBiz.GetAllTagHistoryValue(strTagName, minDate.ToString("yyyy-MM-dd HH:mm:ss.fff"), maxDate.ToString("yyyy-MM-dd HH:mm:ss.fff"), ref strErrCode, ref strErrText);
 
                         if (dtTagHistory != null && dtTagHistory.Rows.Count > 0)
                         {
@@ -329,7 +332,7 @@ namespace DataSpider.UserMonitor
             }
             else
             {
-                DataTable dtTagValueHistory = sqlBiz.GetTagValueHistoryByEquip(equipName, minDate.ToString("yyyy-MM-dd HH:mm:ss.fff"), maxDate.ToString("yyyy-MM-dd HH:mm:ss.fff"), ref strErrCode, ref strErrText);
+                dtTagValueHistory = sqlBiz.GetTagValueHistoryByEquip(equipName, minDate.ToString("yyyy-MM-dd HH:mm:ss.fff"), maxDate.ToString("yyyy-MM-dd HH:mm:ss.fff"), ref strErrCode, ref strErrText);
 
                 if (strErrCode == null || strErrCode == string.Empty)
                 {
@@ -345,23 +348,26 @@ namespace DataSpider.UserMonitor
             if (dtHistoryData != null && dtHistoryData.Rows.Count > 0)
             {
                 dtHistoryData.DefaultView.Sort = "MEASURE_DATE DESC";
-
-
                 int nHoriScrollOffset = dataGridView_Main.HorizontalScrollingOffset;
                 int nRowIndex = dataGridView_Main.FirstDisplayedScrollingRowIndex;
 
+
+
+
                 //dataGridView_Main.ColumnHeadersVisible = dataGridView_Main.RowHeadersVisible = false;
+                //dataGridView_Main.SuspendLayout();
                 //DataGridViewAutoSizeColumnsMode dgvascm = dataGridView_Main.AutoSizeColumnsMode;
                 //DataGridViewAutoSizeRowsMode dgvasrm = dataGridView_Main.AutoSizeRowsMode;
-                //dataGridView_Main.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.None;
+                dataGridView_Main.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
                 //dataGridView_Main.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.None;
-                //dataGridView_Main.SuspendLayout();
                 dataGridView_Main.DataSource = dtHistoryData;
                 //dataGridView_Main.AutoSizeColumnsMode = dgvascm;
                 //dataGridView_Main.AutoSizeRowsMode = dgvasrm;
                 //dataGridView_Main.ColumnHeadersVisible = dataGridView_Main.RowHeadersVisible = true;
                 //dataGridView_Main.ResumeLayout();
 
+                // Configure the details DataGridView so that its columns automatically
+                // adjust their widths when the data changes.
 
                 if (dtHistoryData.Rows.Count > 0)
                 {
