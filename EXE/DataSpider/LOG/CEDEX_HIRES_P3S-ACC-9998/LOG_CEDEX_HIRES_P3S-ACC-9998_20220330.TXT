@@ -1,4 +1,0 @@
-﻿[2022/03/30 15:31:14] [INFO] - [GetSoftwareVersion] SoftwareVersion :  !
-﻿[2022/03/30 15:31:14] [INFO] - [ThreadJob] Read From Ini File m_SoftwareVersion :
-﻿[2022/03/30 15:31:14] [INFO] - [GetLastProcessTime] LastProcessTime :2022-01-01 00:00:00.000 ,   !
-﻿[2022/03/30 15:31:14] [INFO] - [ThreadJob] Read From Ini File m_dtLastProcessTime :2022-01-01 00:00:00.000

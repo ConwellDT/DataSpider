@@ -37,3 +37,15 @@ DataSpider.SampleCollector/obj/
 LibraryWH/obj/
 OpcUaClient/obj/
 EXE/
+
+DataSpider.FailoverManager/bin/
+DataSpider.FailoverService/bin/
+DataSpider.FileTrans/bin/
+DataSpider.MANAGER/bin/
+DataSpider.PC00.PT/bin/
+DataSpider.PC01.PT/bin/
+DataSpider.PC02.PT/bin/
+DataSpider.PC03.PT/bin/
+DataSpider.SampleCollector/bin/
+LibraryWH/bin/
+OpcUaClient/bin/
