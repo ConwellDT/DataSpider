@@ -16,7 +16,6 @@ namespace DataSpider.FailoverManager
         [STAThread]
         static void Main(string[] args)
         {
-
             Process[] localByName = Process.GetProcessesByName(Process.GetCurrentProcess().ProcessName);
             if (localByName.Length == 1)
             {
