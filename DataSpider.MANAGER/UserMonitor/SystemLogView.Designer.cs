@@ -253,8 +253,6 @@ namespace DataSpider.UserMonitor
             // 
             // checkBox_AutoRefresh
             // 
-            this.checkBox_AutoRefresh.Checked = true;
-            this.checkBox_AutoRefresh.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox_AutoRefresh.Dock = System.Windows.Forms.DockStyle.Fill;
             this.checkBox_AutoRefresh.Location = new System.Drawing.Point(0, 0);
             this.checkBox_AutoRefresh.Name = "checkBox_AutoRefresh";

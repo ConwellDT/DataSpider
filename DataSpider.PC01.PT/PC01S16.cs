@@ -322,7 +322,7 @@ namespace DataSpider.PC01.PT
         private UInt32 GetLastEnqueuedRecord()
         {
             UInt32 retVal =0;
-            string dtString = PC00U01.ReadConfigValue("LastEnqueuedRecord", m_Name, $@".\CFG\{m_Type}.ini");
+            string dtString = m_sqlBiz.ReadSTCommon(m_Name, "LastEnqueuedRecord"); //PC00U01.ReadConfigValue("LastEnqueuedRecord", m_Name, $@".\CFG\{m_Type}.ini");
             UInt32.TryParse(dtString, out retVal);
             listViewMsg.UpdateMsg($"Read last enqueued Record  : {retVal.ToString()}", false, true);
 
@@ -332,7 +332,8 @@ namespace DataSpider.PC01.PT
         }
         private bool SetLastEnqueuedRecord(UInt32 lastEnqueuedRecord)
         {
-            if (!PC00U01.WriteConfigValue("LastEnqueuedRecord", m_Name, $@".\CFG\{m_Type}.ini", $"{lastEnqueuedRecord.ToString()}"))
+            //if (!PC00U01.WriteConfigValue("LastEnqueuedRecord", m_Name, $@".\CFG\{m_Type}.ini", $"{lastEnqueuedRecord.ToString()}"))
+            if (!m_sqlBiz.WriteSTCommon(m_Name, "LastEnqueuedRecord", $"{lastEnqueuedRecord.ToString()}"))
             {
                 listViewMsg.UpdateMsg($"Error to write LastEnqueuedRecord to INI file", false, true);
                 return false;
@@ -345,7 +346,7 @@ namespace DataSpider.PC01.PT
         private UInt32 GetFromRecord()
         {
             UInt32 retVal = 0;
-            string dtString = PC00U01.ReadConfigValue("FromRecord", m_Name, $@".\CFG\{m_Type}_MANL.ini");
+            string dtString = m_sqlBiz.ReadSTCommon(m_Name, "FromRecord"); //PC00U01.ReadConfigValue("FromRecord", m_Name, $@".\CFG\{m_Type}_MANL.ini");
             UInt32.TryParse(dtString, out retVal);
             listViewMsg.UpdateMsg($"Read FromRecord : {retVal.ToString()}", false, true);
             listViewMsg.UpdateMsg($"FromRecord :{m_FromRecord.ToString() } , {dtString}  !", false, true, true, PC00D01.MSGTINF);
@@ -354,7 +355,8 @@ namespace DataSpider.PC01.PT
         }
         private bool SetFromRecord(UInt32 fromRecord)
         {
-            if (!PC00U01.WriteConfigValue("FromRecord", m_Name, $@".\CFG\{m_Type}_MANL.ini", $"{fromRecord.ToString()}"))
+            //if (!PC00U01.WriteConfigValue("FromRecord", m_Name, $@".\CFG\{m_Type}_MANL.ini", $"{fromRecord.ToString()}"))
+            if (!m_sqlBiz.WriteSTCommon(m_Name, "FromRecord", $"{fromRecord.ToString()}"))
             {
                 listViewMsg.UpdateMsg($"Error to write FromRecord to INI file", false, true);
                 return false;
@@ -366,7 +368,7 @@ namespace DataSpider.PC01.PT
         private UInt32 GetToRecord()
         {
             UInt32 retVal = 0;
-            string dtString = PC00U01.ReadConfigValue("ToRecord", m_Name, $@".\CFG\{m_Type}_MANL.ini");
+            string dtString = m_sqlBiz.ReadSTCommon(m_Name, "ToRecord"); //PC00U01.ReadConfigValue("ToRecord", m_Name, $@".\CFG\{m_Type}_MANL.ini");
             UInt32.TryParse(dtString, out retVal);
             listViewMsg.UpdateMsg($"Read ToRecord : {retVal.ToString()}", false, true);
             listViewMsg.UpdateMsg($"ToRecord :{m_FromRecord.ToString() } , {dtString}  !", false, true, true, PC00D01.MSGTINF);
@@ -375,7 +377,8 @@ namespace DataSpider.PC01.PT
         }
         private bool SetToRecord(UInt32 toRecord)
         {
-            if (!PC00U01.WriteConfigValue("ToRecord", m_Name, $@".\CFG\{m_Type}_MANL.ini", $"{toRecord.ToString()}"))
+            //if (!PC00U01.WriteConfigValue("ToRecord", m_Name, $@".\CFG\{m_Type}_MANL.ini", $"{toRecord.ToString()}"))
+            if (!m_sqlBiz.WriteSTCommon(m_Name, "ToRecord", $"{toRecord.ToString()}"))
             {
                 listViewMsg.UpdateMsg($"Error to write ToRecord to INI file", false, true);
                 return false;

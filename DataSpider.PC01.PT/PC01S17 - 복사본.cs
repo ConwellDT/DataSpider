@@ -53,7 +53,7 @@ namespace DataSpider.PC01.PT
         }
         private string GetSoftwareVersion()
         {
-            string softwareVersion = PC00U01.ReadConfigValue("SoftwareVersion", m_Name, $@".\CFG\{m_Type}.ini");
+            string softwareVersion = m_sqlBiz.ReadSTCommon(m_Name, "SoftwareVersion"); //PC00U01.ReadConfigValue("SoftwareVersion", m_Name, $@".\CFG\{m_Type}.ini");
             listViewMsg.UpdateMsg($"Read SoftwareVersion  : {softwareVersion}", false, true);
             listViewMsg.UpdateMsg($"SoftwareVersion :{softwareVersion}  !", false, true, true, PC00D01.MSGTINF);
             return softwareVersion;
@@ -61,7 +61,7 @@ namespace DataSpider.PC01.PT
         private DateTime GetLastProcessTime()
         {
             DateTime LastProcessTime;
-            string strLastProcessTime = PC00U01.ReadConfigValue("LastProcessTime", m_Name, $@".\CFG\{m_Type}.ini");
+            string strLastProcessTime = m_sqlBiz.ReadSTCommon(m_Name, "LastProcessTime"); //PC00U01.ReadConfigValue("LastProcessTime", m_Name, $@".\CFG\{m_Type}.ini");
             DateTime.TryParseExact(strLastProcessTime, "yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture, DateTimeStyles.AssumeLocal | DateTimeStyles.AllowInnerWhite, out LastProcessTime);
             if (LastProcessTime < new DateTime(DateTime.Now.Year, 1, 1, 0, 0, 0, 0))
                 LastProcessTime = new DateTime(DateTime.Now.Year, 1, 1, 0, 0, 0, 0);
@@ -71,7 +71,8 @@ namespace DataSpider.PC01.PT
         }
         private bool SetLastProcessTime(DateTime LastProcessTime)
         {
-            if (!PC00U01.WriteConfigValue("LastProcessTime", m_Name, $@".\CFG\{m_Type}.ini", $"{LastProcessTime.ToString("yyyy-MM-dd HH:mm:ss.fff")}"))
+            //if (!PC00U01.WriteConfigValue("LastProcessTime", m_Name, $@".\CFG\{m_Type}.ini", $"{LastProcessTime.ToString("yyyy-MM-dd HH:mm:ss.fff")}"))
+            if (!m_sqlBiz.WriteSTCommon(m_Name, "LastProcessTime", $"{LastProcessTime.ToString("yyyy-MM-dd HH:mm:ss.fff")}"))
             {
                 listViewMsg.UpdateMsg($"Error to write LastProcessTime to INI file", false, true);
                 return false;
