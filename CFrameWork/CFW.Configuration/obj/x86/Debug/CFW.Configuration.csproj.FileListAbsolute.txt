@@ -1,5 +1,0 @@
-C:\KMM1TAS\DEV\01.CFrameWork\CFW.Configuration\bin\x86\Debug\CFW.Configuration.dll
-C:\KMM1TAS\DEV\01.CFrameWork\CFW.Configuration\bin\x86\Debug\CFW.Configuration.pdb
-C:\KMM1TAS\DEV\01.CFrameWork\CFW.Configuration\obj\x86\Debug\ResolveAssemblyReference.cache
-C:\KMM1TAS\DEV\01.CFrameWork\CFW.Configuration\obj\x86\Debug\CFW.Configuration.dll
-C:\KMM1TAS\DEV\01.CFrameWork\CFW.Configuration\obj\x86\Debug\CFW.Configuration.pdb
