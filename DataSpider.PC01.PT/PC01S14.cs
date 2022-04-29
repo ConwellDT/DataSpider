@@ -44,7 +44,7 @@ namespace DataSpider.PC01.PT
         // 2022-04-20 데이터 변경
         // L0  <-   뒤에서 부터 0번째
         // *   <-   전부를 붙여서 출력하는 기능
-        public class SoloVpe : PC01S14
+        public class SoloVpe 
         {
             const int ARRAY0 = 0;
             const int PROPERTY1 = 1;
