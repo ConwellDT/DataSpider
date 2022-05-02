@@ -117,7 +117,7 @@ namespace DataSpider.PC00.PT
                 DataSet ds = CFW.Data.MsSqlDbAccess.GetDataSet(strQuery.ToString(), null, CommandType.Text, ref _strErrCode, ref _strErrText);
                 if (ds != null && ds.Tables[0] != null)
                 {
-                    result = ds.Tables[0].Rows?[0].ToString();
+                    result = ds.Tables[0].Rows?[0][0].ToString();
                 }
             }
             catch (Exception ex)

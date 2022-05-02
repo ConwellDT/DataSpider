@@ -78,85 +78,122 @@ namespace DataSpider
 
         }
 
-        private void StatusThread()
+        private void GetProgramStatus()
         {
             string errCode = string.Empty;
             string errText = string.Empty;
-            bool result = true;
+            DataTable dtStatus = sqlBiz.GetProgramStatus2(ref errCode, ref errText);
 
-            string CurDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            foreach (DataRow dr in dtStatus.Rows)
+            {
+                int nStatus = Convert.ToInt16(dr[2].ToString());
+                string strEqName = dr[1].ToString();
 
+                if (!string.IsNullOrWhiteSpace(strEqName))
+                {
+                    switch (strEqName)
+                    {
+                        case "DataSpiderPC02P":
+
+                            if (this.InvokeRequired)
+                            {
+                                this.Invoke(new MethodInvoker(delegate ()
+                                {
+                                    toolStripStatusLabel_DBPGM_P_Status.Image = imageList_EquipState.Images[dr[0].ToString()];
+                                    toolStripStatusLabel_DBPGM_P_Status.ToolTipText = dr[0].ToString();
+                                }));
+                            }
+                            else
+                            {
+                                toolStripStatusLabel_DBPGM_P_Status.Image = imageList_EquipState.Images[dr[0].ToString()];
+                                toolStripStatusLabel_DBPGM_P_Status.ToolTipText = dr[0].ToString();
+                            }
+                            break;
+                        case "DataSpiderPC02S":
+
+                            if (this.InvokeRequired)
+                            {
+                                this.Invoke(new MethodInvoker(delegate ()
+                                {
+                                    toolStripStatusLabel_DBPGM_S_Status.Image = imageList_EquipState.Images[dr[0].ToString()];
+                                    toolStripStatusLabel_DBPGM_S_Status.ToolTipText = dr[0].ToString();
+                                }));
+                            }
+                            else
+                            {
+                                toolStripStatusLabel_DBPGM_S_Status.Image = imageList_EquipState.Images[dr[0].ToString()];
+                                toolStripStatusLabel_DBPGM_S_Status.ToolTipText = dr[0].ToString();
+                            }
+                            break;
+                        case "DataSpiderPC03":
+                            if (this.InvokeRequired)
+                            {
+                                this.Invoke(new MethodInvoker(delegate ()
+                                {
+                                    toolStripStatusLabel_PIPGM_Status.Image = imageList_EquipState.Images[dr[0].ToString()];
+                                    toolStripStatusLabel_PIPGM_Status.ToolTipText = dr[0].ToString();
+                                }));
+                            }
+                            else
+                            {
+                                toolStripStatusLabel_PIPGM_Status.Image = imageList_EquipState.Images[dr[0].ToString()];
+                                toolStripStatusLabel_PIPGM_Status.ToolTipText = dr[0].ToString();
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        }
+
+        private void GetPC02ErrorFileStatus()
+        {
+            string dataSpiderPC02P_ErrorFile = sqlBiz.ReadSTCommon("ERROR_STATUS", "DataSpiderPC02P").Trim();
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new MethodInvoker(delegate ()
+                {
+                    toolStripStatusLabel_DBPGM_P_ErrorFile.Text = string.IsNullOrWhiteSpace(dataSpiderPC02P_ErrorFile) ? "No ErrorFile" : dataSpiderPC02P_ErrorFile;
+                    toolStripStatusLabel_DBPGM_P_ErrorFile.ForeColor = string.IsNullOrWhiteSpace(dataSpiderPC02P_ErrorFile) ? Color.Black : Color.Red;
+                    toolStripStatusLabel_DBPGM_P_ErrorFile.Visible = true;
+                }));
+            }
+            else
+            {
+                toolStripStatusLabel_DBPGM_P_ErrorFile.Text = string.IsNullOrWhiteSpace(dataSpiderPC02P_ErrorFile) ? "No ErrorFile" : dataSpiderPC02P_ErrorFile;
+                toolStripStatusLabel_DBPGM_P_ErrorFile.ForeColor = string.IsNullOrWhiteSpace(dataSpiderPC02P_ErrorFile) ? Color.Black : Color.Red;
+                toolStripStatusLabel_DBPGM_P_ErrorFile.Visible = true;
+            }
+            string dataSpiderPC02S_ErrorFile = sqlBiz.ReadSTCommon("ERROR_STATUS", "DataSpiderPC02S").Trim();
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new MethodInvoker(delegate ()
+                {
+                    toolStripStatusLabel_DBPGM_S_ErrorFile.Text = string.IsNullOrWhiteSpace(dataSpiderPC02S_ErrorFile) ? "No ErrorFile" : dataSpiderPC02S_ErrorFile;
+                    toolStripStatusLabel_DBPGM_S_ErrorFile.ForeColor = string.IsNullOrWhiteSpace(dataSpiderPC02S_ErrorFile) ? Color.Black : Color.Red;
+                    toolStripStatusLabel_DBPGM_S_ErrorFile.Visible = true;
+                }));
+            }
+            else
+            {
+                toolStripStatusLabel_DBPGM_S_ErrorFile.Text = string.IsNullOrWhiteSpace(dataSpiderPC02S_ErrorFile) ? "No ErrorFile" : dataSpiderPC02S_ErrorFile;
+                toolStripStatusLabel_DBPGM_S_ErrorFile.ForeColor = string.IsNullOrWhiteSpace(dataSpiderPC02S_ErrorFile) ? Color.Black : Color.Red;
+                toolStripStatusLabel_DBPGM_S_ErrorFile.Visible = true;
+            }
+        }
+        private void StatusThread()
+        {
             while (!bTerminal)
             {
                 try
                 {
-                    
-                    //데이타 조회
-                    DataTable dtStatus = sqlBiz.GetProgramStatus2(ref errCode, ref errText);
-
-                    foreach (DataRow dr in dtStatus.Rows)
-                    {
-                        int nStatus = Convert.ToInt16(dr[2].ToString());
-                        string strEqName = dr[1].ToString();
-                        
-                        if (!string.IsNullOrWhiteSpace(strEqName))
-                        {
-                            switch (strEqName)
-                            {
-                                case "DataSpiderPC02P":
-                                    
-                                    if (this.InvokeRequired)
-                                    {
-                                        this.Invoke(new MethodInvoker(delegate ()
-                                        {
-                                            toolStripStatusLabel_DBPGM_P_Status.Image = imageList_EquipState.Images[dr[0].ToString()];
-                                            toolStripStatusLabel_DBPGM_P_Status.ToolTipText = dr[0].ToString();
-                                        }));
-                                    }
-                                    else
-                                    {
-                                        toolStripStatusLabel_DBPGM_P_Status.Image = imageList_EquipState.Images[dr[0].ToString()];
-                                        toolStripStatusLabel_DBPGM_P_Status.ToolTipText = dr[0].ToString();
-                                    }
-                                    break;
-                                case "DataSpiderPC02S":
-
-                                    if (this.InvokeRequired)
-                                    {
-                                        this.Invoke(new MethodInvoker(delegate ()
-                                        {
-                                            toolStripStatusLabel_DBPGM_S_Status.Image = imageList_EquipState.Images[dr[0].ToString()];
-                                            toolStripStatusLabel_DBPGM_S_Status.ToolTipText = dr[0].ToString();
-                                        }));
-                                    }
-                                    else
-                                    {
-                                        toolStripStatusLabel_DBPGM_S_Status.Image = imageList_EquipState.Images[dr[0].ToString()];
-                                        toolStripStatusLabel_DBPGM_S_Status.ToolTipText = dr[0].ToString();
-                                    }
-                                    break;
-                                case "DataSpiderPC03":
-                                    if (this.InvokeRequired)
-                                    {
-                                        this.Invoke(new MethodInvoker(delegate ()
-                                        {
-                                            toolStripStatusLabel_PIPGM_Status.Image = imageList_EquipState.Images[dr[0].ToString()];
-                                            toolStripStatusLabel_PIPGM_Status.ToolTipText = dr[0].ToString();
-                                        }));
-                                    }
-                                    else
-                                    {
-                                        toolStripStatusLabel_PIPGM_Status.Image = imageList_EquipState.Images[dr[0].ToString()];
-                                        toolStripStatusLabel_PIPGM_Status.ToolTipText = dr[0].ToString();                                    }
-                                    break;
-                                default:
-                                    break;
-                            }
-                        }
-                    }                    
+                    GetProgramStatus();
+                    GetPC02ErrorFileStatus();
                 }
+
                 catch (Exception ex)
-                {   
+                {
                 }
                 finally
                 {
@@ -380,6 +417,7 @@ namespace DataSpider
             equipMonitor.threadStop = true;
             currentTagValueMonitor.threadStop = true;
             PIMonitor.threadStop = true;
+            systemLogview.threadStop = true;
 
             dbStatus?.Stop();
 

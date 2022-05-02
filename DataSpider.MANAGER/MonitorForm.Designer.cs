@@ -63,6 +63,8 @@ namespace DataSpider
             this.toolStripStatusLabel_MainDBSourceName = new System.Windows.Forms.ToolStripStatusLabel();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.imageList_EquipState = new System.Windows.Forms.ImageList(this.components);
+            this.toolStripStatusLabel_DBPGM_S_ErrorFile = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel_DBPGM_P_ErrorFile = new System.Windows.Forms.ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -292,9 +294,11 @@ namespace DataSpider
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel_DB1_Status,
-            this.toolStripStatusLabel_DBPGM_P_Status,
-            this.toolStripStatusLabel_DBPGM_S_Status,
             this.toolStripStatusLabel_PIPGM_Status,
+            this.toolStripStatusLabel_DBPGM_P_Status,
+            this.toolStripStatusLabel_DBPGM_P_ErrorFile,
+            this.toolStripStatusLabel_DBPGM_S_Status,
+            this.toolStripStatusLabel_DBPGM_S_ErrorFile,
             this.toolStripStatusLabel4,
             this.toolStripStatusLabel_ServerName,
             this.toolStripStatusLabel_MainDBSourceName});
@@ -344,7 +348,7 @@ namespace DataSpider
             // toolStripStatusLabel4
             // 
             this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            this.toolStripStatusLabel4.Size = new System.Drawing.Size(576, 26);
+            this.toolStripStatusLabel4.Size = new System.Drawing.Size(245, 26);
             this.toolStripStatusLabel4.Spring = true;
             this.toolStripStatusLabel4.Text = "  ";
             this.toolStripStatusLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -381,6 +385,26 @@ namespace DataSpider
             this.imageList_EquipState.Images.SetKeyName(5, "InternalError");
             this.imageList_EquipState.Images.SetKeyName(6, "Unknown");
             this.imageList_EquipState.Images.SetKeyName(7, "NetworkError");
+            // 
+            // toolStripStatusLabel_DBPGM_S_ErrorFile
+            // 
+            this.toolStripStatusLabel_DBPGM_S_ErrorFile.AutoSize = false;
+            this.toolStripStatusLabel_DBPGM_S_ErrorFile.AutoToolTip = true;
+            this.toolStripStatusLabel_DBPGM_S_ErrorFile.ForeColor = System.Drawing.Color.Red;
+            this.toolStripStatusLabel_DBPGM_S_ErrorFile.Name = "toolStripStatusLabel_DBPGM_S_ErrorFile";
+            this.toolStripStatusLabel_DBPGM_S_ErrorFile.Size = new System.Drawing.Size(150, 26);
+            this.toolStripStatusLabel_DBPGM_S_ErrorFile.Text = "No ErrorFile";
+            this.toolStripStatusLabel_DBPGM_S_ErrorFile.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // toolStripStatusLabel_DBPGM_P_ErrorFile
+            // 
+            this.toolStripStatusLabel_DBPGM_P_ErrorFile.AutoSize = false;
+            this.toolStripStatusLabel_DBPGM_P_ErrorFile.AutoToolTip = true;
+            this.toolStripStatusLabel_DBPGM_P_ErrorFile.ForeColor = System.Drawing.Color.Red;
+            this.toolStripStatusLabel_DBPGM_P_ErrorFile.Name = "toolStripStatusLabel_DBPGM_P_ErrorFile";
+            this.toolStripStatusLabel_DBPGM_P_ErrorFile.Size = new System.Drawing.Size(150, 26);
+            this.toolStripStatusLabel_DBPGM_P_ErrorFile.Text = "No ErrorFile";
+            this.toolStripStatusLabel_DBPGM_P_ErrorFile.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // MonitorForm
             // 
@@ -448,6 +472,8 @@ namespace DataSpider
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel_ServerName;
         private System.Windows.Forms.ImageList imageList_EquipState;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel_DBPGM_P_Status;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel_DBPGM_P_ErrorFile;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel_DBPGM_S_ErrorFile;
     }
 }
 
