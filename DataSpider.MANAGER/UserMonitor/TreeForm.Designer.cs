@@ -184,7 +184,6 @@ namespace DataSpider.UserMonitor
             treeNode78,
             treeNode79,
             treeNode80});
-            this.imageListEQStatus = new System.Windows.Forms.ImageList(this.components);
             this.contextMenuStripEQControl = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -197,6 +196,7 @@ namespace DataSpider.UserMonitor
             this.programHideToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.modeChangeManualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.modeChangeAutoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.activeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.imageList_EquipState = new System.Windows.Forms.ImageList(this.components);
             this.tableLayoutPanelEQStausMenu = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -213,7 +213,6 @@ namespace DataSpider.UserMonitor
             this.label1 = new System.Windows.Forms.Label();
             this.panel7 = new System.Windows.Forms.Panel();
             this.textBox_RefreshInterval = new System.Windows.Forms.TextBox();
-            this.activeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStripEQControl.SuspendLayout();
             this.tableLayoutPanelEQStausMenu.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -225,20 +224,6 @@ namespace DataSpider.UserMonitor
             this.panel6.SuspendLayout();
             this.panel7.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // imageListEQStatus
-            // 
-            this.imageListEQStatus.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListEQStatus.ImageStream")));
-            this.imageListEQStatus.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageListEQStatus.Images.SetKeyName(0, "Normal");
-            this.imageListEQStatus.Images.SetKeyName(1, "Stop");
-            this.imageListEQStatus.Images.SetKeyName(2, "Disconnect");
-            this.imageListEQStatus.Images.SetKeyName(3, "NoData");
-            this.imageListEQStatus.Images.SetKeyName(4, "InvalidData");
-            this.imageListEQStatus.Images.SetKeyName(5, "InternalError");
-            this.imageListEQStatus.Images.SetKeyName(6, "ACC_Vi-Cell_OFF");
-            this.imageListEQStatus.Images.SetKeyName(7, "PCM_S470-K_OFF");
-            this.imageListEQStatus.Images.SetKeyName(8, "PCM_S470-K_ON");
             // 
             // contextMenuStripEQControl
             // 
@@ -257,84 +242,91 @@ namespace DataSpider.UserMonitor
             this.modeChangeAutoToolStripMenuItem,
             this.activeToolStripMenuItem});
             this.contextMenuStripEQControl.Name = "contextMenuStrip1";
-            this.contextMenuStripEQControl.Size = new System.Drawing.Size(246, 302);
+            this.contextMenuStripEQControl.Size = new System.Drawing.Size(206, 252);
             this.contextMenuStripEQControl.Text = "Add Equipment ";
             this.contextMenuStripEQControl.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStripEQControl_Opening);
             // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(245, 24);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
             this.editToolStripMenuItem.Text = "Edit";
             this.editToolStripMenuItem.Click += new System.EventHandler(this.EditEquipmentToolStripMenuItem_Click);
             // 
             // copyToolStripMenuItem
             // 
             this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
-            this.copyToolStripMenuItem.Size = new System.Drawing.Size(245, 24);
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
             this.copyToolStripMenuItem.Text = "Copy";
             this.copyToolStripMenuItem.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
             // 
             // addToolStripMenuItem
             // 
             this.addToolStripMenuItem.Name = "addToolStripMenuItem";
-            this.addToolStripMenuItem.Size = new System.Drawing.Size(245, 24);
+            this.addToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
             this.addToolStripMenuItem.Text = "Add";
             this.addToolStripMenuItem.Click += new System.EventHandler(this.AddEquipmentToolStripMenuItem_Click);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(245, 24);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.DeleteEquipmentToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(242, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(202, 6);
             // 
             // programRunToolStripMenuItem
             // 
             this.programRunToolStripMenuItem.Name = "programRunToolStripMenuItem";
-            this.programRunToolStripMenuItem.Size = new System.Drawing.Size(245, 24);
+            this.programRunToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
             this.programRunToolStripMenuItem.Text = "Run";
             this.programRunToolStripMenuItem.Click += new System.EventHandler(this.programRunToolStripMenuItem_Click);
             // 
             // programStopToolStripMenuItem
             // 
             this.programStopToolStripMenuItem.Name = "programStopToolStripMenuItem";
-            this.programStopToolStripMenuItem.Size = new System.Drawing.Size(245, 24);
+            this.programStopToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
             this.programStopToolStripMenuItem.Text = "Stop";
             this.programStopToolStripMenuItem.Click += new System.EventHandler(this.programStopToolStripMenuItem_Click);
             // 
             // programShowToolStripMenuItem
             // 
             this.programShowToolStripMenuItem.Name = "programShowToolStripMenuItem";
-            this.programShowToolStripMenuItem.Size = new System.Drawing.Size(245, 24);
+            this.programShowToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
             this.programShowToolStripMenuItem.Text = "Show";
             this.programShowToolStripMenuItem.Click += new System.EventHandler(this.programShowToolStripMenuItem_Click);
             // 
             // programHideToolStripMenuItem
             // 
             this.programHideToolStripMenuItem.Name = "programHideToolStripMenuItem";
-            this.programHideToolStripMenuItem.Size = new System.Drawing.Size(245, 24);
+            this.programHideToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
             this.programHideToolStripMenuItem.Text = "Hide";
             this.programHideToolStripMenuItem.Click += new System.EventHandler(this.programHideToolStripMenuItem_Click);
             // 
             // modeChangeManualToolStripMenuItem
             // 
             this.modeChangeManualToolStripMenuItem.Name = "modeChangeManualToolStripMenuItem";
-            this.modeChangeManualToolStripMenuItem.Size = new System.Drawing.Size(245, 24);
+            this.modeChangeManualToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
             this.modeChangeManualToolStripMenuItem.Text = "Failover Mode : Manual ";
             this.modeChangeManualToolStripMenuItem.Click += new System.EventHandler(this.modeChangeToolStripMenuItem_Click);
             // 
             // modeChangeAutoToolStripMenuItem
             // 
             this.modeChangeAutoToolStripMenuItem.Name = "modeChangeAutoToolStripMenuItem";
-            this.modeChangeAutoToolStripMenuItem.Size = new System.Drawing.Size(245, 24);
+            this.modeChangeAutoToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
             this.modeChangeAutoToolStripMenuItem.Text = "Failover Mode : Auto ";
             this.modeChangeAutoToolStripMenuItem.Click += new System.EventHandler(this.modeChangeAutoToolStripMenuItem_Click);
+            // 
+            // activeToolStripMenuItem
+            // 
+            this.activeToolStripMenuItem.Name = "activeToolStripMenuItem";
+            this.activeToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.activeToolStripMenuItem.Text = "Transfer ActiveServer";
+            this.activeToolStripMenuItem.Click += new System.EventHandler(this.activeToolStripMenuItem_Click);
             // 
             // imageList_EquipState
             // 
@@ -357,22 +349,20 @@ namespace DataSpider.UserMonitor
             this.tableLayoutPanelEQStausMenu.Controls.Add(this.panelAutoRefreshMenu, 0, 0);
             this.tableLayoutPanelEQStausMenu.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanelEQStausMenu.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanelEQStausMenu.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tableLayoutPanelEQStausMenu.Name = "tableLayoutPanelEQStausMenu";
             this.tableLayoutPanelEQStausMenu.RowCount = 2;
-            this.tableLayoutPanelEQStausMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 38F));
+            this.tableLayoutPanelEQStausMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanelEQStausMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanelEQStausMenu.Size = new System.Drawing.Size(718, 666);
+            this.tableLayoutPanelEQStausMenu.Size = new System.Drawing.Size(628, 533);
             this.tableLayoutPanelEQStausMenu.TabIndex = 3;
             // 
             // panel1
             // 
             this.panel1.Controls.Add(this.treeViewEQStatus);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(3, 42);
-            this.panel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.panel1.Location = new System.Drawing.Point(3, 33);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(712, 620);
+            this.panel1.Size = new System.Drawing.Size(622, 497);
             this.panel1.TabIndex = 0;
             // 
             // treeViewEQStatus
@@ -681,26 +671,25 @@ namespace DataSpider.UserMonitor
             treeNode81});
             this.treeViewEQStatus.SelectedImageIndex = 0;
             this.treeViewEQStatus.ShowNodeToolTips = true;
-            this.treeViewEQStatus.Size = new System.Drawing.Size(712, 620);
+            this.treeViewEQStatus.Size = new System.Drawing.Size(622, 497);
             this.treeViewEQStatus.TabIndex = 3;
             // 
             // panelAutoRefreshMenu
             // 
             this.panelAutoRefreshMenu.Controls.Add(this.tableLayoutPanelRefreshMenu);
             this.panelAutoRefreshMenu.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelAutoRefreshMenu.Location = new System.Drawing.Point(3, 4);
-            this.panelAutoRefreshMenu.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.panelAutoRefreshMenu.Location = new System.Drawing.Point(3, 3);
             this.panelAutoRefreshMenu.Name = "panelAutoRefreshMenu";
-            this.panelAutoRefreshMenu.Size = new System.Drawing.Size(712, 30);
+            this.panelAutoRefreshMenu.Size = new System.Drawing.Size(622, 24);
             this.panelAutoRefreshMenu.TabIndex = 1;
             // 
             // tableLayoutPanelRefreshMenu
             // 
             this.tableLayoutPanelRefreshMenu.ColumnCount = 5;
-            this.tableLayoutPanelRefreshMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 114F));
-            this.tableLayoutPanelRefreshMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 69F));
-            this.tableLayoutPanelRefreshMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 114F));
-            this.tableLayoutPanelRefreshMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 137F));
+            this.tableLayoutPanelRefreshMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutPanelRefreshMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
+            this.tableLayoutPanelRefreshMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutPanelRefreshMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
             this.tableLayoutPanelRefreshMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanelRefreshMenu.Controls.Add(this.panel3, 2, 0);
             this.tableLayoutPanelRefreshMenu.Controls.Add(this.panelAutoRefreshSel, 3, 0);
@@ -709,21 +698,19 @@ namespace DataSpider.UserMonitor
             this.tableLayoutPanelRefreshMenu.Controls.Add(this.panel7, 1, 0);
             this.tableLayoutPanelRefreshMenu.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanelRefreshMenu.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanelRefreshMenu.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tableLayoutPanelRefreshMenu.Name = "tableLayoutPanelRefreshMenu";
             this.tableLayoutPanelRefreshMenu.RowCount = 1;
             this.tableLayoutPanelRefreshMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanelRefreshMenu.Size = new System.Drawing.Size(712, 30);
+            this.tableLayoutPanelRefreshMenu.Size = new System.Drawing.Size(622, 24);
             this.tableLayoutPanelRefreshMenu.TabIndex = 0;
             // 
             // panel3
             // 
             this.panel3.Controls.Add(this.button_SetInterval);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(186, 4);
-            this.panel3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.panel3.Location = new System.Drawing.Point(163, 3);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(108, 22);
+            this.panel3.Size = new System.Drawing.Size(94, 18);
             this.panel3.TabIndex = 0;
             // 
             // button_SetInterval
@@ -732,7 +719,7 @@ namespace DataSpider.UserMonitor
             this.button_SetInterval.Location = new System.Drawing.Point(0, 0);
             this.button_SetInterval.Margin = new System.Windows.Forms.Padding(0);
             this.button_SetInterval.Name = "button_SetInterval";
-            this.button_SetInterval.Size = new System.Drawing.Size(108, 22);
+            this.button_SetInterval.Size = new System.Drawing.Size(94, 18);
             this.button_SetInterval.TabIndex = 3;
             this.button_SetInterval.Text = "Set Interval";
             this.button_SetInterval.UseVisualStyleBackColor = true;
@@ -742,10 +729,9 @@ namespace DataSpider.UserMonitor
             // 
             this.panelAutoRefreshSel.Controls.Add(this.checkBox_AutoRefresh);
             this.panelAutoRefreshSel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelAutoRefreshSel.Location = new System.Drawing.Point(300, 4);
-            this.panelAutoRefreshSel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.panelAutoRefreshSel.Location = new System.Drawing.Point(263, 3);
             this.panelAutoRefreshSel.Name = "panelAutoRefreshSel";
-            this.panelAutoRefreshSel.Size = new System.Drawing.Size(131, 22);
+            this.panelAutoRefreshSel.Size = new System.Drawing.Size(114, 18);
             this.panelAutoRefreshSel.TabIndex = 1;
             // 
             // checkBox_AutoRefresh
@@ -754,9 +740,8 @@ namespace DataSpider.UserMonitor
             this.checkBox_AutoRefresh.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox_AutoRefresh.Dock = System.Windows.Forms.DockStyle.Fill;
             this.checkBox_AutoRefresh.Location = new System.Drawing.Point(0, 0);
-            this.checkBox_AutoRefresh.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.checkBox_AutoRefresh.Name = "checkBox_AutoRefresh";
-            this.checkBox_AutoRefresh.Size = new System.Drawing.Size(131, 22);
+            this.checkBox_AutoRefresh.Size = new System.Drawing.Size(114, 18);
             this.checkBox_AutoRefresh.TabIndex = 2;
             this.checkBox_AutoRefresh.Text = "Auto Refresh";
             this.checkBox_AutoRefresh.UseVisualStyleBackColor = true;
@@ -766,19 +751,17 @@ namespace DataSpider.UserMonitor
             // 
             this.panel5.Controls.Add(this.button_Refresh);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel5.Location = new System.Drawing.Point(437, 4);
-            this.panel5.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.panel5.Location = new System.Drawing.Point(383, 3);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(272, 22);
+            this.panel5.Size = new System.Drawing.Size(236, 18);
             this.panel5.TabIndex = 2;
             // 
             // button_Refresh
             // 
             this.button_Refresh.Dock = System.Windows.Forms.DockStyle.Fill;
             this.button_Refresh.Location = new System.Drawing.Point(0, 0);
-            this.button_Refresh.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button_Refresh.Name = "button_Refresh";
-            this.button_Refresh.Size = new System.Drawing.Size(272, 22);
+            this.button_Refresh.Size = new System.Drawing.Size(236, 18);
             this.button_Refresh.TabIndex = 2;
             this.button_Refresh.Text = "Refresh";
             this.button_Refresh.UseVisualStyleBackColor = true;
@@ -788,10 +771,9 @@ namespace DataSpider.UserMonitor
             // 
             this.panel6.Controls.Add(this.label1);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel6.Location = new System.Drawing.Point(3, 4);
-            this.panel6.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.panel6.Location = new System.Drawing.Point(3, 3);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(108, 22);
+            this.panel6.Size = new System.Drawing.Size(94, 18);
             this.panel6.TabIndex = 3;
             // 
             // label1
@@ -799,7 +781,7 @@ namespace DataSpider.UserMonitor
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(108, 22);
+            this.label1.Size = new System.Drawing.Size(94, 18);
             this.label1.TabIndex = 4;
             this.label1.Text = "Interval (sec)";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -808,36 +790,26 @@ namespace DataSpider.UserMonitor
             // 
             this.panel7.Controls.Add(this.textBox_RefreshInterval);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel7.Location = new System.Drawing.Point(117, 4);
-            this.panel7.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.panel7.Location = new System.Drawing.Point(103, 3);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(63, 22);
+            this.panel7.Size = new System.Drawing.Size(54, 18);
             this.panel7.TabIndex = 4;
             // 
             // textBox_RefreshInterval
             // 
             this.textBox_RefreshInterval.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_RefreshInterval.Location = new System.Drawing.Point(0, -1);
-            this.textBox_RefreshInterval.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBox_RefreshInterval.Name = "textBox_RefreshInterval";
-            this.textBox_RefreshInterval.Size = new System.Drawing.Size(62, 25);
+            this.textBox_RefreshInterval.Size = new System.Drawing.Size(54, 21);
             this.textBox_RefreshInterval.TabIndex = 2;
             this.textBox_RefreshInterval.Text = "10";
             this.textBox_RefreshInterval.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // activeToolStripMenuItem
-            // 
-            this.activeToolStripMenuItem.Name = "activeToolStripMenuItem";
-            this.activeToolStripMenuItem.Size = new System.Drawing.Size(245, 24);
-            this.activeToolStripMenuItem.Text = "Transfer ActiveServer";
-            this.activeToolStripMenuItem.Click += new System.EventHandler(this.activeToolStripMenuItem_Click);
-            // 
             // TreeForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
-            this.ClientSize = new System.Drawing.Size(718, 666);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
+            this.ClientSize = new System.Drawing.Size(628, 533);
             this.Controls.Add(this.tableLayoutPanelEQStausMenu);
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "TreeForm";
             this.Text = "TreeView";
             this.Load += new System.EventHandler(this.TreeForm_Load);
@@ -857,8 +829,6 @@ namespace DataSpider.UserMonitor
         }
 
         #endregion
-
-        private System.Windows.Forms.ImageList imageListEQStatus;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripEQControl;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addToolStripMenuItem;

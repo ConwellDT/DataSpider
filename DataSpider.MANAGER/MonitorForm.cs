@@ -27,7 +27,7 @@ namespace DataSpider
         public delegate void OnUserLogInChangedDelegate();
         public event OnUserLogInChangedDelegate OnUserLoginChanged = null;
 
-        private CheckDBStatus[] dbStatus = null;
+        private CheckDBStatus dbStatus = null;
         EquipmentMonitor equipMonitor = null;
         CurrentTagValueMonitorDGV currentTagValueMonitor = null;
         PIAlarmMonitor PIMonitor = null;
@@ -35,9 +35,6 @@ namespace DataSpider
         Form_Splash splash = null;
         public bool bTerminal = false;
         Thread threadStatus = null;
-        bool m_bDb1StatusEnable = true;
-        bool m_bDb2StatusEnable = true;
-        bool m_bDb3StatusEnable = true;
         bool m_bDbPgmStatusEnable = true;
         bool m_bPiPgmStatusEnable = true;
 
@@ -99,41 +96,58 @@ namespace DataSpider
 
                     foreach (DataRow dr in dtStatus.Rows)
                     {
-                        int nStatus = Convert.ToInt16(dr[8].ToString());
+                        int nStatus = Convert.ToInt16(dr[2].ToString());
                         string strEqName = dr[1].ToString();
                         
                         if (!string.IsNullOrWhiteSpace(strEqName))
                         {
                             switch (strEqName)
                             {
-                                case "DataSpiderPC02":
+                                case "DataSpiderPC02P":
                                     
                                     if (this.InvokeRequired)
                                     {
                                         this.Invoke(new MethodInvoker(delegate ()
                                         {
-                                            toolStripStatusLabel_DBPGM_Status.Image = imageList1.Images[nStatus];
+                                            toolStripStatusLabel_DBPGM_P_Status.Image = imageList_EquipState.Images[dr[0].ToString()];
+                                            toolStripStatusLabel_DBPGM_P_Status.ToolTipText = dr[0].ToString();
                                         }));
                                     }
                                     else
                                     {
-                                        toolStripStatusLabel_DBPGM_Status.Image = imageList1.Images[nStatus];
+                                        toolStripStatusLabel_DBPGM_P_Status.Image = imageList_EquipState.Images[dr[0].ToString()];
+                                        toolStripStatusLabel_DBPGM_P_Status.ToolTipText = dr[0].ToString();
                                     }
+                                    break;
+                                case "DataSpiderPC02S":
 
+                                    if (this.InvokeRequired)
+                                    {
+                                        this.Invoke(new MethodInvoker(delegate ()
+                                        {
+                                            toolStripStatusLabel_DBPGM_S_Status.Image = imageList_EquipState.Images[dr[0].ToString()];
+                                            toolStripStatusLabel_DBPGM_S_Status.ToolTipText = dr[0].ToString();
+                                        }));
+                                    }
+                                    else
+                                    {
+                                        toolStripStatusLabel_DBPGM_S_Status.Image = imageList_EquipState.Images[dr[0].ToString()];
+                                        toolStripStatusLabel_DBPGM_S_Status.ToolTipText = dr[0].ToString();
+                                    }
                                     break;
                                 case "DataSpiderPC03":
                                     if (this.InvokeRequired)
                                     {
                                         this.Invoke(new MethodInvoker(delegate ()
                                         {
-                                            toolStripStatusLabel_PIPGM_Status.Image = imageList1.Images[nStatus];
+                                            toolStripStatusLabel_PIPGM_Status.Image = imageList_EquipState.Images[dr[0].ToString()];
+                                            toolStripStatusLabel_PIPGM_Status.ToolTipText = dr[0].ToString();
                                         }));
                                     }
                                     else
                                     {
-                                        toolStripStatusLabel_PIPGM_Status.Image = imageList1.Images[nStatus];
-                                    }
-                                    
+                                        toolStripStatusLabel_PIPGM_Status.Image = imageList_EquipState.Images[dr[0].ToString()];
+                                        toolStripStatusLabel_PIPGM_Status.ToolTipText = dr[0].ToString();                                    }
                                     break;
                                 default:
                                     break;
@@ -174,8 +188,8 @@ namespace DataSpider
             //    }
             //}
 
-            //threadStatus = new Thread(StatusThread);
-            //threadStatus.Start();
+            threadStatus = new Thread(StatusThread);
+            threadStatus.Start();
 
             Text = $"{AssemblyTitle} V.{AssemblyVersion}";
             configCToolStripMenuItem.Visible = userToolStripMenuItem.Visible = false;
@@ -203,13 +217,20 @@ namespace DataSpider
             strSvrCode = (MY_ID == 0) ? "P" : "S";
             toolStripStatusLabel_ServerName.Text = $"Server = {strSvrName}({strSvrCode})";
 
-            ////////////////////////////////////////////////////
+            dbStatus = new CheckDBStatus($"DB", 60 * 1000);
+            dbStatus.DBConnectionString = CFW.Common.SecurityUtil.DecryptString(CFW.Configuration.ConfigManager.Default.ReadConfig("connectionStrings", $"SQL_ConnectionString"));
 
-            dbStatus = new CheckDBStatus[1];
-            dbStatus[0] = new CheckDBStatus($"DB", 60 * 1000);
-            dbStatus[0].DBConnectionString = CFW.Common.SecurityUtil.DecryptString(CFW.Configuration.ConfigManager.Default.ReadConfig("connectionStrings", $"SQL_ConnectionString"));
-            dbStatus[0].OnDBStatusChanged += OnDBStatusChanged;
-            dbStatus[0].Start();
+            int[] nSPos = { -1, -1 };
+            toolStripStatusLabel_MainDBSourceName.Text = "No MSSQL DB";
+            nSPos[0] = dbStatus.DBConnectionString.IndexOf("Data Source", 0);
+            if (nSPos[0] >= 0)
+            {
+                nSPos[1] = dbStatus.DBConnectionString.IndexOf(";", nSPos[0] + 1);
+                toolStripStatusLabel_MainDBSourceName.Text = dbStatus.DBConnectionString.Substring(nSPos[0], nSPos[1] - nSPos[0]);
+            }
+
+            dbStatus.OnDBStatusChanged += OnDBStatusChanged;
+            dbStatus.Start();
             splash?.Stop();
         }
 
@@ -221,47 +242,8 @@ namespace DataSpider
             }
             else
             {
-                switch (name)
-                {
-                    case "DB1":
-                        toolStripStatusLabel_DB1_Status.Image = imageList1.Images[status];
-                        break;
-                    case "DB2":
-                        toolStripStatusLabel_DB2_Status.Image = imageList1.Images[status];
-                        break;
-                    case "DB3":
-                        toolStripStatusLabel_DB3_Status.Image = imageList1.Images[status];
-                        break;
-                    default:
-                        break;
-                }
-
-                //
-                // 2022. 2. 15 : Han,Ilho
-                //  Add DB Source Name to prevent wrong DB use
-                //
-                if (dbStatus.Length > 0)
-                {
-                    int[] nSPos = { -1, -1 };
-
-                    nSPos[0] = dbStatus[0].DBConnectionString.IndexOf("Data Source", 0);
-
-                    if( nSPos[0] >= 0 )
-                    {
-                        nSPos[1] = dbStatus[0].DBConnectionString.IndexOf(";", nSPos[0] + 1);
-
-                        toolStripStatusLabel_MainDBSourceName.Text = dbStatus[0].DBConnectionString.Substring( nSPos[0], nSPos[1] - nSPos[0] );
-                    }
-                    else
-                    {
-                        toolStripStatusLabel_MainDBSourceName.Text = "No MSSQL DB";
-                    }
-                }
-                else
-                {
-                    toolStripStatusLabel_MainDBSourceName.Text = "No Main DB";
-                }
-                //---------------
+                toolStripStatusLabel_DB1_Status.Image = imageList1.Images[status];
+                toolStripStatusLabel_DB1_Status.ToolTipText = status.Equals(1) ? "Connected" : "Disconnected";
             }
         }
 
@@ -399,10 +381,7 @@ namespace DataSpider
             currentTagValueMonitor.threadStop = true;
             PIMonitor.threadStop = true;
 
-            for (int i = 0; i < dbStatus?.Length; i++)
-            {
-                dbStatus[i].Stop();
-            }
+            dbStatus?.Stop();
 
             bTerminal = true;
 
@@ -494,16 +473,8 @@ namespace DataSpider
         private void ReadStatusConfig()
         {
             toolStripStatusLabel_DB1_Status.Visible = true;
-            toolStripStatusLabel_DB2_Status.Visible = false;
-            toolStripStatusLabel_DB3_Status.Visible = false;
-
-            m_bDbPgmStatusEnable = ConfigHelper.GetAppSetting("DbPgmStatusEnable").Trim().ToUpper().Equals("Y");
-            if (m_bDbPgmStatusEnable) toolStripStatusLabel_DBPGM_Status.Visible = true;
-            else toolStripStatusLabel_DBPGM_Status.Visible = false;
-
-            m_bPiPgmStatusEnable = ConfigHelper.GetAppSetting("PiPgmStatusEnable").Trim().ToUpper().Equals("Y");
-            if (m_bPiPgmStatusEnable) toolStripStatusLabel_PIPGM_Status.Visible = true;
-            else toolStripStatusLabel_PIPGM_Status.Visible = false;
+            toolStripStatusLabel_DBPGM_S_Status.Visible = !ConfigHelper.GetAppSetting("DbPgmStatusEnable").Trim().ToUpper().Equals("N");
+            toolStripStatusLabel_PIPGM_Status.Visible = !ConfigHelper.GetAppSetting("PiPgmStatusEnable").Trim().ToUpper().Equals("N");
         }
 
         private void tagGroupToolStripMenuItem_Click(object sender, EventArgs e)
