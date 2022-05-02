@@ -6,10 +6,10 @@ using System.Runtime.InteropServices;
 // 어셈블리와 관련된 정보를 수정하려면
 // 이 특성 값을 변경하십시오.
 [assembly: AssemblyTitle("DataSpiderPC02")]
-[assembly: AssemblyDescription("File Data DB Uploader")]
+[assembly: AssemblyDescription("DataFile DB Uploader")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Conwell")]
-[assembly: AssemblyProduct("DataSpiderPC02")]
+[assembly: AssemblyProduct("DataSpiderPC02 - DataFile DB Uploader")]
 [assembly: AssemblyCopyright("Copyright © Conwell 2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

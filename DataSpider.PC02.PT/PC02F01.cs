@@ -73,10 +73,12 @@ namespace DataSpider.PC02.PT
 
             // Tray Icon
             this.m_niIcon = new System.Windows.Forms.NotifyIcon();
-            this.m_niIcon.BalloonTipText = $"{this.ProductName} - DB Uploader "; //PC00D01.NotifyTipText;
-            this.m_niIcon.Text = $"{this.ProductName} - DB Uploader"; //PC00D01.NotifyText;
-            this.m_niIcon.Icon = PC02.PT.Properties.Resources.icon2;
-            this.m_niIcon.Click += new EventHandler(m_niIcon_Click);
+            this.m_niIcon.BalloonTipText = $"{this.ProductName}";// - DB Uploader "; //PC00D01.NotifyTipText;
+            this.m_niIcon.Text = $"{this.ProductName}";// - DB Uploader"; //PC00D01.NotifyText;
+            this.m_niIcon.Icon = PC02.PT.Properties.Resources.dbupdate;
+            this.m_niIcon.DoubleClick += new EventHandler(m_niIcon_Click);
+            this.m_niIcon.ContextMenuStrip = contextMenuStrip_TrayIcon;
+            this.m_niIcon.Visible = true;
 
             // Show Lines Text Input Only Number
             this.tbShowLines.MaxLength = 4;
@@ -214,6 +216,10 @@ namespace DataSpider.PC02.PT
             catch (Exception ex)
             {
                 this.m_clsLog.LogToFile("LOG", this.m_strLogFileName, PC00D01.MSGTDBG, MethodBase.GetCurrentMethod().Name, ex.ToString());
+            }
+            finally
+            {
+                this.m_niIcon.Visible = false;
             }
         }
         #endregion
@@ -755,8 +761,7 @@ namespace DataSpider.PC02.PT
             //this.m_niIcon.ShowBalloonTip(2000);
         }
 
-        // Exit Button Click Event (btnExit_Click)
-        void btnExit_Click(object sender, EventArgs e)
+        void Terminate()
         {
             DialogResult dialogResult = MessageBox.Show(PC00D01.MSGP0001, PC00D01.MSGP0002, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
@@ -766,11 +771,23 @@ namespace DataSpider.PC02.PT
             }
         }
 
+        // Exit Button Click Event (btnExit_Click)
+        void btnExit_Click(object sender, EventArgs e)
+        {
+            ShowForm(false);
+        }
+
         // Icon Tray Button Click Event (m_niIcon_Click)
         void m_niIcon_Click(object sender, EventArgs e)
         {
-            this.Visible = true;
-            this.m_niIcon.Visible = false;
+            //this.m_niIcon.Visible = false;
+            ShowForm(true);
+        }
+
+        void ShowForm(bool show)
+        {
+            WindowState = show ? FormWindowState.Normal : FormWindowState.Minimized;
+            this.ShowInTaskbar = show;
         }
         #endregion
 
@@ -839,6 +856,15 @@ namespace DataSpider.PC02.PT
             }
         }
 
+        private void TrayIconOpen_Click(object sender, EventArgs e)
+        {
+            ShowForm(true);
+        }
+
+        private void TrayIconExit_Click(object sender, EventArgs e)
+        {
+            Terminate();
+        }
     }
 
 }

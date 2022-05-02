@@ -61,6 +61,9 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.lblRunTime = new System.Windows.Forms.Label();
             this.pbDbCon = new System.Windows.Forms.PictureBox();
+            this.contextMenuStrip_TrayIcon = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.TrayIconOpen = new System.Windows.Forms.ToolStripMenuItem();
+            this.TrayIconExit = new System.Windows.Forms.ToolStripMenuItem();
             this.LvServerInfo = new DataSpider.PC03.PT.Controls.CWListView();
             this.LvRevLog = new DataSpider.PC03.PT.Controls.CWListView();
             this.panel1.SuspendLayout();
@@ -80,6 +83,7 @@
             this.panel14.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbDbCon)).BeginInit();
+            this.contextMenuStrip_TrayIcon.SuspendLayout();
             this.SuspendLayout();
             // 
             // imgHeight
@@ -449,6 +453,28 @@
             this.pbDbCon.TabIndex = 70;
             this.pbDbCon.TabStop = false;
             // 
+            // contextMenuStrip_TrayIcon
+            // 
+            this.contextMenuStrip_TrayIcon.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.TrayIconOpen,
+            this.TrayIconExit});
+            this.contextMenuStrip_TrayIcon.Name = "contextMenuStrip1";
+            this.contextMenuStrip_TrayIcon.Size = new System.Drawing.Size(104, 48);
+            // 
+            // TrayIconOpen
+            // 
+            this.TrayIconOpen.Name = "TrayIconOpen";
+            this.TrayIconOpen.Size = new System.Drawing.Size(103, 22);
+            this.TrayIconOpen.Text = "Open";
+            this.TrayIconOpen.Click += new System.EventHandler(this.TrayIconOpen_Click);
+            // 
+            // TrayIconExit
+            // 
+            this.TrayIconExit.Name = "TrayIconExit";
+            this.TrayIconExit.Size = new System.Drawing.Size(103, 22);
+            this.TrayIconExit.Text = "Exit";
+            this.TrayIconExit.Click += new System.EventHandler(this.TrayIconExit_Click);
+            // 
             // LvServerInfo
             // 
             this.LvServerInfo.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -479,7 +505,6 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "PC03F01";
             this.Text = "PI Interface";
-            this.WindowState = System.Windows.Forms.FormWindowState.Minimized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PC03F01_FormClosing);
             this.Load += new System.EventHandler(this.PC03F01_Load);
             this.panel1.ResumeLayout(false);
@@ -501,6 +526,7 @@
             this.panel14.PerformLayout();
             this.panel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbDbCon)).EndInit();
+            this.contextMenuStrip_TrayIcon.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -540,6 +566,9 @@
         private System.Windows.Forms.CheckBox cbDebug;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label_Version;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip_TrayIcon;
+        private System.Windows.Forms.ToolStripMenuItem TrayIconOpen;
+        private System.Windows.Forms.ToolStripMenuItem TrayIconExit;
     }
 }
 

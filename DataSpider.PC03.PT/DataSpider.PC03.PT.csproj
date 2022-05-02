@@ -151,6 +151,7 @@
     <Content Include="Image\dbconnected.jpg" />
     <Content Include="Image\dbdisconnected.jpg" />
     <Content Include="Image\icon1.ico" />
+    <None Include="Resources\applications-utilities-3.ico" />
     <Content Include="UpdateLog.txt" />
     <None Include="Image\icon2.ico" />
     <Content Include="Image\RSM-logo.png" />

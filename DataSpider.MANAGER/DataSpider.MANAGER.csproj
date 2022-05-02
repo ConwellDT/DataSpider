@@ -48,8 +48,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>
-    </ApplicationIcon>
+    <ApplicationIcon>interface3.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CFW.Common, Version=15.4.1.0, Culture=neutral, processorArchitecture=x86">
@@ -333,6 +332,7 @@
     <None Include="Resources\TagGroupConfig.bmp" />
     <None Include="Resources\TagAddEditBK.bmp" />
     <Content Include="DBConnectionString.txt" />
+    <Content Include="interface3.ico" />
     <Content Include="UpdateLog.txt" />
   </ItemGroup>
   <ItemGroup>

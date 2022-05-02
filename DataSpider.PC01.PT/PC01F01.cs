@@ -607,14 +607,13 @@ namespace DataSpider.PC01.PT
                 {
                     this.ShowInTaskbar = show;
                 }
-                if (show && !Opacity.Equals(1))
+                if (show && !this.WindowState.Equals(FormWindowState.Normal))
                 {
-                    this.Opacity = 1;
-                    this.Activate();
+                    this.WindowState = FormWindowState.Normal;
                 }
-                if (!show && !Opacity.Equals(0))
+                if (!show && !this.WindowState.Equals(FormWindowState.Minimized))
                 {
-                    this.Opacity = 0;
+                    this.WindowState = FormWindowState.Minimized;
                 }
             }
         }
