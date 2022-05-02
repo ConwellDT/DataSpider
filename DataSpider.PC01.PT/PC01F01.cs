@@ -237,7 +237,7 @@ namespace DataSpider.PC01.PT
                 {
                     this.m_clsLog.LogToFile("LOG", this.m_strLogFileName, PC00D01.MSGTERR, MethodBase.GetCurrentMethod().Name, $"{equipName}:"+ex.ToString());
                 }
-                Thread.Sleep(5000);
+                Thread.Sleep(1000);
             }
         }
         #endregion

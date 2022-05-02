@@ -61,6 +61,8 @@ namespace DataSpider.UserMonitor
             dataGridView_Main.RowTemplate.MinimumHeight = 30;
             dataGridView_Main.DoubleBuffered(true);
             dataGridView_Main.CellMouseDoubleClick += DataGridView_Main_CellMouseDoubleClick;
+            dataGridView_Main.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            dataGridView_Main.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
 
             //
             // 2022. 3. 14 : Han, Ilho
@@ -350,18 +352,7 @@ namespace DataSpider.UserMonitor
                 int nHoriScrollOffset = dataGridView_Main.HorizontalScrollingOffset;
                 int nRowIndex = dataGridView_Main.FirstDisplayedScrollingRowIndex;
 
-                //dataGridView_Main.ColumnHeadersVisible = dataGridView_Main.RowHeadersVisible = false;
-                //DataGridViewAutoSizeColumnsMode dgvascm = dataGridView_Main.AutoSizeColumnsMode;
-                //DataGridViewAutoSizeRowsMode dgvasrm = dataGridView_Main.AutoSizeRowsMode;
-                //dataGridView_Main.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.None;
-                //dataGridView_Main.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.None;
-                //dataGridView_Main.SuspendLayout();
                 dataGridView_Main.DataSource = dtHistoryData;
-                //dataGridView_Main.AutoSizeColumnsMode = dgvascm;
-                //dataGridView_Main.AutoSizeRowsMode = dgvasrm;
-                //dataGridView_Main.ColumnHeadersVisible = dataGridView_Main.RowHeadersVisible = true;
-                //dataGridView_Main.ResumeLayout();
-
 
                 if (dtHistoryData.Rows.Count > 0)
                 {
@@ -379,6 +370,7 @@ namespace DataSpider.UserMonitor
             }
             else
             {
+                dataGridView_Main.DataSource = null;
                 //String strMsg = $"Equipment : {equipName}, TagGroup : {selGrpName}, Period : {minDate} ~ {maxDate} - No data exist";
                 //MessageBox.Show(strMsg, "History Data Display", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
