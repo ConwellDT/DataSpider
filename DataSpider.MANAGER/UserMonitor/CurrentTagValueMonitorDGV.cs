@@ -61,8 +61,10 @@ namespace DataSpider.UserMonitor
             dataGridView_Main.RowTemplate.MinimumHeight = 30;
             dataGridView_Main.DoubleBuffered(true);
             dataGridView_Main.CellMouseDoubleClick += DataGridView_Main_CellMouseDoubleClick;
-            dataGridView_Main.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            dataGridView_Main.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
+            // None 로 해야 사용자 컬럼 사이즈 조절이 가능함. 
+            // 바인딩 후 AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells); 처리
+            dataGridView_Main.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
+            dataGridView_Main.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
             dataGridView_Main.AllowUserToResizeRows = dataGridView_Main.AllowUserToResizeColumns = true;
 
             //
@@ -173,6 +175,8 @@ namespace DataSpider.UserMonitor
         {
             string strErrCode = string.Empty;
             string strErrText = string.Empty;
+
+            dataGridView_Main.DataSource = null;
 
             DataTable dtProgramStatus = sqlBiz.GetCurrentTagValue(equipType.Trim(), equipName.Trim(), ref strErrCode, ref strErrText);
             if (dtProgramStatus == null || dtProgramStatus.Rows.Count < 1)
@@ -354,7 +358,7 @@ namespace DataSpider.UserMonitor
                 int nRowIndex = dataGridView_Main.FirstDisplayedScrollingRowIndex;
 
                 dataGridView_Main.DataSource = dtHistoryData;
-                
+
                 if (dtHistoryData.Rows.Count > 0)
                 {
                     dataGridView_Main.HorizontalScrollingOffset = nHoriScrollOffset;
@@ -458,6 +462,7 @@ namespace DataSpider.UserMonitor
                     {
                         GetTagHistoryValues();
                     }
+                    dataGridView_Main.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells);
                 }
                 catch (Exception ex)
                 {
