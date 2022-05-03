@@ -21,6 +21,11 @@ namespace DataSpider.PC02.PT
     {
         private DateTime dtLastUpdateProgDateTime = DateTime.MinValue;
         private int serverCode = 0;
+
+        private string errorFilePath = string.Empty;
+        private string lastErrorFileName = string.Empty;
+        private string programName = string.Empty;
+
         public PC02S01()
         {
         }
@@ -31,12 +36,65 @@ namespace DataSpider.PC02.PT
 
         public PC02S01(IPC00F00 pOwner, string equipType, string equipName, string connectionInfo, string extraInfo, int nCurNo, bool bAutoRun = false) : base(pOwner, equipType, equipName, connectionInfo, extraInfo, nCurNo, bAutoRun)
         {
-            serverCode = m_sqlBiz.GetServerId(Environment.MachineName);
+            Init();
 
             if (m_AutoRun == true)
             {
-                m_Thd = new Thread(ThreadJob);
+                m_Thd = new Thread(new ThreadStart(ThreadJob));
                 m_Thd.Start();
+            }
+        }
+
+        private void Init()
+        {
+            serverCode = m_sqlBiz.GetServerId(Environment.MachineName);
+            programName = $"{System.Windows.Forms.Application.ProductName}{(serverCode == 0 ? "P" : "S")}";
+            errorFilePath = $@"{m_ConnectionInfo}\DataFile_Error";
+            if (!Directory.Exists(m_ConnectionInfo))
+            {
+                Directory.CreateDirectory(m_ConnectionInfo);
+            }
+
+            if (!Directory.Exists(errorFilePath))
+            {
+                Directory.CreateDirectory(errorFilePath);
+            }
+        }
+
+        private void CheckErrorFile()
+        {
+
+            string errorFileDirectoryName = string.Empty;
+            DirectoryInfo di = new DirectoryInfo(errorFilePath);
+            try
+            {
+                List<FileInfo> listFileInfo = di.GetFiles("*.ttv", SearchOption.AllDirectories).ToList();
+                if (listFileInfo.Count > 0)
+                {
+                    listFileInfo.Sort((x, y) => x.LastWriteTime.CompareTo(y.LastWriteTime));
+                    errorFileDirectoryName = listFileInfo[0].DirectoryName.Substring(listFileInfo[0].DirectoryName.LastIndexOf(@"\") + 1);
+                    if (!errorFileDirectoryName.Equals(lastErrorFileName))
+                    {
+                        listViewMsg.UpdateMsg($"New Error File : {errorFileDirectoryName}", true, false);
+                        lastErrorFileName = errorFileDirectoryName;
+                        m_sqlBiz.WriteSTCommon("ERROR_STATUS", programName, errorFileDirectoryName);
+                    }
+                }
+                else
+                {
+                    if (!errorFileDirectoryName.Equals(lastErrorFileName))
+                    {
+                        lastErrorFileName = errorFileDirectoryName;
+                        m_sqlBiz.WriteSTCommon("ERROR_STATUS", programName, errorFileDirectoryName);
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                m_Owner.listViewMsg(m_Name, ex.ToString(), true, m_nCurNo, 6, true, PC00D01.MSGTERR);
+                listViewMsg.UpdateMsg($"Exception in ThreadJob - ({ex})", false, true, true, PC00D01.MSGTERR);
+                UpdateEquipmentProgDateTime(IF_STATUS.InternalError);
             }
         }
 
@@ -45,14 +103,6 @@ namespace DataSpider.PC02.PT
             string errCode = string.Empty;
             string errText = string.Empty;
 
-            if (!Directory.Exists(m_ConnectionInfo))
-            {
-                Directory.CreateDirectory(m_ConnectionInfo);
-            }
-            if (!Directory.Exists($@"{m_ConnectionInfo}\DataFile_Error"))
-            {
-                Directory.CreateDirectory($@"{m_ConnectionInfo}\DataFile_Error");
-            }
             DirectoryInfo di = new DirectoryInfo(m_ConnectionInfo);
             string lineData = string.Empty;
             bool result = false;
@@ -64,6 +114,8 @@ namespace DataSpider.PC02.PT
             {
                 try
                 {
+                    CheckErrorFile();
+
                     if (m_nCurNo == 0)
                         UpdateEquipmentProgDateTime(IF_STATUS.Normal);
 
@@ -131,6 +183,8 @@ namespace DataSpider.PC02.PT
                             UpdateEquipmentProgDateTime(IF_STATUS.InvalidData);
                         }
                     }
+
+
                 }
                 catch (Exception ex)
                 {
@@ -148,7 +202,7 @@ namespace DataSpider.PC02.PT
             listViewMsg.UpdateStatus(false);
             listViewMsg.UpdateMsg("Thread finished");
         }
-        protected bool UpdateEquipmentProgDateTime(IF_STATUS status = IF_STATUS.Normal)
+        protected new bool UpdateEquipmentProgDateTime(IF_STATUS status = IF_STATUS.Normal)
         {
             string errCode = string.Empty;
             string errText = string.Empty;

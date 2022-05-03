@@ -63,6 +63,7 @@ namespace DataSpider.PC03.PT
         string m_PgmPara = "";
         private DataTable dtEquipmentType = null;
         Thread m_ThdChkPI = null;
+        Thread m_ThdPIUpdate = null;
 
         static PISystem _PIStstem;
         static PIServer _PIserver;
@@ -171,8 +172,11 @@ namespace DataSpider.PC03.PT
                 PIInfo();
 
 
-                m_ThdChkPI = new Thread(ThreadChkPI);
+                m_ThdChkPI = new Thread(new ThreadStart(ThreadChkPI));
                 m_ThdChkPI.Start();
+
+                m_ThdPIUpdate = new Thread(new ThreadStart(ThreadJob));
+                m_ThdPIUpdate.Start();
 
             }
             catch(Exception ex)
@@ -208,201 +212,6 @@ namespace DataSpider.PC03.PT
             string strErrText = string.Empty;
             dtEquipmentType = this.m_SqlBiz.GetCommonCode("EQUIP_TYPE", ref strErrCode, ref strErrText);
         }
-
-        #region PC03F01_FormClosing 폼 닫기 이벤트 
-        // Form Closing Event (TightenOrderRcv_FormClosed)
-        void PC03F01_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            try
-            {
-                /*
-                OrdThreadIsRun.threadRun = false;
-                this.m_clsLog.LogToFile("LOG", this.m_strLogFileName, PC01D01.MSGTINF, MethodBase.GetCurrentMethod().Name, PC01D01.MSGP0020 + System.Environment.NewLine);
-
-                if (this.m_clsOraCon != null) { this.m_clsOraCon.DBDisConnect(); }
-
-                if (this.m_tmOraConUpd != null    && this.m_tmOraConUpd.Enabled   ) { this.m_tmOraConUpd.Stop(); }
-                if (this.m_tmSerInfoLvUpd != null && this.m_tmSerInfoLvUpd.Enabled) { this.m_tmSerInfoLvUpd.Stop(); }
-                if (this.m_tmRevOrdLvUpd != null  && this.m_tmRevOrdLvUpd.Enabled ) { this.m_tmRevOrdLvUpd.Stop(); }
-                if (this.m_tmLogLvUpd != null     && this.m_tmLogLvUpd.Enabled    ) { this.m_tmLogLvUpd.Stop(); }
-                if (this.m_tmCurrTmUpd != null    && this.m_tmCurrTmUpd.Enabled   ) { this.m_tmCurrTmUpd.Stop(); }
-                */
-
-                try
-                {
-                    for (int i = 0; i < thProcess.Count(); i++)
-                    {
-                        if( thProcess[i] != null) 
-                            thProcess[i].bTerminal = true;
-
-                        //Thread.Sleep(100);
-
-                        //if (thProcess[i].m_Thd != null && thProcess[i].m_Thd.IsAlive)
-                        //{
-                        //    thProcess[i].m_Thd.Abort();
-                        //}
-                    }
-                    for (int i = 0; i < thProcess.Count(); i++)
-                    {
-                        if (thProcess[i] != null)
-                        {
-                            thProcess[i].m_Thd?.Join(100);
-                            if (thProcess[i].m_Thd != null && thProcess[i].m_Thd.IsAlive)
-                            {
-                                thProcess[i].m_Thd.Abort();
-                            }
-                        }
-                    }
-                    bTerminated = true;
-                    if (m_ThdChkPI != null)
-                    {
-                        m_ThdChkPI.Join(100);
-                        if (m_ThdChkPI != null && m_ThdChkPI.IsAlive)
-                        {
-                            m_ThdChkPI.Abort();
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    this.m_clsLog.LogToFile("LOG", this.m_strLogFileName, PC00D01.MSGTDBG, MethodBase.GetCurrentMethod().Name, ex.ToString());
-                }
-
-                try
-                {
-                    this.m_clsLog.LogToFile("LOG", this.m_strLogFileName, PC00D01.MSGTDBG, MethodBase.GetCurrentMethod().Name, "Program Close");
-                    Application.Exit();
-                }
-                catch (Exception ex)
-                {
-                    this.m_clsLog.LogToFile("LOG", this.m_strLogFileName, PC00D01.MSGTDBG, MethodBase.GetCurrentMethod().Name, ex.ToString());
-                }
-            }
-            catch (Exception ex)
-            {
-                this.m_clsLog.LogToFile("LOG", this.m_strLogFileName, PC00D01.MSGTDBG, MethodBase.GetCurrentMethod().Name, ex.ToString());
-            }
-            finally
-            {
-                m_niIcon.Visible = false;
-            }
-        }
-        #endregion
-
-        #region GetProgramInfo 프로그램 정보를 로딩한다. 
-        private void GetProgramInfo()
-        {
-            //DataTable dt = null;
-
-            //if (!this.m_clsOraCon.DBConnectState())
-            //{
-            string strErrCode = string.Empty;
-            string strErrText = string.Empty;
-            //DataSet dsPgm = new DataSet();
-
-            //dsPgm = this.m_SqlBiz.GetProgramInfo(this.m_clsPgmInfo.strPLANT_CD, this.m_clsPgmInfo.strPGM_ID, this.m_clsDBCon, ref strErrCode, ref strErrText);
-
-            //if (dsPgm == null)
-            //{
-            //    this.m_clsLog.LogToFile("LOG", this.m_strLogFileName, PC01D01.MSGTERR, MethodBase.GetCurrentMethod().Name, $"{PC01D01.MSGP0046} - {strErrCode} : {strErrText}");
-            //    this.m_clsAryDevInfo = null;
-            //    return;
-            //}
-            //else
-            //{
-
-                //m_PgmType = dsPgm.Tables[0].Rows[0]["PGM_TYPE"].ToString();
-                //m_PgmPara = dsPgm.Tables[0].Rows[0]["PGM_PARA"].ToString();
-
-                dsMain = this.m_SqlBiz.GetDeviceInfo(this.m_clsPgmInfo.strEQUIP_TYPE, "", this.m_clsDBCon, ref strErrCode, ref strErrText);
-
-                if (dsMain == null)
-                {
-                    this.m_clsLog.LogToFile("LOG", this.m_strLogFileName, PC00D01.MSGTERR, MethodBase.GetCurrentMethod().Name, $"{PC00D01.MSGP0046} - {strErrCode} : {strErrText}");
-                    this.m_clsAryDevInfo = null;
-                    return;
-                }
-                else
-                {
-                    lbTitle.Text = " " + dsMain.Tables[0].Rows[0]["PGM_NAME"].ToString();
-                }
-            //}
-            
-            this.m_clsAryDevInfo = new DeviceInfo[dsMain.Tables[0].Rows.Count];
-
-            for (int i = 0; i < dsMain.Tables[0].Rows.Count; i++)
-            {
-                string strPlantCd                  = dsMain.Tables[0].Rows[i]["PLANT_CD"].ToString().Trim();  
-                string strProcID                   = dsMain.Tables[0].Rows[i]["PROC_ID"].ToString().Trim(); 
-                string strProcNM                   = dsMain.Tables[0].Rows[i]["PROC_NAME"].ToString().Trim(); 
-                string strProcInitRunFlag          = dsMain.Tables[0].Rows[i]["INIT_RUN_FLAG"].ToString().Trim();
-                //int nPoolingSec                    = int.Parse(dsMain.Tables[0].Rows[i]["POOLING_SEC"].ToString().Trim()); 
-                //int    nHeartBitChkSec             = int.Parse(dsMain.Tables[0].Rows[i]["HEARTBIT_CHK_SEC"].ToString().Trim()); 
-                //int    nDBReconnectSec             = int.Parse(dsMain.Tables[0].Rows[i]["DB_RECONNECT_SEC"].ToString().Trim()); 
-                //int    nSocketReconnectSec         = int.Parse(dsMain.Tables[0].Rows[i]["SOCKET_RECONNECT_SEC"].ToString().Trim()); 
-                //string strDeviceID                 = dsMain.Tables[0].Rows[i]["DEVICE_ID"].ToString().Trim();
-                //string strDeviceNM                 = dsMain.Tables[0].Rows[i]["DEVICE_NM"].ToString().Trim();                 
-                //string strDeviceIP                 = dsMain.Tables[0].Rows[i]["DEVICE_IP"].ToString().Trim(); 
-                //int    nDevicePort                 = int.Parse(dsMain.Tables[0].Rows[i]["DEVICE_PORT"].ToString().Trim());
-                //string strOpcIp                    = dsMain.Tables[0].Rows[i]["OPC_IP"].ToString().Trim();
-                //int nOpcPort                       = int.Parse(dsMain.Tables[0].Rows[i]["OPC_PORT"].ToString().Trim());
-                string strStnCd                    = dsMain.Tables[0].Rows[i]["STATION_CD"].ToString().Trim();
-
-                string strPathTemp = dsMain.Tables[0].Rows[i]["proc_para"].ToString();
-                string[] strAryPathTemp = strPathTemp.Split(';');
-                string strGetPath = string.Empty;
-                string strSetPath = string.Empty;
-                // 20201006, DQK
-                string strBackupPath = "";
-                //if (strAryPathTemp.Length == 2)
-                //{
-                //    strGetPath = strAryPathTemp[0];
-                //    strSetPath = strAryPathTemp[1];
-                //}
-                if (strAryPathTemp.Length == 3)
-                {
-                    strGetPath = strAryPathTemp[0];
-                    strSetPath = strAryPathTemp[1];
-                    strBackupPath = strAryPathTemp[2];
-                }
-
-                // 20201027, DQK
-                string strVisionFileFormat = "";
-                string[] strVisionFileFormats = dsMain.Tables[0].Rows[i]["Vision_FileFormat"].ToString().Trim().Split(';');
-                if (strVisionFileFormats.Length > 0)
-                {
-                    strVisionFileFormat = strVisionFileFormats[0];
-                }
-
-
-
-                DeviceInfo clsDevInfo                         = new DeviceInfo();
-                clsDevInfo.strPLANT_CD                        = strPlantCd;
-                clsDevInfo.strProc_ID                         = strProcID;
-                clsDevInfo.strProc_NM                         = strProcNM;
-                clsDevInfo.strProc_Init_Run_Flag              = strProcInitRunFlag;
-                clsDevInfo.nProc_HeartBit_Check_Sec = 10; // nHeartBitChkSec;
-                clsDevInfo.nProc_DB_Reconnect_Sec = 10; // nDBReconnectSec;
-                clsDevInfo.nProc_Pooling_Sec = 10; // nPoolingSec;
-                clsDevInfo.nDevice_SocketReconnectSec = 10; // nSocketReconnectSec;
-                //clsDevInfo.strDevice_ID                       = strDeviceID;
-                //clsDevInfo.strDevice_Name                     = strDeviceNM;
-                //clsDevInfo.strDevice_IP                       = strDeviceIP;
-                //clsDevInfo.nDevice_Port                       = nDevicePort;
-                //clsDevInfo.strOpc_IP                          = strOpcIp;
-                //clsDevInfo.nOpc_Port                          = nOpcPort;
-                clsDevInfo.strStation_Cd                      = strStnCd;
-                clsDevInfo.strGetPath                         = strGetPath;
-                clsDevInfo.strSetPath                         = strSetPath;
-
-                clsDevInfo.strBackupPath = strBackupPath;
-                // 20201027, DQK
-                clsDevInfo.strVisionFileFormat = strVisionFileFormat;
-
-                this.m_clsAryDevInfo[i] = clsDevInfo;
-            }
-        }
-        #endregion
 
         #region CreateProcess 각 설비별로 PLC 데이타 수집 클래스 생성        
         private void CreateProcess()
@@ -981,7 +790,89 @@ namespace DataSpider.PC03.PT
 
             if (dialogResult == DialogResult.Yes)
             {
-                this.Close();
+                try
+                {
+                    bTerminated = true;
+
+                    for (int i = 0; i < thProcess.Count(); i++)
+                    {
+                        if (thProcess[i] != null)
+                            thProcess[i].bTerminal = true;
+                    }
+                    Thread.Sleep(2000);
+
+                    for (int i = 0; i < thProcess.Count(); i++)
+                    {
+                        if (thProcess[i] != null)
+                        {
+                            int count = 0;
+                            while (thProcess[i].m_Thd != null && thProcess[i].m_Thd.IsAlive)
+                            {
+                                thProcess[i].m_Thd.Join(10);
+                                if (count++ > 10)
+                                {
+                                    break;
+                                }
+                            }
+                            if (thProcess[i].m_Thd != null && thProcess[i].m_Thd.IsAlive)
+                            {
+                                thProcess[i].m_Thd.Abort();
+                            }
+                        }
+                    }
+
+                    if (m_ThdChkPI != null)
+                    {
+                        int count = 0;
+                        while (m_ThdChkPI != null && m_ThdChkPI.IsAlive)
+                        {
+                            m_ThdChkPI.Join(10);
+                            if (count++ > 100)
+                            {
+                                break;
+                            }
+                        }
+                        if (m_ThdChkPI != null && m_ThdChkPI.IsAlive)
+                        {
+                            m_ThdChkPI.Abort();
+                        }
+                    }
+                    if (m_ThdPIUpdate != null)
+                    {
+                        int count = 0;
+                        while (m_ThdPIUpdate != null && m_ThdPIUpdate.IsAlive)
+                        {
+                            m_ThdPIUpdate.Join(10);
+                            if (count++ > 100)
+                            {
+                                break;
+                            }
+                        }
+                        if (m_ThdPIUpdate != null && m_ThdPIUpdate.IsAlive)
+                        {
+                            m_ThdPIUpdate.Abort();
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    this.m_clsLog.LogToFile("LOG", this.m_strLogFileName, PC00D01.MSGTDBG, MethodBase.GetCurrentMethod().Name, ex.ToString());
+                }
+
+                try
+                {
+                    this.m_clsLog.LogToFile("LOG", this.m_strLogFileName, PC00D01.MSGTDBG, MethodBase.GetCurrentMethod().Name, "Program Close");
+                    Application.Exit();
+                }
+                catch (Exception ex)
+                {
+                    this.m_clsLog.LogToFile("LOG", this.m_strLogFileName, PC00D01.MSGTDBG, MethodBase.GetCurrentMethod().Name, ex.ToString());
+                }
+                finally
+                {
+                    m_niIcon.Visible = false;
+                    Application.Exit();
+                }
             }
         }
 
@@ -1052,7 +943,110 @@ namespace DataSpider.PC03.PT
             }
         }
         #endregion
+        // PI_CONNECTION_01_PROGRAM_STATUS.PV measure result pi 저장
+        private void ThreadJob()
+        {
+            string errCode = string.Empty;
+            string errText = string.Empty;
+            string pierrText = string.Empty;
+            bool result = true;
 
+            while (!bTerminated)
+            {
+                try
+                {
+                    if (_PIserver == null && !_PIserver.ConnectionInfo.IsConnected)
+                    {
+                        Thread.Sleep(1000);
+                        continue;
+                    }
+
+                    DataTable dtResult = m_SqlBiz.GetMeasureResultForPIConnection(ref errCode, ref errText);
+
+                    if (dtResult != null)
+                    {
+                        if (dtResult.Rows.Count > 0)
+                        {
+                            for (int i = 0; i < dtResult.Rows.Count; i++)
+                            {
+                                int strSeq = int.Parse(dtResult.Rows[i]["HI_SEQ"].ToString());
+                                int ifCount = 0; int.TryParse(dtResult.Rows[i]["IF_COUNT"].ToString(), out ifCount);
+                                string pointName = dtResult.Rows[i]["PI_TAG_NM"].ToString();
+                                object pointValue = dtResult.Rows[i]["MEASURE_VALUE"].ToString();
+
+                                //DateTime mTime = DateTime.Parse(dtResult.Rows[i]["MEASURE_DATE"].ToString("yyyyMMddHHmmss.fff"));
+
+                                DateTime mTime = Convert.ToDateTime(dtResult.Rows[i]["MEASURE_DATE"]);
+
+                                string tagName = dtResult.Rows[i]["TAG_NM"].ToString();
+
+                                if (pointName.Trim() != "")
+                                {
+                                    //PI서버 업로드
+                                    bool rVal = SetPIValue(pointName, pointValue, mTime, ref pierrText);
+
+                                    if (i % 10 == 9) Thread.Sleep(1);
+
+                                    //데이타 전송 플래그 업데이트
+                                    string strFlag = "Y";
+                                    string errMsg = "";
+
+                                    if (rVal == false)
+                                    {
+                                        strFlag = "E";
+                                        errMsg = pierrText.Replace("\\", "").Replace("\r\n", "").Replace("'", "");
+                                    }
+
+                                    result = m_SqlBiz.UpdateMeasureResult(strSeq, strFlag, ifCount, errMsg, ref errCode, ref errText);
+                                    if (!result)
+                                    {
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    Thread.Sleep(1000);
+                }
+                catch (Exception ex)
+                {
+                }
+                finally
+                {
+                }
+            }
+        }
+
+        private bool SetPIValue(string pointName, object pointValue, DateTime mTime, ref string _strErrText)
+        {
+            bool rtnval = false;
+
+            try
+            {
+                PIPoint point = PIPoint.FindPIPoint(_PIserver, pointName);
+
+                AFTime aTime = new AFTime(mTime.ToUniversalTime());
+
+                AFValue value = new AFValue(pointValue, aTime);
+
+                //AFValue value = new AFValue(pointValue, aTime, null, AFValueStatus.Bad);
+
+                //2021.05.20 변경요청 [김현지 프로]
+                //point.UpdateValue(value, OSIsoft.AF.Data.AFUpdateOption.Replace);
+                //point.UpdateValue(value, OSIsoft.AF.Data.AFUpdateOption.Insert);
+                // 버퍼 미사용 옵션
+                point.UpdateValue(value, OSIsoft.AF.Data.AFUpdateOption.Insert, OSIsoft.AF.Data.AFBufferOption.DoNotBuffer);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                string ee = ex.ToString();
+
+                _strErrText = ee;
+                return false;
+            }
+        }
         public void ThreadChkPI()
         {
             DateTime dtUpdateTime = DateTime.Now;
@@ -1090,12 +1084,12 @@ namespace DataSpider.PC03.PT
             UpdateEquipmentProgDateTime(strEqName, IF_STATUS.Unknown);
         }
 
-        protected bool UpdateEquipmentProgDateTime(string strEqName, IF_STATUS status = IF_STATUS.Normal)
+        protected void UpdateEquipmentProgDateTime(string strEqName, IF_STATUS status = IF_STATUS.Normal)
         {
             string errCode = string.Empty;
             string errText = string.Empty;
 
-            return this.m_SqlBiz.UpdateEquipmentProgDateTimePC03(strEqName, (int)status, ref errCode, ref errText);
+            m_SqlBiz.UpdateEquipmentProgDateTimePC03(strEqName, (int)status, ref errCode, ref errText);
 
         }
 

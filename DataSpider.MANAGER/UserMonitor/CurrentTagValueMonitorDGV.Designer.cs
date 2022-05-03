@@ -383,7 +383,6 @@ namespace DataSpider.UserMonitor
             this.radioButtonHistoryTag.Text = "HISTORY";
             this.radioButtonHistoryTag.UseVisualStyleBackColor = true;
             this.radioButtonHistoryTag.CheckedChanged += new System.EventHandler(this.radioButtonHistoryTag_CheckedChanged);
-            this.radioButtonHistoryTag.MouseClick += new System.Windows.Forms.MouseEventHandler(this.radioButtonHistoryTag_MouseClick);
             // 
             // radioButtonCurTag
             // 

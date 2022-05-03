@@ -63,6 +63,7 @@ namespace DataSpider.UserMonitor
             dataGridView_Main.CellMouseDoubleClick += DataGridView_Main_CellMouseDoubleClick;
             dataGridView_Main.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             dataGridView_Main.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
+            dataGridView_Main.AllowUserToResizeRows = dataGridView_Main.AllowUserToResizeColumns = true;
 
             //
             // 2022. 3. 14 : Han, Ilho
@@ -353,7 +354,7 @@ namespace DataSpider.UserMonitor
                 int nRowIndex = dataGridView_Main.FirstDisplayedScrollingRowIndex;
 
                 dataGridView_Main.DataSource = dtHistoryData;
-
+                
                 if (dtHistoryData.Rows.Count > 0)
                 {
                     dataGridView_Main.HorizontalScrollingOffset = nHoriScrollOffset;
@@ -818,16 +819,17 @@ namespace DataSpider.UserMonitor
                 checkBox_AutoRefresh.Checked = false;
                 checkBox_AutoRefresh.Visible = button_SetInterval.Visible = false;
             }
-        }
-
-        private void radioButtonHistoryTag_MouseClick(object sender, MouseEventArgs e)
-        {
-            nDBModeCurrent = 0;
-
-            checkBox_AutoRefresh.Checked = false;
-
             GetProgramStatus();
         }
+
+        //private void radioButtonHistoryTag_MouseClick(object sender, MouseEventArgs e)
+        //{
+        //    nDBModeCurrent = 0;
+
+        //    checkBox_AutoRefresh.Checked = false;
+
+        //    GetProgramStatus();
+        //}
 
         //private void listView_Main_ColumnClick(object sender, ColumnClickEventArgs e)
         //{

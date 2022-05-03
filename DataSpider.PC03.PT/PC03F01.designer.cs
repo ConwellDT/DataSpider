@@ -48,9 +48,11 @@
             this.panel8 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.panel9 = new System.Windows.Forms.Panel();
+            this.LvServerInfo = new DataSpider.PC03.PT.Controls.CWListView();
             this.panel10 = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
             this.panel11 = new System.Windows.Forms.Panel();
+            this.LvRevLog = new DataSpider.PC03.PT.Controls.CWListView();
             this.panel14 = new System.Windows.Forms.Panel();
             this.tbShowLines = new System.Windows.Forms.TextBox();
             this.lbShowLines = new System.Windows.Forms.Label();
@@ -64,8 +66,6 @@
             this.contextMenuStrip_TrayIcon = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.TrayIconOpen = new System.Windows.Forms.ToolStripMenuItem();
             this.TrayIconExit = new System.Windows.Forms.ToolStripMenuItem();
-            this.LvServerInfo = new DataSpider.PC03.PT.Controls.CWListView();
-            this.LvRevLog = new DataSpider.PC03.PT.Controls.CWListView();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -309,6 +309,16 @@
             this.panel9.Size = new System.Drawing.Size(979, 256);
             this.panel9.TabIndex = 0;
             // 
+            // LvServerInfo
+            // 
+            this.LvServerInfo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LvServerInfo.Font = new System.Drawing.Font("Arial", 9F);
+            this.LvServerInfo.Location = new System.Drawing.Point(0, 0);
+            this.LvServerInfo.Margin = new System.Windows.Forms.Padding(1);
+            this.LvServerInfo.Name = "LvServerInfo";
+            this.LvServerInfo.Size = new System.Drawing.Size(979, 256);
+            this.LvServerInfo.TabIndex = 0;
+            // 
             // panel10
             // 
             this.panel10.BackColor = System.Drawing.SystemColors.Control;
@@ -342,6 +352,17 @@
             this.panel11.Name = "panel11";
             this.panel11.Size = new System.Drawing.Size(979, 250);
             this.panel11.TabIndex = 0;
+            // 
+            // LvRevLog
+            // 
+            this.LvRevLog.AutoScroll = true;
+            this.LvRevLog.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LvRevLog.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.LvRevLog.Location = new System.Drawing.Point(0, 0);
+            this.LvRevLog.Margin = new System.Windows.Forms.Padding(3, 3, 1, 1);
+            this.LvRevLog.Name = "LvRevLog";
+            this.LvRevLog.Size = new System.Drawing.Size(979, 250);
+            this.LvRevLog.TabIndex = 0;
             // 
             // panel14
             // 
@@ -475,27 +496,6 @@
             this.TrayIconExit.Text = "Exit";
             this.TrayIconExit.Click += new System.EventHandler(this.TrayIconExit_Click);
             // 
-            // LvServerInfo
-            // 
-            this.LvServerInfo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.LvServerInfo.Font = new System.Drawing.Font("Arial", 9F);
-            this.LvServerInfo.Location = new System.Drawing.Point(0, 0);
-            this.LvServerInfo.Margin = new System.Windows.Forms.Padding(1);
-            this.LvServerInfo.Name = "LvServerInfo";
-            this.LvServerInfo.Size = new System.Drawing.Size(979, 256);
-            this.LvServerInfo.TabIndex = 0;
-            // 
-            // LvRevLog
-            // 
-            this.LvRevLog.AutoScroll = true;
-            this.LvRevLog.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.LvRevLog.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.LvRevLog.Location = new System.Drawing.Point(0, 0);
-            this.LvRevLog.Margin = new System.Windows.Forms.Padding(3, 3, 1, 1);
-            this.LvRevLog.Name = "LvRevLog";
-            this.LvRevLog.Size = new System.Drawing.Size(979, 250);
-            this.LvRevLog.TabIndex = 0;
-            // 
             // PC03F01
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -505,7 +505,6 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "PC03F01";
             this.Text = "PI Interface";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PC03F01_FormClosing);
             this.Load += new System.EventHandler(this.PC03F01_Load);
             this.panel1.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
