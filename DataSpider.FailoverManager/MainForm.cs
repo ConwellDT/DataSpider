@@ -151,7 +151,8 @@ namespace DataSpider.FailoverManager
                         foreach (DataRow dr in dtStatus.Rows)
                         {
                             // 프로그램이 종료되었으면 null
-                            if (IsProcessTerminated(m_ProcessList[(string)dr["EQUIP_NM"]])) m_ProcessList[(string)dr["EQUIP_NM"]] = null;
+                            if (IsProcessTerminated(m_ProcessList[(string)dr["EQUIP_NM"]]))
+                                m_ProcessList[(string)dr["EQUIP_NM"]] = null;
 
                             if (FAILOVER_MODE.AUTO == (int)dr["FAILOVER_MODE"])  // FAILOVER_MODE=AUTO
                             {
