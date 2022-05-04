@@ -48,7 +48,6 @@ namespace DataSpider.PC03.PT
         protected string m_strPgmPara = "";
 
         public Thread m_Thd = null;
-        public Thread m_ThdChkPI = null;
         protected bool DeleteFile = false;
 
         protected string m_strDataFilePath = "";

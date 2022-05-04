@@ -39,16 +39,32 @@ namespace DataSpider.PC03.PT
     {
         static PISystem _PIStstem;
         static PIServer _PIserver;
-        static AFDatabase _AFDB;
 
         public string serverName = "";
         public string dbName = "";
         public string user = "";
         public string password = "";
-        private DateTime dtLastUpdateProgDateTime = DateTime.MinValue;
-        protected int UpdateInterval = 30;
-        protected IF_STATUS lastStatus = IF_STATUS.Stop;
+        
         FileLog m_Logger = null;
+
+        DateTime dtLastStatus = DateTime.MinValue;
+        IF_STATUS lastStatus = IF_STATUS.Normal;
+        public IF_STATUS STATUS 
+        {
+            get
+            {
+                if (DateTime.Now.Subtract(dtLastStatus).TotalSeconds > 60)
+                {
+                    lastStatus = IF_STATUS.Unknown;
+                }
+                return lastStatus;
+            }
+            set
+            {
+                lastStatus = value;
+                dtLastStatus = DateTime.Now; 
+            }
+        }
 
         public PC03S01() : base()
         {
@@ -140,20 +156,18 @@ namespace DataSpider.PC03.PT
 
 
                                     result = m_sqlBiz.UpdateMeasureResult(strSeq, strFlag, ifCount, errMsg, ref errCode, ref errText);
-                                    if (!result)
-                                    {
-                                        break;
-                                    }
 
                                     if (result)
                                     {
                                         mOwner.listViewMsg(m_strEName, string.Format(PC00D01.SucceededtoPI, pointName, pointValue), true, m_nCurNo, 3, true, PC00D01.MSGTINF);
                                         m_Logger.WriteLog(string.Format(PC00D01.SucceededtoPI, pointName, pointValue), PC00D01.MSGTERR, m_strEName);
+                                        STATUS = IF_STATUS.Normal;
                                     }
                                     else
                                     {
                                         mOwner.listViewMsg(m_strEName, string.Format(PC00D01.FailedtoPI, $"{errText} - {pointName}", pointValue), true, m_nCurNo, 3, true, PC00D01.MSGTERR);
                                         m_Logger.WriteLog(string.Format(PC00D01.FailedtoPI, $"{errText} - {pointName}", pointValue), PC00D01.MSGTERR, m_strEName);
+                                        STATUS = IF_STATUS.InternalError;
                                     }
                                 }
                                 else
@@ -161,20 +175,24 @@ namespace DataSpider.PC03.PT
                                     string errMsg = "매핑된 PI 태그명이 없습니다.";
                                     mOwner.listViewMsg(m_strEName, string.Format(PC00D01.FailedtoPI, $"{errMsg} - {tagName}", pointValue), true, m_nCurNo, 3, true, PC00D01.MSGTERR);
                                     m_Logger.WriteLog(string.Format(PC00D01.FailedtoPI, $"{errMsg} - {tagName}", pointValue), PC00D01.MSGTERR, m_strEName);
+                                    STATUS = IF_STATUS.NoData;
                                 }
                             }
                         }
+                        STATUS = IF_STATUS.Normal;
                     }
                     else
                     {
-                        Thread.Sleep(1000);
-                        //m_Thd.Join(1000);
+                        STATUS = IF_STATUS.InternalError;
                     }
+
+                    Thread.Sleep(1000);
                 }
                 catch (Exception ex)
                 {
                     mOwner.listViewMsg(m_strEName, ex.ToString(), true, m_nCurNo, 3, true, PC00D01.MSGTERR);
                     m_Logger.WriteLog($"ThreadJob - {ex.ToString()} ", PC00D01.MSGTERR, m_strEName);
+                    STATUS = IF_STATUS.InternalError;
                 }
                 finally
                 {
@@ -186,8 +204,9 @@ namespace DataSpider.PC03.PT
                     //m_Thd.Join(1000)
                 }
             }
-            mOwner.listViewMsg(m_strEName, PC00D01.OFF, true, m_nCurNo, 1, false, PC00D01.MSGTINF);
             m_Logger.WriteLog(PC00D01.OFF, PC00D01.MSGTINF, m_strEName);
+            //mOwner.listViewMsg(m_strEName, PC00D01.OFF, true, m_nCurNo, 1, false, PC00D01.MSGTINF);
+            
         }
 
 

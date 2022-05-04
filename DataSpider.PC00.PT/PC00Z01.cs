@@ -491,12 +491,12 @@ namespace DataSpider.PC00.PT
                 return false;
             }
         }
-        public bool UpdateEquipmentProgDateTimePC02(string equipName, int status, ref string _strErrCode, ref string _strErrText)
+        public bool UpdateEquipmentProgDateTimeForProgram(string equipName, int status, ref string _strErrCode, ref string _strErrText)
         {
             try
             {
                 StringBuilder strQuery = new StringBuilder();
-                strQuery.Append($"EXEC UpdateEquipmentProgDateTimePC02 '{equipName}', {status} ");
+                strQuery.Append($"EXEC UpdateEquipmentProgDateTimeForProgram '{equipName}', {status} ");
 
                 bool result = CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref _strErrCode, ref _strErrText);
                 return result;
@@ -508,22 +508,6 @@ namespace DataSpider.PC00.PT
             }
         }
 
-        public bool UpdateEquipmentProgDateTimePC03(string equipName, int status, ref string _strErrCode, ref string _strErrText)
-        {
-            try
-            {
-                StringBuilder strQuery = new StringBuilder();
-                strQuery.Append($"EXEC UpdateEquipmentProgDateTimePC03 '{equipName}', {status} ");
-
-                bool result = CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref _strErrCode, ref _strErrText);
-                return result;
-            }
-            catch (Exception ex)
-            {
-                _strErrText = ex.ToString();
-                return false;
-            }
-        }
         /// <summary>
         /// 장비명을 받아 해당 장비의 상태 및 기본 정보를 조회
         /// 장비 상태는 ProgDateTime 이 현재시간과 비교하여 60초 이상 차이가 나면 STOP, 아니면 START 로 처리

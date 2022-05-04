@@ -211,7 +211,7 @@ namespace DataSpider.PC02.PT
             {
                 dtLastUpdateProgDateTime = dtNow;
                 lastStatus = status;
-                return m_sqlBiz.UpdateEquipmentProgDateTimePC02($"{System.Windows.Forms.Application.ProductName}{(serverCode == 0 ? "P" : "S")}", (int)status, ref errCode, ref errText);
+                return m_sqlBiz.UpdateEquipmentProgDateTimeForProgram($"{System.Windows.Forms.Application.ProductName}{(serverCode == 0 ? "P" : "S")}", (int)status, ref errCode, ref errText);
             }
             return true;
         }
