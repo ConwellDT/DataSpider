@@ -140,6 +140,21 @@ namespace DataSpider
                                 toolStripStatusLabel_PIPGM_Status.ToolTipText = dr[0].ToString();
                             }
                             break;
+                        case "PIConnection":
+                            if (this.InvokeRequired)
+                            {
+                                this.Invoke(new MethodInvoker(delegate ()
+                                {
+                                    toolStripStatusLabel_PI_Status.Image = imageList_EquipState.Images[dr[0].ToString()];
+                                    toolStripStatusLabel_PI_Status.ToolTipText = dr[0].ToString();
+                                }));
+                            }
+                            else
+                            {
+                                toolStripStatusLabel_PI_Status.Image = imageList_EquipState.Images[dr[0].ToString()];
+                                toolStripStatusLabel_PI_Status.ToolTipText = dr[0].ToString();
+                            }
+                            break;
                         default:
                             break;
                     }
@@ -279,8 +294,8 @@ namespace DataSpider
             }
             else
             {
-                toolStripStatusLabel_DB1_Status.Image = imageList1.Images[status];
-                toolStripStatusLabel_DB1_Status.ToolTipText = status.Equals(1) ? "Connected" : "Disconnected";
+                toolStripStatusLabel_DB_Status.Image = imageList1.Images[status];
+                toolStripStatusLabel_DB_Status.ToolTipText = status.Equals(1) ? "Connected" : "Disconnected";
             }
         }
 
@@ -510,7 +525,8 @@ namespace DataSpider
 
         private void ReadStatusConfig()
         {
-            toolStripStatusLabel_DB1_Status.Visible = true;
+            toolStripStatusLabel_DB_Status.Visible = true;
+            toolStripStatusLabel_PI_Status.Visible = true;
             toolStripStatusLabel_DBPGM_S_Status.Visible = !ConfigHelper.GetAppSetting("DbPgmStatusEnable").Trim().ToUpper().Equals("N");
             toolStripStatusLabel_PIPGM_Status.Visible = !ConfigHelper.GetAppSetting("PiPgmStatusEnable").Trim().ToUpper().Equals("N");
         }

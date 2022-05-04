@@ -62,8 +62,9 @@ namespace DataSpider.PC03.PT
         string m_PgmType = "";
         string m_PgmPara = "";
         private DataTable dtEquipmentType = null;
-        Thread m_ThdChkPI = null;
-        Thread m_ThdPIUpdate = null;
+        Thread m_ThdCheckPI = null;
+        Thread m_ThdUpdatePI = null;
+        Thread threadUpdateProgramStatus = null;
 
         static PISystem _PIStstem;
         static PIServer _PIserver;
@@ -172,11 +173,14 @@ namespace DataSpider.PC03.PT
                 PIInfo();
 
 
-                m_ThdChkPI = new Thread(new ThreadStart(ThreadChkPI));
-                m_ThdChkPI.Start();
+                m_ThdCheckPI = new Thread(new ThreadStart(ThreadCheckPI));
+                m_ThdCheckPI.Start();
 
-                m_ThdPIUpdate = new Thread(new ThreadStart(ThreadJob));
-                m_ThdPIUpdate.Start();
+                m_ThdUpdatePI = new Thread(new ThreadStart(ThreadUpdatePI));
+                m_ThdUpdatePI.Start();
+
+                threadUpdateProgramStatus = new Thread(new ThreadStart(ThreadUpdateProgramStatus));
+                threadUpdateProgramStatus.Start();
 
             }
             catch(Exception ex)
@@ -799,7 +803,7 @@ namespace DataSpider.PC03.PT
                         if (thProcess[i] != null)
                             thProcess[i].bTerminal = true;
                     }
-                    Thread.Sleep(2000);
+                    Thread.Sleep(1000);
 
                     for (int i = 0; i < thProcess.Count(); i++)
                     {
@@ -811,46 +815,50 @@ namespace DataSpider.PC03.PT
                                 thProcess[i].m_Thd.Join(10);
                                 if (count++ > 10)
                                 {
+                                    thProcess[i].m_Thd.Abort();
                                     break;
                                 }
-                            }
-                            if (thProcess[i].m_Thd != null && thProcess[i].m_Thd.IsAlive)
-                            {
-                                thProcess[i].m_Thd.Abort();
                             }
                         }
                     }
 
-                    if (m_ThdChkPI != null)
+                    if (m_ThdCheckPI != null)
                     {
                         int count = 0;
-                        while (m_ThdChkPI != null && m_ThdChkPI.IsAlive)
+                        while (m_ThdCheckPI != null && m_ThdCheckPI.IsAlive)
                         {
-                            m_ThdChkPI.Join(10);
+                            m_ThdCheckPI.Join(10);
                             if (count++ > 100)
                             {
+                                m_ThdCheckPI.Abort();
                                 break;
                             }
-                        }
-                        if (m_ThdChkPI != null && m_ThdChkPI.IsAlive)
-                        {
-                            m_ThdChkPI.Abort();
                         }
                     }
-                    if (m_ThdPIUpdate != null)
+                    if (m_ThdUpdatePI != null)
                     {
                         int count = 0;
-                        while (m_ThdPIUpdate != null && m_ThdPIUpdate.IsAlive)
+                        while (m_ThdUpdatePI != null && m_ThdUpdatePI.IsAlive)
                         {
-                            m_ThdPIUpdate.Join(10);
+                            m_ThdUpdatePI.Join(10);
                             if (count++ > 100)
                             {
+                                m_ThdUpdatePI.Abort();
                                 break;
                             }
                         }
-                        if (m_ThdPIUpdate != null && m_ThdPIUpdate.IsAlive)
+                    }
+                    if (threadUpdateProgramStatus != null)
+                    {
+                        int count = 0;
+                        while (threadUpdateProgramStatus != null && threadUpdateProgramStatus.IsAlive)
                         {
-                            m_ThdPIUpdate.Abort();
+                            threadUpdateProgramStatus.Join(10);
+                            if (count++ > 100)
+                            {
+                                threadUpdateProgramStatus.Abort();
+                                break;
+                            }
                         }
                     }
                 }
@@ -943,8 +951,41 @@ namespace DataSpider.PC03.PT
             }
         }
         #endregion
-        // PI_CONNECTION_01_PROGRAM_STATUS.PV measure result pi 저장
-        private void ThreadJob()
+
+        
+        private void ThreadUpdateProgramStatus()
+        {
+            string errCode = string.Empty;
+            string errText = string.Empty;
+            while (!bTerminated)
+            {
+                try
+                {
+                    int maxStatus = -1;
+                    foreach (PC03S01 prc in thProcess)
+                    {
+                        if (maxStatus < (int)prc.STATUS)
+                        {
+                            maxStatus = (int)prc.STATUS;
+                        }
+                    }
+
+                    m_SqlBiz.UpdateEquipmentProgDateTime(Application.ProductName, maxStatus, ref errCode, ref errText);
+
+                    Thread.Sleep(10*1000);
+                }
+                catch (Exception ex)
+                {
+                }
+                finally
+                {
+                }
+            }
+            m_SqlBiz.UpdateEquipmentProgDateTime(Application.ProductName, (int)IF_STATUS.Stop, ref errCode, ref errText);
+        }
+
+        // PI_CONNECTION_01_PROGRAM_STATUS.PV measure result 에서 읽어서 pi 저장 처리
+        private void ThreadUpdatePI()
         {
             string errCode = string.Empty;
             string errText = string.Empty;
@@ -1047,7 +1088,9 @@ namespace DataSpider.PC03.PT
                 return false;
             }
         }
-        public void ThreadChkPI()
+
+        // 7초마다 PI 접속 체크하여 PC03 프로그램 PI 접속 상태 업데이트 및 PI CONNECTION 상태 데이터를 MEASURE 테이블에 저장 (PI 에 저장하도록)
+        public void ThreadCheckPI()
         {
             DateTime dtUpdateTime = DateTime.Now;
 
@@ -1063,34 +1106,34 @@ namespace DataSpider.PC03.PT
                     {
                         if (_PIserver != null && _PIserver.ConnectionInfo.IsConnected)
                         {
-                            UpdateEquipmentProgDateTime(strEqName, IF_STATUS.Normal);
+                            UpdateProgDateTime(strEqName, IF_STATUS.Normal);
                         }
                         else
                         {
-                            UpdateEquipmentProgDateTime(strEqName, IF_STATUS.Disconnected);
+                            UpdateProgDateTime(strEqName, IF_STATUS.Disconnected);
                         }
                         dtUpdateTime = DateTime.Now;
                     }
                 }
                 catch (Exception ex)
                 {
-                    UpdateEquipmentProgDateTime(strEqName, IF_STATUS.InternalError);
+                    UpdateProgDateTime(strEqName, IF_STATUS.InternalError);
                 }
                 finally
                 {
-                    m_ThdChkPI.Join(100);
+                    m_ThdCheckPI.Join(100);
                 }
             }
-            UpdateEquipmentProgDateTime(strEqName, IF_STATUS.Unknown);
+            UpdateProgDateTime(strEqName, IF_STATUS.Unknown);
         }
 
-        protected void UpdateEquipmentProgDateTime(string strEqName, IF_STATUS status = IF_STATUS.Normal)
+        protected void UpdateProgDateTime(string strEqName, IF_STATUS status = IF_STATUS.Normal)
         {
             string errCode = string.Empty;
             string errText = string.Empty;
 
-            m_SqlBiz.UpdateEquipmentProgDateTimePC03(strEqName, (int)status, ref errCode, ref errText);
-
+            m_SqlBiz.UpdateEquipmentProgDateTimeForProgram("PIConnection", (int)status, ref errCode, ref errText);
+            m_SqlBiz.InsertResult("PI_CONNECTION_01_PROGRAM_STATUS.PV", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ((int)status).ToString(), "N", null, null, ref errCode, ref errText);
         }
 
         private void TrayIconOpen_Click(object sender, EventArgs e)
