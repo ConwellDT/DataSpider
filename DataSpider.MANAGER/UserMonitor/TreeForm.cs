@@ -594,6 +594,7 @@ namespace DataSpider.UserMonitor
                 DataTable fot = sqlBiz.GetTableInfo(strQuery.ToString(), ref errCode, ref errText);
                 if (fot == null || fot.Rows.Count == 0)
                 {
+                    return;
                 }
                 DataRow fo_dr = fot.Rows[0];
 

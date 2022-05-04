@@ -33,7 +33,7 @@ namespace DataSpider.PC01.PT
         private int m_ToBeProcessedDaqID = 0;
         private DateTime m_LastEnqueuedDate = DateTime.Now;
         private DateTime m_ToBeProcessedDate = DateTime.Now;
-        private SoloVpe m_soloVpe = new SoloVpe();
+        //private SoloVpe m_soloVpe = new SoloVpe();
 
         private DateTime dtDateTime;
         private string dataString = string.Empty;
@@ -41,23 +41,18 @@ namespace DataSpider.PC01.PT
         private StringBuilder ssb = new StringBuilder();
 
 
-        // 2022-04-20 데이터 변경
-        // L0  <-   뒤에서 부터 0번째
-        // *   <-   전부를 붙여서 출력하는 기능
-        public class SoloVpe 
+        public class SoloVpeTable
         {
-            const int ARRAY0 = 0;
-            const int PROPERTY1 = 1;
-            const int ARRAY1 = 2;
-            const int PROPERTY2 = 3;
+            // SoloeVpe Data Table
+            public DataTable sdt = null;
+            // Raw Data Table (SeriesData)
+            public DataTable rdt = null;
 
             public int newDaqID;
             public string newSampleName;
             public string newLDAPUserID;
             public string newRunStart;
             public string newRunEnd;
-
-            public Dictionary<string, List<string>> m_soloVpeDic = new Dictionary<string, List<string>>();
 
 
             /// <summary>
@@ -111,83 +106,47 @@ namespace DataSpider.PC01.PT
                 return document.RootElement.GetArrayLength();
             }
 
-            public string GetValue(string jsonString, List<string> list)
+            public string MakeDataTable(string jsonString)
             {
                 string retValue = string.Empty;
                 JsonDocument document;
-                JsonElement root, jElement, jjElement, jjjElement;
-                int nArray0 = -1, nArray1 = -1;
+                JsonElement root;
+                DataColumn sdt_column, rdt_column;
                 try
                 {
                     document = JsonDocument.Parse(jsonString);
                     root = document.RootElement;
-                    if (root.ValueKind != JsonValueKind.Array) return retValue;
-
-
-                    if (int.TryParse(list[ARRAY0], out nArray0) == false)
+                    if (root.ValueKind != JsonValueKind.Array)
                     {
-                        if (list[ARRAY0].Contains("#LAST"))
+                        sdt = rdt = null;
+                        return retValue;
+                    }
+                    foreach (JsonElement je in root.EnumerateArray())
+                    {
+                        foreach (JsonProperty jp in je.EnumerateObject())
                         {
-                            nArray0 = root.GetArrayLength() - 1;
-                        }
-                        else if (list[ARRAY0].Contains("L"))
-                        {
-                            char[] charsToTrim = { 'L', ' ' };
-                            string val = list[ARRAY0].Trim(charsToTrim);
-                            if (int.TryParse(val, out nArray0) == false)
+                            if (jp.Name == "SeriesData")
                             {
-                                nArray0 = -1;
-                            }
-                            else
-                                nArray0 = root.GetArrayLength() - 1 - nArray0;
-
-                        }
-                        else
-                            nArray0 = -1;
-                    }
-
-                    if (nArray0 >= 0)
-                    {
-                        jElement = root[nArray0];
-                    }
-                    else
-                    {
-                        jElement = root;
-                    }
-
-                    if (string.IsNullOrWhiteSpace(list[PROPERTY1]) == false) // Property1이 있음.
-                    {
-                        jjElement = jElement.GetProperty(list[PROPERTY1]); //Property1
-
-                        if (string.IsNullOrWhiteSpace(list[PROPERTY2]) == false) // Property2가 있음.
-                        {
-                            if (list[ARRAY1].Contains("*"))
-                            {
-                                for (int nLen = 0; nLen < jjElement.GetArrayLength(); nLen++)
+                                JsonElement.ArrayEnumerator ja = jp.Value.EnumerateArray();
+                                ja.MoveNext();
+                                JsonElement jje = ja.Current;
+                                foreach (JsonProperty jjp in jje.EnumerateObject())
                                 {
-                                    jjjElement = jjElement[jjElement.GetArrayLength() - nLen - 1].GetProperty(list[PROPERTY2]);
-                                    retValue += " " + jjjElement.ToString() + " ;";
+                                    rdt_column = new DataColumn();
+                                    rdt_column.DataType = Type.GetType("System.String");
+                                    rdt_column.ColumnName = jjp.Name;
+                                    rdt.Columns.Add(rdt_column);
                                 }
-                                if (retValue.Length > 0) retValue = retValue.Substring(0, retValue.Length - 1);
                             }
                             else
                             {
-                                if (int.TryParse(list[ARRAY1], out nArray1) == false)
-                                {
-                                    if (list[ARRAY1].Contains("#LAST"))
-                                        nArray1 = jjElement.GetArrayLength() - 1;
-                                    else
-                                        nArray0 = -1;
-                                }
-                                if (nArray1 >= 0) jjjElement = jjElement[nArray1].GetProperty(list[PROPERTY2]); //Property2
-                                else jjjElement = jjElement.GetProperty(list[PROPERTY2]); //Property2
-                                retValue = jjjElement.ToString();
+                                sdt_column = new DataColumn();
+                                sdt_column.DataType = Type.GetType("System.String");
+                                sdt_column.ColumnName = jp.Name;
+                                sdt.Columns.Add(sdt_column);
                             }
                         }
-                        else
-                        {
-                            retValue = jjElement.ToString();
-                        }
+                        return retValue;
                     }
                     return retValue;
                 }
@@ -198,74 +157,384 @@ namespace DataSpider.PC01.PT
                 return retValue;
             }
 
-            public void ReadCfgData(string configFile)
+            public string FillDataTable(string jsonString)
             {
-                List<string> keyValue = null;
-                string line;
+                string retValue = string.Empty;
+                JsonDocument document;
+                JsonElement root;
+                DataRow sdt_row, rdt_row;
                 try
                 {
-                    m_soloVpeDic.Clear();
-                    using (StreamReader file = new StreamReader(configFile, Encoding.Default))
+                    sdt.Clear();
+                    rdt.Clear();
+                    document = JsonDocument.Parse(jsonString);
+                    root = document.RootElement;
+                    if (root.ValueKind != JsonValueKind.Array) return retValue;
+                    foreach (JsonElement je in root.EnumerateArray())
                     {
-                        while ((line = file.ReadLine()) != null)
+                        sdt_row = sdt.NewRow();
+                        foreach (JsonProperty jp in je.EnumerateObject())
                         {
-                            if (line.StartsWith(";")) continue;
-                            string[] spline = line.Split(',');
-                            if (spline.Length > 1)
+
+                            if (jp.Name == "SeriesData")
                             {
-                                keyValue = new List<string>();
-                                for (int nLine = 1; nLine < 6; nLine++)
+                                foreach (JsonElement jje in jp.Value.EnumerateArray())
                                 {
-                                    if (spline.Length <= nLine)
-                                        keyValue.Add("");
-                                    else
-                                        keyValue.Add(spline[nLine].Trim());
+                                    rdt_row = rdt.NewRow();
+                                    foreach (JsonProperty jjp in jje.EnumerateObject())
+                                    {
+                                        rdt_row[jjp.Name] = jjp.Value;
+                                    }
+                                    rdt.Rows.Add(rdt_row);
                                 }
-                                m_soloVpeDic.Add(spline[0].Trim(), keyValue);
                             }
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    //listViewMsg.UpdateMsg($"Exceptioin - PC01S14 ({ex})", false, true, true, PC00D01.MSGTERR);
-                }
-            }
-            public void ReadCfgData(DataRow drConfig)
-            {
-                try
-                {
-                    string configInfo = drConfig["CONFIG_INFO"]?.ToString();
-                    if (string.IsNullOrWhiteSpace(configInfo))
-                    {
-                        return;
-                    }
-                    m_soloVpeDic.Clear();
-                    string[] arrConfig = configInfo.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
-                    foreach (string line in arrConfig)
-                    {
-                        if (line.StartsWith(";")) continue;
-                        string[] spline = line.Split(',');
-                        if (spline.Length > 1)
-                        {
-                            List<string> keyValue = new List<string>();
-                            for (int nLine = 1; nLine < 6; nLine++)
+                            else
                             {
-                                if (spline.Length <= nLine)
-                                    keyValue.Add("");
-                                else
-                                    keyValue.Add(spline[nLine].Trim());
+                                sdt_row[jp.Name] = jp.Value;
                             }
-                            m_soloVpeDic.Add(spline[0].Trim(), keyValue);
                         }
+                        sdt.Rows.Add(sdt_row);
                     }
                 }
                 catch (Exception ex)
                 {
-                    //listViewMsg.UpdateMsg($"Exceptioin - PC01S14 ({ex})", false, true, true, PC00D01.MSGTERR);
+                    //MessageBox.Show(ex.ToString());
                 }
+                return retValue;
             }
+
+            public int GetWaveLengthCount()
+            {
+                DataTable distinctTable = sdt.DefaultView.ToTable(true, "WaveLength");
+                return distinctTable.Rows.Count;
+            }
+
+            public int GetRepeatCount()
+            {
+                int nRepeatCount = sdt.Rows.Count / GetWaveLengthCount();
+                return nRepeatCount;
+            }
+
+            public string GetWaveLength(int nWaveLength)
+            {
+                DataTable distinctTable = sdt.DefaultView.ToTable(true, "WaveLength");
+                return (string)distinctTable.Rows[nWaveLength]["WaveLength"];
+            }
+
+            public string GetConfigWaveLengths()
+            {
+                string retString = string.Empty;
+                DataTable distinctTable = sdt.DefaultView.ToTable(true, "WaveLength");
+                foreach (DataRow dr in distinctTable.Rows)
+                {
+                    retString += " " + dr["WaveLength"] + " ;";
+                }
+                if (retString.Length > 0)
+                    retString = retString.Substring(0, retString.Length - 1);
+
+                return retString.Trim();
+            }
+
+            public string GetConfigDataPoints()
+            {
+                string retString = string.Empty;
+                if (sdt.Rows.Count > 0)
+                {
+                    retString = (string)sdt.Rows[0]["Datapoints"];
+                }
+                return retString.Trim();
+            }
+
+            public string GetConfigECs()
+            {
+                string retString = string.Empty;
+                DataTable distinctTable = sdt.DefaultView.ToTable(true, "WaveLength", "ExtinctionCoefficient");
+                foreach (DataRow dr in distinctTable.Rows)
+                {
+                    retString += " " + dr["ExtinctionCoefficient"] + " ;";
+                }
+                if (retString.Length > 0)
+                    retString = retString.Substring(0, retString.Length - 1);
+                return retString.Trim();
+            }
+
+            public string GetSeachPathLengths()
+            {
+                string retString = string.Empty;
+                for (int nRow = 0; nRow < 3 && nRow < rdt.Rows.Count; nRow++)
+                {
+                    retString += " " + rdt.Rows[nRow]["Pathlength"] + " ;";
+                }
+                if (retString.Length > 0)
+                    retString = retString.Substring(0, retString.Length - 1);
+                return retString.Trim();
+            }
+            // 통계는 WaveLength순으로
+            public string GetStatValue(int nWaveLength, string PropertyName)
+            {
+                string retString = string.Empty;
+                DataRow[] rows = sdt.Select($"WaveLength ={GetWaveLength(nWaveLength)}", "ID DESC");
+                retString = (string)rows[0][PropertyName];
+                return retString.Trim();
+            }
+
+            public string GetRepeatValue(int nWaveLength, int nRepeat, string PropertyName)
+            {
+                string retString = string.Empty;
+                DataRow[] rows = sdt.Select($"", "ID ASC");
+                retString = (string)rows[(nWaveLength) * GetRepeatCount() + nRepeat][PropertyName];
+                return retString.Trim();
+            }
+            public string GetRawValue(int nRepeat, string PropertyName)
+            {
+                string retString = string.Empty;
+                int nSeriesData = rdt.Rows.Count / GetRepeatCount();
+
+                DataRow[] rows = rdt.Select($"", "ID ASC");
+                for (int nData = 0; nData < nSeriesData; nData++)
+                {
+                    retString += " " + (string)rows[nRepeat * nSeriesData + nData][PropertyName] + " ;";
+                }
+                if (retString.Length > 0)
+                    retString = retString.Substring(0, retString.Length - 1);
+                return retString.Trim();
+            }
+
+            public string GetSdtValue(int nWaveLength, string PropertyName)
+            {
+                string retString = string.Empty;
+                retString = (string)sdt.Rows[nWaveLength][PropertyName];
+                return retString.Trim();
+            }
+
         }
+        private SoloVpeTable m_soloVpeTable = new SoloVpeTable();
+
+        // 2022-04-20 데이터 변경
+        // L0  <-   뒤에서 부터 0번째
+        // *   <-   전부를 붙여서 출력하는 기능
+        //public class SoloVpe 
+        //{
+        //    const int ARRAY0 = 0;
+        //    const int PROPERTY1 = 1;
+        //    const int ARRAY1 = 2;
+        //    const int PROPERTY2 = 3;
+
+        //    public int newDaqID;
+        //    public string newSampleName;
+        //    public string newLDAPUserID;
+        //    public string newRunStart;
+        //    public string newRunEnd;
+
+        //    public Dictionary<string, List<string>> m_soloVpeDic = new Dictionary<string, List<string>>();
+
+
+        //    /// <summary>
+        //    /// jsonString에서 currentDaqID 보다 큰 가장 작은 DaqID를 찾는다.
+        //    /// 만일 currentDaqID 보다 큰 가장 작은 DaqID를 찾지 못하면 newDaqID는 int.MaxValue가 된다.
+        //    /// 이 때는 newDaqID를 currentDaqID로 설정한다.
+        //    /// </summary>
+        //    /// <param name="jsonString"></param>
+        //    /// <param name="currentDaqID"></param>
+        //    public void GetDaqID(string jsonString, int currentDaqID)
+        //    {
+        //        JsonDocument document;
+        //        JsonElement root;
+        //        int DaqID;
+
+        //        newDaqID = currentDaqID;
+        //        newSampleName = string.Empty;
+        //        newLDAPUserID = string.Empty;
+        //        newRunStart = string.Empty;
+        //        newRunEnd = string.Empty;
+
+        //        document = JsonDocument.Parse(jsonString);
+        //        root = document.RootElement;
+        //        if (root.ValueKind != JsonValueKind.Array || root.GetArrayLength() == 0) return;
+
+        //        newDaqID = int.MaxValue;
+        //        foreach (JsonElement jElement in root.EnumerateArray())
+        //        {
+        //            DaqID = jElement.GetProperty("ID").GetInt32();
+
+        //            if (DaqID > currentDaqID && DaqID < newDaqID)
+        //            {
+        //                if (jElement.GetProperty("RunEnd").GetString() != null)
+        //                {
+        //                    newDaqID = DaqID;
+        //                    newSampleName = jElement.GetProperty("SampleName").GetString();
+        //                    newLDAPUserID = jElement.GetProperty("LDAPUserID").GetString();
+        //                    newRunStart = jElement.GetProperty("RunStart").GetString();
+        //                    newRunEnd = jElement.GetProperty("RunEnd").GetString();
+        //                }
+        //            }
+        //        }
+        //        if (newDaqID == int.MaxValue) newDaqID = currentDaqID;
+        //    }
+
+        //    public int GetArrayLength(string jsonString)
+        //    {
+        //        //JArray jArray = JArray.Parse(jsonString);
+        //        //return jArray.Count;
+        //        JsonDocument document = JsonDocument.Parse(jsonString);
+        //        return document.RootElement.GetArrayLength();
+        //    }
+
+        //    public string GetValue(string jsonString, List<string> list)
+        //    {
+        //        string retValue = string.Empty;
+        //        JsonDocument document;
+        //        JsonElement root, jElement, jjElement, jjjElement;
+        //        int nArray0 = -1, nArray1 = -1;
+        //        try
+        //        {
+        //            document = JsonDocument.Parse(jsonString);
+        //            root = document.RootElement;
+        //            if (root.ValueKind != JsonValueKind.Array) return retValue;
+
+
+        //            if (int.TryParse(list[ARRAY0], out nArray0) == false)
+        //            {
+        //                if (list[ARRAY0].Contains("#LAST"))
+        //                {
+        //                    nArray0 = root.GetArrayLength() - 1;
+        //                }
+        //                else if (list[ARRAY0].Contains("L"))
+        //                {
+        //                    char[] charsToTrim = { 'L', ' ' };
+        //                    string val = list[ARRAY0].Trim(charsToTrim);
+        //                    if (int.TryParse(val, out nArray0) == false)
+        //                    {
+        //                        nArray0 = -1;
+        //                    }
+        //                    else
+        //                        nArray0 = root.GetArrayLength() - 1 - nArray0;
+
+        //                }
+        //                else
+        //                    nArray0 = -1;
+        //            }
+
+        //            if (nArray0 >= 0)
+        //            {
+        //                jElement = root[nArray0];
+        //            }
+        //            else
+        //            {
+        //                jElement = root;
+        //            }
+
+        //            if (string.IsNullOrWhiteSpace(list[PROPERTY1]) == false) // Property1이 있음.
+        //            {
+        //                jjElement = jElement.GetProperty(list[PROPERTY1]); //Property1
+
+        //                if (string.IsNullOrWhiteSpace(list[PROPERTY2]) == false) // Property2가 있음.
+        //                {
+        //                    if (list[ARRAY1].Contains("*"))
+        //                    {
+        //                        for (int nLen = 0; nLen < jjElement.GetArrayLength(); nLen++)
+        //                        {
+        //                            jjjElement = jjElement[jjElement.GetArrayLength() - nLen - 1].GetProperty(list[PROPERTY2]);
+        //                            retValue += " " + jjjElement.ToString() + " ;";
+        //                        }
+        //                        if (retValue.Length > 0) retValue = retValue.Substring(0, retValue.Length - 1);
+        //                    }
+        //                    else
+        //                    {
+        //                        if (int.TryParse(list[ARRAY1], out nArray1) == false)
+        //                        {
+        //                            if (list[ARRAY1].Contains("#LAST"))
+        //                                nArray1 = jjElement.GetArrayLength() - 1;
+        //                            else
+        //                                nArray0 = -1;
+        //                        }
+        //                        if (nArray1 >= 0) jjjElement = jjElement[nArray1].GetProperty(list[PROPERTY2]); //Property2
+        //                        else jjjElement = jjElement.GetProperty(list[PROPERTY2]); //Property2
+        //                        retValue = jjjElement.ToString();
+        //                    }
+        //                }
+        //                else
+        //                {
+        //                    retValue = jjElement.ToString();
+        //                }
+        //            }
+        //            return retValue;
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            //MessageBox.Show(ex.ToString());
+        //        }
+        //        return retValue;
+        //    }
+
+        //    public void ReadCfgData(string configFile)
+        //    {
+        //        List<string> keyValue = null;
+        //        string line;
+        //        try
+        //        {
+        //            m_soloVpeDic.Clear();
+        //            using (StreamReader file = new StreamReader(configFile, Encoding.Default))
+        //            {
+        //                while ((line = file.ReadLine()) != null)
+        //                {
+        //                    if (line.StartsWith(";")) continue;
+        //                    string[] spline = line.Split(',');
+        //                    if (spline.Length > 1)
+        //                    {
+        //                        keyValue = new List<string>();
+        //                        for (int nLine = 1; nLine < 6; nLine++)
+        //                        {
+        //                            if (spline.Length <= nLine)
+        //                                keyValue.Add("");
+        //                            else
+        //                                keyValue.Add(spline[nLine].Trim());
+        //                        }
+        //                        m_soloVpeDic.Add(spline[0].Trim(), keyValue);
+        //                    }
+        //                }
+        //            }
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            //listViewMsg.UpdateMsg($"Exceptioin - PC01S14 ({ex})", false, true, true, PC00D01.MSGTERR);
+        //        }
+        //    }
+        //    public void ReadCfgData(DataRow drConfig)
+        //    {
+        //        try
+        //        {
+        //            string configInfo = drConfig["CONFIG_INFO"]?.ToString();
+        //            if (string.IsNullOrWhiteSpace(configInfo))
+        //            {
+        //                return;
+        //            }
+        //            m_soloVpeDic.Clear();
+        //            string[] arrConfig = configInfo.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+        //            foreach (string line in arrConfig)
+        //            {
+        //                if (line.StartsWith(";")) continue;
+        //                string[] spline = line.Split(',');
+        //                if (spline.Length > 1)
+        //                {
+        //                    List<string> keyValue = new List<string>();
+        //                    for (int nLine = 1; nLine < 6; nLine++)
+        //                    {
+        //                        if (spline.Length <= nLine)
+        //                            keyValue.Add("");
+        //                        else
+        //                            keyValue.Add(spline[nLine].Trim());
+        //                    }
+        //                    m_soloVpeDic.Add(spline[0].Trim(), keyValue);
+        //                }
+        //            }
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            //listViewMsg.UpdateMsg($"Exceptioin - PC01S14 ({ex})", false, true, true, PC00D01.MSGTERR);
+        //        }
+        //    }
+        //}
 
 
         public PC01S14() : base()
@@ -320,8 +589,8 @@ namespace DataSpider.PC01.PT
                         listViewMsg.UpdateMsg($"OPC UA Not Connected. Try to connect.", false, true, true, PC00D01.MSGTERR);
                         Thread.Sleep(5000);
                         InitOpcUaClient();
-                        //m_soloVpe.ReadCfgData($@".\Cfg\{m_Type}_Config.csv");
-                        m_soloVpe.ReadCfgData(drEquipment);
+
+                        //m_soloVpe.ReadCfgData(drEquipment);
                         dtNormalTime = DateTime.Now;
                     }
                     else
@@ -426,8 +695,10 @@ namespace DataSpider.PC01.PT
             if (outputArguments != null && outputArguments.Count >= 1)
             {
                 // JSON 데이터를 분석하여 LastEnqueuedDaqID보다 큰 가장 작은 DaqID 를 찾는다.
-                m_soloVpe.GetDaqID(outputArguments[0].ToString(), LastEnqueuedDaqID);
-                newDaqID = m_soloVpe.newDaqID;
+                //m_soloVpe.GetDaqID(outputArguments[0].ToString(), LastEnqueuedDaqID);
+                m_soloVpeTable.GetDaqID(outputArguments[0].ToString(), LastEnqueuedDaqID);
+                //newDaqID = m_soloVpe.newDaqID;
+                newDaqID = m_soloVpeTable.newDaqID;
 
                 // LastEnqueuedDaqID보다 보다 큰 DaqID가 없다면
                 //          날짜가 오늘 이전이면 날짜를 변경해야 함.
@@ -464,24 +735,92 @@ namespace DataSpider.PC01.PT
                 return false;
             }
             if (outputArguments != null && outputArguments.Count >= 1)
-            {               
-                PC00U01.TryParseExact(m_soloVpe.newRunStart, out dtDateTime);
-                dtDateTime = dtDateTime.ToLocalTime();
-                ssb.Clear();
-                ssb.AppendLine($"{typeName}_SVRTIME, {dtDateTime:yyyy-MM-dd HH:mm:ss.fff}, {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}");
-
-                ssb.AppendLine($"{typeName}_DAQID, {dtDateTime:yyyy-MM-dd HH:mm:ss.fff}, {m_soloVpe.newDaqID}");
-                ssb.AppendLine($"{typeName}_SAMPLENAME, {dtDateTime:yyyy-MM-dd HH:mm:ss.fff}, {m_soloVpe.newSampleName}");
-                ssb.AppendLine($"{typeName}_USERID, {dtDateTime:yyyy-MM-dd HH:mm:ss.fff}, {m_soloVpe.newLDAPUserID}");
-                ssb.AppendLine($"{typeName}_RUNSTART, {dtDateTime:yyyy-MM-dd HH:mm:ss.fff}, {m_soloVpe.newRunStart}");
-                ssb.AppendLine($"{typeName}_RUNEND, {dtDateTime:yyyy-MM-dd HH:mm:ss.fff}, {m_soloVpe.newRunEnd}");
-
-                foreach (KeyValuePair<string, List<string>> kvp in m_soloVpe.m_soloVpeDic)
+            {
+                try
                 {
-                    dataString = m_soloVpe.GetValue(outputArguments[0].ToString(), kvp.Value);
-                    ssb.AppendLine($"{typeName}_{kvp.Key.ToUpper()}, {dtDateTime:yyyy-MM-dd HH:mm:ss.fff}, {dataString}");
+                    //PC00U01.TryParseExact(m_soloVpe.newRunStart, out dtDateTime);
+                    PC00U01.TryParseExact(m_soloVpeTable.newRunStart, out dtDateTime);
+                    dtDateTime = dtDateTime.ToLocalTime();
+                    ssb.Clear();
+                    ssb.AppendLine($"{typeName}_SVRTIME, {dtDateTime:yyyy-MM-dd HH:mm:ss.fff}, {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}");
+
+                    //ssb.AppendLine($"{typeName}_DAQID, {dtDateTime:yyyy-MM-dd HH:mm:ss.fff}, {m_soloVpe.newDaqID}");
+                    //ssb.AppendLine($"{typeName}_SAMPLENAME, {dtDateTime:yyyy-MM-dd HH:mm:ss.fff}, {m_soloVpe.newSampleName}");
+                    //ssb.AppendLine($"{typeName}_USERID, {dtDateTime:yyyy-MM-dd HH:mm:ss.fff}, {m_soloVpe.newLDAPUserID}");
+                    //ssb.AppendLine($"{typeName}_RUNSTART, {dtDateTime:yyyy-MM-dd HH:mm:ss.fff}, {m_soloVpe.newRunStart}");
+                    //ssb.AppendLine($"{typeName}_RUNEND, {dtDateTime:yyyy-MM-dd HH:mm:ss.fff}, {m_soloVpe.newRunEnd}");
+
+                    ssb.AppendLine($"{typeName}_DAQID, {dtDateTime:yyyy-MM-dd HH:mm:ss.fff}, {m_soloVpeTable.newDaqID}");
+                    ssb.AppendLine($"{typeName}_SAMPLENAME, {dtDateTime:yyyy-MM-dd HH:mm:ss.fff}, {m_soloVpeTable.newSampleName}");
+                    ssb.AppendLine($"{typeName}_USERID, {dtDateTime:yyyy-MM-dd HH:mm:ss.fff}, {m_soloVpeTable.newLDAPUserID}");
+                    ssb.AppendLine($"{typeName}_RUNSTART, {dtDateTime:yyyy-MM-dd HH:mm:ss.fff}, {m_soloVpeTable.newRunStart}");
+                    ssb.AppendLine($"{typeName}_RUNEND, {dtDateTime:yyyy-MM-dd HH:mm:ss.fff}, {m_soloVpeTable.newRunEnd}");
+
+                    if (m_soloVpeTable.sdt == null)
+                    {
+                        m_soloVpeTable.sdt = new DataTable();
+                        m_soloVpeTable.rdt = new DataTable();
+                        m_soloVpeTable.MakeDataTable(outputArguments[0].ToString());
+                    }
+
+                    if (m_soloVpeTable.sdt != null)
+                    {
+                        // Json Data를 DataTable에 저장
+                        m_soloVpeTable.FillDataTable(outputArguments[0].ToString());
+
+                        // Configuration
+                        ssb.AppendLine($"{typeName}_CONF_WAVELENGTH, {dtDateTime:yyyy-MM-dd HH:mm:ss.fff}, {m_soloVpeTable.GetConfigWaveLengths()}");
+                        ssb.AppendLine($"{typeName}_CONF_DATA_POINTS, {dtDateTime:yyyy-MM-dd HH:mm:ss.fff}, {m_soloVpeTable.GetConfigDataPoints()}");
+                        ssb.AppendLine($"{typeName}_CONF_SEARCH_PATHLENGTHS, {dtDateTime:yyyy-MM-dd HH:mm:ss.fff}, {m_soloVpeTable.GetSeachPathLengths()}");
+                        ssb.AppendLine($"{typeName}_CONF_EXTINCTION_COEFFICIENT, {dtDateTime:yyyy-MM-dd HH:mm:ss.fff}, {m_soloVpeTable.GetConfigECs()}");
+
+                        // Stat
+                        for (int nWaveLength = 0; nWaveLength < m_soloVpeTable.GetWaveLengthCount(); nWaveLength++)
+                        {
+                            ssb.AppendLine($"{typeName}_STAT_WAVELENGTH_{nWaveLength + 1} : {m_soloVpeTable.GetStatValue(nWaveLength, "Wavelength")}");
+                            ssb.AppendLine($"{typeName}_STAT_AVG_SLOPE_{nWaveLength + 1} : {m_soloVpeTable.GetStatValue(nWaveLength, "MovingAverageConcentration")}");
+                            ssb.AppendLine($"{typeName}_STAT_STD_DEV_SLOPE_{nWaveLength + 1} : {m_soloVpeTable.GetStatValue(nWaveLength, "StdDevConcentration")}");
+                            ssb.AppendLine($"{typeName}_STAT_MAX_SLOPE_{nWaveLength + 1} : {m_soloVpeTable.GetStatValue(nWaveLength, "MaximumConcentration")}");
+                            ssb.AppendLine($"{typeName}_STAT_MIN_SLOPE_{nWaveLength + 1} : {m_soloVpeTable.GetStatValue(nWaveLength, "MinimumConcentration")}");
+                            ssb.AppendLine($"{typeName}_STAT_RANGE_SLOPE_{nWaveLength + 1} : {m_soloVpeTable.GetStatValue(nWaveLength, "RangeConcentration")}");
+                            ssb.AppendLine($"{typeName}_STAT_SLOPE_PERCENT_REL_DIFF_{nWaveLength + 1} : {m_soloVpeTable.GetStatValue(nWaveLength, "PercentRelDiffConcentration")}");
+                            ssb.AppendLine($"{typeName}_STAT_SLOPE_PERCENT_RSD_{nWaveLength + 1} : {m_soloVpeTable.GetStatValue(nWaveLength, "PercentRSDConcentration")}");
+                            ssb.AppendLine($"{typeName}_STAT_EXTINCTION_COEFFICIENT_{nWaveLength + 1} : {m_soloVpeTable.GetStatValue(nWaveLength, "ExtinctionCoefficient")}");
+                        }
+                        // Repeat
+                        for (int nRepeat = 0; nRepeat < m_soloVpeTable.GetRepeatCount(); nRepeat++)
+                        {
+                            for (int nWaveLength = 0; nWaveLength < m_soloVpeTable.GetWaveLengthCount(); nWaveLength++)
+                            {
+                                ssb.AppendLine($"{typeName}_WAVELENGTH_{nWaveLength * m_soloVpeTable.GetRepeatCount() + nRepeat + 1} : {m_soloVpeTable.GetRepeatValue(nWaveLength, nRepeat, "Wavelength")}");
+                                ssb.AppendLine($"{typeName}_CONC_{nWaveLength * m_soloVpeTable.GetRepeatCount() + nRepeat + 1} : {m_soloVpeTable.GetRepeatValue(nWaveLength, nRepeat, "BestConcentration")}");
+                                ssb.AppendLine($"{typeName}_SLOPE_{nWaveLength * m_soloVpeTable.GetRepeatCount() + nRepeat + 1} : {m_soloVpeTable.GetRepeatValue(nWaveLength, nRepeat, "BestSlope")}");
+                                ssb.AppendLine($"{typeName}_R2_{nWaveLength * m_soloVpeTable.GetRepeatCount() + nRepeat + 1} : {m_soloVpeTable.GetRepeatValue(nWaveLength, nRepeat, "BestRSquared")}");
+                                ssb.AppendLine($"{typeName}_THRESHOLD_PATHLENGTH_{nWaveLength * m_soloVpeTable.GetRepeatCount() + nRepeat + 1} : {m_soloVpeTable.GetRepeatValue(nWaveLength, nRepeat, "ThresholdPL")}");
+                                ssb.AppendLine($"{typeName}_PATHLENGTH_STEP_{nWaveLength * m_soloVpeTable.GetRepeatCount() + nRepeat + 1} : {m_soloVpeTable.GetRepeatValue(nWaveLength, nRepeat, "StepPL")}");
+                                ssb.AppendLine($"{typeName}_COLLECT_TIME_{nWaveLength * m_soloVpeTable.GetRepeatCount() + nRepeat + 1} : {m_soloVpeTable.GetRepeatValue(nWaveLength, nRepeat, "CompletionDateTime")}");
+                            }
+                        }
+                        // Raw Data
+                        for (int nRepeat = 0; nRepeat < m_soloVpeTable.GetRepeatCount(); nRepeat++)
+                        {
+                            ssb.AppendLine($"{typeName}_REPEAT{nRepeat + 1}_PATHLENGTH : {m_soloVpeTable.GetRawValue(nRepeat, "Pathlength")}");
+                            ssb.AppendLine($"{typeName}_REPEAT{nRepeat + 1}_WAVELENGTH: {m_soloVpeTable.GetRawValue(nRepeat, "Wavelength")}");
+                            ssb.AppendLine($"{typeName}_REPEAT{nRepeat + 1}_ABS : {m_soloVpeTable.GetRawValue(nRepeat, "Absorbance")}");
+                        }
+                    }
+
+                    //foreach (KeyValuePair<string, List<string>> kvp in m_soloVpe.m_soloVpeDic)
+                    //{
+                    //    dataString = m_soloVpe.GetValue(outputArguments[0].ToString(), kvp.Value);
+                    //    ssb.AppendLine($"{typeName}_{kvp.Key.ToUpper()}, {dtDateTime:yyyy-MM-dd HH:mm:ss.fff}, {dataString}");
+                    //}
+                    EnQueue(MSGTYPE.MEASURE, ssb.ToString());
                 }
-                EnQueue(MSGTYPE.MEASURE, ssb.ToString());
+                catch(Exception ex)
+                {
+                    listViewMsg.UpdateMsg($" DaqID:{m_soloVpeTable.newDaqID} Jason DataProcessing - {ex.Message}", false, true, true, PC00D01.MSGTINF);
+                }
             }
             return true;
         }
