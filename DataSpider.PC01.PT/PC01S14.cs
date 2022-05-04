@@ -48,13 +48,17 @@ namespace DataSpider.PC01.PT
             // Raw Data Table (SeriesData)
             public DataTable rdt = null;
 
+            public FileLog fileLog = null;
             public int newDaqID;
             public string newSampleName;
             public string newLDAPUserID;
             public string newRunStart;
             public string newRunEnd;
 
-
+            public void SetFileLog(FileLog _filelog)
+            {
+                fileLog = _filelog;
+            }
             /// <summary>
             /// jsonString에서 currentDaqID 보다 큰 가장 작은 DaqID를 찾는다.
             /// 만일 currentDaqID 보다 큰 가장 작은 DaqID를 찾지 못하면 newDaqID는 int.MaxValue가 된다.
@@ -224,14 +228,20 @@ namespace DataSpider.PC01.PT
             public string GetConfigWaveLengths()
             {
                 string retString = string.Empty;
-                DataTable distinctTable = sdt.DefaultView.ToTable(true, "WaveLength");
-                foreach (DataRow dr in distinctTable.Rows)
+                try
                 {
-                    retString += " " + dr["WaveLength"] + " ;";
+                    DataTable distinctTable = sdt.DefaultView.ToTable(true, "WaveLength");
+                    foreach (DataRow dr in distinctTable.Rows)
+                    {
+                        retString += " " + dr["WaveLength"] + " ;";
+                    }
+                    if (retString.Length > 0)
+                        retString = retString.Substring(0, retString.Length - 1);
                 }
-                if (retString.Length > 0)
-                    retString = retString.Substring(0, retString.Length - 1);
+                catch(Exception ex)
+                {
 
+                }
                 return retString.Trim();
             }
 
@@ -251,7 +261,7 @@ namespace DataSpider.PC01.PT
                 DataTable distinctTable = sdt.DefaultView.ToTable(true, "WaveLength", "ExtinctionCoefficient");
                 foreach (DataRow dr in distinctTable.Rows)
                 {
-                    retString += " " + dr["ExtinctionCoefficient"] + " ;";
+                    retString += " " + dr["ExtinctionCoefficient"] + " ,";
                 }
                 if (retString.Length > 0)
                     retString = retString.Substring(0, retString.Length - 1);
@@ -263,7 +273,7 @@ namespace DataSpider.PC01.PT
                 string retString = string.Empty;
                 for (int nRow = 0; nRow < 3 && nRow < rdt.Rows.Count; nRow++)
                 {
-                    retString += " " + rdt.Rows[nRow]["Pathlength"] + " ;";
+                    retString += " " + rdt.Rows[nRow]["Pathlength"] + " ,";
                 }
                 if (retString.Length > 0)
                     retString = retString.Substring(0, retString.Length - 1);
@@ -742,7 +752,7 @@ namespace DataSpider.PC01.PT
                     PC00U01.TryParseExact(m_soloVpeTable.newRunStart, out dtDateTime);
                     dtDateTime = dtDateTime.ToLocalTime();
                     ssb.Clear();
-                    ssb.AppendLine($"{typeName}_SVRTIME, {dtDateTime:yyyy-MM-dd HH:mm:ss.fff}, {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}");
+                    ssb.AppendLine($"SVRTIME, {dtDateTime:yyyy-MM-dd HH:mm:ss.fff}, {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}");
 
                     //ssb.AppendLine($"{typeName}_DAQID, {dtDateTime:yyyy-MM-dd HH:mm:ss.fff}, {m_soloVpe.newDaqID}");
                     //ssb.AppendLine($"{typeName}_SAMPLENAME, {dtDateTime:yyyy-MM-dd HH:mm:ss.fff}, {m_soloVpe.newSampleName}");
@@ -777,36 +787,36 @@ namespace DataSpider.PC01.PT
                         // Stat
                         for (int nWaveLength = 0; nWaveLength < m_soloVpeTable.GetWaveLengthCount(); nWaveLength++)
                         {
-                            ssb.AppendLine($"{typeName}_STAT_WAVELENGTH_{nWaveLength + 1} : {m_soloVpeTable.GetStatValue(nWaveLength, "Wavelength")}");
-                            ssb.AppendLine($"{typeName}_STAT_AVG_SLOPE_{nWaveLength + 1} : {m_soloVpeTable.GetStatValue(nWaveLength, "MovingAverageConcentration")}");
-                            ssb.AppendLine($"{typeName}_STAT_STD_DEV_SLOPE_{nWaveLength + 1} : {m_soloVpeTable.GetStatValue(nWaveLength, "StdDevConcentration")}");
-                            ssb.AppendLine($"{typeName}_STAT_MAX_SLOPE_{nWaveLength + 1} : {m_soloVpeTable.GetStatValue(nWaveLength, "MaximumConcentration")}");
-                            ssb.AppendLine($"{typeName}_STAT_MIN_SLOPE_{nWaveLength + 1} : {m_soloVpeTable.GetStatValue(nWaveLength, "MinimumConcentration")}");
-                            ssb.AppendLine($"{typeName}_STAT_RANGE_SLOPE_{nWaveLength + 1} : {m_soloVpeTable.GetStatValue(nWaveLength, "RangeConcentration")}");
-                            ssb.AppendLine($"{typeName}_STAT_SLOPE_PERCENT_REL_DIFF_{nWaveLength + 1} : {m_soloVpeTable.GetStatValue(nWaveLength, "PercentRelDiffConcentration")}");
-                            ssb.AppendLine($"{typeName}_STAT_SLOPE_PERCENT_RSD_{nWaveLength + 1} : {m_soloVpeTable.GetStatValue(nWaveLength, "PercentRSDConcentration")}");
-                            ssb.AppendLine($"{typeName}_STAT_EXTINCTION_COEFFICIENT_{nWaveLength + 1} : {m_soloVpeTable.GetStatValue(nWaveLength, "ExtinctionCoefficient")}");
+                            ssb.AppendLine($"{typeName}_STAT_WAVELENGTH_{nWaveLength + 1}, {dtDateTime:yyyy-MM-dd HH:mm:ss.fff},  {m_soloVpeTable.GetStatValue(nWaveLength, "Wavelength")}");
+                            ssb.AppendLine($"{typeName}_STAT_AVG_SLOPE_{nWaveLength + 1}, {dtDateTime:yyyy-MM-dd HH:mm:ss.fff}, {m_soloVpeTable.GetStatValue(nWaveLength, "MovingAverageConcentration")}");
+                            ssb.AppendLine($"{typeName}_STAT_STD_DEV_SLOPE_{nWaveLength + 1} , {dtDateTime:yyyy-MM-dd HH:mm:ss.fff},  {m_soloVpeTable.GetStatValue(nWaveLength, "StdDevConcentration")}");
+                            ssb.AppendLine($"{typeName}_STAT_MAX_SLOPE_{nWaveLength + 1} , {dtDateTime:yyyy-MM-dd HH:mm:ss.fff},  {m_soloVpeTable.GetStatValue(nWaveLength, "MaximumConcentration")}");
+                            ssb.AppendLine($"{typeName}_STAT_MIN_SLOPE_{nWaveLength + 1}, {dtDateTime:yyyy-MM-dd HH:mm:ss.fff},  {m_soloVpeTable.GetStatValue(nWaveLength, "MinimumConcentration")}");
+                            ssb.AppendLine($"{typeName}_STAT_RANGE_SLOPE_{nWaveLength + 1}, {dtDateTime:yyyy-MM-dd HH:mm:ss.fff},  {m_soloVpeTable.GetStatValue(nWaveLength, "RangeConcentration")}");
+                            ssb.AppendLine($"{typeName}_STAT_SLOPE_PERCENT_REL_DIFF_{nWaveLength + 1} , {dtDateTime:yyyy-MM-dd HH:mm:ss.fff},  {m_soloVpeTable.GetStatValue(nWaveLength, "PercentRelDiffConcentration")}");
+                            ssb.AppendLine($"{typeName}_STAT_SLOPE_PERCENT_RSD_{nWaveLength + 1} , {dtDateTime:yyyy-MM-dd HH:mm:ss.fff},  {m_soloVpeTable.GetStatValue(nWaveLength, "PercentRSDConcentration")}");
+                            ssb.AppendLine($"{typeName}_STAT_EXTINCTION_COEFFICIENT_{nWaveLength + 1}, {dtDateTime:yyyy-MM-dd HH:mm:ss.fff},  {m_soloVpeTable.GetStatValue(nWaveLength, "ExtinctionCoefficient")}");
                         }
                         // Repeat
                         for (int nRepeat = 0; nRepeat < m_soloVpeTable.GetRepeatCount(); nRepeat++)
                         {
                             for (int nWaveLength = 0; nWaveLength < m_soloVpeTable.GetWaveLengthCount(); nWaveLength++)
                             {
-                                ssb.AppendLine($"{typeName}_WAVELENGTH_{nWaveLength * m_soloVpeTable.GetRepeatCount() + nRepeat + 1} : {m_soloVpeTable.GetRepeatValue(nWaveLength, nRepeat, "Wavelength")}");
-                                ssb.AppendLine($"{typeName}_CONC_{nWaveLength * m_soloVpeTable.GetRepeatCount() + nRepeat + 1} : {m_soloVpeTable.GetRepeatValue(nWaveLength, nRepeat, "BestConcentration")}");
-                                ssb.AppendLine($"{typeName}_SLOPE_{nWaveLength * m_soloVpeTable.GetRepeatCount() + nRepeat + 1} : {m_soloVpeTable.GetRepeatValue(nWaveLength, nRepeat, "BestSlope")}");
-                                ssb.AppendLine($"{typeName}_R2_{nWaveLength * m_soloVpeTable.GetRepeatCount() + nRepeat + 1} : {m_soloVpeTable.GetRepeatValue(nWaveLength, nRepeat, "BestRSquared")}");
-                                ssb.AppendLine($"{typeName}_THRESHOLD_PATHLENGTH_{nWaveLength * m_soloVpeTable.GetRepeatCount() + nRepeat + 1} : {m_soloVpeTable.GetRepeatValue(nWaveLength, nRepeat, "ThresholdPL")}");
-                                ssb.AppendLine($"{typeName}_PATHLENGTH_STEP_{nWaveLength * m_soloVpeTable.GetRepeatCount() + nRepeat + 1} : {m_soloVpeTable.GetRepeatValue(nWaveLength, nRepeat, "StepPL")}");
-                                ssb.AppendLine($"{typeName}_COLLECT_TIME_{nWaveLength * m_soloVpeTable.GetRepeatCount() + nRepeat + 1} : {m_soloVpeTable.GetRepeatValue(nWaveLength, nRepeat, "CompletionDateTime")}");
+                                ssb.AppendLine($"{typeName}_WAVELENGTH_{nWaveLength * m_soloVpeTable.GetRepeatCount() + nRepeat + 1} , {dtDateTime:yyyy-MM-dd HH:mm:ss.fff},  {m_soloVpeTable.GetRepeatValue(nWaveLength, nRepeat, "Wavelength")}");
+                                ssb.AppendLine($"{typeName}_CONC_{nWaveLength * m_soloVpeTable.GetRepeatCount() + nRepeat + 1} , {dtDateTime:yyyy-MM-dd HH:mm:ss.fff},  {m_soloVpeTable.GetRepeatValue(nWaveLength, nRepeat, "BestConcentration")}");
+                                ssb.AppendLine($"{typeName}_SLOPE_{nWaveLength * m_soloVpeTable.GetRepeatCount() + nRepeat + 1} , {dtDateTime:yyyy-MM-dd HH:mm:ss.fff},  {m_soloVpeTable.GetRepeatValue(nWaveLength, nRepeat, "BestSlope")}");
+                                ssb.AppendLine($"{typeName}_R2_{nWaveLength * m_soloVpeTable.GetRepeatCount() + nRepeat + 1} , {dtDateTime:yyyy-MM-dd HH:mm:ss.fff}, {m_soloVpeTable.GetRepeatValue(nWaveLength, nRepeat, "BestRSquared")}");
+                                ssb.AppendLine($"{typeName}_THRESHOLD_PATHLENGTH_{nWaveLength * m_soloVpeTable.GetRepeatCount() + nRepeat + 1} , {dtDateTime:yyyy-MM-dd HH:mm:ss.fff},  {m_soloVpeTable.GetRepeatValue(nWaveLength, nRepeat, "ThresholdPL")}");
+                                ssb.AppendLine($"{typeName}_PATHLENGTH_STEP_{nWaveLength * m_soloVpeTable.GetRepeatCount() + nRepeat + 1} , {dtDateTime:yyyy-MM-dd HH:mm:ss.fff},  {m_soloVpeTable.GetRepeatValue(nWaveLength, nRepeat, "StepPL")}");
+                                ssb.AppendLine($"{typeName}_COLLECT_TIME_{nWaveLength * m_soloVpeTable.GetRepeatCount() + nRepeat + 1}, {dtDateTime:yyyy-MM-dd HH:mm:ss.fff},  {m_soloVpeTable.GetRepeatValue(nWaveLength, nRepeat, "CompletionDateTime")}");
                             }
                         }
                         // Raw Data
                         for (int nRepeat = 0; nRepeat < m_soloVpeTable.GetRepeatCount(); nRepeat++)
                         {
-                            ssb.AppendLine($"{typeName}_REPEAT{nRepeat + 1}_PATHLENGTH : {m_soloVpeTable.GetRawValue(nRepeat, "Pathlength")}");
-                            ssb.AppendLine($"{typeName}_REPEAT{nRepeat + 1}_WAVELENGTH: {m_soloVpeTable.GetRawValue(nRepeat, "Wavelength")}");
-                            ssb.AppendLine($"{typeName}_REPEAT{nRepeat + 1}_ABS : {m_soloVpeTable.GetRawValue(nRepeat, "Absorbance")}");
+                            ssb.AppendLine($"{typeName}_REPEAT{nRepeat + 1}_PATHLENGTH, {dtDateTime:yyyy-MM-dd HH:mm:ss.fff},  {m_soloVpeTable.GetRawValue(nRepeat, "Pathlength")}");
+                            ssb.AppendLine($"{typeName}_REPEAT{nRepeat + 1}_WAVELENGTH, {dtDateTime:yyyy-MM-dd HH:mm:ss.fff},  {m_soloVpeTable.GetRawValue(nRepeat, "Wavelength")}");
+                            ssb.AppendLine($"{typeName}_REPEAT{nRepeat + 1}_ABS , {dtDateTime:yyyy-MM-dd HH:mm:ss.fff},  {m_soloVpeTable.GetRawValue(nRepeat, "Absorbance")}");
                         }
                     }
 
