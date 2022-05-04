@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("DataFile DB Uploader")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Conwell")]
-[assembly: AssemblyProduct("DataSpiderPC02 - DataFile DB Uploader")]
+[assembly: AssemblyProduct("DataSpiderPC02")]
 [assembly: AssemblyCopyright("Copyright © Conwell 2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
