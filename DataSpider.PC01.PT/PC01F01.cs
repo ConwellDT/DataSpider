@@ -64,7 +64,6 @@ namespace DataSpider.PC01.PT
 
         private string serverCode = "0";
 
-        private int m_bPrevHideShow = -1;
         #endregion
 
         #region PC01F01 생성자
@@ -224,20 +223,25 @@ namespace DataSpider.PC01.PT
                             return;
                         }
 
-                        int bHideShow = (int)dtRequest.Rows[0]["HIDE_SHOW"];
-                        if (bHideShow != m_bPrevHideShow)
+                        //int bHideShow = (int)dtRequest.Rows[0]["HIDE_SHOW"];
+                        //if (bHideShow != m_bPrevHideShow)
+                        //{
+                        //    if (bHideShow == 0) ShowHideForm(false);
+                        //    else                ShowHideForm(true);
+                        //    m_bPrevHideShow = bHideShow;
+                        //}
+                        if (!int.TryParse(dtRequest.Rows[0]["HIDE_SHOW"].ToString(), out int hideShow))
                         {
-                            if (bHideShow == 0) ShowHideForm(false);
-                            else                ShowHideForm(true);
-                            m_bPrevHideShow = bHideShow;
+                            hideShow = 1;
                         }
+                        ShowHideForm(hideShow.Equals(1));
                     }
                 }
                 catch (Exception ex)
                 {
                     this.m_clsLog.LogToFile("LOG", this.m_strLogFileName, PC00D01.MSGTERR, MethodBase.GetCurrentMethod().Name, $"{equipName}:"+ex.ToString());
                 }
-                Thread.Sleep(5000);
+                Thread.Sleep(1000);
             }
         }
         #endregion
@@ -599,18 +603,17 @@ namespace DataSpider.PC01.PT
             }
             else
             {
-                this.ShowInTaskbar = show;
-                if (show)
+                if (!this.ShowInTaskbar.Equals(show))
                 {
-                    //this.Show();
-                    this.Activate();
-                    this.Opacity = 100;
+                    this.ShowInTaskbar = show;
                 }
-                else
+                if (show && !this.WindowState.Equals(FormWindowState.Normal))
                 {
-                    this.Opacity = 0;
-
-//                    this.Hide();
+                    this.WindowState = FormWindowState.Normal;
+                }
+                if (!show && !this.WindowState.Equals(FormWindowState.Minimized))
+                {
+                    this.WindowState = FormWindowState.Minimized;
                 }
             }
         }

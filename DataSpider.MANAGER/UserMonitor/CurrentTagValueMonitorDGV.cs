@@ -48,10 +48,6 @@ namespace DataSpider.UserMonitor
         private DateTime DateTimeFilterHistMax = DateTime.Now;// DateTime.MinValue;
         private string DescriptionFilter = "";
 
-        DataTable dtTagValueHistory = null;
-        DataTable dtGropTagNames = null;
-        DataTable dtHistoryData = null;
-        DataTable dtTagHistory = null;
         public CurrentTagValueMonitorDGV()
         {
             InitializeComponent();
@@ -65,6 +61,11 @@ namespace DataSpider.UserMonitor
             dataGridView_Main.RowTemplate.MinimumHeight = 30;
             dataGridView_Main.DoubleBuffered(true);
             dataGridView_Main.CellMouseDoubleClick += DataGridView_Main_CellMouseDoubleClick;
+            // None 로 해야 사용자 컬럼 사이즈 조절이 가능함. 
+            // 바인딩 후 AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells); 처리
+            dataGridView_Main.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
+            dataGridView_Main.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
+            dataGridView_Main.AllowUserToResizeRows = dataGridView_Main.AllowUserToResizeColumns = true;
 
             //
             // 2022. 3. 14 : Han, Ilho
@@ -175,6 +176,8 @@ namespace DataSpider.UserMonitor
             string strErrCode = string.Empty;
             string strErrText = string.Empty;
 
+            dataGridView_Main.DataSource = null;
+
             DataTable dtProgramStatus = sqlBiz.GetCurrentTagValue(equipType.Trim(), equipName.Trim(), ref strErrCode, ref strErrText);
             if (dtProgramStatus == null || dtProgramStatus.Rows.Count < 1)
             {
@@ -195,7 +198,7 @@ namespace DataSpider.UserMonitor
 
                 if (selGrpName != "All")
                 {
-                    dtGropTagNames = sqlBiz.GetTagGroupInfo(selGrpName, ref strErrCode, ref strErrText);
+                    DataTable dtGropTagNames = sqlBiz.GetTagGroupInfo(selGrpName, ref strErrCode, ref strErrText);
                     
                     if (strErrCode == null || strErrCode == string.Empty)
                     {
@@ -283,6 +286,7 @@ namespace DataSpider.UserMonitor
             string strErrCode = string.Empty;
             string strErrText = string.Empty;
 
+            DataTable dtHistoryData = null;
 
             String strFileterStr = String.Empty;
 
@@ -303,7 +307,7 @@ namespace DataSpider.UserMonitor
 
             if (selGrpName != "All")
             {
-                dtGropTagNames = sqlBiz.GetTagGroupInfo(selGrpName, ref strErrCode, ref strErrText);
+                DataTable dtGropTagNames = sqlBiz.GetTagGroupInfo(selGrpName, ref strErrCode, ref strErrText);
 
                 if (strErrCode == null || strErrCode == string.Empty)
                 {
@@ -312,7 +316,7 @@ namespace DataSpider.UserMonitor
                         String strTagName = equipName.Trim() + "_" + dtGropTagNames.Rows[nT]["TAG_NM"].ToString();
 
 
-                        dtTagHistory = sqlBiz.GetAllTagHistoryValue(strTagName, minDate.ToString("yyyy-MM-dd HH:mm:ss.fff"), maxDate.ToString("yyyy-MM-dd HH:mm:ss.fff"), ref strErrCode, ref strErrText);
+                        DataTable dtTagHistory = sqlBiz.GetAllTagHistoryValue(strTagName, minDate.ToString("yyyy-MM-dd HH:mm:ss.fff"), maxDate.ToString("yyyy-MM-dd HH:mm:ss.fff"), ref strErrCode, ref strErrText);
 
                         if (dtTagHistory != null && dtTagHistory.Rows.Count > 0)
                         {
@@ -332,7 +336,7 @@ namespace DataSpider.UserMonitor
             }
             else
             {
-                dtTagValueHistory = sqlBiz.GetTagValueHistoryByEquip(equipName, minDate.ToString("yyyy-MM-dd HH:mm:ss.fff"), maxDate.ToString("yyyy-MM-dd HH:mm:ss.fff"), ref strErrCode, ref strErrText);
+                DataTable dtTagValueHistory = sqlBiz.GetTagValueHistoryByEquip(equipName, minDate.ToString("yyyy-MM-dd HH:mm:ss.fff"), maxDate.ToString("yyyy-MM-dd HH:mm:ss.fff"), ref strErrCode, ref strErrText);
 
                 if (strErrCode == null || strErrCode == string.Empty)
                 {
@@ -348,26 +352,12 @@ namespace DataSpider.UserMonitor
             if (dtHistoryData != null && dtHistoryData.Rows.Count > 0)
             {
                 dtHistoryData.DefaultView.Sort = "MEASURE_DATE DESC";
+
+
                 int nHoriScrollOffset = dataGridView_Main.HorizontalScrollingOffset;
                 int nRowIndex = dataGridView_Main.FirstDisplayedScrollingRowIndex;
 
-
-
-
-                //dataGridView_Main.ColumnHeadersVisible = dataGridView_Main.RowHeadersVisible = false;
-                //dataGridView_Main.SuspendLayout();
-                //DataGridViewAutoSizeColumnsMode dgvascm = dataGridView_Main.AutoSizeColumnsMode;
-                //DataGridViewAutoSizeRowsMode dgvasrm = dataGridView_Main.AutoSizeRowsMode;
-                dataGridView_Main.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
-                //dataGridView_Main.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.None;
                 dataGridView_Main.DataSource = dtHistoryData;
-                //dataGridView_Main.AutoSizeColumnsMode = dgvascm;
-                //dataGridView_Main.AutoSizeRowsMode = dgvasrm;
-                //dataGridView_Main.ColumnHeadersVisible = dataGridView_Main.RowHeadersVisible = true;
-                //dataGridView_Main.ResumeLayout();
-
-                // Configure the details DataGridView so that its columns automatically
-                // adjust their widths when the data changes.
 
                 if (dtHistoryData.Rows.Count > 0)
                 {
@@ -385,6 +375,7 @@ namespace DataSpider.UserMonitor
             }
             else
             {
+                dataGridView_Main.DataSource = null;
                 //String strMsg = $"Equipment : {equipName}, TagGroup : {selGrpName}, Period : {minDate} ~ {maxDate} - No data exist";
                 //MessageBox.Show(strMsg, "History Data Display", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -471,6 +462,7 @@ namespace DataSpider.UserMonitor
                     {
                         GetTagHistoryValues();
                     }
+                    dataGridView_Main.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells);
                 }
                 catch (Exception ex)
                 {
@@ -832,16 +824,17 @@ namespace DataSpider.UserMonitor
                 checkBox_AutoRefresh.Checked = false;
                 checkBox_AutoRefresh.Visible = button_SetInterval.Visible = false;
             }
-        }
-
-        private void radioButtonHistoryTag_MouseClick(object sender, MouseEventArgs e)
-        {
-            nDBModeCurrent = 0;
-
-            checkBox_AutoRefresh.Checked = false;
-
             GetProgramStatus();
         }
+
+        //private void radioButtonHistoryTag_MouseClick(object sender, MouseEventArgs e)
+        //{
+        //    nDBModeCurrent = 0;
+
+        //    checkBox_AutoRefresh.Checked = false;
+
+        //    GetProgramStatus();
+        //}
 
         //private void listView_Main_ColumnClick(object sender, ColumnClickEventArgs e)
         //{

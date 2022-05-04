@@ -43,10 +43,11 @@ namespace DataSpider.UserMonitor
             threadDataRefresh = new Thread(new ThreadStart(ThreadJob));
             threadDataRefresh.Start();
 
-            checkBox_AutoRefresh.Checked = ConfigHelper.GetAppSetting("LovViewAutoRefresh").Trim().ToUpper().Equals("Y");
+            checkBox_AutoRefresh.Checked = ConfigHelper.GetAppSetting("LogViewAutoRefresh").Trim().ToUpper().Equals("Y");
+            threadPause = !checkBox_AutoRefresh.Checked;
             checkBox_AutoRefresh.CheckedChanged += checkBox_AutoRefresh_CheckedChanged;
 
-            if (!int.TryParse(ConfigHelper.GetAppSetting("LovViewAutoRefreshInterval").Trim(), out autoRefreshInterval))
+            if (!int.TryParse(ConfigHelper.GetAppSetting("LogViewAutoRefreshInterval").Trim(), out autoRefreshInterval))
             {
                 autoRefreshInterval = 10;
             }

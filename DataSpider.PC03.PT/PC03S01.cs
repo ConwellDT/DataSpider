@@ -102,11 +102,6 @@ namespace DataSpider.PC03.PT
             {
                 try
                 {
-            
-                    if(m_nCurNo == 0)
-                        UpdateEquipmentProgDateTime(IF_STATUS.Normal);
-
-                    //데이타 조회
                     DataTable dtResult = m_sqlBiz.GetMeasureResult(m_strEType, ref errCode, ref errText);
 
                     if (dtResult != null)
@@ -159,7 +154,6 @@ namespace DataSpider.PC03.PT
                                     {
                                         mOwner.listViewMsg(m_strEName, string.Format(PC00D01.FailedtoPI, $"{errText} - {pointName}", pointValue), true, m_nCurNo, 3, true, PC00D01.MSGTERR);
                                         m_Logger.WriteLog(string.Format(PC00D01.FailedtoPI, $"{errText} - {pointName}", pointValue), PC00D01.MSGTERR, m_strEName);
-                                        UpdateEquipmentProgDateTime(IF_STATUS.InternalError);
                                     }
                                 }
                                 else
@@ -167,21 +161,20 @@ namespace DataSpider.PC03.PT
                                     string errMsg = "매핑된 PI 태그명이 없습니다.";
                                     mOwner.listViewMsg(m_strEName, string.Format(PC00D01.FailedtoPI, $"{errMsg} - {tagName}", pointValue), true, m_nCurNo, 3, true, PC00D01.MSGTERR);
                                     m_Logger.WriteLog(string.Format(PC00D01.FailedtoPI, $"{errMsg} - {tagName}", pointValue), PC00D01.MSGTERR, m_strEName);
-                                    UpdateEquipmentProgDateTime(IF_STATUS.NoData);
                                 }
                             }
                         }
-                        else
-                            m_Thd.Join(1000);
                     }
                     else
-                        m_Thd.Join(1000);
+                    {
+                        Thread.Sleep(1000);
+                        //m_Thd.Join(1000);
+                    }
                 }
                 catch (Exception ex)
                 {
                     mOwner.listViewMsg(m_strEName, ex.ToString(), true, m_nCurNo, 3, true, PC00D01.MSGTERR);
                     m_Logger.WriteLog($"ThreadJob - {ex.ToString()} ", PC00D01.MSGTERR, m_strEName);
-                    UpdateEquipmentProgDateTime(IF_STATUS.InternalError);
                 }
                 finally
                 {
@@ -193,7 +186,6 @@ namespace DataSpider.PC03.PT
                     //m_Thd.Join(1000)
                 }
             }
-            UpdateEquipmentProgDateTime(IF_STATUS.Unknown);
             mOwner.listViewMsg(m_strEName, PC00D01.OFF, true, m_nCurNo, 1, false, PC00D01.MSGTINF);
             m_Logger.WriteLog(PC00D01.OFF, PC00D01.MSGTINF, m_strEName);
         }
@@ -243,20 +235,6 @@ namespace DataSpider.PC03.PT
             {
                 point.UpdateValue(value, OSIsoft.AF.Data.AFUpdateOption.Remove);
             }
-        }
-
-        protected bool UpdateEquipmentProgDateTime(IF_STATUS status = IF_STATUS.Normal)
-        {
-            string errCode = string.Empty;
-            string errText = string.Empty;
-            DateTime dtNow = DateTime.Now;
-            if (dtNow.Subtract(dtLastUpdateProgDateTime).TotalSeconds > UpdateInterval || !lastStatus.Equals(status))
-            {
-                dtLastUpdateProgDateTime = dtNow;
-                lastStatus = status;
-                return m_sqlBiz.UpdateEquipmentProgDateTimePC02($"{System.Windows.Forms.Application.ProductName}", (int)status, ref errCode, ref errText);
-            }
-            return true;
         }
     }
 

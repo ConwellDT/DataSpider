@@ -117,7 +117,7 @@ namespace DataSpider.PC00.PT
                 DataSet ds = CFW.Data.MsSqlDbAccess.GetDataSet(strQuery.ToString(), null, CommandType.Text, ref _strErrCode, ref _strErrText);
                 if (ds != null && ds.Tables[0] != null)
                 {
-                    result = ds.Tables[0].Rows?[0].ToString();
+                    result = ds.Tables[0].Rows?[0][0].ToString();
                 }
             }
             catch (Exception ex)
@@ -396,6 +396,27 @@ namespace DataSpider.PC00.PT
 
                 strQuery.Append($"EXEC GetMeasureResult '{strEquipType}'");
                 
+                DataSet ds = CFW.Data.MsSqlDbAccess.GetDataSet(strQuery.ToString(), null, CommandType.Text, ref _strErrCode, ref _strErrText);
+                if (ds != null && ds.Tables[0] != null)
+                {
+                    result = ds.Tables[0];
+                }
+            }
+            catch (Exception ex)
+            {
+                _strErrText = ex.ToString();
+            }
+            return result;
+        }
+        public DataTable GetMeasureResultForPIConnection(ref string _strErrCode, ref string _strErrText)
+        {
+            DataTable result = null;
+            try
+            {
+                StringBuilder strQuery = new StringBuilder();
+
+                strQuery.Append($"EXEC GetMeasureResultForPIConnection");
+
                 DataSet ds = CFW.Data.MsSqlDbAccess.GetDataSet(strQuery.ToString(), null, CommandType.Text, ref _strErrCode, ref _strErrText);
                 if (ds != null && ds.Tables[0] != null)
                 {
@@ -721,8 +742,8 @@ namespace DataSpider.PC00.PT
                     }
                     else
                     {
-                        strQuery.Append($"UPDATE [dbo].[MA_FAILOVER_CD] SET [FILE_PATH] = '.\\DataSpiderPC01.EXE {equipName}', DEFAULT_SERVER = {serverId}) ");
-                        strQuery.Append($" WHERE EQUIP_NM = '{equipName}')");
+                        strQuery.Append($"UPDATE [dbo].[MA_FAILOVER_CD] SET [FILE_PATH] = '.\\DataSpiderPC01.EXE {equipName}', DEFAULT_SERVER = {serverId} ");
+                        strQuery.Append($" WHERE EQUIP_NM = '{equipName}'");
                     }
                     result = CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref _strErrCode, ref _strErrText);
                 }

@@ -138,7 +138,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\dbupdate.ico" />
+    <None Include="Resources\dbupdate.ico" />
     <Content Include="Image\dbconnected.jpg" />
     <Content Include="Image\dbdisconnected.jpg" />
     <Content Include="Image\icon1.ico" />

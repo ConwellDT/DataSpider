@@ -332,8 +332,8 @@ namespace DataSpider.UserMonitor
             this.dataGridView_Main.AllowUserToDeleteRows = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(221)))), ((int)(((byte)(235)))), ((int)(((byte)(247)))));
             this.dataGridView_Main.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridView_Main.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dataGridView_Main.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
+            this.dataGridView_Main.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.dataGridView_Main.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dataGridView_Main.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_Main.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView_Main.Location = new System.Drawing.Point(0, 0);
@@ -383,7 +383,6 @@ namespace DataSpider.UserMonitor
             this.radioButtonHistoryTag.Text = "HISTORY";
             this.radioButtonHistoryTag.UseVisualStyleBackColor = true;
             this.radioButtonHistoryTag.CheckedChanged += new System.EventHandler(this.radioButtonHistoryTag_CheckedChanged);
-            this.radioButtonHistoryTag.MouseClick += new System.Windows.Forms.MouseEventHandler(this.radioButtonHistoryTag_MouseClick);
             // 
             // radioButtonCurTag
             // 

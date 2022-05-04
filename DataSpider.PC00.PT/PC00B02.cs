@@ -272,7 +272,7 @@ namespace DataSpider.PC00.PT
                     {
                         continue;
                     }
-                    dicConfigInfo.TryAdd(info.Substring(0, index + 1), info.Substring(index + 1));
+                    dicConfigInfo.TryAdd(info.Substring(0, index).Trim(), info.Substring(index + 1).Trim());
                 }
 
                 if (!int.TryParse(dicConfigInfo.TryGetValue("MESSAGE_LINE_COUNT"), out m_MessageLineCount))
