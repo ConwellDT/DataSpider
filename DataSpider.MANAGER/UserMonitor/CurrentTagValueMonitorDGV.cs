@@ -47,6 +47,7 @@ namespace DataSpider.UserMonitor
         private DateTime DateTimeFilterHistMin = DateTime.Now.AddDays(-30);// DateTime.MinValue;
         private DateTime DateTimeFilterHistMax = DateTime.Now;// DateTime.MinValue;
         private string DescriptionFilter = "";
+        private bool autoRefresheChecked = true;
 
         public CurrentTagValueMonitorDGV()
         {
@@ -76,7 +77,7 @@ namespace DataSpider.UserMonitor
             //pi.SetValue(dataGridView_Main, true, null);
             //////////////////////////
 
-            checkBox_AutoRefresh.Checked = ConfigHelper.GetAppSetting("TagAutoRefresh").Trim().ToUpper().Equals("Y");
+            autoRefresheChecked = checkBox_AutoRefresh.Checked = ConfigHelper.GetAppSetting("TagAutoRefresh").Trim().ToUpper().Equals("Y");
             checkBox_AutoRefresh.CheckedChanged += checkBox_AutoRefresh_CheckedChanged;
 
             if (!int.TryParse(ConfigHelper.GetAppSetting("TagAutoRefreshInterval").Trim(), out autoRefreshInterval))
@@ -261,11 +262,11 @@ namespace DataSpider.UserMonitor
 
             if (dvProgramStatus.Count > 0)
             {
-                dataGridView_Main.HorizontalScrollingOffset = nHoriScrollOffset;
+                dataGridView_Main.HorizontalScrollingOffset = nHoriScrollOffset > 0 ? nHoriScrollOffset : 0;
 
                 if (dvProgramStatus.Count > nRowIndex)
                 {
-                    dataGridView_Main.FirstDisplayedScrollingRowIndex = nRowIndex;
+                    dataGridView_Main.FirstDisplayedScrollingRowIndex = nRowIndex > 0 ? nRowIndex : 0;
                 }
                 else
                 {
@@ -361,11 +362,11 @@ namespace DataSpider.UserMonitor
 
                 if (dtHistoryData.Rows.Count > 0)
                 {
-                    dataGridView_Main.HorizontalScrollingOffset = nHoriScrollOffset;
+                    dataGridView_Main.HorizontalScrollingOffset = nHoriScrollOffset > 0 ? nHoriScrollOffset : 0;
 
                     if (dtHistoryData.Rows.Count > nRowIndex)
                     {
-                        dataGridView_Main.FirstDisplayedScrollingRowIndex = nRowIndex;
+                        dataGridView_Main.FirstDisplayedScrollingRowIndex = nRowIndex > 0 ? nRowIndex : 0;
                     }
                     else
                     {
@@ -597,6 +598,7 @@ namespace DataSpider.UserMonitor
                 threadPause = false;
                 //button_Refresh.Enabled = false;
                 //timerRefresh.Start();
+                autoRefresheChecked = true;
             }
             else
             {
@@ -790,21 +792,6 @@ namespace DataSpider.UserMonitor
             GetProgramStatus();
         }
 
-        private void radioButtonCurTag_CheckedChanged(object sender, EventArgs e)
-        {
-            if(radioButtonCurTag.Checked == true)
-            {
-                nDBModeCurrent = 1;
-
-                checkBox_AutoRefresh.Checked = true;
-            }
-            else
-            {
-                nDBModeCurrent = 0;
-
-                checkBox_AutoRefresh.Checked = false;
-            }
-        }
 
         private void radioButtonHistoryTag_CheckedChanged(object sender, EventArgs e)
         {
@@ -813,7 +800,7 @@ namespace DataSpider.UserMonitor
             {
                 nDBModeCurrent = 1;
 
-                checkBox_AutoRefresh.Checked = true;
+                checkBox_AutoRefresh.Checked = autoRefresheChecked;
                 checkBox_AutoRefresh.Visible = button_SetInterval.Visible = true;
             }
             // History
