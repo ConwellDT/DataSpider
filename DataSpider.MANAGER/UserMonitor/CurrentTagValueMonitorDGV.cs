@@ -63,7 +63,8 @@ namespace DataSpider.UserMonitor
             dataGridView_Main.CellMouseDoubleClick += DataGridView_Main_CellMouseDoubleClick;
             // None 로 해야 사용자 컬럼 사이즈 조절이 가능함. 
             // 바인딩 후 AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells); 처리
-            dataGridView_Main.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
+            //            dataGridView_Main.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
+            dataGridView_Main.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             dataGridView_Main.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
             dataGridView_Main.AllowUserToResizeRows = dataGridView_Main.AllowUserToResizeColumns = true;
 
