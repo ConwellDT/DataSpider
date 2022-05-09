@@ -808,6 +808,7 @@ namespace DataSpider.PC01.PT
                                 ssb.AppendLine($"{typeName}_R2_{nWaveLength * m_soloVpeTable.GetRepeatCount() + nRepeat + 1} , {dtDateTime:yyyy-MM-dd HH:mm:ss.fff}, {m_soloVpeTable.GetRepeatValue(nWaveLength, nRepeat, "BestRSquared")}");
                                 ssb.AppendLine($"{typeName}_THRESHOLD_PATHLENGTH_{nWaveLength * m_soloVpeTable.GetRepeatCount() + nRepeat + 1} , {dtDateTime:yyyy-MM-dd HH:mm:ss.fff},  {m_soloVpeTable.GetRepeatValue(nWaveLength, nRepeat, "ThresholdPL")}");
                                 ssb.AppendLine($"{typeName}_PATHLENGTH_STEP_{nWaveLength * m_soloVpeTable.GetRepeatCount() + nRepeat + 1} , {dtDateTime:yyyy-MM-dd HH:mm:ss.fff},  {m_soloVpeTable.GetRepeatValue(nWaveLength, nRepeat, "StepPL")}");
+                                ssb.AppendLine($"{typeName}_EXTINCTION_COEFFICIENT_{nWaveLength * m_soloVpeTable.GetRepeatCount() + nRepeat + 1} , {dtDateTime:yyyy-MM-dd HH:mm:ss.fff},  {m_soloVpeTable.GetRepeatValue(nWaveLength, nRepeat, "ExtinctionCoefficient")}");
                                 ssb.AppendLine($"{typeName}_COLLECT_TIME_{nWaveLength * m_soloVpeTable.GetRepeatCount() + nRepeat + 1}, {dtDateTime:yyyy-MM-dd HH:mm:ss.fff},  {m_soloVpeTable.GetRepeatValue(nWaveLength, nRepeat, "CompletionDateTime")}");
                             }
                         }
