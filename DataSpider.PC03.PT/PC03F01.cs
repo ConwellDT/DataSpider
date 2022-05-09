@@ -790,9 +790,7 @@ namespace DataSpider.PC03.PT
 
         void Terminate()
         {
-            DialogResult dialogResult = MessageBox.Show(PC00D01.MSGP0001, PC00D01.MSGP0002, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            if (dialogResult == DialogResult.Yes)
+            if (DialogResult.Yes == MessageBox.Show(PC00D01.MSGP0001, PC00D01.MSGP0002, MessageBoxButtons.YesNo, MessageBoxIcon.Question))
             {
                 try
                 {
@@ -964,9 +962,9 @@ namespace DataSpider.PC03.PT
                     int maxStatus = -1;
                     foreach (PC03S01 prc in thProcess)
                     {
-                        if (maxStatus < (int)prc.STATUS)
+                        if (maxStatus < (int)prc.ThreadStatus)
                         {
-                            maxStatus = (int)prc.STATUS;
+                            maxStatus = (int)prc.ThreadStatus;
                         }
                     }
 

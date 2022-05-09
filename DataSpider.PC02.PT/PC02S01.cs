@@ -23,9 +23,26 @@ namespace DataSpider.PC02.PT
         private int serverCode = 0;
 
         private string errorFilePath = string.Empty;
-        private string lastErrorFileName = string.Empty;
         private string programName = string.Empty;
 
+        DateTime dtLastThreadStatus = DateTime.MinValue;
+        IF_STATUS lastThreadStatus = IF_STATUS.Normal;
+        public IF_STATUS ThreadStatus
+        {
+            get
+            {
+                if (DateTime.Now.Subtract(dtLastThreadStatus).TotalSeconds > 60)
+                {
+                    lastThreadStatus = IF_STATUS.Unknown;
+                }
+                return lastThreadStatus;
+            }
+            set
+            {
+                lastThreadStatus = value;
+                dtLastThreadStatus = DateTime.Now;
+            }
+        }
         public PC02S01()
         {
         }
@@ -61,42 +78,6 @@ namespace DataSpider.PC02.PT
             }
         }
 
-        private void CheckErrorFile()
-        {
-
-            string errorFileDirectoryName = string.Empty;
-            DirectoryInfo di = new DirectoryInfo(errorFilePath);
-            try
-            {
-                List<FileInfo> listFileInfo = di.GetFiles("*.ttv", SearchOption.AllDirectories).ToList();
-                if (listFileInfo.Count > 0)
-                {
-                    listFileInfo.Sort((x, y) => x.LastWriteTime.CompareTo(y.LastWriteTime));
-                    errorFileDirectoryName = listFileInfo[0].DirectoryName.Substring(listFileInfo[0].DirectoryName.LastIndexOf(@"\") + 1);
-                    if (!errorFileDirectoryName.Equals(lastErrorFileName))
-                    {
-                        listViewMsg.UpdateMsg($"New Error File : {errorFileDirectoryName}", true, false);
-                        lastErrorFileName = errorFileDirectoryName;
-                        m_sqlBiz.WriteSTCommon("ERROR_STATUS", programName, errorFileDirectoryName);
-                    }
-                }
-                else
-                {
-                    if (!errorFileDirectoryName.Equals(lastErrorFileName))
-                    {
-                        lastErrorFileName = errorFileDirectoryName;
-                        m_sqlBiz.WriteSTCommon("ERROR_STATUS", programName, errorFileDirectoryName);
-                    }
-                }
-
-            }
-            catch (Exception ex)
-            {
-                m_Owner.listViewMsg(m_Name, ex.ToString(), true, m_nCurNo, 6, true, PC00D01.MSGTERR);
-                listViewMsg.UpdateMsg($"Exception in ThreadJob - ({ex})", false, true, true, PC00D01.MSGTERR);
-                UpdateEquipmentProgDateTime(IF_STATUS.InternalError);
-            }
-        }
 
         private void ThreadJob()
         {
@@ -114,16 +95,12 @@ namespace DataSpider.PC02.PT
             {
                 try
                 {
-                    CheckErrorFile();
-
-                    if (m_nCurNo == 0)
-                        UpdateEquipmentProgDateTime(IF_STATUS.Normal);
-
                     // 파일 찾기
                     List<FileInfo> listFileInfo = di.GetFiles("*.ttv").ToList();
                     if (listFileInfo.Count < 1)
                     {
                         listViewMsg.UpdateMsg("No Files", true, false);
+                        ThreadStatus = IF_STATUS.Normal;
                         Thread.Sleep(1000);
                         continue;
                     }
@@ -173,6 +150,7 @@ namespace DataSpider.PC02.PT
                             fi.Delete();
                             // ttv 파일 처리 실패시 해당 파일을 DataFile_Done 폴더로 이동 처리
                             //fi.MoveTo($@"{di.FullName}\DataFile_Done\{fi.Name}");                            
+                            ThreadStatus = IF_STATUS.Normal;
                         }
                         else
                         {
@@ -180,7 +158,7 @@ namespace DataSpider.PC02.PT
                             listViewMsg.UpdateMsg(string.Format(PC00D01.FailedDBStore, $"{errText} - {fi.Name}"), false, true, true, PC00D01.MSGTERR);
                             // ttv 파일 처리 실패시 DataFile_Error 폴더로 이동 처리
                             fi.MoveTo($@"{di.FullName}\DataFile_Error\{fi.Name}");
-                            UpdateEquipmentProgDateTime(IF_STATUS.InvalidData);
+                            ThreadStatus = IF_STATUS.InvalidData;
                         }
                     }
 
@@ -190,7 +168,7 @@ namespace DataSpider.PC02.PT
                 {
                     m_Owner.listViewMsg(m_Name, ex.ToString(), true, m_nCurNo, 6, true, PC00D01.MSGTERR);
                     listViewMsg.UpdateMsg($"Exception in ThreadJob - ({ex})", false, true, true, PC00D01.MSGTERR);
-                    UpdateEquipmentProgDateTime(IF_STATUS.InternalError);
+                    ThreadStatus = IF_STATUS.InternalError;
                 }
                 finally
                 {
@@ -198,22 +176,9 @@ namespace DataSpider.PC02.PT
                 }
                 Thread.Sleep(10);
             }
-            UpdateEquipmentProgDateTime(IF_STATUS.Unknown);
+            ThreadStatus = IF_STATUS.Unknown;
             listViewMsg.UpdateStatus(false);
             listViewMsg.UpdateMsg("Thread finished");
-        }
-        protected new bool UpdateEquipmentProgDateTime(IF_STATUS status = IF_STATUS.Normal)
-        {
-            string errCode = string.Empty;
-            string errText = string.Empty;
-            DateTime dtNow = DateTime.Now;
-            if (dtNow.Subtract(dtLastUpdateProgDateTime).TotalSeconds > UpdateInterval || !lastStatus.Equals(status))
-            {
-                dtLastUpdateProgDateTime = dtNow;
-                lastStatus = status;
-                return m_sqlBiz.UpdateEquipmentProgDateTimeForProgram($"{System.Windows.Forms.Application.ProductName}{(serverCode == 0 ? "P" : "S")}", (int)status, ref errCode, ref errText);
-            }
-            return true;
         }
     }
 

@@ -11,6 +11,7 @@ using System.Reflection;
 using CFW.Common;
 using System.Configuration;
 using DataSpider.PC00.PT;
+using System.IO;
 
 namespace DataSpider.PC02.PT
 {
@@ -23,13 +24,13 @@ namespace DataSpider.PC02.PT
         public bool bTerminated = false;
 
         //Dictionary<string, PC01S01> m_dicThread;
-        DeviceInfo[]    m_clsAryDevInfo;                        // Device Infomation
-        DbInfo          m_clsDbInfo;                            // DB Infomation
-        PgmRegInfo      m_clsPgmInfo;                           // Program Registration Infomation
-        Logging         m_clsLog = new Logging();
+        DeviceInfo[] m_clsAryDevInfo;                        // Device Infomation
+        DbInfo m_clsDbInfo;                            // DB Infomation
+        PgmRegInfo m_clsPgmInfo;                           // Program Registration Infomation
+        Logging m_clsLog = new Logging();
 
         //MsSqlDbAccess m_clsDBCon;                         // DB Connection
-        PC00Z01       m_SqlBiz;
+        PC00Z01 m_SqlBiz;
 
         System.Windows.Forms.Timer m_tmOraConUpd;
         System.Windows.Forms.Timer m_tmSerInfoLvUpd;      // Timer (Infomation ListView Update)
@@ -37,14 +38,14 @@ namespace DataSpider.PC02.PT
         System.Windows.Forms.Timer m_tmLogLvUpd;          // Timer (Log ListView Update)
         System.Windows.Forms.Timer m_tmCurrTmUpd;         // Timer (Current Time Display Label SetValue)
 
-        Point       m_ptFirstMouseClick;                         // Point (Using Window Move Control)
-        NotifyIcon  m_niIcon;                          // m_niIcon (Using OrderRcv Form Hide)
+        Point m_ptFirstMouseClick;                         // Point (Using Window Move Control)
+        NotifyIcon m_niIcon;                          // m_niIcon (Using OrderRcv Form Hide)
 
         private Image m_imgDbRun = PC02.PT.Properties.Resources.dbconnected;
         private Image m_imgDbStop = PC02.PT.Properties.Resources.dbdisconnected;
 
-        bool    m_bDBCon = false;                           // Using DB Connection State Display Label Update
-        int     m_nLogLines = 10;
+        bool m_bDBCon = false;                           // Using DB Connection State Display Label Update
+        int m_nLogLines = 10;
         string m_strLogFileName = Application.ProductName;//"ALIS";
 
         DataSet dsMain = null;
@@ -53,6 +54,14 @@ namespace DataSpider.PC02.PT
         string m_PgmPara = "";
         private DataTable dtEquipmentType = null;
 
+        private Thread threadUpdateProgramStatus = null;
+        private int serverCode = 0;
+        private List<string> listDataFilePath = new List<string>();
+        private string lastErrorFileName = string.Empty;
+        public string ProgramName
+        {
+            get { return $"{Application.ProductName}{(serverCode == 0 ? "P" : "S")}"; }
+        }
 
         #endregion
 
@@ -117,10 +126,12 @@ namespace DataSpider.PC02.PT
 
             try
             {
-                Text = lbTitle.Text = $"{this.ProductName} - DB Uploader";
-                //label_Version.Text = $"V.{Assembly.GetExecutingAssembly().GetName().Version}";
                 // DB 연결 
                 this.m_SqlBiz = new PC00Z01();
+                serverCode = m_SqlBiz.GetServerId(Environment.MachineName);
+
+                Text = lbTitle.Text = $"{this.ProductName} - DB Uploader";
+                //label_Version.Text = $"V.{Assembly.GetExecutingAssembly().GetName().Version}";
 
                 // Refresh DB Connection State
                 this.m_bDBCon = true;
@@ -149,8 +160,11 @@ namespace DataSpider.PC02.PT
                 ServerInfoListViewSetValue(); //리스트뷰에 세팅처리.
                 CreateProcess();
 
+                m_SqlBiz.WriteSTCommon(ProgramName, "ERROR_FILE", string.Empty);
+                threadUpdateProgramStatus = new Thread(new ThreadStart(ThreadUpdateProgramStatus));
+                threadUpdateProgramStatus.Start();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 this.m_clsLog.LogToFile("LOG", this.m_strLogFileName, PC00D01.MSGTDBG, MethodBase.GetCurrentMethod().Name, ex.ToString());
             } 
@@ -239,6 +253,7 @@ namespace DataSpider.PC02.PT
                 {
                     string equipType = dr["CODE_NM"].ToString();
                     thProcess[threadIndex] = new PC02S01(this, equipType, $"{Application.ProductName}_{equipType}", $@"{Environment.CurrentDirectory}\Data\{equipType}", string.Empty, threadIndex++, true);
+                    listDataFilePath.Add($@"{Environment.CurrentDirectory}\Data\{equipType}");
                 }
             }
             catch (Exception ex)
@@ -761,13 +776,71 @@ namespace DataSpider.PC02.PT
             //this.m_niIcon.ShowBalloonTip(2000);
         }
 
-        void Terminate()
+        private void Terminate()
         {
-            DialogResult dialogResult = MessageBox.Show(PC00D01.MSGP0001, PC00D01.MSGP0002, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            if (dialogResult == DialogResult.Yes)
+            if (DialogResult.Yes == MessageBox.Show(PC00D01.MSGP0001, PC00D01.MSGP0002, MessageBoxButtons.YesNo, MessageBoxIcon.Question))
             {
-                this.Close();
+                try
+                {
+                    bTerminated = true;
+
+                    for (int i = 0; i < thProcess.Count(); i++)
+                    {
+                        if (thProcess[i] != null)
+                            thProcess[i].bTerminal = true;
+                    }
+                    Thread.Sleep(1000);
+
+                    for (int i = 0; i < thProcess.Count(); i++)
+                    {
+                        if (thProcess[i] != null)
+                        {
+                            int count = 0;
+                            while (thProcess[i].m_Thd != null && thProcess[i].m_Thd.IsAlive)
+                            {
+                                thProcess[i].m_Thd.Join(10);
+                                if (count++ > 10)
+                                {
+                                    thProcess[i].m_Thd.Abort();
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
+                    if (threadUpdateProgramStatus != null)
+                    {
+                        int count = 0;
+                        while (threadUpdateProgramStatus != null && threadUpdateProgramStatus.IsAlive)
+                        {
+                            threadUpdateProgramStatus.Join(10);
+                            if (count++ > 100)
+                            {
+                                threadUpdateProgramStatus.Abort();
+                                break;
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    this.m_clsLog.LogToFile("LOG", this.m_strLogFileName, PC00D01.MSGTDBG, MethodBase.GetCurrentMethod().Name, ex.ToString());
+                }
+
+                try
+                {
+                    this.m_clsLog.LogToFile("LOG", this.m_strLogFileName, PC00D01.MSGTDBG, MethodBase.GetCurrentMethod().Name, "Program Close");
+                    Application.Exit();
+                }
+                catch (Exception ex)
+                {
+                    this.m_clsLog.LogToFile("LOG", this.m_strLogFileName, PC00D01.MSGTDBG, MethodBase.GetCurrentMethod().Name, ex.ToString());
+                }
+                finally
+                {
+                    m_niIcon.Visible = false;
+                    Application.Exit();
+                }
             }
         }
 
@@ -864,6 +937,86 @@ namespace DataSpider.PC02.PT
         private void TrayIconExit_Click(object sender, EventArgs e)
         {
             Terminate();
+        }
+
+        private void ThreadUpdateProgramStatus()
+        {
+            string errCode = string.Empty;
+            string errText = string.Empty;
+            while (!bTerminated)
+            {
+                try
+                {
+                    int maxStatus = -1;
+                    foreach (PC02S01 prc in thProcess)
+                    {
+                        if (maxStatus < (int)prc.ThreadStatus)
+                        {
+                            maxStatus = (int)prc.ThreadStatus;
+                        }
+                    }
+
+                    m_SqlBiz.UpdateEquipmentProgDateTimeForProgram(ProgramName, maxStatus, ref errCode, ref errText);
+                    CheckErrorFile();
+                    Thread.Sleep(10 * 1000);
+                }
+                catch (Exception ex)
+                {
+                }
+                finally
+                {
+                }
+            }
+            m_SqlBiz.UpdateEquipmentProgDateTimeForProgram(ProgramName, (int)IF_STATUS.Stop, ref errCode, ref errText);
+        }
+
+        //protected new bool UpdateEquipmentProgDateTime(IF_STATUS status = IF_STATUS.Normal)
+        //{
+        //    string errCode = string.Empty;
+        //    string errText = string.Empty;
+        //    DateTime dtNow = DateTime.Now;
+        //    if (dtNow.Subtract(dtLastUpdateProgDateTime).TotalSeconds > UpdateInterval || !lastStatus.Equals(status))
+        //    {
+        //        dtLastUpdateProgDateTime = dtNow;
+        //        lastStatus = status;
+        //        return m_sqlBiz.UpdateEquipmentProgDateTimeForProgram($"{System.Windows.Forms.Application.ProductName}{(serverCode == 0 ? "P" : "S")}", (int)status, ref errCode, ref errText);
+        //    }
+        //    return true;
+        //}
+
+        private void CheckErrorFile()
+        {
+
+            string errorFileDirectoryName = string.Empty;
+            try
+            {
+                foreach (string errorFilePath in listDataFilePath)
+                {
+                    DirectoryInfo di = new DirectoryInfo($@"{errorFilePath}\DataFile_Error");
+                    FileInfo[] arrFileInfo = di.GetFiles("*.ttv");
+                    if (arrFileInfo.Length > 0)
+                    {
+                        errorFileDirectoryName = errorFilePath.Substring(errorFilePath.LastIndexOf(@"\") + 1);
+                        if (!errorFileDirectoryName.Equals(lastErrorFileName))
+                        {
+                            lastErrorFileName = errorFileDirectoryName;
+                            m_SqlBiz.WriteSTCommon(ProgramName, "ERROR_FILE", errorFileDirectoryName);
+                        }
+                        break;
+                    }
+                }
+                if (string.IsNullOrWhiteSpace(errorFileDirectoryName) && (!string.IsNullOrWhiteSpace(lastErrorFileName)))
+                {
+                    lastErrorFileName = errorFileDirectoryName;
+                    m_SqlBiz.WriteSTCommon(ProgramName, "ERROR_FILE", errorFileDirectoryName);
+                }
+            }
+            catch (Exception ex)
+            {
+                string errCode = string.Empty;
+                string errText = string.Empty;
+                m_SqlBiz.UpdateEquipmentProgDateTimeForProgram(ProgramName, (int)IF_STATUS.InternalError, ref errCode, ref errText);
+            }
         }
     }
 

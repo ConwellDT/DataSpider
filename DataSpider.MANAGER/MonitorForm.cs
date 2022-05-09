@@ -164,7 +164,7 @@ namespace DataSpider
 
         private void GetPC02ErrorFileStatus()
         {
-            string dataSpiderPC02P_ErrorFile = sqlBiz.ReadSTCommon("ERROR_STATUS", "DataSpiderPC02P").Trim();
+            string dataSpiderPC02P_ErrorFile = sqlBiz.ReadSTCommon("DataSpiderPC02P", "ERROR_FILE").Trim();
             if (this.InvokeRequired)
             {
                 this.Invoke(new MethodInvoker(delegate ()
@@ -180,7 +180,7 @@ namespace DataSpider
                 toolStripStatusLabel_DBPGM_P_ErrorFile.ForeColor = string.IsNullOrWhiteSpace(dataSpiderPC02P_ErrorFile) ? Color.Black : Color.Red;
                 toolStripStatusLabel_DBPGM_P_ErrorFile.Visible = true;
             }
-            string dataSpiderPC02S_ErrorFile = sqlBiz.ReadSTCommon("ERROR_STATUS", "DataSpiderPC02S").Trim();
+            string dataSpiderPC02S_ErrorFile = sqlBiz.ReadSTCommon("DataSpiderPC02S", "ERROR_FILE").Trim();
             if (this.InvokeRequired)
             {
                 this.Invoke(new MethodInvoker(delegate ()

@@ -47,24 +47,25 @@ namespace DataSpider.PC03.PT
         
         FileLog m_Logger = null;
 
-        DateTime dtLastStatus = DateTime.MinValue;
-        IF_STATUS lastStatus = IF_STATUS.Normal;
-        public IF_STATUS STATUS 
+        DateTime dtLastThreadStatus = DateTime.MinValue;
+        IF_STATUS lastThreadStatus = IF_STATUS.Normal;
+        public IF_STATUS ThreadStatus
         {
             get
             {
-                if (DateTime.Now.Subtract(dtLastStatus).TotalSeconds > 60)
+                if (DateTime.Now.Subtract(dtLastThreadStatus).TotalSeconds > 60)
                 {
-                    lastStatus = IF_STATUS.Unknown;
+                    lastThreadStatus = IF_STATUS.Unknown;
                 }
-                return lastStatus;
+                return lastThreadStatus;
             }
             set
             {
-                lastStatus = value;
-                dtLastStatus = DateTime.Now; 
+                lastThreadStatus = value;
+                dtLastThreadStatus = DateTime.Now;
             }
         }
+
 
         public PC03S01() : base()
         {
@@ -161,13 +162,13 @@ namespace DataSpider.PC03.PT
                                     {
                                         mOwner.listViewMsg(m_strEName, string.Format(PC00D01.SucceededtoPI, pointName, pointValue), true, m_nCurNo, 3, true, PC00D01.MSGTINF);
                                         m_Logger.WriteLog(string.Format(PC00D01.SucceededtoPI, pointName, pointValue), PC00D01.MSGTERR, m_strEName);
-                                        STATUS = IF_STATUS.Normal;
+                                        ThreadStatus = IF_STATUS.Normal;
                                     }
                                     else
                                     {
                                         mOwner.listViewMsg(m_strEName, string.Format(PC00D01.FailedtoPI, $"{errText} - {pointName}", pointValue), true, m_nCurNo, 3, true, PC00D01.MSGTERR);
                                         m_Logger.WriteLog(string.Format(PC00D01.FailedtoPI, $"{errText} - {pointName}", pointValue), PC00D01.MSGTERR, m_strEName);
-                                        STATUS = IF_STATUS.InternalError;
+                                        ThreadStatus = IF_STATUS.InternalError;
                                     }
                                 }
                                 else
@@ -175,15 +176,15 @@ namespace DataSpider.PC03.PT
                                     string errMsg = "매핑된 PI 태그명이 없습니다.";
                                     mOwner.listViewMsg(m_strEName, string.Format(PC00D01.FailedtoPI, $"{errMsg} - {tagName}", pointValue), true, m_nCurNo, 3, true, PC00D01.MSGTERR);
                                     m_Logger.WriteLog(string.Format(PC00D01.FailedtoPI, $"{errMsg} - {tagName}", pointValue), PC00D01.MSGTERR, m_strEName);
-                                    STATUS = IF_STATUS.NoData;
+                                    ThreadStatus = IF_STATUS.NoData;
                                 }
                             }
                         }
-                        STATUS = IF_STATUS.Normal;
+                        ThreadStatus = IF_STATUS.Normal;
                     }
                     else
                     {
-                        STATUS = IF_STATUS.InternalError;
+                        ThreadStatus = IF_STATUS.InternalError;
                     }
 
                     Thread.Sleep(1000);
@@ -192,7 +193,7 @@ namespace DataSpider.PC03.PT
                 {
                     mOwner.listViewMsg(m_strEName, ex.ToString(), true, m_nCurNo, 3, true, PC00D01.MSGTERR);
                     m_Logger.WriteLog($"ThreadJob - {ex.ToString()} ", PC00D01.MSGTERR, m_strEName);
-                    STATUS = IF_STATUS.InternalError;
+                    ThreadStatus = IF_STATUS.InternalError;
                 }
                 finally
                 {
