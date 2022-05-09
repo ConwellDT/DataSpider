@@ -109,27 +109,27 @@ namespace DataSpider.UserMonitor
             this.addToolStripMenuItem,
             this.deleteToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(123, 76);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(109, 70);
             this.contextMenuStrip1.Text = "Add Equipment ";
             // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(122, 24);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
             this.editToolStripMenuItem.Text = "Edit";
             this.editToolStripMenuItem.Click += new System.EventHandler(this.EditEquipmentToolStripMenuItem_Click);
             // 
             // addToolStripMenuItem
             // 
             this.addToolStripMenuItem.Name = "addToolStripMenuItem";
-            this.addToolStripMenuItem.Size = new System.Drawing.Size(122, 24);
+            this.addToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
             this.addToolStripMenuItem.Text = "Add";
             this.addToolStripMenuItem.Click += new System.EventHandler(this.AddToolStripMenuItem_Click);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(122, 24);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.DeleteToolStripMenuItem_Click);
             // 
@@ -255,9 +255,10 @@ namespace DataSpider.UserMonitor
             // 
             this.textBox_RefreshInterval.Location = new System.Drawing.Point(0, 5);
             this.textBox_RefreshInterval.Name = "textBox_RefreshInterval";
-            this.textBox_RefreshInterval.Size = new System.Drawing.Size(94, 29);
+            this.textBox_RefreshInterval.Size = new System.Drawing.Size(94, 25);
             this.textBox_RefreshInterval.TabIndex = 1;
             this.textBox_RefreshInterval.Text = "10";
+            this.textBox_RefreshInterval.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // panel5
             // 
@@ -319,7 +320,7 @@ namespace DataSpider.UserMonitor
             // 
             // EquipmentMonitor
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.ClientSize = new System.Drawing.Size(902, 834);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Font = new System.Drawing.Font("맑은 고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));

@@ -31,7 +31,7 @@ namespace DataSpider.UserMonitor
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CurrentTagValueMonitorDGV));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.imageList2 = new System.Windows.Forms.ImageList(this.components);
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -60,6 +60,10 @@ namespace DataSpider.UserMonitor
             this.groupBoxCurOrHistory = new System.Windows.Forms.GroupBox();
             this.radioButtonHistoryTag = new System.Windows.Forms.RadioButton();
             this.radioButtonCurTag = new System.Windows.Forms.RadioButton();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.label_RefreshInterval = new System.Windows.Forms.Label();
+            this.textBox_RefreshInterval = new System.Windows.Forms.TextBox();
             this.contextMenuStrip1.SuspendLayout();
             this.panel8.SuspendLayout();
             this.panel7.SuspendLayout();
@@ -70,6 +74,8 @@ namespace DataSpider.UserMonitor
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Main)).BeginInit();
             this.groupBoxCurOrHistory.SuspendLayout();
+            this.panel5.SuspendLayout();
+            this.panel6.SuspendLayout();
             this.SuspendLayout();
             // 
             // imageList2
@@ -173,7 +179,7 @@ namespace DataSpider.UserMonitor
             // 
             this.panel8.Controls.Add(this.button_Find);
             this.panel8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel8.Location = new System.Drawing.Point(617, 3);
+            this.panel8.Location = new System.Drawing.Point(572, 3);
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(94, 34);
             this.panel8.TabIndex = 7;
@@ -193,9 +199,9 @@ namespace DataSpider.UserMonitor
             // 
             this.panel7.Controls.Add(this.button_SetInterval);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel7.Location = new System.Drawing.Point(847, 3);
+            this.panel7.Location = new System.Drawing.Point(892, 3);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(94, 34);
+            this.panel7.Size = new System.Drawing.Size(84, 34);
             this.panel7.TabIndex = 6;
             // 
             // button_SetInterval
@@ -203,7 +209,7 @@ namespace DataSpider.UserMonitor
             this.button_SetInterval.Dock = System.Windows.Forms.DockStyle.Fill;
             this.button_SetInterval.Location = new System.Drawing.Point(0, 0);
             this.button_SetInterval.Name = "button_SetInterval";
-            this.button_SetInterval.Size = new System.Drawing.Size(94, 34);
+            this.button_SetInterval.Size = new System.Drawing.Size(84, 34);
             this.button_SetInterval.TabIndex = 1;
             this.button_SetInterval.Text = "Set Interval";
             this.button_SetInterval.UseVisualStyleBackColor = true;
@@ -215,7 +221,7 @@ namespace DataSpider.UserMonitor
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(3, 3);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(93, 34);
+            this.panel4.Size = new System.Drawing.Size(48, 34);
             this.panel4.TabIndex = 3;
             // 
             // label2
@@ -224,7 +230,7 @@ namespace DataSpider.UserMonitor
             this.label2.Font = new System.Drawing.Font("맑은 고딕", 16F);
             this.label2.Location = new System.Drawing.Point(0, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(93, 34);
+            this.label2.Size = new System.Drawing.Size(48, 34);
             this.label2.TabIndex = 3;
             this.label2.Text = "TAG Value Monitor";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -253,9 +259,9 @@ namespace DataSpider.UserMonitor
             // 
             this.panel2.Controls.Add(this.checkBox_AutoRefresh);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(947, 3);
+            this.panel2.Location = new System.Drawing.Point(982, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(134, 34);
+            this.panel2.Size = new System.Drawing.Size(109, 34);
             this.panel2.TabIndex = 1;
             // 
             // checkBox_AutoRefresh
@@ -265,9 +271,9 @@ namespace DataSpider.UserMonitor
             this.checkBox_AutoRefresh.Dock = System.Windows.Forms.DockStyle.Fill;
             this.checkBox_AutoRefresh.Location = new System.Drawing.Point(0, 0);
             this.checkBox_AutoRefresh.Name = "checkBox_AutoRefresh";
-            this.checkBox_AutoRefresh.Size = new System.Drawing.Size(134, 34);
+            this.checkBox_AutoRefresh.Size = new System.Drawing.Size(109, 34);
             this.checkBox_AutoRefresh.TabIndex = 0;
-            this.checkBox_AutoRefresh.Text = "Auto Refresh (0s)";
+            this.checkBox_AutoRefresh.Text = "Auto Refresh";
             this.checkBox_AutoRefresh.UseVisualStyleBackColor = true;
             // 
             // tableLayoutTagValueMonitorMenu
@@ -282,20 +288,22 @@ namespace DataSpider.UserMonitor
             this.tableLayoutTagValueMonitorMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutTagValueMonitorMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 10F));
             this.tableLayoutTagValueMonitorMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
+            this.tableLayoutTagValueMonitorMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90F));
             this.tableLayoutTagValueMonitorMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
-            this.tableLayoutTagValueMonitorMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tableLayoutTagValueMonitorMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 140F));
-            this.tableLayoutTagValueMonitorMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 10F));
+            this.tableLayoutTagValueMonitorMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90F));
+            this.tableLayoutTagValueMonitorMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 115F));
             this.tableLayoutTagValueMonitorMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 70F));
             this.tableLayoutTagValueMonitorMenu.Controls.Add(this.buttonFilter, 8, 0);
             this.tableLayoutTagValueMonitorMenu.Controls.Add(this.panel1, 0, 1);
-            this.tableLayoutTagValueMonitorMenu.Controls.Add(this.panel2, 11, 0);
+            this.tableLayoutTagValueMonitorMenu.Controls.Add(this.panel2, 12, 0);
             this.tableLayoutTagValueMonitorMenu.Controls.Add(this.panel3, 13, 0);
             this.tableLayoutTagValueMonitorMenu.Controls.Add(this.panel4, 0, 0);
-            this.tableLayoutTagValueMonitorMenu.Controls.Add(this.panel7, 10, 0);
+            this.tableLayoutTagValueMonitorMenu.Controls.Add(this.panel7, 11, 0);
             this.tableLayoutTagValueMonitorMenu.Controls.Add(this.panel8, 6, 0);
             this.tableLayoutTagValueMonitorMenu.Controls.Add(this.comboBoxTagGroupSel, 4, 0);
             this.tableLayoutTagValueMonitorMenu.Controls.Add(this.groupBoxCurOrHistory, 2, 0);
+            this.tableLayoutTagValueMonitorMenu.Controls.Add(this.panel5, 9, 0);
+            this.tableLayoutTagValueMonitorMenu.Controls.Add(this.panel6, 10, 0);
             this.tableLayoutTagValueMonitorMenu.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutTagValueMonitorMenu.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutTagValueMonitorMenu.Name = "tableLayoutTagValueMonitorMenu";
@@ -308,7 +316,7 @@ namespace DataSpider.UserMonitor
             // buttonFilter
             // 
             this.buttonFilter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonFilter.Location = new System.Drawing.Point(727, 3);
+            this.buttonFilter.Location = new System.Drawing.Point(682, 3);
             this.buttonFilter.Name = "buttonFilter";
             this.buttonFilter.Size = new System.Drawing.Size(54, 34);
             this.buttonFilter.TabIndex = 3;
@@ -330,8 +338,8 @@ namespace DataSpider.UserMonitor
             // 
             this.dataGridView_Main.AllowUserToAddRows = false;
             this.dataGridView_Main.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(221)))), ((int)(((byte)(235)))), ((int)(((byte)(247)))));
-            this.dataGridView_Main.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(221)))), ((int)(((byte)(235)))), ((int)(((byte)(247)))));
+            this.dataGridView_Main.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView_Main.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dataGridView_Main.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dataGridView_Main.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -353,7 +361,7 @@ namespace DataSpider.UserMonitor
             this.comboBoxTagGroupSel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.comboBoxTagGroupSel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxTagGroupSel.FormattingEnabled = true;
-            this.comboBoxTagGroupSel.Location = new System.Drawing.Point(257, 8);
+            this.comboBoxTagGroupSel.Location = new System.Drawing.Point(212, 8);
             this.comboBoxTagGroupSel.Margin = new System.Windows.Forms.Padding(3, 8, 3, 3);
             this.comboBoxTagGroupSel.MaxDropDownItems = 24;
             this.comboBoxTagGroupSel.Name = "comboBoxTagGroupSel";
@@ -366,7 +374,7 @@ namespace DataSpider.UserMonitor
             this.groupBoxCurOrHistory.Controls.Add(this.radioButtonHistoryTag);
             this.groupBoxCurOrHistory.Controls.Add(this.radioButtonCurTag);
             this.groupBoxCurOrHistory.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBoxCurOrHistory.Location = new System.Drawing.Point(109, 0);
+            this.groupBoxCurOrHistory.Location = new System.Drawing.Point(64, 0);
             this.groupBoxCurOrHistory.Margin = new System.Windows.Forms.Padding(0, 0, 0, 6);
             this.groupBoxCurOrHistory.Name = "groupBoxCurOrHistory";
             this.groupBoxCurOrHistory.Size = new System.Drawing.Size(135, 34);
@@ -396,6 +404,42 @@ namespace DataSpider.UserMonitor
             this.radioButtonCurTag.Text = "CUR";
             this.radioButtonCurTag.UseVisualStyleBackColor = true;
             // 
+            // panel5
+            // 
+            this.panel5.Controls.Add(this.label_RefreshInterval);
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel5.Location = new System.Drawing.Point(742, 3);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(84, 34);
+            this.panel5.TabIndex = 10;
+            // 
+            // panel6
+            // 
+            this.panel6.Controls.Add(this.textBox_RefreshInterval);
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel6.Location = new System.Drawing.Point(832, 3);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(54, 34);
+            this.panel6.TabIndex = 11;
+            // 
+            // label_RefreshInterval
+            // 
+            this.label_RefreshInterval.Location = new System.Drawing.Point(0, -1);
+            this.label_RefreshInterval.Name = "label_RefreshInterval";
+            this.label_RefreshInterval.Size = new System.Drawing.Size(84, 37);
+            this.label_RefreshInterval.TabIndex = 4;
+            this.label_RefreshInterval.Text = "Refresh Interval (sec)";
+            this.label_RefreshInterval.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // textBox_RefreshInterval
+            // 
+            this.textBox_RefreshInterval.Location = new System.Drawing.Point(0, 5);
+            this.textBox_RefreshInterval.Name = "textBox_RefreshInterval";
+            this.textBox_RefreshInterval.Size = new System.Drawing.Size(54, 25);
+            this.textBox_RefreshInterval.TabIndex = 0;
+            this.textBox_RefreshInterval.Text = "10";
+            this.textBox_RefreshInterval.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
             // CurrentTagValueMonitorDGV
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -420,6 +464,9 @@ namespace DataSpider.UserMonitor
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Main)).EndInit();
             this.groupBoxCurOrHistory.ResumeLayout(false);
             this.groupBoxCurOrHistory.PerformLayout();
+            this.panel5.ResumeLayout(false);
+            this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -453,5 +500,9 @@ namespace DataSpider.UserMonitor
         private System.Windows.Forms.GroupBox groupBoxCurOrHistory;
         private System.Windows.Forms.RadioButton radioButtonHistoryTag;
         private System.Windows.Forms.RadioButton radioButtonCurTag;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.Label label_RefreshInterval;
+        private System.Windows.Forms.TextBox textBox_RefreshInterval;
     }
 }
