@@ -720,7 +720,7 @@ namespace DataSpider.PC00.PT
                     if (serverId == -1) serverId = 0;
                     strQuery.Clear();
 
-                    strQuery.Append($"EXEC InsertUpdateFailoverInfo '{equipName}', {serverId})");
+                    strQuery.Append($"EXEC InsertUpdateFailoverInfo '{equipName}', {serverId}");
 
                     //if (add)
                     //{
