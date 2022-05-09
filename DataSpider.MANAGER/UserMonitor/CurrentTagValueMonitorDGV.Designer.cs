@@ -31,7 +31,7 @@ namespace DataSpider.UserMonitor
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CurrentTagValueMonitorDGV));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.imageList2 = new System.Windows.Forms.ImageList(this.components);
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -330,8 +330,8 @@ namespace DataSpider.UserMonitor
             // 
             this.dataGridView_Main.AllowUserToAddRows = false;
             this.dataGridView_Main.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(221)))), ((int)(((byte)(235)))), ((int)(((byte)(247)))));
-            this.dataGridView_Main.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(221)))), ((int)(((byte)(235)))), ((int)(((byte)(247)))));
+            this.dataGridView_Main.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView_Main.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dataGridView_Main.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dataGridView_Main.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -395,7 +395,6 @@ namespace DataSpider.UserMonitor
             this.radioButtonCurTag.TabStop = true;
             this.radioButtonCurTag.Text = "CUR";
             this.radioButtonCurTag.UseVisualStyleBackColor = true;
-            this.radioButtonCurTag.CheckedChanged += new System.EventHandler(this.radioButtonCurTag_CheckedChanged);
             // 
             // CurrentTagValueMonitorDGV
             // 

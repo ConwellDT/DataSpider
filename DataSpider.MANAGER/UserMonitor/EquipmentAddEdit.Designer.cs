@@ -330,7 +330,7 @@ namespace DataSpider.UserMonitor
             "N"});
             this.comboBox_UseFlag.Location = new System.Drawing.Point(0, 12);
             this.comboBox_UseFlag.Name = "comboBox_UseFlag";
-            this.comboBox_UseFlag.Size = new System.Drawing.Size(357, 29);
+            this.comboBox_UseFlag.Size = new System.Drawing.Size(337, 29);
             this.comboBox_UseFlag.TabIndex = 2;
             // 
             // panel16
@@ -444,7 +444,7 @@ namespace DataSpider.UserMonitor
             // 
             this.textBox_ConnectionInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_ConnectionInfo.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.textBox_ConnectionInfo.Location = new System.Drawing.Point(-3, 7);
+            this.textBox_ConnectionInfo.Location = new System.Drawing.Point(0, 9);
             this.textBox_ConnectionInfo.Name = "textBox_ConnectionInfo";
             this.textBox_ConnectionInfo.Size = new System.Drawing.Size(337, 29);
             this.textBox_ConnectionInfo.TabIndex = 2;
@@ -482,7 +482,7 @@ namespace DataSpider.UserMonitor
             // 
             this.textBox_Description.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_Description.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.textBox_Description.Location = new System.Drawing.Point(0, 5);
+            this.textBox_Description.Location = new System.Drawing.Point(0, 9);
             this.textBox_Description.Name = "textBox_Description";
             this.textBox_Description.Size = new System.Drawing.Size(337, 29);
             this.textBox_Description.TabIndex = 1;
@@ -571,7 +571,7 @@ namespace DataSpider.UserMonitor
             // 
             this.textBox_EquipName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_EquipName.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.textBox_EquipName.Location = new System.Drawing.Point(0, 6);
+            this.textBox_EquipName.Location = new System.Drawing.Point(0, 9);
             this.textBox_EquipName.Name = "textBox_EquipName";
             this.textBox_EquipName.Size = new System.Drawing.Size(337, 29);
             this.textBox_EquipName.TabIndex = 0;
