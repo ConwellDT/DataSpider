@@ -349,15 +349,15 @@ namespace DataSpider.UserMonitor
                             if (dtTag != null && dtTag.Rows.Count > 0) TagAdd = false;
 
                             if (sqlBiz.InsertUpdateTagInfo(TagAdd,
-                                                            row.Cells["Tag Name"].Value.ToString().Trim(),
-                                                            row.Cells["Message Type"].Value.ToString().Trim(),
+                                                            row.Cells["Tag Name"].Value?.ToString().Trim(),
+                                                            row.Cells["Message Type"].Value?.ToString().Trim(),
                                                             textBox_EquipName.Text.Trim(),
-                                                            row.Cells["Description"].Value.ToString().Trim(),
-                                                            row.Cells["PI Tag Name"].Value.ToString().Trim(),
-                                                            row.Cells["Value Position"].Value.ToString().Trim(),
-                                                            row.Cells["Date Position"].Value.ToString().Trim(),
-                                                            row.Cells["Time Position"].Value.ToString().Trim(),
-                                                            row.Cells["Item Name"].Value.ToString().Trim(),
+                                                            row.Cells["Description"].Value?.ToString().Trim(),
+                                                            row.Cells["PI Tag Name"].Value?.ToString().Trim(),
+                                                            row.Cells["Value Position"].Value?.ToString().Trim(),
+                                                            row.Cells["Date Position"].Value?.ToString().Trim(),
+                                                            row.Cells["Time Position"].Value?.ToString().Trim(),
+                                                            row.Cells["Item Name"].Value?.ToString().Trim(),
                                                             ref strErrCode, ref strErrText) == false)
                             {
                                 MessageBox.Show($"Tag {row.Cells["Tag Name"].Value.ToString().Trim()}  저장 중 {strErrText} 오류가 발생하였습니다.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
