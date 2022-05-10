@@ -604,7 +604,7 @@ namespace DataSpider.UserMonitor
                 {
                     contextMenuStripEQControl.Items["editToolStripMenuItem"].Enabled = true; contextMenuStripEQControl.Items["editToolStripMenuItem"].Text = "Edit";
                     contextMenuStripEQControl.Items["copyToolStripMenuItem"].Enabled = true;
-                    contextMenuStripEQControl.Items["addToolStripMenuItem"].Enabled = true;
+                    contextMenuStripEQControl.Items["addToolStripMenuItem"].Enabled = false;
                     contextMenuStripEQControl.Items["deleteToolStripMenuItem"].Enabled = true;
 
 

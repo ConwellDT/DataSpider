@@ -86,7 +86,6 @@ namespace DataSpider.UserMonitor
             dataGridTagInfo.Columns[5].Name = "Value Position"; dataGridTagInfo.Columns[5].Width = 80;
             dataGridTagInfo.Columns[6].Name = "Date Position";  dataGridTagInfo.Columns[6].Width = 80;
             dataGridTagInfo.Columns[7].Name = "Time Position";  dataGridTagInfo.Columns[7].Width = 80;
-            
 
             dataGridTagInfo.EditMode = DataGridViewEditMode.EditOnKeystrokeOrF2;
             dataGridTagInfo.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -283,6 +282,8 @@ namespace DataSpider.UserMonitor
                     textBox_EquipName.Enabled = false;
                 }
             }
+            dataGridTagInfo.Columns[1].ReadOnly = true;
+            dataGridTagInfo.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells);
         }
 
         private void button_Save_Click(object sender, EventArgs e)

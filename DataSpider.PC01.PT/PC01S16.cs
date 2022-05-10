@@ -491,7 +491,7 @@ namespace DataSpider.PC01.PT
 
         private void GetCodeValueDictionary(DataTable dtConfig, string codeName, IDictionary<string, string> dicConfig)
         {
-            string[] arrCodeValue = dtConfig.Select($"CODE_NAME = '{codeName}'")?[0]["CODE_VALUE"].ToString().Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+            string[] arrCodeValue = dtConfig.Select($"CODE_NM = '{codeName}'")?[0]["CODE_VALUE"].ToString().Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
             dicConfig.Clear();
 
             foreach (string line in arrCodeValue)
