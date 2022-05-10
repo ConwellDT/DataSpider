@@ -9,7 +9,8 @@ using System.Threading;
 namespace DataSpider.PC01.PT
 {
     /// <summary>
-    /// File I/F
+    /// CEDEX_HIRES SQL SERVER INTERFACE
+    /// 
     /// </summary>
     public class PC01S17 : PC00B01
     {
@@ -96,6 +97,7 @@ namespace DataSpider.PC01.PT
                         {
                             if (nDisconnectCount % 30 == 0)
                             {
+                                UpdateEquipmentProgDateTime(IF_STATUS.Disconnected);
                                 listViewMsg.UpdateMsg($"SqlConnection Exception in ThreadJob  - ({ex})", false, true, true, PC00D01.MSGTINF);
                                 Thread.Sleep(2000);
                             }

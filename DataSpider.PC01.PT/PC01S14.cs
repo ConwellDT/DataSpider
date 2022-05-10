@@ -156,7 +156,7 @@ namespace DataSpider.PC01.PT
                 }
                 catch (Exception ex)
                 {
-                    //MessageBox.Show(ex.ToString());
+                    fileLog.WriteLog($"{ex}");
                 }
                 return retValue;
             }
@@ -202,7 +202,7 @@ namespace DataSpider.PC01.PT
                 }
                 catch (Exception ex)
                 {
-                    //MessageBox.Show(ex.ToString());
+                    fileLog.WriteLog($"{ex}");
                 }
                 return retValue;
             }
@@ -238,9 +238,9 @@ namespace DataSpider.PC01.PT
                     if (retString.Length > 0)
                         retString = retString.Substring(0, retString.Length - 1);
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
-
+                    fileLog.WriteLog($"{ex}");
                 }
                 return retString.Trim();
             }
@@ -260,7 +260,7 @@ namespace DataSpider.PC01.PT
                 }
                 catch (Exception ex)
                 {
-
+                    fileLog.WriteLog($"{ex}");
                 }
                 return retString.Trim();
             }
@@ -280,7 +280,7 @@ namespace DataSpider.PC01.PT
                 }
                 catch (Exception ex)
                 {
-
+                    fileLog.WriteLog($"{ex}");
                 }
                 return retString.Trim();
             }
@@ -299,7 +299,7 @@ namespace DataSpider.PC01.PT
                 }
                 catch (Exception ex)
                 {
-
+                    fileLog.WriteLog($"{ex}");
                 }
                 return retString.Trim();
             }
@@ -385,7 +385,7 @@ namespace DataSpider.PC01.PT
 
             string strErrCode = string.Empty, strErrText = string.Empty;
             DataTable dtConfig = null;
-
+            m_soloVpeTable.SetFileLog(fileLog);
             while (!bTerminal)
             {
                 try
