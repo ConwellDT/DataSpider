@@ -27,6 +27,7 @@ namespace DataSpider.PC01.PT
     {
         OpcUaClient.OpcUaClient myUaClient=null;
         private DateTime dtNormalTime = DateTime.Now;
+        Dictionary<string, string> m_OpcItemList = new Dictionary<string, string>();
 
         public PC01S19() : base()
         {
@@ -160,6 +161,7 @@ namespace DataSpider.PC01.PT
                         if (string.IsNullOrWhiteSpace(data[0]) || string.IsNullOrWhiteSpace(data[1]) )
                             continue;
                         myUaClient.AddItem(data[0], data[1]);
+                        m_OpcItemList[data[0]] = data[1];
                     }
                 }
             }
@@ -188,7 +190,8 @@ namespace DataSpider.PC01.PT
                         continue;
                     if (string.IsNullOrWhiteSpace(data[0]) || string.IsNullOrWhiteSpace(data[1]))
                         continue;
-                    myUaClient.AddItem(data[0], data[1]);
+                    myUaClient.AddItem(data[0].Trim(), data[1].Trim());
+                    m_OpcItemList.Add(data[0].Trim(), data[1].Trim());
                 }
             }
             catch (Exception ex)
@@ -200,16 +203,27 @@ namespace DataSpider.PC01.PT
 
         public void UpdateTagValue( string tagname, string value, string datetime, string status)
         {
-            //EnQueue(MSGTYPE.MEASURE,$"{tagname},{datetime},{value},{status}");
-            EnQueue(MSGTYPE.MEASURE,$"{tagname},{datetime},{value}");
-            if (tagname == "MSR_VAL")
+            if (tagname == "MSR_SVRTIME")
             {
-                EnQueue(MSGTYPE.MEASURE, $"MSR_SVRTIME,{datetime},{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}");
+                DateTime svrtime;
+                PC00U01.TryParseExact(value, out svrtime);  // 측정시간
+                foreach (KeyValuePair<string, string> kvp in m_OpcItemList)
+                {
+                    try
+                    {
+                        string strValue =myUaClient.ReadValue(kvp.Value).Value?.ToString();
+                        if (kvp.Key == "MSR_SVRTIME")
+                            EnQueue(MSGTYPE.MEASURE, $" {kvp.Key},{svrtime.ToString("yyyy-MM-dd HH:mm:ss")}, {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}");
+                        else
+                            EnQueue(MSGTYPE.MEASURE, $" {kvp.Key}, {svrtime.ToString("yyyy-MM-dd HH:mm:ss")}, {strValue}");
+                        listViewMsg.UpdateMsg($" {kvp.Key}, {svrtime.ToString("yyyy-MM-dd HH:mm:ss")}, {strValue} ", false, true, true, PC00D01.MSGTINF);
+                    }
+                    catch (Exception ex)
+                    {
+                        listViewMsg.UpdateMsg($" UpdateTagValue - {kvp.Key },{kvp.Value} - {ex}", false, true, true, PC00D01.MSGTERR);
+                    }
+                }
             }
-            listViewMsg.UpdateMsg($"{tagname},{datetime},{value},{status}",false, true, true, PC00D01.MSGTINF);
         }
-
-
-
     }
 }
