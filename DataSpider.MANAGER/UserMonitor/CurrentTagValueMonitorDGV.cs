@@ -85,7 +85,7 @@ namespace DataSpider.UserMonitor
             {
                 autoRefreshInterval = 10;
             }
-            checkBox_AutoRefresh.Text = "Auto Refresh(" + autoRefreshInterval.ToString() + "s)";
+            textBox_RefreshInterval.Text = autoRefreshInterval.ToString();
             //timerRefresh.Tick += TimerRefresh_Tick;
             //timerRefresh.Interval = autoRefreshInterval * 1000;
             //if (checkBox_AutoRefresh.Checked)
@@ -611,21 +611,11 @@ namespace DataSpider.UserMonitor
 
         private void button_SetInterval_Click(object sender, EventArgs e)
         {
-            SetRefreshInterval dlg = new SetRefreshInterval();
-
-            dlg.RefreshInterval = autoRefreshInterval;
-
-            if( dlg.ShowDialog() == DialogResult.OK )
+            if (int.TryParse(textBox_RefreshInterval.Text, out int tempInterval))
             {
-                if (dlg.RefreshInterval > 0)
-                {
-                    autoRefreshInterval = dlg.RefreshInterval;
-
-                    ConfigHelper.SetAppSetting("TagAutoRefreshInterval", autoRefreshInterval.ToString());
-                }
+                //timerRefresh.Interval = tempInterval * 1000;
+                autoRefreshInterval = tempInterval;
             }
-
-            checkBox_AutoRefresh.Text = "Auto Refresh(" + autoRefreshInterval.ToString() + "s)";
         }
 
 
@@ -802,7 +792,7 @@ namespace DataSpider.UserMonitor
                 nDBModeCurrent = 1;
 
                 checkBox_AutoRefresh.Checked = autoRefresheChecked;
-                checkBox_AutoRefresh.Visible = button_SetInterval.Visible = true;
+                checkBox_AutoRefresh.Visible = button_SetInterval.Visible = textBox_RefreshInterval.Visible = label_RefreshInterval.Visible = true;
             }
             // History
             else
@@ -810,7 +800,7 @@ namespace DataSpider.UserMonitor
                 nDBModeCurrent = 0;
 
                 checkBox_AutoRefresh.Checked = false;
-                checkBox_AutoRefresh.Visible = button_SetInterval.Visible = false;
+                checkBox_AutoRefresh.Visible = button_SetInterval.Visible = textBox_RefreshInterval.Visible = label_RefreshInterval.Visible = false;
             }
             GetProgramStatus();
         }

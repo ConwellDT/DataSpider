@@ -344,233 +344,6 @@ namespace DataSpider.PC01.PT
         }
         private SoloVpeTable m_soloVpeTable = new SoloVpeTable();
 
-        // 2022-04-20 데이터 변경
-        // L0  <-   뒤에서 부터 0번째
-        // *   <-   전부를 붙여서 출력하는 기능
-        //public class SoloVpe 
-        //{
-        //    const int ARRAY0 = 0;
-        //    const int PROPERTY1 = 1;
-        //    const int ARRAY1 = 2;
-        //    const int PROPERTY2 = 3;
-
-        //    public int newDaqID;
-        //    public string newSampleName;
-        //    public string newLDAPUserID;
-        //    public string newRunStart;
-        //    public string newRunEnd;
-
-        //    public Dictionary<string, List<string>> m_soloVpeDic = new Dictionary<string, List<string>>();
-
-
-        //    /// <summary>
-        //    /// jsonString에서 currentDaqID 보다 큰 가장 작은 DaqID를 찾는다.
-        //    /// 만일 currentDaqID 보다 큰 가장 작은 DaqID를 찾지 못하면 newDaqID는 int.MaxValue가 된다.
-        //    /// 이 때는 newDaqID를 currentDaqID로 설정한다.
-        //    /// </summary>
-        //    /// <param name="jsonString"></param>
-        //    /// <param name="currentDaqID"></param>
-        //    public void GetDaqID(string jsonString, int currentDaqID)
-        //    {
-        //        JsonDocument document;
-        //        JsonElement root;
-        //        int DaqID;
-
-        //        newDaqID = currentDaqID;
-        //        newSampleName = string.Empty;
-        //        newLDAPUserID = string.Empty;
-        //        newRunStart = string.Empty;
-        //        newRunEnd = string.Empty;
-
-        //        document = JsonDocument.Parse(jsonString);
-        //        root = document.RootElement;
-        //        if (root.ValueKind != JsonValueKind.Array || root.GetArrayLength() == 0) return;
-
-        //        newDaqID = int.MaxValue;
-        //        foreach (JsonElement jElement in root.EnumerateArray())
-        //        {
-        //            DaqID = jElement.GetProperty("ID").GetInt32();
-
-        //            if (DaqID > currentDaqID && DaqID < newDaqID)
-        //            {
-        //                if (jElement.GetProperty("RunEnd").GetString() != null)
-        //                {
-        //                    newDaqID = DaqID;
-        //                    newSampleName = jElement.GetProperty("SampleName").GetString();
-        //                    newLDAPUserID = jElement.GetProperty("LDAPUserID").GetString();
-        //                    newRunStart = jElement.GetProperty("RunStart").GetString();
-        //                    newRunEnd = jElement.GetProperty("RunEnd").GetString();
-        //                }
-        //            }
-        //        }
-        //        if (newDaqID == int.MaxValue) newDaqID = currentDaqID;
-        //    }
-
-        //    public int GetArrayLength(string jsonString)
-        //    {
-        //        //JArray jArray = JArray.Parse(jsonString);
-        //        //return jArray.Count;
-        //        JsonDocument document = JsonDocument.Parse(jsonString);
-        //        return document.RootElement.GetArrayLength();
-        //    }
-
-        //    public string GetValue(string jsonString, List<string> list)
-        //    {
-        //        string retValue = string.Empty;
-        //        JsonDocument document;
-        //        JsonElement root, jElement, jjElement, jjjElement;
-        //        int nArray0 = -1, nArray1 = -1;
-        //        try
-        //        {
-        //            document = JsonDocument.Parse(jsonString);
-        //            root = document.RootElement;
-        //            if (root.ValueKind != JsonValueKind.Array) return retValue;
-
-
-        //            if (int.TryParse(list[ARRAY0], out nArray0) == false)
-        //            {
-        //                if (list[ARRAY0].Contains("#LAST"))
-        //                {
-        //                    nArray0 = root.GetArrayLength() - 1;
-        //                }
-        //                else if (list[ARRAY0].Contains("L"))
-        //                {
-        //                    char[] charsToTrim = { 'L', ' ' };
-        //                    string val = list[ARRAY0].Trim(charsToTrim);
-        //                    if (int.TryParse(val, out nArray0) == false)
-        //                    {
-        //                        nArray0 = -1;
-        //                    }
-        //                    else
-        //                        nArray0 = root.GetArrayLength() - 1 - nArray0;
-
-        //                }
-        //                else
-        //                    nArray0 = -1;
-        //            }
-
-        //            if (nArray0 >= 0)
-        //            {
-        //                jElement = root[nArray0];
-        //            }
-        //            else
-        //            {
-        //                jElement = root;
-        //            }
-
-        //            if (string.IsNullOrWhiteSpace(list[PROPERTY1]) == false) // Property1이 있음.
-        //            {
-        //                jjElement = jElement.GetProperty(list[PROPERTY1]); //Property1
-
-        //                if (string.IsNullOrWhiteSpace(list[PROPERTY2]) == false) // Property2가 있음.
-        //                {
-        //                    if (list[ARRAY1].Contains("*"))
-        //                    {
-        //                        for (int nLen = 0; nLen < jjElement.GetArrayLength(); nLen++)
-        //                        {
-        //                            jjjElement = jjElement[jjElement.GetArrayLength() - nLen - 1].GetProperty(list[PROPERTY2]);
-        //                            retValue += " " + jjjElement.ToString() + " ;";
-        //                        }
-        //                        if (retValue.Length > 0) retValue = retValue.Substring(0, retValue.Length - 1);
-        //                    }
-        //                    else
-        //                    {
-        //                        if (int.TryParse(list[ARRAY1], out nArray1) == false)
-        //                        {
-        //                            if (list[ARRAY1].Contains("#LAST"))
-        //                                nArray1 = jjElement.GetArrayLength() - 1;
-        //                            else
-        //                                nArray0 = -1;
-        //                        }
-        //                        if (nArray1 >= 0) jjjElement = jjElement[nArray1].GetProperty(list[PROPERTY2]); //Property2
-        //                        else jjjElement = jjElement.GetProperty(list[PROPERTY2]); //Property2
-        //                        retValue = jjjElement.ToString();
-        //                    }
-        //                }
-        //                else
-        //                {
-        //                    retValue = jjElement.ToString();
-        //                }
-        //            }
-        //            return retValue;
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            //MessageBox.Show(ex.ToString());
-        //        }
-        //        return retValue;
-        //    }
-
-        //    public void ReadCfgData(string configFile)
-        //    {
-        //        List<string> keyValue = null;
-        //        string line;
-        //        try
-        //        {
-        //            m_soloVpeDic.Clear();
-        //            using (StreamReader file = new StreamReader(configFile, Encoding.Default))
-        //            {
-        //                while ((line = file.ReadLine()) != null)
-        //                {
-        //                    if (line.StartsWith(";")) continue;
-        //                    string[] spline = line.Split(',');
-        //                    if (spline.Length > 1)
-        //                    {
-        //                        keyValue = new List<string>();
-        //                        for (int nLine = 1; nLine < 6; nLine++)
-        //                        {
-        //                            if (spline.Length <= nLine)
-        //                                keyValue.Add("");
-        //                            else
-        //                                keyValue.Add(spline[nLine].Trim());
-        //                        }
-        //                        m_soloVpeDic.Add(spline[0].Trim(), keyValue);
-        //                    }
-        //                }
-        //            }
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            //listViewMsg.UpdateMsg($"Exceptioin - PC01S14 ({ex})", false, true, true, PC00D01.MSGTERR);
-        //        }
-        //    }
-        //    public void ReadCfgData(DataRow drConfig)
-        //    {
-        //        try
-        //        {
-        //            string configInfo = drConfig["CONFIG_INFO"]?.ToString();
-        //            if (string.IsNullOrWhiteSpace(configInfo))
-        //            {
-        //                return;
-        //            }
-        //            m_soloVpeDic.Clear();
-        //            string[] arrConfig = configInfo.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
-        //            foreach (string line in arrConfig)
-        //            {
-        //                if (line.StartsWith(";")) continue;
-        //                string[] spline = line.Split(',');
-        //                if (spline.Length > 1)
-        //                {
-        //                    List<string> keyValue = new List<string>();
-        //                    for (int nLine = 1; nLine < 6; nLine++)
-        //                    {
-        //                        if (spline.Length <= nLine)
-        //                            keyValue.Add("");
-        //                        else
-        //                            keyValue.Add(spline[nLine].Trim());
-        //                    }
-        //                    m_soloVpeDic.Add(spline[0].Trim(), keyValue);
-        //                }
-        //            }
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            //listViewMsg.UpdateMsg($"Exceptioin - PC01S14 ({ex})", false, true, true, PC00D01.MSGTERR);
-        //        }
-        //    }
-        //}
-
-
         public PC01S14() : base()
         {
         }
@@ -870,7 +643,7 @@ namespace DataSpider.PC01.PT
                 myUaClient.CreateSubscription(1000);
                 listViewMsg.UpdateMsg($"myUaClient.UpateTagData ", false, true, true, PC00D01.MSGTINF);
                 // CSV 파일에 있는 TagName, NodeId 리스트를 MonitoredItem으로 등록하고 
-                ReadCsvFile();
+                ReadConfigInfo();
                 myUaClient.UpateTagData += UpdateTagValue;
                 listViewMsg.UpdateMsg($"myUaClient.UpateTagData ", false, true, true, PC00D01.MSGTINF);
                 // currentSubscription에 대한 서비스를 등록한다.
@@ -929,6 +702,34 @@ namespace DataSpider.PC01.PT
             listViewMsg.UpdateMsg($"Write last LastEnqueuedDaqID : {LastEnqueuedDaqID}", false, true);
             return true;
         }
+        private void ReadConfigInfo()
+        {
+            try
+            {
+                string configInfo = drEquipment["CONFIG_INFO"]?.ToString();
+                if (string.IsNullOrWhiteSpace(configInfo))
+                {
+                    m_Owner.listViewMsg(m_Name, $"Read Config Info", false, m_nCurNo, 6, true, PC00D01.MSGTINF);
+                    return;
+                }
+                string[] arrConfigInfo = drEquipment["CONFIG_INFO"]?.ToString().Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+                foreach (string lineData in arrConfigInfo)
+                {
+                    listViewMsg.UpdateMsg($"Data : {lineData}", false, true, true, PC00D01.MSGTINF);
+                    string[] data = lineData.Split(',');
+                    if (data.Length < 2)
+                        continue;
+                    if (string.IsNullOrWhiteSpace(data[0]) || string.IsNullOrWhiteSpace(data[1]))
+                        continue;
+                    myUaClient.AddItem(data[0], data[1]);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                listViewMsg.UpdateMsg($"Exceptioin - ReadConfigInfo ({ex})", false, true, true, PC00D01.MSGTERR);
+            }
+        }
 
 
 
@@ -939,6 +740,7 @@ namespace DataSpider.PC01.PT
             string lineData = string.Empty;
             string errCode = string.Empty;
             string errText = string.Empty;
+
 
             try
             {
