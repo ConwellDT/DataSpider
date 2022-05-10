@@ -118,7 +118,7 @@ namespace DataSpider.PC01.PT
                 myUaClient.CreateSubscription(1000);
                 listViewMsg.UpdateMsg($"myUaClient.CreateSubscription ", false, true, true, PC00D01.MSGTINF);
                 // CSV 파일에 있는 TagName, NodeId 리스트를 MonitoredItem으로 등록하고 
-                ReadCfgData();
+                ReadConfigInfo();
                 myUaClient.UpateTagData += UpdateTagValue;
                 myUaClient.LogMsgFunc += LogMsg; 
 
@@ -135,6 +135,8 @@ namespace DataSpider.PC01.PT
                 myUaClient = null;
             }
         }
+
+
         void ReadCsvFile()
         {
             string section = m_Name;
@@ -167,17 +169,18 @@ namespace DataSpider.PC01.PT
                 listViewMsg.UpdateMsg($"Exceptioin - ReadCsvFile ({ex})", false, true, true, PC00D01.MSGTERR);
             }
         }
-        void ReadCfgData()
+        private void ReadConfigInfo()
         {
             try
             {
                 string configInfo = drEquipment["CONFIG_INFO"]?.ToString();
                 if (string.IsNullOrWhiteSpace(configInfo))
                 {
+                    m_Owner.listViewMsg(m_Name, $"Read Config Info", false, m_nCurNo, 6, true, PC00D01.MSGTINF);
                     return;
                 }
-                string[] arrConfig = configInfo.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
-                foreach (string lineData in arrConfig)
+                string[] arrConfigInfo = drEquipment["CONFIG_INFO"]?.ToString().Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+                foreach (string lineData in arrConfigInfo)
                 {
                     listViewMsg.UpdateMsg($"Data : {lineData}", false, true, true, PC00D01.MSGTINF);
                     string[] data = lineData.Split(',');
@@ -191,9 +194,10 @@ namespace DataSpider.PC01.PT
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.ToString());
-                listViewMsg.UpdateMsg($"Exceptioin - ReadCsvFile ({ex})", false, true, true, PC00D01.MSGTERR);
+                listViewMsg.UpdateMsg($"Exceptioin - ReadConfigInfo ({ex})", false, true, true, PC00D01.MSGTERR);
             }
         }
+
         public void UpdateTagValue( string tagname, string value, string datetime, string status)
         {
             //EnQueue(MSGTYPE.MEASURE,$"{tagname},{datetime},{value},{status}");

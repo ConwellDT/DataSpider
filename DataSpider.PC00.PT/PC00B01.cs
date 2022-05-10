@@ -104,7 +104,5 @@ namespace DataSpider.PC00.PT
             }
             return true;
         }
-
-
     }
 }
