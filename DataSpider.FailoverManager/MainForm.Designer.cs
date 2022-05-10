@@ -193,7 +193,7 @@ namespace DataSpider.FailoverManager
             // 
             // lbTitle
             // 
-            this.lbTitle.BackColor = System.Drawing.Color.RoyalBlue;
+            this.lbTitle.BackColor = System.Drawing.Color.Purple;
             this.lbTitle.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbTitle.Font = new System.Drawing.Font("Arial", 15F, System.Drawing.FontStyle.Bold);
             this.lbTitle.ForeColor = System.Drawing.Color.White;
@@ -283,7 +283,7 @@ namespace DataSpider.FailoverManager
             // 
             // label4
             // 
-            this.label4.BackColor = System.Drawing.Color.RoyalBlue;
+            this.label4.BackColor = System.Drawing.Color.Purple;
             this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label4.Font = new System.Drawing.Font("Arial", 9.5F, System.Drawing.FontStyle.Bold);
             this.label4.ForeColor = System.Drawing.Color.White;
@@ -395,7 +395,7 @@ namespace DataSpider.FailoverManager
             // 
             // panel4
             // 
-            this.panel4.BackColor = System.Drawing.Color.RoyalBlue;
+            this.panel4.BackColor = System.Drawing.Color.Purple;
             this.panel4.Controls.Add(this.lblRunTime);
             this.panel4.Controls.Add(this.pbDbCon);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -408,7 +408,7 @@ namespace DataSpider.FailoverManager
             // lblRunTime
             // 
             this.lblRunTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblRunTime.BackColor = System.Drawing.Color.RoyalBlue;
+            this.lblRunTime.BackColor = System.Drawing.Color.Purple;
             this.lblRunTime.Font = new System.Drawing.Font("굴림", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.lblRunTime.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.lblRunTime.Location = new System.Drawing.Point(733, 6);
