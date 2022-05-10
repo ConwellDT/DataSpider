@@ -19,7 +19,6 @@ namespace DataSpider.PC01.PT
         string p_strErrCode;
         string p_strErrText;
         string prev_strErrText;
-        bool m_bConnection = false;
 
         protected DateTime dtLastWriteTime = DateTime.MinValue;
         private DateTime m_dtLastProcessTime = DateTime.MinValue;
@@ -81,30 +80,54 @@ namespace DataSpider.PC01.PT
             m_dtLastProcessTime = GetLastProcessTime();
             listViewMsg.UpdateMsg($"Read From Ini File m_dtLastProcessTime :{m_dtLastProcessTime.ToString("yyyy-MM-dd HH:mm:ss.fff")}", false, true, true, PC00D01.MSGTINF);
             string data = string.Empty;
+            int nDisconnectCount = 0;
             while (!bTerminal)
             {
                 try
                 {
-                    if ((data = ResultProcess())!=string.Empty )
+                    if (mCon == null || mCon.State == ConnectionState.Closed)
                     {
-                        UpdateEquipmentProgDateTime(IF_STATUS.Normal);
-                         //data = ResultProcess();
-                        EnQueue(MSGTYPE.MEASURE, data);
-                        listViewMsg.UpdateMsg($"{m_Name}({MSGTYPE.MEASURE}) Data has been enqueued", true, true);
-                        fileLog.WriteData(data, "EnQ", $"{m_Name}({MSGTYPE.MEASURE})");
-                        Thread.Sleep(1000);
+                        try
+                        {
+                            mCon = new SqlConnection(m_ConnectionInfo);
+                            mCon.Open();
+                        }
+                        catch (Exception ex)
+                        {
+                            if (nDisconnectCount % 30 == 0)
+                            {
+                                listViewMsg.UpdateMsg($"SqlConnection Exception in ThreadJob  - ({ex})", false, true, true, PC00D01.MSGTINF);
+                                Thread.Sleep(2000);
+                            }
+                        }
+                    }
+                    if (mCon.State == ConnectionState.Open)
+                    {
+                        if ((data = ResultProcess()) != string.Empty)
+                        {
+                            UpdateEquipmentProgDateTime(IF_STATUS.Normal);
+                            //data = ResultProcess();
+                            EnQueue(MSGTYPE.MEASURE, data);
+                            listViewMsg.UpdateMsg($"{m_Name}({MSGTYPE.MEASURE}) Data has been enqueued", true, true);
+                            fileLog.WriteData(data, "EnQ", $"{m_Name}({MSGTYPE.MEASURE})");
+                            Thread.Sleep(1000);
+                        }
+                        else
+                        {
+                            if (mCon.State == ConnectionState.Open)
+                            {
+                                if (string.IsNullOrWhiteSpace(data))
+                                {
+                                    listViewMsg.UpdateMsg("No data in DB", true, false);
+                                    Thread.Sleep(2000);
+                                }
+                            }
+                        }
+                        nDisconnectCount = 0;
                     }
                     else
                     {
-                        if (m_bConnection == true)
-                        {
-                            if (string.IsNullOrWhiteSpace(data))
-                            {
-                                listViewMsg.UpdateMsg("No data in DB", true, false);
-                                Thread.Sleep(10000);
-                            }
-                        }
-                        else
+                        if (nDisconnectCount % 30 == 0)
                         {
                             UpdateEquipmentProgDateTime(IF_STATUS.Disconnected);
                             if (prev_strErrText != p_strErrText)
@@ -113,8 +136,9 @@ namespace DataSpider.PC01.PT
                                 listViewMsg.UpdateMsg($"Exception in ThreadJob - ({p_strErrText})", false, true, true, PC00D01.MSGTERR);
                                 prev_strErrText = p_strErrText;
                             }
-                            Thread.Sleep(1000);
+                            Thread.Sleep(2000);
                         }
+                        nDisconnectCount++;
                     }
                 }
                 catch (Exception ex)
@@ -125,7 +149,7 @@ namespace DataSpider.PC01.PT
                 finally
                 {
                 }
-                Thread.Sleep(100);
+                Thread.Sleep(1000);
             }
             UpdateEquipmentProgDateTime(IF_STATUS.Stop);
             listViewMsg.UpdateStatus(false);
@@ -257,10 +281,8 @@ namespace DataSpider.PC01.PT
                 dt1=GetDataTable(strSql, ref p_strErrCode, ref p_strErrText);
                 if (dt1 == null)
                 {
-                    m_bConnection = false;
                     return string.Empty;
                 }
-                m_bConnection = true;
                 if (dt1.Rows.Count == 0) return string.Empty;
 
                 dr1 = dt1.Rows[0];

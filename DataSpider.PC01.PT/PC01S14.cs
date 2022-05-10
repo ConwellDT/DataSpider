@@ -233,7 +233,7 @@ namespace DataSpider.PC01.PT
                     DataTable distinctTable = sdt.DefaultView.ToTable(true, "WaveLength");
                     foreach (DataRow dr in distinctTable.Rows)
                     {
-                        retString += " " + dr["WaveLength"] + " ;";
+                        retString += " " + dr["WaveLength"] + " ,";
                     }
                     if (retString.Length > 0)
                         retString = retString.Substring(0, retString.Length - 1);
@@ -248,9 +248,19 @@ namespace DataSpider.PC01.PT
             public string GetConfigDataPoints()
             {
                 string retString = string.Empty;
-                if (sdt.Rows.Count > 0)
+                try
                 {
-                    retString = (string)sdt.Rows[0]["Datapoints"];
+                    DataTable distinctTable = sdt.DefaultView.ToTable(true, "WaveLength");
+                    foreach (DataRow dr in distinctTable.Rows)
+                    {
+                        retString += " " + (string)sdt.Rows[0]["Datapoints"] + " ,";
+                    }
+                    if (retString.Length > 0)
+                        retString = retString.Substring(0, retString.Length - 1);
+                }
+                catch (Exception ex)
+                {
+
                 }
                 return retString.Trim();
             }
@@ -258,25 +268,39 @@ namespace DataSpider.PC01.PT
             public string GetConfigECs()
             {
                 string retString = string.Empty;
-                DataTable distinctTable = sdt.DefaultView.ToTable(true, "WaveLength", "ExtinctionCoefficient");
-                foreach (DataRow dr in distinctTable.Rows)
+                try
                 {
-                    retString += " " + dr["ExtinctionCoefficient"] + " ,";
+                    DataTable distinctTable = sdt.DefaultView.ToTable(true, "WaveLength", "ExtinctionCoefficient");
+                    foreach (DataRow dr in distinctTable.Rows)
+                    {
+                        retString += " " + dr["ExtinctionCoefficient"] + " ,";
+                    }
+                    if (retString.Length > 0)
+                        retString = retString.Substring(0, retString.Length - 1);
                 }
-                if (retString.Length > 0)
-                    retString = retString.Substring(0, retString.Length - 1);
+                catch (Exception ex)
+                {
+
+                }
                 return retString.Trim();
             }
 
             public string GetSeachPathLengths()
             {
                 string retString = string.Empty;
-                for (int nRow = 0; nRow < 3 && nRow < rdt.Rows.Count; nRow++)
+                try
                 {
-                    retString += " " + rdt.Rows[nRow]["Pathlength"] + " ,";
+                    for (int nRow = 0; nRow < 3 && nRow < rdt.Rows.Count; nRow++)
+                    {
+                        retString += " " + rdt.Rows[nRow]["Pathlength"] + " ,";
+                    }
+                    if (retString.Length > 0)
+                        retString = retString.Substring(0, retString.Length - 1);
                 }
-                if (retString.Length > 0)
-                    retString = retString.Substring(0, retString.Length - 1);
+                catch (Exception ex)
+                {
+
+                }
                 return retString.Trim();
             }
             // 통계는 WaveLength순으로
