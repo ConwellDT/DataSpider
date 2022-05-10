@@ -178,7 +178,7 @@ namespace DataSpider.PC01.PT
                 CreateProcess(equipType);
                 this.m_clsLog.LogToFile("LOG", this.m_strLogFileName, PC00D01.MSGTDBG, MethodBase.GetCurrentMethod().Name, "3");
 
-                serverCode = GetServerCode();
+                serverCode = m_SqlBiz.GetServerId(Environment.MachineName).ToString();
 
                 thCheckRequest = new Thread(ThreadCheckRequest);
                 thCheckRequest.Start();
@@ -547,24 +547,6 @@ namespace DataSpider.PC01.PT
             {
                 this.m_clsLog.LogToFile("LOG", this.m_strLogFileName, PC00D01.MSGTERR, MethodBase.GetCurrentMethod().Name, ex.ToString());
             }
-        }
-        private string GetServerCode()
-        {
-            string result = string.Empty;
-            try
-            {
-
-                DataTable dtResult = m_SqlBiz.GetCommonCode("SERVER_CODE", Environment.MachineName, ref strErrCode, ref strErrText);
-                if (dtResult.Rows.Count > 0)
-                {
-                    result = dtResult.Rows[0]["CODE_VALUE"].ToString();
-                }
-            }
-            catch (Exception ex)
-            {
-                this.m_clsLog.LogToFile("LOG", this.m_strLogFileName, PC00D01.MSGTERR, MethodBase.GetCurrentMethod().Name, ex.ToString());
-            }
-            return result;
         }
         private void GetEquipmentInfo()
         {

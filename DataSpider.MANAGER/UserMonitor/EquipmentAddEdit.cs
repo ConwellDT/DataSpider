@@ -67,10 +67,10 @@ namespace DataSpider.UserMonitor
             comboBox_InterfaceType.DisplayMember = "CODE_NM_VALUE";
             comboBox_InterfaceType.ValueMember = "CODE";
 
-            DataTable dtServerName = sqlBiz.GetCommonCode("SERVER_NAME", ref strErrCode, ref strErrText);
+            DataTable dtServerName = sqlBiz.GetCommonCode("SERVER_CODE", ref strErrCode, ref strErrText);
             comboBox_ServerName.DataSource = dtServerName;
             comboBox_ServerName.DisplayMember = "CODE_NM_VALUE";
-            comboBox_ServerName.ValueMember = "CODE_NM";
+            comboBox_ServerName.ValueMember = "CODE_VALUE";
 
             //
             // 2022. 2. 16 : Han, Ilho
