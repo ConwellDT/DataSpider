@@ -204,7 +204,7 @@ namespace DataSpider.PC01.PT
             EnQueue(MSGTYPE.MEASURE,$"{tagname},{datetime},{value}");
             if (tagname == "MSR_VAL")
             {
-                EnQueue(MSGTYPE.MEASURE, $"SVRTIME,{datetime},{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}");
+                EnQueue(MSGTYPE.MEASURE, $"MSR_SVRTIME,{datetime},{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}");
             }
             listViewMsg.UpdateMsg($"{tagname},{datetime},{value},{status}",false, true, true, PC00D01.MSGTINF);
         }
