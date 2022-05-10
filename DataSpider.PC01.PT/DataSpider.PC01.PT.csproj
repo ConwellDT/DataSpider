@@ -96,6 +96,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PC01S19.cs" />
     <Compile Include="PC01S17 - 복사본.cs" />
     <Compile Include="PC01S17.cs" />
     <Compile Include="PC01S16.cs" />
@@ -163,6 +164,7 @@
     <None Include="PC01S13.cs_Turbidity_AQ4500" />
     <None Include="PC01S14.cs_SOLOVPE" />
     <None Include="PC01S15.cs_FIT_SC5P파일전용" />
+    <None Include="PC01S19.cs_OSMO_TECH" />
     <None Include="PC01S18.cs_MCA" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
