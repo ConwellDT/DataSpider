@@ -202,7 +202,7 @@ namespace DataSpider.PC01.PT
         {
             //EnQueue(MSGTYPE.MEASURE,$"{tagname},{datetime},{value},{status}");
             EnQueue(MSGTYPE.MEASURE,$"{tagname},{datetime},{value}");
-            if (tagname == "MSR_SAMPLE_TIME" || tagname == "QC_SAMPLE_TIME")
+            if (tagname == "MSR_VAL")
             {
                 EnQueue(MSGTYPE.MEASURE, $"SVRTIME,{datetime},{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}");
             }
