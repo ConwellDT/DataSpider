@@ -97,7 +97,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PC01S19.cs" />
-    <Compile Include="PC01S17 - 복사본.cs" />
     <Compile Include="PC01S17.cs" />
     <Compile Include="PC01S16.cs" />
     <Compile Include="PC01S14.cs" />

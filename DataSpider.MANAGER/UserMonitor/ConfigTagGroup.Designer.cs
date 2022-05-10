@@ -264,6 +264,7 @@ namespace DataSpider.UserMonitor
             // checkedLBoxTagList
             // 
             this.checkedLBoxTagList.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.checkedLBoxTagList.CheckOnClick = true;
             this.checkedLBoxTagList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.checkedLBoxTagList.Font = new System.Drawing.Font("맑은 고딕", 12F);
             this.checkedLBoxTagList.FormattingEnabled = true;

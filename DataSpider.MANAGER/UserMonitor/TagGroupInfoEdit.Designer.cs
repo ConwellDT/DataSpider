@@ -91,7 +91,7 @@ namespace DataSpider.UserMonitor
             this.labelGroupDesc.Name = "labelGroupDesc";
             this.labelGroupDesc.Size = new System.Drawing.Size(114, 40);
             this.labelGroupDesc.TabIndex = 1;
-            this.labelGroupDesc.Text = "Descripyion";
+            this.labelGroupDesc.Text = "Description";
             this.labelGroupDesc.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tableLayoutGroupDescInput

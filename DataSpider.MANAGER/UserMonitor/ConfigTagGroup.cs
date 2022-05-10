@@ -57,6 +57,7 @@ namespace DataSpider.UserMonitor
         {
             string strErrCode = string.Empty;
             string strErrText = string.Empty;
+            label_GroupDesc.Text = string.Empty;
 
             if (comboBoxGroupSel.Items.Count > 0)
             {
@@ -216,8 +217,8 @@ namespace DataSpider.UserMonitor
                     MessageBox.Show(strErrText, $"Group add fail", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
+                MessageBox.Show("Tag Group Added.", $"Tag Group", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            MessageBox.Show("Tag Group Added.", $"Tag Group", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void button_Edit_Click(object sender, EventArgs e)
@@ -229,6 +230,12 @@ namespace DataSpider.UserMonitor
             if (comboBox_EquipType.SelectedIndex < 0 || comboBox_EquipType.Items.Count < 1)
             {
                 MessageBox.Show("Equipment type is not selected", $"Group Edit", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            if (comboBoxGroupSel.SelectedIndex < 0 || comboBoxGroupSel.Items.Count < 1)
+            {
+                MessageBox.Show("Group is not selected", $"Group Edit", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -345,6 +352,11 @@ namespace DataSpider.UserMonitor
             if (comboBox_EquipType.SelectedIndex < 0 || comboBox_EquipType.Items.Count < 1)
             {
                 MessageBox.Show("Equipment type is not selected", $"Group Delete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            if (comboBoxGroupSel.SelectedIndex < 0 || comboBoxGroupSel.Items.Count < 1)
+            {
+                MessageBox.Show("Group is not selected", $"Group Edit", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
