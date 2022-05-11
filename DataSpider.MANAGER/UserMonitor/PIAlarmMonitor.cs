@@ -288,9 +288,9 @@ namespace DataSpider.UserMonitor
         }
         private void resetIFFlagToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (int.TryParse(listView_Main.SelectedItems[0].Text, out int hiSeq))
+            if (listView_Main.SelectedItems.Count > 0 && int.TryParse(listView_Main.SelectedItems[0].Text, out int hiSeq))
             {
-                if (DialogResult.Yes.Equals(MessageBox.Show("Do you want to reset PI I/F flag ? It will try to save the PI again.", "PIAlarm", MessageBoxButtons.YesNo)))
+                if (DialogResult.Yes.Equals(MessageBox.Show($"Do you want to reset PI I/F flag [{listView_Main.SelectedItems[0].SubItems[1].Text}] ? It will try to save the PI again.", "PIAlarm", MessageBoxButtons.YesNo)))
                 {
                     sqlBiz.RestPIIFFlag(hiSeq);
                     GetProgramStatus();
@@ -300,9 +300,9 @@ namespace DataSpider.UserMonitor
 
         private void removePIAlarmToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (int.TryParse(listView_Main.SelectedItems[0].Text, out int hiSeq))
+            if (listView_Main.SelectedItems.Count > 0 && int.TryParse(listView_Main.SelectedItems[0].Text, out int hiSeq))
             {
-                if (DialogResult.Yes.Equals(MessageBox.Show("Do you want to ignore PI I/F alarm ?", "PIAlarm", MessageBoxButtons.YesNo)))
+                if (DialogResult.Yes.Equals(MessageBox.Show($"Do you want to remove PI I/F alarm [{listView_Main.SelectedItems[0].SubItems[1].Text}] ?", "PIAlarm", MessageBoxButtons.YesNo)))
                 {
                     sqlBiz.RemovePIAlarm(hiSeq);
                     GetProgramStatus();

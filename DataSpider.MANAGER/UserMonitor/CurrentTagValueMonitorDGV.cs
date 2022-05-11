@@ -55,6 +55,7 @@ namespace DataSpider.UserMonitor
         }
         private void CurrentTagValueMonitor_Load(object sender, EventArgs e)
         {
+            buttonFilter.Visible = false;
             threadDataRefresh = new Thread(new ThreadStart(ThreadJob));
             threadDataRefresh.Start();
 
@@ -97,7 +98,7 @@ namespace DataSpider.UserMonitor
 
         private void DataGridView_Main_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (e.RowIndex < 0 || e.RowIndex >= dataGridView_Main.Rows.Count || nDBModeCurrent==0)
+            if (e.RowIndex < 0 || e.RowIndex >= dataGridView_Main.Rows.Count)// || nDBModeCurrent==0)
             {
                 return;
             }
@@ -439,17 +440,13 @@ namespace DataSpider.UserMonitor
                                 row["GROUP_NM_VALUE"] = "All(All Tags)";
                                 row["EQUIP_TYPE"] = equipType;
 
-                                dtGroups.Rows.Add(row);
+                                dtGroups.Rows.InsertAt(row, 0);
 
                                 comboBoxTagGroupSel.DataSource = dtGroups;
                                 comboBoxTagGroupSel.DisplayMember = "GROUP_NM_VALUE";
                                 comboBoxTagGroupSel.ValueMember = "GROUP_NM";
 
-
-                                if( dtGroups.Rows.Count > 0 )
-                                {
-                                    comboBoxTagGroupSel.SelectedIndex = (comboBoxTagGroupSel.Items.Count - 1);
-                                }
+                                comboBoxTagGroupSel.SelectedIndex = 0;
                             }
 
                             equipTypeCur = equipType;
@@ -533,8 +530,7 @@ namespace DataSpider.UserMonitor
             {
                 return;
             }
-            string tagName = dataGridView_Main.SelectedRows[0].Cells[3].Value.ToString();
-            TAGValueHistoryPopupDGV form = new TAGValueHistoryPopupDGV(tagName);
+            TAGValueHistoryPopupDGV form = new TAGValueHistoryPopupDGV(radioButtonCurTag.Checked ? dataGridView_Main.SelectedRows[0].Cells[3].Value.ToString() : dataGridView_Main.SelectedRows[0].Cells[1].Value.ToString());
             form.ShowDialog(this);
         }
 
@@ -793,6 +789,7 @@ namespace DataSpider.UserMonitor
 
                 checkBox_AutoRefresh.Checked = autoRefresheChecked;
                 checkBox_AutoRefresh.Visible = button_SetInterval.Visible = textBox_RefreshInterval.Visible = label_RefreshInterval.Visible = true;
+                buttonFilter.Visible = false;
             }
             // History
             else
@@ -801,6 +798,7 @@ namespace DataSpider.UserMonitor
 
                 checkBox_AutoRefresh.Checked = false;
                 checkBox_AutoRefresh.Visible = button_SetInterval.Visible = textBox_RefreshInterval.Visible = label_RefreshInterval.Visible = false;
+                buttonFilter.Visible = true;
             }
             GetProgramStatus();
         }
