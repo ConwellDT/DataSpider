@@ -59,7 +59,6 @@ namespace DataSpider.UserMonitor
         private void InitControls()
         {
             DateTime dtNow = DateTime.Now;
-
             dateTimePicker_Start.Value = dtNow;
             dateTimePicker_StartTime.Value = DateTime.Parse("00:00:00");
             dateTimePicker_End.Value = dtNow;

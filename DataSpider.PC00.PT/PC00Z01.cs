@@ -945,6 +945,26 @@ namespace DataSpider.PC00.PT
             }
             return result;
         }
+        public DataTable GetTagValueHistoryByTag(string tagName, string minDate, string maxDate, ref string _strErrCode, ref string _strErrText)
+        {
+            DataTable result = null;
+            try
+            {
+                StringBuilder strQuery = new StringBuilder();
+                strQuery.Append($"EXEC GetTagValueHistoryByTag '{tagName}', '{minDate}', '{maxDate}'");
+
+                DataSet ds = CFW.Data.MsSqlDbAccess.GetDataSet(strQuery.ToString(), null, CommandType.Text, ref _strErrCode, ref _strErrText);
+                if (ds != null && ds.Tables[0] != null)
+                {
+                    result = ds.Tables[0];
+                }
+            }
+            catch (Exception ex)
+            {
+                _strErrText = ex.ToString();
+            }
+            return result;
+        }
         public DataTable GetSystemLog(string minDate, string maxDate, string equipName,  string level, ref string _strErrCode, ref string _strErrText)
         {
             DataTable result = null;

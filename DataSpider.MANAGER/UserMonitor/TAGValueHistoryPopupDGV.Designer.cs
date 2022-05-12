@@ -54,6 +54,16 @@ namespace DataSpider.UserMonitor
             this.button_Refresh = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
             this.button_Close = new System.Windows.Forms.Button();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.dateTimePicker_Start = new System.Windows.Forms.DateTimePicker();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.dateTimePicker_StartTime = new System.Windows.Forms.DateTimePicker();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.panel10 = new System.Windows.Forms.Panel();
+            this.dateTimePicker_End = new System.Windows.Forms.DateTimePicker();
+            this.panel11 = new System.Windows.Forms.Panel();
+            this.dateTimePicker_EndTime = new System.Windows.Forms.DateTimePicker();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -63,6 +73,11 @@ namespace DataSpider.UserMonitor
             this.tableLayoutPanel2.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel6.SuspendLayout();
+            this.panel7.SuspendLayout();
+            this.panel8.SuspendLayout();
+            this.panel9.SuspendLayout();
+            this.panel10.SuspendLayout();
+            this.panel11.SuspendLayout();
             this.SuspendLayout();
             // 
             // imageList2
@@ -160,41 +175,41 @@ namespace DataSpider.UserMonitor
             this.toolStripSeparator3,
             this.toolStripMenuItemDataList});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(211, 122);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(118, 88);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(207, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(114, 6);
             // 
             // toolStripMenuItemLog
             // 
             this.toolStripMenuItemLog.Name = "toolStripMenuItemLog";
-            this.toolStripMenuItemLog.Size = new System.Drawing.Size(210, 24);
+            this.toolStripMenuItemLog.Size = new System.Drawing.Size(117, 22);
             this.toolStripMenuItemLog.Text = "Log";
             this.toolStripMenuItemLog.Click += new System.EventHandler(this.toolStripMenuItemLog_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(207, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(114, 6);
             // 
             // toolStripMenuItemData
             // 
             this.toolStripMenuItemData.Name = "toolStripMenuItemData";
-            this.toolStripMenuItemData.Size = new System.Drawing.Size(210, 24);
+            this.toolStripMenuItemData.Size = new System.Drawing.Size(117, 22);
             this.toolStripMenuItemData.Text = "Data";
             this.toolStripMenuItemData.Click += new System.EventHandler(this.toolStripMenuItemData_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(207, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(114, 6);
             // 
             // toolStripMenuItemDataList
             // 
             this.toolStripMenuItemDataList.Name = "toolStripMenuItemDataList";
-            this.toolStripMenuItemDataList.Size = new System.Drawing.Size(210, 24);
+            this.toolStripMenuItemDataList.Size = new System.Drawing.Size(117, 22);
             this.toolStripMenuItemDataList.Text = "DataList";
             this.toolStripMenuItemDataList.Click += new System.EventHandler(this.toolStripMenuItemDataList_Click);
             // 
@@ -236,19 +251,29 @@ namespace DataSpider.UserMonitor
             // 
             // tableLayoutPanel2
             // 
-            this.tableLayoutPanel2.ColumnCount = 3;
+            this.tableLayoutPanel2.ColumnCount = 9;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 130F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 130F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
             this.tableLayoutPanel2.Controls.Add(this.panel4, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.panel5, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.panel6, 2, 0);
+            this.tableLayoutPanel2.Controls.Add(this.panel5, 7, 0);
+            this.tableLayoutPanel2.Controls.Add(this.panel6, 8, 0);
+            this.tableLayoutPanel2.Controls.Add(this.panel7, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.panel8, 2, 0);
+            this.tableLayoutPanel2.Controls.Add(this.panel9, 3, 0);
+            this.tableLayoutPanel2.Controls.Add(this.panel10, 4, 0);
+            this.tableLayoutPanel2.Controls.Add(this.panel11, 5, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(1259, 34);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
@@ -257,7 +282,7 @@ namespace DataSpider.UserMonitor
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(3, 3);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(953, 28);
+            this.panel4.Size = new System.Drawing.Size(253, 28);
             this.panel4.TabIndex = 0;
             // 
             // panel5
@@ -276,7 +301,7 @@ namespace DataSpider.UserMonitor
             this.button_Refresh.Name = "button_Refresh";
             this.button_Refresh.Size = new System.Drawing.Size(144, 28);
             this.button_Refresh.TabIndex = 2;
-            this.button_Refresh.Text = "Refresh";
+            this.button_Refresh.Text = "Inquire";
             this.button_Refresh.UseVisualStyleBackColor = true;
             this.button_Refresh.Click += new System.EventHandler(this.button_Refresh_Click);
             // 
@@ -300,9 +325,95 @@ namespace DataSpider.UserMonitor
             this.button_Close.UseVisualStyleBackColor = true;
             this.button_Close.Click += new System.EventHandler(this.button_Close_Click);
             // 
+            // panel7
+            // 
+            this.panel7.Controls.Add(this.dateTimePicker_Start);
+            this.panel7.Location = new System.Drawing.Point(262, 3);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(194, 28);
+            this.panel7.TabIndex = 3;
+            // 
+            // dateTimePicker_Start
+            // 
+            this.dateTimePicker_Start.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dateTimePicker_Start.Location = new System.Drawing.Point(0, 0);
+            this.dateTimePicker_Start.Name = "dateTimePicker_Start";
+            this.dateTimePicker_Start.Size = new System.Drawing.Size(194, 25);
+            this.dateTimePicker_Start.TabIndex = 2;
+            // 
+            // panel8
+            // 
+            this.panel8.Controls.Add(this.dateTimePicker_StartTime);
+            this.panel8.Location = new System.Drawing.Point(462, 3);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(124, 28);
+            this.panel8.TabIndex = 4;
+            // 
+            // dateTimePicker_StartTime
+            // 
+            this.dateTimePicker_StartTime.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dateTimePicker_StartTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.dateTimePicker_StartTime.Location = new System.Drawing.Point(0, 0);
+            this.dateTimePicker_StartTime.Name = "dateTimePicker_StartTime";
+            this.dateTimePicker_StartTime.ShowUpDown = true;
+            this.dateTimePicker_StartTime.Size = new System.Drawing.Size(124, 25);
+            this.dateTimePicker_StartTime.TabIndex = 3;
+            // 
+            // panel9
+            // 
+            this.panel9.Controls.Add(this.label1);
+            this.panel9.Location = new System.Drawing.Point(592, 3);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(14, 28);
+            this.panel9.TabIndex = 5;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label1.Location = new System.Drawing.Point(0, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(17, 17);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "~";
+            // 
+            // panel10
+            // 
+            this.panel10.Controls.Add(this.dateTimePicker_End);
+            this.panel10.Location = new System.Drawing.Point(612, 3);
+            this.panel10.Name = "panel10";
+            this.panel10.Size = new System.Drawing.Size(194, 28);
+            this.panel10.TabIndex = 6;
+            // 
+            // dateTimePicker_End
+            // 
+            this.dateTimePicker_End.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dateTimePicker_End.Location = new System.Drawing.Point(0, 0);
+            this.dateTimePicker_End.Name = "dateTimePicker_End";
+            this.dateTimePicker_End.Size = new System.Drawing.Size(194, 25);
+            this.dateTimePicker_End.TabIndex = 1;
+            // 
+            // panel11
+            // 
+            this.panel11.Controls.Add(this.dateTimePicker_EndTime);
+            this.panel11.Location = new System.Drawing.Point(812, 3);
+            this.panel11.Name = "panel11";
+            this.panel11.Size = new System.Drawing.Size(124, 28);
+            this.panel11.TabIndex = 7;
+            // 
+            // dateTimePicker_EndTime
+            // 
+            this.dateTimePicker_EndTime.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dateTimePicker_EndTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.dateTimePicker_EndTime.Location = new System.Drawing.Point(0, 0);
+            this.dateTimePicker_EndTime.Name = "dateTimePicker_EndTime";
+            this.dateTimePicker_EndTime.ShowUpDown = true;
+            this.dateTimePicker_EndTime.Size = new System.Drawing.Size(124, 25);
+            this.dateTimePicker_EndTime.TabIndex = 4;
+            // 
             // TAGValueHistoryPopupDGV
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1265, 861);
             this.Controls.Add(this.tableLayoutPanel1);
@@ -323,6 +434,12 @@ namespace DataSpider.UserMonitor
             this.tableLayoutPanel2.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
+            this.panel7.ResumeLayout(false);
+            this.panel8.ResumeLayout(false);
+            this.panel9.ResumeLayout(false);
+            this.panel9.PerformLayout();
+            this.panel10.ResumeLayout(false);
+            this.panel11.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -349,5 +466,15 @@ namespace DataSpider.UserMonitor
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemDataList;
+        private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.Panel panel8;
+        private System.Windows.Forms.Panel panel9;
+        private System.Windows.Forms.Panel panel10;
+        private System.Windows.Forms.Panel panel11;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DateTimePicker dateTimePicker_Start;
+        private System.Windows.Forms.DateTimePicker dateTimePicker_StartTime;
+        private System.Windows.Forms.DateTimePicker dateTimePicker_End;
+        private System.Windows.Forms.DateTimePicker dateTimePicker_EndTime;
     }
 }

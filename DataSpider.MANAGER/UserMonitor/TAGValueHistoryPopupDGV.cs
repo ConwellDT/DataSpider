@@ -15,16 +15,14 @@ namespace DataSpider.UserMonitor
     {
         private PC00Z01 sqlBiz = new PC00Z01();
         private string tagName = string.Empty;
-        private int periodDays = 30;
         private int selectedIndex = 0;
         private string equipType;
         private string equipName;
         private string logviewProgram = "NotePad";
-        public TAGValueHistoryPopupDGV(string _tagName = "", int _periodDays = 60)
+        public TAGValueHistoryPopupDGV(string _tagName = "")
         {
             InitializeComponent();
             tagName = _tagName;
-            periodDays = _periodDays;
         }
         private void TAGValueHistoryPopup_Load(object sender, EventArgs e)
         {
@@ -35,6 +33,13 @@ namespace DataSpider.UserMonitor
             listView_Info.SmallImageList = dummyImageList;
             dataGridView1.RowTemplate.MinimumHeight = 30;
             dataGridView1.DoubleBuffered(true);
+
+            DateTime dtNow = DateTime.Now;
+            dateTimePicker_Start.Value = dtNow.AddDays(-60);
+            dateTimePicker_StartTime.Value = DateTime.Parse("00:00:00");
+            dateTimePicker_End.Value = dtNow;
+            dateTimePicker_EndTime.Value = DateTime.Parse("23:59:59");
+
             DisplayInfo();
             DisplayData();
             logviewProgram=ConfigHelper.GetAppSetting("LogViewProgram").Trim();
@@ -73,7 +78,7 @@ namespace DataSpider.UserMonitor
         {
             string strErrCode = string.Empty;
             string strErrText = string.Empty;
-            DataTable dtProgramStatus = sqlBiz.GetTagValueHistory(tagName.Trim(), periodDays, ref strErrCode, ref strErrText);
+            DataTable dtProgramStatus = sqlBiz.GetTagValueHistoryByTag(tagName.Trim(), $"{dateTimePicker_Start.Value:yyyy-MM-dd} {dateTimePicker_StartTime.Value:HH:mm:ss}.000", $"{dateTimePicker_End.Value:yyyy-MM-dd} {dateTimePicker_EndTime.Value:HH:mm:ss}.999", ref strErrCode, ref strErrText);
 
             dataGridView1.DataSource = dtProgramStatus;
 
