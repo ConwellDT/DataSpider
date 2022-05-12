@@ -230,7 +230,7 @@ namespace DataSpider.PC01.PT
                 string retString = string.Empty;
                 try
                 {
-                    DataTable distinctTable = sdt.DefaultView.ToTable(true, "WaveLength");
+                    DataTable distinctTable = sdt.DefaultView.ToTable(true, "WaveLength", "ExtinctionCoefficient", "DataPoints");
                     foreach (DataRow dr in distinctTable.Rows)
                     {
                         retString += " " + dr["WaveLength"] + " ,";
@@ -250,7 +250,7 @@ namespace DataSpider.PC01.PT
                 string retString = string.Empty;
                 try
                 {
-                    DataTable distinctTable = sdt.DefaultView.ToTable(true, "WaveLength");
+                    DataTable distinctTable = sdt.DefaultView.ToTable(true, "WaveLength", "ExtinctionCoefficient", "DataPoints");
                     foreach (DataRow dr in distinctTable.Rows)
                     {
                         retString += " " + (string)sdt.Rows[0]["Datapoints"] + " ,";
@@ -270,7 +270,7 @@ namespace DataSpider.PC01.PT
                 string retString = string.Empty;
                 try
                 {
-                    DataTable distinctTable = sdt.DefaultView.ToTable(true, "WaveLength", "ExtinctionCoefficient");
+                    DataTable distinctTable = sdt.DefaultView.ToTable(true, "WaveLength", "ExtinctionCoefficient", "DataPoints");
                     foreach (DataRow dr in distinctTable.Rows)
                     {
                         retString += " " + dr["ExtinctionCoefficient"] + " ,";
@@ -327,7 +327,7 @@ namespace DataSpider.PC01.PT
                 DataRow[] rows = rdt.Select($"", "ID ASC");
                 for (int nData = 0; nData < nSeriesData; nData++)
                 {
-                    retString += " " + (string)rows[nRepeat * nSeriesData + nData][PropertyName] + " ;";
+                    retString += " " + (string)rows[nRepeat * nSeriesData + (nSeriesData-nData-1)][PropertyName] + " ;";
                 }
                 if (retString.Length > 0)
                     retString = retString.Substring(0, retString.Length - 1);
@@ -526,6 +526,7 @@ namespace DataSpider.PC01.PT
             IList<object> outputArguments = null;
             try
             {
+                //
                 outputArguments = myUaClient.session.Call(new NodeId("ns=2;s=Daq"),
                                                                         new NodeId("ns=2;s=Daq/GetCycleData"),
                                                                         ToBeProcessedDaqID
