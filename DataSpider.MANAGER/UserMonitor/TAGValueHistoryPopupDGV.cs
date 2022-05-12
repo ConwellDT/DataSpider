@@ -212,8 +212,6 @@ namespace DataSpider.UserMonitor
                 return string.Empty;
             }
 
-            string retString = string.Empty;
-
             string stringLine;
 
             foreach (FileInfo fi in fileInfo)
@@ -243,12 +241,7 @@ namespace DataSpider.UserMonitor
                     }
                 }
             }
-
-            foreach (string str in loglist)
-            {
-                retString += str + Environment.NewLine;
-            }
-            return retString;
+            return string.Join(Environment.NewLine, loglist);
         }
     }
 }
