@@ -709,15 +709,33 @@ namespace DataSpider.UserMonitor
             finder.Show();
         }
 
-        private void toolStripMenuItemLog_Click(object sender, EventArgs e)
+        private void ShowFile(string logData)
         {
             try
             {
                 DataGridViewRow dgvr = dataGridView_Main.CurrentRow;
-                DateTime MeasureDate = DateTime.Now;
-                DateTime.TryParse(dgvr.Cells[5].Value.ToString(), out MeasureDate);
-                string filePath = $@"{Directory.GetCurrentDirectory()}\LOG\{equipType}_{equipName}\LOG_{equipType}_{equipName}_{MeasureDate.ToString("yyyyMMdd")}.TXT";
-                Process.Start(logviewProgram, filePath);
+                if (dgvr != null)
+                {
+
+                    if (!DateTime.TryParse(dgvr.Cells[6].Value.ToString(), out DateTime dtReg))
+                    {
+                        dtReg = DateTime.Now;
+                    }
+                    string filePath = $@"{Directory.GetCurrentDirectory()}\LOG\{equipType}_{equipName}\{logData}_{equipType}_{equipName}_{dtReg:yyyyMMdd}.TXT";
+                    Process.Start(logviewProgram, filePath);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void toolStripMenuItemLog_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ShowFile("LOG");
             }
             catch (Exception ex)
             {
@@ -729,11 +747,7 @@ namespace DataSpider.UserMonitor
         {
             try
             {
-                DataGridViewRow dgvr = dataGridView_Main.CurrentRow;
-                DateTime MeasureDate = DateTime.Now;
-                DateTime.TryParse(dgvr.Cells[5].Value.ToString(), out MeasureDate);
-                string filePath = $@"{Directory.GetCurrentDirectory()}\LOG\{equipType}_{equipName}\DATA_{equipType}_{equipName}_{MeasureDate.ToString("yyyyMMdd")}.TXT";
-                Process.Start(logviewProgram, filePath);
+                ShowFile("DATA");
             }
             catch (Exception ex)
             {
