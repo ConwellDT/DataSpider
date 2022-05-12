@@ -59,13 +59,12 @@ namespace DataSpider.UserMonitor
         private void InitControls()
         {
             DateTime dtNow = DateTime.Now;
-
             dateTimePicker_Start.Value = dtNow;
             dateTimePicker_StartTime.Value = DateTime.Parse("00:00:00");
             dateTimePicker_End.Value = dtNow;
             dateTimePicker_EndTime.Value = DateTime.Parse("23:59:59");
 
-            comboBox_Level.Items.AddRange(new object[] { "All", "Trace", "Debug", "Info", "Warn", "Error", "Fatal", "Off" });
+            comboBox_Level.Items.AddRange(new object[] { "All", "Trace", "Debug", "Info", "Warn", "Error", "Fatal" });
             comboBox_Level.SelectedIndex = 0;
 
             string strErrCode = string.Empty; string strErrText = string.Empty;

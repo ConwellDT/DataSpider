@@ -67,10 +67,10 @@ namespace DataSpider.UserMonitor
             comboBox_InterfaceType.DisplayMember = "CODE_NM_VALUE";
             comboBox_InterfaceType.ValueMember = "CODE";
 
-            DataTable dtServerName = sqlBiz.GetCommonCode("SERVER_NAME", ref strErrCode, ref strErrText);
+            DataTable dtServerName = sqlBiz.GetCommonCode("SERVER_CODE", ref strErrCode, ref strErrText);
             comboBox_ServerName.DataSource = dtServerName;
             comboBox_ServerName.DisplayMember = "CODE_NM_VALUE";
-            comboBox_ServerName.ValueMember = "CODE_NM";
+            comboBox_ServerName.ValueMember = "CODE_VALUE";
 
             //
             // 2022. 2. 16 : Han, Ilho
@@ -86,7 +86,6 @@ namespace DataSpider.UserMonitor
             dataGridTagInfo.Columns[5].Name = "Value Position"; dataGridTagInfo.Columns[5].Width = 80;
             dataGridTagInfo.Columns[6].Name = "Date Position";  dataGridTagInfo.Columns[6].Width = 80;
             dataGridTagInfo.Columns[7].Name = "Time Position";  dataGridTagInfo.Columns[7].Width = 80;
-            
 
             dataGridTagInfo.EditMode = DataGridViewEditMode.EditOnKeystrokeOrF2;
             dataGridTagInfo.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -283,6 +282,8 @@ namespace DataSpider.UserMonitor
                     textBox_EquipName.Enabled = false;
                 }
             }
+            dataGridTagInfo.Columns[1].ReadOnly = true;
+            dataGridTagInfo.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells);
         }
 
         private void button_Save_Click(object sender, EventArgs e)

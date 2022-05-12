@@ -61,8 +61,8 @@ namespace DataSpider.UserMonitor
             this.radioButtonHistoryTag = new System.Windows.Forms.RadioButton();
             this.radioButtonCurTag = new System.Windows.Forms.RadioButton();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.panel6 = new System.Windows.Forms.Panel();
             this.label_RefreshInterval = new System.Windows.Forms.Label();
+            this.panel6 = new System.Windows.Forms.Panel();
             this.textBox_RefreshInterval = new System.Windows.Forms.TextBox();
             this.contextMenuStrip1.SuspendLayout();
             this.panel8.SuspendLayout();
@@ -413,15 +413,6 @@ namespace DataSpider.UserMonitor
             this.panel5.Size = new System.Drawing.Size(84, 34);
             this.panel5.TabIndex = 10;
             // 
-            // panel6
-            // 
-            this.panel6.Controls.Add(this.textBox_RefreshInterval);
-            this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel6.Location = new System.Drawing.Point(832, 3);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(54, 34);
-            this.panel6.TabIndex = 11;
-            // 
             // label_RefreshInterval
             // 
             this.label_RefreshInterval.Location = new System.Drawing.Point(0, -1);
@@ -430,6 +421,15 @@ namespace DataSpider.UserMonitor
             this.label_RefreshInterval.TabIndex = 4;
             this.label_RefreshInterval.Text = "Refresh Interval (sec)";
             this.label_RefreshInterval.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // panel6
+            // 
+            this.panel6.Controls.Add(this.textBox_RefreshInterval);
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel6.Location = new System.Drawing.Point(832, 3);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(54, 34);
+            this.panel6.TabIndex = 11;
             // 
             // textBox_RefreshInterval
             // 

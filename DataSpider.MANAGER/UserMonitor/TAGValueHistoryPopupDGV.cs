@@ -15,16 +15,14 @@ namespace DataSpider.UserMonitor
     {
         private PC00Z01 sqlBiz = new PC00Z01();
         private string tagName = string.Empty;
-        private int periodDays = 30;
         private int selectedIndex = 0;
         private string equipType;
         private string equipName;
         private string logviewProgram = "NotePad";
-        public TAGValueHistoryPopupDGV(string _tagName = "", int _periodDays = 60)
+        public TAGValueHistoryPopupDGV(string _tagName = "")
         {
             InitializeComponent();
             tagName = _tagName;
-            periodDays = _periodDays;
         }
         private void TAGValueHistoryPopup_Load(object sender, EventArgs e)
         {
@@ -35,6 +33,13 @@ namespace DataSpider.UserMonitor
             listView_Info.SmallImageList = dummyImageList;
             dataGridView1.RowTemplate.MinimumHeight = 30;
             dataGridView1.DoubleBuffered(true);
+
+            DateTime dtNow = DateTime.Now;
+            dateTimePicker_Start.Value = dtNow.AddDays(-60);
+            dateTimePicker_StartTime.Value = DateTime.Parse("00:00:00");
+            dateTimePicker_End.Value = dtNow;
+            dateTimePicker_EndTime.Value = DateTime.Parse("23:59:59");
+
             DisplayInfo();
             DisplayData();
             logviewProgram=ConfigHelper.GetAppSetting("LogViewProgram").Trim();
@@ -73,7 +78,7 @@ namespace DataSpider.UserMonitor
         {
             string strErrCode = string.Empty;
             string strErrText = string.Empty;
-            DataTable dtProgramStatus = sqlBiz.GetTagValueHistory(tagName.Trim(), periodDays, ref strErrCode, ref strErrText);
+            DataTable dtProgramStatus = sqlBiz.GetTagValueHistoryByTag(tagName.Trim(), $"{dateTimePicker_Start.Value:yyyy-MM-dd} {dateTimePicker_StartTime.Value:HH:mm:ss}.000", $"{dateTimePicker_End.Value:yyyy-MM-dd} {dateTimePicker_EndTime.Value:HH:mm:ss}.999", ref strErrCode, ref strErrText);
 
             dataGridView1.DataSource = dtProgramStatus;
 
@@ -105,7 +110,6 @@ namespace DataSpider.UserMonitor
 
         private void button_Refresh_Click(object sender, EventArgs e)
         {
-            DisplayInfo();
             DisplayData();
         }
 
@@ -119,15 +123,33 @@ namespace DataSpider.UserMonitor
             selectedIndex = e.RowIndex;
         }
 
-        private void toolStripMenuItemLog_Click(object sender, EventArgs e)
+        private void ShowFile(string logData)
         {
             try
             {
                 DataGridViewRow dgvr = dataGridView1.CurrentRow;
-                DateTime MeasureDate = DateTime.Now;
-                DateTime.TryParse(dgvr.Cells[1].Value.ToString(), out MeasureDate);
-                string filePath = $@"{Directory.GetCurrentDirectory()}\LOG\{equipType}_{equipName}\LOG_{equipType}_{equipName}_{MeasureDate.ToString("yyyyMMdd")}.TXT";
-                Process.Start(logviewProgram, filePath);
+                if (dgvr != null)
+                {
+
+                    if (!DateTime.TryParse(dgvr.Cells[2].Value.ToString(), out DateTime dtReg))
+                    {
+                        dtReg = DateTime.Now;
+                    }
+                    string filePath = $@"{Directory.GetCurrentDirectory()}\LOG\{equipType}_{equipName}\{logData}_{equipType}_{equipName}_{dtReg:yyyyMMdd}.TXT";
+                    Process.Start(logviewProgram, filePath);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void toolStripMenuItemLog_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ShowFile("LOG");
             }
             catch(Exception ex)
             {
@@ -139,11 +161,7 @@ namespace DataSpider.UserMonitor
         {
             try
             {
-                DataGridViewRow dgvr = dataGridView1.CurrentRow;
-                DateTime MeasureDate = DateTime.Now;
-                DateTime.TryParse(dgvr.Cells[1].Value.ToString(), out MeasureDate);
-                string filePath = $@"{Directory.GetCurrentDirectory()}\LOG\{equipType}_{equipName}\DATA_{equipType}_{equipName}_{MeasureDate.ToString("yyyyMMdd")}.TXT";
-                Process.Start(logviewProgram, filePath);
+                ShowFile("DATA");
             }
             catch (Exception ex)
             {
@@ -157,9 +175,9 @@ namespace DataSpider.UserMonitor
             {
                 TimeSpan oneDay = new TimeSpan(1, 0, 0, 0);
                 DataGridViewRow from_dgvr = dataGridView1.Rows[dataGridView1.RowCount - 1];
-                DateTime fromDate = DateTime.Parse(from_dgvr.Cells[1].Value.ToString()) - oneDay;
+                DateTime fromDate = DateTime.Parse(from_dgvr.Cells[2].Value.ToString()) - oneDay;
                 DataGridViewRow to_dgvr = dataGridView1.Rows[0];
-                DateTime toDate = DateTime.Parse(to_dgvr.Cells[1].Value.ToString()) + oneDay;
+                DateTime toDate = DateTime.Parse(to_dgvr.Cells[2].Value.ToString()) + oneDay;
                 string filePath = $@"{Directory.GetCurrentDirectory()}\LOG\{equipType}_{equipName}";
                 string fromFile = $@"DATA_{equipType}_{equipName}_{fromDate.ToString("yyyyMMdd")}.TXT";
                 string toFile = $@"DATA_{equipType}_{equipName}_{toDate.ToString("yyyyMMdd")}.TXT";
@@ -169,8 +187,7 @@ namespace DataSpider.UserMonitor
                 llf.loglist = LogList(filePath,
                     fileSearchPattern,
                     fromFile,
-                    toFile,
-                    stringSearchPattern);
+                    toFile);
                 llf.ShowDialog();
             }
             catch (Exception ex)
@@ -179,12 +196,22 @@ namespace DataSpider.UserMonitor
             }
         }
 
-        string LogList(string filePath, string fileSearchPattern, string fromFile, string toFile, string stringSearchPattern)
+        string LogList(string filePath, string fileSearchPattern, string fromFile, string toFile, string stringSearchPattern = "")
         {
             List<string> loglist = new List<string>();
             List<FileInfo> listFileInfo = new List<FileInfo>();
+            if (!Directory.Exists(filePath))
+            {
+                Directory.CreateDirectory(filePath);
+            }
+
             DirectoryInfo di = new DirectoryInfo(filePath);
             FileInfo[] fileInfo = di.GetFiles(fileSearchPattern);
+            if (fileInfo.Length < 1)
+            {
+                return string.Empty;
+            }
+
             string retString = string.Empty;
 
             string stringLine;
@@ -200,11 +227,19 @@ namespace DataSpider.UserMonitor
             {
                 using (StreamReader sr = new StreamReader(fi.FullName))
                 {
-                    while (sr.Peek() >= 0)
+                    if (string.IsNullOrWhiteSpace(stringSearchPattern))
                     {
-                        stringLine = sr.ReadLine();
-                        if (stringLine.Contains(stringSearchPattern))
-                            loglist.Add(stringLine);
+                        stringLine = sr.ReadToEnd();
+                        loglist.Add(stringLine);
+                    }
+                    else
+                    {
+                        while (sr.Peek() >= 0)
+                        {
+                            stringLine = sr.ReadLine();
+                            if (stringLine.Contains(stringSearchPattern))
+                                loglist.Add(stringLine);
+                        }
                     }
                 }
             }

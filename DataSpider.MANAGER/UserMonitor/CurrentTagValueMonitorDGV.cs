@@ -55,6 +55,7 @@ namespace DataSpider.UserMonitor
         }
         private void CurrentTagValueMonitor_Load(object sender, EventArgs e)
         {
+            buttonFilter.Visible = false;
             threadDataRefresh = new Thread(new ThreadStart(ThreadJob));
             threadDataRefresh.Start();
 
@@ -97,7 +98,7 @@ namespace DataSpider.UserMonitor
 
         private void DataGridView_Main_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (e.RowIndex < 0 || e.RowIndex >= dataGridView_Main.Rows.Count || nDBModeCurrent==0)
+            if (e.RowIndex < 0 || e.RowIndex >= dataGridView_Main.Rows.Count)// || nDBModeCurrent==0)
             {
                 return;
             }
@@ -439,17 +440,13 @@ namespace DataSpider.UserMonitor
                                 row["GROUP_NM_VALUE"] = "All(All Tags)";
                                 row["EQUIP_TYPE"] = equipType;
 
-                                dtGroups.Rows.Add(row);
+                                dtGroups.Rows.InsertAt(row, 0);
 
                                 comboBoxTagGroupSel.DataSource = dtGroups;
                                 comboBoxTagGroupSel.DisplayMember = "GROUP_NM_VALUE";
                                 comboBoxTagGroupSel.ValueMember = "GROUP_NM";
 
-
-                                if( dtGroups.Rows.Count > 0 )
-                                {
-                                    comboBoxTagGroupSel.SelectedIndex = (comboBoxTagGroupSel.Items.Count - 1);
-                                }
+                                comboBoxTagGroupSel.SelectedIndex = 0;
                             }
 
                             equipTypeCur = equipType;
@@ -533,8 +530,7 @@ namespace DataSpider.UserMonitor
             {
                 return;
             }
-            string tagName = dataGridView_Main.SelectedRows[0].Cells[3].Value.ToString();
-            TAGValueHistoryPopupDGV form = new TAGValueHistoryPopupDGV(tagName);
+            TAGValueHistoryPopupDGV form = new TAGValueHistoryPopupDGV(radioButtonCurTag.Checked ? dataGridView_Main.SelectedRows[0].Cells[3].Value.ToString() : dataGridView_Main.SelectedRows[0].Cells[1].Value.ToString());
             form.ShowDialog(this);
         }
 
@@ -713,15 +709,33 @@ namespace DataSpider.UserMonitor
             finder.Show();
         }
 
-        private void toolStripMenuItemLog_Click(object sender, EventArgs e)
+        private void ShowFile(string logData)
         {
             try
             {
                 DataGridViewRow dgvr = dataGridView_Main.CurrentRow;
-                DateTime MeasureDate = DateTime.Now;
-                DateTime.TryParse(dgvr.Cells[5].Value.ToString(), out MeasureDate);
-                string filePath = $@"{Directory.GetCurrentDirectory()}\LOG\{equipType}_{equipName}\LOG_{equipType}_{equipName}_{MeasureDate.ToString("yyyyMMdd")}.TXT";
-                Process.Start(logviewProgram, filePath);
+                if (dgvr != null)
+                {
+
+                    if (!DateTime.TryParse(dgvr.Cells[6].Value.ToString(), out DateTime dtReg))
+                    {
+                        dtReg = DateTime.Now;
+                    }
+                    string filePath = $@"{Directory.GetCurrentDirectory()}\LOG\{equipType}_{equipName}\{logData}_{equipType}_{equipName}_{dtReg:yyyyMMdd}.TXT";
+                    Process.Start(logviewProgram, filePath);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void toolStripMenuItemLog_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ShowFile("LOG");
             }
             catch (Exception ex)
             {
@@ -733,11 +747,7 @@ namespace DataSpider.UserMonitor
         {
             try
             {
-                DataGridViewRow dgvr = dataGridView_Main.CurrentRow;
-                DateTime MeasureDate = DateTime.Now;
-                DateTime.TryParse(dgvr.Cells[5].Value.ToString(), out MeasureDate);
-                string filePath = $@"{Directory.GetCurrentDirectory()}\LOG\{equipType}_{equipName}\DATA_{equipType}_{equipName}_{MeasureDate.ToString("yyyyMMdd")}.TXT";
-                Process.Start(logviewProgram, filePath);
+                ShowFile("DATA");
             }
             catch (Exception ex)
             {
@@ -793,6 +803,7 @@ namespace DataSpider.UserMonitor
 
                 checkBox_AutoRefresh.Checked = autoRefresheChecked;
                 checkBox_AutoRefresh.Visible = button_SetInterval.Visible = textBox_RefreshInterval.Visible = label_RefreshInterval.Visible = true;
+                buttonFilter.Visible = false;
             }
             // History
             else
@@ -801,6 +812,7 @@ namespace DataSpider.UserMonitor
 
                 checkBox_AutoRefresh.Checked = false;
                 checkBox_AutoRefresh.Visible = button_SetInterval.Visible = textBox_RefreshInterval.Visible = label_RefreshInterval.Visible = false;
+                buttonFilter.Visible = true;
             }
             GetProgramStatus();
         }

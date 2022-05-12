@@ -390,7 +390,7 @@ namespace DataSpider.UserMonitor
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(144, 44);
             this.label6.TabIndex = 4;
-            this.label6.Text = "Server Name";
+            this.label6.Text = "Default Server";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel13
