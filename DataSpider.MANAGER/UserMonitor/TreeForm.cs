@@ -613,7 +613,7 @@ namespace DataSpider.UserMonitor
                     if (0 == (int)fo_dr["FAILOVER_MODE"])  // MANL
                     {
                         // DSC프로그램에서 종료시 99를 써야 한다.
-                        if (99 == (int)fo_dr["PROG_STATUS"]) 
+                        if (99 == (int)fo_dr["PROG_STATUS"]|| 0 == (int)fo_dr["PROG_STATUS"]) 
                         {
                             contextMenuStripEQControl.Items["programRunToolStripMenuItem"].Enabled = true;
                             contextMenuStripEQControl.Items["programStopToolStripMenuItem"].Enabled = false;

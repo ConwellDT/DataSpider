@@ -159,7 +159,7 @@ namespace DataSpider.FailoverManager
                                 if (MY_ID == (int)dr["ACTIVE_SERVER"])
                                 {
                                     // 99 <== 이 경우는 잘 동작함.    99 !=  이 경우는 문제가 있음.
-                                    if (99 == (int)dr["PROG_STATUS"] )
+                                    if (99 == (int)dr["PROG_STATUS"])
                                     {
                                         //Execute Program
                                         if (IsProcessTerminated(m_ProcessList[(string)dr["EQUIP_NM"]]))
