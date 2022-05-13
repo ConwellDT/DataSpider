@@ -244,6 +244,7 @@ namespace DataSpider.FailoverManager
                                 if (1 == (int)dr[$"RUN_REQ{MY_ID}"])
                                 {
                                     //Execute Program
+                                    m_Logger.WriteLog($" {(string)dr["EQUIP_NM"]} Collector RUR_REQ Has Detected!");
                                     if (IsProcessTerminated(m_ProcessList[(string)dr["EQUIP_NM"]])==true )
                                     {
                                         try
@@ -269,8 +270,9 @@ namespace DataSpider.FailoverManager
                                 }
                                 if (1 == (int)dr[$"STOP_REQ{MY_ID}"])
                                 {
+                                    m_Logger.WriteLog($" {(string)dr["EQUIP_NM"]} Collector STOP_REQ Has Detected!");
                                     m_ProcessList.TryGetValue((string)dr["EQUIP_NM"], out Process prc);
-                                    if (prc != null)
+                                    if (prc != null && IsProcessTerminated(prc) == false)
                                     {
                                         try
                                         {
@@ -283,6 +285,7 @@ namespace DataSpider.FailoverManager
                                             m_Logger.WriteLog($" {ex.ToString()} ");
                                         }
                                     }
+                                    m_Logger.WriteLog($" {(string)dr["EQUIP_NM"]} Collector Has Exited!");
                                     m_ProcessList[(string)dr["EQUIP_NM"]] = null;
                                     strQuery = new StringBuilder();
                                     strQuery.Append($" UPDATE MA_FAILOVER_CD SET PROG_STATUS=99, STOP_REQ{MY_ID}=0  WHERE EQUIP_NM='{dr["EQUIP_NM"]}'  ");
