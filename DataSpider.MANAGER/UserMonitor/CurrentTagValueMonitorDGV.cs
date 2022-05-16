@@ -44,7 +44,7 @@ namespace DataSpider.UserMonitor
         private string TagNameFilter = "";
         private DateTime DateTimeFilterCurMin = DateTime.MinValue;
         private DateTime DateTimeFilterCurMax = DateTime.MinValue;
-        private DateTime DateTimeFilterHistMin = DateTime.Now.AddDays(-30);// DateTime.MinValue;
+        private DateTime DateTimeFilterHistMin = DateTime.Now.AddDays(-1);// DateTime.MinValue;
         private DateTime DateTimeFilterHistMax = DateTime.Now;// DateTime.MinValue;
         private string DescriptionFilter = "";
         private bool autoRefresheChecked = true;
@@ -304,7 +304,7 @@ namespace DataSpider.UserMonitor
             }
             else
             {
-                minDate = DateTime.Now.AddDays(-30);
+                minDate = DateTime.Now.AddDays(-1);
                 maxDate = DateTime.Now;
             }
 
@@ -722,7 +722,14 @@ namespace DataSpider.UserMonitor
                         dtReg = DateTime.Now;
                     }
                     string filePath = $@"{Directory.GetCurrentDirectory()}\LOG\{equipType}_{equipName}\{logData}_{equipType}_{equipName}_{dtReg:yyyyMMdd}.TXT";
-                    Process.Start(logviewProgram, filePath);
+                    if (Directory.Exists(filePath))
+                    {
+                        Process.Start(logviewProgram, filePath);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Log file not exists.", "System Log", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
                 }
             }
             catch (Exception ex)

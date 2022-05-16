@@ -68,12 +68,12 @@ namespace DataSpider.PC00.PT
             }
             isTagUpdated = false;
             //DataTable dtCurrTagInfo = m_sqlBiz.GetTagInfo(m_Type, machineName, string.Empty, true, ref errCode, ref errText) ;
-            DataTable dtCurrTagInfo = m_sqlBiz.GetTagInfoForDSC(m_Type, string.Empty, true, ref errCode, ref errText);
+            DataTable dtCurrTagInfo = m_sqlBiz.GetTagInfoForDSC(m_Name, string.Empty, true, ref errCode, ref errText);
             if (string.IsNullOrWhiteSpace(errText))
             {
                 if (dtCurrTagInfo.Rows.Count < 1)
                 {
-                    listViewMsg.UpdateMsg($"There are no TAGs for Equipment Type : {m_Type}, Server Name : {Environment.MachineName}");
+                    listViewMsg.UpdateMsg($"There are no TAGs for Equipment Type : {m_Name}, Server Name : {Environment.MachineName}");
                     return false;
                 }
                 if (PC00U01.TryParseExact(dtCurrTagInfo.Select("", "UPDATE_REG_DATE DESC")[0]["UPDATE_REG_DATE"]?.ToString(), out DateTime dtTemp))
