@@ -81,29 +81,30 @@ namespace DataSpider.PC01.PT
             m_dtLastProcessTime = GetLastProcessTime();
             listViewMsg.UpdateMsg($"Read From Ini File m_dtLastProcessTime :{m_dtLastProcessTime.ToString("yyyy-MM-dd HH:mm:ss.fff")}", false, true, true, PC00D01.MSGTINF);
             string data = string.Empty;
-            int nDisconnectCount = 0;
             while (!bTerminal)
             {
                 try
                 {
                     if (mCon == null || mCon.State == ConnectionState.Closed)
                     {
-                        try
+                        if (DBConnect(m_ConnectionInfo, ref p_strErrCode, ref p_strErrText))
                         {
-                            mCon = new SqlConnection(m_ConnectionInfo);
-                            mCon.Open();
+                            listViewMsg.UpdateMsg("DB Connected", true, false);
+                            prev_strErrText = "";
                         }
-                        catch (Exception ex)
+                        else
                         {
-                            if (nDisconnectCount % 30 == 0)
+                            UpdateEquipmentProgDateTime(IF_STATUS.Disconnected);
+                            if (prev_strErrText != p_strErrText)
                             {
-                                UpdateEquipmentProgDateTime(IF_STATUS.Disconnected);
-                                listViewMsg.UpdateMsg($"SqlConnection Exception in ThreadJob  - ({ex})", false, true, true, PC00D01.MSGTINF);
-                                Thread.Sleep(2000);
+                                listViewMsg.UpdateMsg("DB Disconnected", true, false);
+                                listViewMsg.UpdateMsg($"Exception in ThreadJob - ({p_strErrText})", false, true, true, PC00D01.MSGTERR);
+                                prev_strErrText = p_strErrText;
                             }
+                            Thread.Sleep(2000);
                         }
                     }
-                    if (mCon.State == ConnectionState.Open)
+                    if (mCon?.State == ConnectionState.Open)
                     {
                         if ((data = ResultProcess()) != string.Empty)
                         {
@@ -125,22 +126,6 @@ namespace DataSpider.PC01.PT
                                 }
                             }
                         }
-                        nDisconnectCount = 0;
-                    }
-                    else
-                    {
-                        if (nDisconnectCount % 30 == 0)
-                        {
-                            UpdateEquipmentProgDateTime(IF_STATUS.Disconnected);
-                            if (prev_strErrText != p_strErrText)
-                            {
-                                listViewMsg.UpdateMsg("DB Disconnected", true, false);
-                                listViewMsg.UpdateMsg($"Exception in ThreadJob - ({p_strErrText})", false, true, true, PC00D01.MSGTERR);
-                                prev_strErrText = p_strErrText;
-                            }
-                            Thread.Sleep(2000);
-                        }
-                        nDisconnectCount++;
                     }
                 }
                 catch (Exception ex)

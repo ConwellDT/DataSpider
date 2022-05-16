@@ -236,9 +236,9 @@ namespace DataSpider.PC00.PT
                 }
                 property = "IGNORE_LINE_STRING";
                 value = PC00U01.ReadConfigValue(property, section, configFile);
-                listViewMsg.UpdateMsg($"{property} : {value}");
                 if (!string.IsNullOrWhiteSpace(value))
                 {
+                    listViewMsg.UpdateMsg($"{property} : {value}");
                     m_IgnoreStringList.AddRange(value.Split(','));
                 }
 
@@ -350,9 +350,9 @@ namespace DataSpider.PC00.PT
                 }
                 property = "IGNORE_LINE_STRING";
                 value = dicConfigInfo.TryGetValue(property);
-                listViewMsg.UpdateMsg($"{property} : {value}");
                 if (!string.IsNullOrWhiteSpace(value))
                 {
+                    listViewMsg.UpdateMsg($"{property} : {value}");
                     m_IgnoreStringList.AddRange(value.Split(','));
                 }
             }
