@@ -62,6 +62,10 @@ namespace DataSpider.UserMonitor
             sql = new PC00Z01();
             UserLogInChanged();
             this.treeViewEQStatus.Nodes.Clear();
+            
+            // 장비설정 변경 체크를 위한 정보를 최초 1회 업데이트 하여 쓰레드에서 최초 장비설정변경으로 처리되는것 막기위해
+            IsEquipmentUpdated();
+
             if (!int.TryParse(ConfigHelper.GetAppSetting("TreeAutoRefreshInterval").Trim(), out autoRefreshInterval))
             {
                 autoRefreshInterval = 10;
@@ -215,6 +219,8 @@ namespace DataSpider.UserMonitor
                 }
                 else
                 {
+                    treeNodeLastSelected = treeViewEQStatus.SelectedNode;
+                    
                     treeViewEQStatus.Nodes.Clear();
                     TreeNode_SBL rootNode = new TreeNode_SBL(new SBL());
                     rootNode.Text = "DataSpider";
@@ -261,8 +267,7 @@ namespace DataSpider.UserMonitor
                             lidx++;
                         }
                     }
-
-                    treeViewEQStatus.SelectedNode = treeNodeLastSelected == null ? treeViewEQStatus.Nodes[0] : treeNodeLastSelected;
+                    treeViewEQStatus.SelectedNode = GetLastSelectedNode(treeNodeLastSelected);// treeNodeLastSelected == null ? treeViewEQStatus.Nodes[0] : treeNodeLastSelected;
                 }
             }
             catch (Exception e)
@@ -273,6 +278,20 @@ namespace DataSpider.UserMonitor
                 // //throw;
             }
             //GetEquipmentType();
+        }
+
+        private TreeNode GetLastSelectedNode(TreeNode nodeLastSelected)
+        {
+            if (nodeLastSelected != null)
+            {
+                TreeNode[] nodeFound = treeViewEQStatus.Nodes.Find(nodeLastSelected.Name, true);
+                if (nodeFound != null && nodeFound.Length > 0)
+                {
+                    return nodeFound[0];
+                }
+                return GetLastSelectedNode(nodeLastSelected.Parent);
+            }
+            return treeViewEQStatus.Nodes[0];
         }
 
         /// <summary>
