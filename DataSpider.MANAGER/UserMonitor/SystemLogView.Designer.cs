@@ -130,7 +130,6 @@ namespace DataSpider.UserMonitor
             listViewItem1});
             this.listView_Main.Location = new System.Drawing.Point(0, 0);
             this.listView_Main.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.listView_Main.MultiSelect = false;
             this.listView_Main.Name = "listView_Main";
             this.listView_Main.Size = new System.Drawing.Size(1327, 738);
             this.listView_Main.TabIndex = 1;

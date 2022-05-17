@@ -32,7 +32,7 @@ namespace DataSpider.UserMonitor
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TAGValueHistoryPopupDGV));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("");
             this.imageList2 = new System.Windows.Forms.ImageList(this.components);
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -230,7 +230,7 @@ namespace DataSpider.UserMonitor
             this.listView_Info.GridLines = true;
             this.listView_Info.HideSelection = false;
             this.listView_Info.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem3});
+            listViewItem1});
             this.listView_Info.Location = new System.Drawing.Point(0, 0);
             this.listView_Info.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.listView_Info.MultiSelect = false;

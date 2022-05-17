@@ -345,7 +345,6 @@ namespace DataSpider.UserMonitor
             this.dataGridView_Main.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_Main.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView_Main.Location = new System.Drawing.Point(0, 0);
-            this.dataGridView_Main.MultiSelect = false;
             this.dataGridView_Main.Name = "dataGridView_Main";
             this.dataGridView_Main.ReadOnly = true;
             this.dataGridView_Main.RowHeadersVisible = false;
