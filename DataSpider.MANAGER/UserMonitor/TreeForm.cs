@@ -334,6 +334,9 @@ namespace DataSpider.UserMonitor
             if (OnRefreshTreeData != null)
             {
                 OnRefreshTreeData();
+                // 주기적으로 장비설정 변경을 체크하여 리프레시 하는 것과 사용자가 장비설정 변경을 하여 리프레시 하는 것 이 있음
+                // 사용자가 변경하여 리프레시 되었을 때 장비변경 정보를 업데이트 하여 주기적으로 장비설정 변경 체크하여 실행하는 것을 제한
+                IsEquipmentUpdated();
             }
         }
 
