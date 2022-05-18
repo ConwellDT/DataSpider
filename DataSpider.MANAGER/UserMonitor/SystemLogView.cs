@@ -168,9 +168,6 @@ namespace DataSpider.UserMonitor
                     }
 
                     List<ListViewItem> listListViewItem = new List<ListViewItem>();
-                    Stopwatch sw = new Stopwatch();
-                    sw.Start();
-                    Debug.WriteLine("Start");
                     foreach (DataRow dr in dtProgramStatus.Rows)
                     {
                         ListViewItem lvi = new ListViewItem();
@@ -207,18 +204,11 @@ namespace DataSpider.UserMonitor
 
                         if (!resized && listView_Main.Items.Count > 26)
                         {
-                            Stopwatch sw1 = new Stopwatch();
-                            sw1.Start();
                             listView_Main.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
                             //needResizeColumn = false;
                             resized = true;
-                            Debug.WriteLine($"Resize : {sw1.Elapsed.Seconds}");
                         }
                     }
-                    //Debug.WriteLine($"AddRange : {sw.Elapsed.Seconds}");
-                    //listView_Main.Items.AddRange(listListViewItem.ToArray());
-
-                    Debug.WriteLine($"End : {sw.Elapsed.Seconds}");
                     if (listView_Main.Items.Count > 0 && !resized)
                     {
                         listView_Main.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
