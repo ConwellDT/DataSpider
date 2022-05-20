@@ -86,45 +86,37 @@ namespace DataSpider.PC01.PT
                 try
                 {
                     if (mCon == null || mCon.State == ConnectionState.Closed)
-                    {
+                    {   
                         if (DBConnect(m_ConnectionInfo, ref p_strErrCode, ref p_strErrText))
                         {
+                            UpdateEquipmentProgDateTime(IF_STATUS.Normal);
                             listViewMsg.UpdateMsg("DB Connected", true, false);
                             prev_strErrText = "";
                         }
                         else
                         {
                             UpdateEquipmentProgDateTime(IF_STATUS.Disconnected);
-                            if (prev_strErrText != p_strErrText)
-                            {
-                                listViewMsg.UpdateMsg("DB Disconnected", true, false);
-                                listViewMsg.UpdateMsg($"Exception in ThreadJob - ({p_strErrText})", false, true, true, PC00D01.MSGTERR);
-                                prev_strErrText = p_strErrText;
-                            }
+                            listViewMsg.UpdateMsg($"DB Disconnected", true, true, true);
                             Thread.Sleep(2000);
                         }
                     }
-                    if (mCon?.State == ConnectionState.Open)
+
+                    if ((data = ResultProcess()) != string.Empty)
                     {
-                        if ((data = ResultProcess()) != string.Empty)
+                        UpdateEquipmentProgDateTime(IF_STATUS.Normal);
+                        //data = ResultProcess();
+                        EnQueue(MSGTYPE.MEASURE, data);
+                        listViewMsg.UpdateMsg($"{m_Name}({MSGTYPE.MEASURE}) Data has been enqueued", true, true);
+                        fileLog.WriteData(data, "EnQ", $"{m_Name}({MSGTYPE.MEASURE})");
+                        Thread.Sleep(1000);
+                    }
+                    else
+                    {
+                        if (string.IsNullOrWhiteSpace(data))
                         {
                             UpdateEquipmentProgDateTime(IF_STATUS.Normal);
-                            //data = ResultProcess();
-                            EnQueue(MSGTYPE.MEASURE, data);
-                            listViewMsg.UpdateMsg($"{m_Name}({MSGTYPE.MEASURE}) Data has been enqueued", true, true);
-                            fileLog.WriteData(data, "EnQ", $"{m_Name}({MSGTYPE.MEASURE})");
-                            Thread.Sleep(1000);
-                        }
-                        else
-                        {
-                            if (mCon.State == ConnectionState.Open)
-                            {
-                                if (string.IsNullOrWhiteSpace(data))
-                                {
-                                    listViewMsg.UpdateMsg("No data in DB", true, false);
-                                    Thread.Sleep(2000);
-                                }
-                            }
+                            listViewMsg.UpdateMsg("No data in DB", true, false);
+                            Thread.Sleep(2000);
                         }
                     }
                 }
@@ -167,8 +159,8 @@ namespace DataSpider.PC01.PT
                     mCon.Dispose();
                 }
                 if (mCommand != null) mCommand.Dispose();
-            }
 
+            }
             return bReturn;
         }
 

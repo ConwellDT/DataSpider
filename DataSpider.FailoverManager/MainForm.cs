@@ -244,7 +244,7 @@ namespace DataSpider.FailoverManager
                                 if (1 == (int)dr[$"RUN_REQ{MY_ID}"])
                                 {
                                     //Execute Program
-                                    m_Logger.WriteLog($" {(string)dr["EQUIP_NM"]} Collector RUR_REQ Has Detected!");
+                                    m_Logger.WriteLog($" {(string)dr["EQUIP_NM"]} Collector RUN_REQ Has Detected!");
                                     if (IsProcessTerminated(m_ProcessList[(string)dr["EQUIP_NM"]])==true )
                                     {
                                         try
@@ -263,6 +263,19 @@ namespace DataSpider.FailoverManager
                                         {
                                             m_Logger.WriteLog($" {ex.ToString()} ");
                                         }
+                                    }
+                                    else
+                                    {
+                                        m_Logger.WriteLog($" {(string)dr["EQUIP_NM"]} Collector still Running");
+                                        if(m_ProcessList[(string)dr["EQUIP_NM"]]==null)
+                                            m_Logger.WriteLog($" process == null ");
+                                        else
+                                        {
+                                            if (m_ProcessList[(string)dr["EQUIP_NM"]].HasExited == false)
+                                                m_Logger.WriteLog($" HasExited == false ");
+                                            else
+                                                m_Logger.WriteLog($" HasExited == true ");
+                                        }                                            
                                     }
                                     strQuery = new StringBuilder();
                                     strQuery.Append($" UPDATE MA_FAILOVER_CD SET RUN_REQ{MY_ID}=0  WHERE EQUIP_NM='{dr["EQUIP_NM"]}'  ");

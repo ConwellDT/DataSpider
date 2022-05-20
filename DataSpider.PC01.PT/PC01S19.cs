@@ -213,9 +213,14 @@ namespace DataSpider.PC01.PT
                     {
                         string strValue =myUaClient.ReadValue(kvp.Value).Value?.ToString();
                         if (kvp.Key == "MSR_SVRTIME")
+                        {
                             EnQueue(MSGTYPE.MEASURE, $" {kvp.Key},{svrtime.ToString("yyyy-MM-dd HH:mm:ss")}, {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}");
+                            listViewMsg.UpdateMsg($" {kvp.Key}, {svrtime.ToString("yyyy-MM-dd HH:mm:ss")}, {strValue}, {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")} ", false, true, true, PC00D01.MSGTINF);
+                        }
                         else
+                        {
                             EnQueue(MSGTYPE.MEASURE, $" {kvp.Key}, {svrtime.ToString("yyyy-MM-dd HH:mm:ss")}, {strValue}");
+                        }
                         listViewMsg.UpdateMsg($" {kvp.Key}, {svrtime.ToString("yyyy-MM-dd HH:mm:ss")}, {strValue} ", false, true, true, PC00D01.MSGTINF);
                     }
                     catch (Exception ex)
