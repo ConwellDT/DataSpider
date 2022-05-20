@@ -522,12 +522,13 @@ namespace DataSpider.PC01.PT
                 {
                     thDataProcess.bTerminal = true;
                 }
+                Thread.Sleep(1 * 1000);
 
                 // Data Process Thread
                 int count = 0;
                 while (thDataProcess.m_Thd != null && thDataProcess.m_Thd.IsAlive)
                 {
-                    thDataProcess.m_Thd.Join(10);
+                    thDataProcess.m_Thd.Join(100);
                     if (count++ > 10)
                     {
                         thDataProcess.m_Thd.Abort();
@@ -543,7 +544,7 @@ namespace DataSpider.PC01.PT
                         count = 0;
                         while (thProcess[i].m_Thd != null && thProcess[i].m_Thd.IsAlive)
                         {
-                            thProcess[i].m_Thd.Join(10);
+                            thProcess[i].m_Thd.Join(1000);
                             if (count++ > 10)
                             {
                                 thProcess[i].m_Thd.Abort();
