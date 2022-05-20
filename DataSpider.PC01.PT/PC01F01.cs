@@ -171,12 +171,9 @@ namespace DataSpider.PC01.PT
                 Text = lbTitle.Text = $"{this.ProductName} - {equipName} [{dtEquipment.Rows[0]["EQUIP_DESC"]} - {dtEquipment.Rows[0]["EQUIP_TYPE_NM"]}]";
                 //label_Version.Text = $"V.{Assembly.GetExecutingAssembly().GetName().Version}";
                 ServerInfoListViewSetValue(); //리스트뷰에 세팅처리.
-                this.m_clsLog.LogToFile("LOG", this.m_strLogFileName, PC00D01.MSGTDBG, MethodBase.GetCurrentMethod().Name, "1");
                 equipType = dtEquipment.Rows[0]["EQUIP_TYPE_NM"].ToString();
                 CreateDataProcss();
-                this.m_clsLog.LogToFile("LOG", this.m_strLogFileName, PC00D01.MSGTDBG, MethodBase.GetCurrentMethod().Name, "2");
                 CreateProcess(equipType);
-                this.m_clsLog.LogToFile("LOG", this.m_strLogFileName, PC00D01.MSGTDBG, MethodBase.GetCurrentMethod().Name, "3");
 
                 serverCode = m_SqlBiz.GetServerId(Environment.MachineName).ToString();
 
@@ -207,20 +204,22 @@ namespace DataSpider.PC01.PT
                     {
                         //this.m_clsLog.LogToFile("LOG", this.m_strLogFileName, PC00D01.MSGTERR, MethodBase.GetCurrentMethod().Name, $"GetRequest Return NULL -{equipName}:{strErrText}");
                         //Terminate();
-                        return;
+                        Thread.Sleep(1000);
+                        continue;
                     }
                     if (dtRequest.Rows.Count < 1)
                     {
                         //this.m_clsLog.LogToFile("LOG", this.m_strLogFileName, PC00D01.MSGTERR, MethodBase.GetCurrentMethod().Name, $"GetRequest Return No Data - {equipName}:{strErrText}");
                         //Terminate();
-                        return;
+                        Thread.Sleep(1000);
+                        continue;
                     }
                     if (dtRequest.Rows.Count > 0)
                     {
                         if (dtRequest.Rows[0][$"STOP_REQ{serverCode}"].ToString().Equals("1"))
                         {
                             Terminate();
-                            return;
+                            break;
                         }
 
                         //int bHideShow = (int)dtRequest.Rows[0]["HIDE_SHOW"];
@@ -243,6 +242,7 @@ namespace DataSpider.PC01.PT
                 }
                 Thread.Sleep(1000);
             }
+            Application.Exit();
         }
         #endregion
 
@@ -511,25 +511,46 @@ namespace DataSpider.PC01.PT
         {
             try
             {
-                m_SqlBiz.ExecuteNonQuery($"Update MA_FAILOVER_CD SET PROG_STATUS=99 WHERE EQUIP_NM = {equipName}", ref strErrCode, ref strErrText);
+                //m_SqlBiz.ExecuteNonQuery($"Update MA_FAILOVER_CD SET PROG_STATUS=0 WHERE EQUIP_NM = {equipName}", ref strErrCode, ref strErrText);
                 bTerminated = true;
-                thDataProcess.bTerminal = true;
-
                 for (int i = 0; i < thProcess?.Count(); i++)
                 {
-                    thProcess[i].bTerminal = true;
+                    if (thProcess[i] != null)
+                        thProcess[i].bTerminal = true;
                 }
-
-                if (thDataProcess.m_Thd != null && !thDataProcess.m_Thd.Join(1000))
+                if (thDataProcess != null)
                 {
-                    thDataProcess.m_Thd.Abort();
+                    thDataProcess.bTerminal = true;
                 }
+                Thread.Sleep(1 * 1000);
 
-                for (int i = 0; i < thProcess?.Count(); i++)
+                // Data Process Thread
+                int count = 0;
+                while (thDataProcess.m_Thd != null && thDataProcess.m_Thd.IsAlive)
                 {
-                    if (thProcess[i].m_Thd != null && !thProcess[i].m_Thd.Join(1000))
+                    thDataProcess.m_Thd.Join(100);
+                    if (count++ > 10)
                     {
-                        thProcess[i].m_Thd.Abort();
+                        thDataProcess.m_Thd.Abort();
+                        break;
+                    }
+                }
+                // Equipment i/f Thread
+                count = 0;
+                for (int i = 0; i < thProcess?.Count(); i++)
+                {
+                    if (thProcess[i] != null)
+                    {
+                        count = 0;
+                        while (thProcess[i].m_Thd != null && thProcess[i].m_Thd.IsAlive)
+                        {
+                            thProcess[i].m_Thd.Join(1000);
+                            if (count++ > 10)
+                            {
+                                thProcess[i].m_Thd.Abort();
+                                break;
+                            }
+                        }
                     }
                 }
             }
@@ -541,7 +562,6 @@ namespace DataSpider.PC01.PT
             try
             {
                 this.m_clsLog.LogToFile("LOG", this.m_strLogFileName, PC00D01.MSGTDBG, MethodBase.GetCurrentMethod().Name, "Program Close");
-                Application.Exit();
             }
             catch (Exception ex)
             {
@@ -576,7 +596,8 @@ namespace DataSpider.PC01.PT
                 // 20210427, SHS, 장비타입별로 동작하는 데이터 파싱 및 TTV 데이터 파일 생성 프로세스에 TTV 파일 저장 경로를 기존 한개로 설정
                 // 장비타입별로 TTV 파일 저장 폴더를 분리 처리. Data 폴더 하위에 장비타입명 폴더에 저장
                 //thDataProcess = new PC00M01(this, equipType, "DataProcess", connectionInfo, "", 0, true);
-                thDataProcess = new PC00M01(this, equipName, "DataProcess", connectionInfo, "", 0, true);
+                //thDataProcess = new PC00M01(this, equipName, "DataProcess", connectionInfo, "", 0, true);
+                thDataProcess = new PC00M01(this, equipType, equipName, connectionInfo, "", 0, true);
                 //thDataProcess = new PC00M01(this, equipType, "DataProcess", $@"{Environment.CurrentDirectory}\Data\{equipType}", "", 0, true);
             }
             catch (Exception ex)

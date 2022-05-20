@@ -16,6 +16,8 @@ namespace DataSpider.UserMonitor
         {
             Obj = pObj;
 
+            Name = Obj.Name;
+
             this.Tag = Obj;
             if (pObj is EqType)
             {

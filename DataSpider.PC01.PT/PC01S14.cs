@@ -379,9 +379,9 @@ namespace DataSpider.PC01.PT
             listViewMsg.UpdateMsg("Thread started");
 
             m_LastEnqueuedDate = GetLastEnqueuedDate();
-            listViewMsg.UpdateMsg($"Read From Ini File m_LastEnqueuedDate :{m_LastEnqueuedDate.ToString("yyyyMMdd")}", false, true, true, PC00D01.MSGTINF);
+            listViewMsg.UpdateMsg($"Read m_LastEnqueuedDate :{m_LastEnqueuedDate.ToString("yyyyMMdd")}", false, true, true, PC00D01.MSGTINF);
             m_LastEnqueuedDaqID = GetLastEnqueuedDaqID();
-            listViewMsg.UpdateMsg($"Read From Ini File m_LastEnqueuedDaqID :{m_LastEnqueuedDaqID}", false, true, true, PC00D01.MSGTINF);
+            listViewMsg.UpdateMsg($"Read m_LastEnqueuedDaqID :{m_LastEnqueuedDaqID}", false, true, true, PC00D01.MSGTINF);
 
             string strErrCode = string.Empty, strErrText = string.Empty;
             DataTable dtConfig = null;
@@ -394,11 +394,21 @@ namespace DataSpider.PC01.PT
                     {
                         UpdateEquipmentProgDateTime(IF_STATUS.Disconnected);
                         listViewMsg.UpdateMsg($"OPC UA Not Connected. Try to connect.", false, true, true, PC00D01.MSGTERR);
-                        Thread.Sleep(5000);
-                        InitOpcUaClient();
+                        for (int i = 0; i < 5; i++)
+                        {
+                            Thread.Sleep(1000);
+                            if (bTerminal)
+                            {
+                                break;
+                            }
+                        }
+                        if (!bTerminal)
+                        {
+                            InitOpcUaClient();
 
-                        //m_soloVpe.ReadCfgData(drEquipment);
-                        dtNormalTime = DateTime.Now;
+                            //m_soloVpe.ReadCfgData(drEquipment);
+                            dtNormalTime = DateTime.Now;
+                        }
                     }
                     else
                     {
@@ -642,7 +652,7 @@ namespace DataSpider.PC01.PT
                 myUaClient = new OpcUaClient.OpcUaClient(m_ConnectionInfo, m_Name);
                 // Session/Subscription을 생성한 후
                 myUaClient.CreateSubscription(1000);
-                listViewMsg.UpdateMsg($"myUaClient.UpateTagData ", false, true, true, PC00D01.MSGTINF);
+                listViewMsg.UpdateMsg($"myUaClient.CreateSubscription ", false, true, true, PC00D01.MSGTINF);
                 // CSV 파일에 있는 TagName, NodeId 리스트를 MonitoredItem으로 등록하고 
                 ReadConfigInfo();
                 myUaClient.UpateTagData += UpdateTagValue;

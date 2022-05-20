@@ -62,6 +62,10 @@ namespace DataSpider.UserMonitor
             sql = new PC00Z01();
             UserLogInChanged();
             this.treeViewEQStatus.Nodes.Clear();
+            
+            // 장비설정 변경 체크를 위한 정보를 최초 1회 업데이트 하여 쓰레드에서 최초 장비설정변경으로 처리되는것 막기위해
+            IsEquipmentUpdated();
+
             if (!int.TryParse(ConfigHelper.GetAppSetting("TreeAutoRefreshInterval").Trim(), out autoRefreshInterval))
             {
                 autoRefreshInterval = 10;
@@ -215,6 +219,8 @@ namespace DataSpider.UserMonitor
                 }
                 else
                 {
+                    treeNodeLastSelected = treeViewEQStatus.SelectedNode;
+                    
                     treeViewEQStatus.Nodes.Clear();
                     TreeNode_SBL rootNode = new TreeNode_SBL(new SBL());
                     rootNode.Text = "DataSpider";
@@ -261,8 +267,7 @@ namespace DataSpider.UserMonitor
                             lidx++;
                         }
                     }
-
-                    treeViewEQStatus.SelectedNode = treeNodeLastSelected == null ? treeViewEQStatus.Nodes[0] : treeNodeLastSelected;
+                    treeViewEQStatus.SelectedNode = GetLastSelectedNode(treeNodeLastSelected);// treeNodeLastSelected == null ? treeViewEQStatus.Nodes[0] : treeNodeLastSelected;
                 }
             }
             catch (Exception e)
@@ -273,6 +278,20 @@ namespace DataSpider.UserMonitor
                 // //throw;
             }
             //GetEquipmentType();
+        }
+
+        private TreeNode GetLastSelectedNode(TreeNode nodeLastSelected)
+        {
+            if (nodeLastSelected != null)
+            {
+                TreeNode[] nodeFound = treeViewEQStatus.Nodes.Find(nodeLastSelected.Name, true);
+                if (nodeFound != null && nodeFound.Length > 0)
+                {
+                    return nodeFound[0];
+                }
+                return GetLastSelectedNode(nodeLastSelected.Parent);
+            }
+            return treeViewEQStatus.Nodes[0];
         }
 
         /// <summary>
@@ -315,6 +334,9 @@ namespace DataSpider.UserMonitor
             if (OnRefreshTreeData != null)
             {
                 OnRefreshTreeData();
+                // 주기적으로 장비설정 변경을 체크하여 리프레시 하는 것과 사용자가 장비설정 변경을 하여 리프레시 하는 것 이 있음
+                // 사용자가 변경하여 리프레시 되었을 때 장비변경 정보를 업데이트 하여 주기적으로 장비설정 변경 체크하여 실행하는 것을 제한
+                IsEquipmentUpdated();
             }
         }
 
@@ -386,80 +408,6 @@ namespace DataSpider.UserMonitor
             }
         }
 
-        private void programRunToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                SBL nodeTag = treeViewEQStatus.SelectedNode.Tag as SBL;
-                string equipName;
-
-                int MY_ID = sqlBiz.GetServerId(Environment.MachineName);
-                if (MY_ID == -1)
-                {
-                    MessageBox.Show("", $"Server Code does not exist in database", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    Application.Exit();
-                }
-
-                strQuery.Clear();
-                if (nodeTag is EqType)
-                {
-                    return;
-                }
-                else
-                {
-                    equipName = nodeTag.Name;
-                    strQuery.Append($" UPDATE MA_FAILOVER_CD SET RUN_REQ{MY_ID}=1  WHERE EQUIP_NM='{equipName}'  ");
-                }
-                sqlBiz.ExecuteNonQuery(strQuery.ToString(), ref errCode, ref errText);
-
-
-                //SBL nodeTag = treeViewEQStatus.SelectedNode.Tag as SBL;
-
-                //switch (contextMenuStripEQControl.Items["programRunToolStripMenuItem"].Text)
-                //{
-                //    case "Program Stop":
-                //        if (DialogResult.Yes.Equals(MessageBox.Show($"{nodeTag.Name} 장비 I/F 프로그램을 종료하시겠습니까 ?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)))
-                //        {
-                //            parent.dicProgram.TryGetValue(nodeTag.Name, out Process prc);
-                //            if (prc == null)
-                //            {
-                //                MessageBox.Show($"{nodeTag.Name} 장비 I/F 프로그램이 실행되고 있지 않습니다.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                //            }
-                //            else
-                //            {
-                //                parent.dicProgram[nodeTag.Name].Kill();
-                //                parent.dicProgram[nodeTag.Name] = null;
-                //            }
-                //        }
-                //        break;
-                //    default:
-                //        if (DialogResult.Yes.Equals(MessageBox.Show($"{nodeTag.Name} 장비 I/F 프로그램을 실행하시겠습니까 ?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)))
-                //        {
-                //            parent.dicProgram.TryGetValue(nodeTag.Name, out Process prc);
-                //            if (prc != null && !prc.HasExited)
-                //            {
-                //                MessageBox.Show($"{nodeTag.Name} 장비 I/F 프로그램이 실행중 입니다.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                //            }
-                //            else
-                //            {
-                //                if (!parent.dicProgram.ContainsKey(nodeTag.Name))
-                //                {
-                //                    parent.dicProgram.Add(nodeTag.Name, null);
-                //                }
-                //                parent.dicProgram[nodeTag.Name] = ExecuteIFPrograms(nodeTag.Name);
-                //            }
-                //        }
-                //        break;
-                //}
-                //UpdateTreeNodeStateForEqType(treeViewEQStatus.SelectedNode as TreeNode_SBL);
-                //contextMenuStripEQControl.Items["programRunToolStripMenuItem"].Text = parent.dicProgram[nodeTag.Name] == null ? "Program Run" : "Program Stop";
-                //contextMenuStripEQControl.Items["programShowToolStripMenuItem"].Enabled = parent.dicProgram[nodeTag.Name] != null;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"장비 I/F 프로그램 실행 중 오류가 발생하였습니다. {ex.Message}", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
         private Process ExecuteIFPrograms(string equipTypeName)
         {
             Process prc = Process.Start(new ProcessStartInfo(@"DataSpiderPC01.exe")
@@ -500,61 +448,6 @@ namespace DataSpider.UserMonitor
             else
                 strQuery.Append($" UPDATE MA_FAILOVER_CD SET HIDE_SHOW=0  WHERE EQUIP_NM='{equipName}'  ");
             sqlBiz.ExecuteNonQuery(strQuery.ToString(), ref errCode, ref errText);
-        }
-
-
-        private void programShowToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            SBL nodeTag = treeViewEQStatus.SelectedNode.Tag as SBL;
-
-            if (nodeTag is EqType)
-            {
-                ForegroundEquipmentType((nodeTag as EqType).Name, true);
-            }
-            else
-            {
-                ForegroundEquipment(nodeTag.Name, true);
-            }
-
-        }
-
-        private void programHideToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            SBL nodeTag = treeViewEQStatus.SelectedNode.Tag as SBL;
-
-            if (nodeTag is EqType)
-            {
-                ForegroundEquipmentType((nodeTag as EqType).Name, false);
-            }
-            else
-            {
-                ForegroundEquipment(nodeTag.Name, false);
-            }
-
-        }
-
-
-        private void modeChangeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            SBL nodeTag = treeViewEQStatus.SelectedNode.Tag as SBL;
-            string equipName;
-            if (nodeTag is EqType)
-            {
-                return;
-            }
-            else
-                equipName = nodeTag.Name;
-
-            strQuery.Clear();
-            int MY_ID = sqlBiz.GetServerId(Environment.MachineName);
-            if (MY_ID == -1)
-            {
-                MessageBox.Show("", $"Server Code does not exist in database", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                Application.Exit();
-            }
-            strQuery.Append($" UPDATE MA_FAILOVER_CD SET FAILOVER_MODE=0 WHERE EQUIP_NM='{equipName}'  ");
-            sqlBiz.ExecuteNonQuery(strQuery.ToString(), ref errCode, ref errText);
-
         }
 
         private void button_Refresh_Click(object sender, EventArgs e)
@@ -613,7 +506,7 @@ namespace DataSpider.UserMonitor
                     if (0 == (int)fo_dr["FAILOVER_MODE"])  // MANL
                     {
                         // DSC프로그램에서 종료시 99를 써야 한다.
-                        if (99 == (int)fo_dr["PROG_STATUS"]|| 0 == (int)fo_dr["PROG_STATUS"]) 
+                        if (99 == (int)fo_dr["PROG_STATUS"] || 0 == (int)fo_dr["PROG_STATUS"]) 
                         {
                             contextMenuStripEQControl.Items["programRunToolStripMenuItem"].Enabled = true;
                             contextMenuStripEQControl.Items["programStopToolStripMenuItem"].Enabled = false;
@@ -724,73 +617,169 @@ namespace DataSpider.UserMonitor
             }
         }
 
+        // 프로그램 run
+        private void programRunToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                SBL nodeTag = treeViewEQStatus.SelectedNode.Tag as SBL;
 
+                if (nodeTag is EqType)
+                {
+                    return;
+                }
+                if (DialogResult.No.Equals(MessageBox.Show($"{nodeTag.Name} 장비 수집 프로그램을 실행하시겠습니까 ?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)))
+                {
+                    return;
+                }
+
+                int MY_ID = sqlBiz.GetServerId(Environment.MachineName);
+                if (MY_ID == -1)
+                {
+                    MessageBox.Show($"Server Code does not exist in database", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
+                strQuery.Clear();
+                strQuery.Append($" UPDATE MA_FAILOVER_CD SET RUN_REQ{MY_ID}=1  WHERE EQUIP_NM='{nodeTag.Name}'  ");
+                sqlBiz.ExecuteNonQuery(strQuery.ToString(), ref errCode, ref errText);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"장비 I/F 프로그램 실행 중 오류가 발생하였습니다. {ex.Message}", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        
+        // 프로그램 stop
         private void programStopToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SBL nodeTag = treeViewEQStatus.SelectedNode.Tag as SBL;
-            string equipName;
+
             if (nodeTag is EqType)
             {
                 return;
             }
-            else
-                equipName = nodeTag.Name;
+            if (DialogResult.No.Equals(MessageBox.Show($"{nodeTag.Name} 장비 수집 프로그램을 종료하시겠습니까 ?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)))
+            {
+                return;
+            }
 
-                strQuery.Clear();
             int MY_ID = sqlBiz.GetServerId(Environment.MachineName);
             if (MY_ID == -1)
             {
-                MessageBox.Show("", $"Server Code does not exist in database", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                Application.Exit();
+                MessageBox.Show($"Server Code does not exist in database", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            strQuery.Append($" UPDATE MA_FAILOVER_CD SET STOP_REQ{MY_ID}=1  WHERE EQUIP_NM='{equipName}'  ");
-            sqlBiz.ExecuteNonQuery(strQuery.ToString(), ref errCode, ref errText);
 
+            strQuery.Clear();
+            strQuery.Append($" UPDATE MA_FAILOVER_CD SET STOP_REQ{MY_ID}=1  WHERE EQUIP_NM='{nodeTag.Name}'  ");
+            sqlBiz.ExecuteNonQuery(strQuery.ToString(), ref errCode, ref errText);
         }
 
+        // 실행서버 전환
         private void activeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SBL nodeTag = treeViewEQStatus.SelectedNode.Tag as SBL;
-            string equipName;
+
             if (nodeTag is EqType)
             {
                 return;
             }
-            else
-                equipName = nodeTag.Name;
+            if (DialogResult.No.Equals(MessageBox.Show($"{nodeTag.Name} 장비 수집 프로그램 실행서버를 전환하시겠습니까 ?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)))
+            {
+                return;
+            }
 
-            strQuery.Clear();
             int MY_ID = sqlBiz.GetServerId(Environment.MachineName);
             if (MY_ID == -1)
             {
-                MessageBox.Show("", $"Server Code does not exist in database", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                Application.Exit();
+                MessageBox.Show($"Server Code does not exist in database", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            strQuery.Append($" UPDATE MA_FAILOVER_CD SET ACTIVE_SERVER=(ACTIVE_SERVER+1)%2, PROG_STATUS=99  WHERE EQUIP_NM='{equipName}'  ");
-            sqlBiz.ExecuteNonQuery(strQuery.ToString(), ref errCode, ref errText);
 
+            strQuery.Clear();
+            strQuery.Append($" UPDATE MA_FAILOVER_CD SET ACTIVE_SERVER=(ACTIVE_SERVER+1)%2, PROG_STATUS=99  WHERE EQUIP_NM='{nodeTag.Name}'  ");
+            sqlBiz.ExecuteNonQuery(strQuery.ToString(), ref errCode, ref errText);
         }
 
+        // Failover Auto Mode 로 전환 
         private void modeChangeAutoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SBL nodeTag = treeViewEQStatus.SelectedNode.Tag as SBL;
-            string equipName;
+
             if (nodeTag is EqType)
             {
                 return;
             }
-            else
-                equipName = nodeTag.Name;
+            if (DialogResult.No.Equals(MessageBox.Show($"{nodeTag.Name} 장비 수집 프로그램 Failover Mode Auto 로 전환하시겠습니까 ?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)))
+            {
+                return;
+            }
 
-            strQuery.Clear();
             int MY_ID = sqlBiz.GetServerId(Environment.MachineName);
             if (MY_ID == -1)
             {
-                MessageBox.Show("", $"Server Code does not exist in database", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                Application.Exit();
+                MessageBox.Show($"Server Code does not exist in database", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            strQuery.Append($" UPDATE MA_FAILOVER_CD SET FAILOVER_MODE=1  WHERE EQUIP_NM='{equipName}'  ");
+
+            strQuery.Clear();
+            strQuery.Append($" UPDATE MA_FAILOVER_CD SET FAILOVER_MODE=1  WHERE EQUIP_NM='{nodeTag.Name}'  ");
             sqlBiz.ExecuteNonQuery(strQuery.ToString(), ref errCode, ref errText);
+        }
+
+        // Failover Manual Mode 로 전환
+        private void modeChangeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SBL nodeTag = treeViewEQStatus.SelectedNode.Tag as SBL;
+
+            if (nodeTag is EqType)
+            {
+                return;
+            }
+
+            if (DialogResult.No.Equals(MessageBox.Show($"{nodeTag.Name} 장비 수집 프로그램 Failover Manual Mode 로 전환하시겠습니까 ?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)))
+            {
+                return;
+            }
+
+            int MY_ID = sqlBiz.GetServerId(Environment.MachineName);
+            if (MY_ID == -1)
+            {
+                MessageBox.Show($"Server Code does not exist in database", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+            strQuery.Clear();
+            strQuery.Append($" UPDATE MA_FAILOVER_CD SET FAILOVER_MODE=0 WHERE EQUIP_NM='{nodeTag.Name}'  ");
+            sqlBiz.ExecuteNonQuery(strQuery.ToString(), ref errCode, ref errText);
+        }
+
+        // 프로그램 표시
+        private void programShowToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SBL nodeTag = treeViewEQStatus.SelectedNode.Tag as SBL;
+
+            if (nodeTag is EqType)
+            {
+                ForegroundEquipmentType(nodeTag.Name, true);
+            }
+            else
+            {
+                ForegroundEquipment(nodeTag.Name, true);
+            }
+
+        }
+
+        // 프로그램 숨김
+        private void programHideToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SBL nodeTag = treeViewEQStatus.SelectedNode.Tag as SBL;
+
+            if (nodeTag is EqType)
+            {
+                ForegroundEquipmentType(nodeTag.Name, false);
+            }
+            else
+            {
+                ForegroundEquipment(nodeTag.Name, false);
+            }
+
         }
     }
 }

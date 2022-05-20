@@ -35,7 +35,7 @@ namespace DataSpider.UserMonitor
             dataGridView1.DoubleBuffered(true);
 
             DateTime dtNow = DateTime.Now;
-            dateTimePicker_Start.Value = dtNow.AddDays(-60);
+            dateTimePicker_Start.Value = dtNow.AddDays(-30);
             dateTimePicker_StartTime.Value = DateTime.Parse("00:00:00");
             dateTimePicker_End.Value = dtNow;
             dateTimePicker_EndTime.Value = DateTime.Parse("23:59:59");
@@ -136,7 +136,14 @@ namespace DataSpider.UserMonitor
                         dtReg = DateTime.Now;
                     }
                     string filePath = $@"{Directory.GetCurrentDirectory()}\LOG\{equipType}_{equipName}\{logData}_{equipType}_{equipName}_{dtReg:yyyyMMdd}.TXT";
-                    Process.Start(logviewProgram, filePath);
+                    if (Directory.Exists(filePath))
+                    {
+                        Process.Start(logviewProgram, filePath);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Log file not exists.", "System Log", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
                 }
             }
             catch (Exception ex)

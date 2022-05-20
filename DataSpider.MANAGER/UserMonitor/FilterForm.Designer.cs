@@ -89,8 +89,9 @@ namespace DataSpider.UserMonitor
             // 
             // dateTimePickerTimeMax
             // 
+            this.dateTimePickerTimeMax.CustomFormat = "HH:mm:ss";
             this.dateTimePickerTimeMax.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dateTimePickerTimeMax.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.dateTimePickerTimeMax.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePickerTimeMax.Location = new System.Drawing.Point(123, 156);
             this.dateTimePickerTimeMax.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.dateTimePickerTimeMax.Name = "dateTimePickerTimeMax";
@@ -100,7 +101,9 @@ namespace DataSpider.UserMonitor
             // 
             // dateTimePickerDateMax
             // 
+            this.dateTimePickerDateMax.CustomFormat = "yyyy-MM-dd";
             this.dateTimePickerDateMax.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dateTimePickerDateMax.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePickerDateMax.Location = new System.Drawing.Point(123, 136);
             this.dateTimePickerDateMax.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.dateTimePickerDateMax.Name = "dateTimePickerDateMax";
@@ -174,7 +177,9 @@ namespace DataSpider.UserMonitor
             // 
             // dateTimePickerDateMin
             // 
+            this.dateTimePickerDateMin.CustomFormat = "yyyy-MM-dd";
             this.dateTimePickerDateMin.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dateTimePickerDateMin.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePickerDateMin.Location = new System.Drawing.Point(123, 64);
             this.dateTimePickerDateMin.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.dateTimePickerDateMin.Name = "dateTimePickerDateMin";
@@ -184,8 +189,9 @@ namespace DataSpider.UserMonitor
             // 
             // dateTimePickerTimeMin
             // 
+            this.dateTimePickerTimeMin.CustomFormat = "HH:mm:ss";
             this.dateTimePickerTimeMin.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dateTimePickerTimeMin.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.dateTimePickerTimeMin.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePickerTimeMin.Location = new System.Drawing.Point(123, 84);
             this.dateTimePickerTimeMin.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.dateTimePickerTimeMin.Name = "dateTimePickerTimeMin";

@@ -24,7 +24,6 @@ namespace DataSpider.UserMonitor
         private int selectedIndex = 0;
         private int autoRefreshInterval = 10;
         private bool formSelected = false;
-        private bool needResizeColumn = true;
         private DateTime dtLastRefreshed = DateTime.MinValue;
         private Thread threadDataRefresh = null;
         public bool threadStop = false;
@@ -87,6 +86,8 @@ namespace DataSpider.UserMonitor
         }
         private void GetProgramStatus()
         {
+            bool resized = false;
+
             if (this.InvokeRequired)
             {
                 this.Invoke((MethodInvoker)delegate { GetProgramStatus(); });
@@ -105,19 +106,19 @@ namespace DataSpider.UserMonitor
 
                     SetSelectedIndex();
 
-                    listView_Main.Items.Clear();
-
                     DataTable dtProgramStatus = sqlBiz.GetPIAlarmStatus(equipType.Trim(), equipName.Trim(), ref strErrCode, ref strErrText);
 
                     if (dtProgramStatus == null || dtProgramStatus.Rows.Count < 1)
                     {
+                        listView_Main.Items.Clear();
                         return;
                     }
                                         
                     listView_Main.BeginUpdate();
+                    listView_Main.Items.Clear();
+
                     if (listView_Main.Columns.Count != dtProgramStatus.Columns.Count)
                     {
-                        needResizeColumn = true;
                         listView_Main.Clear();
                         foreach (DataColumn dc in dtProgramStatus.Columns)
                         {
@@ -151,11 +152,15 @@ namespace DataSpider.UserMonitor
                         lvi.BackColor = listView_Main.Items.Count % 2 == 0 ? Color.FromArgb(221, 235, 247) : Color.Transparent;
 
                         listView_Main.Items.Add(lvi);
+                        if (!resized && listView_Main.Items.Count > 26)
+                        {
+                            listView_Main.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+                            resized = true;
+                        }
                     }
-                    if (needResizeColumn)
-                    {                        
+                    if (listView_Main.Items.Count > 0 && !resized)
+                    {
                         listView_Main.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
-                        needResizeColumn = false;
                     }
                     if (dtProgramStatus.Rows.Count > 0)
                     {
