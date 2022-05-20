@@ -72,6 +72,9 @@ namespace DataSpider.UserMonitor
             comboBox_ServerName.DisplayMember = "CODE_NM_VALUE";
             comboBox_ServerName.ValueMember = "CODE_VALUE";
 
+            dataGridTagInfo.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
+            dataGridTagInfo.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
+            dataGridTagInfo.AllowUserToResizeRows = dataGridTagInfo.AllowUserToResizeColumns = true;
             //
             // 2022. 2. 16 : Han, Ilho
             //      Add tag editor UI
