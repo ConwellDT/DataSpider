@@ -1,0 +1,7 @@
+﻿endpointURL Sample
+ 
+ endpointURL = "opc.tcp://192.168.20.102:62641/ViCellBlu/Server",
+
+
+UserIdentity 를 사용함. 
+  useridentity = new UserIdentity("factory_admin", "Vi-CELL#08"),

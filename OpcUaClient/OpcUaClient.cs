@@ -16,7 +16,15 @@ namespace OpcUaClient
 
     public class OpcUaClient
     {
-        string endpointURL { get; set; }
+        public Session m_session { get; set; }
+        public SessionReconnectHandler reconnectHandler;
+        public const int ReconnectPeriod = 10;
+
+        public ServiceMessageContext m_context;
+
+
+
+        public string endpointURL { get; set; }
         public string applicationName { get; set; }
         public ApplicationType applicationType { get; set; }
         public string subjectName { get; set; }
@@ -24,10 +32,6 @@ namespace OpcUaClient
         bool SecurityEnabled { get; set; }
         ApplicationInstance applicationInstance = null;
         ApplicationConfiguration config = null;
-
-        const int ReconnectPeriod = 10;
-        public Session session { get; set; }
-        public SessionReconnectHandler reconnectHandler;
 
         Subscription currentSubscription;
         public DateTime LastTimeSessionRenewed { get; set; }
@@ -142,7 +146,7 @@ namespace OpcUaClient
             applicationInstance = CreateApplicationInstance();
 
             // Console.WriteLine($"Step 2 - Create a session with your server: {selectedEndpoint.EndpointUrl} ");
-            session = CreateSession();
+            m_session = CreateSession();
         }
 
         /// <summary>
@@ -167,11 +171,11 @@ namespace OpcUaClient
             ClassDisposing = true;
             try
             {
-                if (session != null)
+                if (m_session != null)
                 {
-                    session.Close();
-                    session.Dispose();
-                    session = null;
+                    m_session.Close();
+                    m_session.Dispose();
+                    m_session = null;
                 }
             }
             catch { }
@@ -189,10 +193,10 @@ namespace OpcUaClient
             var endpointConfiguration = EndpointConfiguration.Create(config);
             var endpoint = new ConfiguredEndpoint(null, selectedEndpoint, endpointConfiguration);
 
-            session = Session.Create(config, endpoint, false, config.ApplicationName, 60000, useridentity, null).GetAwaiter().GetResult();
+            m_session = Session.Create(config, endpoint, false, config.ApplicationName, 60000, useridentity, null).GetAwaiter().GetResult();
             // register keep alive handler
-            session.KeepAlive += Client_KeepAlive;
-            return session;
+            m_session.KeepAlive += Client_KeepAlive;
+            return m_session;
         }
 
         public ReferenceDescriptionCollection Browse(out byte[] continuationPoint, NodeId nodeId = null)
@@ -202,13 +206,13 @@ namespace OpcUaClient
                 nodeId = Opc.Ua.ObjectIds.ObjectsFolder;
             }
 
-            if (null == session)
+            if (null == m_session)
             {
                 continuationPoint = new byte[1];
                 return new ReferenceDescriptionCollection(1);
             }
 
-            session.Browse(null, null, nodeId, 0u, BrowseDirection.Forward, ReferenceTypeIds.HierarchicalReferences,
+            m_session.Browse(null, null, nodeId, 0u, BrowseDirection.Forward, ReferenceTypeIds.HierarchicalReferences,
                 true,
                 (uint)NodeClass.Variable | (uint)NodeClass.Object | (uint)NodeClass.Method, out continuationPoint,
                 out var references);
@@ -218,7 +222,7 @@ namespace OpcUaClient
 
         public ReferenceDescriptionCollection Browse(out byte[] continuationPoint, ExpandedNodeId expandedNodeId)
         {
-            var nodeId = ExpandedNodeId.ToNodeId(expandedNodeId, session.NamespaceUris);
+            var nodeId = ExpandedNodeId.ToNodeId(expandedNodeId, m_session.NamespaceUris);
             return Browse(out continuationPoint, nodeId);
         }
 
@@ -228,7 +232,7 @@ namespace OpcUaClient
         public void CreateSubscription(int _publishingInterval)
         {
             //Console.WriteLine("Step 4 - Create a subscription. Set a faster publishing interval if you wish.");
-            var _subscription = new Subscription(session.DefaultSubscription) { PublishingInterval = _publishingInterval };
+            var _subscription = new Subscription(m_session.DefaultSubscription) { PublishingInterval = _publishingInterval };
             currentSubscription = _subscription;
         }
 
@@ -252,7 +256,7 @@ namespace OpcUaClient
         public bool AddSubscription()
         {
             bool bReturn = false;
-            bReturn = session.AddSubscription(currentSubscription);
+            bReturn = m_session.AddSubscription(currentSubscription);
             if (bReturn == true) currentSubscription.Create();
             return bReturn;
         }
@@ -280,7 +284,7 @@ namespace OpcUaClient
                 LogMsg("--- ignore callbacks from discarded objects. ---");
                 return;
             }
-            session = reconnectHandler.Session;
+            m_session = reconnectHandler.Session;
             reconnectHandler.Dispose();
             reconnectHandler = null;
             LogMsg("--- RECONNECTED ---");
@@ -329,7 +333,7 @@ namespace OpcUaClient
         {
             try
             {
-                return session.ReadValue(nodeId);
+                return m_session.ReadValue(nodeId);
             }
             catch (Exception exception)
             {
@@ -353,7 +357,7 @@ namespace OpcUaClient
                 StatusCodeCollection results = null;
                 DiagnosticInfoCollection diagnosticInfos = null;
 
-                ResponseHeader responseHeader = session.Write(
+                ResponseHeader responseHeader = m_session.Write(
                     null,
                     nodesToWrite,
                     out results,
@@ -385,7 +389,7 @@ namespace OpcUaClient
                 StatusCodeCollection results = null;
                 DiagnosticInfoCollection diagnosticInfos = null;
 
-                ResponseHeader responseHeader = session.Write(
+                ResponseHeader responseHeader = m_session.Write(
                     null,
                     nodesToWrite,
                     out results,

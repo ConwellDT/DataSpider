@@ -1,4 +1,10 @@
 ﻿
+- WaveLength가 1개 이상이라도 DataPoints는 1개만 표시하도록 수정 2022-05-23(월)
+
+
+
+
+
 처리 방법
 
 1) ini 파일에서  마지막 처리한 날짜와 마지막 처리한 DaqID를  읽는다.
@@ -23,4 +29,3 @@ LastDaqID
 	JSON FORMAT으로 리턴된다.
 
 
-	

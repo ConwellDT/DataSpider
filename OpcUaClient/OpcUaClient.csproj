@@ -57,16 +57,16 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="OPCFoundation.NetStandard.Opc.Ua">
-      <Version>1.4.365.48</Version>
+      <Version>1.4.368.53</Version>
     </PackageReference>
     <PackageReference Include="OPCFoundation.NetStandard.Opc.Ua.Bindings.Https">
-      <Version>1.4.365.48</Version>
+      <Version>1.4.368.53</Version>
     </PackageReference>
     <PackageReference Include="OPCFoundation.NetStandard.Opc.Ua.Gds.Client.Common">
-      <Version>1.4.365.48</Version>
+      <Version>1.4.368.53</Version>
     </PackageReference>
     <PackageReference Include="OPCFoundation.NetStandard.Opc.Ua.Gds.Server.Common">
-      <Version>1.4.365.48</Version>
+      <Version>1.4.368.53</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

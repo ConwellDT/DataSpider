@@ -199,7 +199,7 @@ namespace DataSpider.PC01.PT
 
             try
             {
-                outputArguments = myUaClient.session.Call(new NodeId("ns=2;s=Automation"),
+                outputArguments = myUaClient.m_session.Call(new NodeId("ns=2;s=Automation"),
                                                                         new NodeId("ns=2;s=RequestTestRecord"),
                                                                         ToBeProcessedRecord
                                                                         );
