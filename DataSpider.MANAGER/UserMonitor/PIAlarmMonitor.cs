@@ -293,11 +293,20 @@ namespace DataSpider.UserMonitor
         }
         private void resetIFFlagToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (listView_Main.SelectedItems.Count > 0 && int.TryParse(listView_Main.SelectedItems[0].Text, out int hiSeq))
+            if (listView_Main.SelectedItems.Count > 0)
             {
-                if (DialogResult.Yes.Equals(MessageBox.Show($"Do you want to reset PI I/F flag [{listView_Main.SelectedItems[0].SubItems[1].Text}] ? It will try to save the PI again.", "PIAlarm", MessageBoxButtons.YesNo)))
+                List<long> listSeq = new List<long>();
+                foreach (ListViewItem item in listView_Main.SelectedItems)
                 {
-                    sqlBiz.RestPIIFFlag(hiSeq);
+                    if (long.TryParse(item.Text, out long seq))
+                    {
+                        listSeq.Add(seq);
+                    }
+                }
+
+                if (DialogResult.Yes.Equals(MessageBox.Show($"Do you want to reset PI I/F flag [{listView_Main.SelectedItems[0].SubItems[1].Text}] and {listView_Main.SelectedItems.Count - 1} others ? It will try to save the PI again.", "PIAlarm", MessageBoxButtons.YesNo)))
+                {
+                    sqlBiz.RestPIIFFlag(string.Join(",", listSeq));// minSeq, maxSeq);
                     GetProgramStatus();
                 }
             }
@@ -305,11 +314,28 @@ namespace DataSpider.UserMonitor
 
         private void removePIAlarmToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (listView_Main.SelectedItems.Count > 0 && int.TryParse(listView_Main.SelectedItems[0].Text, out int hiSeq))
+            //if (listView_Main.SelectedItems.Count > 0)
+            //{
+            //    if (DialogResult.Yes.Equals(MessageBox.Show($"Do you want to remove PI I/F alarm [{listView_Main.SelectedItems[0].SubItems[1].Text}] ?", "PIAlarm", MessageBoxButtons.YesNo)))
+            //    {
+            //        sqlBiz.RemovePIAlarm(hiSeq);
+            //        GetProgramStatus();
+            //    }
+            //}
+            if (listView_Main.SelectedItems.Count > 0)
             {
-                if (DialogResult.Yes.Equals(MessageBox.Show($"Do you want to remove PI I/F alarm [{listView_Main.SelectedItems[0].SubItems[1].Text}] ?", "PIAlarm", MessageBoxButtons.YesNo)))
+                List<long> listSeq = new List<long>();
+                foreach (ListViewItem item in listView_Main.SelectedItems)
                 {
-                    sqlBiz.RemovePIAlarm(hiSeq);
+                    if (long.TryParse(item.Text, out long seq))
+                    {
+                        listSeq.Add(seq);
+                    }
+                }
+
+                if (DialogResult.Yes.Equals(MessageBox.Show($"Do you want to remove PI I/F alarm [{listView_Main.SelectedItems[0].SubItems[1].Text}] and {listView_Main.SelectedItems.Count - 1} others ? Can't handle retries anymore.", "PIAlarm", MessageBoxButtons.YesNo)))
+                {
+                    sqlBiz.RemovePIAlarm(string.Join(",", listSeq));
                     GetProgramStatus();
                 }
             }
