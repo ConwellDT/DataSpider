@@ -251,12 +251,8 @@ namespace DataSpider.PC01.PT
                 try
                 {
                     DataTable distinctTable = sdt.DefaultView.ToTable(true, "WaveLength", "ExtinctionCoefficient", "DataPoints");
-                    foreach (DataRow dr in distinctTable.Rows)
-                    {
-                        retString += " " + (string)sdt.Rows[0]["Datapoints"] + " ,";
-                    }
-                    if (retString.Length > 0)
-                        retString = retString.Substring(0, retString.Length - 1);
+                    if (distinctTable.Rows.Count > 0)
+                        retString = (string)sdt.Rows[0]["Datapoints"];
                 }
                 catch (Exception ex)
                 {
@@ -498,7 +494,7 @@ namespace DataSpider.PC01.PT
             IList<object> outputArguments = null;
             try
             {
-                outputArguments = myUaClient.session.Call(new NodeId("ns=2;s=Daq"),
+                outputArguments = myUaClient.m_session.Call(new NodeId("ns=2;s=Daq"),
                                                                         new NodeId("ns=2;s=Daq/GetDaqStartInfo"),
                                                                         startDate.ToString("MM/dd/yyyy"),
                                                                         endDate.ToString("MM/dd/yyyy")
@@ -537,7 +533,7 @@ namespace DataSpider.PC01.PT
             try
             {
                 //
-                outputArguments = myUaClient.session.Call(new NodeId("ns=2;s=Daq"),
+                outputArguments = myUaClient.m_session.Call(new NodeId("ns=2;s=Daq"),
                                                                         new NodeId("ns=2;s=Daq/GetCycleData"),
                                                                         ToBeProcessedDaqID
                                                                         );
@@ -672,11 +668,11 @@ namespace DataSpider.PC01.PT
 
         private DateTime GetLastEnqueuedDate()
         {
-            DateTime LastEnqueuedDate;
+            DateTime LastEnqueuedDate=DateTime.MinValue;
             string strLastEnqueuedDate = m_sqlBiz.ReadSTCommon(m_Name, "LastEnqueuedDate"); //PC00U01.ReadConfigValue("LastEnqueuedDate", m_Name, $@".\CFG\{m_Type}.ini");
             DateTime.TryParseExact(strLastEnqueuedDate,"yyyyMMdd", CultureInfo.InvariantCulture, DateTimeStyles.AssumeLocal | DateTimeStyles.AllowInnerWhite, out LastEnqueuedDate);
-            if (LastEnqueuedDate < new DateTime(2021, 10, 01))
-                LastEnqueuedDate = new DateTime(2021, 10, 01);
+            if (LastEnqueuedDate == DateTime.MinValue)
+                LastEnqueuedDate = DateTime.Now.Subtract(TimeSpan.FromDays(1));
             listViewMsg.UpdateMsg($"Read last enqueued Date  : {LastEnqueuedDate.ToString("yyyyMMdd")}", false, true);
             listViewMsg.UpdateMsg($"m_LastEnqueuedDate :{LastEnqueuedDate.ToString("yyyyMMdd") } , {strLastEnqueuedDate}  !", false, true, true, PC00D01.MSGTINF);
             return LastEnqueuedDate;

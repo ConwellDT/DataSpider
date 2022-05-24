@@ -16,16 +16,22 @@ namespace OpcUaClient
 
     public class OpcUaClient
     {
+        public Session m_session { get; set; }
+        public SessionReconnectHandler reconnectHandler;
+        public const int ReconnectPeriod = 10;
 
-        string endpointURL { get; set; }
+        public ServiceMessageContext m_context;
+
+
+
+        public string endpointURL { get; set; }
+        public string applicationName { get; set; }
+        public ApplicationType applicationType { get; set; }
+        public string subjectName { get; set; }
         int clientRunTime = Timeout.Infinite;
         bool SecurityEnabled { get; set; }
         ApplicationInstance applicationInstance = null;
         ApplicationConfiguration config = null;
-
-        const int ReconnectPeriod = 10;
-        public Session session { get; set; }
-        public SessionReconnectHandler reconnectHandler;
 
         Subscription currentSubscription;
         public DateTime LastTimeSessionRenewed { get; set; }
@@ -44,12 +50,72 @@ namespace OpcUaClient
 
 
         public bool bUseSourceTime = true;
-        
-        public OpcUaClient(string _endpointURL, string _applicationName)
+
+
+        public UserIdentity useridentity = null;
+
+        public ReferenceDescriptionCollection objectsFolderCollection = null;
+        public ReferenceDescriptionCollection methodCollection = null;
+        public ReferenceDescriptionCollection variableCollection = null;
+        public ReferenceDescriptionCollection objectCollection = null;
+
+        public OpcUaClient()
         {
-            endpointURL = _endpointURL;
-            //Console.WriteLine("Step 1 - Create application configuration and certificate.");
-            config = CreateConfig(_applicationName);
+        }
+
+        public ApplicationConfiguration CreateConfig()
+        {
+            config = new ApplicationConfiguration()
+            {
+                ApplicationName = applicationName,
+                ApplicationUri = Utils.Format(@"urn:{0}:" + applicationName + "", Dns.GetHostName()),
+                ApplicationType = ApplicationType.Client,
+                SecurityConfiguration = new SecurityConfiguration
+                {
+                    ApplicationCertificate = new CertificateIdentifier
+                    {
+                        StoreType = @"Directory",
+                        StorePath = @"%CommonApplicationData%\OPC Foundation\CertificateStores\MachineDefault",
+                        SubjectName = subjectName
+                    },
+                    TrustedIssuerCertificates = new CertificateTrustList
+                    {
+                        StoreType = @"Directory",
+                        StorePath = @"%CommonApplicationData%\OPC Foundation\CertificateStores\UA Certificate Authorities"
+                    },
+                    TrustedPeerCertificates = new CertificateTrustList
+                    {
+                        StoreType = @"Directory",
+                        StorePath = @"%CommonApplicationData%\OPC Foundation\CertificateStores\UA Applications"
+                    },
+                    RejectedCertificateStore = new CertificateTrustList
+                    {
+                        StoreType = @"Directory",
+                        StorePath = @"%CommonApplicationData%\OPC Foundation\CertificateStores\RejectedCertificates"
+                    },
+                    AddAppCertToTrustedStore = true,
+                    NonceLength = 32,
+                    AutoAcceptUntrustedCertificates = autoAccept,
+                    RejectSHA1SignedCertificates = false,
+                    MinimumCertificateKeySize = 2048,
+                    SendCertificateChain = true
+                },
+                TransportConfigurations = new TransportConfigurationCollection(),
+                TransportQuotas = new TransportQuotas { OperationTimeout = 15000 },
+                ClientConfiguration = new ClientConfiguration { DefaultSessionTimeout = 60000 },
+                TraceConfiguration = new TraceConfiguration()
+            };
+            config.TransportQuotas = new TransportQuotas
+            {
+                OperationTimeout = 600000,
+                MaxStringLength = 1048576,
+                MaxByteStringLength = 1048576,
+                MaxArrayLength = 65535,
+                MaxMessageSize = 4194304,
+                MaxBufferSize = 65535,
+                ChannelLifetime = 300000,
+                SecurityTokenLifetime = 3600000
+            };
 
             config.Validate(ApplicationType.Client).GetAwaiter().GetResult();
             if (config.SecurityConfiguration.AutoAcceptUntrustedCertificates)
@@ -57,13 +123,40 @@ namespace OpcUaClient
                 //config.CertificateValidator.CertificateValidation += (s, e) => { e.Accept = (e.Error.StatusCode == StatusCodes.BadCertificateUntrusted); };
                 config.CertificateValidator.CertificateValidation += CertificateValidator_CertificateValidation;
             }
+            return config;
+        }
 
-            applicationInstance = CreateApplicationInstance(_applicationName, ApplicationType.Client, config);
-
+        public ApplicationInstance CreateApplicationInstance()
+        {
+            applicationInstance = new ApplicationInstance();
+            applicationInstance.ApplicationName = applicationName;
+            applicationInstance.ApplicationType = applicationType;
+            applicationInstance.ApplicationConfiguration = config;
             applicationInstance.CheckApplicationInstanceCertificate(false, 2048).GetAwaiter().GetResult();
+            return applicationInstance;
+        }
+
+
+
+        public OpcUaClient(string _endpointURL, string _applicationName)
+        {
+            endpointURL = _endpointURL;
+            applicationName = _applicationName;
+            applicationType = ApplicationType.Client;
+            //Console.WriteLine("Step 1 - Create application configuration and certificate.");
+            config = CreateConfig();
+
+            //config.Validate(ApplicationType.Client).GetAwaiter().GetResult();
+            //if (config.SecurityConfiguration.AutoAcceptUntrustedCertificates)
+            //{
+            //    //config.CertificateValidator.CertificateValidation += (s, e) => { e.Accept = (e.Error.StatusCode == StatusCodes.BadCertificateUntrusted); };
+            //    config.CertificateValidator.CertificateValidation += CertificateValidator_CertificateValidation;
+            //}
+
+            applicationInstance = CreateApplicationInstance();
 
             // Console.WriteLine($"Step 2 - Create a session with your server: {selectedEndpoint.EndpointUrl} ");
-            session = CreateSession();
+            m_session = CreateSession();
         }
 
         /// <summary>
@@ -88,81 +181,68 @@ namespace OpcUaClient
             ClassDisposing = true;
             try
             {
-                if (session != null)
+                if (m_session != null)
                 {
-                    session.Close();
-                    session.Dispose();
-                    session = null;
+                    m_session.Close();
+                    m_session.Dispose();
+                    m_session = null;
                 }
             }
             catch { }
         }
 
-        public ApplicationInstance CreateApplicationInstance(string _applicationName, ApplicationType _applcationType, ApplicationConfiguration _config)
-        {
-            ApplicationInstance _applicationInstance = new ApplicationInstance();
-            _applicationInstance.ApplicationName = _applicationName;
-            _applicationInstance.ApplicationType = _applcationType;
-            _applicationInstance.ApplicationConfiguration = _config;
-            return _applicationInstance;
-        }
-        public ApplicationConfiguration CreateConfig(string _applicationName)
-        {
-            ApplicationConfiguration _config = new ApplicationConfiguration()
-            {
-                ApplicationName = _applicationName,
-                ApplicationUri = Utils.Format(@"urn:{0}:" + _applicationName + "", Dns.GetHostName()),
-                ApplicationType = ApplicationType.Client,
-                SecurityConfiguration = new SecurityConfiguration
-                {
-                    ApplicationCertificate = new CertificateIdentifier { 
-                        StoreType = @"Directory", 
-                        StorePath = @"%CommonApplicationData%\OPC Foundation\CertificateStores\MachineDefault", 
-                        SubjectName =_applicationName // Utils.Format(@"CN={0}, DC={1}", _applicationName, Dns.GetHostName()) 
-                    },
-                    TrustedIssuerCertificates = new CertificateTrustList { 
-                        StoreType = @"Directory", 
-                        StorePath = @"%CommonApplicationData%\OPC Foundation\CertificateStores\UA Certificate Authorities" 
-                    },
-                    TrustedPeerCertificates = new CertificateTrustList {
-                        StoreType = @"Directory", 
-                        StorePath = @"%CommonApplicationData%\OPC Foundation\CertificateStores\UA Applications" 
-                    },
-                    RejectedCertificateStore = new CertificateTrustList {
-                        StoreType = @"Directory", 
-                        StorePath = @"%CommonApplicationData%\OPC Foundation\CertificateStores\RejectedCertificates" 
-                    },
-                    AddAppCertToTrustedStore = true,
-                    NonceLength = 32,
-                    AutoAcceptUntrustedCertificates = autoAccept,
-                    RejectSHA1SignedCertificates = false,
-                    MinimumCertificateKeySize = 1024
-                },
-                TransportConfigurations = new TransportConfigurationCollection(),
-                TransportQuotas = new TransportQuotas { OperationTimeout = 15000 },
-                ClientConfiguration = new ClientConfiguration { DefaultSessionTimeout = 60000 },
-                TraceConfiguration = new TraceConfiguration()
-            };
-            return _config;
-        }
-
         public Session CreateSession()
         {
             // Console.WriteLine($"Step 2 - Create a session with your server: {selectedEndpoint.EndpointUrl} ");
+            Task<bool> haveAppCertificateTask = applicationInstance.CheckApplicationInstanceCertificate(false, 0);
+            bool haveAppCertificate = haveAppCertificateTask.Result;
+            if (haveAppCertificate)
+                config.ApplicationUri = X509Utils.GetApplicationUriFromCertificate(config.SecurityConfiguration.ApplicationCertificate.Certificate);
+
             var selectedEndpoint = CoreClientUtils.SelectEndpoint(endpointURL, useSecurity: SecurityEnabled, discoverTimeout: 15000);
             var endpointConfiguration = EndpointConfiguration.Create(config);
             var endpoint = new ConfiguredEndpoint(null, selectedEndpoint, endpointConfiguration);
 
-            session = Session.Create(config, endpoint, false, config.ApplicationName, 60000, null, null).GetAwaiter().GetResult();
+            m_session = Session.Create(config, endpoint, false, config.ApplicationName, 60000, useridentity, null).GetAwaiter().GetResult();
             // register keep alive handler
-            session.KeepAlive += Client_KeepAlive;
-            return session;
+            m_session.KeepAlive += Client_KeepAlive;
+            return m_session;
         }
+
+        public ReferenceDescriptionCollection Browse(out byte[] continuationPoint, NodeId nodeId = null)
+        {
+            if (null == nodeId)
+            {
+                nodeId = Opc.Ua.ObjectIds.ObjectsFolder;
+            }
+
+            if (null == m_session)
+            {
+                continuationPoint = new byte[1];
+                return new ReferenceDescriptionCollection(1);
+            }
+
+            m_session.Browse(null, null, nodeId, 0u, BrowseDirection.Forward, ReferenceTypeIds.HierarchicalReferences,
+                true,
+                (uint)NodeClass.Variable | (uint)NodeClass.Object | (uint)NodeClass.Method, out continuationPoint,
+                out var references);
+
+            return references;
+        }
+
+        public ReferenceDescriptionCollection Browse(out byte[] continuationPoint, ExpandedNodeId expandedNodeId)
+        {
+            var nodeId = ExpandedNodeId.ToNodeId(expandedNodeId, m_session.NamespaceUris);
+            return Browse(out continuationPoint, nodeId);
+        }
+
+
+
 
         public void CreateSubscription(int _publishingInterval)
         {
             //Console.WriteLine("Step 4 - Create a subscription. Set a faster publishing interval if you wish.");
-            var _subscription = new Subscription(session.DefaultSubscription) { PublishingInterval = _publishingInterval };
+            var _subscription = new Subscription(m_session.DefaultSubscription) { PublishingInterval = _publishingInterval };
             currentSubscription = _subscription;
         }
 
@@ -186,7 +266,7 @@ namespace OpcUaClient
         public bool AddSubscription()
         {
             bool bReturn = false;
-            bReturn = session.AddSubscription(currentSubscription);
+            bReturn = m_session.AddSubscription(currentSubscription);
             if (bReturn == true) currentSubscription.Create();
             return bReturn;
         }
@@ -214,7 +294,7 @@ namespace OpcUaClient
                 LogMsg("--- ignore callbacks from discarded objects. ---");
                 return;
             }
-            session = reconnectHandler.Session;
+            m_session = reconnectHandler.Session;
             reconnectHandler.Dispose();
             reconnectHandler = null;
             LogMsg("--- RECONNECTED ---");
@@ -263,7 +343,7 @@ namespace OpcUaClient
         {
             try
             {
-                return session.ReadValue(nodeId);
+                return m_session.ReadValue(nodeId);
             }
             catch (Exception exception)
             {
@@ -287,7 +367,7 @@ namespace OpcUaClient
                 StatusCodeCollection results = null;
                 DiagnosticInfoCollection diagnosticInfos = null;
 
-                ResponseHeader responseHeader = session.Write(
+                ResponseHeader responseHeader = m_session.Write(
                     null,
                     nodesToWrite,
                     out results,
@@ -319,7 +399,7 @@ namespace OpcUaClient
                 StatusCodeCollection results = null;
                 DiagnosticInfoCollection diagnosticInfos = null;
 
-                ResponseHeader responseHeader = session.Write(
+                ResponseHeader responseHeader = m_session.Write(
                     null,
                     nodesToWrite,
                     out results,
