@@ -105,7 +105,17 @@ namespace OpcUaClient
                 ClientConfiguration = new ClientConfiguration { DefaultSessionTimeout = 60000 },
                 TraceConfiguration = new TraceConfiguration()
             };
-
+            config.TransportQuotas = new TransportQuotas
+            {
+                OperationTimeout = 600000,
+                MaxStringLength = 1048576,
+                MaxByteStringLength = 1048576,
+                MaxArrayLength = 65535,
+                MaxMessageSize = 4194304,
+                MaxBufferSize = 65535,
+                ChannelLifetime = 300000,
+                SecurityTokenLifetime = 3600000
+            };
 
             config.Validate(ApplicationType.Client).GetAwaiter().GetResult();
             if (config.SecurityConfiguration.AutoAcceptUntrustedCertificates)
