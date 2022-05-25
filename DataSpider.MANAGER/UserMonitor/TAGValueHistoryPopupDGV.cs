@@ -136,7 +136,7 @@ namespace DataSpider.UserMonitor
                         dtReg = DateTime.Now;
                     }
                     string filePath = $@"{Directory.GetCurrentDirectory()}\LOG\{equipType}_{equipName}\{logData}_{equipType}_{equipName}_{dtReg:yyyyMMdd}.TXT";
-                    if (Directory.Exists(filePath))
+                    if (File.Exists(filePath))
                     {
                         Process.Start(logviewProgram, filePath);
                     }
@@ -186,8 +186,8 @@ namespace DataSpider.UserMonitor
                 DataGridViewRow to_dgvr = dataGridView1.Rows[0];
                 DateTime toDate = DateTime.Parse(to_dgvr.Cells[2].Value.ToString()) + oneDay;
                 string filePath = $@"{Directory.GetCurrentDirectory()}\LOG\{equipType}_{equipName}";
-                string fromFile = $@"DATA_{equipType}_{equipName}_{fromDate.ToString("yyyyMMdd")}.TXT";
-                string toFile = $@"DATA_{equipType}_{equipName}_{toDate.ToString("yyyyMMdd")}.TXT";
+                string fromFile = $@"DATA_{equipType}_{equipName}_{fromDate:yyyyMMdd}.TXT";
+                string toFile = $@"DATA_{equipType}_{equipName}_{toDate:yyyyMMdd}.TXT";
                 string fileSearchPattern = "DATA*.txt";
                 string stringSearchPattern = tagName.Replace(equipName + "_", "");
                 LogListForm llf = new LogListForm();
