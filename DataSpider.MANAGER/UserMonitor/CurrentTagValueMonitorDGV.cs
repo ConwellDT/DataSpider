@@ -274,6 +274,7 @@ namespace DataSpider.UserMonitor
                 {
                     dataGridView_Main.FirstDisplayedScrollingRowIndex = 0;
                 }
+                dataGridView_Main.Rows[0].Selected = false;
                 dataGridView_Main.Rows[selectedIndex].Selected = true;
             }
         }
@@ -376,6 +377,7 @@ namespace DataSpider.UserMonitor
                         dataGridView_Main.FirstDisplayedScrollingRowIndex = 0;
                     }
 
+                    dataGridView_Main.Rows[0].Selected = false;
                     dataGridView_Main.Rows[selectedIndex].Selected = true;
                 }
             }
