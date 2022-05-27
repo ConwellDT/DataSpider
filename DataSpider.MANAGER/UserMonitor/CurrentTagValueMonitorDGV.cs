@@ -179,6 +179,9 @@ namespace DataSpider.UserMonitor
             string strErrCode = string.Empty;
             string strErrText = string.Empty;
 
+            int nHoriScrollOffset = dataGridView_Main.HorizontalScrollingOffset;
+            int nRowIndex = dataGridView_Main.FirstDisplayedScrollingRowIndex;
+
             dataGridView_Main.DataSource = null;
 
             DataTable dtProgramStatus = sqlBiz.GetCurrentTagValue(equipType.Trim(), equipName.Trim(), ref strErrCode, ref strErrText);
@@ -257,9 +260,6 @@ namespace DataSpider.UserMonitor
             dvProgramStatus.RowFilter = strFileterStr;
             dvProgramStatus.Sort = "Measure DateTime DESC";
             
-            int nHoriScrollOffset = dataGridView_Main.HorizontalScrollingOffset;
-            int nRowIndex = dataGridView_Main.FirstDisplayedScrollingRowIndex;
-
             dataGridView_Main.DataSource = dvProgramStatus;
 
             if (dvProgramStatus.Count > 0)
@@ -274,6 +274,7 @@ namespace DataSpider.UserMonitor
                 {
                     dataGridView_Main.FirstDisplayedScrollingRowIndex = 0;
                 }
+                dataGridView_Main.Rows[selectedIndex].Selected = true;
             }
         }
 
@@ -288,6 +289,10 @@ namespace DataSpider.UserMonitor
 
             string strErrCode = string.Empty;
             string strErrText = string.Empty;
+
+            int nHoriScrollOffset = dataGridView_Main.HorizontalScrollingOffset;
+            int nRowIndex = dataGridView_Main.FirstDisplayedScrollingRowIndex;
+            dataGridView_Main.DataSource = null;//.Rows.Clear();
 
             DataTable dtHistoryData = null;
 
@@ -356,10 +361,6 @@ namespace DataSpider.UserMonitor
             {
                 dtHistoryData.DefaultView.Sort = "MEASURE_DATE DESC";
 
-
-                int nHoriScrollOffset = dataGridView_Main.HorizontalScrollingOffset;
-                int nRowIndex = dataGridView_Main.FirstDisplayedScrollingRowIndex;
-
                 dataGridView_Main.DataSource = dtHistoryData;
 
                 if (dtHistoryData.Rows.Count > 0)
@@ -374,6 +375,8 @@ namespace DataSpider.UserMonitor
                     {
                         dataGridView_Main.FirstDisplayedScrollingRowIndex = 0;
                     }
+
+                    dataGridView_Main.Rows[selectedIndex].Selected = true;
                 }
             }
             else
