@@ -539,6 +539,7 @@ namespace DataSpider
                 {
                     ConfigTagGroup frm = new ConfigTagGroup();
                     frm.ShowDialog(this);
+                    currentTagValueMonitor.UpdatecomboBoxTagGroupSel();
                 }
             }
         }

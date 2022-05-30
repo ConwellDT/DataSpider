@@ -425,37 +425,10 @@ namespace DataSpider.UserMonitor
                         DataTable dtEquiptype = sqlBiz.GetCommonCode("EQUIP_TYPE", ref strErrCode, ref strErrText);
                         equipType = dtEquiptype.Rows[0]["CODE_NM"].ToString();
                     }
-
                     if (equipTypeCur != equipType)
                     {
-                        DataTable dtEquiptype = sqlBiz.GetCommonCode("EQUIP_TYPE", ref strErrCode, ref strErrText);
-                        DataRow[] drEQCodeSel = dtEquiptype.Select($"CD_GRP = 'EQUIP_TYPE' AND CODE_NM = '{equipType.Trim()}'");
-
-                        if (drEQCodeSel != null && drEQCodeSel.Length > 0)
-                        {
-                            String strEQTypeCode = drEQCodeSel[0]["CODE"].ToString();
-                            DataTable dtGroups = sqlBiz.GetTagGroupByEQType(strEQTypeCode, ref strErrCode, ref strErrText);
-
-                            if (strErrCode == null || strErrCode == string.Empty)
-                            {
-                                DataRow row = dtGroups.NewRow();
-
-                                row["GROUP_NM"] = "All";
-                                row["GROUP_DESC"] = "All Tags";
-                                row["GROUP_NM_VALUE"] = "All(All Tags)";
-                                row["EQUIP_TYPE"] = equipType;
-
-                                dtGroups.Rows.InsertAt(row, 0);
-
-                                comboBoxTagGroupSel.DataSource = dtGroups;
-                                comboBoxTagGroupSel.DisplayMember = "GROUP_NM_VALUE";
-                                comboBoxTagGroupSel.ValueMember = "GROUP_NM";
-
-                                comboBoxTagGroupSel.SelectedIndex = 0;
-                            }
-
-                            equipTypeCur = equipType;
-                        }
+                        UpdatecomboBoxTagGroupSel();
+                        equipTypeCur = equipType;
                     }
                     /////////////////////////////////
                     if( nDBModeCurrent == 1)
@@ -479,6 +452,39 @@ namespace DataSpider.UserMonitor
                     //    timerRefresh.Start();
                     //}
                     dtLastRefreshed = DateTime.Now;
+                }
+            }
+        }
+        public void UpdatecomboBoxTagGroupSel()
+        {
+            string strErrCode = string.Empty;
+            string strErrText = string.Empty;
+
+            DataTable dtEquiptype = sqlBiz.GetCommonCode("EQUIP_TYPE", ref strErrCode, ref strErrText);
+            DataRow[] drEQCodeSel = dtEquiptype.Select($"CD_GRP = 'EQUIP_TYPE' AND CODE_NM = '{equipType.Trim()}'");
+
+            if (drEQCodeSel != null && drEQCodeSel.Length > 0)
+            {
+                String strEQTypeCode = drEQCodeSel[0]["CODE"].ToString();
+                DataTable dtGroups = sqlBiz.GetTagGroupByEQType(strEQTypeCode, ref strErrCode, ref strErrText);
+
+                if (strErrCode == null || strErrCode == string.Empty)
+                {
+                    DataRow row = dtGroups.NewRow();
+
+                    row["GROUP_NM"] = "All";
+                    row["GROUP_DESC"] = "All Tags";
+                    row["GROUP_NM_VALUE"] = "All(All Tags)";
+                    row["EQUIP_TYPE"] = equipType;
+
+                    dtGroups.Rows.InsertAt(row, 0);
+
+                    comboBoxTagGroupSel.SelectedIndexChanged -= comboBoxTagGroupSel_SelectedIndexChanged;
+                    comboBoxTagGroupSel.DataSource = dtGroups;
+                    comboBoxTagGroupSel.DisplayMember = "GROUP_NM_VALUE";
+                    comboBoxTagGroupSel.ValueMember = "GROUP_NM";
+                    comboBoxTagGroupSel.SelectedIndex = 0;
+                    comboBoxTagGroupSel.SelectedIndexChanged += comboBoxTagGroupSel_SelectedIndexChanged;
                 }
             }
         }
