@@ -19,7 +19,6 @@ namespace DataSpider.PC01.PT
         protected SqlTransaction mTrans;
         string p_strErrCode;
         string p_strErrText;
-        string prev_strErrText;
 
         protected DateTime dtLastWriteTime = DateTime.MinValue;
         private DateTime m_dtLastProcessTime = DateTime.MinValue;
@@ -56,19 +55,19 @@ namespace DataSpider.PC01.PT
             DateTime.TryParseExact(strLastProcessTime, "yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture, DateTimeStyles.AssumeLocal | DateTimeStyles.AllowInnerWhite, out LastProcessTime);
             if (LastProcessTime < new DateTime(DateTime.Now.Year, 1, 1, 0, 0, 0, 0))
                 LastProcessTime = new DateTime(DateTime.Now.Year, 1, 1, 0, 0, 0, 0);
-            listViewMsg.UpdateMsg($"Read last Process Time  : {LastProcessTime.ToString("yyyy-MM-dd HH:mm:ss.fff")}", false, true);
-            listViewMsg.UpdateMsg($"LastProcessTime :{LastProcessTime.ToString("yyyy-MM-dd HH:mm:ss.fff") } , {strLastProcessTime}  !", false, true, true, PC00D01.MSGTINF);
+            listViewMsg.UpdateMsg($"Read last Process Time  : {LastProcessTime:yyyy-MM-dd HH:mm:ss.fff}", false, true);
+            listViewMsg.UpdateMsg($"LastProcessTime :{LastProcessTime:yyyy-MM-dd HH:mm:ss.fff} , {strLastProcessTime}  !", false, true, true, PC00D01.MSGTINF);
             return LastProcessTime;
         }
         private bool SetLastProcessTime(DateTime LastProcessTime)
         {
-            //if (!PC00U01.WriteConfigValue("LastProcessTime", m_Name, $@".\CFG\{m_Type}.ini", $"{LastProcessTime.ToString("yyyy-MM-dd HH:mm:ss.fff")}"))
-            if (!m_sqlBiz.WriteSTCommon(m_Name, "LastProcessTime", $"{LastProcessTime.ToString("yyyy-MM-dd HH:mm:ss.fff")}"))
+            //if (!PC00U01.WriteConfigValue("LastProcessTime", m_Name, $@".\CFG\{m_Type}.ini", $"{LastProcessTime:yyyy-MM-dd HH:mm:ss.fff}"))
+            if (!m_sqlBiz.WriteSTCommon(m_Name, "LastProcessTime", $"{LastProcessTime:yyyy-MM-dd HH:mm:ss.fff}"))
             {
                 listViewMsg.UpdateMsg($"Error to write LastProcessTime to INI file", false, true);
                 return false;
             }
-            listViewMsg.UpdateMsg($"Write last LastEnqueuedDate : {LastProcessTime.ToString("yyyy-MM-dd HH:mm:ss.fff")}", false, true);
+            listViewMsg.UpdateMsg($"Write last LastEnqueuedDate : {LastProcessTime:yyyy-MM-dd HH:mm:ss.fff}", false, true);
             return true;
         }
 
@@ -79,7 +78,7 @@ namespace DataSpider.PC01.PT
             m_SoftwareVersion = GetSoftwareVersion();
             listViewMsg.UpdateMsg($"Read From Ini File m_SoftwareVersion :{m_SoftwareVersion}", false, true, true, PC00D01.MSGTINF);
             m_dtLastProcessTime = GetLastProcessTime();
-            listViewMsg.UpdateMsg($"Read From Ini File m_dtLastProcessTime :{m_dtLastProcessTime.ToString("yyyy-MM-dd HH:mm:ss.fff")}", false, true, true, PC00D01.MSGTINF);
+            listViewMsg.UpdateMsg($"Read From Ini File m_dtLastProcessTime :{m_dtLastProcessTime:yyyy-MM-dd HH:mm:ss.fff}", false, true, true, PC00D01.MSGTINF);
             string data = string.Empty;
             while (!bTerminal)
             {
@@ -91,7 +90,6 @@ namespace DataSpider.PC01.PT
                         {
                             UpdateEquipmentProgDateTime(IF_STATUS.Normal);
                             listViewMsg.UpdateMsg("DB Connected", true, false);
-                            prev_strErrText = "";
                         }
                         else
                         {
@@ -254,7 +252,7 @@ namespace DataSpider.PC01.PT
                 //                DateTime? NewProcessTime = (DateTime?)queriesTableAdapter.GetNewProcessTime(m_dtLastProcessTime);
                 strSql  = $" SELECT TOP 1 P.ProcessTime as ProcessTime  FROM Measurement M INNER JOIN ";
                 strSql += $" ProcessDataSet P ON M.MeasurementID = P.MeasurementID ";
-                strSql += $" WHERE(P.ProcessTime > '{m_dtLastProcessTime.ToString("yyyy-MM-dd HH:mm:ss.fff")}') AND(NOT(M.DateFinished IS NULL))";
+                strSql += $" WHERE(P.ProcessTime > '{m_dtLastProcessTime:yyyy-MM-dd HH:mm:ss.fff}') AND(NOT(M.DateFinished IS NULL))";
                 strSql += $" ORDER BY P.ProcessTime ";
                 //listViewMsg.UpdateMsg($"QueryString :{strSql} !", false, true, true, PC00D01.MSGTINF);
                 dt1=GetDataTable(strSql, ref p_strErrCode, ref p_strErrText);
@@ -280,7 +278,7 @@ namespace DataSpider.PC01.PT
                 strSql += $" CedexSystem ON M.CedexSystemID = CedexSystem.Id AND P.CedexSystemId = CedexSystem.Id INNER JOIN ";
                 strSql += $" Workarea ON M.WorkareaID = Workarea.WorkareaId AND CedexSystem.Id = Workarea.CedexSystemId INNER JOIN ";
                 strSql += $" [User] ON M.UserID = [User].UserId AND P.UserID = [User].UserId AND CedexSystem.Id = [User].CedexSystemId ";
-                strSql += $" WHERE(P.ProcessTime = '{NewProcessTime.ToString("yyyy-MM-dd HH:mm:ss.fff")}') ";
+                strSql += $" WHERE(P.ProcessTime = '{NewProcessTime:yyyy-MM-dd HH:mm:ss.fff}') ";
                 strSql += $" ORDER BY P.ProcessTime ";
                 dt2 = GetDataTable(strSql, ref p_strErrCode, ref p_strErrText);
                 if (dt2.Rows.Count > 0)
@@ -293,7 +291,7 @@ namespace DataSpider.PC01.PT
                 strSql += $" FROM  ProcessDataSet P INNER JOIN";
                 strSql += $" Measurement M ON P.MeasurementID = M.MeasurementID INNER JOIN ";
                 strSql += $" MeasurementResultData ON P.ProcessDataSetID = MeasurementResultData.ProcessDataSetID ";
-                strSql += $" WHERE(P.ProcessTime = '{NewProcessTime.ToString("yyyy-MM-dd HH:mm:ss.fff")}') ";
+                strSql += $" WHERE(P.ProcessTime = '{NewProcessTime:yyyy-MM-dd HH:mm:ss.fff}') ";
                 strSql += $" ORDER BY MeasurementResultData.OverallType ";
                 dt3 = GetDataTable(strSql, ref p_strErrCode, ref p_strErrText);
                 foreach(DataRow mr_dr in dt3.Rows) 
@@ -333,7 +331,7 @@ namespace DataSpider.PC01.PT
                 strSql += $"FROM  Measurement M INNER JOIN ";
                 strSql += $"ProcessDataSet P ON M.MeasurementID = P.MeasurementID INNER JOIN ";
                 strSql += $"Image ON M.MeasurementID = Image.MeasurementID ";
-                strSql += $"WHERE(P.ProcessTime = '{NewProcessTime.ToString("yyyy-MM-dd HH:mm:ss.fff")}') AND(Image.ImageNo = 1) ";
+                strSql += $"WHERE(P.ProcessTime = '{NewProcessTime:yyyy-MM-dd HH:mm:ss.fff}') AND(Image.ImageNo = 1) ";
                 strSql += $"ORDER BY P.ProcessTime ";
                 //listViewMsg.UpdateMsg($"QueryString :{strSql} !", false, true, true, PC00D01.MSGTINF);
                 dt5 = GetDataTable(strSql, ref p_strErrCode, ref p_strErrText);
@@ -383,7 +381,7 @@ namespace DataSpider.PC01.PT
                 strSql = $"SELECT COUNT(ProcessDataSetImageResult.ImageID) AS Images ";
                 strSql += $"FROM ProcessDataSetImageResult INNER JOIN ";
                 strSql += $"ProcessDataSet P ON ProcessDataSetImageResult.ProcessDataSetID = P.ProcessDataSetID ";
-                strSql += $"WHERE(P.ProcessTime = '{NewProcessTime.ToString("yyyy-MM-dd HH:mm:ss.fff")}' ) ";
+                strSql += $"WHERE(P.ProcessTime = '{NewProcessTime:yyyy-MM-dd HH:mm:ss.fff}' ) ";
                 strSql += $"GROUP BY P.ProcessDataSetID, ProcessDataSetImageResult.ProcessDataSetID ";
                 //listViewMsg.UpdateMsg($"QueryString :{strSql} !", false, true, true, PC00D01.MSGTINF);
                 dt6 = GetDataTable(strSql, ref p_strErrCode, ref p_strErrText);
@@ -400,7 +398,7 @@ namespace DataSpider.PC01.PT
                 strSql += $"FROM  Measurement M INNER JOIN ";
                 strSql += $"ProcessDataSet P ON M.MeasurementID = P.MeasurementID INNER JOIN ";
                 strSql += $"MeasurementIRParameter ON P.ProcessDataSetID = MeasurementIRParameter.ProcessDataSetId ";
-                strSql += $"WHERE(P.ProcessTime = '{NewProcessTime.ToString("yyyy-MM-dd HH:mm:ss.fff")}') ";
+                strSql += $"WHERE(P.ProcessTime = '{NewProcessTime:yyyy-MM-dd HH:mm:ss.fff}') ";
                 strSql += $"ORDER BY MeasurementIRParameter.IROperatorInputName";
                 // listViewMsg.UpdateMsg($"QueryString :{strSql} !", false, true, true, PC00D01.MSGTINF);
 
@@ -414,13 +412,13 @@ namespace DataSpider.PC01.PT
 
                 strPara = strPara.Substring(0, strPara.Length - 2);
                 sbData.Append($"Parameter,{strDate},{strPara}" + Environment.NewLine);
-                sbData.Append($"SvrTime,{strDate},{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}" + Environment.NewLine);
+                sbData.Append($"SvrTime,{strDate},{DateTime.Now:yyyy-MM-dd HH:mm:ss}" + Environment.NewLine);
 
                 strSql = $"SELECT dbo.Image.ImageNo, dbo.ProcessDataSetImageResult.ImageStatus ";
                 strSql += $"FROM  dbo.ProcessDataSetImageResult INNER JOIN ";
                 strSql += $"dbo.ProcessDataSet P ON dbo.ProcessDataSetImageResult.ProcessDataSetID = P.ProcessDataSetID INNER JOIN ";
                 strSql += $"dbo.Image ON dbo.ProcessDataSetImageResult.ImageID = dbo.Image.ImageID ";
-                strSql += $"WHERE(P.ProcessTime = '{NewProcessTime.ToString("yyyy-MM-dd HH:mm:ss.fff")}') ";
+                strSql += $"WHERE(P.ProcessTime = '{NewProcessTime:yyyy-MM-dd HH:mm:ss.fff}') ";
                 strSql += $"ORDER BY dbo.Image.ImageNo ";
 //                listViewMsg.UpdateMsg($"QueryString :{strSql} !", false, true, true, PC00D01.MSGTINF);
 

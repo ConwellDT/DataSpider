@@ -39,11 +39,13 @@ namespace DataSpider.PC01.PT
         string m_PrevViCellStatus = String.Empty;
 
         private DateTime m_LastEnqueuedDate = DateTime.Now;
-        private DateTime m_PrevLastEnqueuedDate = DateTime.Now;
-        private DateTime m_LastAccessTime = DateTime.Now;
-        private TimeSpan m_accessTimeSpan = TimeSpan.FromSeconds(60);
         private string Uid;
         private string Pwd;
+        private bool m_bReconnected = false;
+
+        private UInt32 m_dwSubscriptionCount = 0;
+        private UInt32 m_dwSessionCount = 0;
+
         public PC01S20() : base()
         {
         }
@@ -79,7 +81,7 @@ namespace DataSpider.PC01.PT
 
             m_LastEnqueuedDate = GetLastEnqueuedDate();
             listViewMsg.UpdateMsg($"Read m_LastEnqueuedDate :{m_LastEnqueuedDate.ToString("yyyyMMddHHmmss")}", false, true, true, PC00D01.MSGTINF);
-
+            int nLogCounter = 0;
 
             while (!bTerminal)
             {
@@ -92,46 +94,58 @@ namespace DataSpider.PC01.PT
                         Thread.Sleep(5000);
                         InitOpcUaClient();
                         dtNormalTime = DateTime.Now;
+                        m_bReconnected = true;
                     }
                     else
                     {
-                        if (myUaClient.reconnectHandler != null)
+                        if (myUaClient.m_reconnectHandler != null)
                         {
+                            m_bReconnected = true;
+                            //                            listViewMsg.UpdateMsg($" Network Error , IF_STATUS.Disconnected ", false, true, true, PC00D01.MSGTERR);
                             UpdateEquipmentProgDateTime(IF_STATUS.Disconnected);
-                            if ((DateTime.Now - dtNormalTime).TotalHours >= 1 )
+                            if ((DateTime.Now - dtNormalTime).TotalMilliseconds >= myUaClient.m_session.SessionTimeout)
                             {
+                                listViewMsg.UpdateMsg($" Network Error , UaClient.Close() ", false, true, true, PC00D01.MSGTERR);
+                                myUaClient.Close();
                                 myUaClient = null;
-                                listViewMsg.UpdateMsg($" Network Error Time >= 1 Hr, Ua Client Reset ", false, true, true, PC00D01.MSGTERR);
+                                listViewMsg.UpdateMsg($" Network Error , Ua Client Reset ", false, true, true, PC00D01.MSGTERR);
                             }
                         }
                         else
                         {
                             UpdateEquipmentProgDateTime(IF_STATUS.Normal);
                             dtNormalTime = DateTime.Now;
+
+                            if (SessionCountChange() || SubscriptionCountChange())                            
+                            {
+                                myUaClient.m_subscription.Delete(true);
+                                myUaClient.m_subscription.Create();
+                            }
+
+
+
                             m_ViCellStatus = m_OpcItemList["ViCellStatus"];
                             if (m_ViCellStatus == "0")
                             {
-                                if (m_ViCellStatus != m_PrevViCellStatus || m_LastAccessTime < DateTime.Now.Subtract(m_accessTimeSpan))
+                                if ( bReadSampleResult() )  // reconnect, reidle
                                 {
                                     if (RequestLock())
                                     {
-                                        GetSampleResult();
-                                        ReleaseLock();
-                                        m_LastAccessTime = DateTime.Now;
-                                        if (m_LastEnqueuedDate != m_PrevLastEnqueuedDate)
+                                        listViewMsg.UpdateMsg("RequestLock", false, true, true, PC00D01.MSGTINF);
+                                        if ( GetSampleResult() ) // ReturnSuccess==true
                                         {
-                                            m_PrevLastEnqueuedDate = m_LastEnqueuedDate;
+                                            if (m_bReconnected == true) m_bReconnected = false;
                                             m_PrevViCellStatus = m_ViCellStatus;
-                                            m_accessTimeSpan = TimeSpan.FromSeconds(60);
-                                        }
+                                        }                                        
                                     }
                                 }
                             }
                             else
                             {
                                 m_PrevViCellStatus = m_ViCellStatus;
-                                m_accessTimeSpan = TimeSpan.FromSeconds(1);
                             }
+
+
                         }
                     }
                 }
@@ -145,16 +159,60 @@ namespace DataSpider.PC01.PT
                 }
                 Thread.Sleep(1000);
             }
+            myUaClient = null;
             UpdateEquipmentProgDateTime(IF_STATUS.Stop);
             listViewMsg.UpdateStatus(false);
             listViewMsg.UpdateMsg("Thread finished");
         }
 
-
-        private void GetSampleResult()
+        // 
+        public bool SessionCountChange()
         {
-            try
+            bool bReturn = false;
+            UInt32 dwSessionCount = 0;
+            DataValue dv = myUaClient.ReadValue(NodeId.Parse("i=2277"));
+            if (dv != null)
             {
+                dwSessionCount = (UInt32)dv.WrappedValue.Value;
+                if (dwSessionCount != m_dwSessionCount)
+                {
+                    bReturn = true;
+                    m_dwSessionCount = dwSessionCount;
+                }
+            }
+            return bReturn;
+        }
+        public bool SubscriptionCountChange()
+        {
+            bool bReturn = false;
+            UInt32 dwSubscriptionCount = 0;
+            DataValue dv = myUaClient.ReadValue(NodeId.Parse("i=2285"));
+            if (dv != null)
+            {
+                dwSubscriptionCount = (UInt32)dv.WrappedValue.Value;
+                if (dwSubscriptionCount != m_dwSubscriptionCount)
+                {
+                    bReturn = true;
+                    m_dwSubscriptionCount = dwSubscriptionCount;
+                }
+            }
+            return bReturn;
+        }
+
+
+        private bool bReadSampleResult()
+        {
+            bool bReturn = false;
+            if ( m_bReconnected == true ) bReturn = true;
+            if ( m_ViCellStatus != m_PrevViCellStatus ) bReturn = true;
+            return bReturn;
+        }
+
+        private bool GetSampleResult()
+        {
+            bool bReturnSuccess = false;
+            try
+            {              
                 var callResult = new ViCellBlu.VcbResultGetSampleResults { ErrorLevel = ViCellBlu.ErrorLevelEnum.Warning, MethodResult = ViCellBlu.MethodResultEnum.Failure };
 
                 var method = _methodCollection.First(n => n.DisplayName.ToString().Equals("GetSampleResults"));
@@ -183,7 +241,8 @@ namespace DataSpider.PC01.PT
                 var responseHeader = myUaClient.m_session.Call(requestHeader, methodsToCall, out var results, out var diagnosticInfos);
                 ClientBase.ValidateResponse(results, methodsToCall);
                 ClientBase.ValidateDiagnosticInfos(diagnosticInfos, methodsToCall);
-
+                ReleaseLock();
+                listViewMsg.UpdateMsg("ReleaseLock", false, true, true, PC00D01.MSGTINF);
                 if (ServiceResult.IsGood(responseHeader.ServiceResult))
                 {
                     foreach (var result in results)
@@ -194,15 +253,43 @@ namespace DataSpider.PC01.PT
                             if (callResult.MethodResult == ViCellBlu.MethodResultEnum.Success)
                             {
                                 sampleResults = callResult.SampleResults;
-                                sampleResults.Reverse();
+                                sampleResults.Sort(delegate (ViCellBlu.SampleResult x, ViCellBlu.SampleResult y)
+                                {
+                                    if (x.ReanalysisDateTime != DateTime.MinValue && y.ReanalysisDateTime != DateTime.MinValue)
+                                    {
+                                        if (x.ReanalysisDateTime == DateTime.MinValue && y.ReanalysisDateTime == DateTime.MinValue) return 0;
+                                        else if (x.ReanalysisDateTime == DateTime.MinValue) return -1;
+                                        else if (y.ReanalysisDateTime == DateTime.MinValue) return 1;
+                                        else return x.ReanalysisDateTime.CompareTo(y.AnalysisDateTime);
+                                    }
+                                    else if (x.ReanalysisDateTime != DateTime.MinValue)
+                                    {
+                                        return x.ReanalysisDateTime.CompareTo(y.AnalysisDateTime);
+                                    }
+                                    else if (y.ReanalysisDateTime != DateTime.MinValue)
+                                    {
+                                        return x.AnalysisDateTime.CompareTo(y.ReanalysisDateTime);
+                                    }
+                                    else 
+                                    {
+                                        if (x.AnalysisDateTime == DateTime.MinValue && y.AnalysisDateTime == DateTime.MinValue) return 0;
+                                        else if (x.AnalysisDateTime == DateTime.MinValue) return -1;
+                                        else if (y.AnalysisDateTime == DateTime.MinValue) return 1;
+                                        else return x.AnalysisDateTime.CompareTo(y.AnalysisDateTime);
+                                    }
+                                });
+                                
                                 foreach (var sampleResult in sampleResults)
                                 {
                                     if (sampleResult.SampleDataUuid == Uuid.Empty) continue;
 
                                     DateTime svrtime;
-                                    svrtime = sampleResult.AnalysisDateTime.ToLocalTime(); // 측정시간
-                                                                                           //sampleResult.ReanalysisDateTime
-                                                                                           // 재분석 시간의 처리방안.
+                                    if(sampleResult.ReanalysisDateTime != DateTime.MinValue )
+                                        svrtime = sampleResult.ReanalysisDateTime.ToLocalTime(); //  재분석 시간을 측정시간으로
+                                    else
+                                        svrtime = sampleResult.AnalysisDateTime.ToLocalTime(); // 측정시간
+                                                                                          
+                                    if (svrtime.CompareTo(m_LastEnqueuedDate) <= 0) continue;
                                     EnQueue(MSGTYPE.MEASURE, $" SVRTIME, {svrtime:yyyy-MM-dd HH:mm:ss}, {DateTime.Now:yyyy-MM-dd HH:mm:ss} ");
                                     listViewMsg.UpdateMsg($" SVRTIME, {svrtime:yyyy-MM-dd HH:mm:ss}, {DateTime.Now:yyyy-MM-dd HH:mm:ss} ", false, true, true, PC00D01.MSGTINF);
 
@@ -231,8 +318,9 @@ namespace DataSpider.PC01.PT
                                             default:
                                                 if (property.PropertyType == typeof(DateTime))
                                                 {
-                                                    EnQueue(MSGTYPE.MEASURE, $" {property.Name}, {svrtime:yyyy-MM-dd HH:mm:ss}, {property.GetValue(sampleResult):yyyy-MM-dd HH:mm:ss} ");
-                                                    listViewMsg.UpdateMsg($" {property.Name}, {svrtime:yyyy-MM-dd HH:mm:ss}, {property.GetValue(sampleResult):yyyy-MM-dd HH:mm:ss} ", false, true, true, PC00D01.MSGTINF);
+                                                    DateTime dateTime = (DateTime)(property.GetValue(sampleResult));
+                                                    EnQueue(MSGTYPE.MEASURE, $" {property.Name}, {svrtime:yyyy-MM-dd HH:mm:ss}, {dateTime.ToLocalTime():yyyy-MM-dd HH:mm:ss} ");
+                                                    listViewMsg.UpdateMsg($" {property.Name}, {svrtime:yyyy-MM-dd HH:mm:ss}, {dateTime.ToLocalTime():yyyy-MM-dd HH:mm:ss} ", false, true, true, PC00D01.MSGTINF);
                                                 }
                                                 else
                                                 {
@@ -249,12 +337,14 @@ namespace DataSpider.PC01.PT
                         }
                     }
 
+                    bReturnSuccess = true;
                 }
             }
             catch(Exception ex)
             {
                 listViewMsg.UpdateMsg($"Exception in GetSampleResult - ({ex})", false, true, true, PC00D01.MSGTERR);
             }
+            return bReturnSuccess;
         }
 
         public ViCellBlu.VcbResultGetSampleResults DecodeRawSampleResults(object rawResult, IServiceMessageContext messageContext)
@@ -388,7 +478,7 @@ namespace DataSpider.PC01.PT
                 LastEnqueuedDate = DateTime.Now.Subtract(TimeSpan.FromDays(1));
                 SetLastEnqueuedDate(LastEnqueuedDate);
             }
-            listViewMsg.UpdateMsg($"Read last enqueued Date  : {LastEnqueuedDate.ToString("yyyyMMddHHmmss")}", false, true);
+            listViewMsg.UpdateMsg($"Read last enqueued Date  : {LastEnqueuedDate.ToString("yyyyMMddHHmmss")}", false, true, true, PC00D01.MSGTINF);
             listViewMsg.UpdateMsg($"m_LastEnqueuedDate :{LastEnqueuedDate.ToString("yyyyMMddHHmmss")} , {strLastEnqueuedDate}  !", false, true, true, PC00D01.MSGTINF);
             return LastEnqueuedDate;
         }
@@ -397,10 +487,10 @@ namespace DataSpider.PC01.PT
             //if (!PC00U01.WriteConfigValue("LastEnqueuedDate", m_Name, $@".\CFG\{m_Type}.ini", $"{LastEnqueuedDate.ToString("yyyyMMdd")}"))
             if (!m_sqlBiz.WriteSTCommon(m_Name, "LastEnqueuedDate", $"{LastEnqueuedDate.ToString("yyyyMMddHHmmss")}"))
             {
-                listViewMsg.UpdateMsg($"Error to write LastEnqueuedDate to INI file", false, true);
+                listViewMsg.UpdateMsg($"Error to write LastEnqueuedDate to INI file", false, true, true);
                 return false;
             }
-            listViewMsg.UpdateMsg($"Write last LastEnqueuedDate : {LastEnqueuedDate.ToString("yyyyMMddHHmmss")}", false, true);
+            listViewMsg.UpdateMsg($"Write last LastEnqueuedDate : {LastEnqueuedDate.ToString("yyyyMMddHHmmss")}", false, true,true, PC00D01.MSGTINF);
             return true;
         }
 
@@ -428,19 +518,7 @@ namespace DataSpider.PC01.PT
                 myUaClient.CreateApplicationInstance();
                 myUaClient.CreateSession();
 
-                // Session/Subscription을 생성한 후
-                myUaClient.CreateSubscription(1000);
-                listViewMsg.UpdateMsg($"myUaClient.CreateSubscription ", false, true, true, PC00D01.MSGTINF);
-                // CSV 파일에 있는 TagName, NodeId 리스트를 MonitoredItem으로 등록하고 
-                ReadConfigInfo();
-                myUaClient.UpateTagData += UpdateTagValue;
-                myUaClient.LogMsgFunc += LogMsg; 
 
-                listViewMsg.UpdateMsg($"myUaClient.UpateTagData ", false, true, true, PC00D01.MSGTINF);
-                // currentSubscription에 대한 서비스를 등록한다.
-                bool bReturn = myUaClient.AddSubscription();
-                if (bReturn == false) myUaClient = null;
-                listViewMsg.UpdateMsg($"{bReturn}= myUaClient.AddSubscription", false, true, true, PC00D01.MSGTINF);
                 myUaClient.objectsFolderCollection = myUaClient.Browse(out _);
 
                 viCellBlue = myUaClient.objectsFolderCollection.First(n => n.BrowseName.Name.Equals("ViCellBluStateObject"));
@@ -451,11 +529,30 @@ namespace DataSpider.PC01.PT
                 _parentMethodNode = ExpandedNodeId.ToNodeId(_browsedMethods.NodeId, myUaClient.m_session.NamespaceUris);
 
 
+                // Session/Subscription을 생성한 후
+                myUaClient.CreateSubscription(1000);
+                listViewMsg.UpdateMsg($"myUaClient.CreateSubscription ", false, true, true, PC00D01.MSGTINF);
+                // CSV 파일에 있는 TagName, NodeId 리스트를 MonitoredItem으로 등록하고 
+                myUaClient.UpateTagData += UpdateTagValue;
+                myUaClient.LogMsgFunc += LogMsg;
+
+                ReadConfigInfo();
+
+                listViewMsg.UpdateMsg($"myUaClient.UpateTagData ", false, true, true, PC00D01.MSGTINF);
+                // currentSubscription에 대한 서비스를 등록한다.
+                bool bReturn = myUaClient.AddSubscription();
+                listViewMsg.UpdateMsg($"{bReturn}= myUaClient.AddSubscription", false, true, true, PC00D01.MSGTINF);
+                if (bReturn == false)
+                {
+                    myUaClient.Close();
+                    myUaClient = null;
+                }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.ToString());
                 listViewMsg.UpdateMsg($"Exceptioin - InitOpcUaClient ({ex})", false, true, true, PC00D01.MSGTERR);
+                myUaClient.Close();
                 myUaClient = null;
             }
         }
@@ -498,6 +595,7 @@ namespace DataSpider.PC01.PT
         {
             try
             {
+                m_OpcItemList.Clear();
                 string configInfo = drEquipment["CONFIG_INFO"]?.ToString();
                 if (string.IsNullOrWhiteSpace(configInfo))
                 {
@@ -509,12 +607,17 @@ namespace DataSpider.PC01.PT
                 {
                     listViewMsg.UpdateMsg($"Data : {lineData}", false, true, true, PC00D01.MSGTINF);
                     string[] data = lineData.Split(',');
-                    if (data.Length < 2)
-                        continue;
-                    if (string.IsNullOrWhiteSpace(data[0]) || string.IsNullOrWhiteSpace(data[1]))
-                        continue;
-                    myUaClient.AddItem(data[0].Trim(), data[1].Trim());
-                    m_OpcItemList.Add(data[0].Trim(), data[1].Trim());
+                    if (data.Length < 2) continue;
+                    if (string.IsNullOrWhiteSpace(data[0]) || string.IsNullOrWhiteSpace(data[1])) continue;
+                    data[0] = data[0].Trim();
+                    data[1] = data[1].Trim();
+                    Opc.Ua.Client.MonitoredItem monitoreditem = myUaClient.AddItem(data[0], data[1]);
+                    m_OpcItemList.Add(data[0], data[1]);
+
+                }
+                foreach(Opc.Ua.Client.MonitoredItem monitoreditem in  myUaClient.m_subscription.MonitoredItems )
+                {                    
+                   if (  monitoreditem.DisplayName == "ViCellStatus") myUaClient.m_monitoredItem = monitoreditem;
                 }
             }
             catch (Exception ex)
@@ -524,9 +627,13 @@ namespace DataSpider.PC01.PT
             }
         }
 
-        public void UpdateTagValue( string tagname, string value, string datetime, string status)
+        public void UpdateTagValue(string tagname, string value, string datetime, string status)
         {
             m_OpcItemList[tagname] = value.Trim();
+          //  if (tagname == "ViCellStatus")
+            {
+                listViewMsg.UpdateMsg($"{tagname} - {value}", false, true, true, PC00D01.MSGTINF);
+            }
         }
     }
 }

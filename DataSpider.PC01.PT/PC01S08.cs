@@ -73,7 +73,7 @@ namespace DataSpider.PC01.PT
                     }
                     else
                     {
-                        if (myUaClient.reconnectHandler != null)
+                        if (myUaClient.m_reconnectHandler != null)
                         {
                             UpdateEquipmentProgDateTime(IF_STATUS.Disconnected);
                             if ((DateTime.Now - dtNormalTime).TotalHours >= 1 )

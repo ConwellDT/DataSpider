@@ -16,27 +16,37 @@ namespace OpcUaClient
 
     public class OpcUaClient
     {
+        /// <summary>
+        /// The identifier for the Directory_Applications Object.
+        /// </summary>
+        private const uint GdsId_Directory_Applications = 586;
+
+        private readonly object m_uaclientLock = new object();
+
+
         public Session m_session { get; set; }
-        public SessionReconnectHandler reconnectHandler;
+        public SessionReconnectHandler m_reconnectHandler;
+        private uint m_sessionTImeout = 120*1000;//1200*1000;
+        public uint SessionTimeout
+        {
+            get { return m_sessionTImeout; }
+            set {  m_sessionTImeout=value; }
+        }
+
+
         public const int ReconnectPeriod = 10;
-
-        public ServiceMessageContext m_context;
-
-
 
         public string endpointURL { get; set; }
         public string applicationName { get; set; }
         public ApplicationType applicationType { get; set; }
         public string subjectName { get; set; }
-        int clientRunTime = Timeout.Infinite;
         bool SecurityEnabled { get; set; }
         ApplicationInstance applicationInstance = null;
         ApplicationConfiguration config = null;
 
-        Subscription currentSubscription;
+        public Subscription m_subscription;
         public DateTime LastTimeSessionRenewed { get; set; }
         public DateTime LastTimeOPCServerFoundAlive { get; set; }
-        public bool ClassDisposing { get; set; }
         public bool InitialisationCompleted { get; set; }
 
         bool autoAccept = true;
@@ -49,6 +59,8 @@ namespace OpcUaClient
         public LogMsgDelegate LogMsgFunc = null;
 
 
+        public MonitoredItem m_monitoredItem =null;
+
         public bool bUseSourceTime = true;
 
 
@@ -58,6 +70,9 @@ namespace OpcUaClient
         public ReferenceDescriptionCollection methodCollection = null;
         public ReferenceDescriptionCollection variableCollection = null;
         public ReferenceDescriptionCollection objectCollection = null;
+
+        public DateTime m_ServerTimestamp;
+
 
         public OpcUaClient()
         {
@@ -175,20 +190,67 @@ namespace OpcUaClient
                 //
             }
         }
-        //class destructor
-        ~OpcUaClient()
+
+        public void Close()
         {
-            ClassDisposing = true;
+            try
+            {
+                if (m_reconnectHandler != null)
+                {
+                    m_reconnectHandler.Session.Dispose();
+                    m_reconnectHandler.Dispose();
+                    m_reconnectHandler = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogMsg(ex.Message);
+            }
+
+            try { 
+
+                if (m_subscription != null)
+                {
+                    LogMsg("--- m_subscription not null ---");
+                    m_subscription.StateChanged -= new SubscriptionStateChangedEventHandler(Subscription_StateChanged);
+                    m_subscription.PublishStatusChanged -= new EventHandler(Subscription_PublishStatusChanged);
+                    m_subscription.FastDataChangeCallback = null;
+                    foreach ( MonitoredItem monitoredItem in m_subscription.MonitoredItems)
+                    {
+                        monitoredItem.Notification -= new MonitoredItemNotificationEventHandler(MonitoredItem_Notification);
+                    }
+                    //m_subscription.Dispose();
+                    m_subscription = null;
+                    LogMsg("--- m_subscription null ---");
+                }
+            }
+            catch (Exception ex)
+            {
+                LogMsg(ex.Message);
+            }
             try
             {
                 if (m_session != null)
                 {
-                    m_session.Close();
+                    LogMsg("--- m_session not null ---");
+                    m_session.KeepAlive -= new KeepAliveEventHandler(StandardClient_KeepAlive);
                     m_session.Dispose();
                     m_session = null;
+                    LogMsg("--- m_session null ---");
                 }
             }
-            catch { }
+            catch (Exception ex)
+            {
+                LogMsg(ex.Message);
+            }
+
+        }
+        //class destructor
+        ~OpcUaClient()
+        {
+            LogMsg("~OpcUaClient begin");
+            Close();
+            LogMsg("~OpcUaClient end");
         }
 
         public Session CreateSession()
@@ -203,9 +265,12 @@ namespace OpcUaClient
             var endpointConfiguration = EndpointConfiguration.Create(config);
             var endpoint = new ConfiguredEndpoint(null, selectedEndpoint, endpointConfiguration);
 
-            m_session = Session.Create(config, endpoint, false, config.ApplicationName, 60000, useridentity, null).GetAwaiter().GetResult();
+            m_session = Session.Create(config, endpoint, false, config.ApplicationName, SessionTimeout, useridentity, null).GetAwaiter().GetResult();
+
             // register keep alive handler
-            m_session.KeepAlive += Client_KeepAlive;
+            m_session.KeepAliveInterval = 5000;
+            m_session.KeepAlive += new KeepAliveEventHandler(StandardClient_KeepAlive);
+//            m_session.Notification += new NotificationEventHandler(Session_Notification);
             return m_session;
         }
 
@@ -242,102 +307,437 @@ namespace OpcUaClient
         public void CreateSubscription(int _publishingInterval)
         {
             //Console.WriteLine("Step 4 - Create a subscription. Set a faster publishing interval if you wish.");
-            var _subscription = new Subscription(m_session.DefaultSubscription) { PublishingInterval = _publishingInterval };
-            currentSubscription = _subscription;
+            m_subscription = new Subscription(m_session.DefaultSubscription) 
+            { 
+                PublishingInterval = _publishingInterval
+            };
+            m_subscription.StateChanged += new SubscriptionStateChangedEventHandler(Subscription_StateChanged);
+            m_subscription.PublishStatusChanged += new EventHandler(Subscription_PublishStatusChanged);
+            //m_subscription.FastDataChangeCallback = OnDataChange;
         }
 
-        public void AddItem(string _displayName, string _nodeId)
+        public MonitoredItem AddItem(string _displayName, string _nodeId)
         {
-            MonitoredItem mitem = new MonitoredItem(currentSubscription.DefaultItem) { DisplayName = _displayName, StartNodeId = _nodeId };
-            mitem.Notification += OnNotification;
-            currentSubscription.AddItem(mitem);
-
+            MonitoredItem mitem = new MonitoredItem(m_subscription.DefaultItem)
+            {
+                DisplayName = _displayName,
+                StartNodeId = _nodeId
+            };
+            mitem.Notification += new MonitoredItemNotificationEventHandler(MonitoredItem_Notification);
+            m_subscription.AddItem(mitem);
+            return mitem;
         }
+  
         public void AddItem(MonitoredItem mitem)
         {
-            mitem.Notification += OnNotification;
-            currentSubscription.AddItem(mitem);
+            mitem.Notification += new MonitoredItemNotificationEventHandler(MonitoredItem_Notification);
+            m_subscription.AddItem(mitem);
         }
+
+
+        /// <summary>
+        /// Creates an item from a reference.
+        /// </summary>
+        public void AddItem(ReferenceDescription reference, string _displayName)
+        {
+            if (reference == null)
+            {
+                return;
+            }
+            // After AddSubscription
+            //Node node = m_subscription.Session.NodeCache.Find(reference.NodeId) as Node;
+            // BeFore AddSubscription
+            Node node = m_session.NodeCache.Find(reference.NodeId) as Node;
+
+            if (node == null)
+            {
+                return;
+            }
+
+            Node parent = null;
+
+            // if the NodeId is of type string and contains '.' do not use relative paths
+            if (node.NodeId.IdType != IdType.String || (node.NodeId.Identifier.ToString().IndexOf('.') == -1 && node.NodeId.Identifier.ToString().IndexOf('/') == -1))
+            {
+                parent = FindParent(node);
+            }
+
+            MonitoredItem monitoredItem = new MonitoredItem(m_subscription.DefaultItem);
+
+            //if (parent != null)
+            //{
+            //    monitoredItem.DisplayName = String.Format("{0}.{1}", parent, node);
+            //}
+            //else
+            //{
+            //    monitoredItem.DisplayName = String.Format("{0}", node);
+            //}
+            monitoredItem.DisplayName = _displayName;
+
+            monitoredItem.StartNodeId = node.NodeId;
+            monitoredItem.NodeClass = node.NodeClass;
+
+            if (parent != null)
+            {
+                List<Node> parents = new List<Node>();
+                parents.Add(parent);
+
+                while (parent.NodeClass != NodeClass.ObjectType && parent.NodeClass != NodeClass.VariableType)
+                {
+                    parent = FindParent(parent);
+
+                    if (parent == null)
+                    {
+                        break;
+                    }
+
+                    parents.Add(parent);
+                }
+
+                monitoredItem.StartNodeId = parents[parents.Count - 1].NodeId;
+
+                StringBuilder relativePath = new StringBuilder();
+
+                for (int ii = parents.Count - 2; ii >= 0; ii--)
+                {
+                    relativePath.AppendFormat(".{0}", parents[ii].BrowseName);
+                }
+
+                relativePath.AppendFormat(".{0}", node.BrowseName);
+
+                monitoredItem.RelativePath = relativePath.ToString();
+            }
+
+            Session session = m_subscription.Session;
+
+            if (node.NodeClass == NodeClass.Object || node.NodeClass == NodeClass.Variable)
+            {
+                node.Find(ReferenceTypeIds.HasChild, true);
+
+            }
+            monitoredItem.Notification += new MonitoredItemNotificationEventHandler(MonitoredItem_Notification);
+            m_subscription.AddItem(monitoredItem);
+        }
+
+        /// <summary>
+        /// Returns the parent for the node.
+        /// </summary>
+        private Node FindParent(Node node)
+        {
+            // After AddSubscription
+            //IList<IReference> parents = node.ReferenceTable.Find(ReferenceTypeIds.Aggregates, true, true, m_subscription.Session.TypeTree);
+            // Before AddSubscription
+            IList<IReference> parents = node.ReferenceTable.Find(ReferenceTypeIds.Aggregates, true, true, m_session.TypeTree);
+
+            if (parents.Count > 0)
+            {
+                bool followToType = false;
+
+                foreach (IReference parentReference in parents)
+                {
+                    // After AddSubscription
+                    //                    Node parent = m_subscription.Session.NodeCache.Find(parentReference.TargetId) as Node;
+                    // Before AddSubscription
+                    Node parent = m_session.NodeCache.Find(parentReference.TargetId) as Node;
+
+                    if (followToType)
+                    {
+                        if (parent.NodeClass == NodeClass.VariableType || parent.NodeClass == NodeClass.ObjectType)
+                        {
+                            return parent;
+                        }
+                    }
+                    else
+                    {
+                        return parent;
+                    }
+                }
+            }
+
+            return null;
+        }
+
+
         public void AddItems(List<MonitoredItem> mitems)
         {
-            mitems.ForEach(Item => Item.Notification += OnNotification);
-            currentSubscription.AddItems(mitems);
+            mitems.ForEach(Item => Item.Notification += new MonitoredItemNotificationEventHandler(MonitoredItem_Notification));
+            m_subscription.AddItems(mitems);
         }
         public bool AddSubscription()
         {
             bool bReturn = false;
-            bReturn = m_session.AddSubscription(currentSubscription);
-            if (bReturn == true) currentSubscription.Create();
+            bReturn = m_session.AddSubscription(m_subscription);
+            if (bReturn == true) m_subscription.Create();
             return bReturn;
         }
 
-        private void Client_KeepAlive(Session sender, KeepAliveEventArgs e)
+        private void StandardClient_KeepAlive(Session sender, KeepAliveEventArgs e)
         {
-            if (e.Status != null && ServiceResult.IsNotGood(e.Status))
+            try
             {
-                LogMsg($"Client_KeepAlive {e.Status} {sender.OutstandingRequestCount}/{sender.DefunctRequestCount}");
 
-                if (reconnectHandler == null)
+                if (e.Status!=null)
                 {
-                    LogMsg("--- RECONNECTING ---");
-                    reconnectHandler = new SessionReconnectHandler();
-                    reconnectHandler.BeginReconnect(sender, ReconnectPeriod * 1000, Client_ReconnectComplete);
-                }
-            }
-        }
-
-        private void Client_ReconnectComplete(object sender, EventArgs e)
-        {
-            // ignore callbacks from discarded objects.
-            if (!Object.ReferenceEquals(sender, reconnectHandler))
-            {
-                LogMsg("--- ignore callbacks from discarded objects. ---");
-                return;
-            }
-            m_session = reconnectHandler.Session;
-            reconnectHandler.Dispose();
-            reconnectHandler = null;
-            LogMsg("--- RECONNECTED ---");
-        }
-        public void OnNotification(MonitoredItem item, MonitoredItemNotificationEventArgs e)
-        {
-            foreach (var value in item.DequeueValues())
-            {
-                if (UpateTagData == null) return;
-                if (value.Value == null) continue;
-                string updatevalue = string.Empty;
-                if (value.WrappedValue.TypeInfo.BuiltInType == BuiltInType.DateTime)
-                {
-                    DateTime datetime = (DateTime)value.WrappedValue.Value;
-                    updatevalue = datetime.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss.fffZ");
-                }
-                else if (value.WrappedValue.TypeInfo.BuiltInType == BuiltInType.String && value.WrappedValue.TypeInfo.ValueRank == 1)
-                {  // RankValue=1 :OneDimension (1): The value is an array with one dimension.
-                   // RankValue=0 :OneOrMoreDimensions (0): The value is an array with one or more dimensions
-
-                    StringBuilder buffer = new StringBuilder();
-                    System.Collections.IEnumerable enumerable = value.WrappedValue.Value as System.Collections.IEnumerable;
-                    if (enumerable != null)
+                    if(ServiceResult.IsNotGood(e.Status))
                     {
-                        foreach (object element in enumerable)
+                        if (m_reconnectHandler == null)
                         {
-                            buffer.Append((string)element);
+                            m_reconnectHandler = new SessionReconnectHandler();
+                            m_reconnectHandler.BeginReconnect(sender, ReconnectPeriod * 1000, StandardClient_Server_ReconnectComplete);
+                            LogMsg("--- RECONNECTING ---");
                         }
+                        //LogMsg($"StandardClient_KeepAlive ServerStatus:{e.Status} {e.CurrentTime.ToLocalTime():HH:mm:ss} {sender.OutstandingRequestCount}/{sender.DefunctRequestCount}");
                     }
-                    updatevalue = buffer.ToString();
+                    else
+                    {
+                        LogMsg("--- e.Status Good! ---");
+
+                        if (m_reconnectHandler != null)
+                        {
+                            LogMsg("--- Reconnected????? ---");
+                            m_reconnectHandler.Dispose();
+                            m_reconnectHandler = null;
+                        }                            
+                    }
                 }
-                else
-                {
-                    updatevalue = value.WrappedValue.ToString();
-                }
-                if (bUseSourceTime)
-                {
-                        UpateTagData(item.DisplayName, updatevalue, value.SourceTimestamp.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss.fff"), value.StatusCode.ToString());
-                }
-                else
-                    UpateTagData(item.DisplayName, updatevalue, value.ServerTimestamp.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss.fff"), value.StatusCode.ToString());
+            }
+            catch(Exception ex)
+            {
+                LogMsg(ex.Message);
             }
         }
+
+        private void StandardClient_Server_ReconnectComplete(object sender, EventArgs e)
+        {
+            try
+            { 
+                // ignore callbacks from discarded objects.
+                if (!Object.ReferenceEquals(sender, m_reconnectHandler))
+                {
+                    LogMsg("--- ignore callbacks from discarded objects. ---");
+                    return;
+                }
+                m_session = m_reconnectHandler.Session;
+                m_reconnectHandler.Dispose();
+                m_reconnectHandler = null;
+                LogMsg("--- RECONNECTED ---");
+            }
+            catch (Exception ex)
+            {
+                LogMsg("StandardClient_Server_ReconnectComplete :"+ex.Message);
+            }
+        }
+
+        public void MonitoredItem_Notification(MonitoredItem item, MonitoredItemNotificationEventArgs e)
+        {
+            try
+            {
+                foreach (var value in item.DequeueValues())
+                {
+                    if (UpateTagData == null)
+                    {
+                        LogMsg("UpateTagData == null");
+                        return;
+                    }
+                    if (value.Value == null)
+                    {
+                        LogMsg($"{item.DisplayName} value.Value == null");
+                        continue;                           
+                    }
+                    string updatevalue = string.Empty;
+                    if (value.WrappedValue.TypeInfo.BuiltInType == BuiltInType.DateTime)
+                    {
+                        DateTime datetime = (DateTime)value.WrappedValue.Value;
+                        updatevalue = datetime.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss.fffZ");
+                    }
+                    else if (value.WrappedValue.TypeInfo.BuiltInType == BuiltInType.String && value.WrappedValue.TypeInfo.ValueRank == 1)
+                    {  // RankValue=1 :OneDimension (1): The value is an array with one dimension.
+                       // RankValue=0 :OneOrMoreDimensions (0): The value is an array with one or more dimensions
+
+                        StringBuilder buffer = new StringBuilder();
+                        System.Collections.IEnumerable enumerable = value.WrappedValue.Value as System.Collections.IEnumerable;
+                        if (enumerable != null)
+                        {
+                            foreach (object element in enumerable)
+                            {
+                                buffer.Append((string)element);
+                            }
+                        }
+                        updatevalue = buffer.ToString();
+                    }
+                    else
+                    {
+                        updatevalue = value.WrappedValue.ToString();
+                    }
+                    if (bUseSourceTime)
+                    {
+                        UpateTagData(item.DisplayName, updatevalue, value.SourceTimestamp.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss.fff"), value.StatusCode.ToString());
+                    }
+                    else
+                        UpateTagData(item.DisplayName, updatevalue, value.ServerTimestamp.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss.fff"), value.StatusCode.ToString());
+                }
+            }
+            catch(Exception ex)
+            {
+                LogMsg("MonitoredItem_Notification:"+ex.Message);
+            }
+        }
+
+
+        public void OnDataChange(Subscription subscription, DataChangeNotification notification, IList<string> stringTable)
+        {
+
+            try
+            {
+                foreach (MonitoredItemNotification itemNotification in notification.MonitoredItems)
+                {
+                    MonitoredItem monitoredItem = subscription.FindItemByClientHandle(itemNotification.ClientHandle);
+
+                    if (monitoredItem == null)
+                    {
+                        continue;
+                    }
+
+                    DataValue value=itemNotification.Value;
+                    string updatevalue = string.Empty;
+                    if (value.WrappedValue.TypeInfo.BuiltInType == BuiltInType.DateTime)
+                    {
+                        DateTime datetime = (DateTime)value.WrappedValue.Value;
+                        updatevalue = datetime.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss.fffZ");
+                    }
+                    else if (value.WrappedValue.TypeInfo.BuiltInType == BuiltInType.String && value.WrappedValue.TypeInfo.ValueRank == 1)
+                    {  // RankValue=1 :OneDimension (1): The value is an array with one dimension.
+                       // RankValue=0 :OneOrMoreDimensions (0): The value is an array with one or more dimensions
+
+                        StringBuilder buffer = new StringBuilder();
+                        System.Collections.IEnumerable enumerable = value.WrappedValue.Value as System.Collections.IEnumerable;
+                        if (enumerable != null)
+                        {
+                            foreach (object element in enumerable)
+                            {
+                                buffer.Append((string)element);
+                            }
+                        }
+                        updatevalue = buffer.ToString();
+                    }
+                    else
+                    {
+                        updatevalue = value.WrappedValue.ToString();
+                    }
+                    if (bUseSourceTime)
+                    {
+                        UpateTagData(monitoredItem.DisplayName, updatevalue, value.SourceTimestamp.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss.fff"), value.StatusCode.ToString());
+                    }
+                    else
+                        UpateTagData(monitoredItem.DisplayName, updatevalue, value.ServerTimestamp.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss.fff"), value.StatusCode.ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                LogMsg("OnDataChange:"+ex.Message);
+            }
+        }
+
+
+        public void Session_Notification(Session sender, NotificationEventArgs e)
+        {
+            try
+            {
+                //LogMsg($"Session_Notification");
+
+                foreach (EventFieldList eventFields in e.NotificationMessage.GetEvents(true))
+                {
+                    MonitoredItem monitoredItem = m_subscription.FindItemByClientHandle(eventFields.ClientHandle);
+                    LogMsg($"SN {monitoredItem.DisplayName} - {eventFields.Message}");
+                }
+
+                foreach (MonitoredItemNotification change in e.NotificationMessage.GetDataChanges(false))
+                {
+                    MonitoredItem monitoredItem = m_subscription.FindItemByClientHandle(change.ClientHandle);
+                    DataValue dataValue = change.Value;
+                    LogMsg($"SN {monitoredItem.DisplayName} - {dataValue.WrappedValue}");
+                }
+            }
+            catch (Exception ex)
+            {
+                LogMsg("Session_Notification:"+ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Handles a change to the publish status for the subscription.
+        /// </summary>
+        public void Subscription_PublishStatusChanged(object subscription, EventArgs e)
+        {
+            try
+            {
+                NotificationMessage lastMessage = null;
+                if (m_monitoredItem != null)
+                {
+                    MonitoredItem monitoredItem = m_subscription.FindItemByClientHandle(m_monitoredItem.ClientHandle);
+                    if(monitoredItem.LastValue != null)
+                        lastMessage = monitoredItem.LastMessage;
+                }
+                if (m_subscription != null && m_subscription.PublishingStopped)
+                {
+                    //LogMsg($"PSC m_subscription.PublishingEnabled {m_subscription.PublishingEnabled},  m_subscription.PublishingStopped {m_subscription.PublishingStopped} ! BadNoCommunication?");
+                    //LogMsg($"PSC m_session.connected : {m_session.Connected}");
+                }
+
+                foreach (MonitoredItem monitoredItem in ((Subscription)subscription).MonitoredItems)
+                {
+                    if (ServiceResult.IsBad(monitoredItem.Status.Error))
+                    {
+                        LogMsg($" SSC {monitoredItem.Subscription.DisplayName} -  {m_monitoredItem.DisplayName} - {m_monitoredItem.Status.Error}");
+                    }
+                }
+
+
+                if (lastMessage != null)
+                {
+                 //   LogMsg($"PublishTime:{lastMessage.PublishTime.ToLocalTime():HH:mm:ss} SequenceNumber :{lastMessage.SequenceNumber}");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                LogMsg("Subscription_PublishStatusChanged:"+ex.Message);
+            }
+
+        }
+
+        /// <summary>
+        /// Handles a change to the state of the subscription.
+        /// </summary>
+        public void Subscription_StateChanged(Subscription subscription, SubscriptionStateChangedEventArgs e)
+        {
+            try
+            {
+                LogMsg($"Subscription_StateChanged {e.Status}");
+
+                if ((e.Status & SubscriptionChangeMask.ItemsDeleted) != 0)
+                {
+                    // 삭제 코드
+                }
+
+                foreach (MonitoredItem monitoredItem in subscription.MonitoredItems)
+                {
+                    if (ServiceResult.IsBad(monitoredItem.Status.Error))
+                    {
+                        LogMsg($" SSC {subscription.DisplayName} -  {m_monitoredItem.DisplayName} - {m_monitoredItem.Status.Error}");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogMsg(ex.Message);
+            }
+        }
+
+
+
+
+
 
         public DataValue ReadValue(NodeId nodeId)
         {
@@ -345,9 +745,9 @@ namespace OpcUaClient
             {
                 return m_session.ReadValue(nodeId);
             }
-            catch (Exception exception)
+            catch (Exception ex)
             {
-                //
+                LogMsg(ex.Message);
             }
             return null;
         }
@@ -377,9 +777,9 @@ namespace OpcUaClient
                 if (StatusCode.IsBad(results[0])) return StatusCodes.Bad;
                 else return StatusCodes.Good;
             }
-            catch (Exception exception)
+            catch (Exception ex)
             {
-                //HandleException("WriteValue", exception);
+                LogMsg(ex.Message);
             }
             return StatusCodes.Bad;
         }
@@ -410,9 +810,9 @@ namespace OpcUaClient
                 return results;                
 
             }
-            catch (Exception exception)
+            catch (Exception ex)
             {
-                //HandleException("WriteValue", exception);
+                LogMsg(ex.Message);
             }
             return null;
         }
