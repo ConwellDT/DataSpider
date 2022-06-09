@@ -26,7 +26,7 @@ namespace OpcUaClient
 
         public Session m_session { get; set; }
         public SessionReconnectHandler m_reconnectHandler;
-        private uint m_sessionTImeout = 120*1000;//1200*1000;
+        private uint m_sessionTImeout = 60*1000;//1200*1000;
         public uint SessionTimeout
         {
             get { return m_sessionTImeout; }
@@ -197,9 +197,17 @@ namespace OpcUaClient
             {
                 if (m_reconnectHandler != null)
                 {
-                    m_reconnectHandler.Session.Dispose();
+                    LogMsg("--- m_reconnectHandler not null ---");
+                    if (m_reconnectHandler.Session.Connected)
+                    {
+                        m_reconnectHandler.Session.Close();
+                        LogMsg("--- m_reconnectHandler.Session.Close ---");
+                        m_reconnectHandler.Session.Dispose();
+                    }
+                    LogMsg("--- m_reconnectHandler.Session.Dispose ---");
                     m_reconnectHandler.Dispose();
                     m_reconnectHandler = null;
+                    LogMsg("--- m_reconnectHandler   null ---");
                 }
             }
             catch (Exception ex)
@@ -219,6 +227,10 @@ namespace OpcUaClient
                     {
                         monitoredItem.Notification -= new MonitoredItemNotificationEventHandler(MonitoredItem_Notification);
                     }
+                    if(m_subscription.Created)
+                    {
+                        m_subscription.Delete(true);
+                    }
                     //m_subscription.Dispose();
                     m_subscription = null;
                     LogMsg("--- m_subscription null ---");
@@ -234,7 +246,12 @@ namespace OpcUaClient
                 {
                     LogMsg("--- m_session not null ---");
                     m_session.KeepAlive -= new KeepAliveEventHandler(StandardClient_KeepAlive);
-                    m_session.Dispose();
+                    if (m_session.Connected)
+                    {
+                        m_session.Close();
+                        LogMsg("---m_session.Close ---");
+                        m_session.Dispose();
+                    }
                     m_session = null;
                     LogMsg("--- m_session null ---");
                 }
@@ -510,16 +527,54 @@ namespace OpcUaClient
         private void StandardClient_Server_ReconnectComplete(object sender, EventArgs e)
         {
             try
-            { 
+            {
+                LogMsg("--- ReconnectComplete---");
                 // ignore callbacks from discarded objects.
                 if (!Object.ReferenceEquals(sender, m_reconnectHandler))
                 {
                     LogMsg("--- ignore callbacks from discarded objects. ---");
-                    return;
+                    //if (sender != null)
+                    //{
+                    //    ((SessionReconnectHandler)sender).Session.Close();
+                    //    ((SessionReconnectHandler)sender).Session.Dispose();
+                    //    ((SessionReconnectHandler)sender).Dispose();
+                    //    LogMsg("--- session dispose  ---");
+                    //}
+                    m_session = ((SessionReconnectHandler)sender).Session;
+                    Subscription prevsubscription = m_subscription;
+                    CreateSubscription(1000);
+                    foreach (MonitoredItem monitoredItem in prevsubscription.MonitoredItems)
+                    {
+                        AddItem(monitoredItem.DisplayName, monitoredItem.StartNodeId.ToString());
+                    }
+                    AddSubscription();
                 }
-                m_session = m_reconnectHandler.Session;
-                m_reconnectHandler.Dispose();
+                else
+                {
+                    m_session = m_reconnectHandler.Session;
+                    if (m_session.SubscriptionCount == 0)
+                    {
+                        LogMsg("--- m_session.SubscriptionCount == 0 ---");
+                        Subscription prevsubscription = m_subscription;
+                        CreateSubscription(1000);
+                        foreach (MonitoredItem monitoredItem in prevsubscription.MonitoredItems)
+                        {
+                            AddItem(monitoredItem.DisplayName, monitoredItem.StartNodeId.ToString());
+                        }
+                        AddSubscription();                     
+                    }
+                    else
+                    {
+                        LogMsg("--- m_session.SubscriptionCount > 0 ---");
+                        if (m_subscription.Created)
+                            m_subscription.Delete(true);
+                        m_subscription.Create();
+                    }
+                }
+
+                m_reconnectHandler?.Dispose();
                 m_reconnectHandler = null;
+
                 LogMsg("--- RECONNECTED ---");
             }
             catch (Exception ex)
@@ -675,7 +730,7 @@ namespace OpcUaClient
                 if (m_monitoredItem != null)
                 {
                     MonitoredItem monitoredItem = m_subscription.FindItemByClientHandle(m_monitoredItem.ClientHandle);
-                    if(monitoredItem.LastValue != null)
+                    if(monitoredItem?.LastValue != null)
                         lastMessage = monitoredItem.LastMessage;
                 }
                 if (m_subscription != null && m_subscription.PublishingStopped)

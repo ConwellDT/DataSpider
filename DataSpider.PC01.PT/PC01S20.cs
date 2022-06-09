@@ -43,8 +43,9 @@ namespace DataSpider.PC01.PT
         private string Pwd;
         private bool m_bReconnected = false;
 
-        private UInt32 m_dwSubscriptionCount = 0;
-        private UInt32 m_dwSessionCount = 0;
+        private UInt32 m_dwCurrentSessionCount = 0;
+        private UInt32 m_dwCurrentSubscriptionCount = 0;
+        private UInt32 m_dwCummulatedSubscriptionCount = 0;
 
         public PC01S20() : base()
         {
@@ -82,6 +83,9 @@ namespace DataSpider.PC01.PT
             m_LastEnqueuedDate = GetLastEnqueuedDate();
             listViewMsg.UpdateMsg($"Read m_LastEnqueuedDate :{m_LastEnqueuedDate.ToString("yyyyMMddHHmmss")}", false, true, true, PC00D01.MSGTINF);
             int nLogCounter = 0;
+            bool bCurrentSessionCountChanged = false;
+            bool bCurrentSubscriptionCountChanged = false;
+            bool bCummulatedSubscriptionCountChanged = false;
 
             while (!bTerminal)
             {
@@ -93,6 +97,7 @@ namespace DataSpider.PC01.PT
                         listViewMsg.UpdateMsg($"OPC UA Not Connected. Try to connect.", false, true, true, PC00D01.MSGTERR);
                         Thread.Sleep(5000);
                         InitOpcUaClient();
+                        Thread.Sleep(1000);
                         dtNormalTime = DateTime.Now;
                         m_bReconnected = true;
                     }
@@ -103,26 +108,53 @@ namespace DataSpider.PC01.PT
                             m_bReconnected = true;
                             //                            listViewMsg.UpdateMsg($" Network Error , IF_STATUS.Disconnected ", false, true, true, PC00D01.MSGTERR);
                             UpdateEquipmentProgDateTime(IF_STATUS.Disconnected);
+
+
                             if ((DateTime.Now - dtNormalTime).TotalMilliseconds >= myUaClient.m_session.SessionTimeout)
                             {
-                                listViewMsg.UpdateMsg($" Network Error , UaClient.Close() ", false, true, true, PC00D01.MSGTERR);
-                                myUaClient.Close();
-                                myUaClient = null;
-                                listViewMsg.UpdateMsg($" Network Error , Ua Client Reset ", false, true, true, PC00D01.MSGTERR);
+                                LogMsg("--- SessionTimeout---");
+
+                                if (myUaClient.m_reconnectHandler.Session.Connected)
+                                {
+                                    //    //myUaClient.m_session = myUaClient.m_reconnectHandler.Session;
+                                    myUaClient.m_reconnectHandler.Session.Close(5000);
+                                    //    myUaClient.m_reconnectHandler.Session.Dispose();
+                                    //    myUaClient.m_reconnectHandler.Dispose();
+                                    //    myUaClient.m_reconnectHandler = null;
+                                    LogMsg("--- Session.Close---");
+                                }
+                                dtNormalTime = DateTime.Now;
                             }
+
+                            //if ((DateTime.Now - dtNormalTime).TotalMilliseconds >= myUaClient.m_session.SessionTimeout)
+                            //{
+                            //    listViewMsg.UpdateMsg($" Network Error , UaClient.Close() ", false, true, true, PC00D01.MSGTERR);
+                            //    myUaClient.Close();
+                            //    myUaClient = null;
+                            //    listViewMsg.UpdateMsg($" Network Error , Ua Client Reset ", false, true, true, PC00D01.MSGTERR);
+                            //}
                         }
                         else
                         {
                             UpdateEquipmentProgDateTime(IF_STATUS.Normal);
                             dtNormalTime = DateTime.Now;
-
-                            if (SessionCountChange() || SubscriptionCountChange())                            
+                            bCurrentSessionCountChanged = CurrentSessionCountChanged();
+                            bCurrentSubscriptionCountChanged = CurrentSubscriptionCountChanged();
+                            bCummulatedSubscriptionCountChanged = CummulatedSubscriptionCountChanged();
+                            //if (bCurrentSessionCountChanged || 
+                            //    bCurrentSubscriptionCountChanged || 
+                            //    bCummulatedSubscriptionCountChanged ||
+                            if( myUaClient.m_subscription.CurrentPublishingEnabled == false || 
+                                myUaClient.m_subscription.PublishingEnabled==false)
                             {
-                                myUaClient.m_subscription.Delete(true);
-                                myUaClient.m_subscription.Create();
+                                LogMsg($"---m_subscription.Delete/Create 1   CurrentPublishingEnabled ={myUaClient.m_subscription.CurrentPublishingEnabled}-PublishingEnabled ={myUaClient.m_subscription.PublishingEnabled}---");
+                                //myUaClient.m_subscription.Delete(true);
+                                //myUaClient.m_subscription.Create();
+                                //myUaClient.m_subscription.PublishingEnabled = true;
+                                myUaClient.m_subscription.SetPublishingMode(true);
+                                LogMsg($"---m_subscription.Delete/Create 2   CurrentPublishingEnabled ={myUaClient.m_subscription.CurrentPublishingEnabled}-PublishingEnabled ={myUaClient.m_subscription.PublishingEnabled}---");
+                                Thread.Sleep(1000);
                             }
-
-
 
                             m_ViCellStatus = m_OpcItemList["ViCellStatus"];
                             if (m_ViCellStatus == "0")
@@ -159,42 +191,75 @@ namespace DataSpider.PC01.PT
                 }
                 Thread.Sleep(1000);
             }
+            myUaClient.Close();
             myUaClient = null;
             UpdateEquipmentProgDateTime(IF_STATUS.Stop);
             listViewMsg.UpdateStatus(false);
             listViewMsg.UpdateMsg("Thread finished");
         }
 
-        // 
-        public bool SessionCountChange()
+        public bool CurrentSessionCountChanged()
         {
             bool bReturn = false;
-            UInt32 dwSessionCount = 0;
-            DataValue dv = myUaClient.ReadValue(NodeId.Parse("i=2277"));
-            if (dv != null)
+            UInt32 dwCurrentSessionCount = 0;
+            try
+
             {
-                dwSessionCount = (UInt32)dv.WrappedValue.Value;
-                if (dwSessionCount != m_dwSessionCount)
+                if (string.IsNullOrEmpty(m_OpcItemList["CurrentSessionCount"])) return false;
+                dwCurrentSessionCount = UInt32.Parse(m_OpcItemList["CurrentSessionCount"]);
+
+                if (dwCurrentSessionCount != m_dwCurrentSessionCount)
                 {
                     bReturn = true;
-                    m_dwSessionCount = dwSessionCount;
+                    m_dwCurrentSessionCount = dwCurrentSessionCount;
                 }
+            }
+            catch(Exception ex)
+            {
+                LogMsg($"CurrentSessionCountChanged -{ex.Message}");
             }
             return bReturn;
         }
-        public bool SubscriptionCountChange()
+
+        public bool CurrentSubscriptionCountChanged()
         {
             bool bReturn = false;
-            UInt32 dwSubscriptionCount = 0;
-            DataValue dv = myUaClient.ReadValue(NodeId.Parse("i=2285"));
-            if (dv != null)
+            UInt32 dwCurrentSubscriptionCount = 0;
+            try
             {
-                dwSubscriptionCount = (UInt32)dv.WrappedValue.Value;
-                if (dwSubscriptionCount != m_dwSubscriptionCount)
+
+                if (string.IsNullOrEmpty(m_OpcItemList["CurrentSubscriptionCount"])) return false;
+                dwCurrentSubscriptionCount = UInt32.Parse(m_OpcItemList["CurrentSubscriptionCount"]);
+                if (dwCurrentSubscriptionCount != m_dwCurrentSubscriptionCount)
                 {
                     bReturn = true;
-                    m_dwSubscriptionCount = dwSubscriptionCount;
+                    m_dwCurrentSubscriptionCount = dwCurrentSubscriptionCount;
                 }
+            }
+            catch (Exception ex)
+            {
+                LogMsg($"CurrentSubscriptionCountChanged -{ex.Message}");
+            }
+            return bReturn;
+        }
+        public bool CummulatedSubscriptionCountChanged()
+        {
+            bool bReturn = false;
+            UInt32 dwCummulatedSubscriptionCount = 0;
+
+            try
+            {
+                if (string.IsNullOrEmpty(m_OpcItemList["CumulatedSubscriptionCount"])) return false;
+                dwCummulatedSubscriptionCount = UInt32.Parse(m_OpcItemList["CumulatedSubscriptionCount"]);
+                if (dwCummulatedSubscriptionCount != m_dwCummulatedSubscriptionCount)
+                {
+                    bReturn = true;
+                    m_dwCummulatedSubscriptionCount = dwCummulatedSubscriptionCount;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogMsg($"CurrentSubscriptionCountChanged -{ex.Message}");
             }
             return bReturn;
         }
@@ -229,7 +294,7 @@ namespace DataSpider.PC01.PT
                             {
                                 new Variant(string.Empty),                                  // User name string
                                 new Variant(m_LastEnqueuedDate.AddSeconds(10)),             // start date
-                                new Variant(DateTime.Now),                                  // end date
+                                new Variant(DateTime.Now.AddHours(1)),                                  // end date
                                 new Variant(1),                                             // filter ON: 0 = sample set, 1 = sample
                                 new Variant(string.Empty),                                  //new Variant("Insect"), // Cell type or QC name
                                 new Variant(string.Empty),                                  // Search string (sample or sample set name)
