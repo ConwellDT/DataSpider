@@ -22,7 +22,9 @@ namespace DataSpider.PC01.PT
 
         protected DateTime dtLastWriteTime = DateTime.MinValue;
         private DateTime m_dtLastProcessTime = DateTime.MinValue;
-        private string m_SoftwareVersion = string.Empty;
+
+        // SoftwareVersion  삭제하기로 협의됨. 20220609 165800
+        //private string m_SoftwareVersion = string.Empty;
 
         public PC01S17() : base()
         {
@@ -75,8 +77,8 @@ namespace DataSpider.PC01.PT
         {
             listViewMsg.UpdateStatus(true);
             listViewMsg.UpdateMsg("Thread started");
-            m_SoftwareVersion = GetSoftwareVersion();
-            listViewMsg.UpdateMsg($"Read From Ini File m_SoftwareVersion :{m_SoftwareVersion}", false, true, true, PC00D01.MSGTINF);
+            //m_SoftwareVersion = GetSoftwareVersion();
+            //listViewMsg.UpdateMsg($"Read From Ini File m_SoftwareVersion :{m_SoftwareVersion}", false, true, true, PC00D01.MSGTINF);
             m_dtLastProcessTime = GetLastProcessTime();
             listViewMsg.UpdateMsg($"Read From Ini File m_dtLastProcessTime :{m_dtLastProcessTime:yyyy-MM-dd HH:mm:ss.fff}", false, true, true, PC00D01.MSGTINF);
             string data = string.Empty;
@@ -300,7 +302,7 @@ namespace DataSpider.PC01.PT
                 }
                 sbData.Append($"CedexSystemId,{strDate}, {dr2["CedexSystemID"]}" + Environment.NewLine);
                 sbData.Append($"CedexSystemNm,{strDate}, {dr2["CedexSystemNm"]}" + Environment.NewLine);
-                sbData.Append($"SoftwareVersion,{strDate},{m_SoftwareVersion}" + Environment.NewLine);
+                //sbData.Append($"SoftwareVersion,{strDate},{m_SoftwareVersion}" + Environment.NewLine);
                 sbData.Append($"ReactorId,{strDate},{dr2["ReactorIdentifier"]}" + Environment.NewLine);
                 sbData.Append($"SampleId,{strDate},{dr2["SampleIdentifier"]}" + Environment.NewLine);
 
