@@ -1188,7 +1188,7 @@ namespace DataSpider.PC00.PT
             }
             return result;
         }
-        public bool RestPIIFFlag(int hiSeq)
+        public bool RestPIIFFlag(string hiSeq)
         {
             string _strErrCode = string.Empty;
             string _strErrText = string.Empty;
@@ -1196,8 +1196,8 @@ namespace DataSpider.PC00.PT
             try
             {
                 StringBuilder strQuery = new StringBuilder();
-                //strQuery.Append($"UPDATE HI_MEASURE_RESULT SET IF_FLAG = 'N', IF_COUNT = 0 WHERE HI_SEQ = {hiSeq}");
-                strQuery.Append($"EXEC ResetPIIFFlag {hiSeq}");
+                //	UPDATE HI_MEASURE_RESULT SET IF_FLAG = 'N', IF_COUNT = 0 WHERE HI_SEQ IN (SELECT * FROM STRING_SPLIT(@hiSeq, ','))
+                strQuery.Append($"EXEC ResetPIIFFlag '{hiSeq}'");
 
                 bool result = CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref _strErrCode, ref _strErrText);
                 return result;
@@ -1208,7 +1208,7 @@ namespace DataSpider.PC00.PT
                 return false;
             }
         }
-        public bool RemovePIAlarm(int hiSeq)
+        public bool RemovePIAlarm(string hiSeq)
         {
             string _strErrCode = string.Empty;
             string _strErrText = string.Empty;
@@ -1216,9 +1216,10 @@ namespace DataSpider.PC00.PT
             try
             {
                 StringBuilder strQuery = new StringBuilder();
-                //strQuery.Append($"INSERT INTO HI_MEASURE_RESULT_BK SELECT TAG_NM, MEASURE_VALUE, MEASURE_DATE, 'Z', getdate(), getdate(), '{UserAuthentication.UserID}', REMARK, IF_COUNT FROM HI_MEASURE_RESULT WHERE HI_SEQ = {hiSeq};");
-                //strQuery.Append($"DELETE HI_MEASURE_RESULT WHERE HI_SEQ = {hiSeq}");
-                strQuery.Append($"EXEC RemovePiAlarm '{UserAuthentication.UserID}', {hiSeq};");
+                //INSERT INTO HI_MEASURE_RESULT_BK SELECT TAG_NM, MEASURE_VALUE, MEASURE_DATE, 'Z', getdate(), getdate(), @regID, REMARK, IF_COUNT
+                //    FROM HI_MEASURE_RESULT WHERE HI_SEQ IN(SELECT* FROM STRING_SPLIT(@hiSeq, ','));
+                //DELETE HI_MEASURE_RESULT WHERE HI_SEQ IN(SELECT * FROM STRING_SPLIT(@hiSeq, ','));
+                strQuery.Append($"EXEC RemovePiAlarm '{UserAuthentication.UserID}', '{hiSeq}'");
 
                 bool result = CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref _strErrCode, ref _strErrText);
                 return result;

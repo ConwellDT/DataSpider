@@ -352,8 +352,17 @@ namespace DataSpider.FailoverManager
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            DialogResult dialogResult = MessageBox.Show(PC00D01.MSGP0001, PC00D01.MSGP0002, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (!dialogResult.Equals(DialogResult.Yes))
+            {
+                e.Cancel = true;
+                return;
+            }
+
             m_bTermial = true;
             Thread.Sleep(1000);
+            notifyIcon1.Visible = false;
             m_Logger.WriteLog($"MainForm_FormClosing");
         }
 
@@ -475,7 +484,7 @@ namespace DataSpider.FailoverManager
         {
             this.Show();
             this.WindowState = FormWindowState.Normal;
-            notifyIcon1.Visible = false;
+            //notifyIcon1.Visible = false;
 
         }
 
@@ -491,13 +500,13 @@ namespace DataSpider.FailoverManager
         {
             if (FormWindowState.Minimized == this.WindowState)
             {
-                notifyIcon1.Visible = true; // tray icon 표시
+                //notifyIcon1.Visible = true; // tray icon 표시
                 this.Hide();
                 this.ShowInTaskbar = false; // 작업 표시줄 표시
             }
             else //if (FormWindowState.Normal == this.WindowState)
             {
-                notifyIcon1.Visible = false;
+                //notifyIcon1.Visible = false;
                 this.Show();
                 this.ShowInTaskbar = true; // 작업 표시줄 표시
             }
@@ -508,7 +517,7 @@ namespace DataSpider.FailoverManager
         {
             this.Show();
             this.WindowState = FormWindowState.Normal;
-            notifyIcon1.Visible = false;
+            //notifyIcon1.Visible = false;
         }
 
         #region <Update Listview Items>
