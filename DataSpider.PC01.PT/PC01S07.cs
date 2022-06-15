@@ -49,9 +49,18 @@ namespace DataSpider.PC01.PT
                 m_Thd.Start();
             }
         }
-
+        string RemoveNull(string Msg)
+        {
+            string returnString=string.Empty;
+            foreach( char ch in Msg)
+            {
+                if (ch != 0) returnString += ch;
+            }
+            return returnString;
+        }
         protected override void ParseMessage(string Msg)
         {
+            //Msg=RemoveNull(Msg);
             string[] LineData = Msg.Split(new string[] { System.Environment.NewLine }, StringSplitOptions.None);
             List<string> listData = new List<string>();
             bool Started = false;
@@ -70,6 +79,7 @@ namespace DataSpider.PC01.PT
                     listData.Clear();
                     lineString = string.Empty;
                 }
+
                 if (Started)
                 {
                     // 20210407, SHS, Ignore line, 수신한 라인에 무시문자열이 있으면 해당 라인 처리 제외

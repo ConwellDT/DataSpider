@@ -735,7 +735,7 @@ namespace OpcUaClient
                 }
                 if (m_subscription != null && m_subscription.PublishingStopped)
                 {
-                    //LogMsg($"PSC m_subscription.PublishingEnabled {m_subscription.PublishingEnabled},  m_subscription.PublishingStopped {m_subscription.PublishingStopped} ! BadNoCommunication?");
+                    LogMsg($"PSC m_subscription.PublishingEnabled {m_subscription.PublishingEnabled},  m_subscription.PublishingStopped {m_subscription.PublishingStopped} ! BadNoCommunication?");
                     //LogMsg($"PSC m_session.connected : {m_session.Connected}");
                 }
 
