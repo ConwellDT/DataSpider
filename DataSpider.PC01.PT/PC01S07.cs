@@ -60,7 +60,7 @@ namespace DataSpider.PC01.PT
         }
         protected override void ParseMessage(string Msg)
         {
-            //Msg=RemoveNull(Msg);
+            Msg=RemoveNull(Msg);
             string[] LineData = Msg.Split(new string[] { System.Environment.NewLine }, StringSplitOptions.None);
             List<string> listData = new List<string>();
             bool Started = false;
