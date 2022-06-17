@@ -75,7 +75,9 @@ namespace DataSpider.PC01.PT
 
         private void ThreadJob()
         {
-            listViewMsg.UpdateStatus(true);
+// 접속을 못했을 때 normal로 표시되었다가 끊어지는 것으로 표시됨. 
+// 오해의 소지가 있어서 삭제.
+//            listViewMsg.UpdateStatus(true);
             listViewMsg.UpdateMsg("Thread started");
             //m_SoftwareVersion = GetSoftwareVersion();
             //listViewMsg.UpdateMsg($"Read From Ini File m_SoftwareVersion :{m_SoftwareVersion}", false, true, true, PC00D01.MSGTINF);
