@@ -317,29 +317,46 @@ namespace DataSpider.FailoverManager
                     threadFailover.Join(500);
                 }
             }
-            foreach (KeyValuePair<string, Process> kvp in m_ProcessList)
+            try
             {
-                Process prc = kvp.Value;
-                if (prc != null)
+                foreach (KeyValuePair<string, Process> kvp in m_ProcessList)
                 {
-                    strQuery = new StringBuilder();
-                    strQuery.Append($" UPDATE MA_FAILOVER_CD SET STOP_REQ{MY_ID}=1, STOP_REQ_TIME{MY_ID}=GETDATE() WHERE EQUIP_NM='{kvp.Key}'  ");
-                    CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref errCode, ref errText);
-                    m_Logger.WriteLog($" {kvp.Key} STOP_REQ : {strQuery.ToString()} ");
+                    Process prc = kvp.Value;
+                    if (prc != null)
+                    {
+                        strQuery = new StringBuilder();
+                        strQuery.Append($" UPDATE MA_FAILOVER_CD SET STOP_REQ{MY_ID}=1, STOP_REQ_TIME{MY_ID}=GETDATE() WHERE EQUIP_NM='{kvp.Key}'  ");
+                        CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref errCode, ref errText);
+                        m_Logger.WriteLog($" {kvp.Key} STOP_REQ : {strQuery.ToString()} ");
+                    }
                 }
+                Thread.Sleep(1000);
+                foreach (KeyValuePair<string, Process> kvp in m_ProcessList)
+                {
+                    Process prc = kvp.Value;
+                    if( prc!=null && IsProcessTerminated(prc) == false)                    
+                    {
+                        try
+                        {
+                            prc.Kill();
+                            prc.WaitForExit();
+                        }
+                        catch (Exception ex)
+                        {
+                            m_Logger.WriteLog($" {ex.ToString()} ");
+                        }
+                        m_Logger.WriteLog($" {kvp.Key}  Collector Killed ");
+                    }
+                }
+                m_Logger.WriteLog("FailoverThread End");
             }
-            Thread.Sleep(1000);
-            foreach (KeyValuePair<string, Process> kvp in m_ProcessList)
+            catch (Exception ex)
             {
-                Process prc = kvp.Value;
-                if (prc != null)
-                {
-                    prc.Kill();
-                    prc.WaitForExit();
-                    m_Logger.WriteLog($" {kvp.Key}  Collector Killed ");
-                }
+                m_Logger.WriteLog($" {ex.ToString()} ");
             }
-            m_Logger.WriteLog("FailoverThread End");
+            finally
+            {
+            }
         }
 
         public bool IsProcessTerminated(Process prc)
@@ -350,119 +367,119 @@ namespace DataSpider.FailoverManager
         }
 
 
-        private void btn1_mode_Click(object sender, EventArgs e)
-        {
-            strQuery = new StringBuilder();
-            strQuery.Append($" UPDATE MA_FAILOVER_CD SET FAILOVER_MODE=(FAILOVER_MODE+1)%2 WHERE EQUIP_NM='P4S-EQ-0001' ");
-            CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref errCode, ref errText);
-        }
+        //private void btn1_mode_Click(object sender, EventArgs e)
+        //{
+        //    strQuery = new StringBuilder();
+        //    strQuery.Append($" UPDATE MA_FAILOVER_CD SET FAILOVER_MODE=(FAILOVER_MODE+1)%2 WHERE EQUIP_NM='P4S-EQ-0001' ");
+        //    CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref errCode, ref errText);
+        //}
 
-        private void btn1_show_Click(object sender, EventArgs e)
-        {
-            strQuery = new StringBuilder();
-            strQuery.Append($" UPDATE MA_FAILOVER_CD SET HIDE_SHOW=1 WHERE EQUIP_NM='P4S-EQ-0001' ");
-            CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref errCode, ref errText);
+        //private void btn1_show_Click(object sender, EventArgs e)
+        //{
+        //    strQuery = new StringBuilder();
+        //    strQuery.Append($" UPDATE MA_FAILOVER_CD SET HIDE_SHOW=1 WHERE EQUIP_NM='P4S-EQ-0001' ");
+        //    CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref errCode, ref errText);
 
-        }
+        //}
 
-        private void btn1_hide_Click(object sender, EventArgs e)
-        {
-            strQuery = new StringBuilder();
-            strQuery.Append($" UPDATE MA_FAILOVER_CD SET HIDE_SHOW=0 WHERE EQUIP_NM='P4S-EQ-0001' ");
-            CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref errCode, ref errText);
+        //private void btn1_hide_Click(object sender, EventArgs e)
+        //{
+        //    strQuery = new StringBuilder();
+        //    strQuery.Append($" UPDATE MA_FAILOVER_CD SET HIDE_SHOW=0 WHERE EQUIP_NM='P4S-EQ-0001' ");
+        //    CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref errCode, ref errText);
 
-        }
+        //}
 
-        private void btn1_run_req_Click(object sender, EventArgs e)
-        {
-            strQuery = new StringBuilder();
-            strQuery.Append($" UPDATE MA_FAILOVER_CD SET RUN_REQ0=1 WHERE EQUIP_NM='P4S-EQ-0001' AND FAILOVER_MODE=0 ");
-            CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref errCode, ref errText);
+        //private void btn1_run_req_Click(object sender, EventArgs e)
+        //{
+        //    strQuery = new StringBuilder();
+        //    strQuery.Append($" UPDATE MA_FAILOVER_CD SET RUN_REQ0=1 WHERE EQUIP_NM='P4S-EQ-0001' AND FAILOVER_MODE=0 ");
+        //    CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref errCode, ref errText);
 
-        }
-        private void btn1_run_req1_Click(object sender, EventArgs e)
-        {
-            strQuery = new StringBuilder();
-            strQuery.Append($" UPDATE MA_FAILOVER_CD SET RUN_REQ1=1 WHERE EQUIP_NM='P4S-EQ-0001' AND FAILOVER_MODE=0 ");
-            CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref errCode, ref errText);
+        //}
+        //private void btn1_run_req1_Click(object sender, EventArgs e)
+        //{
+        //    strQuery = new StringBuilder();
+        //    strQuery.Append($" UPDATE MA_FAILOVER_CD SET RUN_REQ1=1 WHERE EQUIP_NM='P4S-EQ-0001' AND FAILOVER_MODE=0 ");
+        //    CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref errCode, ref errText);
 
-        }
+        //}
 
-        private void btn1_stop_req_Click(object sender, EventArgs e)
-        {
-            strQuery = new StringBuilder();
-            strQuery.Append($" UPDATE MA_FAILOVER_CD SET STOP_REQ0=1 WHERE EQUIP_NM='P4S-EQ-0001' AND FAILOVER_MODE=0 ");
-            CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref errCode, ref errText);
-        }
-        private void btn1_stop_req1_Click(object sender, EventArgs e)
-        {
-            strQuery = new StringBuilder();
-            strQuery.Append($" UPDATE MA_FAILOVER_CD SET STOP_REQ1=1 WHERE EQUIP_NM='P4S-EQ-0001' AND FAILOVER_MODE=0 ");
-            CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref errCode, ref errText);
+        //private void btn1_stop_req_Click(object sender, EventArgs e)
+        //{
+        //    strQuery = new StringBuilder();
+        //    strQuery.Append($" UPDATE MA_FAILOVER_CD SET STOP_REQ0=1 WHERE EQUIP_NM='P4S-EQ-0001' AND FAILOVER_MODE=0 ");
+        //    CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref errCode, ref errText);
+        //}
+        //private void btn1_stop_req1_Click(object sender, EventArgs e)
+        //{
+        //    strQuery = new StringBuilder();
+        //    strQuery.Append($" UPDATE MA_FAILOVER_CD SET STOP_REQ1=1 WHERE EQUIP_NM='P4S-EQ-0001' AND FAILOVER_MODE=0 ");
+        //    CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref errCode, ref errText);
 
-        }
+        //}
 
-        private void btn2_mode_Click(object sender, EventArgs e)
-        {
-            strQuery = new StringBuilder();
-            strQuery.Append($" UPDATE MA_FAILOVER_CD SET FAILOVER_MODE=(FAILOVER_MODE+1)%2 WHERE EQUIP_NM='P4S-EQ-0002' ");
-            CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref errCode, ref errText);
-        }
+        //private void btn2_mode_Click(object sender, EventArgs e)
+        //{
+        //    strQuery = new StringBuilder();
+        //    strQuery.Append($" UPDATE MA_FAILOVER_CD SET FAILOVER_MODE=(FAILOVER_MODE+1)%2 WHERE EQUIP_NM='P4S-EQ-0002' ");
+        //    CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref errCode, ref errText);
+        //}
 
-        private void btn2_show_Click(object sender, EventArgs e)
-        {
-            strQuery = new StringBuilder();
-            strQuery.Append($" UPDATE MA_FAILOVER_CD SET HIDE_SHOW=1 WHERE EQUIP_NM='P4S-EQ-0002' ");
-            CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref errCode, ref errText);
+        //private void btn2_show_Click(object sender, EventArgs e)
+        //{
+        //    strQuery = new StringBuilder();
+        //    strQuery.Append($" UPDATE MA_FAILOVER_CD SET HIDE_SHOW=1 WHERE EQUIP_NM='P4S-EQ-0002' ");
+        //    CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref errCode, ref errText);
 
-        }
+        //}
 
-        private void btn2_hide_Click(object sender, EventArgs e)
-        {
-            strQuery = new StringBuilder();
-            strQuery.Append($" UPDATE MA_FAILOVER_CD SET HIDE_SHOW=0 WHERE EQUIP_NM='P4S-EQ-0002' ");
-            CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref errCode, ref errText);
+        //private void btn2_hide_Click(object sender, EventArgs e)
+        //{
+        //    strQuery = new StringBuilder();
+        //    strQuery.Append($" UPDATE MA_FAILOVER_CD SET HIDE_SHOW=0 WHERE EQUIP_NM='P4S-EQ-0002' ");
+        //    CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref errCode, ref errText);
 
 
-        }
+        //}
 
-        private void btn2_run_req_Click(object sender, EventArgs e)
-        {
-            strQuery = new StringBuilder();
-            strQuery.Append($" UPDATE MA_FAILOVER_CD SET RUN_REQ=1 WHERE EQUIP_NM='P4S-EQ-0002' AND FAILOVER_MODE=0 ");
-            CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref errCode, ref errText);
+        //private void btn2_run_req_Click(object sender, EventArgs e)
+        //{
+        //    strQuery = new StringBuilder();
+        //    strQuery.Append($" UPDATE MA_FAILOVER_CD SET RUN_REQ=1 WHERE EQUIP_NM='P4S-EQ-0002' AND FAILOVER_MODE=0 ");
+        //    CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref errCode, ref errText);
 
-        }
+        //}
 
-        private void btn2_stop_req_Click(object sender, EventArgs e)
-        {
-            strQuery = new StringBuilder();
-            strQuery.Append($" UPDATE MA_FAILOVER_CD SET STOP_REQ0=1 WHERE EQUIP_NM='P4S-EQ-0002' AND FAILOVER_MODE=0 ");
-            CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref errCode, ref errText);
+        //private void btn2_stop_req_Click(object sender, EventArgs e)
+        //{
+        //    strQuery = new StringBuilder();
+        //    strQuery.Append($" UPDATE MA_FAILOVER_CD SET STOP_REQ0=1 WHERE EQUIP_NM='P4S-EQ-0002' AND FAILOVER_MODE=0 ");
+        //    CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref errCode, ref errText);
 
-        }
-        private void btn2_stop_req1_Click(object sender, EventArgs e)
-        {
-            strQuery = new StringBuilder();
-            strQuery.Append($" UPDATE MA_FAILOVER_CD SET STOP_REQ1=1 WHERE EQUIP_NM='P4S-EQ-0002' AND FAILOVER_MODE=0 ");
-            CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref errCode, ref errText);
-        }
+        //}
+        //private void btn2_stop_req1_Click(object sender, EventArgs e)
+        //{
+        //    strQuery = new StringBuilder();
+        //    strQuery.Append($" UPDATE MA_FAILOVER_CD SET STOP_REQ1=1 WHERE EQUIP_NM='P4S-EQ-0002' AND FAILOVER_MODE=0 ");
+        //    CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref errCode, ref errText);
+        //}
 
-        private void btn1_active_server_Click(object sender, EventArgs e)
-        {
-            strQuery = new StringBuilder();
-            strQuery.Append($" UPDATE MA_FAILOVER_CD SET ACTIVE_SERVER=(ACTIVE_SERVER+1)%2 WHERE EQUIP_NM='P4S-EQ-0001' ");
-            CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref errCode, ref errText);
+        //private void btn1_active_server_Click(object sender, EventArgs e)
+        //{
+        //    strQuery = new StringBuilder();
+        //    strQuery.Append($" UPDATE MA_FAILOVER_CD SET ACTIVE_SERVER=(ACTIVE_SERVER+1)%2 WHERE EQUIP_NM='P4S-EQ-0001' ");
+        //    CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref errCode, ref errText);
 
-        }
+        //}
 
-        private void btn2_active_server_Click(object sender, EventArgs e)
-        {
-            strQuery = new StringBuilder();
-            strQuery.Append($" UPDATE MA_FAILOVER_CD SET ACTIVE_SERVER=(ACTIVE_SERVER+1)%2 WHERE EQUIP_NM='P4S-EQ-0002' ");
-            CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref errCode, ref errText);
+        //private void btn2_active_server_Click(object sender, EventArgs e)
+        //{
+        //    strQuery = new StringBuilder();
+        //    strQuery.Append($" UPDATE MA_FAILOVER_CD SET ACTIVE_SERVER=(ACTIVE_SERVER+1)%2 WHERE EQUIP_NM='P4S-EQ-0002' ");
+        //    CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref errCode, ref errText);
 
-        }
+        //}
 
 
         private void MainForm_Resize(object sender, EventArgs e)
@@ -692,15 +709,13 @@ namespace DataSpider.FailoverManager
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             DialogResult dialogResult = MessageBox.Show(PC00D01.MSGP0001, PC00D01.MSGP0002, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
             if (!dialogResult.Equals(DialogResult.Yes))
             {
                 e.Cancel = true;
                 return;
             }
-
             m_bTermial = true;
-            Thread.Sleep(2000);
+            Thread.Sleep(10000);
             notifyIcon1.Visible = false;
             m_Logger.WriteLog($"MainForm_FormClosing");
         }
@@ -722,7 +737,7 @@ namespace DataSpider.FailoverManager
                 return;
             }
             m_bTermial = true;
-            Thread.Sleep(2000);
+            Thread.Sleep(10000);
             notifyIcon1.Visible = false;
             m_Logger.WriteLog($"Application.Exit");
             Application.Exit();

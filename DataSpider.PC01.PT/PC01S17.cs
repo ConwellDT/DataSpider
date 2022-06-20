@@ -15,8 +15,6 @@ namespace DataSpider.PC01.PT
     public class PC01S17 : PC00B01
     {
         protected SqlConnection mCon;
-        protected SqlCommand mCommand;
-        protected SqlTransaction mTrans;
         string p_strErrCode;
         string p_strErrText;
 
@@ -89,7 +87,7 @@ namespace DataSpider.PC01.PT
                 try
                 {
                     if (mCon == null || mCon.State == ConnectionState.Closed)
-                    {   
+                    {
                         if (DBConnect(m_ConnectionInfo, ref p_strErrCode, ref p_strErrText))
                         {
                             UpdateEquipmentProgDateTime(IF_STATUS.Normal);
@@ -99,26 +97,28 @@ namespace DataSpider.PC01.PT
                         {
                             UpdateEquipmentProgDateTime(IF_STATUS.Disconnected);
                             listViewMsg.UpdateMsg($"DB Disconnected", true, true, true);
-                            Thread.Sleep(2000);
+                            Thread.Sleep(1000);
                         }
-                    }
-
-                    if ((data = ResultProcess()) != string.Empty)
-                    {
-                        UpdateEquipmentProgDateTime(IF_STATUS.Normal);
-                        //data = ResultProcess();
-                        EnQueue(MSGTYPE.MEASURE, data);
-                        listViewMsg.UpdateMsg($"{m_Name}({MSGTYPE.MEASURE}) Data has been enqueued", true, true);
-                        fileLog.WriteData(data, "EnQ", $"{m_Name}({MSGTYPE.MEASURE})");
-                        Thread.Sleep(1000);
                     }
                     else
                     {
-                        if (string.IsNullOrWhiteSpace(data))
+                        if ((data = ResultProcess()) != string.Empty)
                         {
                             UpdateEquipmentProgDateTime(IF_STATUS.Normal);
-                            listViewMsg.UpdateMsg("No data in DB", true, false);
-                            Thread.Sleep(2000);
+                            //data = ResultProcess();
+                            EnQueue(MSGTYPE.MEASURE, data);
+                            listViewMsg.UpdateMsg($"{m_Name}({MSGTYPE.MEASURE}) Data has been enqueued", true, true);
+                            fileLog.WriteData(data, "EnQ", $"{m_Name}({MSGTYPE.MEASURE})");
+                            Thread.Sleep(1000);
+                        }
+                        else
+                        {
+                            if (string.IsNullOrWhiteSpace(data))
+                            {
+                                UpdateEquipmentProgDateTime(IF_STATUS.Normal);
+                                listViewMsg.UpdateMsg("No data in DB", true, false);
+                                Thread.Sleep(1000);
+                            }
                         }
                     }
                 }
@@ -130,7 +130,7 @@ namespace DataSpider.PC01.PT
                 finally
                 {
                 }
-                Thread.Sleep(1000);
+                Thread.Sleep(10);
             }
             UpdateEquipmentProgDateTime(IF_STATUS.Stop);
             listViewMsg.UpdateStatus(false);
@@ -154,14 +154,12 @@ namespace DataSpider.PC01.PT
             }
             finally
             {
-                if (mCon != null)
-                {
-                    if (mCon.State == ConnectionState.Open)
-                        mCon.Close();
-                    mCon.Dispose();
-                }
-                if (mCommand != null) mCommand.Dispose();
-
+                //if (mCon != null)
+                //{
+                //    if (mCon.State == ConnectionState.Open)
+                //        mCon.Close();
+                //    mCon.Dispose();
+                //}
             }
             return bReturn;
         }
@@ -226,12 +224,12 @@ namespace DataSpider.PC01.PT
             }
             finally
             {
-                if (mCon != null)
-                {
-                    if (mCon.State == ConnectionState.Open)
-                        mCon.Close();
-                    mCon.Dispose();
-                }
+                //if (mCon != null)
+                //{
+                //    if (mCon.State == ConnectionState.Open)
+                //        mCon.Close();
+                //    mCon.Dispose();
+                //}
                 if (mCommand != null) mCommand.Dispose();
                 if (da != null) da.Dispose();
             }
@@ -437,6 +435,14 @@ namespace DataSpider.PC01.PT
 
                 m_dtLastProcessTime = (DateTime)NewProcessTime;
                 SetLastProcessTime(m_dtLastProcessTime);
+
+                if (mCon != null)
+                {
+                    if (mCon.State == ConnectionState.Open)
+                        mCon.Close();
+                    mCon.Dispose();
+                    mCon = null;
+                }
 
                 return sbData.ToString().Trim();
             }
