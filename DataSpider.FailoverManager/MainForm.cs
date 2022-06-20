@@ -361,7 +361,7 @@ namespace DataSpider.FailoverManager
             }
 
             m_bTermial = true;
-            Thread.Sleep(1000);
+            Thread.Sleep(2000);
             notifyIcon1.Visible = false;
             m_Logger.WriteLog($"MainForm_FormClosing");
         }
@@ -490,8 +490,9 @@ namespace DataSpider.FailoverManager
 
         private void 종료ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            m_bTermial = true;
-            Thread.Sleep(1000);
+            MainForm_FormClosing(null, null);
+            //m_bTermial = true;
+            //Thread.Sleep(1000);
             m_Logger.WriteLog($"Application.Exit");
             Application.Exit();
         }
@@ -712,8 +713,12 @@ namespace DataSpider.FailoverManager
         {
             OrderDataLogHelper.isCheckedInfo = this.cbInfo.Checked;
         }
+
         #endregion
 
-     
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            m_Logger.WriteLog($"MainForm_FormClosed!");
+        }
     }
 }
