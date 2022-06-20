@@ -523,11 +523,12 @@ namespace DataSpider.PC00.PT
             {
                 m_clsPIInfo = ConfigHelper.GetPIInfo();
                 _PIserver = PIServer.FindPIServer(_PIStstem, m_clsPIInfo.strPI_Server);
+                Thread.Sleep(1000);
                 _PIserver?.Connect();
             }
             catch (Exception ex)
             {
-                listViewMsg.UpdateMsg($"PI Server Connection - {ex}", false, true, true, PC00D01.MSGTERR);
+                listViewMsg.UpdateMsg($"PI Server Connection ({m_clsPIInfo.strPI_Server})- {ex}", false, true, true, PC00D01.MSGTERR);
             }
         }
         public EquipmentDataProcess(string filePath, DataTable dtTag, FormListViewMsg listViewMsg, Encoding dataEncoding = null) : this(filePath, listViewMsg, dataEncoding)
