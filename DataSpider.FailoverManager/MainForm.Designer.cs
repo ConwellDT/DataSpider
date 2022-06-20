@@ -329,6 +329,7 @@ namespace DataSpider.FailoverManager
             this.panel14.Name = "panel14";
             this.panel14.Size = new System.Drawing.Size(979, 24);
             this.panel14.TabIndex = 0;
+            this.panel14.Visible = false;
             // 
             // tbShowLines
             // 
