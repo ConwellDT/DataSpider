@@ -469,13 +469,13 @@ namespace DataSpider.FailoverManager
         {
             if (FormWindowState.Minimized == this.WindowState)
             {
-                //notifyIcon1.Visible = true; // tray icon 표시
+                notifyIcon1.Visible = true; // tray icon 표시
                 this.Hide();
                 this.ShowInTaskbar = false; // 작업 표시줄 표시
             }
             else //if (FormWindowState.Normal == this.WindowState)
             {
-                //notifyIcon1.Visible = false;
+                notifyIcon1.Visible = false;
                 this.Show();
                 this.ShowInTaskbar = true; // 작업 표시줄 표시
             }
@@ -710,7 +710,7 @@ namespace DataSpider.FailoverManager
         {
             this.Show();
             this.WindowState = FormWindowState.Normal;
-            //notifyIcon1.Visible = false;
+            notifyIcon1.Visible = false;
 
         }
 
