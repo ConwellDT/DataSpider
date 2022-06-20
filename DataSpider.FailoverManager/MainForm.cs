@@ -350,22 +350,6 @@ namespace DataSpider.FailoverManager
         }
 
 
-        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            DialogResult dialogResult = MessageBox.Show(PC00D01.MSGP0001, PC00D01.MSGP0002, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            if (!dialogResult.Equals(DialogResult.Yes))
-            {
-                e.Cancel = true;
-                return;
-            }
-
-            m_bTermial = true;
-            Thread.Sleep(1000);
-            notifyIcon1.Visible = false;
-            m_Logger.WriteLog($"MainForm_FormClosing");
-        }
-
         private void btn1_mode_Click(object sender, EventArgs e)
         {
             strQuery = new StringBuilder();
@@ -480,21 +464,6 @@ namespace DataSpider.FailoverManager
 
         }
 
-        private void 열기ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.Show();
-            this.WindowState = FormWindowState.Normal;
-            //notifyIcon1.Visible = false;
-
-        }
-
-        private void 종료ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            m_bTermial = true;
-            Thread.Sleep(1000);
-            m_Logger.WriteLog($"Application.Exit");
-            Application.Exit();
-        }
 
         private void MainForm_Resize(object sender, EventArgs e)
         {
@@ -712,8 +681,51 @@ namespace DataSpider.FailoverManager
         {
             OrderDataLogHelper.isCheckedInfo = this.cbInfo.Checked;
         }
+
         #endregion
 
-     
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            m_Logger.WriteLog($"MainForm_FormClosed!");
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show(PC00D01.MSGP0001, PC00D01.MSGP0002, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (!dialogResult.Equals(DialogResult.Yes))
+            {
+                e.Cancel = true;
+                return;
+            }
+
+            m_bTermial = true;
+            Thread.Sleep(2000);
+            notifyIcon1.Visible = false;
+            m_Logger.WriteLog($"MainForm_FormClosing");
+        }
+
+
+        private void 열기ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Show();
+            this.WindowState = FormWindowState.Normal;
+            //notifyIcon1.Visible = false;
+
+        }
+
+        private void 종료ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show(PC00D01.MSGP0001, PC00D01.MSGP0002, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (!dialogResult.Equals(DialogResult.Yes))
+            {
+                return;
+            }
+            m_bTermial = true;
+            Thread.Sleep(2000);
+            notifyIcon1.Visible = false;
+            m_Logger.WriteLog($"Application.Exit");
+            Application.Exit();
+        }
     }
 }
