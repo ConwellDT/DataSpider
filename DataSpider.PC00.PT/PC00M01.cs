@@ -509,8 +509,8 @@ namespace DataSpider.PC00.PT
         private Encoding dataEncoding = Encoding.UTF8;
 
         protected PC00Z01 m_sqlBiz = new PC00Z01();
-        static PISystem _PIStstem = null;
-        static PIServer _PIserver = null;
+        static PISystem _PISystem = null;
+        static PIServer _PIServer = null;
         private PIInfo m_clsPIInfo;
 
         public EquipmentDataProcess(string filePath, FormListViewMsg _listViewMsg, Encoding _dataEncoding = null)
@@ -522,9 +522,9 @@ namespace DataSpider.PC00.PT
             try
             {
                 m_clsPIInfo = ConfigHelper.GetPIInfo();
-                _PIserver = PIServer.FindPIServer(_PIStstem, m_clsPIInfo.strPI_Server);
+                _PIServer = PIServer.FindPIServer(_PISystem, m_clsPIInfo.strPI_Server);
                 Thread.Sleep(1000);
-                _PIserver?.Connect();
+                _PIServer?.Connect();
             }
             catch (Exception ex)
             {
@@ -685,6 +685,29 @@ namespace DataSpider.PC00.PT
             {
                 string errText;
                 bool result = false;
+                if (_PIServer == null)
+                {
+                    _PIServer = PIServer.FindPIServer(_PISystem, m_clsPIInfo.strPI_Server);
+                }
+                if (!_PIServer.ConnectionInfo.IsConnected)
+                {
+                    try
+                    {
+                        _PIServer.Connect();
+                    }
+                    catch (Exception ex)
+                    {
+                        listViewMsg.UpdateMsg($"PI Server Connection ({m_clsPIInfo.strPI_Server})- {ex}", false, true, true, PC00D01.MSGTERR);
+                    }
+                    if (!_PIServer.ConnectionInfo.IsConnected)
+                    {
+                        errText = "PI Not Connected.";
+                        listResult.ForEach(x => x.PIIFFlag = "E");
+                        listResult.ForEach(x => x.Remark = errText);
+                        listViewMsg.UpdateMsg(string.Format(PC00D01.FailedtoPI, $"{errText}", ""), false, true, true, PC00D01.MSGTERR);
+                        return false;
+                    }
+                }
 
                 foreach (TAG tag in listResult)
                 {
@@ -725,7 +748,7 @@ namespace DataSpider.PC00.PT
         {
             try
             {
-                PIPoint point = PIPoint.FindPIPoint(_PIserver, pointName);
+                PIPoint point = PIPoint.FindPIPoint(_PIServer, pointName);
 
                 AFTime aTime = new AFTime(mTime.ToUniversalTime());
 

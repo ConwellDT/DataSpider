@@ -66,8 +66,8 @@ namespace DataSpider.PC03.PT
         Thread m_ThdUpdatePI = null;
         Thread threadUpdateProgramStatus = null;
 
-        static PISystem _PIStstem;
-        static PIServer _PIserver;
+        static PISystem _PISystem;
+        static PIServer _PIServer;
 
         public string serverName = "";
         public string dbName = "";
@@ -198,8 +198,8 @@ namespace DataSpider.PC03.PT
 
             try
             {
-                _PIserver = PIServer.FindPIServer(_PIStstem, serverName);
-                _PIserver?.Connect();
+                _PIServer = PIServer.FindPIServer(_PIStstem, serverName);
+                _PIServer?.Connect();
             }
             catch(Exception ex)
             {
@@ -994,10 +994,25 @@ namespace DataSpider.PC03.PT
             {
                 try
                 {
-                    if (_PIserver == null && !_PIserver.ConnectionInfo.IsConnected)
+                    if (_PIServer == null)
                     {
-                        Thread.Sleep(1000);
-                        continue;
+                        _PIServer = PIServer.FindPIServer(_PISystem, m_clsPIInfo.strPI_Server);
+                    }
+                    if (!_PIServer.ConnectionInfo.IsConnected)
+                    {
+                        try
+                        {
+                            _PIServer.Connect();
+                        }
+                        catch (Exception ex)
+                        {
+                        }
+                        if (!_PIServer.ConnectionInfo.IsConnected)
+                        {
+                            errText = "PI Not Connected.";
+                            Thread.Sleep(1000);
+                            continue;
+                        }
                     }
 
                     DataTable dtResult = m_SqlBiz.GetMeasureResultForPIConnection(ref errCode, ref errText);
@@ -1062,7 +1077,7 @@ namespace DataSpider.PC03.PT
 
             try
             {
-                PIPoint point = PIPoint.FindPIPoint(_PIserver, pointName);
+                PIPoint point = PIPoint.FindPIPoint(_PIServer, pointName);
 
                 AFTime aTime = new AFTime(mTime.ToUniversalTime());
 
@@ -1102,7 +1117,7 @@ namespace DataSpider.PC03.PT
                 {
                     if ((DateTime.Now-dtUpdateTime).TotalSeconds> 7)
                     {
-                        if (_PIserver != null && _PIserver.ConnectionInfo.IsConnected)
+                        if (_PIServer != null && _PIServer.ConnectionInfo.IsConnected)
                         {
                             UpdateProgDateTime(strEqName, IF_STATUS.Normal);
                         }
