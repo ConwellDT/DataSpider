@@ -262,7 +262,11 @@ namespace DataSpider.PC01.PT
                 {
                     return string.Empty;
                 }
-                if (dt1.Rows.Count == 0) return string.Empty;
+                if (dt1.Rows.Count == 0)
+                {
+                    return string.Empty;
+                }
+                listViewMsg.UpdateMsg($"Query Started.", false, true, true, PC00D01.MSGTINF);
 
                 dr1 = dt1.Rows[0];
                 NewProcessTime = (DateTime)dr1["ProcessTime"];
@@ -339,7 +343,7 @@ namespace DataSpider.PC01.PT
                 dt5 = GetDataTable(strSql, ref p_strErrCode, ref p_strErrText);
                 if (dt5.Rows.Count == 0)
                 {
-                    listViewMsg.UpdateMsg($"read false mageXm !", false, true, true, PC00D01.MSGTINF);
+                    //listViewMsg.UpdateMsg($"read false mageXm !", false, true, true, PC00D01.MSGTINF);
 
                     sbData.Append($"ImageXm,{strDate}, n/a" + Environment.NewLine);
                     sbData.Append($"ImageYm,{strDate}, n/a" + Environment.NewLine);
@@ -358,7 +362,7 @@ namespace DataSpider.PC01.PT
                 {
                     dr5 = dt5.Rows[0];
                     //                        DataRow id_dr = id_dt.Rows[0];
-                    listViewMsg.UpdateMsg($"read true ImageXm !", false, true, true, PC00D01.MSGTINF);
+                    //listViewMsg.UpdateMsg($"read true ImageXm !", false, true, true, PC00D01.MSGTINF);
                     sbData.Append($"ImageXm,{strDate},{dr5["XM"]}" + Environment.NewLine);
                     sbData.Append($"ImageYm,{strDate},{dr5["YM"]}" + Environment.NewLine);
                     sbData.Append($"ImageCh,{strDate},{dr2["CH"]}" + Environment.NewLine);
