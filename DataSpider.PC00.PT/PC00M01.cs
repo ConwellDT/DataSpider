@@ -522,9 +522,12 @@ namespace DataSpider.PC00.PT
             try
             {
                 m_clsPIInfo = ConfigHelper.GetPIInfo();
-                _PIServer = PIServer.FindPIServer(_PISystem, m_clsPIInfo.strPI_Server);
-                Thread.Sleep(1000);
-                _PIServer?.Connect();
+                //_PIServer = PIServer.FindPIServer(_PISystem, m_clsPIInfo.strPI_Server);
+                //_PIServer?.Connect();
+                if (!CheckPIConnection(out string errText))
+                {
+                    listViewMsg.UpdateMsg($"PI Server Connection Error (PI Server : {m_clsPIInfo.strPI_Server}, Error : {errText})", false, true, true, PC00D01.MSGTERR);
+                }
             }
             catch (Exception ex)
             {
@@ -679,34 +682,60 @@ namespace DataSpider.PC00.PT
             }
             return true;
         }
+
+        private bool CheckPIConnection(out string errText)
+        {
+            errText = string.Empty;
+
+            if (string.IsNullOrWhiteSpace(m_clsPIInfo.strPI_Server))
+            {
+                errText = "No PI Server info.";
+                return false;
+            }
+
+            if (_PIServer == null)
+            {
+                _PIServer = PIServer.FindPIServer(_PISystem, m_clsPIInfo.strPI_Server);
+                if (_PIServer == null)
+                {
+                    errText = "FindPIServer Returned Null.";
+                    return false;
+                }
+            }
+            if (!_PIServer.ConnectionInfo.IsConnected)
+            {
+                try
+                {
+                    _PIServer.Connect();
+                }
+                catch (Exception ex)
+                {
+                    listViewMsg.UpdateMsg($"PI Server Connection ({m_clsPIInfo.strPI_Server})- {ex}", false, true, true, PC00D01.MSGTERR);
+                    errText = $"Exception PI Server Connection ({m_clsPIInfo.strPI_Server})";
+                    return false;
+                }
+                if (!_PIServer.ConnectionInfo.IsConnected)
+                {
+                    errText = "PI Not Connected.";
+                    return false;
+                }
+            }
+            return true;
+        }
+
         private bool SavePI(List<TAG> listResult)
         {
             try
             {
                 string errText;
                 bool result = false;
-                if (_PIServer == null)
+
+                if (!CheckPIConnection(out errText))
                 {
-                    _PIServer = PIServer.FindPIServer(_PISystem, m_clsPIInfo.strPI_Server);
-                }
-                if (!_PIServer.ConnectionInfo.IsConnected)
-                {
-                    try
-                    {
-                        _PIServer.Connect();
-                    }
-                    catch (Exception ex)
-                    {
-                        listViewMsg.UpdateMsg($"PI Server Connection ({m_clsPIInfo.strPI_Server})- {ex}", false, true, true, PC00D01.MSGTERR);
-                    }
-                    if (!_PIServer.ConnectionInfo.IsConnected)
-                    {
-                        errText = "PI Not Connected.";
-                        listResult.ForEach(x => x.PIIFFlag = "E");
-                        listResult.ForEach(x => x.Remark = errText);
-                        listViewMsg.UpdateMsg(string.Format(PC00D01.FailedtoPI, $"{errText}", ""), false, true, true, PC00D01.MSGTERR);
-                        return false;
-                    }
+                    listResult.ForEach(x => x.PIIFFlag = "E");
+                    listResult.ForEach(x => x.Remark = errText);
+                    listViewMsg.UpdateMsg(string.Format(PC00D01.FailedtoPI, $"{errText}", ""), false, true, true, PC00D01.MSGTERR);
+                    return false;
                 }
 
                 foreach (TAG tag in listResult)

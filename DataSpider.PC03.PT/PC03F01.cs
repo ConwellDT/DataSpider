@@ -198,10 +198,14 @@ namespace DataSpider.PC03.PT
 
             try
             {
-                _PIServer = PIServer.FindPIServer(_PIStstem, serverName);
-                _PIServer?.Connect();
+                //_PIServer = PIServer.FindPIServer(_PISystem, serverName);
+                //_PIServer?.Connect();
+                if (!CheckPIConnection(out string errText))
+                {
+                    this.m_clsLog.LogToFile("LOG", this.m_strLogFileName, "PI Server Connection Error", MethodBase.GetCurrentMethod().Name, $"PI Server : {serverName}, Error : {errText}");
+                }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 this.m_clsLog.LogToFile("LOG", this.m_strLogFileName, PC00D01.MSGTDBG, MethodBase.GetCurrentMethod().Name, ex.ToString());
             }
@@ -982,6 +986,45 @@ namespace DataSpider.PC03.PT
             m_SqlBiz.UpdateEquipmentProgDateTime(Application.ProductName, (int)IF_STATUS.Stop, ref errCode, ref errText);
         }
 
+        private bool CheckPIConnection(out string errText)
+        {
+            errText = string.Empty;
+
+            if (string.IsNullOrWhiteSpace(m_clsPIInfo.strPI_Server))
+            {
+                errText = "No PI Server info.";
+                return false;
+            }
+
+            if (_PIServer == null)
+            {
+                _PIServer = PIServer.FindPIServer(_PISystem, m_clsPIInfo.strPI_Server);
+                if (_PIServer == null)
+                {
+                    errText = "FindPIServer Returned Null.";
+                    return false;
+                }
+            }
+            if (!_PIServer.ConnectionInfo.IsConnected)
+            {
+                try
+                {
+                    _PIServer.Connect();
+                }
+                catch (Exception ex)
+                {
+                    errText = $"Exception PI Server Connection ({m_clsPIInfo.strPI_Server})- {ex}";
+                    return false;
+                }
+                if (!_PIServer.ConnectionInfo.IsConnected)
+                {
+                    errText = "PI Not Connected.";
+                    return false;
+                }
+            }
+            return true;
+        }
+
         // PI_CONNECTION_01_PROGRAM_STATUS.PV measure result 에서 읽어서 pi 저장 처리
         private void ThreadUpdatePI()
         {
@@ -994,25 +1037,31 @@ namespace DataSpider.PC03.PT
             {
                 try
                 {
-                    if (_PIServer == null)
+                    //if (_PIServer == null)
+                    //{
+                    //    _PIServer = PIServer.FindPIServer(_PISystem, m_clsPIInfo.strPI_Server);
+                    //}
+                    //if (!_PIServer.ConnectionInfo.IsConnected)
+                    //{
+                    //    try
+                    //    {
+                    //        _PIServer.Connect();
+                    //    }
+                    //    catch (Exception ex)
+                    //    {
+                    //    }
+                    //    if (!_PIServer.ConnectionInfo.IsConnected)
+                    //    {
+                    //        errText = "PI Not Connected.";
+                    //        Thread.Sleep(1000);
+                    //        continue;
+                    //    }
+                    //}
+                    if (!CheckPIConnection(out errText))
                     {
-                        _PIServer = PIServer.FindPIServer(_PISystem, m_clsPIInfo.strPI_Server);
-                    }
-                    if (!_PIServer.ConnectionInfo.IsConnected)
-                    {
-                        try
-                        {
-                            _PIServer.Connect();
-                        }
-                        catch (Exception ex)
-                        {
-                        }
-                        if (!_PIServer.ConnectionInfo.IsConnected)
-                        {
-                            errText = "PI Not Connected.";
-                            Thread.Sleep(1000);
-                            continue;
-                        }
+                        this.m_clsLog.LogToFile("LOG", this.m_strLogFileName, "PI Server Connection Error", MethodBase.GetCurrentMethod().Name, $"PI Server : {serverName}, Error : {errText}");
+                        Thread.Sleep(1000);
+                        continue;
                     }
 
                     DataTable dtResult = m_SqlBiz.GetMeasureResultForPIConnection(ref errCode, ref errText);
