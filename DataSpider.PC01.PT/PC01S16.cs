@@ -45,6 +45,8 @@ namespace DataSpider.PC01.PT
         private string typeName = "MSR";
         private StringBuilder ssb = new StringBuilder();
         private DateTime dtNormalTime=DateTime.Now;
+        private string Uid;
+        private string Pwd;
 
         public PC01S16() : base()
         {
@@ -553,7 +555,20 @@ namespace DataSpider.PC01.PT
             try
             {
                 // OpcUaClient 를 생성하고
-                myUaClient = new OpcUaClient.OpcUaClient(m_ConnectionInfo, m_Name);
+                myUaClient = new OpcUaClient.OpcUaClient()
+                {
+                    endpointURL = m_ConnectionInfo,
+                    applicationName = m_Name,
+                    applicationType = ApplicationType.Client,
+                    subjectName = Utils.Format($@"CN={m_Name}, DC={0}", Dns.GetHostName())
+                };
+                if (!string.IsNullOrEmpty(Uid) && !string.IsNullOrEmpty(Pwd))
+                    myUaClient.useridentity = new UserIdentity(Uid, Pwd);
+
+                myUaClient.CreateConfig();
+                myUaClient.CreateApplicationInstance();
+                myUaClient.CreateSession();
+
                 if (myUaClient != null)
                 {
                     UpdateEquipmentProgDateTime(IF_STATUS.Normal);

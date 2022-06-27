@@ -147,7 +147,7 @@ namespace OpcUaClient
             applicationInstance.ApplicationName = applicationName;
             applicationInstance.ApplicationType = applicationType;
             applicationInstance.ApplicationConfiguration = config;
-            applicationInstance.CheckApplicationInstanceCertificate(false, 2048).GetAwaiter().GetResult();
+            applicationInstance.CheckApplicationInstanceCertificate(true, 2048).GetAwaiter().GetResult();
             return applicationInstance;
         }
 
@@ -273,7 +273,7 @@ namespace OpcUaClient
         public Session CreateSession()
         {
             // Console.WriteLine($"Step 2 - Create a session with your server: {selectedEndpoint.EndpointUrl} ");
-            Task<bool> haveAppCertificateTask = applicationInstance.CheckApplicationInstanceCertificate(false, 0);
+            Task<bool> haveAppCertificateTask = applicationInstance.CheckApplicationInstanceCertificate(true, 0);
             bool haveAppCertificate = haveAppCertificateTask.Result;
             if (haveAppCertificate)
                 config.ApplicationUri = X509Utils.GetApplicationUriFromCertificate(config.SecurityConfiguration.ApplicationCertificate.Certificate);
@@ -282,20 +282,25 @@ namespace OpcUaClient
             var endpointConfiguration = EndpointConfiguration.Create(config);
             var endpoint = new ConfiguredEndpoint(null, selectedEndpoint, endpointConfiguration);
 
-            //m_session = Session.Create(config, endpoint, false, config.ApplicationName, SessionTimeout, useridentity, null).GetAwaiter().GetResult();
-            //m_session = 
-                
-             Task<Session> t= Session.Create(config, endpoint, false, config.ApplicationName, SessionTimeout, useridentity, null);
-            t.Start();
-            if (t.Wait(30000))
-            {
-                m_session = t.Result;
-                // register keep alive handler
-                m_session.KeepAliveInterval = 5000;
-                m_session.KeepAlive += new KeepAliveEventHandler(StandardClient_KeepAlive);
-                // m_session.Notification += new NotificationEventHandler(Session_Notification);
-            }
-            else m_session = null;
+            m_session = Session.Create(config, endpoint, false, config.ApplicationName, SessionTimeout, useridentity, null).GetAwaiter().GetResult();
+            m_session.KeepAliveInterval = 5000;
+            m_session.KeepAlive += new KeepAliveEventHandler(StandardClient_KeepAlive);
+            m_session.Notification += new NotificationEventHandler(Session_Notification);
+
+
+            //Task<Session> t= Session.Create(config, endpoint, false, config.ApplicationName, SessionTimeout, useridentity, null);
+            //t.Start();
+            //if (t.Wait(30000))
+            //{
+            //    m_session = t.Result;
+            //    // register keep alive handler
+            //    m_session.KeepAliveInterval = 5000;
+            //    m_session.KeepAlive += new KeepAliveEventHandler(StandardClient_KeepAlive);
+            //    // m_session.Notification += new NotificationEventHandler(Session_Notification);
+            //}
+            //else m_session.Dispose();
+
+
             return m_session;
         }
 

@@ -16,6 +16,7 @@ using System.Net.Sockets;
 using System.Net;
 using System.Data;
 using OpcUaClient;
+using Opc.Ua;
 
 
 namespace DataSpider.PC01.PT
@@ -28,6 +29,8 @@ namespace DataSpider.PC01.PT
         OpcUaClient.OpcUaClient myUaClient=null;
         private DateTime dtNormalTime = DateTime.Now;
         Dictionary<string, string> m_OpcItemList = new Dictionary<string, string>();
+        private string Uid;
+        private string Pwd;
 
         public PC01S19() : base()
         {
@@ -114,7 +117,21 @@ namespace DataSpider.PC01.PT
             try
             {
                 // OpcUaClient 를 생성하고
-                myUaClient = new OpcUaClient.OpcUaClient(m_ConnectionInfo, m_Name);
+                myUaClient = new OpcUaClient.OpcUaClient()
+                {                
+                    endpointURL = m_ConnectionInfo,
+                    applicationName = m_Name,
+                    applicationType = ApplicationType.Client,
+                    subjectName = Utils.Format($@"CN={m_Name}, DC={0}", Dns.GetHostName())
+                };
+                
+                if (!string.IsNullOrEmpty(Uid) && !string.IsNullOrEmpty(Pwd))
+                    myUaClient.useridentity = new UserIdentity(Uid, Pwd);
+
+                myUaClient.CreateConfig();
+                myUaClient.CreateApplicationInstance();
+                myUaClient.CreateSession();
+
                 // Session/Subscription을 생성한 후
                 myUaClient.CreateSubscription(1000);
                 listViewMsg.UpdateMsg($"myUaClient.CreateSubscription ", false, true, true, PC00D01.MSGTINF);

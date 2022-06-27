@@ -39,6 +39,8 @@ namespace DataSpider.PC01.PT
         private string dataString = string.Empty;
         private string typeName = "MSR";
         private StringBuilder ssb = new StringBuilder();
+        private string Uid;
+        private string Pwd;
 
 
         public class SoloVpeTable
@@ -645,7 +647,21 @@ namespace DataSpider.PC01.PT
             try
             {
                 // OpcUaClient 를 생성하고
-                myUaClient = new OpcUaClient.OpcUaClient(m_ConnectionInfo, m_Name);
+                myUaClient = new OpcUaClient.OpcUaClient()
+                {
+                    endpointURL = m_ConnectionInfo,
+                    applicationName = m_Name,
+                    applicationType = ApplicationType.Client,
+                    subjectName = Utils.Format($@"CN={m_Name}, DC={0}", Dns.GetHostName())
+                };
+
+                if (!string.IsNullOrEmpty(Uid) && !string.IsNullOrEmpty(Pwd))
+                    myUaClient.useridentity = new UserIdentity(Uid, Pwd);
+
+                myUaClient.CreateConfig();
+                myUaClient.CreateApplicationInstance();
+                myUaClient.CreateSession();
+
                 // Session/Subscription을 생성한 후
                 myUaClient.CreateSubscription(1000);
                 listViewMsg.UpdateMsg($"myUaClient.CreateSubscription ", false, true, true, PC00D01.MSGTINF);
