@@ -83,9 +83,20 @@ namespace DataSpider.PC03.PT
             user = m_clsPIInfo.strPI_USER;
             password = m_clsPIInfo.strPI_PWD;
 
-            //NetworkCredential credential = new NetworkCredential(user, password);
-            //_PIStstem = (new PISystems()[serverName]);
-            //_PIStstem.Connect(credential);
+            //if (!string.IsNullOrWhiteSpace(user) && !string.IsNullOrWhiteSpace(password))
+            //{
+            //    try
+            //    {
+            //        NetworkCredential credential = new NetworkCredential(user, password);
+            //        _PISystem = (new PISystems()[serverName]);
+            //        _PISystem.Connect(credential);
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        mOwner.listViewMsg(m_strEName, $"PI System Connection ({serverName}) - {ex.ToString()} ", false, m_nCurNo, 1, true, PC00D01.MSGTINF);
+            //        m_Logger.WriteLog($"PI System Connection ({serverName}) - {ex.ToString()} ", PC00D01.MSGTINF, m_strEName);
+            //    }
+            //}
             //_AFDB = _PIStstem.Databases[dbName];
             try
             {

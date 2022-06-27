@@ -418,7 +418,6 @@ namespace DataSpider.PC01.PT
 
                 strPara = strPara.Substring(0, strPara.Length - 2);
                 sbData.Append($"Parameter,{strDate},{strPara}" + Environment.NewLine);
-                sbData.Append($"SvrTime,{strDate},{DateTime.Now:yyyy-MM-dd HH:mm:ss}" + Environment.NewLine);
 
                 strSql = $"SELECT dbo.Image.ImageNo, dbo.ProcessDataSetImageResult.ImageStatus ";
                 strSql += $"FROM  dbo.ProcessDataSetImageResult INNER JOIN ";
@@ -436,6 +435,8 @@ namespace DataSpider.PC01.PT
                     else
                         sbData.Append($"Valid{is_dr["Imageno"]},{strDate},Invalid" + Environment.NewLine);
                 }
+
+                sbData.Append($"SvrTime,{strDate},{DateTime.Now:yyyy-MM-dd HH:mm:ss}" + Environment.NewLine);
 
                 m_dtLastProcessTime = (DateTime)NewProcessTime;
                 SetLastProcessTime(m_dtLastProcessTime);
