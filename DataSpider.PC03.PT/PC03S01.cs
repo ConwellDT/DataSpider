@@ -37,8 +37,8 @@ namespace DataSpider.PC03.PT
 
     public class PC03S01 : PC03B01
     {
-        static PISystem _PIStstem;
-        static PIServer _PIserver;
+        static PISystem _PISystem;
+        static PIServer _PIServer;
 
         public string serverName = "";
         public string dbName = "";
@@ -89,16 +89,60 @@ namespace DataSpider.PC03.PT
             //_AFDB = _PIStstem.Databases[dbName];
             try
             {
-                _PIserver = PIServer.FindPIServer(_PIStstem, serverName);
-                _PIserver?.Connect();
+                //_PIserver = PIServer.FindPIServer(_PIStstem, serverName);
+                //_PIserver?.Connect();
+                if (!CheckPIConnection(out string piErrText))
+                {
+                    mOwner.listViewMsg(m_strEName, $"PI Server Connection Error ({piErrText})", false, m_nCurNo, 1, true, PC00D01.MSGTERR);
+                    m_Logger.WriteLog("PI Server Connection Error", PC00D01.MSGTERR, m_strEName);
+                }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 mOwner.listViewMsg(m_strEName,$"PI Server Connection - {ex.ToString()} ", false, m_nCurNo, 1, true, PC00D01.MSGTINF);
                 m_Logger.WriteLog($"PI Server Connection - {ex.ToString()} ", PC00D01.MSGTINF, m_strEName);
                                     
             }
             #endregion           
+        }
+
+        private bool CheckPIConnection(out string errText)
+        {
+            errText = string.Empty;
+
+            if (string.IsNullOrWhiteSpace(serverName))
+            {
+                errText = "No PI Server info.";
+                return false;
+            }
+
+            if (_PIServer == null)
+            {
+                _PIServer = PIServer.FindPIServer(_PISystem, serverName);
+                if (_PIServer == null)
+                {
+                    errText = "FindPIServer Returned Null.";
+                    return false;
+                }
+            }
+            if (!_PIServer.ConnectionInfo.IsConnected)
+            {
+                try
+                {
+                    _PIServer.Connect();
+                }
+                catch (Exception ex)
+                {
+                    errText = $"Exception PI Server Connection ({serverName})- {ex}";
+                    return false;
+                }
+                if (!_PIServer.ConnectionInfo.IsConnected)
+                {
+                    errText = "PI Not Connected.";
+                    return false;
+                }
+            }
+            return true;
         }
 
         protected override void ThreadJob()
@@ -119,6 +163,15 @@ namespace DataSpider.PC03.PT
             {
                 try
                 {
+                    if (!CheckPIConnection(out string piErrText))
+                    {
+                        mOwner.listViewMsg(m_strEName, $"PI Server Connection Error ({piErrText})", false, m_nCurNo, 1, true, PC00D01.MSGTERR);
+                        m_Logger.WriteLog("PI Server Connection Error", PC00D01.MSGTERR, m_strEName);
+                        ThreadStatus = IF_STATUS.Disconnected;
+                        Thread.Sleep(1000);
+                        continue;
+                    }
+
                     DataTable dtResult = m_sqlBiz.GetMeasureResult(m_strEType, ref errCode, ref errText);
 
                     if (dtResult != null)
@@ -217,7 +270,7 @@ namespace DataSpider.PC03.PT
             
             try
             {
-                PIPoint point = PIPoint.FindPIPoint(_PIserver, pointName);
+                PIPoint point = PIPoint.FindPIPoint(_PIServer, pointName);
 
                 AFTime aTime = new AFTime(mTime.ToUniversalTime());
 
@@ -244,7 +297,7 @@ namespace DataSpider.PC03.PT
 
         static void DeleteFromRange(string pointName, DateTime startTime, DateTime endTime)
         {
-            PIPoint point = PIPoint.FindPIPoint(_PIserver, pointName);
+            PIPoint point = PIPoint.FindPIPoint(_PIServer, pointName);
             AFTime st = new AFTime(startTime.ToUniversalTime());
             AFTime et = new AFTime(endTime.ToUniversalTime());
 
