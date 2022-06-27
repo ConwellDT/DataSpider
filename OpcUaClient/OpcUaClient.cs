@@ -282,12 +282,20 @@ namespace OpcUaClient
             var endpointConfiguration = EndpointConfiguration.Create(config);
             var endpoint = new ConfiguredEndpoint(null, selectedEndpoint, endpointConfiguration);
 
-            m_session = Session.Create(config, endpoint, false, config.ApplicationName, SessionTimeout, useridentity, null).GetAwaiter().GetResult();
-
-            // register keep alive handler
-            m_session.KeepAliveInterval = 5000;
-            m_session.KeepAlive += new KeepAliveEventHandler(StandardClient_KeepAlive);
-//            m_session.Notification += new NotificationEventHandler(Session_Notification);
+            //m_session = Session.Create(config, endpoint, false, config.ApplicationName, SessionTimeout, useridentity, null).GetAwaiter().GetResult();
+            //m_session = 
+                
+             Task<Session> t= Session.Create(config, endpoint, false, config.ApplicationName, SessionTimeout, useridentity, null);
+            t.Start();
+            if (t.Wait(30000))
+            {
+                m_session = t.Result;
+                // register keep alive handler
+                m_session.KeepAliveInterval = 5000;
+                m_session.KeepAlive += new KeepAliveEventHandler(StandardClient_KeepAlive);
+                // m_session.Notification += new NotificationEventHandler(Session_Notification);
+            }
+            else m_session = null;
             return m_session;
         }
 
