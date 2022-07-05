@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using Opc.Ua;   // Install-Package OPCFoundation.NetStandard.Opc.Ua
 using Opc.Ua.Client;
 using Opc.Ua.Configuration;
+using System.Reflection;
 
 
 namespace OpcUaClient
@@ -78,35 +79,49 @@ namespace OpcUaClient
         {
         }
 
+        public string AssemblyProduct
+        {
+            get
+            {
+                object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyProductAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    return "DataSpider";
+                }
+                return ((AssemblyProductAttribute)attributes[0]).Product;
+            }
+        }
+
         public ApplicationConfiguration CreateConfig()
         {
             config = new ApplicationConfiguration()
             {
                 ApplicationName = applicationName,
-                ApplicationUri = Utils.Format(@"urn:{0}:" + applicationName + "", Dns.GetHostName()),
+                ApplicationUri = Utils.Format($@"urn:{Dns.GetHostName()}:{applicationName}"),
                 ApplicationType = ApplicationType.Client,
                 SecurityConfiguration = new SecurityConfiguration
                 {
                     ApplicationCertificate = new CertificateIdentifier
                     {
+
                         StoreType = @"Directory",
-                        StorePath = @"%CommonApplicationData%\OPC Foundation\CertificateStores\MachineDefault",
+                        StorePath = $@"%CommonApplicationData%\{AssemblyProduct}\pki\own",
                         SubjectName = subjectName
                     },
                     TrustedIssuerCertificates = new CertificateTrustList
                     {
                         StoreType = @"Directory",
-                        StorePath = @"%CommonApplicationData%\OPC Foundation\CertificateStores\UA Certificate Authorities"
+                        StorePath = $@"%CommonApplicationData%\{AssemblyProduct}\pki\issuer"
                     },
                     TrustedPeerCertificates = new CertificateTrustList
                     {
                         StoreType = @"Directory",
-                        StorePath = @"%CommonApplicationData%\OPC Foundation\CertificateStores\UA Applications"
+                        StorePath = $@"%CommonApplicationData%\{AssemblyProduct}\pki\trusted"
                     },
                     RejectedCertificateStore = new CertificateTrustList
                     {
                         StoreType = @"Directory",
-                        StorePath = @"%CommonApplicationData%\OPC Foundation\CertificateStores\RejectedCertificates"
+                        StorePath = $@"%CommonApplicationData%\{AssemblyProduct}\pki\rejected"
                     },
                     AddAppCertToTrustedStore = true,
                     NonceLength = 32,
@@ -147,7 +162,11 @@ namespace OpcUaClient
             applicationInstance.ApplicationName = applicationName;
             applicationInstance.ApplicationType = applicationType;
             applicationInstance.ApplicationConfiguration = config;
-            applicationInstance.CheckApplicationInstanceCertificate(true, 2048).GetAwaiter().GetResult();
+            bool haveAppCertificate= applicationInstance.CheckApplicationInstanceCertificate(true, 0, 120).GetAwaiter().GetResult();
+            if(!haveAppCertificate)
+            {
+                LogMsg("Application instance certificate invalid!");
+            }
             return applicationInstance;
         }
 
@@ -184,9 +203,9 @@ namespace OpcUaClient
             {
                 e.Accept = config.SecurityConfiguration.AutoAcceptUntrustedCertificates;
             }
-            catch (Exception exception)
+            catch (Exception ex)
             {
-                //MessageBox.Show(exception.ToString());
+                //MessageBox.Show(ex.ToString());
                 //
             }
         }
@@ -273,10 +292,11 @@ namespace OpcUaClient
         public Session CreateSession()
         {
             // Console.WriteLine($"Step 2 - Create a session with your server: {selectedEndpoint.EndpointUrl} ");
-            Task<bool> haveAppCertificateTask = applicationInstance.CheckApplicationInstanceCertificate(true, 0);
-            bool haveAppCertificate = haveAppCertificateTask.Result;
-            if (haveAppCertificate)
-                config.ApplicationUri = X509Utils.GetApplicationUriFromCertificate(config.SecurityConfiguration.ApplicationCertificate.Certificate);
+
+            //Task<bool> haveAppCertificateTask = applicationInstance.CheckApplicationInstanceCertificate(true, 0);
+            //bool haveAppCertificate = haveAppCertificateTask.Result;
+            //if (haveAppCertificate)
+            //    config.ApplicationUri = X509Utils.GetApplicationUriFromCertificate(config.SecurityConfiguration.ApplicationCertificate.Certificate);
 
             var selectedEndpoint = CoreClientUtils.SelectEndpoint(endpointURL, useSecurity: SecurityEnabled, discoverTimeout: 15000);
             var endpointConfiguration = EndpointConfiguration.Create(config);

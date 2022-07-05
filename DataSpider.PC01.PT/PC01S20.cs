@@ -578,7 +578,7 @@ namespace DataSpider.PC01.PT
                     endpointURL = m_ConnectionInfo,
                     applicationName = m_Name,
                     applicationType = ApplicationType.Client,
-                    subjectName = Utils.Format($@"CN={m_Name}, C=US, S=Colorado, O=Beckman Coulter, DC={0}", Dns.GetHostName())
+                    subjectName = Utils.Format($@"CN={m_Name}, DC={Dns.GetHostName()}")
 //                    subjectName = Utils.Format(@"CN={Vi-Cell BLU Client, C=US, S=Colorado, O=Beckman Coulter, DC={0}", Dns.GetHostName())
                 };
 
