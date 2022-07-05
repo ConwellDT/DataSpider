@@ -54,7 +54,7 @@ namespace DataSpider.PC01.PT
             string strLastProcessTime = m_sqlBiz.ReadSTCommon(m_Name, "LastProcessTime"); //PC00U01.ReadConfigValue("LastProcessTime", m_Name, $@".\CFG\{m_Type}.ini");
             DateTime.TryParseExact(strLastProcessTime, "yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture, DateTimeStyles.AssumeLocal | DateTimeStyles.AllowInnerWhite, out LastProcessTime);
             if (LastProcessTime < new DateTime(DateTime.Now.Year, 1, 1, 0, 0, 0, 0))
-                LastProcessTime = new DateTime(DateTime.Now.Year, 1, 1, 0, 0, 0, 0);
+                LastProcessTime = DateTime.Now;
             listViewMsg.UpdateMsg($"Read last Process Time  : {LastProcessTime:yyyy-MM-dd HH:mm:ss.fff}", false, true);
             listViewMsg.UpdateMsg($"LastProcessTime :{LastProcessTime:yyyy-MM-dd HH:mm:ss.fff} , {strLastProcessTime}  !", false, true, true, PC00D01.MSGTINF);
             return LastProcessTime;

@@ -386,7 +386,7 @@ namespace DataSpider.FailoverManager
             }
             else //if (FormWindowState.Normal == this.WindowState)
             {
-                notifyIcon1.Visible = false;
+                //notifyIcon1.Visible = false;
                 this.Show();
                 this.ShowInTaskbar = true; // 작업 표시줄 표시
             }
