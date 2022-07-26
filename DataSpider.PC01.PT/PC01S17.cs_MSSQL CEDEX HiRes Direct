@@ -1,1 +1,57 @@
-﻿
+﻿--------- Original Message ---------
+Sender : 박찬기 <dkzmfh22@naver.com>
+Date : 2022-07-27 15:10 (GMT+9)
+Title : Cedex Bio Hires 관련 치환값
+삼성바이오로직스 신성종 프로님,
+ 
+안녕하세요
+엠투아이소프트의 박찬기 대리입니다.
+ 
+유선으로 말씀 주셨던 내용 확인하여 연락드립니다
+인터페이스 상에서 치환하여 저장하는값은 아래와 같습니다.
+ 
+Dilution
+장비	치환값
+1	1:1
+0.5	1:2
+0.333333333333333	1:3
+0.25	1:4
+0.2	1:5
+0.1	1:10
+0.05	1:20
+ 
+MeasurementPrecision
+장비	치환값
+1	MINIMUM
+2	NORMAL
+3	SUPERIOR
+4	MAXIMUM
+ 
+Algorithm
+장비	치환값
+11	DBDMOperator
+12	CXHiResImageOperator
+13	IlluminationTestimageOperator
+　	　
+ 
+Overalltype
+장비	치환값
+1	Viable Cell Conc.
+2	Total Cell Conc.
+3	Viability
+4	Total Cell Count
+5	Avg Compactness
+6	Avg Diameter
+7	Std Dev.
+8	Aggregate Rate
+9	Dead Cell Conc.
+10	Viable Cell Count
+11	Dead Cell Count
+12	Total Object Count
+13	Avg Area
+14	Avg Perimeter
+15	Avg Segm. Area
+ 
+ 
+감사합니다.
+박찬기 배상
