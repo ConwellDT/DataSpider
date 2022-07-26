@@ -50,11 +50,10 @@ namespace DataSpider.PC01.PT
         }
         private DateTime GetLastProcessTime()
         {
-            DateTime LastProcessTime;
+            DateTime LastProcessTime = DateTime.MinValue;
             string strLastProcessTime = m_sqlBiz.ReadSTCommon(m_Name, "LastProcessTime"); //PC00U01.ReadConfigValue("LastProcessTime", m_Name, $@".\CFG\{m_Type}.ini");
             DateTime.TryParseExact(strLastProcessTime, "yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture, DateTimeStyles.AssumeLocal | DateTimeStyles.AllowInnerWhite, out LastProcessTime);
-            if (LastProcessTime < new DateTime(DateTime.Now.Year, 1, 1, 0, 0, 0, 0))
-                LastProcessTime = DateTime.Now;
+            if (LastProcessTime == DateTime.MinValue) LastProcessTime = DateTime.Now;
             listViewMsg.UpdateMsg($"Read last Process Time  : {LastProcessTime:yyyy-MM-dd HH:mm:ss.fff}", false, true);
             listViewMsg.UpdateMsg($"LastProcessTime :{LastProcessTime:yyyy-MM-dd HH:mm:ss.fff} , {strLastProcessTime}  !", false, true, true, PC00D01.MSGTINF);
             return LastProcessTime;
@@ -86,12 +85,12 @@ namespace DataSpider.PC01.PT
             {
                 try
                 {
-                    if (mCon == null || mCon.State == ConnectionState.Closed)
+                    if (mCon == null || mCon.State != ConnectionState.Open)
                     {
                         if (DBConnect(m_ConnectionInfo, ref p_strErrCode, ref p_strErrText))
                         {
                             UpdateEquipmentProgDateTime(IF_STATUS.Normal);
-                            listViewMsg.UpdateMsg("DB Connected", true, false);
+                            listViewMsg.UpdateMsg("DB Connected", true, true, true);
                         }
                         else
                         {
@@ -151,15 +150,17 @@ namespace DataSpider.PC01.PT
             catch (Exception ex)
             {
                 p_strErrText = ex.Message;
+                if (mCon != null)
+                {
+                    if (mCon.State == ConnectionState.Open)
+                        mCon.Close();
+                    mCon.Dispose();
+                    mCon = null;
+                }
+
             }
             finally
             {
-                //if (mCon != null)
-                //{
-                //    if (mCon.State == ConnectionState.Open)
-                //        mCon.Close();
-                //    mCon.Dispose();
-                //}
             }
             return bReturn;
         }
@@ -206,7 +207,7 @@ namespace DataSpider.PC01.PT
                         mCommand.Parameters.Add(param);
                     }
                 }
-                if (mCon==null || mCon.State == ConnectionState.Closed)
+                if (mCon==null || mCon.State != ConnectionState.Open)
                 {
                     mCon = new SqlConnection(m_ConnectionInfo);
                     mCon.Open();
@@ -221,15 +222,16 @@ namespace DataSpider.PC01.PT
             catch (Exception ex)
             {
                 p_strErrCode = ex.ToString();
+                if (mCon != null)
+                {
+                    if (mCon.State == ConnectionState.Open)
+                        mCon.Close();
+                    mCon.Dispose();
+                    mCon = null;
+                }
             }
             finally
             {
-                //if (mCon != null)
-                //{
-                //    if (mCon.State == ConnectionState.Open)
-                //        mCon.Close();
-                //    mCon.Dispose();
-                //}
                 if (mCommand != null) mCommand.Dispose();
                 if (da != null) da.Dispose();
             }
@@ -258,14 +260,9 @@ namespace DataSpider.PC01.PT
                 strSql += $" ORDER BY P.ProcessTime ";
                 //listViewMsg.UpdateMsg($"QueryString :{strSql} !", false, true, true, PC00D01.MSGTINF);
                 dt1=GetDataTable(strSql, ref p_strErrCode, ref p_strErrText);
-                if (dt1 == null)
-                {
-                    return string.Empty;
-                }
-                if (dt1.Rows.Count == 0)
-                {
-                    return string.Empty;
-                }
+                if (dt1 == null ) return string.Empty;
+                if ( dt1.Rows.Count == 0) return string.Empty;
+
                 listViewMsg.UpdateMsg($"Query Started.", false, true, true, PC00D01.MSGTINF);
 
                 dr1 = dt1.Rows[0];
@@ -283,10 +280,14 @@ namespace DataSpider.PC01.PT
                 strSql += $" ProcessDataSet P ON M.MeasurementID = P.MeasurementID INNER JOIN ";
                 strSql += $" CedexSystem ON M.CedexSystemID = CedexSystem.Id AND P.CedexSystemId = CedexSystem.Id INNER JOIN ";
                 strSql += $" Workarea ON M.WorkareaID = Workarea.WorkareaId AND CedexSystem.Id = Workarea.CedexSystemId INNER JOIN ";
-                strSql += $" [User] ON M.UserID = [User].UserId AND P.UserID = [User].UserId AND CedexSystem.Id = [User].CedexSystemId ";
+                strSql += $" [User] ON M.UserID = [User].UserId AND CedexSystem.Id = [User].CedexSystemId ";
+                // 쿼리 재검토 결과 M.USERID 와 P.USERID가 다른 경우가 있어서 에러가 발생할 수 있음.
+                // 리포트의 스크립트와 비교하여 P.UserID = [User].UserId 부분을 삭제함. 2022-07-27
+                //              strSql += $" [User] ON M.UserID = [User].UserId AND P.UserID = [User].UserId AND CedexSystem.Id = [User].CedexSystemId ";
                 strSql += $" WHERE(P.ProcessTime = '{NewProcessTime:yyyy-MM-dd HH:mm:ss.fff}') ";
                 strSql += $" ORDER BY P.ProcessTime ";
                 dt2 = GetDataTable(strSql, ref p_strErrCode, ref p_strErrText);
+                if (dt2 == null ) return string.Empty;
                 if (dt2.Rows.Count > 0)
                 {
                     dr2 = dt2.Rows[0];
@@ -300,7 +301,8 @@ namespace DataSpider.PC01.PT
                 strSql += $" WHERE(P.ProcessTime = '{NewProcessTime:yyyy-MM-dd HH:mm:ss.fff}') ";
                 strSql += $" ORDER BY MeasurementResultData.OverallType ";
                 dt3 = GetDataTable(strSql, ref p_strErrCode, ref p_strErrText);
-                foreach(DataRow mr_dr in dt3.Rows) 
+                if (dt3 == null) return string.Empty;
+                foreach (DataRow mr_dr in dt3.Rows) 
                 {
                     sbData.Append($"{mr_dr["OverallType"]},{strDate},{mr_dr["MeasurementResultValue"]}" + Environment.NewLine);
                 }
@@ -314,6 +316,7 @@ namespace DataSpider.PC01.PT
                 strSql += $" FROM SystemConfiguration ";
                 strSql += $" WHERE SystemOptionName = 'JpegQuality' ";
                 dt4 = GetDataTable(strSql, ref p_strErrCode, ref p_strErrText);
+                if (dt4 == null) return string.Empty;
                 string JpeqQuality = string.Empty;
                 if (dt4.Rows.Count > 0)
                 {
@@ -341,6 +344,7 @@ namespace DataSpider.PC01.PT
                 strSql += $"ORDER BY P.ProcessTime ";
                 //listViewMsg.UpdateMsg($"QueryString :{strSql} !", false, true, true, PC00D01.MSGTINF);
                 dt5 = GetDataTable(strSql, ref p_strErrCode, ref p_strErrText);
+                if (dt5 == null) return string.Empty;
                 if (dt5.Rows.Count == 0)
                 {
                     //listViewMsg.UpdateMsg($"read false mageXm !", false, true, true, PC00D01.MSGTINF);
@@ -391,6 +395,7 @@ namespace DataSpider.PC01.PT
                 strSql += $"GROUP BY P.ProcessDataSetID, ProcessDataSetImageResult.ProcessDataSetID ";
                 //listViewMsg.UpdateMsg($"QueryString :{strSql} !", false, true, true, PC00D01.MSGTINF);
                 dt6 = GetDataTable(strSql, ref p_strErrCode, ref p_strErrText);
+                if (dt6 == null) return string.Empty;
 
                 int images = 0;
                 if (dt6.Rows.Count >  0)
@@ -409,6 +414,7 @@ namespace DataSpider.PC01.PT
                 // listViewMsg.UpdateMsg($"QueryString :{strSql} !", false, true, true, PC00D01.MSGTINF);
 
                 dt7 = GetDataTable(strSql, ref p_strErrCode, ref p_strErrText);
+                if (dt7 == null) return string.Empty;
                 string strPara = string.Empty;
                 foreach (DataRow ir_dr in dt7.Rows)
                 {
@@ -428,6 +434,7 @@ namespace DataSpider.PC01.PT
 //                listViewMsg.UpdateMsg($"QueryString :{strSql} !", false, true, true, PC00D01.MSGTINF);
 
                 dt8 = GetDataTable(strSql, ref p_strErrCode, ref p_strErrText);
+                if (dt8 == null) return string.Empty;
                 foreach (DataRow is_dr in dt8.Rows)
                 {
                     if (is_dr["ImageStatus"].ToString().Trim() == "1")
