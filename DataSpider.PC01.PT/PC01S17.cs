@@ -72,10 +72,8 @@ namespace DataSpider.PC01.PT
 
         private void ThreadJob()
         {
-// 접속을 못했을 때 normal로 표시되었다가 끊어지는 것으로 표시됨. 
-// 오해의 소지가 있어서 삭제.
-//            listViewMsg.UpdateStatus(true);
-            listViewMsg.UpdateMsg("Thread started");
+            listViewMsg.UpdateStatus(true);
+            listViewMsg.UpdateMsg($"{m_Name} Thread started");
             //m_SoftwareVersion = GetSoftwareVersion();
             //listViewMsg.UpdateMsg($"Read From Ini File m_SoftwareVersion :{m_SoftwareVersion}", false, true, true, PC00D01.MSGTINF);
             m_dtLastProcessTime = GetLastProcessTime();
@@ -96,7 +94,7 @@ namespace DataSpider.PC01.PT
                         {
                             UpdateEquipmentProgDateTime(IF_STATUS.Disconnected);
                             listViewMsg.UpdateMsg($"DB Disconnected", true, true, true);
-                            Thread.Sleep(1000);
+                            Thread.Sleep(10000);
                         }
                     }
                     else
@@ -112,7 +110,7 @@ namespace DataSpider.PC01.PT
                         }
                         else
                         {
-                            if (string.IsNullOrWhiteSpace(data))
+                            if (mCon != null && string.IsNullOrWhiteSpace(data))
                             {
                                 UpdateEquipmentProgDateTime(IF_STATUS.Normal);
                                 listViewMsg.UpdateMsg("No data in DB", true, false);
@@ -133,7 +131,7 @@ namespace DataSpider.PC01.PT
             }
             UpdateEquipmentProgDateTime(IF_STATUS.Stop);
             listViewMsg.UpdateStatus(false);
-            listViewMsg.UpdateMsg("Thread finished");
+            listViewMsg.UpdateMsg($"{m_Name} Thread finished");
         }
 
         public bool DBConnect(string p_strConnectionString, ref string p_strErrCode, ref string p_strErrText)
@@ -229,6 +227,8 @@ namespace DataSpider.PC01.PT
                     mCon.Dispose();
                     mCon = null;
                 }
+                UpdateEquipmentProgDateTime(IF_STATUS.Disconnected);
+                listViewMsg.UpdateMsg($"DB Disconnected", true, true, true);
             }
             finally
             {
@@ -488,14 +488,6 @@ namespace DataSpider.PC01.PT
 
                 m_dtLastProcessTime = (DateTime)NewProcessTime;
                 SetLastProcessTime(m_dtLastProcessTime);
-
-                if (mCon != null)
-                {
-                    if (mCon.State == ConnectionState.Open)
-                        mCon.Close();
-                    mCon.Dispose();
-                    mCon = null;
-                }
 
                 return sbData.ToString().Trim();
             }
