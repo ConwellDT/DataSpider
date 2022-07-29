@@ -536,18 +536,7 @@ namespace OpcUaClient
                             m_reconnectHandler.BeginReconnect(sender, ReconnectPeriod * 1000, StandardClient_Server_ReconnectComplete);
                             LogMsg("--- RECONNECTING ---");
                         }
-                        //LogMsg($"StandardClient_KeepAlive ServerStatus:{e.Status} {e.CurrentTime.ToLocalTime():HH:mm:ss} {sender.OutstandingRequestCount}/{sender.DefunctRequestCount}");
-                    }
-                    else
-                    {
-                        LogMsg("--- e.Status Good! ---");
-
-                        if (m_reconnectHandler != null)
-                        {
-                            LogMsg("--- Reconnected????? ---");
-                            m_reconnectHandler.Dispose();
-                            m_reconnectHandler = null;
-                        }                            
+                        LogMsg($"StandardClient_KeepAlive ServerStatus:{e.Status} {e.CurrentTime.ToLocalTime():HH:mm:ss} {sender.OutstandingRequestCount}/{sender.DefunctRequestCount}");
                     }
                 }
             }
@@ -566,46 +555,10 @@ namespace OpcUaClient
                 if (!Object.ReferenceEquals(sender, m_reconnectHandler))
                 {
                     LogMsg("--- ignore callbacks from discarded objects. ---");
-                    //if (sender != null)
-                    //{
-                    //    ((SessionReconnectHandler)sender).Session.Close();
-                    //    ((SessionReconnectHandler)sender).Session.Dispose();
-                    //    ((SessionReconnectHandler)sender).Dispose();
-                    //    LogMsg("--- session dispose  ---");
-                    //}
-                    m_session = ((SessionReconnectHandler)sender).Session;
-                    Subscription prevsubscription = m_subscription;
-                    CreateSubscription(1000);
-                    foreach (MonitoredItem monitoredItem in prevsubscription.MonitoredItems)
-                    {
-                        AddItem(monitoredItem.DisplayName, monitoredItem.StartNodeId.ToString());
-                    }
-                    AddSubscription();
+                    return;
                 }
-                else
-                {
-                    m_session = m_reconnectHandler.Session;
-                    if (m_session.SubscriptionCount == 0)
-                    {
-                        LogMsg("--- m_session.SubscriptionCount == 0 ---");
-                        Subscription prevsubscription = m_subscription;
-                        CreateSubscription(1000);
-                        foreach (MonitoredItem monitoredItem in prevsubscription.MonitoredItems)
-                        {
-                            AddItem(monitoredItem.DisplayName, monitoredItem.StartNodeId.ToString());
-                        }
-                        AddSubscription();                     
-                    }
-                    else
-                    {
-                        LogMsg("--- m_session.SubscriptionCount > 0 ---");
-                        if (m_subscription.Created)
-                            m_subscription.Delete(true);
-                        m_subscription.Create();
-                    }
-                }
-
-                m_reconnectHandler?.Dispose();
+                m_session = m_reconnectHandler.Session;
+                m_reconnectHandler.Dispose();
                 m_reconnectHandler = null;
 
                 LogMsg("--- RECONNECTED ---");
@@ -613,6 +566,7 @@ namespace OpcUaClient
             catch (Exception ex)
             {
                 LogMsg("StandardClient_Server_ReconnectComplete :"+ex.Message);
+
             }
         }
 

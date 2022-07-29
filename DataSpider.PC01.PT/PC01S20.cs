@@ -112,30 +112,30 @@ namespace DataSpider.PC01.PT
                             //                            listViewMsg.UpdateMsg($" Network Error , IF_STATUS.Disconnected ", false, true, true, PC00D01.MSGTERR);
                             UpdateEquipmentProgDateTime(IF_STATUS.Disconnected);
 
+                            /*
+                                                        if ((DateTime.Now - dtNormalTime).TotalMilliseconds >= myUaClient.m_session.SessionTimeout)
+                                                        {
+                                                            LogMsg("--- SessionTimeout---");
 
-                            if ((DateTime.Now - dtNormalTime).TotalMilliseconds >= myUaClient.m_session.SessionTimeout)
+                                                            if (myUaClient.m_reconnectHandler.Session.Connected)
+                                                            {
+                                                                //    //myUaClient.m_session = myUaClient.m_reconnectHandler.Session;
+                                                                myUaClient.m_reconnectHandler.Session.Close(5000);
+                                                                //    myUaClient.m_reconnectHandler.Session.Dispose();
+                                                                //    myUaClient.m_reconnectHandler.Dispose();
+                                                                //    myUaClient.m_reconnectHandler = null;
+                                                                LogMsg("--- Session.Close---");
+                                                            }
+                                                            dtNormalTime = DateTime.Now;
+                                                        }
+                            */
+                            if ((DateTime.Now - dtNormalTime).TotalMilliseconds >= myUaClient.m_session.SessionTimeout * 10)
                             {
-                                LogMsg("--- SessionTimeout---");
-
-                                if (myUaClient.m_reconnectHandler.Session.Connected)
-                                {
-                                    //    //myUaClient.m_session = myUaClient.m_reconnectHandler.Session;
-                                    myUaClient.m_reconnectHandler.Session.Close(5000);
-                                    //    myUaClient.m_reconnectHandler.Session.Dispose();
-                                    //    myUaClient.m_reconnectHandler.Dispose();
-                                    //    myUaClient.m_reconnectHandler = null;
-                                    LogMsg("--- Session.Close---");
-                                }
-                                dtNormalTime = DateTime.Now;
+                                //listViewMsg.UpdateMsg($" Network Error , UaClient.Close() ", false, true, true, PC00D01.MSGTERR);
+                                //myUaClient.Close();
+                                myUaClient = null;
+                                listViewMsg.UpdateMsg($" Network Error , Ua Client Reset ", false, true, true, PC00D01.MSGTERR);
                             }
-
-                            //if ((DateTime.Now - dtNormalTime).TotalMilliseconds >= myUaClient.m_session.SessionTimeout)
-                            //{
-                            //    listViewMsg.UpdateMsg($" Network Error , UaClient.Close() ", false, true, true, PC00D01.MSGTERR);
-                            //    myUaClient.Close();
-                            //    myUaClient = null;
-                            //    listViewMsg.UpdateMsg($" Network Error , Ua Client Reset ", false, true, true, PC00D01.MSGTERR);
-                            //}
                         }
                         else
                         {
