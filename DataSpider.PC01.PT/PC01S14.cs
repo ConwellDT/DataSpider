@@ -158,7 +158,7 @@ namespace DataSpider.PC01.PT
                 }
                 catch (Exception ex)
                 {
-                    fileLog.WriteLog($"{ex}");
+                    fileLog.WriteLog($"Exception in MakeDataTable : {ex}");
                 }
                 return retValue;
             }
@@ -204,7 +204,7 @@ namespace DataSpider.PC01.PT
                 }
                 catch (Exception ex)
                 {
-                    fileLog.WriteLog($"{ex}");
+                    fileLog.WriteLog($"Exception in FillDataTable : {ex}");
                 }
                 return retValue;
             }
@@ -242,7 +242,7 @@ namespace DataSpider.PC01.PT
                 }
                 catch (Exception ex)
                 {
-                    fileLog.WriteLog($"{ex}");
+                    fileLog.WriteLog($"Exception in GetConfigWaveLengths : {ex}");
                 }
                 return retString.Trim();
             }
@@ -258,7 +258,7 @@ namespace DataSpider.PC01.PT
                 }
                 catch (Exception ex)
                 {
-                    fileLog.WriteLog($"{ex}");
+                    fileLog.WriteLog($"Exception in GetConfigDataPoints : {ex}");
                 }
                 return retString.Trim();
             }
@@ -278,7 +278,7 @@ namespace DataSpider.PC01.PT
                 }
                 catch (Exception ex)
                 {
-                    fileLog.WriteLog($"{ex}");
+                    fileLog.WriteLog($"Exception in GetConfigECs : {ex}");
                 }
                 return retString.Trim();
             }
@@ -297,7 +297,7 @@ namespace DataSpider.PC01.PT
                 }
                 catch (Exception ex)
                 {
-                    fileLog.WriteLog($"{ex}");
+                    fileLog.WriteLog($"Exception in GetSeachPathLengths : {ex}");
                 }
                 return retString.Trim();
             }
@@ -577,6 +577,7 @@ namespace DataSpider.PC01.PT
             catch (Opc.Ua.ServiceResultException ex)
             {
                 listViewMsg.UpdateMsg($"Exception in ProcessMethodDaqID OPC Call - {ex}", false, true, true, PC00D01.MSGTERR);
+                // josn 데이터 사이즈 초과 시
                 if (ex.Message.Contains("Could not encode outgoing message"))
                 {
                     listViewMsg.UpdateMsg($"Exception in OPC Call - DaqID:{ToBeProcessedDaqID} - Processing Skip!", false, true, true, PC00D01.MSGTERR);
