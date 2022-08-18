@@ -442,19 +442,20 @@ namespace DataSpider.PC01.PT
                                 UpdateEquipmentProgDateTime(IF_STATUS.Normal);
                                 dtNormalTime = DateTime.Now;
                             }
-                            else
-                            {  // 메소드 호출/응답 이상일 때
-                                if ((DateTime.Now - dtNormalTime).TotalHours < 1)
-                                {
-                                    //UpdateEquipmentProgDateTime(IF_STATUS.InvalidData);
-                                    UpdateEquipmentProgDateTime(IF_STATUS.NetworkError);
-                                }
-                                else
-                                {
-                                    myUaClient = null;
-                                    listViewMsg.UpdateMsg($" Network Error Time > 1 Hr, Ua Client Reset ", false, true, true, PC00D01.MSGTERR);
-                                }
-                            }
+                            // 20220818, SHS, ProcessMethodDaqStartInfo (OPC Call) return false (opc call exception 또는 데이터가 없을때) 일때 하는 로직 삭제 
+                            //else
+                            //{  // 메소드 호출/응답 이상일 때
+                            //    if ((DateTime.Now - dtNormalTime).TotalHours < 1)
+                            //    {
+                            //        //UpdateEquipmentProgDateTime(IF_STATUS.InvalidData);
+                            //          UpdateEquipmentProgDateTime(IF_STATUS.NetworkError);
+                            //    }
+                            //    else
+                            //    {
+                            //        myUaClient = null;
+                            //        listViewMsg.UpdateMsg($" Network Error Time > 1 Hr, Ua Client Reset ", false, true, true, PC00D01.MSGTERR);
+                            //    }
+                            //}
                             Thread.Sleep(1 * 1000); // 1회 처리 후 10초가 휴식
                         }
                     }
@@ -487,6 +488,8 @@ namespace DataSpider.PC01.PT
         /// <returns>true : Method 호출/응답 정상일 때</returns>
         private bool ProcessMethodDaqStartInfo(DateTime startDate, int LastEnqueuedDaqID, out DateTime newDate, out int newDaqID)
         {
+            listViewMsg.UpdateMsg($"ProcessMethodDaqStartInfo - Call Daq/GetDaqStartInfo, Date : {startDate:MM/dd/yyyy}, LastEnqueuedDaqID : {LastEnqueuedDaqID}", false, true, true, PC00D01.MSGTINF);
+
             DateTime endDate = startDate;// + new TimeSpan(1, 0, 0, 0);
             DateTime toDay= new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
 
@@ -504,11 +507,17 @@ namespace DataSpider.PC01.PT
             }
             catch (Opc.Ua.ServiceResultException ex)
             {
-                listViewMsg.UpdateMsg($"Exception in OPC Call - {ex.Message}", false, true, true, PC00D01.MSGTINF);
+                listViewMsg.UpdateMsg($"Exception in OPC Call - {ex}", false, true, true, PC00D01.MSGTERR);
+                // 20220818, SHS, OPC Call Exception 시 OPC 접속종료 처리
+                listViewMsg.UpdateMsg($"OPC Client null", false, true, true, PC00D01.MSGTINF);
+                myUaClient = null;
                 return false;
             }
             if (outputArguments != null && outputArguments.Count >= 1)
             {
+
+                // 20220818, SHS, OPC Call 수신 데이터 로그
+                fileLog.WriteData(outputArguments[0].ToString(), "Daq/GetDaqStartInfo call", "GetDaqStartInfo");
                 // JSON 데이터를 분석하여 LastEnqueuedDaqID보다 큰 가장 작은 DaqID 를 찾는다.
                 //m_soloVpe.GetDaqID(outputArguments[0].ToString(), LastEnqueuedDaqID);
                 m_soloVpeTable.GetDaqID(outputArguments[0].ToString(), LastEnqueuedDaqID);
@@ -524,7 +533,14 @@ namespace DataSpider.PC01.PT
                         newDate = endDate +new TimeSpan(1, 0, 0, 0);
                     }
                 }
+
+                listViewMsg.UpdateMsg($"Daq/GetDaqStartInfo call - newDaqID : {newDaqID}, newDate : {newDate}", false, true, true, PC00D01.MSGTINF);
+
                 return true;
+            }
+            else
+            {
+                listViewMsg.UpdateMsg($"Daq/GetDaqStartInfo call - Result : null or count 0", false, true, true, PC00D01.MSGTINF);
             }
             return false;
         }
@@ -534,20 +550,41 @@ namespace DataSpider.PC01.PT
             IList<object> outputArguments = null;
             try
             {
+                listViewMsg.UpdateMsg($"ProcessMethodDaqID - Call Daq/GetCycleData, ToBeProcessedDaqID : {ToBeProcessedDaqID}", false, true, true, PC00D01.MSGTINF);
                 //
                 outputArguments = myUaClient.m_session.Call(new NodeId("ns=2;s=Daq"),
                                                                         new NodeId("ns=2;s=Daq/GetCycleData"),
                                                                         ToBeProcessedDaqID
                                                                         );
+
+                // 20220818, SHS, 수신데이터 로그 추가, null, count < 1, [] 형태로 수신되는 경우 스킵처리 추가
+                if (outputArguments == null || outputArguments.Count < 1)
+                {
+                    listViewMsg.UpdateMsg($"Call Daq/GetCycleData - ToBeProcessedDaqID : {ToBeProcessedDaqID}, Result : null or count 0 - Processing Skip!", false, true, true, PC00D01.MSGTINF);
+                    return true;
+                }
+                else
+                {
+                    listViewMsg.UpdateMsg($"Call Daq/GetCycleData - ToBeProcessedDaqID : {ToBeProcessedDaqID}", false, true, true, PC00D01.MSGTINF);
+                    fileLog.WriteData(outputArguments[0].ToString(), $"Call Daq/GetCycleData - ToBeProcessedDaqID : {ToBeProcessedDaqID}", "GetCycleData");
+                    if (outputArguments[0].ToString().Length < 10)
+                    {
+                        listViewMsg.UpdateMsg($"Invalid Result Data (Data length < 10) - DaqID:{ToBeProcessedDaqID} - Processing Skip!", false, true, true, PC00D01.MSGTINF);
+                        return true;
+                    }
+                }
             }
             catch (Opc.Ua.ServiceResultException ex)
             {
-                listViewMsg.UpdateMsg($"Exception in OPC Call - {ex.Message}", false, true, true, PC00D01.MSGTINF);
+                listViewMsg.UpdateMsg($"Exception in ProcessMethodDaqID OPC Call - {ex}", false, true, true, PC00D01.MSGTERR);
                 if (ex.Message.Contains("Could not encode outgoing message"))
                 {
-                    listViewMsg.UpdateMsg($"Exception in OPC Call - DaqID:{ToBeProcessedDaqID} - Processing Skip!", false, true, true, PC00D01.MSGTINF);
+                    listViewMsg.UpdateMsg($"Exception in OPC Call - DaqID:{ToBeProcessedDaqID} - Processing Skip!", false, true, true, PC00D01.MSGTERR);
                     return true;
                 }
+                // 20220818, SHS, OPC Call Exception 시 OPC 접속종료 처리
+                listViewMsg.UpdateMsg($"OPC Client null", false, true, true, PC00D01.MSGTINF);
+                myUaClient = null;
                 return false;
             }
             if (outputArguments != null && outputArguments.Count >= 1)
@@ -572,7 +609,8 @@ namespace DataSpider.PC01.PT
                     ssb.AppendLine($"{typeName}_RUNSTART, {dtDateTime:yyyy-MM-dd HH:mm:ss.fff}, {m_soloVpeTable.newRunStart}");
                     ssb.AppendLine($"{typeName}_RUNEND, {dtDateTime:yyyy-MM-dd HH:mm:ss.fff}, {m_soloVpeTable.newRunEnd}");
 
-                    if (m_soloVpeTable.sdt == null)
+                    // 20220818, SHS, table 은 무조건 생성하는것으로 수정
+                    //if (m_soloVpeTable.sdt == null)
                     {
                         m_soloVpeTable.sdt = new DataTable();
                         m_soloVpeTable.rdt = new DataTable();
@@ -636,7 +674,7 @@ namespace DataSpider.PC01.PT
                 }
                 catch(Exception ex)
                 {
-                    listViewMsg.UpdateMsg($" DaqID:{m_soloVpeTable.newDaqID} Jason DataProcessing - {ex.Message}", false, true, true, PC00D01.MSGTINF);
+                    listViewMsg.UpdateMsg($"Exception in ProcessMethodDaqID. DaqID : {m_soloVpeTable.newDaqID} Jason DataProcessing - {ex}", false, true, true, PC00D01.MSGTINF);
                 }
             }
             return true;
@@ -668,6 +706,9 @@ namespace DataSpider.PC01.PT
                 // CSV 파일에 있는 TagName, NodeId 리스트를 MonitoredItem으로 등록하고 
                 ReadConfigInfo();
                 myUaClient.UpateTagData += UpdateTagValue;
+                // 20220818, SHS, OPC Client Log 출력용 등록
+                myUaClient.LogMsgFunc += LogMsg;
+
                 listViewMsg.UpdateMsg($"myUaClient.UpateTagData ", false, true, true, PC00D01.MSGTINF);
                 // currentSubscription에 대한 서비스를 등록한다.
                 bool bReturn = myUaClient.AddSubscription();
@@ -680,6 +721,11 @@ namespace DataSpider.PC01.PT
                 listViewMsg.UpdateMsg($"Exceptioin - InitOpcUaClient ({ex})", false, true, true, PC00D01.MSGTERR);
                 myUaClient = null;
             }
+        }
+        // 20220818, SHS, OPC Client Log 출력 처리 함수
+        public void LogMsg(string Msg)
+        {
+            listViewMsg.UpdateMsg($" OPC UA Client - {Msg}", false, true, true, PC00D01.MSGTINF);
         }
 
         private DateTime GetLastEnqueuedDate()
