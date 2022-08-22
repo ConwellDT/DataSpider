@@ -136,6 +136,13 @@ namespace DataSpider.PC01.PT
                                 JsonElement.ArrayEnumerator ja = jp.Value.EnumerateArray();
                                 ja.MoveNext();
                                 JsonElement jje = ja.Current;
+
+                                // 2022-08-22 kwc Repeat별로 데이터리하는 문제를 위해 추가
+                                rdt_column = new DataColumn();
+                                rdt_column.DataType = Type.GetType("System.String");
+                                rdt_column.ColumnName = "IDID";
+                                rdt.Columns.Add(rdt_column);
+
                                 foreach (JsonProperty jjp in jje.EnumerateObject())
                                 {
                                     rdt_column = new DataColumn();
@@ -169,6 +176,9 @@ namespace DataSpider.PC01.PT
                 JsonDocument document;
                 JsonElement root;
                 DataRow sdt_row, rdt_row;
+                // 2022-08-22 kwc Repeat별로 데이터리하는 문제를 위해 추가
+                JsonProperty idid = new JsonProperty();
+
                 try
                 {
                     sdt.Clear();
@@ -187,6 +197,8 @@ namespace DataSpider.PC01.PT
                                 foreach (JsonElement jje in jp.Value.EnumerateArray())
                                 {
                                     rdt_row = rdt.NewRow();
+                                    // 2022-08-22 kwc Repeat별로 데이터리하는 문제를 위해 추가
+                                    rdt_row["IDID"] = idid.Value;
                                     foreach (JsonProperty jjp in jje.EnumerateObject())
                                     {
                                         rdt_row[jjp.Name] = jjp.Value;
@@ -197,6 +209,8 @@ namespace DataSpider.PC01.PT
                             else
                             {
                                 sdt_row[jp.Name] = jp.Value;
+                                // 2022-08-22 kwc Repeat별로 데이터리하는 문제를 위해 추가
+                                if (jp.Name == "ID") idid = jp;
                             }
                         }
                         sdt.Rows.Add(sdt_row);
@@ -317,15 +331,39 @@ namespace DataSpider.PC01.PT
                 retString = (string)rows[(nWaveLength) * GetRepeatCount() + nRepeat][PropertyName];
                 return retString.Trim();
             }
+            //public string GetRawValue(int nRepeat, string PropertyName)
+            //{
+            //    string retString = string.Empty;
+            //    int nSeriesData = rdt.Rows.Count / GetRepeatCount();
+
+            //    DataRow[] rows = rdt.Select($"", "ID ASC");
+            //    for (int nData = 0; nData < nSeriesData; nData++)
+            //    {
+            //        retString += " " + (string)rows[nRepeat * nSeriesData + (nSeriesData-nData-1)][PropertyName] + " ;";
+            //    }
+            //    if (retString.Length > 0)
+            //        retString = retString.Substring(0, retString.Length - 1);
+            //    return retString.Trim();
+            //}
+
+            // 2022-08-22 kwc Repeat별로 데이터리하는 문제를 위해 추가
+            public string GetIDID(int nRepeat)
+            {
+                string retString = string.Empty;
+                DataTable distinctTable = rdt.DefaultView.ToTable(true, "IDID");
+                retString = (string)distinctTable.Rows[nRepeat]["IDID"];
+                return retString;
+            }
+
+            // 2022-08-22 kwc Repeat별로 데이터리하는 문제를 위해 수정
             public string GetRawValue(int nRepeat, string PropertyName)
             {
                 string retString = string.Empty;
-                int nSeriesData = rdt.Rows.Count / GetRepeatCount();
 
-                DataRow[] rows = rdt.Select($"", "ID ASC");
-                for (int nData = 0; nData < nSeriesData; nData++)
+                DataRow[] rows = rdt.Select($"IDID={GetIDID(nRepeat)}", "ID ASC");
+                for (int nData = 0; nData < rows.Length; nData++)
                 {
-                    retString += " " + (string)rows[nRepeat * nSeriesData + (nSeriesData-nData-1)][PropertyName] + " ;";
+                    retString += " " + (string)rows[rows.Length - nData - 1][PropertyName] + " ;";
                 }
                 if (retString.Length > 0)
                     retString = retString.Substring(0, retString.Length - 1);
