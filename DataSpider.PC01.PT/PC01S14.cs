@@ -347,20 +347,43 @@ namespace DataSpider.PC01.PT
             //}
 
             // 2022-08-22 kwc Repeat별로 데이터리하는 문제를 위해 추가
-            public string GetIDID(int nRepeat)
+            //public string GetIDID(int nRepeat)
+            //{
+            //    string retString = string.Empty;
+            //    DataTable distinctTable = rdt.DefaultView.ToTable(true, "IDID");
+            //    retString = (string)distinctTable.Rows[nRepeat]["IDID"];
+            //    return retString;
+            //}
+
+            // 2022-08-23 kwc Repeat, WaveLength를 고려해서 변경
+            public string GetIDID(int nRepeat, string WaveLength)
             {
                 string retString = string.Empty;
-                DataTable distinctTable = rdt.DefaultView.ToTable(true, "IDID");
-                retString = (string)distinctTable.Rows[nRepeat]["IDID"];
+                DataTable distinctTable = rdt.DefaultView.ToTable(true, "IDID", "Wavelength");
+                DataRow[] rows = distinctTable.Select($"Wavelength='{WaveLength}'");
+                retString = (string)rows[nRepeat]["IDID"];
+
+                //DataRow[] rows = sdt.Select($"Wavelength='{WaveLength}'", "ID ASC");
+                //if( rows.Length > 0 )
+                //    retString = rows[0]["ID"].ToString();
+
                 return retString;
             }
 
+
             // 2022-08-22 kwc Repeat별로 데이터리하는 문제를 위해 수정
+            // 2022-08-23 kwc Repeat, WaveLength를 고려해서 변경
             public string GetRawValue(int nRepeat, string PropertyName)
             {
                 string retString = string.Empty;
-
-                DataRow[] rows = rdt.Select($"IDID='{GetIDID(nRepeat)}'", "ID ASC");
+                //DataRow[] rows = rdt.Select($"IDID='{GetIDID(nRepeat)}'", "ID ASC");
+                string selectString = string.Empty;
+                for (int nWaveLength = 0; nWaveLength < GetWaveLengthCount(); nWaveLength++)
+                {
+                    selectString += $" IDID='{GetIDID(nRepeat, GetWaveLength(nWaveLength))}' OR";
+                }
+                if (selectString.Length > 2) selectString = selectString.Substring(0, selectString.Length - 2);
+                DataRow[] rows = rdt.Select(selectString, "ID ASC");
                 for (int nData = 0; nData < rows.Length; nData++)
                 {
                     retString += " " + (string)rows[rows.Length - nData - 1][PropertyName] + " ;";
