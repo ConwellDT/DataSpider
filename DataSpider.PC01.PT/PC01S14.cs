@@ -319,7 +319,7 @@ namespace DataSpider.PC01.PT
             public string GetStatValue(int nWaveLength, string PropertyName)
             {
                 string retString = string.Empty;
-                DataRow[] rows = sdt.Select($"WaveLength ={GetWaveLength(nWaveLength)}", "ID DESC");
+                DataRow[] rows = sdt.Select($"WaveLength ='{GetWaveLength(nWaveLength)}'", "ID DESC");
                 retString = (string)rows[0][PropertyName];
                 return retString.Trim();
             }
@@ -360,7 +360,7 @@ namespace DataSpider.PC01.PT
             {
                 string retString = string.Empty;
 
-                DataRow[] rows = rdt.Select($"IDID={GetIDID(nRepeat)}", "ID ASC");
+                DataRow[] rows = rdt.Select($"IDID='{GetIDID(nRepeat)}'", "ID ASC");
                 for (int nData = 0; nData < rows.Length; nData++)
                 {
                     retString += " " + (string)rows[rows.Length - nData - 1][PropertyName] + " ;";
