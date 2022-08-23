@@ -379,6 +379,7 @@ namespace DataSpider.PC01.PT
 
         }
         private SoloVpeTable m_soloVpeTable = new SoloVpeTable();
+        private string prevOutputArguments = string.Empty;
 
         public PC01S14() : base()
         {
@@ -555,7 +556,15 @@ namespace DataSpider.PC01.PT
             {
 
                 // 20220818, SHS, OPC Call 수신 데이터 로그
-                fileLog.WriteData(outputArguments[0].ToString(), "Daq/GetDaqStartInfo call", "GetDaqStartInfo");
+                if (!outputArguments[0].ToString().Equals(prevOutputArguments))
+                {
+                    fileLog.WriteData(outputArguments[0].ToString(), "Daq/GetDaqStartInfo call", "GetDaqStartInfo");
+                    prevOutputArguments = outputArguments[0].ToString();
+                }
+                else
+                {
+                    listViewMsg.UpdateMsg($"There is no DAQ added.", false, true, true, PC00D01.MSGTINF);
+                }
                 // JSON 데이터를 분석하여 LastEnqueuedDaqID보다 큰 가장 작은 DaqID 를 찾는다.
                 //m_soloVpe.GetDaqID(outputArguments[0].ToString(), LastEnqueuedDaqID);
                 m_soloVpeTable.GetDaqID(outputArguments[0].ToString(), LastEnqueuedDaqID);
