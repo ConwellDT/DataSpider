@@ -360,7 +360,8 @@ namespace DataSpider.PC01.PT
             {
                 string retString = string.Empty;
                 DataTable distinctTable = rdt.DefaultView.ToTable(true, "IDID", "Wavelength");
-                DataRow[] rows = distinctTable.Select($"Wavelength='{WaveLength}'");
+                // 20220823, SHS, REPEAT 데이터 소팅이 안된 상태로 처리되어 IDID ASC 추가
+                DataRow[] rows = distinctTable.Select($"Wavelength='{WaveLength}'", "IDID ASC");
                 retString = (string)rows[nRepeat]["IDID"];
 
                 //DataRow[] rows = sdt.Select($"Wavelength='{WaveLength}'", "ID ASC");
