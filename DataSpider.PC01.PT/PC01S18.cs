@@ -68,6 +68,8 @@ namespace DataSpider.PC01.PT
 
             List<string> listData = new List<string>();
             bool Started = false;
+            List<string> RemoveLineData = new List<string>();
+
             //foreach (string ln in LineData)
             //{
             //    if (m_StartStringList.Exists(x => ln.Trim().StartsWith(x)) || CheckStartString(ln.Trim()))
@@ -104,8 +106,16 @@ namespace DataSpider.PC01.PT
                 if (m_StartStringList.Exists(x => LineData[i].Trim().StartsWith(x)) || CheckStartString(LineData[i].Trim()))
                 {
                     Started = true;
+                    string removeData = string.Empty;
+                    foreach(string line in RemoveLineData)
+                    {
+                        removeData+= line+Environment.NewLine;
+                    }
+                    state.sb = state.sb.Replace(removeData, "");
+                    RemoveLineData.Clear();
                     listData.Clear();
                 }
+                RemoveLineData.Add(LineData[i]);
                 // 데이터 시작
                 if (Started)
                 {
