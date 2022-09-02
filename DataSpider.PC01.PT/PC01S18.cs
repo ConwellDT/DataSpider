@@ -68,7 +68,6 @@ namespace DataSpider.PC01.PT
 
             List<string> listData = new List<string>();
             bool Started = false;
-            List<string> RemoveLineData = new List<string>();
 
             //foreach (string ln in LineData)
             //{
@@ -100,22 +99,38 @@ namespace DataSpider.PC01.PT
             //        }
             //    }
             //}
+            if (!string.IsNullOrWhiteSpace(LineData[LineData.Length - 1]))
+            {
+                return;
+            }
             for (int i = 0; i < LineData.Length; i++)
             {
                 // 수신데이터 중 시작문자를 찾으면 시작 플래그 on, 이전에 처리하기 위해 저장해 둔 데이터는 클리어.
                 if (m_StartStringList.Exists(x => LineData[i].Trim().StartsWith(x)) || CheckStartString(LineData[i].Trim()))
                 {
                     Started = true;
-                    string removeData = string.Empty;
-                    foreach(string line in RemoveLineData)
+                    string replaceData = string.Empty;
+                    for(int j = i; j < LineData.Length; j++)
                     {
-                        removeData+= line+Environment.NewLine;
+                        if (j == LineData.Length - 1)
+                        {
+                            replaceData += LineData[j];
+                        }
+                        else
+                        {
+                            replaceData += LineData[j] + Environment.NewLine;
+                        }
                     }
-                    state.sb = state.sb.Replace(removeData, "");
-                    RemoveLineData.Clear();
+                    //
+                    listViewMsg.UpdateMsg($"Socket Buffer : {state.sb}", false, false, true, PC00D01.MSGTINF);
+                    //
+                    state.sb.Clear();
+                    state.sb.Append(replaceData);
+                    //
+                    listViewMsg.UpdateMsg($"Replaced Socket Buffer : {state.sb}", false, false, true, PC00D01.MSGTINF);
+                    //
                     listData.Clear();
                 }
-                RemoveLineData.Add(LineData[i]);
                 // 데이터 시작
                 if (Started)
                 {
@@ -133,15 +148,15 @@ namespace DataSpider.PC01.PT
                         listData.Add(arrLn.Length >= 4 ? $"{arrLn[0]} {arrLn[1]}{arrLn[2]} {arrLn[3]}" : $"{arrLn[0]} {arrLn[1]} {arrLn[2]}");
                     }
                     // 최대 데이터 설정만큼 수신되었으면 수신데이터를 파싱처리로 전달 
-                    if (listData.Count >= maximumLineCount && maximumLineCount >= minimumLineCount)
-                    {
-                        //EnQueue(MSGTYPE.MEASURE, string.Join(System.Environment.NewLine, listData));
-                        EnQueue(listData);
-                        Started = false;
-                        state.sb.Clear();
-                    }
+                    //if (listData.Count >= maximumLineCount && maximumLineCount >= minimumLineCount)
+                    //{
+                    //    //EnQueue(MSGTYPE.MEASURE, string.Join(System.Environment.NewLine, listData));
+                    //    EnQueue(listData);
+                    //    Started = false;
+                    //    state.sb.Clear();
+                    //}
                     // 최소 데이터 설정 (사용자, 시간 => 고정으로 생성되는 위치가 고정된 데이터) 
-                    else if (listData.Count > minimumLineCount)
+                    if (listData.Count > minimumLineCount)
                     {
                         EnQueue(listData);
                     }
