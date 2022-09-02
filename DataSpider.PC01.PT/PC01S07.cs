@@ -49,18 +49,33 @@ namespace DataSpider.PC01.PT
                 m_Thd.Start();
             }
         }
+        // 2022-07-25 kwc
         string RemoveNull(string Msg)
         {
-            string returnString=string.Empty;
-            foreach( char ch in Msg)
+            string returnString = string.Empty;
+            foreach (char ch in Msg)
             {
                 if (ch != 0) returnString += ch;
             }
             return returnString;
         }
+
+
         protected override void ParseMessage(string Msg)
         {
-            Msg=RemoveNull(Msg);
+            // 2022-07-25 kwc
+            string[] LineData1 = Msg.Split(new string[] { System.Environment.NewLine }, StringSplitOptions.None);
+
+            foreach (string ln in LineData1)
+            {
+                if (m_IgnoreStringList.Exists(s => ln.Contains(s) && !string.IsNullOrWhiteSpace(s)))
+                {
+                    state.sb = state.sb.Replace(ln + System.Environment.NewLine, "");
+                }
+            }
+            Msg = state.sb.ToString();
+            Msg = RemoveNull(Msg);
+
             string[] LineData = Msg.Split(new string[] { System.Environment.NewLine }, StringSplitOptions.None);
             List<string> listData = new List<string>();
             bool Started = false;
