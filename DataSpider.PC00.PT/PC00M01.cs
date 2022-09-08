@@ -30,7 +30,13 @@ namespace DataSpider.PC00.PT
         private bool isTagUpdated = false;
         private int intervalTagUpdate = 60;
 
-        public PC00M01(IPC00F00 owner, string equipType, string equipName, string connectionInfo, string extraInfo, int nCurNo, bool bAutoRun = false) : base(owner, equipType, equipName, connectionInfo, extraInfo, nCurNo, bAutoRun)
+        // 20220908, SHS, SERVERTIME 중복체크 (시간만 비교할지 값도 비교할지) 옵션 기능 추가
+        private bool checkServerTimeDup = false;
+        //
+
+        // 20220908, SHS, SERVERTIME 중복체크 (시간만 비교할지 값도 비교할지) 옵션 기능 추가
+        //public PC00M01(IPC00F00 owner, string equipType, string equipName, string connectionInfo, string extraInfo, int nCurNo, bool bAutoRun = false) : base(owner, equipType, equipName, connectionInfo, extraInfo, nCurNo, bAutoRun)
+        public PC00M01(IPC00F00 owner, string equipType, string equipName, string connectionInfo, string extraInfo, int nCurNo, bool bAutoRun = false, bool bCheckServerTimeDup = false) : base(owner, equipType, equipName, connectionInfo, extraInfo, nCurNo, bAutoRun)
         {
             //if (GetTagInfo())
             //{
@@ -49,6 +55,11 @@ namespace DataSpider.PC00.PT
             //{
             //    Thread.Sleep(intervalTagUpdate * 1000);
             //}
+
+            // 20220908, SHS, SERVERTIME 중복체크 (시간만 비교할지 값도 비교할지) 옵션 기능 추가
+            checkServerTimeDup = bCheckServerTimeDup;
+            //
+
             GetTagInfo();
             if (m_AutoRun && !bTerminal)
             {
@@ -112,7 +123,8 @@ namespace DataSpider.PC00.PT
             listViewMsg.UpdateStatus(true);
             listViewMsg.UpdateMsg("Thread started");
 
-            dataProcess = new EquipmentDataProcess(m_ConnectionInfo, dtTagInfo, listViewMsg, dataEncoding);
+            //dataProcess = new EquipmentDataProcess(m_ConnectionInfo, dtTagInfo, listViewMsg, dataEncoding);
+            dataProcess = new EquipmentDataProcess(m_ConnectionInfo, dtTagInfo, listViewMsg, dataEncoding, checkServerTimeDup);
             while (!bTerminal || PC00U01.QueueCount > 0)
             {
                 try
@@ -331,7 +343,19 @@ namespace DataSpider.PC00.PT
                             return false;
                         }
                         Debug.WriteLine(TTV);
-                        IsValueUpdated = true;
+
+                        //IsValueUpdated = true;
+                        // 20220908, SHS, TTV 형태 데이터 처리시에도 중복데이터 제외 기능 누락되었던것 추가
+                        // 별도의 ServerTime TAG 설정이 없이 데이터에 있는 태그명 값 시간으로 처리되므로 ServerTime 태그 상관없음
+                        //
+                        if (!(TimeStamp.Equals(LastMeasureDateTime) && Value.Equals(LastMeasureValue)))
+                        {
+                            LastMeasureDateTime = TimeStamp;
+                            LastMeasureValue = Value;
+                            IsValueUpdated = true;
+                        }
+                        //
+
                         break;
                     }
                 }
@@ -341,6 +365,10 @@ namespace DataSpider.PC00.PT
     }
     public class TAG
     {
+        //
+        public bool checkServerTimeDup = false;
+        //
+
         protected Data tagValue = new Data();
         private Data dateValue = new Data();
         private Data timeValue = new Data();
@@ -488,12 +516,28 @@ namespace DataSpider.PC00.PT
             if (!(TimeStamp.Equals(LastMeasureDateTime) && Value.Equals(LastMeasureValue)))
             {
                 // server time replace tag 인데 측정시간이 같으면 제외
-                if (!(tagValue.ReplaceTag.Equals(ReplaceTagDef.SERVER_TIME_TAG) && TimeStamp.Equals(LastMeasureDateTime)))
+                // 20220907, SHS, ServerTime 의 경우 측정시간이 같으면 중복판단하여 제외하던 기능 삭제, SLB 신성종 프로, 김현지 프로 확인, 20220913 적용
+                // P3 와 통일, RePrinted DateTime 의 경우 중복데이터지만 시간이 현재 시간이라 처리되고 있어서 ServerTime 도 동일하게 처리되어야 하는것으로 판단
+                //if (!(tagValue.ReplaceTag.Equals(ReplaceTagDef.SERVER_TIME_TAG) && TimeStamp.Equals(LastMeasureDateTime)))
+                //{
+                // 20220908, SHS, SERVERTIME 중복체크 (시간만 비교할지 값도 비교할지) 옵션 기능 추가
+                if (checkServerTimeDup)
+                {
+                    if (!(tagValue.ReplaceTag.Equals(ReplaceTagDef.SERVER_TIME_TAG) && TimeStamp.Equals(LastMeasureDateTime)))
+                    {
+                        LastMeasureDateTime = TimeStamp;
+                        LastMeasureValue = Value;
+                        IsValueUpdated = true;
+
+                    }
+                }
+                else
                 {
                     LastMeasureDateTime = TimeStamp;
                     LastMeasureValue = Value;
                     IsValueUpdated = true;
                 }
+                //}
             }
             //
             return true;
@@ -513,6 +557,10 @@ namespace DataSpider.PC00.PT
         static PIServer _PIServer = null;
         private PIInfo m_clsPIInfo;
 
+        //
+        // 20220908, SHS, SERVERTIME 중복체크 (시간만 비교할지 값도 비교할지) 옵션 기능 추가
+        public bool CheckServerTimeDup { get; set; } = false;
+        //
         public EquipmentDataProcess(string filePath, FormListViewMsg _listViewMsg, Encoding _dataEncoding = null)
         {
             FilePath = filePath;
@@ -534,8 +582,12 @@ namespace DataSpider.PC00.PT
                 listViewMsg.UpdateMsg($"PI Server Connection ({m_clsPIInfo.strPI_Server})- {ex}", false, true, true, PC00D01.MSGTERR);
             }
         }
-        public EquipmentDataProcess(string filePath, DataTable dtTag, FormListViewMsg listViewMsg, Encoding dataEncoding = null) : this(filePath, listViewMsg, dataEncoding)
+        // 20220908, SHS, SERVERTIME 중복체크 (시간만 비교할지 값도 비교할지) 옵션 기능 추가
+        //public EquipmentDataProcess(string filePath, DataTable dtTag, FormListViewMsg listViewMsg, Encoding dataEncoding = null) : this(filePath, listViewMsg, dataEncoding)
+        public EquipmentDataProcess(string filePath, DataTable dtTag, FormListViewMsg listViewMsg, Encoding dataEncoding = null, bool checkServerTimeDup = false) : this(filePath, listViewMsg, dataEncoding)
         {
+            // 20220908, SHS, SERVERTIME 중복체크 (시간만 비교할지 값도 비교할지) 옵션 기능 추가
+            CheckServerTimeDup = checkServerTimeDup;
             UpdateTag(dtTag);
         }
         public bool UpdateTag(DataTable dtTag)
@@ -596,6 +648,9 @@ namespace DataSpider.PC00.PT
             if (string.IsNullOrWhiteSpace(opcItemName))
             {
                 TAG tag = new TAG(tagName, equipName, msgTypeNo, piTagName, lastMeasuredValue, lastMeasuredDateTime);
+                // 20220908, SHS, SERVERTIME 중복체크 (시간만 비교할지 값도 비교할지) 옵션 기능 추가
+                tag.checkServerTimeDup = CheckServerTimeDup;
+                //
                 if (!tag.UpdateFormat(dataPosition, datePosition, timePosition, out string errMessage))
                 {
                     listViewMsg.UpdateMsg($"An error occurred while update TAG format ({tag.TagName}) - {errMessage}", false, true, true, PC00D01.MSGTERR);
@@ -616,7 +671,10 @@ namespace DataSpider.PC00.PT
             foreach (DataRow dr in dtTag.Rows)
             {
                 //Add(dr["TAG_NM"].ToString().Trim(), dr["EQUIP_NM"].ToString().Trim(), dr["MSG_TYPE"].ToString().Trim(), dr["DATA_POSITION"].ToString().Trim(), dr["DATE_POSITION"].ToString().Trim(), dr["TIME_POSITION"].ToString().Trim(), dr["OPCITEM_NM"].ToString().Trim());
-                Add(dr["TAG_NM"].ToString().Trim(), dr["EQUIP_NM"].ToString().Trim(), dr["MSG_TYPE"].ToString().Trim(), dr["DATA_POSITION"].ToString().Trim(), dr["DATE_POSITION"].ToString().Trim(), dr["TIME_POSITION"].ToString().Trim(), dr["PI_TAG_NM"].ToString().Trim(), dr["OPCITEM_NM"].ToString().Trim(), dr["LAST_UPDATED_VALUE"].ToString().Trim(), dr["LAST_MEASURED_DATETIME"].ToString().Trim());
+                // 20220908, SHS, TAG 설정 정보 UPDATE 시 DB 에 저장된 최근값의 측정시간을 yyyy-MM-dd HH:mm:ss 형식 문자열로 변환 처리 (중복데이터 체크 측정시간 비교 위해)
+                //Add(dr["TAG_NM"].ToString().Trim(), dr["EQUIP_NM"].ToString().Trim(), dr["MSG_TYPE"].ToString().Trim(), dr["DATA_POSITION"].ToString().Trim(), dr["DATE_POSITION"].ToString().Trim(), dr["TIME_POSITION"].ToString().Trim(), dr["PI_TAG_NM"].ToString().Trim(), dr["OPCITEM_NM"].ToString().Trim(), dr["LAST_UPDATED_VALUE"].ToString().Trim(), dr["LAST_MEASURED_DATETIME"].ToString().Trim());
+                DateTime.TryParse(dr["LAST_MEASURED_DATETIME"].ToString().Trim(), out DateTime dt);
+                Add(dr["TAG_NM"].ToString().Trim(), dr["EQUIP_NM"].ToString().Trim(), dr["MSG_TYPE"].ToString().Trim(), dr["DATA_POSITION"].ToString().Trim(), dr["DATE_POSITION"].ToString().Trim(), dr["TIME_POSITION"].ToString().Trim(), dr["PI_TAG_NM"].ToString().Trim(), dr["OPCITEM_NM"].ToString().Trim(), dr["LAST_UPDATED_VALUE"].ToString().Trim(), dt.ToString("yyyy-MM-dd HH:mm:ss.fff"));
             }
             return true;
         }

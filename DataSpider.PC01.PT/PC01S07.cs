@@ -50,6 +50,8 @@ namespace DataSpider.PC01.PT
             }
         }
         // 2022-07-25 kwc
+        // 장비 OFF -> ON 시 NULL 문자 두개가 개행문자 없이 수신되어 측정데이터 시작 문자열앞에 붙어서 시작문자열 검출이 안되는 문제로 인해 NULL 문자 제거 처리
+        // AUTO BAUDRATE OFF 인 경우 NULL 문자 두개가 수신되지만 개행문자가 
         string RemoveNull(string Msg)
         {
             string returnString = string.Empty;

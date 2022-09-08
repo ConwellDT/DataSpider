@@ -604,8 +604,15 @@ namespace DataSpider.PC01.PT
                 // 장비타입별로 TTV 파일 저장 폴더를 분리 처리. Data 폴더 하위에 장비타입명 폴더에 저장
                 //thDataProcess = new PC00M01(this, equipType, "DataProcess", connectionInfo, "", 0, true);
                 //thDataProcess = new PC00M01(this, equipName, "DataProcess", connectionInfo, "", 0, true);
-                thDataProcess = new PC00M01(this, equipType, equipName, connectionInfo, "", 0, true);
                 //thDataProcess = new PC00M01(this, equipType, "DataProcess", $@"{Environment.CurrentDirectory}\Data\{equipType}", "", 0, true);
+
+                // 20220908, SHS, SERVERTIME 중복체크 (시간만 비교할지 값도 비교할지) 옵션 기능 추가
+                // MES 결정에 따라 MCA SERVERTIME 중복체크를 옵션 결정. 
+                // 20220908, SHS, MCA 의 경우 서버타임 별도 보완없이 그대로 처리하기로 협의됨 (SBL ATM, MES)
+                thDataProcess = new PC00M01(this, equipType, equipName, connectionInfo, "", 0, true);
+                // 마지막 파라미터 TRUE 이면 서버타임에 대해 시간으로만 중복체크
+                //thDataProcess = new PC00M01(this, equipType, equipName, connectionInfo, "", 0, true, equipType.Equals("SC_MCA"));
+                //
             }
             catch (Exception ex)
             {
