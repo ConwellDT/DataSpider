@@ -396,14 +396,22 @@ namespace DataSpider.PC01.PT
             xmldoc.LoadXml(xmlData);
             //XmlNode xmlNode = xmldoc.SelectSingleNode(xPath);
             XmlNodeList nodeList = xmldoc.SelectNodes(xPath);
+            
+            // 2022-10-13, V.2.0.2.0
+            // SHS, 멀티라인 데이터의 경우 " ;" 로 구분 -> 3공장처럼 " " 로 구분 처리. 마지막 ; 지우는 로직도 3공장처럼 삭제
+            //foreach (XmlNode xmlNode in nodeList)
+            //{
+            //    retString += xmlNode.Value + " ;";
+            //}
+            //if(retString.Length>0)
+            //    retString= retString.Substring(0, retString.Length - 1);
             foreach (XmlNode xmlNode in nodeList)
             {
-                retString += xmlNode.Value + " ;";
+                retString += xmlNode.Value + " ";
             }
-            if(retString.Length>0)
-                retString= retString.Substring(0, retString.Length - 1);
+
             //retString = xmlNode?.Value;
-            retString =retString.Replace((char)ASCII.CR, ' ');
+            retString = retString.Replace((char)ASCII.CR, ' ');
             retString=retString.Replace((char)ASCII.LF, ' ');
             return retString.Trim();
         }

@@ -154,8 +154,9 @@ namespace DataSpider.PC02.PT
                         }
                         else
                         {
-                            m_Owner.listViewMsg(m_Name, string.Format(PC00D01.FailedDBStore, $"{errText} - {fi.Name}"), true, m_nCurNo, 6, true, PC00D01.MSGTERR);
-                            listViewMsg.UpdateMsg(string.Format(PC00D01.FailedDBStore, $"{errText} - {fi.Name}"), false, true, true, PC00D01.MSGTERR);
+                            m_Owner.listViewMsg(m_Name, string.Format(PC00D01.FailedDBStore, $"{errText} - {fi.Name}"), false, m_nCurNo, 6, true, PC00D01.MSGTERR);
+                            // 중복로그 
+                            //listViewMsg.UpdateMsg(string.Format(PC00D01.FailedDBStore, $"{errText} - {fi.Name}"), false, true, true, PC00D01.MSGTERR);
                             // ttv 파일 처리 실패시 DataFile_Error 폴더로 이동 처리
                             fi.MoveTo($@"{di.FullName}\DataFile_Error\{fi.Name}");
                             ThreadStatus = IF_STATUS.InvalidData;
@@ -166,8 +167,9 @@ namespace DataSpider.PC02.PT
                 }
                 catch (Exception ex)
                 {
-                    m_Owner.listViewMsg(m_Name, ex.ToString(), true, m_nCurNo, 6, true, PC00D01.MSGTERR);
-                    listViewMsg.UpdateMsg($"Exception in ThreadJob - ({ex})", false, true, true, PC00D01.MSGTERR);
+                    m_Owner.listViewMsg(m_Name, ex.ToString(), false, m_nCurNo, 6, true, PC00D01.MSGTERR);
+                    // 중복로그 
+                    //listViewMsg.UpdateMsg($"Exception in ThreadJob - ({ex})", false, true, true, PC00D01.MSGTERR);
                     ThreadStatus = IF_STATUS.InternalError;
                 }
                 finally
