@@ -385,10 +385,18 @@ namespace DataSpider.PC01.PT
                 }
                 if (selectString.Length > 2) selectString = selectString.Substring(0, selectString.Length - 2);
                 DataRow[] rows = rdt.Select(selectString, "ID ASC");
+                // 20221020, SHS, SoloVPE 펌웨어 1.179(이전) -> 1.1.114 -> 1.1.148(적용버전) 변경으로 보고서 RawData 출력 순서가 시간 역순 -> 시간 순으로 변경
+                // 보고서 대로 출력 순으로 왼쪽 -> 오른쪽 으로 저장되도록 수정 필요
+                // ID ASC 로 소팅된 상태이므로 인덱스 0 부터 길이만큼 FOR LOOP 처리 
+                //for (int nData = 0; nData < rows.Length; nData++)
+                //{
+                //    retString += " " + (string)rows[rows.Length - nData - 1][PropertyName] + " ;";
+                //}
                 for (int nData = 0; nData < rows.Length; nData++)
                 {
-                    retString += " " + (string)rows[rows.Length - nData - 1][PropertyName] + " ;";
+                    retString += " " + (string)rows[nData][PropertyName] + " ;";
                 }
+
                 if (retString.Length > 0)
                     retString = retString.Substring(0, retString.Length - 1);
                 return retString.Trim();
