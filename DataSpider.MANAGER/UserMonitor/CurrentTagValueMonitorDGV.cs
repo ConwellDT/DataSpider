@@ -734,8 +734,10 @@ namespace DataSpider.UserMonitor
                     }
                     string filePath = $@"{Directory.GetCurrentDirectory()}\LOG\{equipType}_{equipName}\{logData}_{equipType}_{equipName}_{dtReg:yyyyMMdd}.TXT";
                     if (Directory.Exists(filePath))
+                    // 수정필요
+                    //if (File.Exists(filePath))
                     {
-                        Process.Start(logviewProgram, filePath);
+                            Process.Start(logviewProgram, filePath);
                     }
                     else
                     {
