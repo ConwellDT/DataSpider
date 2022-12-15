@@ -733,9 +733,9 @@ namespace DataSpider.UserMonitor
                         dtReg = DateTime.Now;
                     }
                     string filePath = $@"{Directory.GetCurrentDirectory()}\LOG\{equipType}_{equipName}\{logData}_{equipType}_{equipName}_{dtReg:yyyyMMdd}.TXT";
-                    if (Directory.Exists(filePath))
-                    // 수정필요
-                    //if (File.Exists(filePath))
+                    // 20221212, SHS, V.2.0.4.0, 오픈 대상 파일 유무 확인 메서드 오류 수정
+                    //if (Directory.Exists(filePath))
+                    if (File.Exists(filePath))
                     {
                             Process.Start(logviewProgram, filePath);
                     }

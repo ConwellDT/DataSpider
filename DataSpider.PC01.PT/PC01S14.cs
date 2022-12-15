@@ -484,11 +484,13 @@ namespace DataSpider.PC01.PT
                         if (myUaClient.m_reconnectHandler != null)
                         {
                             UpdateEquipmentProgDateTime(IF_STATUS.Disconnected);
-                            if ((DateTime.Now - dtNormalTime).TotalHours >= 1)
-                            {
-                                myUaClient = null;
-                                listViewMsg.UpdateMsg($" Network Error Time >= 1 Hr, Ua Client Reset ", false, true, true, PC00D01.MSGTERR);
-                            }
+
+                            // 20221212, SHS, V.2.0.4.0, OPC 초기화 부분 삭제
+                            //if ((DateTime.Now - dtNormalTime).TotalHours >= 1)
+                            //{
+                            //    myUaClient = null;
+                            //    listViewMsg.UpdateMsg($" Network Error Time >= 1 Hr, Ua Client Reset ", false, true, true, PC00D01.MSGTERR);
+                            //}
                         }
                         else
                         {
@@ -581,7 +583,11 @@ namespace DataSpider.PC01.PT
                 listViewMsg.UpdateMsg($"Exception in OPC Call - {ex}", false, true, true, PC00D01.MSGTERR);
                 // 20220818, SHS, OPC Call Exception 시 OPC 접속종료 처리
                 listViewMsg.UpdateMsg($"OPC Client null", false, true, true, PC00D01.MSGTINF);
+                // 20221212, SHS, V.2.0.4.0, OPC 초기화 부분 보완, null 처리 전 Close 추가, null 후 sleep 추가
+                myUaClient.Close();
                 myUaClient = null;
+                Thread.Sleep(5000);
+
                 return false;
             }
             if (outputArguments != null && outputArguments.Count >= 1)
@@ -664,7 +670,11 @@ namespace DataSpider.PC01.PT
                 }
                 // 20220818, SHS, OPC Call Exception 시 OPC 접속종료 처리
                 listViewMsg.UpdateMsg($"OPC Client null", false, true, true, PC00D01.MSGTINF);
+                // 20221212, SHS, V.2.0.4.0, OPC 초기화 부분 보완, null 처리 전 Close 추가, null 후 sleep 추가
+                myUaClient.Close();
                 myUaClient = null;
+                Thread.Sleep(5000);
+
                 return false;
             }
             if (outputArguments != null && outputArguments.Count >= 1)
@@ -773,27 +783,43 @@ namespace DataSpider.PC01.PT
                     subjectName = Utils.Format($@"CN={m_Name}, DC={0}", Dns.GetHostName())
                 };
 
-                if (!string.IsNullOrEmpty(Uid) && !string.IsNullOrEmpty(Pwd))
-                    myUaClient.useridentity = new UserIdentity(Uid, Pwd);
 
-                myUaClient.CreateConfig();
-                myUaClient.CreateApplicationInstance();
-                myUaClient.CreateSession();
+                // 20221212, SHS, V.2.0.4.0, OPC CLIENT 생성 조건 확인 후 처리 
+                // 20221212, SHS, V.2.0.4.0, OPC CLIENT 생성 로그 
+                if (myUaClient != null)
+                {
+                    UpdateEquipmentProgDateTime(IF_STATUS.Normal);
+                    if (!string.IsNullOrEmpty(Uid) && !string.IsNullOrEmpty(Pwd))
+                        myUaClient.useridentity = new UserIdentity(Uid, Pwd);
 
-                // Session/Subscription을 생성한 후
-                myUaClient.CreateSubscription(1000);
-                listViewMsg.UpdateMsg($"myUaClient.CreateSubscription ", false, true, true, PC00D01.MSGTINF);
-                // CSV 파일에 있는 TagName, NodeId 리스트를 MonitoredItem으로 등록하고 
-                ReadConfigInfo();
-                myUaClient.UpateTagData += UpdateTagValue;
-                // 20220818, SHS, OPC Client Log 출력용 등록
-                myUaClient.LogMsgFunc += LogMsg;
+                    myUaClient.CreateConfig();
+                    myUaClient.CreateApplicationInstance();
+                    myUaClient.CreateSession();
+                    // 20220818, SHS, OPC Client Log 출력용 등록
+                    myUaClient.LogMsgFunc += LogMsg;
+                    listViewMsg.UpdateMsg($"OpcUaClient Created !", false, true, true, PC00D01.MSGTINF);
+                }
+                else
+                {
+                    UpdateEquipmentProgDateTime(IF_STATUS.Disconnected);
+                    listViewMsg.UpdateMsg($"OpcUaClient Create Error !", false, true, true, PC00D01.MSGTINF);
+                }
 
-                listViewMsg.UpdateMsg($"myUaClient.UpateTagData ", false, true, true, PC00D01.MSGTINF);
-                // currentSubscription에 대한 서비스를 등록한다.
-                bool bReturn = myUaClient.AddSubscription();
-                if (bReturn == false) myUaClient = null;
-                listViewMsg.UpdateMsg($"{bReturn}= myUaClient.AddSubscription", false, true, true, PC00D01.MSGTINF);
+                // 20221212, SHS, V.2.0.4.0, SUBSCRIPTION 부분 삭제
+                //// Session/Subscription을 생성한 후
+                //myUaClient.CreateSubscription(1000);
+                //listViewMsg.UpdateMsg($"myUaClient.CreateSubscription ", false, true, true, PC00D01.MSGTINF);
+                //// CSV 파일에 있는 TagName, NodeId 리스트를 MonitoredItem으로 등록하고 
+                //ReadConfigInfo();
+                //myUaClient.UpateTagData += UpdateTagValue;
+
+
+                // 20221212, SHS, V.2.0.4.0, SUBSCRIPTION 부분 삭제
+                //listViewMsg.UpdateMsg($"myUaClient.UpateTagData ", false, true, true, PC00D01.MSGTINF);
+                //// currentSubscription에 대한 서비스를 등록한다.
+                //bool bReturn = myUaClient.AddSubscription();
+                //if (bReturn == false) myUaClient = null;
+                //listViewMsg.UpdateMsg($"{bReturn}= myUaClient.AddSubscription", false, true, true, PC00D01.MSGTINF);
             }
             catch (Exception ex)
             {

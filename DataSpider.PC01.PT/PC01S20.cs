@@ -129,13 +129,14 @@ namespace DataSpider.PC01.PT
                                                             dtNormalTime = DateTime.Now;
                                                         }
                             */
-                            if ((DateTime.Now - dtNormalTime).TotalMilliseconds >= myUaClient.m_session.SessionTimeout * 10)
-                            {
-                                //listViewMsg.UpdateMsg($" Network Error , UaClient.Close() ", false, true, true, PC00D01.MSGTERR);
-                                //myUaClient.Close();
-                                myUaClient = null;
-                                listViewMsg.UpdateMsg($" Network Error , Ua Client Reset ", false, true, true, PC00D01.MSGTERR);
-                            }
+                            // 20221212, SHS, V.2.0.4.0, OPC 초기화 부분 삭제
+                            //if ((DateTime.Now - dtNormalTime).TotalMilliseconds >= myUaClient.m_session.SessionTimeout * 10)
+                            //{
+                            //    //listViewMsg.UpdateMsg($" Network Error , UaClient.Close() ", false, true, true, PC00D01.MSGTERR);
+                            //    //myUaClient.Close();
+                            //    myUaClient = null;
+                            //    listViewMsg.UpdateMsg($" Network Error , Ua Client Reset ", false, true, true, PC00D01.MSGTERR);
+                            //}
                         }
                         else
                         {
@@ -160,6 +161,8 @@ namespace DataSpider.PC01.PT
                             }
 
                             m_ViCellStatus = m_OpcItemList["ViCellStatus"];
+                            //if (m_PrevViCellStatus != m_ViCellStatus)
+                            //    listViewMsg.UpdateMsg($"ViCellStatus : {m_ViCellStatus}", false, true, true, PC00D01.MSGTINF);
                             if (m_ViCellStatus == "0")
                             {
                                 if ( bReadSampleResult() )  // reconnect, reidle
@@ -273,6 +276,7 @@ namespace DataSpider.PC01.PT
             bool bReturn = false;
             if ( m_bReconnected == true ) bReturn = true;
             if ( m_ViCellStatus != m_PrevViCellStatus ) bReturn = true;
+            listViewMsg.UpdateMsg($"bReadSampleResult : {bReturn}, m_bReconnected : {m_bReconnected}, m_ViCellStatus : {m_ViCellStatus}, m_PrevViCellStatus : {m_PrevViCellStatus}", false, true, true, PC00D01.MSGTINF);
             return bReturn;
         }
 
@@ -588,7 +592,6 @@ namespace DataSpider.PC01.PT
                 myUaClient.CreateConfig();
                 myUaClient.CreateApplicationInstance();
                 myUaClient.CreateSession();
-
 
                 myUaClient.objectsFolderCollection = myUaClient.Browse(out _);
 

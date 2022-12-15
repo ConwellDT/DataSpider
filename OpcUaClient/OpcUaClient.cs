@@ -305,7 +305,8 @@ namespace OpcUaClient
             m_session = Session.Create(config, endpoint, false, config.ApplicationName, SessionTimeout, useridentity, null).GetAwaiter().GetResult();
             m_session.KeepAliveInterval = 5000;
             m_session.KeepAlive += new KeepAliveEventHandler(StandardClient_KeepAlive);
-            m_session.Notification += new NotificationEventHandler(Session_Notification);
+            // 20221212, SHS, V.2.0.4.0, OPC 이벤트 삭제
+            //m_session.Notification += new NotificationEventHandler(Session_Notification);
 
 
             //Task<Session> t= Session.Create(config, endpoint, false, config.ApplicationName, SessionTimeout, useridentity, null);
@@ -361,8 +362,11 @@ namespace OpcUaClient
             { 
                 PublishingInterval = _publishingInterval
             };
-            m_subscription.StateChanged += new SubscriptionStateChangedEventHandler(Subscription_StateChanged);
-            m_subscription.PublishStatusChanged += new EventHandler(Subscription_PublishStatusChanged);
+
+            // 20221212, SHS, V.2.0.4.0, OPC 이벤트 삭제
+            //m_subscription.StateChanged += new SubscriptionStateChangedEventHandler(Subscription_StateChanged);
+            //m_subscription.PublishStatusChanged += new EventHandler(Subscription_PublishStatusChanged);
+
             //m_subscription.FastDataChangeCallback = OnDataChange;
         }
 

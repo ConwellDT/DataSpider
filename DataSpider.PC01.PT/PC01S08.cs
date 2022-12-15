@@ -78,11 +78,13 @@ namespace DataSpider.PC01.PT
                         if (myUaClient.m_reconnectHandler != null)
                         {
                             UpdateEquipmentProgDateTime(IF_STATUS.Disconnected);
-                            if ((DateTime.Now - dtNormalTime).TotalHours >= 1 )
-                            {
-                                myUaClient = null;
-                                listViewMsg.UpdateMsg($" Network Error Time >= 1 Hr, Ua Client Reset ", false, true, true, PC00D01.MSGTERR);
-                            }
+
+                            // 20221212, SHS, V.2.0.4.0, OPC 초기화 부분 삭제
+                            //if ((DateTime.Now - dtNormalTime).TotalHours >= 1 )
+                            //{
+                            //    myUaClient = null;
+                            //    listViewMsg.UpdateMsg($" Network Error Time >= 1 Hr, Ua Client Reset ", false, true, true, PC00D01.MSGTERR);
+                            //}
                         }
                         else
                         {

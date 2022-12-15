@@ -102,81 +102,99 @@ namespace DataSpider.PC01.PT
                     }
                     else
                     {
-                        DataValue LastTestCompleted = myUaClient.ReadValue(new NodeId("ns=2;s=LastTestCompleted"));
-//                        listViewMsg.UpdateMsg($"LastTestCompleted :{LastTestCompleted.Value.ToString() }  !", false, true, true, PC00D01.MSGTINF);
-                        // 최근 검사완료 번호를 못받음
-                        if (LastTestCompleted == null)
+                        // 20221212, SHS, V.2.0.4.0, ReconnectHandler 동작 확인 부분 추가
+                        if (myUaClient.m_reconnectHandler != null)
                         {
-                            listViewMsg.UpdateMsg($"LastTestCompleted is null", false, true, true, PC00D01.MSGTERR);
-                            if ((DateTime.Now - dtNormalTime).TotalHours < 1)
-                            {
-                                //UpdateEquipmentProgDateTime(IF_STATUS.InvalidData);
-                                UpdateEquipmentProgDateTime(IF_STATUS.NetworkError);
-                            }
-                            else
-                            {
-                                myUaClient = null;
-                                listViewMsg.UpdateMsg($" Network Error Time > 1 Hr, Ua Client Reset ", false, true, true, PC00D01.MSGTERR);
-                            }
-                            Thread.Sleep(10 * 1000);
-                            continue;
-                        }
-                        dtNormalTime = DateTime.Now;
-                        // 최근 처리한 데이터 이후 데이터 수신
-                        // 현재 값과 이전 값 만 가지고 처리
-                        //      이전 값                현재 값
-                        m_CurrentRecord =(UInt32)LastTestCompleted.Value;
-                        if (m_LastEnqueuedRecord != m_CurrentRecord)
-                        {
-                            listViewMsg.UpdateMsg($"Current m_LastEnqueuedRecord :{m_LastEnqueuedRecord}", false, true, true, PC00D01.MSGTINF);
-                            listViewMsg.UpdateMsg($"Received LastTestCompleted :{m_CurrentRecord}", false, true, true, PC00D01.MSGTINF);
-
-                            if (ProcessMethod(m_CurrentRecord) == true)
-                            {
-                                listViewMsg.UpdateMsg($" ProcessMethod({m_CurrentRecord})-OK ", false, true, true, PC00D01.MSGTINF);
-                                m_LastEnqueuedRecord = m_CurrentRecord;
-                                SetLastEnqueuedRecord(m_LastEnqueuedRecord);
-                            }
-                            else
-                            {
-                                listViewMsg.UpdateMsg($" ProcessMethod({m_CurrentRecord})- NG ", false, true, true, PC00D01.MSGTINF);
-                            }
+                            UpdateEquipmentProgDateTime(IF_STATUS.Disconnected);
                         }
                         else
-                        {// m_LastEnqueuedRecord == m_CurrentRecord  => Nothing To Do => FromRecord/ToRecord 처리
-                            if (m_FromRecord + m_ToRecord > 0)
+                        {
+                            DataValue LastTestCompleted = myUaClient.ReadValue(new NodeId("ns=2;s=LastTestCompleted"));
+                            // TESTTEST
+                            //DataValue LastTestCompleted = myUaClient.ReadValue(new NodeId("ns=2;s=Channel1.Device1.LastTestCompleted"));
+                            //                        listViewMsg.UpdateMsg($"LastTestCompleted :{LastTestCompleted.Value.ToString() }  !", false, true, true, PC00D01.MSGTINF);
+                            // 최근 검사완료 번호를 못받음
+                            if (LastTestCompleted == null)
                             {
-                                listViewMsg.UpdateMsg($"From Record  :{m_FromRecord}", false, true, true, PC00D01.MSGTINF);
-                                listViewMsg.UpdateMsg($"To Record  :{m_ToRecord}", false, true, true, PC00D01.MSGTINF);
+                                // 20221212, SHS, V.2.0.4.0, OPC 초기화 부분 삭제
+                                listViewMsg.UpdateMsg($"LastTestCompleted is null", false, true, true, PC00D01.MSGTERR);
+                                //if ((DateTime.Now - dtNormalTime).TotalHours < 1)
+                                //{
+                                //    //UpdateEquipmentProgDateTime(IF_STATUS.InvalidData);
+                                //    UpdateEquipmentProgDateTime(IF_STATUS.NetworkError);
+                                //}
+                                //else
+                                //{
+                                //    myUaClient = null;
+                                //    listViewMsg.UpdateMsg($" Network Error Time > 1 Hr, Ua Client Reset ", false, true, true, PC00D01.MSGTERR);
+                                //}
 
-                                if (ProcessMethod(m_FromRecord) == true)
+                                // 20221212, SHS, V.2.0.4.0, OPC 초기화 부분 삭제 하고 LastTestCompleted = null 이면 Disconnected 상태 업데이트
+                                UpdateEquipmentProgDateTime(IF_STATUS.Disconnected);
+
+                                Thread.Sleep(10 * 1000);
+                                continue;
+                            }
+                            // 20221212, SHS, V.2.0.4.0, LastTestCompleted 값 로그
+                            listViewMsg.UpdateMsg($"LastTestCompleted : {LastTestCompleted}", false, true, true, PC00D01.MSGTINF);
+
+                            dtNormalTime = DateTime.Now;
+                            // 최근 처리한 데이터 이후 데이터 수신
+                            // 현재 값과 이전 값 만 가지고 처리
+                            //      이전 값                현재 값
+                            m_CurrentRecord = (UInt32)LastTestCompleted.Value;
+                            if (m_LastEnqueuedRecord != m_CurrentRecord)
+                            {
+                                listViewMsg.UpdateMsg($"Current m_LastEnqueuedRecord :{m_LastEnqueuedRecord}", false, true, true, PC00D01.MSGTINF);
+                                listViewMsg.UpdateMsg($"Received LastTestCompleted :{m_CurrentRecord}", false, true, true, PC00D01.MSGTINF);
+
+                                if (ProcessMethod(m_CurrentRecord) == true)
                                 {
-                                    listViewMsg.UpdateMsg($" ProcessMethod({m_FromRecord})-OK ", false, true, true, PC00D01.MSGTINF);
-                                    m_FromRecord++;
-                                    if (m_FromRecord > m_ToRecord)
-                                    {
-                                        m_FromRecord = m_ToRecord = 0;
-                                        SetToRecord(m_ToRecord);
-                                    }
-                                    SetFromRecord(m_FromRecord);
+                                    listViewMsg.UpdateMsg($" ProcessMethod({m_CurrentRecord})-OK ", false, true, true, PC00D01.MSGTINF);
+                                    m_LastEnqueuedRecord = m_CurrentRecord;
+                                    SetLastEnqueuedRecord(m_LastEnqueuedRecord);
                                 }
                                 else
                                 {
-                                    listViewMsg.UpdateMsg($" ProcessMethod({m_FromRecord})- NG ", false, true, true, PC00D01.MSGTINF);
+                                    listViewMsg.UpdateMsg($" ProcessMethod({m_CurrentRecord})- NG ", false, true, true, PC00D01.MSGTINF);
                                 }
-                            }                            
-                            else
-                            {// FromRecord/ToRecord 처리할 것도 없음. 
-                                if( m_LastWriteTime != GetConfigLastWriteTime())
-                                {
-                                    m_FromRecord = GetFromRecord();
-                                    m_ToRecord = GetToRecord();
-                                    m_LastWriteTime = GetConfigLastWriteTime();
-                                }
-                                Thread.Sleep(10 * 1000);
-
                             }
-                            UpdateEquipmentProgDateTime(IF_STATUS.Normal);
+                            else
+                            {// m_LastEnqueuedRecord == m_CurrentRecord  => Nothing To Do => FromRecord/ToRecord 처리
+                                if (m_FromRecord + m_ToRecord > 0)
+                                {
+                                    listViewMsg.UpdateMsg($"From Record  :{m_FromRecord}", false, true, true, PC00D01.MSGTINF);
+                                    listViewMsg.UpdateMsg($"To Record  :{m_ToRecord}", false, true, true, PC00D01.MSGTINF);
+
+                                    if (ProcessMethod(m_FromRecord) == true)
+                                    {
+                                        listViewMsg.UpdateMsg($" ProcessMethod({m_FromRecord})-OK ", false, true, true, PC00D01.MSGTINF);
+                                        m_FromRecord++;
+                                        if (m_FromRecord > m_ToRecord)
+                                        {
+                                            m_FromRecord = m_ToRecord = 0;
+                                            SetToRecord(m_ToRecord);
+                                        }
+                                        SetFromRecord(m_FromRecord);
+                                    }
+                                    else
+                                    {
+                                        listViewMsg.UpdateMsg($" ProcessMethod({m_FromRecord})- NG ", false, true, true, PC00D01.MSGTINF);
+                                    }
+                                }
+                                else
+                                {// FromRecord/ToRecord 처리할 것도 없음. 
+                                    if (m_LastWriteTime != GetConfigLastWriteTime())
+                                    {
+                                        m_FromRecord = GetFromRecord();
+                                        m_ToRecord = GetToRecord();
+                                        m_LastWriteTime = GetConfigLastWriteTime();
+                                    }
+                                    Thread.Sleep(10 * 1000);
+
+                                }
+                                UpdateEquipmentProgDateTime(IF_STATUS.Normal);
+                            }
                         }
                     }
                 }
@@ -303,12 +321,18 @@ namespace DataSpider.PC01.PT
 
         private DateTime GetConfigLastWriteTime()
         {
-            string path = $@".\CFG\{m_Type}_MANL.ini";
+            // 20221212, SHS, V.2.0.4.0, 수동 레코드 설정 부분, 디렉토리 경로 별도 변수 할당
+            //string path = $@".\CFG\{m_Type}_MANL.ini";
+            string dirPath = $@".\CFG";
+            string path = dirPath + $@"\{m_Type}_MANL.ini";
             DateTime dtReturn = DateTime.MinValue;
             try
             {
                 if (!File.Exists(path))
                 {
+                    // 20221212, SHS, V.2.0.4.0, 디렉토리가 없으면 생성
+                    if (!Directory.Exists(dirPath))  Directory.CreateDirectory(dirPath);
+
                     File.Create(path);
                     SetFromRecord(m_FromRecord);
                     SetToRecord(m_ToRecord);
@@ -558,6 +582,10 @@ namespace DataSpider.PC01.PT
                 listViewMsg.UpdateMsg($"Exceptioin - ReadConfigInfo ({ex})", false, true, true, PC00D01.MSGTERR);
             }
         }
+        public void LogMsg(string Msg)
+        {
+            listViewMsg.UpdateMsg($" OPC UA Client - {Msg}", false, true, true, PC00D01.MSGTINF);
+        }
         void InitOpcUaClient()
         {
             try
@@ -570,16 +598,21 @@ namespace DataSpider.PC01.PT
                     applicationType = ApplicationType.Client,
                     subjectName = Utils.Format($@"CN={m_Name}, DC={0}", Dns.GetHostName())
                 };
-                if (!string.IsNullOrEmpty(Uid) && !string.IsNullOrEmpty(Pwd))
-                    myUaClient.useridentity = new UserIdentity(Uid, Pwd);
 
-                myUaClient.CreateConfig();
-                myUaClient.CreateApplicationInstance();
-                myUaClient.CreateSession();
-
+                // 20221212, SHS, V.2.0.4.0, OPC CLIENT 생성 조건 문 위치 이동 / 생성 확인 후 진행
                 if (myUaClient != null)
                 {
-                    UpdateEquipmentProgDateTime(IF_STATUS.Normal);
+
+                    if (!string.IsNullOrEmpty(Uid) && !string.IsNullOrEmpty(Pwd))
+                        myUaClient.useridentity = new UserIdentity(Uid, Pwd);
+
+                    myUaClient.CreateConfig();
+                    myUaClient.CreateApplicationInstance();
+                    myUaClient.CreateSession();
+
+                    // 20221212, SHS, V.2.0.4.0, OPC CLIENT LOG 추가
+                    myUaClient.LogMsgFunc += LogMsg;
+                    UpdateEquipmentProgDateTime(IF_STATUS.Normal);  // 연결 성공 여부는 CreateSession 에서 exception 이 발생하지 않아야 하는 걸로 보임
                     listViewMsg.UpdateMsg($"OpcUaClient Created !", false, true, true, PC00D01.MSGTINF);
                 }
                 else
@@ -587,6 +620,7 @@ namespace DataSpider.PC01.PT
                     UpdateEquipmentProgDateTime(IF_STATUS.Disconnected);
                     listViewMsg.UpdateMsg($"OpcUaClient Create Error !", false, true, true, PC00D01.MSGTINF);
                 }
+
 
             }
             catch (Exception ex)
