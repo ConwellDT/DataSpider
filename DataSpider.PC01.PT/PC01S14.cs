@@ -788,7 +788,6 @@ namespace DataSpider.PC01.PT
                 // 20221212, SHS, V.2.0.4.0, OPC CLIENT 생성 로그 
                 if (myUaClient != null)
                 {
-                    UpdateEquipmentProgDateTime(IF_STATUS.Normal);
                     if (!string.IsNullOrEmpty(Uid) && !string.IsNullOrEmpty(Pwd))
                         myUaClient.useridentity = new UserIdentity(Uid, Pwd);
 
@@ -797,6 +796,9 @@ namespace DataSpider.PC01.PT
                     myUaClient.CreateSession();
                     // 20220818, SHS, OPC Client Log 출력용 등록
                     myUaClient.LogMsgFunc += LogMsg;
+                    //
+                    UpdateEquipmentProgDateTime(IF_STATUS.Normal);  // 연결 성공 여부는 CreateSession 에서 exception 이 발생하지 않아야 하는 걸로 보임
+                    //
                     listViewMsg.UpdateMsg($"OpcUaClient Created !", false, true, true, PC00D01.MSGTINF);
                 }
                 else
