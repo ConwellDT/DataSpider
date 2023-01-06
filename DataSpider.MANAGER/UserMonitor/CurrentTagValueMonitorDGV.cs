@@ -192,11 +192,11 @@ namespace DataSpider.UserMonitor
 
             DataView dvProgramStatus = dtProgramStatus.DefaultView;
 
-            String strFileterStr = String.Empty;
+            String strFilterStr = String.Empty;
 
             if (String.IsNullOrEmpty(TagNameFilter) == false)
             {
-                strFileterStr = $" [TAG Name] LIKE '%{TagNameFilter}%'";
+                strFilterStr = $" [TAG Name] LIKE '%{TagNameFilter}%'";
             }
             else
             {
@@ -214,11 +214,11 @@ namespace DataSpider.UserMonitor
                             {
                                 if (nT == 0)
                                 {
-                                    strFileterStr = $"([TAG Name] = '{equipName.Trim()}_{dtGropTagNames.Rows[nT]["TAG_NM"].ToString()}'";
+                                    strFilterStr = $"([TAG Name] = '{equipName.Trim()}_{dtGropTagNames.Rows[nT]["TAG_NM"].ToString()}'";
                                 }
                                 else
                                 {
-                                    strFileterStr += $" OR [TAG Name] = '{equipName.Trim()}_{dtGropTagNames.Rows[nT]["TAG_NM"].ToString()}'";
+                                    strFilterStr += $" OR [TAG Name] = '{equipName.Trim()}_{dtGropTagNames.Rows[nT]["TAG_NM"].ToString()}'";
                                 }
                             }
                         }
@@ -228,16 +228,16 @@ namespace DataSpider.UserMonitor
                             {
                                 if (nT == 0)
                                 {
-                                    strFileterStr = $"([TAG Name] LIKE '%{equipName.Trim()}_{dtGropTagNames.Rows[nT]["TAG_NM"].ToString()}%'";
+                                    strFilterStr = $"([TAG Name] LIKE '%{equipName.Trim()}_{dtGropTagNames.Rows[nT]["TAG_NM"].ToString()}%'";
                                 }
                                 else
                                 {
-                                    strFileterStr += $" OR [TAG Name] LIKE '%{equipName.Trim()}_{dtGropTagNames.Rows[nT]["TAG_NM"].ToString()}%'";
+                                    strFilterStr += $" OR [TAG Name] LIKE '%{equipName.Trim()}_{dtGropTagNames.Rows[nT]["TAG_NM"].ToString()}%'";
                                 }
                             }
                         }
 
-                        if (String.IsNullOrEmpty(strFileterStr) == false) strFileterStr += ")";
+                        if (String.IsNullOrEmpty(strFilterStr) == false) strFilterStr += ")";
                     }
                 }
             }
@@ -254,10 +254,13 @@ namespace DataSpider.UserMonitor
             //        strFileterStr += $"([Measure DateTime] > '{DateTimeFilterCurMin.ToString("yyyy-MM-dd HH:mm:ss.fff")}' AND [Measure DateTime] < '{DateTimeFilterCurMax.ToString("yyyy-MM-dd HH:mm:ss.fff")}') ";
             //    }
             //}
-            if (String.IsNullOrEmpty(strFileterStr) == false) strFileterStr += " AND ";
-            strFileterStr += $"[Description] LIKE '%{DescriptionFilter}%'  ";
+            if (String.IsNullOrEmpty(strFilterStr) == false) strFilterStr += " AND ";
+            // 20230106, SHS, DescriptionFilter 값이 NULL or WS 일때 LIKE 문 때문에 제외되는 현상으로 인해 수정, strFileterStr -> strFilterStr 오타 수정
+            //strFileterStr += $"[Description] LIKE '%{DescriptionFilter}%'  ";
+            if (!string.IsNullOrWhiteSpace(DescriptionFilter))
+                strFilterStr += $"[Description] LIKE '%{DescriptionFilter}%'  ";
+            dvProgramStatus.RowFilter = strFilterStr;
 
-            dvProgramStatus.RowFilter = strFileterStr;
             dvProgramStatus.Sort = "Measure DateTime DESC";
             
             dataGridView_Main.DataSource = dvProgramStatus;

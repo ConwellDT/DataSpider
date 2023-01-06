@@ -343,6 +343,13 @@ namespace DataSpider.PC00.PT
                             return false;
                         }
                         Debug.WriteLine(TTV);
+                        
+                        // 20230106, SHS, TimeStamp 값이 MSSQL datetime 범위에 벗어나면 (DB 저장시 Error 발생) PI/DataSpider 저장 처리 안하도록 수정
+                        if (dtTimeStamp.CompareTo(DateTime.Parse("1753-01-01 00:00:00.000")) < 0)
+                        {
+                            errMessage = $"Invalid TimeStamp. TimeStamp is before 1753-01-01 00:00:00.000 ({TimeStamp})";
+                            return false;
+                        }
 
                         //IsValueUpdated = true;
                         // 20220908, SHS, TTV 형태 데이터 처리시에도 중복데이터 제외 기능 누락되었던것 추가
@@ -510,6 +517,13 @@ namespace DataSpider.PC00.PT
             }
 
             Debug.WriteLine(TTV);
+
+            // 20230106, SHS, TimeStamp 값이 MSSQL datetime 범위에 벗어나면 (DB 저장시 Error 발생) PI/DataSpider 저장 처리 안하도록 수정
+            if (dtTimeStamp.CompareTo(DateTime.Parse("1753-01-01 00:00:00.000")) < 0)
+            {
+                errMessage = $"Invalid TimeStamp. TimeStamp is before 1753-01-01 00:00:00.000 ({TimeStamp})";
+                return false;
+            }
 
             //IsValueUpdated = true;
             // 20220404, SHS, 이전 데이터와 값과 시간이 모두 같으면 업데이트로 판단하지 않음 (중복데이터 제거)
