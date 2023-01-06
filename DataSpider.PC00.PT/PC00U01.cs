@@ -265,6 +265,34 @@ namespace DataSpider.PC00.PT
             }
             return result;
         }
+        /// <summary>
+        /// 문자열 에서 숫자부분만 추출하여 리턴 (값과 단위가 공백없이 붙어있는 경우)
+        /// 정수, 실수 모두 처리 가능
+        /// 앞에 공백이 있으면 안되고 +, - 기호는 맨앞에만 와야 함
+        /// </summary>
+        /// <param name="sentence"></param>
+        /// <returns></returns>
+        public static string GetNumberString(string sentence)
+        {
+            string result = string.Empty;
+            int nLastNumber = 0;
+
+            for (int i = 0; i < sentence.Length; i++)
+            {
+                if (i == 0 && (sentence[0].Equals('+') || sentence[0].Equals('-')))
+                    continue;
+                if (float.TryParse(sentence.Substring(0, i + 1), out float fResult))
+                {
+                    result = sentence.Substring(0, i + 1);
+                }
+                else
+                {
+                    break;
+                }
+            }
+            return result;
+        }
+
 
         // 미완
         public static string ExtractStringEx(string line, int offset, int size)
@@ -369,6 +397,10 @@ namespace DataSpider.PC00.PT
                 // 정해진 줄, 정해진 위치부터 숫자만 추출
                 case -4:
                     value = PC00U01.GetNumber(line.Substring(offset - 1).Trim());
+                    break;
+                // 정해진 줄, 정해진 위치부터 숫자에 해당하는 문자열 추출
+                case -5:
+                    value = PC00U01.GetNumberString(line.Substring(offset - 1).Trim());
                     break;
                 // 정해진 사이즈 길이만큼
                 default:
