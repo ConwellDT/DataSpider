@@ -192,11 +192,11 @@ namespace DataSpider.UserMonitor
 
             DataView dvProgramStatus = dtProgramStatus.DefaultView;
 
-            String strFileterStr = String.Empty;
+            String strFilterStr = String.Empty;
 
             if (String.IsNullOrEmpty(TagNameFilter) == false)
             {
-                strFileterStr = $" [TAG Name] LIKE '%{TagNameFilter}%'";
+                strFilterStr = $" [TAG Name] LIKE '%{TagNameFilter}%'";
             }
             else
             {
@@ -214,11 +214,11 @@ namespace DataSpider.UserMonitor
                             {
                                 if (nT == 0)
                                 {
-                                    strFileterStr = $"([TAG Name] = '{equipName.Trim()}_{dtGropTagNames.Rows[nT]["TAG_NM"].ToString()}'";
+                                    strFilterStr = $"([TAG Name] = '{equipName.Trim()}_{dtGropTagNames.Rows[nT]["TAG_NM"].ToString()}'";
                                 }
                                 else
                                 {
-                                    strFileterStr += $" OR [TAG Name] = '{equipName.Trim()}_{dtGropTagNames.Rows[nT]["TAG_NM"].ToString()}'";
+                                    strFilterStr += $" OR [TAG Name] = '{equipName.Trim()}_{dtGropTagNames.Rows[nT]["TAG_NM"].ToString()}'";
                                 }
                             }
                         }
@@ -228,36 +228,37 @@ namespace DataSpider.UserMonitor
                             {
                                 if (nT == 0)
                                 {
-                                    strFileterStr = $"([TAG Name] LIKE '%{equipName.Trim()}_{dtGropTagNames.Rows[nT]["TAG_NM"].ToString()}%'";
+                                    strFilterStr = $"([TAG Name] LIKE '%{equipName.Trim()}_{dtGropTagNames.Rows[nT]["TAG_NM"].ToString()}%'";
                                 }
                                 else
                                 {
-                                    strFileterStr += $" OR [TAG Name] LIKE '%{equipName.Trim()}_{dtGropTagNames.Rows[nT]["TAG_NM"].ToString()}%'";
+                                    strFilterStr += $" OR [TAG Name] LIKE '%{equipName.Trim()}_{dtGropTagNames.Rows[nT]["TAG_NM"].ToString()}%'";
                                 }
                             }
                         }
 
-                        if (String.IsNullOrEmpty(strFileterStr) == false) strFileterStr += ")";
+                        if (String.IsNullOrEmpty(strFilterStr) == false) strFilterStr += ")";
                     }
                 }
             }
             // 20220420, SHS, 최근값 조회하는데 시간이 왜 필요 ?
             //if (DateTimeFilterCurMin > DateTime.MinValue && DateTimeFilterCurMax > DateTime.MinValue && DateTimeFilterCurMin < DateTimeFilterCurMax)
             //{
-            //    if (String.IsNullOrEmpty(strFileterStr) == false) strFileterStr += " AND ";
+            //    if (String.IsNullOrEmpty(strFilterStr) == false) strFilterStr += " AND ";
             //    if (DateTimeFilterCurMin == DateTimeFilterCurMax)
             //    {
-            //        strFileterStr += $"([Measure DateTime] = '{DateTimeFilterCurMin.ToString("yyyy-MM-dd HH:mm:ss.fff")}') ";
+            //        strFilterStr += $"([Measure DateTime] = '{DateTimeFilterCurMin.ToString("yyyy-MM-dd HH:mm:ss.fff")}') ";
             //    }
             //    else
             //    {
-            //        strFileterStr += $"([Measure DateTime] > '{DateTimeFilterCurMin.ToString("yyyy-MM-dd HH:mm:ss.fff")}' AND [Measure DateTime] < '{DateTimeFilterCurMax.ToString("yyyy-MM-dd HH:mm:ss.fff")}') ";
+            //        strFilterStr += $"([Measure DateTime] > '{DateTimeFilterCurMin.ToString("yyyy-MM-dd HH:mm:ss.fff")}' AND [Measure DateTime] < '{DateTimeFilterCurMax.ToString("yyyy-MM-dd HH:mm:ss.fff")}') ";
             //    }
             //}
-            if (String.IsNullOrEmpty(strFileterStr) == false) strFileterStr += " AND ";
-            strFileterStr += $"[Description] LIKE '%{DescriptionFilter}%'  ";
+            if (String.IsNullOrEmpty(strFilterStr) == false) strFilterStr += " AND ";
+            if (!string.IsNullOrWhiteSpace(DescriptionFilter))
+                strFilterStr += $"[Description] LIKE '%{DescriptionFilter}%'  ";
 
-            dvProgramStatus.RowFilter = strFileterStr;
+            dvProgramStatus.RowFilter = strFilterStr;
             dvProgramStatus.Sort = "Measure DateTime DESC";
             
             dataGridView_Main.DataSource = dvProgramStatus;
@@ -297,7 +298,7 @@ namespace DataSpider.UserMonitor
 
             DataTable dtHistoryData = null;
 
-            String strFileterStr = String.Empty;
+            String strFilterStr = String.Empty;
 
             String selGrpName = comboBoxTagGroupSel.SelectedValue.ToString();
 

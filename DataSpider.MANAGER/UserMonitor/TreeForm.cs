@@ -55,6 +55,16 @@ namespace DataSpider.UserMonitor
         {
             InitializeComponent();
             parent = _parent;
+
+            if (ConfigHelper.GetAppSetting("HideTransferActiveNode").Contains("y"))
+            {
+                contextMenuStripEQControl.Items["activeToolStripMenuItem"].Visible = false;
+            }
+            else
+            {
+                contextMenuStripEQControl.Items["activeToolStripMenuItem"].Visible = true;
+            }
+
         }
 
         private void TreeForm_Load(object sender, EventArgs e)
@@ -558,7 +568,7 @@ namespace DataSpider.UserMonitor
                         contextMenuStripEQControl.Items["modeChangeAutoToolStripMenuItem"].Enabled = false;
                     }
                     contextMenuStripEQControl.Items["activeToolStripMenuItem"].Enabled = true;
-                    string ToActive=(((int)fo_dr["ACTIVE_SERVER"] + 1) % 2 == 0) ? "P" : "S";
+                    string ToActive = (((int)fo_dr["ACTIVE_SERVER"] + 1) % 2 == 0) ? "P" : "S";
                     contextMenuStripEQControl.Items["activeToolStripMenuItem"].Text = $"Transfer ActiveNode To {ToActive}";
                 }
                 else
