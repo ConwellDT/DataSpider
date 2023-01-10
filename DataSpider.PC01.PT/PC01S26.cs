@@ -149,23 +149,23 @@ namespace DataSpider.PC01.PT
                 if (m_Type.Equals("PCM_S470-K_P12") && keyIndex == 2 && listData.Count >= m_LineLengthList[keyIndex] - 6 && !sMsgTemp.Contains("Buffer 3"))
                 {
                     int nPosition = listData.FindIndex(p => p.Contains("Buffer 2")) + 3;
-                    listData.Insert(nPosition, "Buffer 3");
-                    listData.Insert(nPosition + 1, "Temp. 3");
-                    listData.Insert(nPosition + 2, "Endpoint");
+                    listData.Insert(nPosition, string.Empty);
+                    listData.Insert(nPosition + 1, string.Empty);
+                    listData.Insert(nPosition + 2, string.Empty);
                 }
                 if (m_Type.Equals("PCM_S470-K_P12") && keyIndex == 2 && listData.Count >= m_LineLengthList[keyIndex] - 3 && !sMsgTemp.Contains("Buffer 3"))
                 {
                     int nPosition = listData.FindIndex(p => p.Contains("Buffer 2")) + 3;
-                    listData.Insert(nPosition, "Buffer 3");
-                    listData.Insert(nPosition + 1, "Temp. 3");
-                    listData.Insert(nPosition + 2, "Endpoint");
+                    listData.Insert(nPosition, string.Empty);
+                    listData.Insert(nPosition + 1, string.Empty);
+                    listData.Insert(nPosition + 2, string.Empty);
                 }
                 if (m_Type.Equals("PCM_S470-K_P12") && keyIndex == 2 && listData.Count >= m_LineLengthList[keyIndex] - 3 && !sMsgTemp.Contains("Slope 2-3"))
                 {
                     int nPosition = listData.FindIndex(p => p.Contains("Slope ")) + 3;
-                    listData.Insert(nPosition, "Slope 2-3");
-                    listData.Insert(nPosition+1, "Slope (%)");
-                    listData.Insert(nPosition+2, "Offset");  
+                    listData.Insert(nPosition, string.Empty);
+                    listData.Insert(nPosition+1, string.Empty);
+                    listData.Insert(nPosition+2, string.Empty);  
                 }
 
 
