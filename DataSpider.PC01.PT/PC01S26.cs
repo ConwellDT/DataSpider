@@ -153,7 +153,7 @@ namespace DataSpider.PC01.PT
                     listData.Insert(nPosition + 1, string.Empty);
                     listData.Insert(nPosition + 2, string.Empty);
                 }
-                if (m_Type.Equals("PCM_S470-K_P12") && keyIndex == 2 && listData.Count >= m_LineLengthList[keyIndex] - 3 && !sMsgTemp.Contains("Buffer 3"))
+                else if (m_Type.Equals("PCM_S470-K_P12") && keyIndex == 2 && listData.Count >= m_LineLengthList[keyIndex] - 3 && !sMsgTemp.Contains("Buffer 3"))
                 {
                     int nPosition = listData.FindIndex(p => p.Contains("Buffer 2")) + 3;
                     listData.Insert(nPosition, string.Empty);
