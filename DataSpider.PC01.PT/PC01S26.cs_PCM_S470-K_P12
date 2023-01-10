@@ -1,1 +1,140 @@
-﻿
+﻿CS3​
+Date/Time   08/22/2022  ​
+            12:03:51    ​
+Sensor      ExpertProISM​
+Status      OK          ​
+                        ​
+Buffer gr.  METTLER     ​
+            TOLEDO      ​
+            Europe (Ref.​
+            25캜)       ​
+User        Administrato​
+            r           ​
+                        ​
+Method      DC          ​
+                        ​
+Meas.type1  DC pH       ​
+                        ​
+Buffer 1    4.01 pH     ​
+Temp. 1    21.6 캜 ATC ​
+Endpoint   Automatic   ​
+            (Strict)    ​
+Buffer 2    7.00 pH     ​
+Temp. 2    21.6 캜 ATC ​
+Endpoint   Automatic   ​
+            (Strict)    ​
+Slope       -58.88 mV/pH​
+Slope (%)   99.5 %      ​
+Offset      9.2 mV      ​
+                        
+
+6줄이 적게 들어옴
+
+
+CS3​
+Date/Time   10/28/2022  ​
+            22:56:23    ​
+Sensor      ExpertProISM​
+Status      OK          ​
+                        ​
+Buffer gr.  METTLER     ​
+            TOLEDO      ​
+            Europe (Ref.​
+            25캜)       ​
+User        Administrato​
+            r           ​
+                        ​
+Method      DC          ​
+                        ​
+Meas.type1  DC pH       ​
+                        ​
+Buffer 1    4.01 pH     ​
+Temp. 1    21.1 캜 ATC ​
+Endpoint   Automatic   ​
+            (Strict)    ​
+Buffer 2    7.00 pH     ​
+Temp. 2    21.0 캜 ATC ​
+Endpoint   Automatic   ​
+            (Strict)    ​
+Buffer 3    9.21 pH     ​
+Temp. 3    20.7 캜 ATC ​
+Endpoint   Automatic   ​
+            (Strict)    ​
+Slope       -58.57 mV/pH​
+Slope (%)   99.0 %      ​
+Offset      3.3 mV  
+
+3줄이 적게 들어옴
+
+CS3​
+Date/Time   08/04/2022  ​
+            10:44:11    ​
+Sensor      ExpertProISM​
+Status      OK          ​
+                        ​
+Buffer gr.  METTLER     ​
+            TOLEDO      ​
+            Europe (Ref.​
+            25캜)       ​
+User        Administrato​
+            r           ​
+                        ​
+Method      DC          ​
+                        ​
+Meas.type1  DC pH       ​
+                        ​
+Buffer 1    4.01 pH     ​
+Temp. 1    25.6 캜 ATC ​
+Endpoint   Automatic   ​
+            (Standard)  ​
+Buffer 2    7.00 pH     ​
+Temp. 2    24.7 캜 ATC ​
+Endpoint   Automatic   ​
+            (Standard)  ​
+Slope 1-2   -58.48 mV/pH​
+Slope (%)   98.8 %      ​
+Offset      9.4 mV      ​
+Slope 2-3   -57.97 mV/pH​
+Slope (%)   98.0 %      ​
+Offset      9.4 mV 
+
+3줄이 적게 들어옴
+
+
+CS3​
+Date/Time   08/04/2022  ​
+            10:44:11    ​
+Sensor      ExpertProISM​
+Status      OK          ​
+                        ​
+Buffer gr.  METTLER     ​
+            TOLEDO      ​
+            Europe (Ref.​
+            25캜)       ​
+User        Administrato​
+            r           ​
+                        ​
+Method      DC          ​
+                        ​
+Meas.type1  DC pH       ​
+                        ​
+Buffer 1    4.01 pH     ​
+Temp. 1    25.6 캜 ATC ​
+Endpoint   Automatic   ​
+            (Standard)  ​
+Buffer 2    7.00 pH     ​
+Temp. 2    24.7 캜 ATC ​
+Endpoint   Automatic   ​
+            (Standard)  ​
+Buffer 3    9.21 pH     ​
+Temp. 3    23.6 캜 ATC ​
+Endpoint   Automatic   ​
+            (Standard)  ​
+Slope 1-2   -58.48 mV/pH​
+Slope (%)   98.8 %      ​
+Offset      9.4 mV      ​
+Slope 2-3   -57.97 mV/pH​
+Slope (%)   98.0 %      ​
+Offset      9.4 mV 
+
+다 들어옴
