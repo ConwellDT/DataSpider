@@ -19,10 +19,12 @@ using System.Data;
 namespace DataSpider.PC01.PT
 {
     /// <summary>
-    /// Equip_Type : PCM_S470K, PCM_PC220
+    /// Equip_Type : PCM_S470-K_P12
     /// 공백줄 제거, 여러 줄로 표시되는 항목을 한줄로 편집 처리
-    /// PCM_S470K : 소켓 수신 데이터 UTF7 인코딩 처리 (기본 UTF8)
+    /// PCM_S470-K : 소켓 수신 데이터 UTF7 인코딩 처리 (기본 UTF8)
     ///           : DC pH 중 BUFFER 가 2 세트만 오는 경우 (3 세트 기본) 처리
+    ///           : DC pH 중 Slope가 1 세트만 오는 경우 (2 세트 기본) 처리
+    ///           : DM COND 중 "T.corr.    Off "가 들어오는 경우 처리 (다음 줄에 "Alpha-coeff. "을 삽입한다.)
     /// </summary>
     public class PC01S26 : PC00B02
     {
@@ -143,21 +145,37 @@ namespace DataSpider.PC01.PT
                 int keyIndex = m_KeyStringList.FindIndex(s => sMsgTemp.Contains(s) && !string.IsNullOrWhiteSpace(s));
 
                 // 20210419, SHS, PCM_S470K DC pH 중 BUFFER 가 2 개 오는 경우 처리
-                if (m_Type.Equals("PCM_S470-K") && keyIndex == 2 && listData.Count >= m_LineLengthList[keyIndex] - 3 && !sMsgTemp.Contains("Buffer 3"))
+                // Slope이 하나만 들어오는 경우도 추가해서 처리.
+                if (m_Type.Equals("PCM_S470-K_P12") && keyIndex == 2 && listData.Count >= m_LineLengthList[keyIndex] - 6 && !sMsgTemp.Contains("Buffer 3"))
                 {
-                    //listData.Insert(14, " Endpoint       ".TrimEnd());
-                    //listData.Insert(14, " Temp. 3     ".TrimEnd());
-                    //listData.Insert(14, "Buffer 3        ".TrimEnd());
-                    /* Format 변경이 발생할 수 있음 buffer2  다음으로 수정 2021/8/5
-                    listData.Insert(14, string.Empty);
-                    listData.Insert(14, string.Empty);
-                    listData.Insert(14, string.Empty);
-                    */
-                    int nBuffer3Position = listData.FindIndex(p => p.Contains("Buffer 2")) + 3;
-                    listData.Insert(nBuffer3Position, string.Empty);
-                    listData.Insert(nBuffer3Position, string.Empty);
-                    listData.Insert(nBuffer3Position, string.Empty);
+                    int nPosition = listData.FindIndex(p => p.Contains("Buffer 2")) + 3;
+                    listData.Insert(nPosition, "Buffer 3");
+                    listData.Insert(nPosition + 1, "Temp. 3");
+                    listData.Insert(nPosition + 2, "Endpoint");
                 }
+                if (m_Type.Equals("PCM_S470-K_P12") && keyIndex == 2 && listData.Count >= m_LineLengthList[keyIndex] - 3 && !sMsgTemp.Contains("Buffer 3"))
+                {
+                    int nPosition = listData.FindIndex(p => p.Contains("Buffer 2")) + 3;
+                    listData.Insert(nPosition, "Buffer 3");
+                    listData.Insert(nPosition + 1, "Temp. 3");
+                    listData.Insert(nPosition + 2, "Endpoint");
+                }
+                if (m_Type.Equals("PCM_S470-K_P12") && keyIndex == 2 && listData.Count >= m_LineLengthList[keyIndex] - 3 && !sMsgTemp.Contains("Slope 2-3"))
+                {
+                    int nPosition = listData.FindIndex(p => p.Contains("Slope    ")) + 3;
+                    listData.Insert(nPosition, "Slope 2-3");
+                    listData.Insert(nPosition+1, "Slope (%)");
+                    listData.Insert(nPosition+2, "Offset");  
+                }
+
+
+                //DM COND
+                if (m_Type.Equals("PCM_S470-K_P12") && keyIndex == 3 && listData.Count >= m_LineLengthList[keyIndex] - 1 && !sMsgTemp.Contains("Alpha-coeff."))
+                {
+                    int nPosition = listData.FindIndex(p => p.Contains("T.corr.")) + 1;
+                    listData.Insert(nPosition, "Alpha-coeff.");                    
+                }
+
 
                 if (keyIndex > -1 && listData.Count >= m_LineLengthList[keyIndex])
                 {
