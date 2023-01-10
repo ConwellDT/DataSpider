@@ -173,7 +173,7 @@ namespace DataSpider.PC01.PT
                 if (m_Type.Equals("PCM_S470-K_P12") && keyIndex == 3 && listData.Count >= m_LineLengthList[keyIndex] - 1 && !sMsgTemp.Contains("Alpha-coeff."))
                 {
                     int nPosition = listData.FindIndex(p => p.Contains("T.corr.")) + 1;
-                    listData.Insert(nPosition, "Alpha-coeff.");                    
+                    listData.Insert(nPosition, string.Empty);                    
                 }
 
 
