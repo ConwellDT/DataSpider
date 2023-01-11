@@ -218,8 +218,8 @@ namespace DataSpider.PC00.PT
                 if (result < 1 && !(info.Length == 5 && i == 1))
                 {
                     int sizeIndex = info.Length - 1;
-                    // 20210426, SHS, 사이즈 -3, -4 인경우 추가
-                    if (i != sizeIndex || (result != -1 && result != -2 && result != -3 && result != -4))
+                    // 20210426, SHS, 사이즈 -3, -4 인경우 추가  kwc -5추가
+                    if (i != sizeIndex || (result != -1 && result != -2 && result != -3 && result != -4 && result != -5))
                     {
                         errMessage = $"Format value must be greater than 1 excluding Delimeter and Size - {string.Join(", ", info)}";
                         return false;
