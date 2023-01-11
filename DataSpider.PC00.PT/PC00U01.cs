@@ -275,7 +275,6 @@ namespace DataSpider.PC00.PT
         public static string GetNumberString(string sentence)
         {
             string result = string.Empty;
-            int nLastNumber = 0;
 
             for (int i = 0; i < sentence.Length; i++)
             {
