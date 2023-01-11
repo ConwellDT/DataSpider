@@ -365,6 +365,7 @@ namespace DataSpider.PC01.PT
                     case "SC_CAS3G":
                         // Scale :
                     case "SC_CAS":
+                    case "SC_ICS":
                         thProcess = new PC01S11[dtEquipment.Rows.Count];
                         foreach (DataRow dr in dtEquipment.Rows)
                         {
