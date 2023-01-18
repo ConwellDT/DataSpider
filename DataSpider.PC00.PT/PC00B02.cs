@@ -587,6 +587,14 @@ namespace DataSpider.PC00.PT
 
         protected bool CheckStartString(string data)
         {
+            // 20230111, V2.0.5.0 SHS, data 가 null 체크 안되고 호출될 경우 #TIME 에 대해 00:00:00 로 변환되면서 true 리턴되는 문제.
+            // 그냥 data 만 파싱할 경우 날짜까지 포함되어 있어도 처리가 되므로 현재 날짜 + data 로 처리
+            // SEIMM, DATASPIDER 공통
+            if (string.IsNullOrWhiteSpace(data))
+            {
+                return false;
+            }
+
             DateTime dt;
             foreach (string start in m_StartStringList)
             {

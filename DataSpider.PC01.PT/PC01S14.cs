@@ -584,8 +584,8 @@ namespace DataSpider.PC01.PT
                 // 20220818, SHS, OPC Call Exception 시 OPC 접속종료 처리
                 listViewMsg.UpdateMsg($"OPC Client null", false, true, true, PC00D01.MSGTINF);
                 // 20221212, SHS, V.2.0.4.0, OPC 초기화 부분 보완, null 처리 전 Close 추가, null 후 sleep 추가
-                myUaClient.Close();
-                myUaClient = null;
+                //myUaClient.Close();
+                //myUaClient = null;
                 Thread.Sleep(5000);
 
                 return false;
@@ -671,8 +671,8 @@ namespace DataSpider.PC01.PT
                 // 20220818, SHS, OPC Call Exception 시 OPC 접속종료 처리
                 listViewMsg.UpdateMsg($"OPC Client null", false, true, true, PC00D01.MSGTINF);
                 // 20221212, SHS, V.2.0.4.0, OPC 초기화 부분 보완, null 처리 전 Close 추가, null 후 sleep 추가
-                myUaClient.Close();
-                myUaClient = null;
+                //myUaClient.Close();
+                //myUaClient = null;
                 Thread.Sleep(5000);
 
                 return false;
