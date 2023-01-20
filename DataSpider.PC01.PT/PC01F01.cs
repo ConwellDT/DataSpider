@@ -325,7 +325,7 @@ namespace DataSpider.PC01.PT
                             thProcess[i++] = new PC01S07(this, dr, i, true);
                         }
                         break;
-                    case "PCM_S470-K_P12":
+                    case "PCM_S470-K_V2":
                         thProcess = new PC01S26[dtEquipment.Rows.Count];
                         foreach (DataRow dr in dtEquipment.Rows)
                         {
