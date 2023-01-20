@@ -155,7 +155,7 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="PC01S26.cs_PCM_S470-K_P12" />
+    <None Include="PC01S26.cs_PCM_S470-K_V2" />
     <None Include="PC01S17.cs_MSSQL CEDEX HiRes Direct" />
     <None Include="PC01S08.cs_MTBA_BPFLEX2" />
     <None Include="PC01S16.cs_FIT_PF4" />
