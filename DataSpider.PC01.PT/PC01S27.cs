@@ -189,7 +189,7 @@ namespace DataSpider.PC01.PT
                 }
                 if (nType != MSGTYPE.UNKNOWN)
                 {
-                    EnQueue(nType, string.Join(PrinterNewLine, listData));
+                    EnQueue(nType, string.Join(Environment.NewLine, listData));
                     nType = MSGTYPE.UNKNOWN;
                     Started = false;
                     state.sb.Clear();// = new StringBuilder();// Received data string.  
