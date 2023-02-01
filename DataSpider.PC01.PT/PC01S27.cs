@@ -69,6 +69,9 @@ namespace DataSpider.PC01.PT
 
         protected override void ParseMessage(string Msg)
         {
+            // 2023-02-01  kwc    S7_MULTI는  "\n\r"을 System.Environment.NewLine 로 사용함.
+            Msg = Msg.Replace("\n\r", System.Environment.NewLine);
+            state.sb=state.sb.Replace("\n\r", System.Environment.NewLine);
             // 2022-07-25 kwc
             string[] LineData1 = Msg.Split(new string[] { System.Environment.NewLine }, StringSplitOptions.None);
 
