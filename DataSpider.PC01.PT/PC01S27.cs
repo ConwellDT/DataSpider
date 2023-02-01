@@ -43,7 +43,7 @@ namespace DataSpider.PC01.PT
             drEquipment = dr;
             if (m_Type.Equals("PCM_S47_MULTI"))
             {
-                dataEncoding = Encoding.ASCII;
+                dataEncoding = Encoding.GetEncoding("IBM437");
             }
             ReadConfigInfo();
             ReadConnectionInfoForSocket();
