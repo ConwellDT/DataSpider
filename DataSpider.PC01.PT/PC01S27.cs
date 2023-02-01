@@ -43,7 +43,7 @@ namespace DataSpider.PC01.PT
             drEquipment = dr;
             if (m_Type.Equals("PCM_S47_MULTI"))
             {
-                dataEncoding = Encoding.UTF7;
+                dataEncoding = Encoding.ASCII;
             }
             ReadConfigInfo();
             ReadConnectionInfoForSocket();
@@ -69,20 +69,22 @@ namespace DataSpider.PC01.PT
 
         protected override void ParseMessage(string Msg)
         {
+            // 2023-02-01  kwc    S7_MULTI는  "\n\r"을 PrinterNewLine 로 사용함.
+            string PrinterNewLine = "\n\r";
             // 2022-07-25 kwc
-            string[] LineData1 = Msg.Split(new string[] { System.Environment.NewLine }, StringSplitOptions.None);
+            string[] LineData1 = Msg.Split(new string[] { PrinterNewLine }, StringSplitOptions.None);
 
             foreach (string ln in LineData1)
             {
                 if (m_IgnoreStringList.Exists(s => ln.Contains(s) && !string.IsNullOrWhiteSpace(s)))
                 {
-                    state.sb = state.sb.Replace(ln + System.Environment.NewLine, "");
+                    state.sb = state.sb.Replace(ln + PrinterNewLine, "");
                 }
             }
             Msg = state.sb.ToString();
             Msg = RemoveNull(Msg);
 
-            string[] LineData = Msg.Split(new string[] { System.Environment.NewLine }, StringSplitOptions.None);
+            string[] LineData = Msg.Split(new string[] { PrinterNewLine }, StringSplitOptions.None);
             List<string> listData = new List<string>();
             bool Started = false;
             //List<string> forEnque = new List<string>();
@@ -139,7 +141,7 @@ namespace DataSpider.PC01.PT
                     }
                 }
             }
-            string sMsgTemp = string.Join(System.Environment.NewLine, listData);
+            string sMsgTemp = string.Join(PrinterNewLine, listData);
 
             if (listData.Count > 0)
             {
@@ -187,7 +189,7 @@ namespace DataSpider.PC01.PT
                 }
                 if (nType != MSGTYPE.UNKNOWN)
                 {
-                    EnQueue(nType, string.Join(System.Environment.NewLine, listData));
+                    EnQueue(nType, string.Join(PrinterNewLine, listData));
                     nType = MSGTYPE.UNKNOWN;
                     Started = false;
                     state.sb.Clear();// = new StringBuilder();// Received data string.  
