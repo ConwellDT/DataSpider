@@ -150,7 +150,9 @@ namespace DataSpider.PC00.PT
             try
             {
                 StringBuilder strQuery = new StringBuilder();
-                strQuery.Append($"EXEC InsertResult '{_strTagName}', '{_strDateTime}', '{_strValue}', '{_piIFFlag}', '{_piIFDateTime}', '{remark}'");
+                //                strQuery.Append($"EXEC InsertResult '{_strTagName}', '{_strDateTime}', '{_strValue}', '{_piIFFlag}', '{_piIFDateTime}', '{remark}'");
+                // 20230206 KWC  modify to fix UNICODE PROBLEM (α->a )
+                strQuery.Append($"EXEC InsertResult '{_strTagName}', '{_strDateTime}', N'{_strValue}', '{_piIFFlag}', '{_piIFDateTime}', '{remark}'");
 
                 bool result = CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref _strErrCode, ref _strErrText);
                 return result;
