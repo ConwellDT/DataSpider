@@ -140,6 +140,7 @@ namespace DataSpider.PC00.PT
             {
                 m_IpAddress = split[0];
                 int.TryParse(split[1], out m_nPortNo[0]);
+                m_nPortNo[1] = m_nPortNo[0];
                 if (split.Length > 2)
                 {
                     int.TryParse(split[2], out m_nPortNo[1]);
