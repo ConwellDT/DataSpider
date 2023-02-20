@@ -19,10 +19,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpcUaClient", "OpcUaClient\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataSpider.FailoverManager", "DataSpider.FailoverManager\DataSpider.FailoverManager.csproj", "{FDBC7F90-FCDA-4365-8503-7F2183A82F82}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataSpider.SampleCollector", "DataSpider.SampleCollector\DataSpider.SampleCollector.csproj", "{D81BFCAC-9129-4711-8DEA-CFDC9EB4F511}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataSpider.FailoverService", "DataSpider.FailoverService\DataSpider.FailoverService.csproj", "{4813CA8C-54DB-433D-B6DC-40E885A9444E}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -95,22 +91,6 @@ Global
 		{FDBC7F90-FCDA-4365-8503-7F2183A82F82}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FDBC7F90-FCDA-4365-8503-7F2183A82F82}.Release|x86.ActiveCfg = Release|Any CPU
 		{FDBC7F90-FCDA-4365-8503-7F2183A82F82}.Release|x86.Build.0 = Release|Any CPU
-		{D81BFCAC-9129-4711-8DEA-CFDC9EB4F511}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D81BFCAC-9129-4711-8DEA-CFDC9EB4F511}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D81BFCAC-9129-4711-8DEA-CFDC9EB4F511}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{D81BFCAC-9129-4711-8DEA-CFDC9EB4F511}.Debug|x86.Build.0 = Debug|Any CPU
-		{D81BFCAC-9129-4711-8DEA-CFDC9EB4F511}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D81BFCAC-9129-4711-8DEA-CFDC9EB4F511}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D81BFCAC-9129-4711-8DEA-CFDC9EB4F511}.Release|x86.ActiveCfg = Release|Any CPU
-		{D81BFCAC-9129-4711-8DEA-CFDC9EB4F511}.Release|x86.Build.0 = Release|Any CPU
-		{4813CA8C-54DB-433D-B6DC-40E885A9444E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4813CA8C-54DB-433D-B6DC-40E885A9444E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4813CA8C-54DB-433D-B6DC-40E885A9444E}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{4813CA8C-54DB-433D-B6DC-40E885A9444E}.Debug|x86.Build.0 = Debug|Any CPU
-		{4813CA8C-54DB-433D-B6DC-40E885A9444E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4813CA8C-54DB-433D-B6DC-40E885A9444E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4813CA8C-54DB-433D-B6DC-40E885A9444E}.Release|x86.ActiveCfg = Release|Any CPU
-		{4813CA8C-54DB-433D-B6DC-40E885A9444E}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
