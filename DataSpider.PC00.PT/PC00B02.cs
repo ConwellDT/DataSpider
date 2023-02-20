@@ -140,6 +140,8 @@ namespace DataSpider.PC00.PT
             {
                 m_IpAddress = split[0];
                 int.TryParse(split[1], out m_nPortNo[0]);
+                // 2023-02-16 KWC 
+                m_nPortNo[1] = m_nPortNo[0];
                 if (split.Length > 2)
                 {
                     int.TryParse(split[2], out m_nPortNo[1]);
@@ -587,6 +589,11 @@ namespace DataSpider.PC00.PT
 
         protected bool CheckStartString(string data)
         {
+            // 20230111, SHS, data 가 null 체크 안되고 호출될 경우 #TIME 에 대해 00:00:00 로 변환되면서 true 리턴되는 문제
+            if (string.IsNullOrWhiteSpace(data))
+            {
+                return false;
+            }
             DateTime dt;
             foreach (string start in m_StartStringList)
             {

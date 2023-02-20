@@ -99,6 +99,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PC01S26.cs" />
     <Compile Include="PC01S20.cs" />
     <Compile Include="PC01S19.cs" />
     <Compile Include="PC01S17.cs" />
@@ -133,6 +134,7 @@
     <Compile Include="PC01S13.cs" />
     <Compile Include="PC01S15.cs" />
     <Compile Include="PC01S18.cs" />
+    <Compile Include="PC01S27.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -153,6 +155,7 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="PC01S26.cs_PCM_S470-K_V2" />
     <None Include="PC01S17.cs_MSSQL CEDEX HiRes Direct" />
     <None Include="PC01S08.cs_MTBA_BPFLEX2" />
     <None Include="PC01S16.cs_FIT_PF4" />
@@ -171,6 +174,7 @@
     <None Include="PC01S20.cs_ViCELL_BLU" />
     <None Include="PC01S19.cs_OSMO_TECH" />
     <None Include="PC01S18.cs_MCA" />
+    <None Include="PC01S27.cs_PCM_S47_MULTI" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -258,10 +262,10 @@
       <Version>2.2.8</Version>
     </PackageReference>
     <PackageReference Include="NLog">
-      <Version>5.0.0</Version>
+      <Version>5.1.1</Version>
     </PackageReference>
     <PackageReference Include="NLog.Database">
-      <Version>5.0.0</Version>
+      <Version>5.1.1</Version>
     </PackageReference>
     <PackageReference Include="OPCFoundation.NetStandard.Opc.Ua">
       <Version>1.4.368.53</Version>

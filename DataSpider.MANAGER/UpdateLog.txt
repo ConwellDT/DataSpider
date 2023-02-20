@@ -1,4 +1,33 @@
-﻿2021-11-25  kwc
+﻿
+2023-01-06 kwc
+	1) DataSpider.MANAGER 프로그램의 App.config 변경
+       
+	appSettings 
+		<add key="HideTransferActiveNode" value ="y"/>
+
+	2)  public TreeForm(MonitorForm _parent) 을 아래와 같이 변경
+
+			public TreeForm(MonitorForm _parent)
+			{
+				InitializeComponent();
+				parent = _parent;
+
+			   if (ConfigHelper.GetAppSetting("HideTransferActiveNode").Contains("y"))
+				{
+					contextMenuStripEQControl.Items["activeToolStripMenuItem"].Visible = false;
+				}
+				else
+				{
+					contextMenuStripEQControl.Items["activeToolStripMenuItem"].Visible = true;
+				}
+			}
+
+	3) P4의 경우에도 적용해도 문제 없을 것으로 보이므로 수정 가능할 때 적용바람.
+
+
+
+
+2021-11-25  kwc
 			DataSpider MANAGER TREE ROOT의 상태 변경이 안되는 문제
 					treeView1.BeginUpdate();
                     UpdateTreeNodeState(treeView1.Nodes[0] as TreeNode_SBL);

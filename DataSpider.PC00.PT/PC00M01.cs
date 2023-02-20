@@ -182,9 +182,11 @@ namespace DataSpider.PC00.PT
         public string ReplaceTag { get; private set; } = string.Empty;
         public string Delimeter { get; private set; } = string.Empty;
         public int ItemIndex { get; private set; } = -1;
+
+        // 20230111 kwc -5 추가
         public bool Available
         {
-            get { return !string.IsNullOrWhiteSpace(ReplaceTag) || Line > 0 && Offset > 0 && (Size > 0 || Size == -1 || Size == -2 || Size == -3 || Size == -4); }
+            get { return !string.IsNullOrWhiteSpace(ReplaceTag) || Line > 0 && Offset > 0 && (Size > 0 || Size == -1 || Size == -2 || Size == -3 || Size == -4 || Size == -5); }
         }
         public DateTime ServerTime = DateTime.MinValue;
 
