@@ -60,7 +60,7 @@ namespace DataSpider.PC02.PT
         private string lastErrorFileName = string.Empty;
         public string ProgramName
         {
-            get { return $"{Application.ProductName}{(serverCode == 0 ? "P" : "S")}"; }
+            get { return $"{Application.ProductName}PC02{(serverCode == 0 ? "P" : "S")}"; }
         }
 
         #endregion

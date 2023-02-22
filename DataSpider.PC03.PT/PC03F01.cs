@@ -72,6 +72,11 @@ namespace DataSpider.PC03.PT
         public string serverName = "";
         public string dbName = "";
 
+        public string ProgramName
+        {
+            get { return $"{Application.ProductName}PC03"; }
+        }
+
         #endregion
 
 
@@ -972,7 +977,7 @@ namespace DataSpider.PC03.PT
                         }
                     }
 
-                    m_SqlBiz.UpdateEquipmentProgDateTime(Application.ProductName, maxStatus, ref errCode, ref errText);
+                    m_SqlBiz.UpdateEquipmentProgDateTime(ProgramName, maxStatus, ref errCode, ref errText);
 
                     Thread.Sleep(10*1000);
                 }
@@ -983,7 +988,7 @@ namespace DataSpider.PC03.PT
                 {
                 }
             }
-            m_SqlBiz.UpdateEquipmentProgDateTime(Application.ProductName, (int)IF_STATUS.Stop, ref errCode, ref errText);
+            m_SqlBiz.UpdateEquipmentProgDateTime(ProgramName, (int)IF_STATUS.Stop, ref errCode, ref errText);
         }
 
         private bool CheckPIConnection(out string errText)
