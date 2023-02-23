@@ -440,7 +440,7 @@ namespace DataSpider.PC00.PT
             {
                 StringBuilder strQuery = new StringBuilder();
 
-                strQuery.Append($"EXEC GetMeasureResultForPIConnection '{tagName}'");
+                strQuery.Append($"EXEC GetMeasureResultForPIConnectionTAG '{tagName}'");
 
                 DataSet ds = CFW.Data.MsSqlDbAccess.GetDataSet(strQuery.ToString(), null, CommandType.Text, ref _strErrCode, ref _strErrText);
                 if (ds != null && ds.Tables[0] != null)
