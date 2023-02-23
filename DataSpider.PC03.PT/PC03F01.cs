@@ -988,7 +988,7 @@ namespace DataSpider.PC03.PT
                 {
                 }
             }
-            m_SqlBiz.UpdateEquipmentProgDateTime(ProgramName, (int)IF_STATUS.Stop, ref errCode, ref errText);
+            m_SqlBiz.UpdateEquipmentProgDateTimeForProgram(ProgramName, (int)IF_STATUS.Stop, ref errCode, ref errText);
         }
 
         private bool CheckPIConnection(out string errText)
@@ -1199,7 +1199,7 @@ namespace DataSpider.PC03.PT
             string errCode = string.Empty;
             string errText = string.Empty;
 
-            m_SqlBiz.UpdateEquipmentProgDateTimeForProgram("PIConnection", (int)status, ref errCode, ref errText);
+            //m_SqlBiz.UpdateEquipmentProgDateTimeForProgram("PIConnection", (int)status, ref errCode, ref errText);
             m_SqlBiz.InsertResult("PI_CONNECTION_01_PROGRAM_STATUS.PV", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ((int)status).ToString(), "N", null, null, ref errCode, ref errText);
         }
 
