@@ -977,7 +977,7 @@ namespace DataSpider.PC03.PT
                         }
                     }
 
-                    m_SqlBiz.UpdateEquipmentProgDateTime(ProgramName, maxStatus, ref errCode, ref errText);
+                    m_SqlBiz.UpdateEquipmentProgDateTimeForProgram(ProgramName, maxStatus, ref errCode, ref errText);
 
                     Thread.Sleep(10*1000);
                 }
