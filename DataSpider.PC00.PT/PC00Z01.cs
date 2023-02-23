@@ -472,6 +472,7 @@ namespace DataSpider.PC00.PT
 
         /// <summary>
         /// 장비별 상태를 확인하기 위해 MA_EQUIPMENT_CD.ProgDateTime 에 현재시간을 업데이트
+        /// UpdateEquipmentProgDateTime  : 이전 상태와 다르면 상태태그를 RESULT 테이블에 인서트 (PI 저장 처리), EQUIPMENT, FAILOVER 테이블 업데이트, DISCONNECT 상태이면 DISCONNECT COUNT 증가 FAILOVER 테이블 업데이트
         /// </summary>
         /// <param name="equipName"></param>
         /// <param name="_strErrCode"></param>
@@ -493,6 +494,14 @@ namespace DataSpider.PC00.PT
                 return false;
             }
         }
+        /// <summary>
+        /// MA_FAILOVER_CD 테이블만 업데이트
+        /// </summary>
+        /// <param name="equipName"></param>
+        /// <param name="status"></param>
+        /// <param name="_strErrCode"></param>
+        /// <param name="_strErrText"></param>
+        /// <returns></returns>
         public bool UpdateEquipmentProgDateTimeForProgram(string equipName, int status, ref string _strErrCode, ref string _strErrText)
         {
             try
