@@ -251,7 +251,6 @@ namespace DataSpider.PC03.PT
                         ThreadStatus = IF_STATUS.InternalError;
                     }
 
-                    Thread.Sleep(1000);
                 }
                 catch (Exception ex)
                 {
@@ -268,6 +267,7 @@ namespace DataSpider.PC03.PT
                     //else
                     //m_Thd.Join(1000)
                 }
+                Thread.Sleep(1000);
             }
             m_Logger.WriteLog(PC00D01.OFF, PC00D01.MSGTINF, m_strEName);
             //mOwner.listViewMsg(m_strEName, PC00D01.OFF, true, m_nCurNo, 1, false, PC00D01.MSGTINF);

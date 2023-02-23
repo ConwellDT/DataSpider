@@ -432,6 +432,30 @@ namespace DataSpider.PC00.PT
             return result;
         }
 
+        // 20230223, SHS, PI CONNECTION TAG 이름 COMMON 에 설정 처리 추가
+        public DataTable GetMeasureResultForPIConnection(string tagName, ref string _strErrCode, ref string _strErrText)
+        {
+            DataTable result = null;
+            try
+            {
+                StringBuilder strQuery = new StringBuilder();
+
+                strQuery.Append($"EXEC GetMeasureResultForPIConnection '{tagName}'");
+
+                DataSet ds = CFW.Data.MsSqlDbAccess.GetDataSet(strQuery.ToString(), null, CommandType.Text, ref _strErrCode, ref _strErrText);
+                if (ds != null && ds.Tables[0] != null)
+                {
+                    result = ds.Tables[0];
+                }
+            }
+            catch (Exception ex)
+            {
+                _strErrText = ex.ToString();
+            }
+            return result;
+        }
+
+
         public DataTable GetMeasureResult(ref string _strErrCode, ref string _strErrText)
         {
             DataTable result = null;

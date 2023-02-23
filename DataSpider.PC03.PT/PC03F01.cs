@@ -19,6 +19,7 @@ using OSIsoft.AF.Search;
 using OSIsoft.AF.PI;
 using OSIsoft.AF.Time;
 using System.IO;
+using OSIsoft.AF.Analysis;
 
 namespace DataSpider.PC03.PT
 {
@@ -76,6 +77,9 @@ namespace DataSpider.PC03.PT
         {
             get { return $"{Application.ProductName}PC03"; }
         }
+
+        // 20230223, SHS, PI CONNECTION TAG 이름 COMMON 에 설정 처리 추가
+        public string PIConnectionStatusTAGName { get; set; } = "PI_CONNECTION_01_PROGRAM_STATUS.PV";
 
         #endregion
 
@@ -177,6 +181,18 @@ namespace DataSpider.PC03.PT
                 CreateProcess();
                 PIInfo();
 
+                // 20230223, SHS, PI CONNECTION TAG 이름 COMMON 에 설정 처리 추가
+                string strErrCode = string.Empty;
+                string strErrText = string.Empty;
+                DataTable dtResult = m_SqlBiz.GetCommonCode(ProgramName, "PIConnectionStatusTAG", ref strErrCode, ref strErrText);
+                if (dtResult != null && dtResult.Rows.Count > 0)
+                {
+                    string result = dtResult.Rows[0]["CODE_VALUE"].ToString();
+                    if (!string.IsNullOrWhiteSpace(result))
+                    {
+                        PIConnectionStatusTAGName = result;
+                    }
+                }
 
                 m_ThdCheckPI = new Thread(new ThreadStart(ThreadCheckPI));
                 m_ThdCheckPI.Start();
@@ -1068,8 +1084,9 @@ namespace DataSpider.PC03.PT
                         Thread.Sleep(1000);
                         continue;
                     }
-
-                    DataTable dtResult = m_SqlBiz.GetMeasureResultForPIConnection(ref errCode, ref errText);
+                    // 20230223, SHS, PI CONNECTION TAG 이름 COMMON 에 설정 처리 추가
+                    //DataTable dtResult = m_SqlBiz.GetMeasureResultForPIConnection(ref errCode, ref errText);
+                    DataTable dtResult = m_SqlBiz.GetMeasureResultForPIConnection(PIConnectionStatusTAGName, ref errCode, ref errText);
 
                     if (dtResult != null)
                     {
@@ -1114,7 +1131,6 @@ namespace DataSpider.PC03.PT
                             }
                         }
                     }
-                    Thread.Sleep(1000);
                 }
                 catch (Exception ex)
                 {
@@ -1122,6 +1138,7 @@ namespace DataSpider.PC03.PT
                 finally
                 {
                 }
+                Thread.Sleep(1000);
             }
         }
 
@@ -1200,7 +1217,9 @@ namespace DataSpider.PC03.PT
             string errText = string.Empty;
 
             //m_SqlBiz.UpdateEquipmentProgDateTimeForProgram("PIConnection", (int)status, ref errCode, ref errText);
-            m_SqlBiz.InsertResult("PI_CONNECTION_01_PROGRAM_STATUS.PV", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ((int)status).ToString(), "N", null, null, ref errCode, ref errText);
+            // 20230223, SHS, PI CONNECTION TAG 이름 COMMON 에 설정 처리 추가
+            //m_SqlBiz.InsertResult("PI_CONNECTION_01_PROGRAM_STATUS.PV", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ((int)status).ToString(), "N", null, null, ref errCode, ref errText);
+            m_SqlBiz.InsertResult(PIConnectionStatusTAGName, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ((int)status).ToString(), "N", null, null, ref errCode, ref errText);
         }
 
         private void TrayIconOpen_Click(object sender, EventArgs e)
