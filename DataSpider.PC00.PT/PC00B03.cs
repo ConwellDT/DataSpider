@@ -15,6 +15,7 @@ using System.Diagnostics;
 using System.Data;
 // WildcardPattern
 using System.Management.Automation;
+using OSIsoft.AF.Data;
 
 namespace DataSpider.PC00.PT
 {
@@ -257,7 +258,13 @@ namespace DataSpider.PC00.PT
                     avgBackgoundIntensity =  (int)Math.Round((double)nBackgoundIntensitySum / nImages);
                 }
             }
-            listString.Insert(48, avgBackgoundIntensity.ToString());
+            string sMsgTemp = string.Join(System.Environment.NewLine, listString);
+            if (!sMsgTemp.Contains("Assay value"))
+            {
+                int pos = listString.FindIndex(p => p.Contains("Decluster degree"));
+                listString.Insert(pos, "Assay value :  ");
+            }
+            listString.Insert(49, avgBackgoundIntensity.ToString());
 
             return string.Join(Environment.NewLine, listString);
         }
