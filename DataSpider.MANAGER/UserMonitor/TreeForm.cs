@@ -56,7 +56,7 @@ namespace DataSpider.UserMonitor
             InitializeComponent();
             parent = _parent;
 
-            if (ConfigHelper.GetAppSetting("HideTransferActiveNode").Contains("y"))
+            if (ConfigHelper.GetAppSetting("HideTransferActiveNode").Trim().ToUpper().Equals("Y"))//.Contains("y"))
             {
                 contextMenuStripEQControl.Items["activeToolStripMenuItem"].Visible = false;
             }
