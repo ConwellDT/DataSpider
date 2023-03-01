@@ -456,7 +456,7 @@ namespace DataSpider.PC01.PT
                             thProcess[i++] = new PC01S20(this, dr, i, true);
                         }
                         break;
-                    case "VI-CELL_V2":
+                    case "ACC_Vi-Cell_V2":
                         thProcess = new PC01S28[dtEquipment.Rows.Count];
                         foreach (DataRow dr in dtEquipment.Rows)
                         {

@@ -175,7 +175,7 @@
     <None Include="PC01S20.cs_ViCELL_BLU" />
     <None Include="PC01S19.cs_OSMO_TECH" />
     <None Include="PC01S18.cs_MCA" />
-    <None Include="PC01S28.cs_VI-CELL_V2" />
+    <None Include="PC01S28.cs_ACC_Vi-CELL_V2" />
     <None Include="PC01S27.cs_PCM_S47_MULTI" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
