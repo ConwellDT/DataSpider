@@ -261,8 +261,8 @@ namespace DataSpider.PC00.PT
             string sMsgTemp = string.Join(System.Environment.NewLine, listString);
             if (!sMsgTemp.Contains("Assay value"))
             {
-                int pos = listString.FindIndex(p => p.Contains("Decluster degree"));
-                listString.Insert(pos, "Assay value :  ");
+                int pos = listString.FindIndex(p => p.Contains("Decluster degree"))+1;
+                listString.Insert(pos,  string.Empty);
             }
             listString.Insert(49, avgBackgoundIntensity.ToString());
 
