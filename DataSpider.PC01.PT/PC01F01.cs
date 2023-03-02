@@ -456,13 +456,13 @@ namespace DataSpider.PC01.PT
                             thProcess[i++] = new PC01S20(this, dr, i, true);
                         }
                         break;
-                    case "ACC_Vi-Cell_V2":
-                        thProcess = new PC01S28[dtEquipment.Rows.Count];
-                        foreach (DataRow dr in dtEquipment.Rows)
-                        {
-                            thProcess[i++] = new PC01S28(this, dr, i, true);
-                        }
-                        break;
+                    //case "ACC_Vi-Cell_V2":
+                    //    thProcess = new PC01S28[dtEquipment.Rows.Count];
+                    //    foreach (DataRow dr in dtEquipment.Rows)
+                    //    {
+                    //        thProcess[i++] = new PC01S28(this, dr, i, true);
+                    //    }
+                    //    break;
                     default:
                         listViewMsg("Equipment Interface", $"Invalid Equipment Type : {equipType}", false, 1, 6, true, PC00D01.MSGTERR);
                         //listViewMsg(string pstrProcID, string pMsg, bool pbGridView, int pnCurNo, int pnSubItemNo, bool pbLogView, string pstrType)
