@@ -1216,7 +1216,9 @@ namespace DataSpider.PC03.PT
             string errCode = string.Empty;
             string errText = string.Empty;
 
-            //m_SqlBiz.UpdateEquipmentProgDateTimeForProgram("PIConnection", (int)status, ref errCode, ref errText);
+            // MA_FAILOVE_CD 에 EQUIP_NM 이 PIConnection 인 레코드의 PROG_DATETIME, PROG_STATUS 를 업데이트, 이 레코드는 DataSpider 관리 프로그램에서 GetProgramStatus2 로 조회하여 하단 PI Status 상태표시에 사용
+            m_SqlBiz.UpdateEquipmentProgDateTimeForProgram("PIConnection", (int)status, ref errCode, ref errText);
+
             // 20230223, SHS, PI CONNECTION TAG 이름 COMMON 에 설정 처리 추가
             //m_SqlBiz.InsertResult("PI_CONNECTION_01_PROGRAM_STATUS.PV", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ((int)status).ToString(), "N", null, null, ref errCode, ref errText);
             m_SqlBiz.InsertResult(PIConnectionStatusTAGName, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ((int)status).ToString(), "N", null, null, ref errCode, ref errText);

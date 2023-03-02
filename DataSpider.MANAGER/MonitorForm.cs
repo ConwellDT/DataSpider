@@ -221,7 +221,7 @@ namespace DataSpider
         private void Form1_Load(object sender, EventArgs e)
         {
             
-            if (ConfigHelper.GetAppSetting("SPLASH").Contains("y") )
+            if (ConfigHelper.GetAppSetting("SPLASH").Trim().ToUpper().Equals("Y"))//.Contains("y") )
             {
                 Thread threadSplash = new Thread(SplashThread);
                 threadSplash.Start();
