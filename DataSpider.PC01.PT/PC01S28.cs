@@ -33,6 +33,7 @@ namespace DataSpider.PC01.PT
             DataTable MasterTable = new DataTable();
             public FileLog fileLog = null;
             public DateTime RunDate;
+            public DateTime dtCurrFileWriteTime = DateTime.MinValue;
             IDictionary<string, string> m_DataList = new Dictionary<string, string>();
 
             public void SetFileLog(FileLog _filelog)
@@ -55,11 +56,12 @@ namespace DataSpider.PC01.PT
                         }
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     fileLog.WriteLog($"Exceptioin Vi_Cell_V2- ReadCsv ({ex})");
                 }
             }
+
 
             public void BuildTable(IDictionary<string, string> dicConfig)
             {
@@ -85,18 +87,40 @@ namespace DataSpider.PC01.PT
                 }
             }
 
-            public void ReadDataFile(String Textpath)
+            public string ReadDataFile(FileInfo fileInfo)
             {
                 try
-                { 
-                    string[] buff = File.ReadAllLines(Textpath, Encoding.UTF8);
-                    foreach (string str in buff)
+                {
+                    using (FileStream fs = fileInfo.Open(FileMode.Open, FileAccess.Read, FileShare.None))
                     {
-                        string[] split = str.Split(':');
+                        if (fs != null)
+                        {  // listViewMsg.UpdateMsg($"Open File {fileInfo.Name} ({fileInfo.LastWriteTime:yyyy-MM-dd HH:mm:ss.fffffff})", false, true);
 
-                        if (split.Length > 1)
-                        {
-                            m_DataList.Add(split[0].Trim(), split[1].Trim());
+                            StringBuilder sbData = new StringBuilder();
+                            byte[] b = new byte[1024];
+                            UTF8Encoding temp = new UTF8Encoding(true);
+                            int count;
+                            while ((count = fs.Read(b, 0, b.Length)) > 0)
+                            {
+                                sbData.Append(temp.GetString(b, 0, count));
+                            }
+
+                            string[] gsplit = sbData.ToString().Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+                            m_DataList.Clear();
+                            foreach (string str in gsplit)
+                            {
+                                char[] splitdata = { ':' };
+                                string[] split = str.Split(splitdata, 2);
+
+                                if (split.Length > 1)
+                                {
+
+                                    m_DataList.Add(split[0].Trim(), split[1].Trim());
+                                }
+                            }
+                            dtCurrFileWriteTime = fileInfo.LastWriteTime;
+                            Debug.WriteLine(dtCurrFileWriteTime.ToString());
+                            return sbData.ToString();
                         }
                     }
                 }
@@ -104,19 +128,28 @@ namespace DataSpider.PC01.PT
                 {
                     fileLog.WriteLog($"Exceptioin Vi_Cell_V2- ReadDataFile ({ex})");
                 }
+                return null;
             }
 
-            public void UpdateDataTable(IDictionary<string, string> dicConfig) 
+            public void UpdateDataTable(IDictionary<string, string> dicConfig)
             {
                 string images = string.Empty;
                 string backgoundIntensitySum = string.Empty;
+                string rowvalue = string.Empty;
                 try
                 {
                     foreach (DataRow row in MasterTable.Rows) row[2] = "";
-                        
-                    foreach ( DataRow row in MasterTable.Rows)
+
+                    foreach (DataRow row in MasterTable.Rows)
                     {
-                        row[2]= m_DataList[row[1].ToString()];
+
+                        //row[2] = m_DataList[row[1].ToString()];
+                        if (m_DataList.TryGetValue(row[1].ToString(), out rowvalue))
+                        {
+                            row[2] = rowvalue;
+                        }
+                        else continue;
+
                         if (row[1].ToString().StartsWith("Images"))
                         {
                             images = row[2].ToString();
@@ -125,7 +158,8 @@ namespace DataSpider.PC01.PT
                         {
                             backgoundIntensitySum = row[2].ToString();
                         }
-                        if (row[1].ToString().StartsWith("RunDate")) RunDate = DateTime.Parse(row[2].ToString());
+                        if (row[1].ToString().StartsWith("RunDate"))
+                            RunDate = DateTime.Parse(row[2].ToString());
                     }
                     if (int.TryParse(images, out int nImages))
                     {
@@ -142,14 +176,18 @@ namespace DataSpider.PC01.PT
                     fileLog.WriteLog($"Exceptioin Vi_Cell_V2- UpdateDataTable ({ex})");
                 }
             }
+
             public string GetData()
             {
-                StringBuilder ssb = new StringBuilder();;
+                StringBuilder ssb = new StringBuilder(); ;
+                string rowvalue = string.Empty;
+                string images = string.Empty;
+                string backgoundIntensitySum = string.Empty;
+                ssb.AppendLine($"SVRTIME,{RunDate:yyyy-MM-dd HH:mm:ss.fff},{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff}");
                 foreach (DataRow row in MasterTable.Rows)
                 {
                     ssb.AppendLine($"{row[0]},{RunDate:yyyy-MM-dd HH:mm:ss.fff},{row[2]}");
                 }
-
                 return ssb.ToString();
             }
         }
@@ -182,7 +220,7 @@ namespace DataSpider.PC01.PT
             {
                 try
                 {
-                    //string data = FileProcess();
+                    // string data = FileProcess();
                     FileInfo fi = GetTargetFile();
                     if (fi == null)
                     {
@@ -205,12 +243,11 @@ namespace DataSpider.PC01.PT
                     {
                         msgType = 1;
                     }
-                    //string sData = GetFileRawData(fi);
-                    m_ViCell.ReadDataFile(fi.Name);
+                    m_ViCell.ReadDataFile(fi);
+                    dtCurrFileWriteTime = m_ViCell.dtCurrFileWriteTime;
                     m_ViCell.UpdateDataTable(m_ViCellList);
-//                    m_ViCell.ReadDataFile(fi.Name,);
+                    //     m_ViCell.ReadDataFile(fi.Name,);
                     string sData = m_ViCell.GetData();
-
                     dtLastEnQueuedFileWriteTime = dtCurrFileWriteTime;
                     SetLastEnqueuedFileWriteTime(dtLastEnQueuedFileWriteTime);
                     if (string.IsNullOrWhiteSpace(sData))
@@ -220,10 +257,9 @@ namespace DataSpider.PC01.PT
                         Thread.Sleep(10);
                         continue;
                     }
-                    string data = GetFileData(sData);
-                    EnQueue(msgType, data);
+                    EnQueue(msgType, sData);
                     listViewMsg.UpdateMsg($"{m_Name}({msgType}) Data has been enqueued", true, true);
-                    fileLog.WriteData(data, "EnQ", $"{m_Name}({msgType})");
+                    fileLog.WriteData(sData, "EnQ", $"{m_Name}({msgType})");
                     //UpdateEquipmentProgDateTime(IF_STATUS.Normal);
                 }
                 catch (Exception ex)
