@@ -186,7 +186,12 @@ namespace DataSpider.PC01.PT
                 ssb.AppendLine($"SVRTIME,{RunDate:yyyy-MM-dd HH:mm:ss.fff},{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff}");
                 foreach (DataRow row in MasterTable.Rows)
                 {
-                    ssb.AppendLine($"{row[0]},{RunDate:yyyy-MM-dd HH:mm:ss.fff},{row[2]}");
+                    if (row[1].ToString().Contains("Assay value") && string.IsNullOrEmpty(row[2].ToString()))
+                    {
+                        // DoNothing
+                    }
+                    else 
+                        ssb.AppendLine($"{row[0]},{RunDate:yyyy-MM-dd HH:mm:ss.fff},{row[2]}");
                 }
                 return ssb.ToString();
             }
