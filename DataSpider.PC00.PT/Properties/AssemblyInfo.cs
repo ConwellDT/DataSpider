@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("DataSpider Common Library")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("CONWELL Co., Ltd.")]
-[assembly: AssemblyProduct("DataSpider")]
+[assembly: AssemblyProduct("DataSpider.PC00.PT")]
 [assembly: AssemblyCopyright("Copyright © 2022 CONWELL Co., Ltd.")]
 [assembly: AssemblyTrademark("DataSpider")]
 [assembly: AssemblyCulture("")]
