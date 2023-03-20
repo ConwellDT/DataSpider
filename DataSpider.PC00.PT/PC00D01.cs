@@ -47,7 +47,7 @@ namespace DataSpider.PC00.PT
         public const string MSGP0007 = "Received Order Data ListView Update";
         public const string MSGP0008 = "DB Connected";
         public const string MSGP0009 = "DB Disconnected";
-        public const string MSGP0015 = "Oracle DB Ping Test Fail";
+        public const string MSGP0015 = "DB Ping Test Fail";
         public const string MSGP0031 = "DB Connection Fail, Please check network connection!!";
         public const string MSGP0033 = "Equipment Inteface Program (Equipment Type : {0}) is Already Running !!";
         public const string MSGP0036 = "Are you sure?";

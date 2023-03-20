@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("Equipment Interface")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("CONWELL Co., Ltd.")]
-[assembly: AssemblyProduct("DataSpider")]
+[assembly: AssemblyProduct("DataSpiderPC01")]
 [assembly: AssemblyCopyright("Copyright © 2022 CONWELL Co., Ltd.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

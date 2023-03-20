@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("DataSpider PI Interface")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("CONWELL Co., Ltd.")]
-[assembly: AssemblyProduct("DataSpider")]
+[assembly: AssemblyProduct("DataSpiderPC03")]
 [assembly: AssemblyCopyright("Copyright © 2022 CONWELL Co., Ltd.")]
 [assembly: AssemblyTrademark("DataSpider")]
 [assembly: AssemblyCulture("")]

@@ -75,7 +75,7 @@ namespace DataSpider.PC03.PT
 
         public string ProgramName
         {
-            get { return $"{Application.ProductName}PC03"; }
+            get { return $"{Application.ProductName}"; }
         }
 
         // 20230223, SHS, PI CONNECTION TAG 이름 COMMON 에 설정 처리 추가
