@@ -205,8 +205,8 @@ namespace DataSpider.PC01.PT
 
                                             //ssb.AppendLine($"{typeName}_COMMENT_VAL, {dtMsrDateTime:yyyy-MM-dd HH:mm:ss}, {sp_vert[3]}");
                                         }
-
-                                        if (sp_vert[0].EndsWith("L"))
+                                        // R이 들어 오지 않은 경우 측정시각을 알수 없으므로 저장하지 않음.
+                                        if (sp_vert[0].EndsWith("L") && dtMsrDateTime != DateTime.MinValue)
                                         {
                                             typeName = "HR";
                                             ssb.AppendLine($"SVRTIME, {dtMsrDateTime:yyyy-MM-dd HH:mm:ss}, {DateTime.Now:yyyy-MM-dd HH:mm:ss}");
