@@ -997,24 +997,14 @@ namespace DataSpider.PC02.PT
                     if (arrFileInfo.Length > 0)
                     {
                         errorFileDirectoryName = errorFilePath.Substring(errorFilePath.LastIndexOf(@"\") + 1);
-                        if (!errorFileDirectoryName.Equals(lastErrorFileName))
-                        {
-                            // 20230320, SHS, lastErrorFileName = errorFileDirectoryName; 를 WriteSTCommon 성공 시 수행하도록 수정
-                            if (m_SqlBiz.WriteSTCommon(ProgramName, "ERROR_FILE", errorFileDirectoryName))
-                            {
-                                lastErrorFileName = errorFileDirectoryName;
-                            }
-                        }
                         break;
                     }
                 }
-                if (string.IsNullOrWhiteSpace(errorFileDirectoryName) && (!string.IsNullOrWhiteSpace(lastErrorFileName)))
+
+                string dataSpiderPC02_ErrorFile = m_SqlBiz.ReadSTCommon(ProgramName, "ERROR_FILE").Trim();
+                if (!errorFileDirectoryName.Equals(dataSpiderPC02_ErrorFile))
                 {
-                    // 20230320, SHS, lastErrorFileName = errorFileDirectoryName; 를 WriteSTCommon 성공 시 수행하도록 수정
-                    if (m_SqlBiz.WriteSTCommon(ProgramName, "ERROR_FILE", errorFileDirectoryName))
-                    {
-                        lastErrorFileName = errorFileDirectoryName;
-                    }
+                    m_SqlBiz.WriteSTCommon(ProgramName, "ERROR_FILE", errorFileDirectoryName);
                 }
             }
             catch (Exception ex)
