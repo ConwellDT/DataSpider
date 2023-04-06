@@ -219,10 +219,8 @@ namespace DataSpider.PC03.PT
                                         errMsg = pierrText.Replace("\\", "").Replace("\r\n", "").Replace("'", "");
                                     }
 
-
-                                    result = m_sqlBiz.UpdateMeasureResult(strSeq, strFlag, ifCount, errMsg, ref errCode, ref errText);
-
-                                    if (result)
+                                    // 20230406, SHS, SetPIValue 결과에 따른 로그 추가, 에러 로그 추가
+                                    if (rVal)
                                     {
                                         mOwner.listViewMsg(m_strEName, string.Format(PC00D01.SucceededtoPI, pointName, pointValue), true, m_nCurNo, 3, true, PC00D01.MSGTINF);
                                         m_Logger.WriteLog(string.Format(PC00D01.SucceededtoPI, pointName, pointValue), PC00D01.MSGTERR, m_strEName);
@@ -230,10 +228,28 @@ namespace DataSpider.PC03.PT
                                     }
                                     else
                                     {
-                                        mOwner.listViewMsg(m_strEName, string.Format(PC00D01.FailedtoPI, $"{errText} - {pointName}", pointValue), true, m_nCurNo, 3, true, PC00D01.MSGTERR);
-                                        m_Logger.WriteLog(string.Format(PC00D01.FailedtoPI, $"{errText} - {pointName}", pointValue), PC00D01.MSGTERR, m_strEName);
+                                        mOwner.listViewMsg(m_strEName, string.Format(PC00D01.FailedtoPI, $"{errMsg} - {pointName}", pointValue), true, m_nCurNo, 3, true, PC00D01.MSGTERR);
+                                        m_Logger.WriteLog(string.Format(PC00D01.FailedtoPI, $"{errMsg} - {pointName}", pointValue), PC00D01.MSGTERR, m_strEName);
                                         ThreadStatus = IF_STATUS.InternalError;
                                     }
+
+
+                                    result = m_sqlBiz.UpdateMeasureResult(strSeq, strFlag, ifCount, errMsg, ref errCode, ref errText);
+
+                                    // 20230406, SHS, SetPIValue 결과 DB UPDATE 결과 따른 로그 내용 변경, 성공이면 로그는 필요 없음
+                                    //if (result)
+                                    //{
+                                    //    //mOwner.listViewMsg(m_strEName, string.Format(PC00D01.SucceededtoPI, pointName, pointValue), true, m_nCurNo, 3, true, PC00D01.MSGTINF);
+                                    //    //m_Logger.WriteLog(string.Format(PC00D01.SucceededtoPI, pointName, pointValue), PC00D01.MSGTERR, m_strEName);
+                                    //    //ThreadStatus = IF_STATUS.Normal;
+                                    //}
+                                    if (!result)
+                                    {
+                                        mOwner.listViewMsg(m_strEName, string.Format("UpdateMeasureResult Failed.", $"{errText} - {pointName}", pointValue), true, m_nCurNo, 3, true, PC00D01.MSGTERR);
+                                        m_Logger.WriteLog(string.Format("UpdateMeasureResult Failed.", $"{errText} - {pointName}", pointValue), PC00D01.MSGTERR, m_strEName);
+                                        ThreadStatus = IF_STATUS.InternalError;
+                                    }
+
                                 }
                                 else
                                 {
