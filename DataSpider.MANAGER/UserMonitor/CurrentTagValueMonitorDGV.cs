@@ -254,11 +254,15 @@ namespace DataSpider.UserMonitor
             //        strFileterStr += $"([Measure DateTime] > '{DateTimeFilterCurMin.ToString("yyyy-MM-dd HH:mm:ss.fff")}' AND [Measure DateTime] < '{DateTimeFilterCurMax.ToString("yyyy-MM-dd HH:mm:ss.fff")}') ";
             //    }
             //}
-            if (String.IsNullOrEmpty(strFilterStr) == false) strFilterStr += " AND ";
+            // 20230426, SHS, DescriptionFilter 가 없을때 AND 넣지 않기
+            //if (String.IsNullOrEmpty(strFilterStr) == false) strFilterStr += " AND ";
             // 20230106, SHS, DescriptionFilter 값이 NULL or WS 일때 LIKE 문 때문에 제외되는 현상으로 인해 수정, strFileterStr -> strFilterStr 오타 수정
             //strFileterStr += $"[Description] LIKE '%{DescriptionFilter}%'  ";
             if (!string.IsNullOrWhiteSpace(DescriptionFilter))
+            {
+                if (string.IsNullOrWhiteSpace(strFilterStr) == false) strFilterStr += " AND ";
                 strFilterStr += $"[Description] LIKE '%{DescriptionFilter}%'  ";
+            }
             dvProgramStatus.RowFilter = strFilterStr;
 
             dvProgramStatus.Sort = "Measure DateTime DESC";
