@@ -14,6 +14,7 @@ using System.Reflection;
 using System.Windows.Forms;
 using NLog;
 using NLog.Targets;
+using System.Text.Json;
 
 namespace DataSpider.PC00.PT
 {
@@ -44,6 +45,25 @@ namespace DataSpider.PC00.PT
                                 string key,
                                 string val,
                                 string filePath);
+
+        //extrainfo 예 { TimeFormat : "yyyy-MM-dd HH:mm:ss, dd-MM-yyyy HH:mm:ss" }
+        public static void SetEquipmentDateTimeFormat(string extraInfo)
+        {
+            string result = string.Empty;
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(extraInfo))
+                {
+                    JsonDocument document = JsonDocument.Parse(extraInfo);
+                    result = document.RootElement.GetProperty("TimeFormat").ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            EquipmentDateTimeFomatSetting = result;
+        }
 
         public static string[] GetEntryNames(string section, string FileName)   // 해당 section 안의 모든 키 값 가져오기
         {
@@ -157,19 +177,31 @@ namespace DataSpider.PC00.PT
             "yyyy-MM-dd tt h:mm:ss", "dd/MM/yyyy HH.mm.ss", "dd.MM.yyyy HH:mm:ss", "yyyyMMddHHmmss.fff"
         };
         public static string DateTimeFomatSetting { get; set; } = "dd.MM.yyyy HH:mm:ss, yyyyMMddHHmmss.fff, yyyy M d H m s, ddMMMyy HH:mm, dd-MMM-yy HH:mm";
+        public static string EquipmentDateTimeFomatSetting { get; set; } = string.Empty;
+
         public static bool TryParseExact(string strDateTime, out DateTime dtDateTime)
         {
-            if (DateTime.TryParseExact(strDateTime.Trim(), DateTimeFomatSetting.Split(',').ToArray(), CultureInfo.InvariantCulture, DateTimeStyles.AssumeLocal | DateTimeStyles.AllowInnerWhite, out dtDateTime))
+            if (string.IsNullOrWhiteSpace(EquipmentDateTimeFomatSetting))
             {
-                return true;
+                if (DateTime.TryParseExact(strDateTime.Trim(), DateTimeFomatSetting.Split(',').ToArray(), CultureInfo.InvariantCulture, DateTimeStyles.AssumeLocal | DateTimeStyles.AllowInnerWhite, out dtDateTime))
+                {
+                    return true;
+                }
+                if (DateTime.TryParse(strDateTime.Trim(), out dtDateTime))
+                {
+                    return true;
+                }
+                if (DateTime.TryParse(strDateTime.Trim(), CultureInfo.InvariantCulture, DateTimeStyles.AssumeLocal, out dtDateTime))
+                {
+                    return true;
+                }
             }
-            if (DateTime.TryParse(strDateTime.Trim(), out dtDateTime))
+            else
             {
-                return true;
-            }
-            if (DateTime.TryParse(strDateTime.Trim(), CultureInfo.InvariantCulture, DateTimeStyles.AssumeLocal, out dtDateTime))
-            {
-                return true;
+                if (DateTime.TryParseExact(strDateTime.Trim(), EquipmentDateTimeFomatSetting.Split(',').ToArray(), CultureInfo.InvariantCulture, DateTimeStyles.AssumeLocal | DateTimeStyles.AllowInnerWhite, out dtDateTime))
+                {
+                    return true;
+                }
             }
             return false;
         }

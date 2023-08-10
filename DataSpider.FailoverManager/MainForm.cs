@@ -45,7 +45,7 @@ namespace DataSpider.FailoverManager
             m_Logger.SetDbLogger(Application.ProductName);
 
             InitializeComponent();
-            this.Text = " Hi Title";
+            //this.Text = " Hi Title";
 
             // Show Lines Text Input Only Number
             this.tbShowLines.MaxLength = 4;

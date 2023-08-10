@@ -65,10 +65,12 @@ namespace DataSpider.PC00.PT
             //    m_Thd = new Thread(ThreadJob);
             //    m_Thd.Start();
             //}
-            SetDateTimeForamt();
+            SetDateTimeFormat();
         }
-        private void SetDateTimeForamt()
+        private void SetDateTimeFormat()
         {
+            PC00U01.SetEquipmentDateTimeFormat(m_ExtraInfo);
+
             string strErrCode = string.Empty, strErrText = string.Empty;
             DataTable dt = m_sqlBiz.GetCommonCode("TIMEFORMAT", ref strErrCode, ref strErrText);
             if (dt != null && dt.Rows.Count > 0)

@@ -600,7 +600,8 @@ namespace DataSpider.PC00.PT
                 switch (start)
                 {
                     case "#TIME":
-                        if (PC00U01.TryParseExact($"{DateTime.Now.ToString("yyyy-MM-dd")} {data}", out dt))
+                        //if (PC00U01.TryParseExact($"{DateTime.Now.ToString("yyyy-MM-dd")} {data}", out dt))
+                        if (DateTime.TryParse($"{DateTime.Now.ToString("yyyy-MM-dd")} {data}", out dt))
                             return true;
                         break;
                     case "#DATETIME":

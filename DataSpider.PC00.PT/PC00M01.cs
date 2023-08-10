@@ -87,9 +87,10 @@ namespace DataSpider.PC00.PT
                     listViewMsg.UpdateMsg($"There are no TAGs for Equipment Type : {m_Name}, Server Name : {Environment.MachineName}");
                     return false;
                 }
-                if (PC00U01.TryParseExact(dtCurrTagInfo.Select("", "UPDATE_REG_DATE DESC")[0]["UPDATE_REG_DATE"]?.ToString(), out DateTime dtTemp))
+                //if (PC00U01.TryParseExact(dtCurrTagInfo.Select("", "UPDATE_REG_DATE DESC")[0]["UPDATE_REG_DATE"]?.ToString(), out DateTime dtTemp))
+                if (DateTime.TryParse(dtCurrTagInfo.Select("", "UPDATE_REG_DATE DESC")[0]["UPDATE_REG_DATE"]?.ToString(), out DateTime dtTemp))
                 {
-                    isTagUpdated = dtLastTagUpdated.CompareTo(dtTemp) < 0;
+                        isTagUpdated = dtLastTagUpdated.CompareTo(dtTemp) < 0;
                     dtLastTagUpdated = dtTemp;
                 }
                 if (isTagUpdated || dtTagInfo == null)
