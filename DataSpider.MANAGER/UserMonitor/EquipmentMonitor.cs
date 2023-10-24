@@ -20,6 +20,7 @@ namespace DataSpider.UserMonitor
         private System.Windows.Forms.Timer timerRefresh = new System.Windows.Forms.Timer();
         private PC00Z01 sqlBiz = new PC00Z01();
         private string equipType = string.Empty;
+        private string zoneType = string.Empty;
         private int selectedIndex = 0;
         private int autoRefreshInterval = 10;
         private bool formSelected = false;
@@ -153,7 +154,9 @@ namespace DataSpider.UserMonitor
                     }
                     string strErrCode = string.Empty;
                     string strErrText = string.Empty;
-                    DataTable dtProgramStatus = sqlBiz.GetProgramStatus(equipType.Trim(), ref strErrCode, ref strErrText);
+                    //23.09.07 zone Type 추가
+                    //DataTable dtProgramStatus = sqlBiz.GetProgramStatus(equipType.Trim(), ref strErrCode, ref strErrText);
+                    DataTable dtProgramStatus = sqlBiz.GetProgramStatus3(equipType.Trim(), zoneType.Trim(), ref strErrCode, ref strErrText);
                     if (dtProgramStatus == null || dtProgramStatus.Rows.Count < 1 || dtProgramStatus.Columns.Count < 1)
                     {
                         return;
@@ -234,13 +237,16 @@ namespace DataSpider.UserMonitor
             //if (nodeTag.GetType().Equals(typeof(Eq)))
             //{
             //    selectedEquipType = ((SBL)e.Node.Parent.Tag).Name;
-            //}
+            //}           
             string selectedEquipType = nodeTag is EqType ? nodeTag.Name : nodeTag is Eq ? ((SBL)e.Node.Parent.Tag).Name : string.Empty;
+            string selectedZoneType = nodeTag is EqType ? nodeTag.GetData("ZONE_TYPE") : nodeTag is Eq ? nodeTag.GetData("ZONE_TYPE") : string.Empty;
+
             if (!equipType.Equals(selectedEquipType))
             {
                 treeSelectedNodeChanged = true;
                 //needResizeColumn = true;
                 equipType = selectedEquipType;
+                zoneType = selectedZoneType;
                 selectedIndex = 0;
                 GetProgramStatus();
             }

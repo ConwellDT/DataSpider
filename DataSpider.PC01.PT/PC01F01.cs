@@ -463,6 +463,20 @@ namespace DataSpider.PC01.PT
                             thProcess[i++] = new PC01S28(this, dr, i, true);
                         }
                         break;
+                    case "CEDEX_BIO_V2":
+                        thProcess = new PC01S31[dtEquipment.Rows.Count];
+                        foreach (DataRow dr in dtEquipment.Rows)
+                        {
+                            thProcess[i++] = new PC01S31(this, dr, i, true);
+                        }
+                        break;
+                    case "CEDEX_BIO_HT":
+                        thProcess = new PC01S32[dtEquipment.Rows.Count];
+                        foreach (DataRow dr in dtEquipment.Rows)
+                        {
+                            thProcess[i++] = new PC01S32(this, dr, i, true);
+                        }
+                        break;
                     default:
                         listViewMsg("Equipment Interface", $"Invalid Equipment Type : {equipType}", false, 1, 6, true, PC00D01.MSGTERR);
                         //listViewMsg(string pstrProcID, string pMsg, bool pbGridView, int pnCurNo, int pnSubItemNo, bool pbLogView, string pstrType)

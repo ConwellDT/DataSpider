@@ -76,6 +76,9 @@ namespace DataSpider.UserMonitor
             this.panel18 = new System.Windows.Forms.Panel();
             this.label9 = new System.Windows.Forms.Label();
             this.textBox_ConfigInfo = new System.Windows.Forms.TextBox();
+            this.panel19 = new System.Windows.Forms.Panel();
+            this.comboBox_ZoneType = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.tableLayoutPanel_Main.SuspendLayout();
             this.panelBottomMenu.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -102,6 +105,7 @@ namespace DataSpider.UserMonitor
             this.panel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel18.SuspendLayout();
+            this.panel19.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel_Main
@@ -119,10 +123,11 @@ namespace DataSpider.UserMonitor
             this.tableLayoutPanel_Main.Name = "tableLayoutPanel_Main";
             this.tableLayoutPanel_Main.RowCount = 4;
             this.tableLayoutPanel_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableLayoutPanel_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 430F));
+            this.tableLayoutPanel_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 466F));
             this.tableLayoutPanel_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
-            this.tableLayoutPanel_Main.Size = new System.Drawing.Size(1445, 705);
+            this.tableLayoutPanel_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel_Main.Size = new System.Drawing.Size(1445, 740);
             this.tableLayoutPanel_Main.TabIndex = 0;
             // 
             // label_Title
@@ -141,7 +146,7 @@ namespace DataSpider.UserMonitor
             // 
             this.panelBottomMenu.Controls.Add(this.tableLayoutPanel3);
             this.panelBottomMenu.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelBottomMenu.Location = new System.Drawing.Point(4, 648);
+            this.panelBottomMenu.Location = new System.Drawing.Point(4, 683);
             this.panelBottomMenu.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panelBottomMenu.Name = "panelBottomMenu";
             this.panelBottomMenu.Size = new System.Drawing.Size(1437, 52);
@@ -213,7 +218,7 @@ namespace DataSpider.UserMonitor
             this.panelContents.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelContents.Location = new System.Drawing.Point(4, 45);
             this.panelContents.Name = "panelContents";
-            this.panelContents.Size = new System.Drawing.Size(1437, 424);
+            this.panelContents.Size = new System.Drawing.Size(1437, 460);
             this.panelContents.TabIndex = 2;
             // 
             // tableLayoutPanel_Contents
@@ -229,7 +234,7 @@ namespace DataSpider.UserMonitor
             this.tableLayoutPanel_Contents.RowCount = 1;
             this.tableLayoutPanel_Contents.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel_Contents.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 424F));
-            this.tableLayoutPanel_Contents.Size = new System.Drawing.Size(1437, 424);
+            this.tableLayoutPanel_Contents.Size = new System.Drawing.Size(1437, 460);
             this.tableLayoutPanel_Contents.TabIndex = 0;
             // 
             // dataGridTagInfo
@@ -240,7 +245,7 @@ namespace DataSpider.UserMonitor
             this.dataGridTagInfo.Margin = new System.Windows.Forms.Padding(0);
             this.dataGridTagInfo.Name = "dataGridTagInfo";
             this.dataGridTagInfo.RowTemplate.Height = 23;
-            this.dataGridTagInfo.Size = new System.Drawing.Size(935, 424);
+            this.dataGridTagInfo.Size = new System.Drawing.Size(935, 460);
             this.dataGridTagInfo.TabIndex = 305;
             // 
             // tableLayoutPanel_EquipInfo
@@ -249,6 +254,7 @@ namespace DataSpider.UserMonitor
             this.tableLayoutPanel_EquipInfo.ColumnCount = 2;
             this.tableLayoutPanel_EquipInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
             this.tableLayoutPanel_EquipInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel_EquipInfo.Controls.Add(this.label10, 0, 8);
             this.tableLayoutPanel_EquipInfo.Controls.Add(this.panel1, 1, 1);
             this.tableLayoutPanel_EquipInfo.Controls.Add(this.label8, 0, 1);
             this.tableLayoutPanel_EquipInfo.Controls.Add(this.panel17, 1, 7);
@@ -265,10 +271,11 @@ namespace DataSpider.UserMonitor
             this.tableLayoutPanel_EquipInfo.Controls.Add(this.panel3, 0, 0);
             this.tableLayoutPanel_EquipInfo.Controls.Add(this.panel4, 1, 0);
             this.tableLayoutPanel_EquipInfo.Controls.Add(this.panel7, 1, 2);
+            this.tableLayoutPanel_EquipInfo.Controls.Add(this.panel19, 1, 8);
             this.tableLayoutPanel_EquipInfo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel_EquipInfo.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel_EquipInfo.Name = "tableLayoutPanel_EquipInfo";
-            this.tableLayoutPanel_EquipInfo.RowCount = 8;
+            this.tableLayoutPanel_EquipInfo.RowCount = 9;
             this.tableLayoutPanel_EquipInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel_EquipInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel_EquipInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
@@ -277,7 +284,8 @@ namespace DataSpider.UserMonitor
             this.tableLayoutPanel_EquipInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel_EquipInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel_EquipInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel_EquipInfo.Size = new System.Drawing.Size(496, 418);
+            this.tableLayoutPanel_EquipInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel_EquipInfo.Size = new System.Drawing.Size(496, 454);
             this.tableLayoutPanel_EquipInfo.TabIndex = 0;
             // 
             // panel1
@@ -317,7 +325,7 @@ namespace DataSpider.UserMonitor
             this.panel17.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel17.Location = new System.Drawing.Point(155, 361);
             this.panel17.Name = "panel17";
-            this.panel17.Size = new System.Drawing.Size(337, 53);
+            this.panel17.Size = new System.Drawing.Size(337, 44);
             this.panel17.TabIndex = 13;
             // 
             // comboBox_UseFlag
@@ -339,7 +347,7 @@ namespace DataSpider.UserMonitor
             this.panel16.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel16.Location = new System.Drawing.Point(4, 361);
             this.panel16.Name = "panel16";
-            this.panel16.Size = new System.Drawing.Size(144, 53);
+            this.panel16.Size = new System.Drawing.Size(144, 44);
             this.panel16.TabIndex = 12;
             // 
             // label7
@@ -348,7 +356,7 @@ namespace DataSpider.UserMonitor
             this.label7.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label7.Location = new System.Drawing.Point(0, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(144, 53);
+            this.label7.Size = new System.Drawing.Size(144, 44);
             this.label7.TabIndex = 4;
             this.label7.Text = "Use Flag";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -581,9 +589,9 @@ namespace DataSpider.UserMonitor
             // 
             this.panel2.Controls.Add(this.tableLayoutPanel1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(4, 476);
+            this.panel2.Location = new System.Drawing.Point(4, 512);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1437, 164);
+            this.panel2.Size = new System.Drawing.Size(1437, 163);
             this.panel2.TabIndex = 3;
             // 
             // tableLayoutPanel1
@@ -599,7 +607,7 @@ namespace DataSpider.UserMonitor
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1437, 164);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1437, 163);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // panel18
@@ -608,7 +616,7 @@ namespace DataSpider.UserMonitor
             this.panel18.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel18.Location = new System.Drawing.Point(4, 4);
             this.panel18.Name = "panel18";
-            this.panel18.Size = new System.Drawing.Size(144, 156);
+            this.panel18.Size = new System.Drawing.Size(144, 155);
             this.panel18.TabIndex = 0;
             // 
             // label9
@@ -617,7 +625,7 @@ namespace DataSpider.UserMonitor
             this.label9.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label9.Location = new System.Drawing.Point(0, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(144, 156);
+            this.label9.Size = new System.Drawing.Size(144, 155);
             this.label9.TabIndex = 5;
             this.label9.Text = "Config Info";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -629,14 +637,47 @@ namespace DataSpider.UserMonitor
             this.textBox_ConfigInfo.Multiline = true;
             this.textBox_ConfigInfo.Name = "textBox_ConfigInfo";
             this.textBox_ConfigInfo.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox_ConfigInfo.Size = new System.Drawing.Size(1278, 156);
+            this.textBox_ConfigInfo.Size = new System.Drawing.Size(1278, 155);
             this.textBox_ConfigInfo.TabIndex = 1;
+            // 
+            // panel19
+            // 
+            this.panel19.Controls.Add(this.comboBox_ZoneType);
+            this.panel19.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel19.Location = new System.Drawing.Point(155, 412);
+            this.panel19.Name = "panel19";
+            this.panel19.Size = new System.Drawing.Size(337, 38);
+            this.panel19.TabIndex = 19;
+            // 
+            // comboBox_ZoneType
+            // 
+            this.comboBox_ZoneType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_ZoneType.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.comboBox_ZoneType.FormattingEnabled = true;
+            this.comboBox_ZoneType.Items.AddRange(new object[] {
+            "Y",
+            "N"});
+            this.comboBox_ZoneType.Location = new System.Drawing.Point(3, 3);
+            this.comboBox_ZoneType.Name = "comboBox_ZoneType";
+            this.comboBox_ZoneType.Size = new System.Drawing.Size(331, 29);
+            this.comboBox_ZoneType.TabIndex = 2;
+            // 
+            // label10
+            // 
+            this.label10.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label10.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label10.Location = new System.Drawing.Point(4, 409);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(144, 44);
+            this.label10.TabIndex = 20;
+            this.label10.Text = "Zone Type";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // EquipmentAddEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1445, 705);
+            this.ClientSize = new System.Drawing.Size(1445, 740);
             this.ControlBox = false;
             this.Controls.Add(this.tableLayoutPanel_Main);
             this.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
@@ -677,6 +718,7 @@ namespace DataSpider.UserMonitor
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.panel18.ResumeLayout(false);
+            this.panel19.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -730,5 +772,8 @@ namespace DataSpider.UserMonitor
         private System.Windows.Forms.Panel panel18;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox textBox_ConfigInfo;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Panel panel19;
+        private System.Windows.Forms.ComboBox comboBox_ZoneType;
     }
 }

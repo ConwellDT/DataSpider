@@ -87,7 +87,7 @@ namespace DataSpider.PC01.PT
                 StringBuilder sbData = new StringBuilder();
                 string strDate = "";
 
-                if (strEqpType.Trim() == "6")
+                if (strEqpType.Trim() == "11")
                 {
                     //strSql = "SELECT TOP 1 Seq, SampleDrawTime, MeasurementResultValue, OverallType, OverallName, ";
                     //strSql += " CedexSystemID, CedexSystemNm, ReactorIdentifier, SampleIdentifier, SaveID, Workarea, Dilution, DatasetName, ProcessTime, Valid ";  //information 관련

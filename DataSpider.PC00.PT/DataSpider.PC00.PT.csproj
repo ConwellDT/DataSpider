@@ -71,6 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PC00B01.cs" />
+    <Compile Include="PC00B04.cs" />
     <Compile Include="PC00B02.cs" />
     <Compile Include="PC00B03.cs" />
     <Compile Include="PC00M01.cs" />
@@ -87,10 +88,10 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="NLog">
-      <Version>5.1.1</Version>
+      <Version>5.2.3</Version>
     </PackageReference>
     <PackageReference Include="NLog.Database">
-      <Version>5.1.1</Version>
+      <Version>5.2.3</Version>
     </PackageReference>
     <PackageReference Include="System.Text.Json">
       <Version>6.0.4</Version>

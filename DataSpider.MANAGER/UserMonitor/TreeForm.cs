@@ -237,47 +237,106 @@ namespace DataSpider.UserMonitor
                     rootNode.Obj.State = IF_STATUS.Normal;
                     treeViewEQStatus.Nodes.Add(rootNode);
 
+                    List<Zone> zTypeList = pObj.zLists;
                     List<EqType> pTypeList = pObj.TypeLists;
 
                     if (pTypeList != null)
                     {
+                        TreeNode_SBL zNode;
                         TreeNode_SBL pNode;
                         TreeNode_SBL pChildNode;
 
-                        foreach (EqType pType in pTypeList)
-                        {
-                            pNode = new TreeNode_SBL(pType);
+                        
+                        //    foreach (EqType pType in pTypeList)
+                        //    {
+                        //        pNode = new TreeNode_SBL(pType);
 
-                            rootNode.Nodes.Add(pNode);
-                            foreach (Eq q in pType.EqLists)
+                        //        rootNode.Nodes.Add(pNode);
+                        //        foreach (Eq q in pType.EqLists)
+                        //        {
+                        //            pChildNode = new TreeNode_SBL(q);
+                        //            pChildNode.ToolTipText = q.GetData("CONNECTION_INFO");
+                        //            pNode.Nodes.Add(pChildNode);
+                        //        }
+                        //    }
+                        
+
+                        foreach (Zone zType in zTypeList)
+                        {
+                            zNode = new TreeNode_SBL(zType);
+
+                            rootNode.Nodes.Add(zNode);
+
+                            zType.EqTypeLists = pTypeList.FindAll(element => (element.ZoneType.ToString().Trim() == zType.TypeCode.ToString().Trim()));
+
+
+                            foreach (EqType pType in zType.EqTypeLists)
                             {
-                                pChildNode = new TreeNode_SBL(q);
-                                pChildNode.ToolTipText = q.GetData("CONNECTION_INFO");
-                                pNode.Nodes.Add(pChildNode);
-                            }
+                                pNode = new TreeNode_SBL(pType);
+                                zNode.Nodes.Add(pNode);
+
+                                //pType.EqLists = pType.EqLists.FindAll(element => (element.Type.ToString().Trim() == pType.TypeCode.ToString().Trim()
+                                //&& element.ZoneTypeCd.ToString().Trim() == pType.ZoneType.ToString().Trim()));
+
+                                foreach (Eq q in pType.EqLists)
+                                {
+                                    pChildNode = new TreeNode_SBL(q);
+                                    pChildNode.ToolTipText = q.GetData("CONNECTION_INFO");
+                                    pNode.Nodes.Add(pChildNode);
+                                }
+                            }                            
                         }
                     }
                     UpdateTreeViewState();
 
                     //현재 해당하는 서버만 Expand 처리
-                    treeViewEQStatus.Nodes[0].Expand();
+                    treeViewEQStatus.Nodes[0].Expand();                    
 
-                    if (pTypeList != null)
+                    foreach (Zone zType in zTypeList)
                     {
-                        TreeNode_SBL pNode;
+                        TreeNode_SBL zNode = new TreeNode_SBL(zType);
 
-                        int lidx = 0;
-                        foreach (EqType pType in pTypeList)
+                        treeViewEQStatus.Nodes[0].Nodes[int.Parse(zType.TypeCode.ToString().Trim()) -1].Expand();
+
+                        if (zType.EqTypeLists != null)
                         {
-                            pNode = new TreeNode_SBL(pType);
+                            TreeNode_SBL pNode1;
 
-                            if (pNode.Obj.State != IF_STATUS.Unknown)
-                                treeViewEQStatus.Nodes[0].Nodes[lidx].Expand();
+                            int lidx = 0;
+                            foreach (EqType pType in zType.EqTypeLists)
+                            {
+                                pNode1 = new TreeNode_SBL(pType);
 
-                            lidx++;
+                                if (pNode1.Obj.State != IF_STATUS.Unknown)
+                                    treeViewEQStatus.Nodes[0].Nodes[int.Parse(zType.TypeCode.ToString().Trim())-1].Nodes[lidx].Expand();
+
+                                lidx++;
+                            }
                         }
+                        if (zType.TypeCode.ToString().Trim() == "1")
+                            treeViewEQStatus.SelectedNode = GetLastSelectedNode(treeNodeLastSelected);
+
                     }
-                    treeViewEQStatus.SelectedNode = GetLastSelectedNode(treeNodeLastSelected);// treeNodeLastSelected == null ? treeViewEQStatus.Nodes[0] : treeNodeLastSelected;
+
+                    ////현재 해당하는 서버만 Expand 처리
+                    //treeViewEQStatus.Nodes[0].Expand();
+
+                    //if (pTypeList != null)
+                    //{
+                    //    TreeNode_SBL pNode;
+
+                    //    int lidx = 0;
+                    //    foreach (EqType pType in pTypeList)
+                    //    {
+                    //        pNode = new TreeNode_SBL(pType);
+
+                    //        if (pNode.Obj.State != IF_STATUS.Unknown)
+                    //            treeViewEQStatus.Nodes[0].Nodes[lidx].Expand();
+
+                    //        lidx++;
+                    //    }
+                    //}
+                    //treeViewEQStatus.SelectedNode = GetLastSelectedNode(treeNodeLastSelected);// treeNodeLastSelected == null ? treeViewEQStatus.Nodes[0] : treeNodeLastSelected;
                 }
             }
             catch (Exception e)
@@ -386,29 +445,59 @@ namespace DataSpider.UserMonitor
             {
                 SBL nodeTag = treeViewEQStatus.SelectedNode.Tag as SBL;
 
-                if (DialogResult.Yes.Equals(MessageBox.Show($"{nodeTag.Name} 장비를 삭제하시겠습니까 ?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)))
+                if (nodeTag.GetType().Equals(typeof(EqType))) 
                 {
-                    string strErrCode = string.Empty;
-                    string strErrText = string.Empty;
+                    List<Eq> listEq = (nodeTag as EqType).EqLists;
 
-                    DataTable dtEquipment = sqlBiz.GetEquipmentInfo("", "", true, ref strErrCode, ref strErrText);
-
-                    DataRow[] drSelectEquip = dtEquipment.Select($"EQUIP_NM = '{nodeTag.Name}'");
-                    if (drSelectEquip != null && drSelectEquip.Length > 0)
+                    if (listEq.Count > 0)
                     {
-                        if (sqlBiz.DeleteEquipmentInfo(nodeTag.Name, ref strErrCode, ref strErrText))
+                        MessageBox.Show($"{nodeTag.Name} 에 등록된 장비가 존재합니다. 장비 삭제후 처리가 가능합니다.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return;
+                    }
+
+                    if (DialogResult.Yes.Equals(MessageBox.Show($"{nodeTag.Name}의 장비타입을 삭제하시겠습니까 ?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)))
+                    {
+                        string strErrCode = string.Empty;
+                        string strErrText = string.Empty;
+                                               
+                        if (sqlBiz.DeleteEquipmentTypeInfo(nodeTag.Name, nodeTag.GetData("ZONE_TYPE").ToString(), ref strErrCode, ref strErrText))
                         {
-                            MessageBox.Show($"{nodeTag.Name} 장비가 삭제되었습니다.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show($"{nodeTag.Name} 장비타입의 매핑 정보가 삭제되었습니다.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
                             RefreshTreeView();
                         }
                         else
                         {
-                            MessageBox.Show($"장비 삭제 중 오류가 발생하였습니다. {strErrCode} - {strErrText}", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show($"장비타입의 매핑 정보 삭제 중 오류가 발생하였습니다. {strErrCode} - {strErrText}", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
+                        
                     }
-                    else
+                }
+                else
+                {
+                    if (DialogResult.Yes.Equals(MessageBox.Show($"{nodeTag.Name} 장비를 삭제하시겠습니까 ?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)))
                     {
-                        MessageBox.Show($"Equipment ({nodeTag.Name}) is not exist", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        string strErrCode = string.Empty;
+                        string strErrText = string.Empty;
+
+                        DataTable dtEquipment = sqlBiz.GetEquipmentInfo("", "", true, ref strErrCode, ref strErrText);
+
+                        DataRow[] drSelectEquip = dtEquipment.Select($"EQUIP_NM = '{nodeTag.Name}'");
+                        if (drSelectEquip != null && drSelectEquip.Length > 0)
+                        {
+                            if (sqlBiz.DeleteEquipmentInfo(nodeTag.Name, ref strErrCode, ref strErrText))
+                            {
+                                MessageBox.Show($"{nodeTag.Name} 장비가 삭제되었습니다.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                RefreshTreeView();
+                            }
+                            else
+                            {
+                                MessageBox.Show($"장비 삭제 중 오류가 발생하였습니다. {strErrCode} - {strErrText}", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show($"Equipment ({nodeTag.Name}) is not exist", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
                     }
                 }
             }
@@ -597,8 +686,17 @@ namespace DataSpider.UserMonitor
                     contextMenuStripEQControl.Items["editToolStripMenuItem"].Enabled = false; 
                     contextMenuStripEQControl.Items["editToolStripMenuItem"].Text = "Edit";
                     contextMenuStripEQControl.Items["copyToolStripMenuItem"].Enabled = false;
-                    contextMenuStripEQControl.Items["addToolStripMenuItem"].Enabled = true;
-                    contextMenuStripEQControl.Items["deleteToolStripMenuItem"].Enabled = false;
+
+                    if (nodeTag.Name == null || nodeTag.Name.ToString() == "DataSpider" || treeViewEQStatus.SelectedNode.Parent.Text.ToString() == "DataSpider")
+                    {
+                        contextMenuStripEQControl.Items["addToolStripMenuItem"].Enabled = false;
+                        contextMenuStripEQControl.Items["deleteToolStripMenuItem"].Enabled = false;
+                    }
+                    else
+                    {
+                        contextMenuStripEQControl.Items["addToolStripMenuItem"].Enabled = true;
+                        contextMenuStripEQControl.Items["deleteToolStripMenuItem"].Enabled = true;
+                    }
 
                     contextMenuStripEQControl.Items["programRunToolStripMenuItem"].Enabled = false;
                     contextMenuStripEQControl.Items["programStopToolStripMenuItem"].Enabled = false;

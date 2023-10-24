@@ -48,6 +48,8 @@ namespace DataSpider.UserMonitor
         string sName;
         string sDescription;
         string m_sImageName;
+        string sZoneType;
+
         public virtual string Image 
         { 
             get { return m_sImageName; }
@@ -80,8 +82,20 @@ namespace DataSpider.UserMonitor
                 sDescription = value;
             }
         }
+
+        public virtual string ZoneType
+        {
+            get
+            {
+                return sZoneType;
+            }
+            set
+            {
+                sZoneType = value;
+            }
+        }
         //public virtual string Status { get; set; } = string.Empty;
-        
+
         // 20210503, SHS, DataRow 필드명 값 리턴 함수
         public string GetData(string fieldName)
         {
@@ -128,6 +142,15 @@ namespace DataSpider.UserMonitor
             get
             {
                 return m_pRow["CODE"].ToString();
+            }
+
+        }
+
+        public string ZoneType
+        {
+            get
+            {
+                return m_pRow["ZONE_TYPE"].ToString();
             }
 
         }
@@ -253,6 +276,20 @@ namespace DataSpider.UserMonitor
             }
         }
 
+        public string ZoneType
+        {
+            get
+            {
+
+                if (m_pType != null)
+                    return m_pType.ZoneType;
+                if (m_pRow != null)
+                    return m_pRow["ZONE_TYPE"].ToString().Trim();
+                return "NULL ZONE_TYPE";
+            }
+
+        }
+
         //public override string Status
         //{
         //    get
@@ -260,6 +297,62 @@ namespace DataSpider.UserMonitor
         //        return m_pRow?["PROG_STATUS"].ToString().Trim() ?? "0";
         //    }
         //}
+    }
+
+    public class Zone : SBL
+    {
+
+        //DataRow m_pRow;
+        public List<EqType> EqTypeLists
+        { get; set; }
+        
+        public Zone()
+        {
+            EqTypeLists = new List<EqType>();
+        }
+        public Zone(DataRow pRow)
+        {
+            m_pRow = pRow;
+        }
+        public override string Name
+        {
+            get
+            {
+                if (m_pRow == null)
+                    return "NULL";
+                return $"{m_pRow["CODE_NM"]}";
+            }
+        }
+        public override string Description
+        {
+            get
+            {
+                if (m_pRow == null)
+                    return "NULL";
+                return $"{m_pRow["CODE_VALUE"]}";
+            }
+
+        }
+        public string TypeCode
+        {
+            get
+            {
+                return m_pRow["CODE"].ToString();
+            }
+
+        }
+        public override IF_STATUS State
+        {
+            get { return m_nState; }
+            set
+            {
+                if (m_nState != value)
+                {
+                    m_nState = value;
+                    OnChangeStateEventFn();
+                }
+            }
+        }
     }
 
 }

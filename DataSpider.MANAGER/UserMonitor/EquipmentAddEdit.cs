@@ -72,6 +72,11 @@ namespace DataSpider.UserMonitor
             comboBox_ServerName.DisplayMember = "CODE_NM_VALUE";
             comboBox_ServerName.ValueMember = "CODE_VALUE";
 
+            DataTable dtZoneType = sqlBiz.GetCommonCode("ZONE_TYPE", ref strErrCode, ref strErrText);
+            comboBox_ZoneType.DataSource = dtZoneType;
+            comboBox_ZoneType.DisplayMember = "CODE_NM_VALUE";
+            comboBox_ZoneType.ValueMember = "CODE";
+
             dataGridTagInfo.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
             dataGridTagInfo.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
             dataGridTagInfo.AllowUserToResizeRows = dataGridTagInfo.AllowUserToResizeColumns = true;
@@ -107,6 +112,7 @@ namespace DataSpider.UserMonitor
                     comboBox_EquipType.SelectedValue = dtEquiptype.Select($"CODE_NM = '{EquipTypeName}'")[0]["CODE"].ToString();
                     //comboBox_InterfaceType.SelectedValue = dtInterfacetype.Select($"CODE_NM = '{EquipTypeName}'")[0]["CODE"].ToString();
                     comboBox_InterfaceType.SelectedIndex = 0;
+                    comboBox_ZoneType.SelectedIndex = 0;
                 }
                 foreach (Control ctrl in this.Controls)
                 {
@@ -155,6 +161,7 @@ namespace DataSpider.UserMonitor
 
                 comboBox_EquipType.SelectedValue = int.Parse(drEquipment["EQUIP_TYPE"].ToString());
                 comboBox_InterfaceType.SelectedValue = int.Parse(drEquipment["IF_TYPE"].ToString());
+                comboBox_ZoneType.SelectedValue = int.Parse(drEquipment["ZONE_TYPE"].ToString());
 
                 dataGridTagInfo.Rows.Clear();
                 textBox_ConnectionInfo.Text = drEquipment["CONNECTION_INFO"].ToString();
@@ -332,7 +339,7 @@ namespace DataSpider.UserMonitor
                 if (AddMode == true || EditModeCopy == true) EQSaveMode = true;
 
                 if (sqlBiz.InsertUpdateEquipmentInfo(EQSaveMode, textBox_EquipName.Text.Trim(), textBox_Description.Text.Trim(), comboBox_EquipType.SelectedValue.ToString(), comboBox_InterfaceType.SelectedValue.ToString(),
-                    textBox_ConnectionInfo.Text, textBox_ExtraInfo.Text, comboBox_ServerName.SelectedValue.ToString(), comboBox_UseFlag.Text, textBox_ConfigInfo.Text, ref strErrCode, ref strErrText))
+                    textBox_ConnectionInfo.Text, textBox_ExtraInfo.Text, comboBox_ServerName.SelectedValue.ToString(), comboBox_UseFlag.Text, textBox_ConfigInfo.Text, comboBox_ZoneType.SelectedValue.ToString(), ref strErrCode, ref strErrText))
                 {
                     // Save Trag Info
                     int nTagSaveFailCount = 0;

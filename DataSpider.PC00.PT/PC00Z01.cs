@@ -593,6 +593,27 @@ namespace DataSpider.PC00.PT
             return result;
         }
 
+        public DataTable GetProgramStatus3(string equipType, string zoneType, ref string _strErrCode, ref string _strErrText)
+        {
+            DataTable result = null;
+            try
+            {
+                StringBuilder strQuery = new StringBuilder();
+                strQuery.Append($"EXEC GetProgramStatus3 '{equipType}','{zoneType}'");
+
+                DataSet ds = CFW.Data.MsSqlDbAccess.GetDataSet(strQuery.ToString(), null, CommandType.Text, ref _strErrCode, ref _strErrText);
+                if (ds != null && ds.Tables[0] != null)
+                {
+                    result = ds.Tables[0];
+                }
+            }
+            catch (Exception ex)
+            {
+                _strErrText = ex.ToString();
+            }
+            return result;
+        }
+
         public DataTable GetEquipmentModifiedInfo(ref string _strErrCode, ref string _strErrText)
         {
             DataTable result = null;
@@ -614,13 +635,13 @@ namespace DataSpider.PC00.PT
             return result;
         }
 
-        public DataTable GetCurrentTagValue(string equipType, string equipName, ref string _strErrCode, ref string _strErrText)
+        public DataTable GetCurrentTagValue(string equipType, string equipName, string zoneType, ref string _strErrCode, ref string _strErrText)
         {
             DataTable result = null;
             try
             {
                 StringBuilder strQuery = new StringBuilder();
-                strQuery.Append($"EXEC GetCurrentTagValue '{equipType}', '{equipName}'");
+                strQuery.Append($"EXEC GetCurrentTagValue '{equipType}', '{equipName}','{zoneType}'");
 
                 DataSet ds = CFW.Data.MsSqlDbAccess.GetDataSet(strQuery.ToString(), null, CommandType.Text, ref _strErrCode, ref _strErrText);
                 if (ds != null && ds.Tables[0] != null)
@@ -728,8 +749,25 @@ namespace DataSpider.PC00.PT
                 return false;
             }
         }
-        
-        public bool InsertUpdateEquipmentInfo(bool add, string equipName, string description, string equipType, string interfaceType, string connectionInfo, string extraInfo, string serverName, string useFalg, string configInfo, ref string _strErrCode, ref string _strErrText)
+
+        public bool DeleteEquipmentTypeInfo(string equipName, string zoneType, ref string _strErrCode, ref string _strErrText)
+        {
+            try
+            {
+                StringBuilder strQuery = new StringBuilder();
+                strQuery.Append($"EXEC DeleteEquipmentTypeInfo '{equipName}', '{zoneType}'");
+                bool result = CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref _strErrCode, ref _strErrText);
+                               
+                return result;
+            }
+            catch (Exception ex)
+            {
+                _strErrText = ex.ToString();
+                return false;
+            }
+        }
+
+        public bool InsertUpdateEquipmentInfo(bool add, string equipName, string description, string equipType, string interfaceType, string connectionInfo, string extraInfo, string serverName, string useFalg, string configInfo, string zoneType, ref string _strErrCode, ref string _strErrText)
         {
             try
             {
@@ -742,7 +780,7 @@ namespace DataSpider.PC00.PT
                 {
                     strQuery.Append($"EXEC UpdateEquipmentInfo ");// '{equipName}', '{description}', '{equipType}', '{connectionInfo}', '{extraInfo}', '{serverName}', '{useFalg}', '{UserAuthentication.UserID}'");
                 }
-                strQuery.Append($" '{equipName}', '{description}', '{equipType}', '{interfaceType}', '{connectionInfo}', '{extraInfo}', '{serverName}', '{useFalg}', '{UserAuthentication.UserID}', '{configInfo}'");
+                strQuery.Append($" '{equipName}', '{description}', '{equipType}', '{interfaceType}', '{connectionInfo}', '{extraInfo}', '{serverName}', '{useFalg}', '{UserAuthentication.UserID}', '{configInfo}', '{zoneType}'");
                 bool result = CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref _strErrCode, ref _strErrText);
 
                 //
@@ -1264,6 +1302,27 @@ namespace DataSpider.PC00.PT
                 _strErrText = ex.ToString();
                 return false;
             }
+        }
+
+        public DataTable GetEquipmentTypeList(ref string _strErrCode, ref string _strErrText)
+        {
+            DataTable result = null;
+            try
+            {
+                StringBuilder strQuery = new StringBuilder();
+                strQuery.Append($"EXEC GetEquipmentTypeList");
+
+                DataSet ds = CFW.Data.MsSqlDbAccess.GetDataSet(strQuery.ToString(), null, CommandType.Text, ref _strErrCode, ref _strErrText);
+                if (ds != null && ds.Tables[0] != null)
+                {
+                    result = ds.Tables[0];
+                }
+            }
+            catch (Exception ex)
+            {
+                _strErrText = ex.ToString();
+            }
+            return result;
         }
     }
 }

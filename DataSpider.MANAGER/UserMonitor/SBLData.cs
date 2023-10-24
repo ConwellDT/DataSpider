@@ -18,6 +18,7 @@ namespace DataSpider.UserMonitor
         public delegate void OnChangeDataHandler(SBL sender, SBLEventArgs e);
         public event OnChangeDataHandler OnChangeDataEvent = null;
 
+        private List<Zone> m_zList = new List<Zone>();
         private List<Eq> m_pList = new List<Eq>();
         private List<EqType> m_pTypeList = new List<EqType>();
 
@@ -29,6 +30,19 @@ namespace DataSpider.UserMonitor
         Timer pTimer = new Timer();
 
         PC00Z01 m_SqlBiz = new PC00Z01();
+
+        public List<Zone> zLists
+        {
+            get
+            {
+
+                return m_zList;
+            }
+            set
+            {
+                m_zList = value;
+            }
+        }
 
         public List<Eq> Lists
         {
@@ -98,15 +112,22 @@ namespace DataSpider.UserMonitor
             bool bReturn = false;
             try
             {
+                GetZoneList();
                 GetEquipmentList();
                 GetEquipmentTypeList();
-                foreach(EqType pType in m_pTypeList)
-                {
-                    pType.EqLists = m_pList.FindAll(p => (p.Type == pType.TypeCode));
 
-                    foreach (Eq equipment in pType.EqLists)
+                foreach (Zone zType in m_zList)
+                {
+                    zType.EqTypeLists = m_pTypeList.FindAll(element => (element.ZoneType.ToString().Trim() == zType.TypeCode.ToString().Trim()));
+
+                    foreach (EqType pType in zType.EqTypeLists)
                     {
-                        equipment.EquipType = pType;
+                        pType.EqLists = m_pList.FindAll(p => ((p.Type == pType.TypeCode) && (p.ZoneType.ToString().Trim() == pType.ZoneType.ToString().Trim())));
+
+                        foreach (Eq equipment in pType.EqLists)
+                        {
+                            equipment.EquipType = pType;
+                        }
                     }
                 }
             }
@@ -120,6 +141,36 @@ namespace DataSpider.UserMonitor
                 OnChangeDataEventFn();
             }
             return bReturn;
+        }
+
+        public bool GetZoneList()
+        {
+            try
+            {
+                string strErrCode = string.Empty;
+                string strErrText = string.Empty;
+                DataTable dtZone = this.m_SqlBiz.GetCommonCode("ZONE_TYPE", "", ref strErrCode, ref strErrText);
+
+                m_zList.Clear();
+                if (dtZone == null || dtZone.Rows.Count <= 0)
+                {
+                    MessageBox.Show("No Zone information exist!! Check DB connection!!");
+                    return false;
+                }
+                else
+                {
+                    foreach (DataRow dr in dtZone.Rows)
+                    {
+                        m_zList.Add(new Zone(dr));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+                return false;
+            }
+            return true;
         }
 
         public bool GetEquipmentList()
@@ -163,7 +214,8 @@ namespace DataSpider.UserMonitor
             {
                 string strErrCode = string.Empty;
                 string strErrText = string.Empty;
-                DataTable dtResult = this.m_SqlBiz.GetCommonCode("EQUIP_TYPE", ref strErrCode, ref strErrText);
+                //DataTable dtResult = this.m_SqlBiz.GetCommonCode("EQUIP_TYPE", ref strErrCode, ref strErrText);
+                DataTable dtResult = this.m_SqlBiz.GetEquipmentTypeList(ref strErrCode, ref strErrText);
 
                 EqType pType;
                 m_pTypeList.Clear();
