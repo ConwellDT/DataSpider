@@ -274,8 +274,8 @@ namespace DataSpider.PC01.PT
                     {
                         trans1.Rollback();
                     }
-                }
-                else if (strEqpType.Trim() == "11")
+                }       // cedex hires m2i 통해 처리하던 것. cedex hires 는 직접 처리하는 로직 s17 으로 대체되어 사용되지 않음
+                else if (strEqpType.Trim() == "11")     // cedex bip 처리 (cedex bio 장비의 장비타입번호가 11 이어야 함)
                 {
                     strSql = " SELECT TOP 1 * FROM ROCHE ";
                     strSql += " WHERE MTRL_CD = '" + strEqpID + "' AND (TRIM(IF_FLAG) IS NULL OR TRIM(IF_FLAG) = 'N')  ";
