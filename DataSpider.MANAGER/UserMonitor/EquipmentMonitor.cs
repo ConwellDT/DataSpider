@@ -240,13 +240,23 @@ namespace DataSpider.UserMonitor
             //}           
             string selectedEquipType = nodeTag is EqType ? nodeTag.Name : nodeTag is Eq ? ((SBL)e.Node.Parent.Tag).Name : string.Empty;
             string selectedZoneType = nodeTag is EqType ? nodeTag.GetData("ZONE_TYPE") : nodeTag is Eq ? nodeTag.GetData("ZONE_TYPE") : string.Empty;
-
+            
             if (!equipType.Equals(selectedEquipType))
             {
                 treeSelectedNodeChanged = true;
                 //needResizeColumn = true;
                 equipType = selectedEquipType;
                 zoneType = selectedZoneType;
+                selectedIndex = 0;
+                GetProgramStatus();
+            }
+            else
+            {
+                equipType = selectedEquipType;
+                zoneType = selectedZoneType;
+
+                if (zoneType.Trim() == "" && nodeTag.Name.Trim() == "MSAT")
+                    zoneType = "2";                    
                 selectedIndex = 0;
                 GetProgramStatus();
             }

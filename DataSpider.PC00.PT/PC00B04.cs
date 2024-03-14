@@ -129,6 +129,7 @@ namespace DataSpider.PC00.PT
                 Thread.Sleep(1000);
             }
             Disconnect();
+
             UpdateEquipmentProgDateTime(IF_STATUS.Stop);
             listViewMsg.UpdateStatus(false);
             listViewMsg.UpdateMsg("Thread finished");
@@ -427,19 +428,20 @@ namespace DataSpider.PC00.PT
                     listViewMsg.UpdateMsg($"state.workSocket.BeginReceive - Connect", false, true, true, PC00D01.MSGTINF);
 
                     //Sync Msg
-                    byte[] sendMsg = new byte[9];
+                    //byte[] sendMsg = new byte[9];
 
-                    sendMsg[0] = ASCII.SOH;
-                    sendMsg[1] = ASCII.LF;
-                    sendMsg[2] = ASCII.LF;
-                    sendMsg[3] = ASCII.STX;
-                    sendMsg[4] = ASCII.LF;
-                    sendMsg[5] = ASCII.ETX;
-                    sendMsg[6] = ASCII.LF;
-                    sendMsg[7] = ASCII.EOT;
-                    sendMsg[8] = ASCII.LF;
+                    //sendMsg[0] = ASCII.SOH;
+                    //sendMsg[1] = ASCII.LF;
 
-                    state.workSocket.Send(sendMsg);
+                    //sendMsg[2] = ASCII.LF;
+                    //sendMsg[3] = ASCII.STX;
+                    //sendMsg[4] = ASCII.LF;
+                    //sendMsg[5] = ASCII.ETX;
+                    //sendMsg[6] = ASCII.LF;
+                    //sendMsg[7] = ASCII.EOT;
+                    //sendMsg[8] = ASCII.LF;
+
+                    //state.workSocket.Send(sendMsg);
                     //------------
                 }
             }

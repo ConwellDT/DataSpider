@@ -90,11 +90,6 @@ namespace DataSpider.PC01.PT
 
             for (int nCh = 0; nCh < Msg.Length; nCh++)
             {
-                ////임시 추가
-                //nFrameNumber = 1;
-                //CommStatus = A1_CommState.WAITING;
-                ////
-
                 switch (CommStatus)
                 {
                     case A1_CommState.IDLE:
@@ -135,10 +130,9 @@ namespace DataSpider.PC01.PT
                                 sendMsg = new byte[1];
 
                                 //임시 처리 제외
-                                if (int.TryParse(msgString.Substring(1, 1), out iResult) == true)// && iResult == nFrameNumber)
+                                if (int.TryParse(msgString.Substring(1, 1), out iResult) == true && iResult == nFrameNumber)
                                 {
-                                    //임시 처리 제외
-                                    if (iResult > 0)//(AstmCalcedCheckSum(msgString) == AstmRecvedCheckSum(msgString))
+                                   if (AstmCalcedCheckSum(msgString) == AstmRecvedCheckSum(msgString))
                                     {
                                         // 데이터 해석 가능
                                         string[] sp_cr = msgString.Split((char)ASCII.CR);
@@ -162,6 +156,7 @@ namespace DataSpider.PC01.PT
                                             _VERSION_VAL = sp_vert[12];
                                             _MESSAGEDATETIME_VAL = sp_vert[13];
                                         }
+
                                         if (sp_vert[0].EndsWith("P"))
                                         {
                                             typeName = "SIR";
@@ -191,7 +186,9 @@ namespace DataSpider.PC01.PT
                                             string[] utid = sp_vert[2].Split('^');
                                             if (dtMsrDateTime == DateTime.MinValue)
                                             {
-                                                PC00U01.TryParseExact(sp_vert[11], out dtMsrDateTime);
+                                                //PC00U01.TryParseExact(sp_vert[11], out dtMsrDateTime);
+                                                // KWC 202301123
+                                                PC00U01.TryParseExact(sp_vert[12], out dtMsrDateTime);
                                             }
 
                                             TestName = GetTypeName(utid[3]);

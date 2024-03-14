@@ -677,13 +677,13 @@ namespace DataSpider.PC00.PT
             return result;
         }
 
-        public DataTable GetPIAlarmStatus(string equipType, string equipName, ref string _strErrCode, ref string _strErrText)
+        public DataTable GetPIAlarmStatus(string equipType, string equipName, string zoneType, ref string _strErrCode, ref string _strErrText)
         {
             DataTable result = null;
             try
             {
                 StringBuilder strQuery = new StringBuilder();
-                strQuery.Append($"EXEC GetPIAlarmStatus '{equipType}', '{equipName}'");
+                strQuery.Append($"EXEC GetPIAlarmStatus '{equipType}', '{equipName}', '{zoneType}'");
 
                 DataSet ds = CFW.Data.MsSqlDbAccess.GetDataSet(strQuery.ToString(), null, CommandType.Text, ref _strErrCode, ref _strErrText);
                 if (ds != null && ds.Tables[0] != null)

@@ -21,6 +21,7 @@ namespace DataSpider.UserMonitor
         private PC00Z01 sqlBiz = new PC00Z01();
         private string equipType = string.Empty;
         private string equipName = string.Empty;
+X        private string zoneType = string.Empty;
         private int selectedIndex = 0;
         private int autoRefreshInterval = 10;
         private bool formSelected = false;
@@ -39,7 +40,7 @@ namespace DataSpider.UserMonitor
             GetProgramStatus();
             threadDataRefresh = new Thread(new ThreadStart(ThreadJob));
             threadDataRefresh.Start();
-            
+
             checkBox_AutoRefresh.Checked = ConfigHelper.GetAppSetting("PIAlarmAutoRefresh").Trim().ToUpper().Equals("Y");
             checkBox_AutoRefresh.CheckedChanged += checkBox_AutoRefresh_CheckedChanged;
 
@@ -96,7 +97,7 @@ namespace DataSpider.UserMonitor
             {
                 try
                 {
-                    
+
                     if (!formSelected)
                     {
                         return;
@@ -106,14 +107,14 @@ namespace DataSpider.UserMonitor
 
                     SetSelectedIndex();
 
-                    DataTable dtProgramStatus = sqlBiz.GetPIAlarmStatus(equipType.Trim(), equipName.Trim(), ref strErrCode, ref strErrText);
+                    DataTable dtProgramStatus = sqlBiz.GetPIAlarmStatus(equipType.Trim(), equipName.Trim(), zoneType.Trim(), ref strErrCode, ref strErrText);
 
                     if (dtProgramStatus == null || dtProgramStatus.Rows.Count < 1)
                     {
                         listView_Main.Items.Clear();
                         return;
                     }
-                                        
+
                     listView_Main.BeginUpdate();
                     listView_Main.Items.Clear();
 
@@ -128,7 +129,7 @@ namespace DataSpider.UserMonitor
                     listView_Main.Items.Clear();
                     foreach (DataRow dr in dtProgramStatus.Rows)
                     {
-                        ListViewItem lvi = new ListViewItem();                        
+                        ListViewItem lvi = new ListViewItem();
                         //lvi.Text = lvi.ImageKey = dr[0].ToString();
                         lvi.Text = dr[0].ToString();
 
@@ -148,7 +149,7 @@ namespace DataSpider.UserMonitor
                         //        lvi.SubItems[0].ForeColor = Color.Red;
                         //        break;
                         //}
-                                                
+
                         lvi.BackColor = listView_Main.Items.Count % 2 == 0 ? Color.FromArgb(221, 235, 247) : Color.Transparent;
 
                         listView_Main.Items.Add(lvi);
@@ -180,7 +181,7 @@ namespace DataSpider.UserMonitor
                 finally
                 {
                     listView_Main.EndUpdate();
-                    
+
                     dtLastRefreshed = DateTime.Now;
                 }
             }
@@ -190,20 +191,31 @@ namespace DataSpider.UserMonitor
             SBL nodeTag = e.Node.Tag as SBL;
             string selectedEquipType = string.Empty;
             string selectedEquipName = string.Empty;
+            string selectedZoneType = string.Empty;
 
             if (nodeTag is EqType)
             {
                 selectedEquipType = nodeTag.Name;
                 selectedEquipName = string.Empty;
+                selectedZoneType = nodeTag.GetData("ZONE_TYPE");
             }
             if (nodeTag is Eq)
             {
                 selectedEquipType = (e.Node.Parent.Tag as SBL).Name;
                 selectedEquipName = nodeTag.Name;
+                selectedZoneType = nodeTag.GetData("ZONE_TYPE");
             }
+
+            if (zoneType.Trim() == "" && nodeTag.Name.Trim() == "MSAT")
+                zoneType = "2";
+            else
+                zoneType = selectedZoneType;
+
             //if (!equipType.Equals(selectedEquipType) || !equipName.Equals(selectedEquipName))
             {
                 //needResizeColumn = true;
+
+
 
                 treeSelectedNodeChanged = true;
                 equipType = selectedEquipType;
@@ -243,12 +255,12 @@ namespace DataSpider.UserMonitor
             if ((sender as CheckBox).Checked)
             {
                 threadPause = false;
-                //button_Refresh.Enabled = false;                
+                //button_Refresh.Enabled = false;
             }
             else
             {
                 threadPause = true;
-                //button_Refresh.Enabled = true;                
+                //button_Refresh.Enabled = true;
             }
         }
 

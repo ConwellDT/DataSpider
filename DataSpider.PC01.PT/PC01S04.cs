@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Text;
 using System.Threading;
+using System.Transactions;
 
 namespace DataSpider.PC01.PT
 {
@@ -76,18 +77,19 @@ namespace DataSpider.PC01.PT
             SqlConnection SqlCon = null;
 
             string strCon = m_ConnectionInfo;
-            string strEqpType = drEquipment.ItemArray[2].ToString();
-            string strEqpID = drEquipment.ItemArray[5].ToString();
+            string strEqpType = drEquipment.Table.Rows[0]["EQUIP_TYPE"].ToString();//.ItemArray[2].ToString();
+            string strEqpID = drEquipment.Table.Rows[0]["EXTRA_INFO"].ToString(); //drEquipment.ItemArray[6].ToString();
 
             try
             {
                 SqlCon = new SqlConnection(strCon);
                 SqlCon.Open();
 
+
                 StringBuilder sbData = new StringBuilder();
                 string strDate = "";
 
-                if (strEqpType.Trim() == "11")
+                if (strEqpType.Trim() == "00")  //NO USE
                 {
                     //strSql = "SELECT TOP 1 Seq, SampleDrawTime, MeasurementResultValue, OverallType, OverallName, ";
                     //strSql += " CedexSystemID, CedexSystemNm, ReactorIdentifier, SampleIdentifier, SaveID, Workarea, Dilution, DatasetName, ProcessTime, Valid ";  //information 관련
@@ -185,12 +187,27 @@ namespace DataSpider.PC01.PT
 
                     if (arrSeqNo.Trim() != "")
                     {
+
+                        SqlTransaction trans = SqlCon.BeginTransaction();
+
                         string upSql = "";
                         //Update 처리                        
                         upSql = " UPDATE S2HIRES SET IF_FLAG = 'Y', IF_DATE = GETDATE() WHERE SEQ = '" + arrSeqNo.Trim() + "' ";
 
                         SqlCommand Cmd1 = new SqlCommand(upSql, SqlCon);
-                        Cmd1.ExecuteNonQuery();
+
+                        Cmd1.Transaction = trans;
+
+                        try
+                        {
+                            Cmd1.ExecuteNonQuery();
+
+                            trans.Commit();
+                        }
+                        catch(Exception ex)
+                        {
+                            trans.Rollback();
+                        }
                     }
 
 
@@ -235,15 +252,30 @@ namespace DataSpider.PC01.PT
 
                     reader1.Close();
 
+
+                    SqlTransaction trans1 = SqlCon.BeginTransaction();
+
                     string upSql1 = "";
                     //Update 처리                        
                     //upSql1 = " UPDATE S2HIRES_IMAGE SET IF_FLAG = 'Y', IF_DATE = GETDATE() WHERE MeasurementID = '" + strMID + "' ";
-                    upSql1 = " UPDATE S2HIRES_IMAGE SET IF_FLAG = 'Y', IF_DATE = GETDATE() WHERE MeasurementID = '" + strMID2 + "' and ImageID = '"+ imgid + "' ";
+                    upSql1 = " UPDATE S2HIRES_IMAGE SET IF_FLAG = 'Y', IF_DATE = GETDATE() WHERE MeasurementID = '" + strMID2 + "' and ImageID = '" + imgid + "' ";
 
                     SqlCommand Cmd3 = new SqlCommand(upSql1, SqlCon);
-                    Cmd3.ExecuteNonQuery();
+                    
+                    Cmd3.Transaction = trans1;
+
+                    try
+                    {
+                        Cmd3.ExecuteNonQuery();
+
+                        trans1.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        trans1.Rollback();
+                    }
                 }
-                else
+                else if (strEqpType.Trim() == "11")
                 {
                     strSql = " SELECT TOP 1 * FROM ROCHE ";
                     strSql += " WHERE MTRL_CD = '" + strEqpID + "' AND (TRIM(IF_FLAG) IS NULL OR TRIM(IF_FLAG) = 'N')  ";
@@ -294,6 +326,10 @@ namespace DataSpider.PC01.PT
                     if (strItemNm.Trim() != "")
                     {
                         DateTime CurDt = System.DateTime.Now;
+
+                        SqlTransaction trans1 = SqlCon.BeginTransaction();
+
+
                         string upSql = "";
                         //Update 처리
                         upSql = " UPDATE ROCHE SET IF_FLAG = 'Y', IF_DATE = GETDATE() ";
@@ -306,7 +342,19 @@ namespace DataSpider.PC01.PT
                         upSql += " AND QC_BAR_NO = '" + strQcbarNo + "' ";
 
                         SqlCommand Cmd1 = new SqlCommand(upSql, SqlCon);
-                        Cmd1.ExecuteNonQuery();
+                        
+                        Cmd1.Transaction = trans1;
+
+                        try
+                        {
+                            Cmd1.ExecuteNonQuery();
+
+                            trans1.Commit();
+                        }
+                        catch (Exception ex)
+                        {
+                            trans1.Rollback();
+                        }
                     }
                 }
 
