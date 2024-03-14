@@ -24,6 +24,7 @@ bld/
 # Visual Studio 2015/2017 cache/options directory
 .vs/
 
+Assembly/
 DataSpider.FailoverManager/obj/
 DataSpider.FailoverService/obj/
 DataSpider.FileTrans/obj/
