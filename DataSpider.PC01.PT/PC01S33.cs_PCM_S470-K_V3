@@ -1,0 +1,120 @@
+﻿CS3
+SevenExcellence         
+120-PCM-2004
+
+Date/Time   08/jan/2023  
+            11:40:13    
+Sensor      ExpertProISM
+Status      OK          
+                        
+Buffer gr.  METTLER     
+            TOLEDO      
+            Europe (Ref.
+            25캜)       
+User        Administrato
+            r           
+                        
+Method      DC          
+                        
+Meas.type1  DC pH       
+                        
+Buffer 1    4.01 pH     
+ Temp. 1    25.6 캜 ATC 
+ Endpoint   Automatic   
+            (Standard)  
+Buffer 2    7.00 pH     
+ Temp. 2    24.7 캜 ATC 
+ Endpoint   Automatic   
+            (Standard)  
+Buffer 3    9.21 pH     
+ Temp. 3    23.6 캜 ATC 
+ Endpoint   Automatic   
+            (Standard)  
+Buffer 4    9.21 pH     
+ Temp. 4    23.6 캜 ATC 
+ Endpoint   Automatic   
+            (Standard)  
+Buffer 5    9.21 pH     
+ Temp. 5    23.6 캜 ATC 
+ Endpoint   Automatic   
+            (Standard)  
+Slope 1-2   -58.48 mV/pH
+Slope (%)   98.8 %      
+Offset      9.4 mV      
+Slope 2-3   -57.97 mV/pH
+Slope (%)   98.0 %      
+Offset      9.4 mV      
+             
+
+Administrator           
+08-Jan-2023 11:40:13    
+Print format: Summary   
+Printed from memory      
+
+
+=================================
+// 1줄처리, 빈줄없앰
+01]CS3
+02]P3S-PCM-4000            
+03]Date/Time   07-Apr-21   02:21       
+04]Sensor      ExpertProISM
+05]Status      OK          
+06]Buffer gr.  METTLER     TOLEDO USA  (Ref. 25?C) 
+07]Method      DC          
+08]Meas.type1  DC pH       
+09]Buffer 1    4.01 pH     
+10] Temp. 1    19.6 ?C ATC 
+11] Endpoint   Automatic   (Strict)    
+12]Buffer 2    7.00 pH     
+13] Temp. 2    22.2 ?C ATC 
+14] Endpoint   Automatic   (Strict)    
+15]Buffer 3    10.01 pH    
+16] Temp. 3    20.4 ?C ATC 
+17] Endpoint   Automatic   (Strict)    
+18]Buffer 4    10.01 pH    
+19] Temp. 4    20.4 ?C ATC 
+20] Endpoint   Automatic   (Strict)    
+21]Buffer 5    10.01 pH    
+22] Temp. 5    20.4 ?C ATC 
+23] Endpoint   Automatic   (Strict)    
+24]Slope 1-2   -57.14 mV/pH
+25]Slope (%)   96.6 %      
+26]Offset      3.3 mV      
+27]Slope 2-3   -57.14 mV/pH
+28]Slope (%)   96.6 %      
+29]Offset      3.3 mV      
+30]P3S-PCM-4000            
+31]07-Apr-21 02:49         
+32]Print format: Summary   
+======================================
+
+
+=================================
+// 1줄처리, 빈줄없앰
+01]CS3
+02]P3S-PCM-4000            
+03]Date/Time   07-Apr-21   02:21       
+04]Sensor      ExpertProISM
+05]Status      OK          
+06]Buffer gr.  METTLER     TOLEDO USA  (Ref. 25?C) 
+07]Method      DC          
+08]Meas.type1  DC pH       
+09]Buffer 1    4.01 pH     
+10] Temp. 1    19.6 ?C ATC 
+11] Endpoint   Automatic   (Strict)    
+12]Buffer 2    7.00 pH     
+13] Temp. 2    22.2 ?C ATC 
+14] Endpoint   Automatic   (Strict)    
+15]Buffer 3    10.01 pH    
+16] Temp. 3    20.4 ?C ATC 
+17] Endpoint   Automatic   (Strict)    
+18]Slope 1-2   -57.14 mV/pH
+19]Slope (%)   96.6 %      
+20]Offset      3.3 mV      
+21]Slope 2-3   -57.14 mV/pH
+22]Slope (%)   96.6 %      
+23]Offset      3.3 mV      
+24]P3S-PCM-4000            
+25]07-Apr-21 02:49         
+26]Print format: Summary   
+======================================

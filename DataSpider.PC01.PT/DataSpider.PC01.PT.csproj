@@ -99,6 +99,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PC01S33.cs" />
     <Compile Include="PC01S32.cs" />
     <Compile Include="PC01S31.cs" />
     <Compile Include="PC01S28.cs" />
@@ -158,6 +159,7 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="PC01S33.cs_PCM_S470-K_V3" />
     <None Include="PC01S32.cs_CEDEX_BIO_HT" />
     <None Include="PC01S31.cs_CEDEX_BIO_V2_LIS" />
     <None Include="PC01S26.cs_PCM_S470-K_V2" />
