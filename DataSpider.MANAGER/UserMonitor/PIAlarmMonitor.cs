@@ -21,7 +21,7 @@ namespace DataSpider.UserMonitor
         private PC00Z01 sqlBiz = new PC00Z01();
         private string equipType = string.Empty;
         private string equipName = string.Empty;
-X        private string zoneType = string.Empty;
+        private string zoneType = string.Empty;
         private int selectedIndex = 0;
         private int autoRefreshInterval = 10;
         private bool formSelected = false;
