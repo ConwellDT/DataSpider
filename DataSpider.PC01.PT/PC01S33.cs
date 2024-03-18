@@ -163,25 +163,43 @@ namespace DataSpider.PC01.PT
                 // PHCAL 인경우만
                 if (keyIndex == 2)
                 {
-                    if (listData.Count >= m_LineLengthList[keyIndex] - 6 && !sMsgTemp.Contains("Buffer 5"))
+                    if (listData.Count >= m_LineLengthList[keyIndex] - 12 && !sMsgTemp.Contains("Buffer 3"))
+                    {
+                        int nPosition = listData.FindIndex(p => p.Contains("Buffer 2")) + 3;
+                        listData.Insert(nPosition, "Buffer 3");
+                        listData.Insert(nPosition + 1, string.Empty);
+                        listData.Insert(nPosition + 2, string.Empty);
+                    }
+                    else if (listData.Count >= m_LineLengthList[keyIndex] - 9 && !sMsgTemp.Contains("Buffer 4"))
+                    {
+                        int nPosition = listData.FindIndex(p => p.Contains("Buffer 3")) + 3;
+                        listData.Insert(nPosition, "Buffer 4");
+                        listData.Insert(nPosition + 1, string.Empty);
+                        listData.Insert(nPosition + 2, string.Empty);
+                    }
+                    else if (listData.Count >= m_LineLengthList[keyIndex] - 6 && !sMsgTemp.Contains("Buffer 5"))
                     {
                         int nPosition = listData.FindIndex(p => p.Contains("Buffer 4")) + 3;
-                        listData.Insert(nPosition, string.Empty);
+                        listData.Insert(nPosition, "Buffer 5");
                         listData.Insert(nPosition + 1, string.Empty);
                         listData.Insert(nPosition + 2, string.Empty);
                     }
                     else if (listData.Count >= m_LineLengthList[keyIndex] - 3 && !sMsgTemp.Contains("Buffer 5"))
                     {
                         int nPosition = listData.FindIndex(p => p.Contains("Buffer 4")) + 3;
-                        listData.Insert(nPosition, string.Empty);
+                        listData.Insert(nPosition, "Buffer 5");
                         listData.Insert(nPosition + 1, string.Empty);
                         listData.Insert(nPosition + 2, string.Empty);
                     }
+                }
 
+                // PHCAL 인경우만
+                if (keyIndex == 2)
+                {
                     if (listData.Count >= m_LineLengthList[keyIndex] - 3 && !sMsgTemp.Contains("Slope 2-3"))
                     {
                         int nPosition = listData.FindIndex(p => p.Contains("Slope ")) + 3;
-                        listData.Insert(nPosition, string.Empty);
+                        listData.Insert(nPosition, "Slope 2-3");
                         listData.Insert(nPosition + 1, string.Empty);
                         listData.Insert(nPosition + 2, string.Empty);
                     }
@@ -191,14 +209,14 @@ namespace DataSpider.PC01.PT
                 if (keyIndex == 3 && listData.Count >= m_LineLengthList[keyIndex] - 1 && !sMsgTemp.Contains("Alpha-coeff."))
                 {
                     int nPosition = listData.FindIndex(p => p.Contains("T.corr.")) + 1;
-                    listData.Insert(nPosition, string.Empty);
+                    listData.Insert(nPosition, "Alpha-coeff.");
                 }
 
                 //MS COND
                 if (keyIndex == 5 && listData.Count >= m_LineLengthList[keyIndex] - 1 && !sMsgTemp.Contains("Alpha-coeff."))
                 {
                     int nPosition = listData.FindIndex(p => p.Contains("T.corr.")) + 1;
-                    listData.Insert(nPosition, string.Empty);
+                    listData.Insert(nPosition, "Alpha-coeff.");
                 }
 
 

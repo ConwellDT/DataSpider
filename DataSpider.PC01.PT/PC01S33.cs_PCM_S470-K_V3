@@ -51,70 +51,109 @@ Administrator
 Print format: Summary   
 Printed from memory      
 
-
-=================================
-// 1줄처리, 빈줄없앰
+============================================================================
+V1. DC pH length : 24
+DC pH 일때 Buffer 가 2개 또는 3개 나올수 있음. 2개일때 3개로 만들어줌
+============================================================================
 01]CS3
 02]P3S-PCM-4000            
 03]Date/Time   07-Apr-21   02:21       
 04]Sensor      ExpertProISM
 05]Status      OK          
 06]Buffer gr.  METTLER     TOLEDO USA  (Ref. 25?C) 
-07]Method      DC          
-08]Meas.type1  DC pH       
-09]Buffer 1    4.01 pH     
-10] Temp. 1    19.6 ?C ATC 
-11] Endpoint   Automatic   (Strict)    
-12]Buffer 2    7.00 pH     
-13] Temp. 2    22.2 ?C ATC 
-14] Endpoint   Automatic   (Strict)    
-15]Buffer 3    10.01 pH    
-16] Temp. 3    20.4 ?C ATC 
-17] Endpoint   Automatic   (Strict)    
-18]Buffer 4    10.01 pH    
-19] Temp. 4    20.4 ?C ATC 
-20] Endpoint   Automatic   (Strict)    
-21]Buffer 5    10.01 pH    
-22] Temp. 5    20.4 ?C ATC 
-23] Endpoint   Automatic   (Strict)    
-24]Slope 1-2   -57.14 mV/pH
-25]Slope (%)   96.6 %      
-26]Offset      3.3 mV      
-27]Slope 2-3   -57.14 mV/pH
-28]Slope (%)   96.6 %      
-29]Offset      3.3 mV      
-30]P3S-PCM-4000            
-31]07-Apr-21 02:49         
-32]Print format: Summary   
-======================================
+07]User        Administrator
+08]Method      DC          
+09]Meas.type1  DC pH       
+10]Buffer 1    4.01 pH     
+11] Temp. 1    19.6 ?C ATC 
+12] Endpoint   Automatic   (Strict)    
+13]Buffer 2    7.00 pH     
+14] Temp. 2    22.2 ?C ATC 
+15] Endpoint   Automatic   (Strict)    
+16]Buffer 3    10.01 pH    
+17] Temp. 3    20.4 ?C ATC 
+18] Endpoint   Automatic   (Strict)    
+19]Slope       -57.14 mV/pH
+20]Slope (%)   96.6 %      
+21]Offset      3.3 mV      
+22]P3S-PCM-4000            
+23]07-Apr-21 02:49         
+24]Print format: Summary   
+============================================================================
 
-
-=================================
-// 1줄처리, 빈줄없앰
+============================================================================
+V2. DC pH length : 27
+DC pH 일때 Buffer 가 2개 또는 3개 나올수 있음. Buffer 3 가 없으면 Buffer 2 3줄 다음에 3줄추가 
++ DC pH 일때 Slope 2-3 이 없으면 1개 일때 Slope 3줄 다음에 3줄추가
++ DM COND, MS COND 일때 Alpha-coeff. 가 없으면 T.corr. 다음줄에 1줄 추가
+============================================================================
 01]CS3
 02]P3S-PCM-4000            
 03]Date/Time   07-Apr-21   02:21       
 04]Sensor      ExpertProISM
 05]Status      OK          
 06]Buffer gr.  METTLER     TOLEDO USA  (Ref. 25?C) 
-07]Method      DC          
-08]Meas.type1  DC pH       
-09]Buffer 1    4.01 pH     
-10] Temp. 1    19.6 ?C ATC 
-11] Endpoint   Automatic   (Strict)    
-12]Buffer 2    7.00 pH     
-13] Temp. 2    22.2 ?C ATC 
-14] Endpoint   Automatic   (Strict)    
-15]Buffer 3    10.01 pH    
-16] Temp. 3    20.4 ?C ATC 
-17] Endpoint   Automatic   (Strict)    
-18]Slope 1-2   -57.14 mV/pH
-19]Slope (%)   96.6 %      
-20]Offset      3.3 mV      
-21]Slope 2-3   -57.14 mV/pH
-22]Slope (%)   96.6 %      
-23]Offset      3.3 mV      
-24]P3S-PCM-4000            
-25]07-Apr-21 02:49         
-26]Print format: Summary   
-======================================
+07]User        Administrator
+08]Method      DC          
+09]Meas.type1  DC pH       
+10]Buffer 1    4.01 pH     
+11] Temp. 1    19.6 ?C ATC 
+12] Endpoint   Automatic   (Strict)    
+13]Buffer 2    7.00 pH     
+14] Temp. 2    22.2 ?C ATC 
+15] Endpoint   Automatic   (Strict)    
+16]Buffer 3    10.01 pH    
+17] Temp. 3    20.4 ?C ATC 
+18] Endpoint   Automatic   (Strict)    
+19]Slope 1-2   -57.14 mV/pH
+20]Slope (%)   96.6 %      
+21]Offset      3.3 mV      
+22]Slope 2-3   -57.14 mV/pH
+23]Slope (%)   96.6 %      
+24]Offset      3.3 mV      
+25]P3S-PCM-4000            
+26]07-Apr-21 02:49         
+27]Print format: Summary   
+============================================================================
+
+============================================================================
+V3. DC pH length : 33
+DC pH 일때 Buffer 가 2개 또는 3개 나올수 있음. Buffer 3 가 없으면 Buffer 2 3줄 다음에 3줄추가 
+DC pH 일때 Slope 2-3 이 없으면 1개 일때 Slope 3줄 다음에 3줄추가
+DM COND, MS COND 일때 Alpha-coeff. 가 없으면 T.corr. 다음줄에 1줄 추가
++ DC pH 일때 Buffer 가 2개, 3개, 4개, 5개가 나올수 있음. 
+============================================================================
+01]CS3
+02]P3S-PCM-4000            
+03]Date/Time   07-Apr-21   02:21       
+04]Sensor      ExpertProISM
+05]Status      OK          
+06]Buffer gr.  METTLER     TOLEDO USA  (Ref. 25?C) 
+07]User        Administrator
+08]Method      DC          
+09]Meas.type1  DC pH       
+10]Buffer 1    4.01 pH     
+11] Temp. 1    19.6 ?C ATC 
+12] Endpoint   Automatic   (Strict)    
+13]Buffer 2    7.00 pH     
+14] Temp. 2    22.2 ?C ATC 
+15] Endpoint   Automatic   (Strict)    
+16]Buffer 3    10.01 pH    
+17] Temp. 3    20.4 ?C ATC 
+18] Endpoint   Automatic   (Strict)    
+19]Buffer 4    10.01 pH    
+20] Temp. 4    20.4 ?C ATC 
+21] Endpoint   Automatic   (Strict)    
+22]Buffer 5    10.01 pH    
+23] Temp. 5    20.4 ?C ATC 
+24] Endpoint   Automatic   (Strict)    
+25]Slope 1-2   -57.14 mV/pH
+26]Slope (%)   96.6 %      
+27]Offset      3.3 mV      
+28]Slope 2-3   -57.14 mV/pH
+29]Slope (%)   96.6 %      
+30]Offset      3.3 mV      
+31]P3S-PCM-4000            
+32]07-Apr-21 02:49         
+33]Print format: Summary   
+============================================================================
