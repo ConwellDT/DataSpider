@@ -163,45 +163,41 @@ namespace DataSpider.PC01.PT
                 // PHCAL 인경우만
                 if (keyIndex == 2)
                 {
-                    if (listData.Count >= m_LineLengthList[keyIndex] - 12 && !sMsgTemp.Contains("Buffer 3"))
+                    // buffer 2, slope 1 개 일때, 프린트 포맷이 나왔으면 체크시작 
+                    if (listData.Count >= m_LineLengthList[keyIndex] - 15 && sMsgTemp.Contains("Print format"))
                     {
-                        int nPosition = listData.FindIndex(p => p.Contains("Buffer 2")) + 3;
-                        listData.Insert(nPosition, "Buffer 3");
-                        listData.Insert(nPosition + 1, string.Empty);
-                        listData.Insert(nPosition + 2, string.Empty);
-                    }
-                    else if (listData.Count >= m_LineLengthList[keyIndex] - 9 && !sMsgTemp.Contains("Buffer 4"))
-                    {
-                        int nPosition = listData.FindIndex(p => p.Contains("Buffer 3")) + 3;
-                        listData.Insert(nPosition, "Buffer 4");
-                        listData.Insert(nPosition + 1, string.Empty);
-                        listData.Insert(nPosition + 2, string.Empty);
-                    }
-                    else if (listData.Count >= m_LineLengthList[keyIndex] - 6 && !sMsgTemp.Contains("Buffer 5"))
-                    {
-                        int nPosition = listData.FindIndex(p => p.Contains("Buffer 4")) + 3;
-                        listData.Insert(nPosition, "Buffer 5");
-                        listData.Insert(nPosition + 1, string.Empty);
-                        listData.Insert(nPosition + 2, string.Empty);
-                    }
-                    else if (listData.Count >= m_LineLengthList[keyIndex] - 3 && !sMsgTemp.Contains("Buffer 5"))
-                    {
-                        int nPosition = listData.FindIndex(p => p.Contains("Buffer 4")) + 3;
-                        listData.Insert(nPosition, "Buffer 5");
-                        listData.Insert(nPosition + 1, string.Empty);
-                        listData.Insert(nPosition + 2, string.Empty);
-                    }
-                }
-
-                // PHCAL 인경우만
-                if (keyIndex == 2)
-                {
-                    if (listData.Count >= m_LineLengthList[keyIndex] - 3 && !sMsgTemp.Contains("Slope 2-3"))
-                    {
-                        int nPosition = listData.FindIndex(p => p.Contains("Slope ")) + 3;
-                        listData.Insert(nPosition, "Slope 2-3");
-                        listData.Insert(nPosition + 1, string.Empty);
-                        listData.Insert(nPosition + 2, string.Empty);
+                        if (!sMsgTemp.Contains("Buffer 3"))
+                        {
+                            int nPosition = listData.FindIndex(p => p.Contains("Buffer 2")) + 3;
+                            //listData.Insert(nPosition, "Buffer 3           ");
+                            listData.Insert(nPosition, string.Empty);
+                            listData.Insert(nPosition + 1, string.Empty);
+                            listData.Insert(nPosition + 2, string.Empty);
+                        }
+                        if (!sMsgTemp.Contains("Buffer 4"))
+                        {
+                            int nPosition = listData.FindIndex(p => p.Contains("Buffer 2")) + 6;
+                            //listData.Insert(nPosition, "Buffer 4           ");
+                            listData.Insert(nPosition, string.Empty);
+                            listData.Insert(nPosition + 1, string.Empty);
+                            listData.Insert(nPosition + 2, string.Empty);
+                        }
+                        if (!sMsgTemp.Contains("Buffer 5"))
+                        {
+                            int nPosition = listData.FindIndex(p => p.Contains("Buffer 2")) + 9;
+                            //listData.Insert(nPosition, "Buffer 5           ");
+                            listData.Insert(nPosition, string.Empty);
+                            listData.Insert(nPosition + 1, string.Empty);
+                            listData.Insert(nPosition + 2, string.Empty);
+                        }
+                        if (!sMsgTemp.Contains("Slope 2-3"))
+                        {
+                            int nPosition = listData.FindIndex(p => p.Contains("Slope ")) + 3;
+                            //listData.Insert(nPosition, "Slope 2-3           ");
+                            listData.Insert(nPosition, string.Empty);
+                            listData.Insert(nPosition + 1, string.Empty);
+                            listData.Insert(nPosition + 2, string.Empty);
+                        }
                     }
                 }
 
