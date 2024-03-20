@@ -263,12 +263,18 @@ namespace DataSpider.PC00.PT
 
         public static void ExecuteNetUse(string path, string id, string pw)
         {
+            // 20240320, SHS, NET USE 실행 전 NET USE DELETE 로 이전 연결 종료, 동일한 사용자가 둘 이상의 사용자 이름으로 서버 또는 ... 오류 발생으로 보완
+            Process.Start(new ProcessStartInfo("NET.EXE")
+            {
+                WindowStyle = ProcessWindowStyle.Hidden,
+                Arguments = $@"USE {path} /DELETE"
+            });
+
             Process.Start(new ProcessStartInfo("NET.EXE")
             {
                 WindowStyle = ProcessWindowStyle.Hidden,
                 Arguments = $@"USE {path} {pw} /USER:{id}"
             }); 
-
         }
 
         /// <summary>
