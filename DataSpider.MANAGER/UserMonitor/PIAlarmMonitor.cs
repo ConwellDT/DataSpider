@@ -205,11 +205,17 @@ namespace DataSpider.UserMonitor
                 selectedEquipName = nodeTag.Name;
                 selectedZoneType = nodeTag.GetData("ZONE_TYPE");
             }
+            if (nodeTag is Zone)
+            {
+                selectedZoneType = (nodeTag as Zone).TypeCode;
+            }
 
-            if (zoneType.Trim() == "" && nodeTag.Name.Trim() == "MSAT")
-                zoneType = "2";
-            else
-                zoneType = selectedZoneType;
+            //if (zoneType.Trim() == "" && nodeTag.Name.Trim() == "MSAT")
+            //    zoneType = "2";
+            //else
+            //    zoneType = selectedZoneType;
+
+            zoneType = selectedZoneType;
 
             //if (!equipType.Equals(selectedEquipType) || !equipName.Equals(selectedEquipName))
             {

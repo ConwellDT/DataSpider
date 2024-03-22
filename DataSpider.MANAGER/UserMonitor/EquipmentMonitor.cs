@@ -156,6 +156,7 @@ namespace DataSpider.UserMonitor
                     string strErrText = string.Empty;
                     //23.09.07 zone Type 추가
                     //DataTable dtProgramStatus = sqlBiz.GetProgramStatus(equipType.Trim(), ref strErrCode, ref strErrText);
+                    listView_Main.Items.Clear();
                     DataTable dtProgramStatus = sqlBiz.GetProgramStatus3(equipType.Trim(), zoneType.Trim(), ref strErrCode, ref strErrText);
                     if (dtProgramStatus == null || dtProgramStatus.Rows.Count < 1 || dtProgramStatus.Columns.Count < 1)
                     {
@@ -171,7 +172,7 @@ namespace DataSpider.UserMonitor
                             listView_Main.Columns.Add(dc.ColumnName);
                         }
                     }
-                    listView_Main.Items.Clear();
+                    //listView_Main.Items.Clear();
                     foreach (DataRow dr in dtProgramStatus.Rows)
                     {
                         ListViewItem lvi = new ListViewItem();
@@ -239,8 +240,9 @@ namespace DataSpider.UserMonitor
             //    selectedEquipType = ((SBL)e.Node.Parent.Tag).Name;
             //}           
             string selectedEquipType = nodeTag is EqType ? nodeTag.Name : nodeTag is Eq ? ((SBL)e.Node.Parent.Tag).Name : string.Empty;
-            string selectedZoneType = nodeTag is EqType ? nodeTag.GetData("ZONE_TYPE") : nodeTag is Eq ? nodeTag.GetData("ZONE_TYPE") : string.Empty;
-            
+            //string selectedZoneType = nodeTag is EqType ? nodeTag.GetData("ZONE_TYPE") : nodeTag is Eq ? nodeTag.GetData("ZONE_TYPE") : string.Empty;
+            string selectedZoneType = nodeTag is EqType || nodeTag is Eq ? nodeTag.GetData("ZONE_TYPE") : nodeTag is Zone ? (nodeTag as Zone).TypeCode : string.Empty;
+
             if (!equipType.Equals(selectedEquipType))
             {
                 treeSelectedNodeChanged = true;
@@ -255,8 +257,8 @@ namespace DataSpider.UserMonitor
                 equipType = selectedEquipType;
                 zoneType = selectedZoneType;
 
-                if (zoneType.Trim() == "" && nodeTag.Name.Trim() == "MSAT")
-                    zoneType = "2";                    
+                //if (zoneType.Trim() == "" && nodeTag.Name.Trim() == "MSAT")
+                //    zoneType = "2";                    
                 selectedIndex = 0;
                 GetProgramStatus();
             }
