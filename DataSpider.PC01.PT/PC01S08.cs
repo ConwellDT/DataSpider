@@ -143,13 +143,20 @@ namespace DataSpider.PC01.PT
                 listViewMsg.UpdateMsg($"myUaClient.UpateTagData ", false, true, true, PC00D01.MSGTINF);
                 // currentSubscription에 대한 서비스를 등록한다.
                 bool bReturn = myUaClient.AddSubscription();
-                if (bReturn == false) myUaClient = null;
+                if (bReturn == false)
+                {
+                    // 20240322, SHS, opcClient = null 처리 전에 opcClient?.Close() 추가
+                    myUaClient?.Close();
+                    myUaClient = null;
+                }
                 listViewMsg.UpdateMsg($"{bReturn}= myUaClient.AddSubscription", false, true, true, PC00D01.MSGTINF);
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.ToString());
                 listViewMsg.UpdateMsg($"Exceptioin - InitOpcUaClient ({ex})", false, true, true, PC00D01.MSGTERR);
+                // 20240322, SHS, opcClient = null 처리 전에 opcClient?.Close() 추가
+                myUaClient?.Close();
                 myUaClient = null;
             }
         }

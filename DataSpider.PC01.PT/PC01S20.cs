@@ -197,7 +197,8 @@ namespace DataSpider.PC01.PT
                 }
                 Thread.Sleep(1000);
             }
-            myUaClient.Close();
+            // 20240322, SHS, opcClient = null 처리 전에 opcClient?.Close() 추가
+            myUaClient?.Close();
             myUaClient = null;
             UpdateEquipmentProgDateTime(IF_STATUS.Stop);
             listViewMsg.UpdateStatus(false);
@@ -618,7 +619,8 @@ namespace DataSpider.PC01.PT
                 listViewMsg.UpdateMsg($"{bReturn}= myUaClient.AddSubscription", false, true, true, PC00D01.MSGTINF);
                 if (bReturn == false)
                 {
-                    myUaClient.Close();
+                    // 20240322, SHS, opcClient = null 처리 전에 opcClient?.Close() 추가
+                    myUaClient?.Close();
                     myUaClient = null;
                 }
             }
@@ -626,7 +628,8 @@ namespace DataSpider.PC01.PT
             {
                 Debug.WriteLine(ex.ToString());
                 listViewMsg.UpdateMsg($"Exceptioin - InitOpcUaClient ({ex})", false, true, true, PC00D01.MSGTERR);
-                myUaClient.Close();
+                // 20240322, SHS, opcClient = null 처리 전에 opcClient?.Close() 추가
+                myUaClient?.Close();
                 myUaClient = null;
             }
         }

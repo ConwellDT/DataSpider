@@ -628,6 +628,8 @@ namespace DataSpider.PC01.PT
                 UpdateEquipmentProgDateTime(IF_STATUS.Disconnected);
                 Debug.WriteLine(ex.ToString());
                 listViewMsg.UpdateMsg($"Exceptioin - InitOpcUaClient ({ex})", false, true, true, PC00D01.MSGTERR);
+                // 20240322, SHS, opcClient = null 처리 전에 opcClient?.Close() 추가
+                myUaClient?.Close();
                 myUaClient = null;
             }
         }
