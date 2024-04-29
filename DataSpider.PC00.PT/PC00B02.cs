@@ -72,6 +72,10 @@ namespace DataSpider.PC00.PT
         {
             state.workSocket.Send(new byte[] { controlChar });
         }
+        protected void SendMessage(byte[] message)
+        {
+            state.workSocket.Send(message);
+        }
         protected void ThreadJob()
         {
             Thread.Sleep(1000);

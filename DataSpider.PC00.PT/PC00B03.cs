@@ -345,7 +345,7 @@ namespace DataSpider.PC00.PT
 
         protected DateTime GetLastEnqueuedFileWriteTime()
         {
-            string dtString = m_sqlBiz.ReadSTCommon(m_Name, "LastEnqueudFileWriteTime");//  PC00U01.ReadConfigValue("LastEnqueudFileWriteTime", m_Name, $@".\CFG\{m_Type}.ini");
+            string dtString = m_sqlBiz.ReadSTCommon(m_Name, "LastEnqueuedFileWriteTime");//  PC00U01.ReadConfigValue("LastEnqueudFileWriteTime", m_Name, $@".\CFG\{m_Type}.ini");
             //PC00U01.TryParseExact(dtString, out DateTime dt);
             DateTime.TryParse(dtString, out DateTime dt);
             listViewMsg.UpdateMsg($"Read last enqueued file write time : {dt:yyyy-MM-dd HH:mm:ss.fffffff})", false, true);
@@ -355,7 +355,7 @@ namespace DataSpider.PC00.PT
         protected bool SetLastEnqueuedFileWriteTime(DateTime dt)
         {
             //if (!PC00U01.WriteConfigValue("LastEnqueudFileWriteTime", m_Name, $@".\CFG\{m_Type}.ini", $"{dt:yyyy-MM-dd HH:mm:ss.fffffff}"))
-            if (!m_sqlBiz.WriteSTCommon(m_Name, "LastEnqueudFileWriteTime", $"{dt:yyyy-MM-dd HH:mm:ss.fffffff}"))
+            if (!m_sqlBiz.WriteSTCommon(m_Name, "LastEnqueuedFileWriteTime", $"{dt:yyyy-MM-dd HH:mm:ss.fffffff}"))
             {
                 listViewMsg.UpdateMsg($"Error to write last enqueued file write time to INI file", false, true);
                 return false;

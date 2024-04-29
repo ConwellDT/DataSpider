@@ -15,6 +15,8 @@ using System.Windows.Forms;
 using NLog;
 using NLog.Targets;
 using System.Text.Json;
+using System.Management.Automation.Language;
+using System.Security.Cryptography;
 
 namespace DataSpider.PC00.PT
 {
@@ -631,7 +633,17 @@ namespace DataSpider.PC00.PT
             }
             return false;
         }
-        
+
+        public static bool TryAdd<T>(this Dictionary<T, List<string>> dic, T key, List<string> value)
+        {
+            if (!dic.ContainsKey(key))
+            {
+                dic.Add(key, value);
+                return true;
+            }
+            return false;
+        }
+
         /// <summary>
         /// Dictionary TrayGetValue 를 수행하여 성공하면 그 값을 리턴하고 실패하면 default 값을 리턴하는 확장 메서드
         /// </summary>
@@ -990,5 +1002,224 @@ namespace DataSpider.PC00.PT
     }
     #endregion
 
+
+    #region LIS3_MESSAGE
+    public class LIS3_MESSAGE
+    {
+        private string message;
+
+        private string identifier;
+        private string rTimestamp;
+        private string aTimestamp;
+        private string checksum;
+        //private List<string[]> listGroups = new List<string[]>();
+        private Dictionary<string, List<string>> dicGroups = new Dictionary<string, List<string>>();
+
+        public LIS3_MESSAGE()
+        {
+        }
+
+        public string Identifier
+        {
+            get { return identifier; }
+        }
+
+        public bool Checksum
+        {
+            get { return (message.Substring(0, message.Length - 3).Sum(x => (byte)x) % 256).ToString("X02").Equals(checksum); }
+        }
+
+        //public List<string[]> Groups
+        //{
+        //    get { return listGroups; }
+        //}
+        public Dictionary<string, List<string>> Groups
+        {
+            get { return dicGroups; }
+        }
+
+        public byte[] ACKMessage 
+        {
+            get 
+            {
+                List<byte> listBytes = new List<byte>();
+                listBytes.Add(ASCII.STX);
+                listBytes.Add(ASCII.ACK);
+                listBytes.Add(ASCII.ETX);
+                listBytes.AddRange(Encoding.ASCII.GetBytes("0B"));
+                listBytes.Add(ASCII.EOT);
+
+                return listBytes.ToArray();
+            }
+        }
+
+        public void Parsing(string _message)
+        {
+            identifier = checksum = rTimestamp = aTimestamp = string.Empty;
+            //listGroups.Clear();
+            dicGroups.Clear();
+            message = _message;
+
+            if (message[1].Equals((char)ASCII.ACK))
+            {
+                identifier = "<ACK>";
+                checksum = message.Substring(3, 2);
+            }
+            else
+            {
+                // RS 
+                string[] rs = message.Split(new char[] { (char)ASCII.RS }, StringSplitOptions.RemoveEmptyEntries);
+                identifier = rs[0].Substring(1, rs[0].Length - 2);
+                if (identifier.Equals("ID_REQ"))
+                {
+                    checksum = rs[1].Substring(1, 2);
+                }
+                else
+                {
+                    checksum = rs[2].Substring(1, 2);
+                    List<string> listFields = rs[1].Split(new char[] { (char)ASCII.FS }, StringSplitOptions.RemoveEmptyEntries).ToList();
+                    foreach (string s in listFields)
+                    {
+                        List<string> groups = s.Split(new char[] { (char)ASCII.GS }).ToList();      // GS 는 공백이 있어도 Split 처리
+                        string[] exceptions = groups[3].Split(new char[] { (char)ASCII.ETB }, StringSplitOptions.RemoveEmptyEntries);
+                        groups[3] = string.Join(" ", exceptions);   // Exception 2개까지 나올 수 있음. ETB 로 Split 하고 그 사이는 348EX 와 동일하게 공백으로 구분
+                        groups.RemoveAt(4);     // GS 로 Split 하면 GS 로 끝나기 때문에 1개가 더 생김. 5번째 삭제
+
+                        //listGroups.Add(groups.ToArray());
+
+                        dicGroups.TryAdd(groups[0], groups);
+                    }
+                    //rTimestamp = $"{listGroups.Where(x => x[0].Equals("rDATE")).First()[1]} {listGroups.Where(x => x[0].Equals("rTIME")).First()[1]}";
+                    //aTimestamp = $"{listGroups.Where(x => x[0].Equals("aDATE")).First()[1]} {listGroups.Where(x => x[0].Equals("aTIME")).First()[1]}";
+
+                    rTimestamp = dicGroups.ContainsKey("rDATE") && dicGroups.ContainsKey("rTIME") ? $"{dicGroups["rDATE"][1]} {dicGroups["rTIME"][1]}" : string.Empty;
+                    aTimestamp = dicGroups.ContainsKey("aDATE") && dicGroups.ContainsKey("aTIME") ? $"{dicGroups["aDATE"][1]} {dicGroups["aTIME"][1]}" : string.Empty;
+                }
+            }
+        }
+
+        public byte[] GetResponseMessage()
+        {
+            Dictionary<string, string> dicParams = new Dictionary<string, string>();
+            string reqIdentifier = string.Empty;
+
+            switch (Identifier)
+            {
+                // ACK, REQ
+                case "ID_REQ":
+                    reqIdentifier = "ID_DATA";
+                    dicParams.TryAdd("aMOD", "LIS");
+                    dicParams.TryAdd("iIID", "DSB");
+                    break;
+
+                case "SMP_NEW_AV":
+                case "QC_NEW_AV":
+                case "CAL_NEW_AV":
+                    reqIdentifier = $"{Identifier.Split(new string[] { "_" }, StringSplitOptions.RemoveEmptyEntries)[0]}_REQ";
+                    dicParams.TryAdd("aMOD", dicGroups["aMOD"][1]);
+                    dicParams.TryAdd("iIID", dicGroups["iIID"][1]);
+                    dicParams.TryAdd("rSEQ", dicGroups["rSEQ"][1]);
+                    break;
+
+                case "SMP_NEW_DATA":
+                case "SMP_EDIT_DATA":
+                case "QC_NEW_DATA":
+                case "CAL_NEW_DATA":
+                case "SMP_NOT_AV":
+                case "QC_NOT_AV":
+                case "CAL_NOT_AV":
+                    break;
+
+                default:
+                    // SMP_START, SMP_ABORT, QC_START, QC_ABORT, CAL_START, CAL_ABORT
+                    // SYSTEM STATUS : SYS_READY, SYS_NOT_READY, SYS_WOPR, SYS_MEASURING, SYS_CAL_PEND, SYS_CAL_REP
+                    // TIME_DATA
+                    break;
+            }
+            if (!string.IsNullOrWhiteSpace(reqIdentifier))
+            {
+                return BuildMessage(reqIdentifier, dicParams);
+            }
+
+            return null;
+        }
+
+        private byte[] BuildMessage(string reqdentifier, Dictionary<string, string> dicParams)
+        {
+            List<byte> listBytes = new List<byte>();
+            listBytes.Add(ASCII.STX);
+            listBytes.AddRange(Encoding.ASCII.GetBytes(reqdentifier));
+            listBytes.Add(ASCII.FS);
+
+            listBytes.Add(ASCII.RS);
+
+            foreach (KeyValuePair<string, string> kvp in dicParams)
+            {
+                listBytes.AddRange(Encoding.ASCII.GetBytes(kvp.Key));
+                listBytes.Add(ASCII.GS);
+                listBytes.AddRange(Encoding.ASCII.GetBytes(kvp.Value));
+                listBytes.Add(ASCII.GS);
+                listBytes.Add(ASCII.GS);
+                listBytes.Add(ASCII.GS);
+                listBytes.Add(ASCII.FS);
+            }
+
+            listBytes.Add(ASCII.RS);
+
+            listBytes.Add(ASCII.ETX);
+            listBytes.AddRange(Encoding.ASCII.GetBytes(CalcChecksum(listBytes)));
+            listBytes.Add(ASCII.EOT);
+
+            return listBytes.ToArray();
+        }
+
+        public string GetTTV()
+        {
+            int customCount = 1;
+            string name;
+            StringBuilder sb = new StringBuilder();
+            string timestamp = string.IsNullOrWhiteSpace(rTimestamp) ? aTimestamp : rTimestamp;
+
+            //foreach (string[] s in listGroups)
+            foreach(List<string> s in dicGroups.Values)
+            {
+                if (s[0].StartsWith("iCUST_"))
+                {
+                    name = $"Custom_{customCount++:D02}";
+                    sb.AppendLine($"{name}_NAME, {timestamp}, {s[0]}");
+                }
+                else
+                {
+                    name = $"{s[0]}";
+                }
+                sb.AppendLine($"{name}_VAL, {timestamp}, {s[1]}");
+                sb.AppendLine($"{name}_UNIT, {timestamp}, {s[2]}");
+                sb.AppendLine($"{name}_EXCEPTION, {timestamp}, {s[3]}");
+            }
+            sb.AppendLine($"SVRTIME, {timestamp}, {DateTime.Now:yyyy-MM-dd HH:mm:ss}");
+            return sb.ToString();
+        }
+
+        public override string ToString()
+        {
+            List<string> result = new List<string>();
+            result.Add($"identifier : {identifier}");
+            result.Add($"checksum : {Checksum}");
+            //foreach (string[] s in listGroups)
+            foreach (List<string> s in dicGroups.Values)
+            {
+                result.Add($"{string.Join(",", s)}");
+            }
+
+            return string.Join(" | ", result);
+        }
+        private string CalcChecksum(List<byte> listBytes)
+        {
+            int sumByte = listBytes.Sum(x => x) % 256;
+
+            return sumByte.ToString("X02");
+        }
+    }
+    #endregion
 
 }

@@ -1,0 +1,47 @@
+﻿RAPIDPoint_500e
+SIEMENS RAPIDPoint 500e Blood Gas System LIS3
+
+
+--- ID_REQ ---
+ID Request (Message 1) ->
+<- Acknowledge (Message 2)
+<- ID data (Message 3)
+Acknowledge (Message 2) ->
+
+Message 1
+<STX>ID_REQ<FS><RS><ETX>13<EOT>
+Message 2
+<STX><ACK><ETX>0B<EOT>
+Message 3
+<STX>ID_DATA<FS><RS>aMOD<GS>LIS<GS><GS><GS><FS>iIID
+<GS>333<GS><GS><GS><FS><RS><ETX>84<EOT>
+
+
+Patient sample analysis initiated: {SMP_START}{aMOD, iIID, aDATE, aTIME, iOID}
+Patient sample analysis canceled: {SMP_ABORT}{aMOD, iIID, aDATE, aTIME, iOID}
+
+
+
+
+{
+	"MOD": "LIS",
+	"IID": "DSB",
+	"IDENTIFIER": [
+	{
+		"NAME": "SMP_NEW_DATA",
+		"MSG_TYPE": "1"
+	},
+	{
+		"NAME": "SMP_EDIT_DATA",
+		"MSG_TYPE": "2"
+	},
+	{
+		"NAME": "QC_NEW_DATA",
+		"MSG_TYPE": "3"
+	},
+	{
+		"NAME": "CAL_NEW_DATA",
+		"MSG_TYPE": "4"
+	}
+	]
+}
