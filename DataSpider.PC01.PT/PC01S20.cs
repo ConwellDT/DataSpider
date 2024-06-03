@@ -410,7 +410,10 @@ namespace DataSpider.PC01.PT
                                                 break;
                                         }
                                     }
-                                    EnQueue(MSGTYPE.MEASURE, string.Join(System.Environment.NewLine, listData));
+                                    if (listData.Count > 0)
+                                    {
+                                        EnQueue(MSGTYPE.MEASURE, string.Join(System.Environment.NewLine, listData));
+                                    }
 
                                     m_LastEnqueuedDate = sampleResult.AnalysisDateTime.ToLocalTime();
                                     SetLastEnqueuedDate(m_LastEnqueuedDate);
