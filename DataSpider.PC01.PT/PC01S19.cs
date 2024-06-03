@@ -231,6 +231,8 @@ namespace DataSpider.PC01.PT
             if (tagname == "MSR_SVRTIME")
             {
                 DateTime svrtime;
+                List<string> listData = new List<string>();
+
                 PC00U01.TryParseExact(value, out svrtime);  // 측정시간
                 foreach (KeyValuePair<string, string> kvp in m_OpcItemList)
                 {
@@ -239,19 +241,25 @@ namespace DataSpider.PC01.PT
                         string strValue =myUaClient.ReadValue(kvp.Value).Value?.ToString();
                         if (kvp.Key == "MSR_SVRTIME")
                         {
-                            EnQueue(MSGTYPE.MEASURE, $" {kvp.Key},{svrtime.ToString("yyyy-MM-dd HH:mm:ss")}, {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}");
-                            listViewMsg.UpdateMsg($" {kvp.Key}, {svrtime.ToString("yyyy-MM-dd HH:mm:ss")}, {strValue}, {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")} ", false, true, true, PC00D01.MSGTINF);
+                            //EnQueue(MSGTYPE.MEASURE, $" {kvp.Key},{svrtime.ToString("yyyy-MM-dd HH:mm:ss")}, {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}");
+                            listData.Add($"{kvp.Key}, {svrtime:yyyy-MM-dd HH:mm:ss}, {DateTime.Now:yyyy-MM-dd HH:mm:ss}");
+                            listViewMsg.UpdateMsg($" {kvp.Key}, {svrtime:yyyy-MM-dd HH:mm:ss}, {strValue}, {DateTime.Now:yyyy-MM-dd HH:mm:ss} ", false, true, true, PC00D01.MSGTINF);
                         }
                         else
                         {
-                            EnQueue(MSGTYPE.MEASURE, $" {kvp.Key}, {svrtime.ToString("yyyy-MM-dd HH:mm:ss")}, {strValue}");
+                            //EnQueue(MSGTYPE.MEASURE, $"{kvp.Key}, {svrtime:yyyy-MM-dd HH:mm:ss}, {strValue}");
+                            listData.Add($"{kvp.Key}, {svrtime:yyyy-MM-dd HH:mm:ss}, {strValue}");
                         }
-                        listViewMsg.UpdateMsg($" {kvp.Key}, {svrtime.ToString("yyyy-MM-dd HH:mm:ss")}, {strValue} ", false, true, true, PC00D01.MSGTINF);
+                        listViewMsg.UpdateMsg($" {kvp.Key}, {svrtime:yyyy-MM-dd HH:mm:ss}, {strValue} ", false, true, true, PC00D01.MSGTINF);
                     }
                     catch (Exception ex)
                     {
                         listViewMsg.UpdateMsg($" UpdateTagValue - {kvp.Key },{kvp.Value} - {ex}", false, true, true, PC00D01.MSGTERR);
                     }
+                }
+                if (listData.Count > 0) 
+                {
+                    EnQueue(MSGTYPE.MEASURE, string.Join(System.Environment.NewLine, listData));
                 }
             }
         }
