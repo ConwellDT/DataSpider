@@ -363,7 +363,11 @@ namespace DataSpider.PC01.PT
                                         svrtime = sampleResult.AnalysisDateTime.ToLocalTime(); // 측정시간
                                                                                           
                                     if (svrtime.CompareTo(m_LastEnqueuedDate) <= 0) continue;
-                                    EnQueue(MSGTYPE.MEASURE, $" SVRTIME, {svrtime:yyyy-MM-dd HH:mm:ss}, {DateTime.Now:yyyy-MM-dd HH:mm:ss} ");
+
+                                    List<string> listData = new List<string>();
+
+                                    //EnQueue(MSGTYPE.MEASURE, $" SVRTIME, {svrtime:yyyy-MM-dd HH:mm:ss}, {DateTime.Now:yyyy-MM-dd HH:mm:ss} ");
+                                    listData.Add($"SVRTIME, {svrtime:yyyy-MM-dd HH:mm:ss}, {DateTime.Now:yyyy-MM-dd HH:mm:ss}");
                                     listViewMsg.UpdateMsg($" SVRTIME, {svrtime:yyyy-MM-dd HH:mm:ss}, {DateTime.Now:yyyy-MM-dd HH:mm:ss} ", false, true, true, PC00D01.MSGTINF);
 
                                     PropertyInfo[] properties = sampleResult.GetType().GetProperties();
@@ -380,7 +384,8 @@ namespace DataSpider.PC01.PT
                                                     {
                                                         case "Row":
                                                         case "Column":
-                                                            EnQueue(MSGTYPE.MEASURE, $" {positionproperty.Name},{svrtime:yyyy-MM-dd HH:mm:ss}, {positionproperty.GetValue(samplePosition)} ");
+                                                            //EnQueue(MSGTYPE.MEASURE, $" {positionproperty.Name},{svrtime:yyyy-MM-dd HH:mm:ss}, {positionproperty.GetValue(samplePosition)} ");
+                                                            listData.Add($"{positionproperty.Name},{svrtime:yyyy-MM-dd HH:mm:ss}, {positionproperty.GetValue(samplePosition)}");
                                                             listViewMsg.UpdateMsg($" {positionproperty.Name}, {svrtime:yyyy-MM-dd HH:mm:ss}, {positionproperty.GetValue(samplePosition)} ", false, true, true, PC00D01.MSGTINF);
                                                             break;
                                                         default:
@@ -392,17 +397,21 @@ namespace DataSpider.PC01.PT
                                                 if (property.PropertyType == typeof(DateTime))
                                                 {
                                                     DateTime dateTime = (DateTime)(property.GetValue(sampleResult));
-                                                    EnQueue(MSGTYPE.MEASURE, $" {property.Name}, {svrtime:yyyy-MM-dd HH:mm:ss}, {dateTime.ToLocalTime():yyyy-MM-dd HH:mm:ss} ");
+                                                    //EnQueue(MSGTYPE.MEASURE, $" {property.Name}, {svrtime:yyyy-MM-dd HH:mm:ss}, {dateTime.ToLocalTime():yyyy-MM-dd HH:mm:ss} ");
+                                                    listData.Add($"{property.Name}, {svrtime:yyyy-MM-dd HH:mm:ss}, {dateTime.ToLocalTime():yyyy-MM-dd HH:mm:ss}");
                                                     listViewMsg.UpdateMsg($" {property.Name}, {svrtime:yyyy-MM-dd HH:mm:ss}, {dateTime.ToLocalTime():yyyy-MM-dd HH:mm:ss} ", false, true, true, PC00D01.MSGTINF);
                                                 }
                                                 else
                                                 {
-                                                    EnQueue(MSGTYPE.MEASURE, $" {property.Name}, {svrtime:yyyy-MM-dd HH:mm:ss}, {property.GetValue(sampleResult)} ");
+                                                    //EnQueue(MSGTYPE.MEASURE, $" {property.Name}, {svrtime:yyyy-MM-dd HH:mm:ss}, {property.GetValue(sampleResult)} ");
+                                                    listData.Add($"{property.Name}, {svrtime:yyyy-MM-dd HH:mm:ss}, {property.GetValue(sampleResult)}");
                                                     listViewMsg.UpdateMsg($" {property.Name}, {svrtime:yyyy-MM-dd HH:mm:ss}, {property.GetValue(sampleResult)} ", false, true, true, PC00D01.MSGTINF);
                                                 }
                                                 break;
                                         }
                                     }
+                                    EnQueue(MSGTYPE.MEASURE, string.Join(System.Environment.NewLine, listData));
+
                                     m_LastEnqueuedDate = sampleResult.AnalysisDateTime.ToLocalTime();
                                     SetLastEnqueuedDate(m_LastEnqueuedDate);
                                 }
