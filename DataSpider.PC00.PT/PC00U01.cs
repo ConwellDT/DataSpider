@@ -57,7 +57,7 @@ namespace DataSpider.PC00.PT
                 if (!string.IsNullOrWhiteSpace(extraInfo))
                 {
                     JsonDocument document = JsonDocument.Parse(extraInfo);
-                    result = document.RootElement.GetProperty("TimeFormat").ToString();
+                    result = document.RootElement.GetProperty("TimeFormat").GetString();
                 }
             }
             catch (Exception ex)
@@ -65,6 +65,23 @@ namespace DataSpider.PC00.PT
 
             }
             EquipmentDateTimeFomatSetting = result;
+        }
+        public static string GetJsonProperty(string jsonString, string propertyName)
+        {
+            string result = string.Empty;
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(jsonString))
+                {
+                    JsonDocument document = JsonDocument.Parse(jsonString);
+                    result = document.RootElement.GetProperty(propertyName).GetString();
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return result;
         }
 
         public static string[] GetEntryNames(string section, string FileName)   // 해당 section 안의 모든 키 값 가져오기

@@ -78,7 +78,9 @@ namespace DataSpider.PC01.PT
 
             string strCon = m_ConnectionInfo;
             string strEqpType = drEquipment.Table.Rows[0]["EQUIP_TYPE"].ToString();//.ItemArray[2].ToString();
-            string strEqpID = drEquipment.Table.Rows[0]["EXTRA_INFO"].ToString(); //drEquipment.ItemArray[6].ToString();
+            // 20240611, SHS, CEDEX_BIO PC01S04 MA_EQUIPMENT_CD 테이블 EXTRA_INFO 에 P3S-MEAN-1110 처럼 장비ID 만 설정 -> JSON 포맷으로 EquipmentID 프로퍼티로 설정해야 함. { "EquipmentID": "P3S-MEAN-1110" }
+            //string strEqpID = drEquipment.Table.Rows[0]["EXTRA_INFO"].ToString(); //drEquipment.ItemArray[6].ToString();
+            string strEqpID = PC00U01.GetJsonProperty(drEquipment.Table.Rows[0]["EXTRA_INFO"].ToString(), "EquipmentID");
 
             try
             {

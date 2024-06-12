@@ -18,6 +18,8 @@ using System.Data;
 using OpcUaClient;
 using System.Globalization;
 using Opc.Ua;
+using System.Management.Automation;
+using System.Text.Json;
 
 
 namespace DataSpider.PC01.PT
@@ -60,12 +62,16 @@ namespace DataSpider.PC01.PT
             try
             {
                 drEquipment = dr;
-                string[] extraInfo = dr["EXTRA_INFO"].ToString().Split(',');
-                if (extraInfo.Length > 1)
-                {
-                    Uid = extraInfo[0].Trim();
-                    Pwd = extraInfo[1].Trim();
-                }
+
+                // 20240611, SHS, GetExtraInfo 로 대체
+                //string[] extraInfo = dr["EXTRA_INFO"].ToString().Split(',');
+                //if (extraInfo.Length > 1)
+                //{
+                //    Uid = extraInfo[0].Trim();
+                //    Pwd = extraInfo[1].Trim();
+                //}
+                GetExtraInfo();
+
                 if (m_AutoRun == true)
                 {
                     m_Thd = new Thread(ThreadJob);
@@ -76,6 +82,35 @@ namespace DataSpider.PC01.PT
             {
                 listViewMsg.UpdateMsg($"Exceptioin - PC01S20 ({ex})", false, true, true, PC00D01.MSGTERR);
             }
+        }
+
+
+        /*
+            { "UserIdentity" : 
+                {
+                    "Uid" : "aa", 
+                    "Pwd" : "pp"
+                }
+            }
+         */
+        private bool GetExtraInfo()
+        {
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(m_ExtraInfo))
+                {
+                    JsonDocument document = JsonDocument.Parse(m_ExtraInfo);
+                    
+                    Uid = document.RootElement.GetProperty("UserIdentity").GetProperty("Uid").GetString();
+                    Pwd = document.RootElement.GetProperty("UserIdentity").GetProperty("Pwd").GetString();
+                }
+            }
+            catch (Exception ex)
+            {
+                listViewMsg.UpdateMsg($"Exception in GetExtraInfo - {ex.Message}", true, true, true, PC00D01.MSGTERR);
+                return false;
+            }
+            return true;
         }
 
         private void ThreadJob()
@@ -555,7 +590,7 @@ namespace DataSpider.PC01.PT
 
         private DateTime GetLastEnqueuedDate()
         {
-            DateTime LastEnqueuedDate=DateTime.MinValue;
+            DateTime LastEnqueuedDate = DateTime.MinValue;
             string strLastEnqueuedDate = m_sqlBiz.ReadSTCommon(m_Name, "LastEnqueuedDate"); //PC00U01.ReadConfigValue("LastEnqueuedDate", m_Name, $@".\CFG\{m_Type}.ini");
             DateTime.TryParseExact(strLastEnqueuedDate, "yyyyMMddHHmmss", CultureInfo.InvariantCulture, DateTimeStyles.AssumeLocal | DateTimeStyles.AllowInnerWhite, out LastEnqueuedDate);
             if (LastEnqueuedDate == DateTime.MinValue)
@@ -572,10 +607,10 @@ namespace DataSpider.PC01.PT
             //if (!PC00U01.WriteConfigValue("LastEnqueuedDate", m_Name, $@".\CFG\{m_Type}.ini", $"{LastEnqueuedDate.ToString("yyyyMMdd")}"))
             if (!m_sqlBiz.WriteSTCommon(m_Name, "LastEnqueuedDate", $"{LastEnqueuedDate.ToString("yyyyMMddHHmmss")}"))
             {
-                listViewMsg.UpdateMsg($"Error to write LastEnqueuedDate to INI file", false, true, true);
+                listViewMsg.UpdateMsg($"Error to write LastEnqueuedDate to DB", false, true, true);
                 return false;
             }
-            listViewMsg.UpdateMsg($"Write last LastEnqueuedDate : {LastEnqueuedDate.ToString("yyyyMMddHHmmss")}", false, true,true, PC00D01.MSGTINF);
+            listViewMsg.UpdateMsg($"Write last LastEnqueuedDate : {LastEnqueuedDate.ToString("yyyyMMddHHmmss")}", false, true, true, PC00D01.MSGTINF);
             return true;
         }
 

@@ -92,7 +92,9 @@ namespace DataSpider.PC01.PT
                 //else if (bCalibrationValue == false && PC00U01.TryParseExact(ln.Trim(), out dt) == true)
                 // 20210423, SHS, 측정데이터인지 판단하기 위해 시간인지 파싱하는 부분에서는 포맷 상관없이 시간인지만 판단
                 //else if (bCalibrationValue == false && DateTime.TryParseExact(ln.Trim(), new string[] { "dd/MM/yyyy HH:mm:ss", "MM/dd/yyyy hh:mm:ss tt" }, CultureInfo.InvariantCulture, DateTimeStyles.None, out dt) == true)
-                else if (bCalibrationValue == false && DateTime.TryParseExact(ln.Trim(), new string[] { m_ExtraInfo.Trim() }, CultureInfo.InvariantCulture, DateTimeStyles.None, out dt) == true)
+                // 20240612, SHS, ExtraInfo 에 DateTime Format 만 설정 -> JSON 포맷으로 여러 설정을 하게 하도록 변경하면서 Osmometer3320 도 TimeFormat 설정을 그대로 사용하도록 수정
+                //else if (bCalibrationValue == false && DateTime.TryParseExact(ln.Trim(), new string[] { m_ExtraInfo.Trim() }, CultureInfo.InvariantCulture, DateTimeStyles.None, out dt) == true)
+                else if (bCalibrationValue == false && PC00U01.TryParseExact(ln.Trim(), out dt) == true)
                 {
                     fileLog.WriteData(ln, "ParseMessage", "Measure ON");
                     bMeasuredValue = true;
@@ -116,21 +118,24 @@ namespace DataSpider.PC01.PT
                     //    listData.Add(ln);
                     //}
                     fileLog.WriteData(ln, "ParseMessage", "Start Calibration");
-                    if (!string.IsNullOrWhiteSpace(m_ExtraInfo) && DateTime.TryParseExact(ln.Trim(), new string[] { m_ExtraInfo.Trim() }, CultureInfo.InvariantCulture, DateTimeStyles.None, out dt))
+                    // 20240612, SHS, ExtraInfo 에 DateTime Format 만 설정 -> JSON 포맷으로 여러 설정을 하게 하도록 변경하면서 Osmometer3320 도 TimeFormat 설정을 그대로 사용하도록 수정, 
+                    // 기존은 extrainfo 설정으로 실패 시 공통 설정으로 다시 시도 -> TimeFormat 기능이 있어서 PC00U01.TryParseExact 에서 extrainfo 에 TimeFormat 설정이 있으면 그것으로 처리, 기존처럼 DB 설정 TimeFormat 으로는 하지 않음
+                    // 명확하게 ExtraInfo 에 Timeformat 을 설정하였으므로 다른 포맷으로는 시도하지 않음
+                    //if (!string.IsNullOrWhiteSpace(m_ExtraInfo) && DateTime.TryParseExact(ln.Trim(), new string[] { m_ExtraInfo.Trim() }, CultureInfo.InvariantCulture, DateTimeStyles.None, out dt))
+                    //{
+                    //    listData.Add(dt.ToString("yyyy-MM-dd HH:mm:ss"));
+                    //}
+                    //else
+                    //{
+                    if (PC00U01.TryParseExact(ln.Trim(), out dt))
                     {
                         listData.Add(dt.ToString("yyyy-MM-dd HH:mm:ss"));
                     }
                     else
                     {
-                        if (PC00U01.TryParseExact(ln.Trim(), out dt))
-                        {
-                            listData.Add(dt.ToString("yyyy-MM-dd HH:mm:ss"));
-                        }
-                        else
-                        {
-                            listData.Add(ln);
-                        }
+                        listData.Add(ln);
                     }
+                    //}
                     if (listData.Count >= 4)
                     {
                         // 20211213 kwc Value자리에 들어오는 문자열 처리를 위해 수정
@@ -157,21 +162,24 @@ namespace DataSpider.PC01.PT
                     fileLog.WriteData(ln, "ParseMessage", "Start Measure");
                     //if (PC00U01.TryParseExact(ln.Trim(), out dt))
                     //if (DateTime.TryParseExact(ln.Trim(), new string[] { "dd/MM/yyyy HH:mm:ss", "MM/dd/yyyy hh:mm:ss tt" }, CultureInfo.InvariantCulture, DateTimeStyles.None, out dt))
-                    if (DateTime.TryParseExact(ln.Trim(), new string[] { m_ExtraInfo.Trim() }, CultureInfo.InvariantCulture, DateTimeStyles.None, out dt))
+                    // 20240612, SHS, ExtraInfo 에 DateTime Format 만 설정 -> JSON 포맷으로 여러 설정을 하게 하도록 변경하면서 Osmometer3320 도 TimeFormat 설정을 그대로 사용하도록 수정, 
+                    // 기존은 extrainfo 설정으로 실패 시 공통 설정으로 다시 시도 -> TimeFormat 기능이 있어서 PC00U01.TryParseExact 에서 extrainfo 에 TimeFormat 설정이 있으면 그것으로 처리, 기존처럼 DB 설정 TimeFormat 으로는 하지 않음
+                    // 명확하게 ExtraInfo 에 Timeformat 을 설정하였으므로 다른 포맷으로는 시도하지 않음
+                    //if (DateTime.TryParseExact(ln.Trim(), new string[] { m_ExtraInfo.Trim() }, CultureInfo.InvariantCulture, DateTimeStyles.None, out dt))
+                    //{
+                    //    listData.Add(dt.ToString("yyyy-MM-dd HH:mm:ss"));
+                    //}
+                    //else
+                    //{
+                    if (PC00U01.TryParseExact(ln.Trim(), out dt))
                     {
-                            listData.Add(dt.ToString("yyyy-MM-dd HH:mm:ss"));
+                        listData.Add(dt.ToString("yyyy-MM-dd HH:mm:ss"));
                     }
                     else
                     {
-                        if (PC00U01.TryParseExact(ln.Trim(), out dt))
-                        {
-                            listData.Add(dt.ToString("yyyy-MM-dd HH:mm:ss"));
-                        }
-                        else
-                        {
-                            listData.Add(ln);
-                        }
+                        listData.Add(ln);
                     }
+                    //}
                     if ( listData.Count==2  && ln.Contains("SN") == false )
                     {
                         bMeasuredValue = false;

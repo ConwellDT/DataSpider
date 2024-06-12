@@ -16,6 +16,9 @@ using System.Data;
 // WildcardPattern
 using System.Management.Automation;
 using OSIsoft.AF.Data;
+using OSIsoft.AF.Analysis;
+using System.Text.Json;
+using System.Linq.Expressions;
 
 namespace DataSpider.PC00.PT
 {
@@ -58,6 +61,26 @@ namespace DataSpider.PC00.PT
                 PC00U01.ExecuteNetUse(filePath, winID, winPW);
             }
 
+            // 20240611, SHS, EXTRA_INFO JSON 포맷으로 변경, 1 = *dif*.*, 2 = *wti*.*, 3 = *aif*.* 형태의 msgType = wildCardPattern
+            // => 
+            /*
+             { "MessageType" : [
+                    {
+                        "Type" : "1", 
+                        "WildcardPattern" : "*dif*.*"
+                    }, 
+                    {
+                        "Type" : "2", 
+                        "WildcardPattern" : "*wti*.*"
+                    }, 
+                    {
+                        "Type" : "3", 
+                        "WildcardPattern" : "*aif*.* "
+                    }
+                ]
+            }
+            */
+            /*
             // 1 = *dif*.*, 2 = *wti*.*, 3 = *aif*.*
             string[] extraInfos = m_ExtraInfo.Split(',');
             // 1 = *dif*.*
@@ -77,11 +100,55 @@ namespace DataSpider.PC00.PT
                     dicMessageType.Add(msgType, new WildcardPattern(items[1].Trim(), WildcardOptions.IgnoreCase));
                 }
             }
+            */
+            if (!GetExtraInfo())
+            {
+                listViewMsg.UpdateStatus(false);
+                listViewMsg.UpdateMsg("Invalid Extra_Info (MessageType)", true, true, true, PC00D01.MSGTERR);
+                return;
+            }
+
             if (m_AutoRun == true)
             {
                 m_Thd = new Thread(ThreadJob);
                 m_Thd.Start();
             }
+        }
+
+        private bool GetExtraInfo()
+        {
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(m_ExtraInfo))
+                {
+                    JsonDocument document = JsonDocument.Parse(m_ExtraInfo);
+                    // "MessageType" 설정이 없으면 기본 1로 하도록 되어 있어 오류는 아님
+                    if (!document.RootElement.TryGetProperty("MessageType", out JsonElement _))
+                    {
+                        return true;
+                    }
+                    JsonElement je = document.RootElement.GetProperty("MessageType");
+                    foreach (JsonElement item in je.EnumerateArray())
+                    {
+                        // Type 이 숫자로 파싱이 안되면 오류이므로 프로그램 종료 시킴
+                        if (!int.TryParse(item.GetProperty("Type").GetString(), out int msgType))
+                        {
+                            return false;
+                        }
+                        if (!dicMessageType.ContainsKey(msgType))
+                        {
+                            dicMessageType.Add(msgType, new WildcardPattern(item.GetProperty("WildcardPattern").GetString().Trim(), WildcardOptions.IgnoreCase));
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                listViewMsg.UpdateMsg($"Exception in GetExtraInfo - {ex.Message}", true, true, true, PC00D01.MSGTERR);
+                // 설정이 되어 있는데 Exception 이 발생하면 프로그램 종료
+                return false;
+            }
+            return true;
         }
         protected virtual void ThreadJob()
         {

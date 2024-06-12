@@ -90,7 +90,7 @@ namespace DataSpider.PC00.PT
                 //if (PC00U01.TryParseExact(dtCurrTagInfo.Select("", "UPDATE_REG_DATE DESC")[0]["UPDATE_REG_DATE"]?.ToString(), out DateTime dtTemp))
                 if (DateTime.TryParse(dtCurrTagInfo.Select("", "UPDATE_REG_DATE DESC")[0]["UPDATE_REG_DATE"]?.ToString(), out DateTime dtTemp))
                 {
-                        isTagUpdated = dtLastTagUpdated.CompareTo(dtTemp) < 0;
+                    isTagUpdated = dtLastTagUpdated.CompareTo(dtTemp) < 0;
                     dtLastTagUpdated = dtTemp;
                 }
                 if (isTagUpdated || dtTagInfo == null)
@@ -421,6 +421,11 @@ namespace DataSpider.PC00.PT
         public string LastMeasureValue { get; set; } = string.Empty;
         // ---
 
+        /// <summary>
+        /// 저장할 EventFrame Attribute Name 
+        /// </summary>
+        public string EFAttributeName { get; set; } = string.Empty;
+
         public bool IsValueUpdated { get; set; }
 
         public string TagName { get; set; }
@@ -540,6 +545,7 @@ namespace DataSpider.PC00.PT
                 // 20220908, SHS, SERVERTIME 중복체크 (시간만 비교할지 값도 비교할지) 옵션 기능 추가
                 if (checkServerTimeDup)
                 {
+                    // 타임스탬프가 같고 이번 태그가 서버타임 태그이면 업데이트 하지 않음
                     if (!(tagValue.ReplaceTag.Equals(ReplaceTagDef.SERVER_TIME_TAG) && TimeStamp.Equals(LastMeasureDateTime)))
                     {
                         LastMeasureDateTime = TimeStamp;
@@ -741,10 +747,16 @@ namespace DataSpider.PC00.PT
             {
                 // 초기화
                 DateTime dtNow = DateTime.Now;
-                listUpdated.ForEach(x => x.PIIFDateTime = dtNow);
-                listUpdated.ForEach(x => x.Remark = string.Empty);
-                listUpdated.ForEach(x => x.PIIFFlag = "N");
-                listUpdated.ForEach(x => x.IsDBInserted = false);
+                listUpdated.ForEach(tag => 
+                { 
+                    tag.PIIFDateTime = dtNow; 
+                    tag.Remark = string.Empty; 
+                    tag.PIIFFlag = "N";
+                    tag.IsDBInserted = false; 
+                });
+                //listUpdated.ForEach(x => x.Remark = string.Empty);
+                //listUpdated.ForEach(x => x.PIIFFlag = "N");
+                //listUpdated.ForEach(x => x.IsDBInserted = false);
                 //
                 SavePI(listUpdated);
                 SaveDBHistory(listUpdated);

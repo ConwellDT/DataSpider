@@ -1,0 +1,658 @@
+﻿RemoteResults
+{
+    "Results": [
+        {
+            "DS": "",
+            "RS": 10,
+            "SI": "OPC LIS",
+            "TS": "2022-01-14T10:35:38",
+            "UI": "Admin"
+        },
+        {
+            "DS": "Test canceled",
+            "RS": -914,
+            "SI": "",
+            "TS": "2022-01-14T10:32:19",
+            "UI": ""
+        },
+        {
+            "DS": "",
+            "RS": 631,
+            "SI": "",
+            "TS": "2022-01-14T10:11:39",
+            "UI": ""
+        },
+        {
+            "DS": "Test canceled",
+            "RS": -914,
+            "SI": "",
+            "TS": "2022-01-14T10:02:22",
+            "UI": ""
+        },
+        {
+            "DS": "",
+            "RS": 2,
+            "SI": "",
+            "TS": "2022-01-14T09:47:19",
+            "UI": ""
+        },
+        {
+            "DS": "Sample did not freeze",
+            "RS": -908,
+            "SI": "",
+            "TS": "2022-01-14T09:43:35",
+            "UI": ""
+        },
+        {
+            "DS": "Sample did not freeze",
+            "RS": -908,
+            "SI": "",
+            "TS": "2022-01-14T09:35:39",
+            "UI": ""
+        },
+        {
+            "DS": "",
+            "RS": 671,
+            "SI": "",
+            "TS": "2022-01-14T09:19:29",
+            "UI": ""
+        },
+        {
+            "DS": "",
+            "RS": 642,
+            "SI": "LIS TEST",
+            "TS": "2022-01-14T09:03:41",
+            "UI": ""
+        },
+        {
+            "DS": "Result out of range high",
+            "RS": -910,
+            "SI": "",
+            "TS": "2022-01-13T15:30:47",
+            "UI": ""
+        },
+        {
+            "DS": "",
+            "RS": 407,
+            "SI": "LIS",
+            "TS": "2022-01-13T15:08:48",
+            "UI": "Admin"
+        },
+        {
+            "DS": "",
+            "RS": 409,
+            "SI": "",
+            "TS": "2022-01-13T11:02:29",
+            "UI": "Admin"
+        },
+        {
+            "DS": "Result out of range high",
+            "RS": -910,
+            "SI": "sample01",
+            "TS": "2022-01-13T10:58:35",
+            "UI": "Admin"
+        },
+        {
+            "DS": "Sample did not freeze",
+            "RS": -908,
+            "SI": "error1",
+            "TS": "2022-01-10T16:27:32",
+            "UI": ""
+        },
+        {
+            "DS": "",
+            "RS": 290,
+            "SI": "3MA029",
+            "TS": "2022-01-10T02:38:26",
+            "UI": "Admin"
+        },
+        {
+            "DS": "",
+            "RS": 291,
+            "SI": "",
+            "TS": "2022-01-10T01:25:37",
+            "UI": "Admin"
+        }
+    ]
+}
+
+
+RemoteEvents
+{
+    "Events": [
+        {
+            "DS": "Software version: 2.0   Firmware version: 1.2",
+            "TS": "2022-01-19T14:30:36",
+            "TY": "Power Up",
+            "UI": ""
+        },
+        {
+            "DS": "Software version: 2.0   Firmware version: 1.2",
+            "TS": "2022-01-17T08:04:30",
+            "TY": "Power Up",
+            "UI": ""
+        },
+        {
+            "DS": "Software version: 2.0   Firmware version: 1.2",
+            "TS": "2022-01-14T13:18:02",
+            "TY": "Power Up",
+            "UI": ""
+        },
+        {
+            "DS": "Sample did not freeze.",
+            "TS": "2022-01-14T09:43:35",
+            "TY": "Error",
+            "UI": ""
+        },
+        {
+            "DS": "Sample did not freeze.",
+            "TS": "2022-01-14T09:35:39",
+            "TY": "Error",
+            "UI": ""
+        },
+        {
+            "DS": "Software version: 2.0   Firmware version: 1.2",
+            "TS": "2022-01-14T07:41:47",
+            "TY": "Power Up",
+            "UI": ""
+        },
+        {
+            "DS": "Result out of range high.",
+            "TS": "2022-01-13T15:30:47",
+            "TY": "Error",
+            "UI": ""
+        },
+        {
+            "DS": "Software version: 2.0   Firmware version: 1.2",
+            "TS": "2022-01-13T15:02:05",
+            "TY": "Power Up",
+            "UI": ""
+        },
+        {
+            "DS": "Software version: 2.0   Firmware version: 1.2",
+            "TS": "2022-01-13T14:26:50",
+            "TY": "Power Up",
+            "UI": ""
+        },
+        {
+            "DS": "Changed LIS Direction from UNIDIRECTIONAL to BIDIRECTIONAL",
+            "TS": "2022-01-13T14:25:30",
+            "TY": "Setting change",
+            "UI": "Admin"
+        },
+        {
+            "DS": "Changed LIS Enabled from OFF to ON",
+            "TS": "2022-01-13T13:31:10",
+            "TY": "Setting change",
+            "UI": "Admin"
+        },
+        {
+            "DS": "Result out of range high.",
+            "TS": "2022-01-13T10:58:35",
+            "TY": "Error",
+            "UI": "Admin"
+        },
+        {
+            "DS": "Software version: 2.0   Firmware version: 1.2",
+            "TS": "2022-01-13T08:17:46",
+            "TY": "Power Up",
+            "UI": ""
+        },
+        {
+            "DS": "Software version: 2.0   Firmware version: 1.2",
+            "TS": "2022-01-13T08:02:50",
+            "TY": "Power Up",
+            "UI": ""
+        },
+        {
+            "DS": "Software version: 2.0   Firmware version: 1.2",
+            "TS": "2022-01-12T16:11:22",
+            "TY": "Power Up",
+            "UI": ""
+        },
+        {
+            "DS": "Software version: 2.0   Firmware version: 1.2",
+            "TS": "2022-01-12T16:07:40",
+            "TY": "Power Up",
+            "UI": ""
+        },
+        {
+            "DS": "Changed SNTP Server from 192.168.20.5 to 192.168.20.245",
+            "TS": "2022-01-12T15:51:41",
+            "TY": "Setting change",
+            "UI": "Admin"
+        },
+        {
+            "DS": "Changed SNTP Server from 192.168.36.5 to 192.168.20.5",
+            "TS": "2022-01-12T15:42:25",
+            "TY": "Setting change",
+            "UI": "Admin"
+        },
+        {
+            "DS": "Changed SNTP Server from 192.168.20.245 to 192.168.36.5",
+            "TS": "2022-01-12T15:41:56",
+            "TY": "Setting change",
+            "UI": "Admin"
+        },
+        {
+            "DS": "Changed SNTP Server from 192.168.20.8 to 192.168.20.245",
+            "TS": "2022-01-12T15:38:21",
+            "TY": "Setting change",
+            "UI": "Admin"
+        },
+        {
+            "DS": "Changed SNTP Server from time.windows.com to 192.168.20.8",
+            "TS": "2022-01-12T15:35:57",
+            "TY": "Setting change",
+            "UI": "Admin"
+        },
+        {
+            "DS": "Changed SNTP Server from 192.168.20.8 to time.windows.com",
+            "TS": "2022-01-12T15:35:07",
+            "TY": "Setting change",
+            "UI": "Admin"
+        },
+        {
+            "DS": "Changed SNTP Server from 192.168.20.1 to 192.168.20.8",
+            "TS": "2022-01-12T15:31:33",
+            "TY": "Setting change",
+            "UI": "Admin"
+        },
+        {
+            "DS": "Changed SNTP Server from 192.168.20.245 to 192.168.20.1",
+            "TS": "2022-01-12T15:30:56",
+            "TY": "Setting change",
+            "UI": "Admin"
+        },
+        {
+            "DS": "Changed SNTP Server from 192.168.20.229 to 192.168.20.245",
+            "TS": "2022-01-12T15:30:25",
+            "TY": "Setting change",
+            "UI": "Admin"
+        },
+        {
+            "DS": "Changed Use Regional Format from ON to OFF",
+            "TS": "2022-01-12T15:30:03",
+            "TY": "Setting change",
+            "UI": "Admin"
+        },
+        {
+            "DS": "Changed Use Regional Format from OFF to ON",
+            "TS": "2022-01-12T15:29:51",
+            "TY": "Setting change",
+            "UI": "Admin"
+        },
+        {
+            "DS": "Changed SNTP Server from SYS-PLC-017 to 192.168.20.229",
+            "TS": "2022-01-12T15:29:20",
+            "TY": "Setting change",
+            "UI": "Admin"
+        },
+        {
+            "DS": "Changed SNTP Server from 2.pool.ntp.org to SYS-PLC-017",
+            "TS": "2022-01-12T15:28:27",
+            "TY": "Setting change",
+            "UI": "Admin"
+        },
+        {
+            "DS": "Changed Use Time Server from OFF to ON",
+            "TS": "2022-01-12T15:26:33",
+            "TY": "Setting change",
+            "UI": "Admin"
+        },
+        {
+            "DS": "Changed Use Time Server from ON to OFF",
+            "TS": "2022-01-12T15:26:20",
+            "TY": "Setting change",
+            "UI": "Admin"
+        },
+        {
+            "DS": "Changed SNTP Server from 192.168.20.245 to 2.pool.ntp.org",
+            "TS": "2022-01-12T15:25:47",
+            "TY": "Setting change",
+            "UI": "Admin"
+        },
+        {
+            "DS": "Changed SNTP Server from 192.168.20.8 to 192.168.20.245",
+            "TS": "2022-01-12T15:23:38",
+            "TY": "Setting change",
+            "UI": "Admin"
+        },
+        {
+            "DS": "Software version: 2.0   Firmware version: 1.2",
+            "TS": "2022-01-12T15:22:33",
+            "TY": "Power Up",
+            "UI": ""
+        },
+        {
+            "DS": "Changed SNTP Server from 2.pool.ntp.org to 192.168.20.8",
+            "TS": "2022-01-12T15:19:34",
+            "TY": "Setting change",
+            "UI": "Admin"
+        },
+        {
+            "DS": "Changed Time Zone from America/New_York to Asia/Seoul",
+            "TS": "2022-01-12T15:16:35",
+            "TY": "Setting change",
+            "UI": "Admin"
+        },
+        {
+            "DS": "Changed Use Time Server from OFF to ON",
+            "TS": "2022-01-12T15:16:34",
+            "TY": "Setting change",
+            "UI": "Admin"
+        },
+        {
+            "DS": "Software version: 2.0   Firmware version: 1.2",
+            "TS": "2022-01-12T11:02:52",
+            "TY": "Power Up",
+            "UI": ""
+        },
+        {
+            "DS": "Software version: 2.0   Firmware version: 1.2",
+            "TS": "2022-01-12T08:02:31",
+            "TY": "Power Up",
+            "UI": ""
+        },
+        {
+            "DS": "Software version: 2.0   Firmware version: 1.2",
+            "TS": "2022-01-11T08:21:14",
+            "TY": "Power Up",
+            "UI": ""
+        },
+        {
+            "DS": "Sample did not freeze.",
+            "TS": "2022-01-10T16:27:32",
+            "TY": "Error",
+            "UI": ""
+        },
+        {
+            "DS": "Changed User ID Required from ON to OFF",
+            "TS": "2022-01-10T15:35:11",
+            "TY": "Setting change",
+            "UI": "Admin"
+        },
+        {
+            "DS": "Changed Sample ID Required from ON to OFF",
+            "TS": "2022-01-10T15:35:10",
+            "TY": "Setting change",
+            "UI": "Admin"
+        },
+        {
+            "DS": "Changed Use Regional Format from ON to OFF",
+            "TS": "2022-01-10T15:25:01",
+            "TY": "Setting change",
+            "UI": "Admin"
+        },
+        {
+            "DS": "Changed Date/Time from [1/10/22 3:26 AM] to [1/10/22 3:25 PM]",
+            "TS": "2022-01-10T15:25:00",
+            "TY": "Setting change",
+            "UI": "Admin"
+        },
+        {
+            "DS": "Successful: Mean Values: 12.7 / 569.2 / 1633.1 - Low Range",
+            "TS": "2022-01-10T03:25:14",
+            "TY": "Calibration",
+            "UI": "Admin"
+        },
+        {
+            "DS": "1500 #5: 1639 / 6659.9 / -3.048 / 1638.5 / 1638.5 / 2 / 139",
+            "TS": "2022-01-10T03:25:13",
+            "TY": "Calibration",
+            "UI": "Admin"
+        },
+        {
+            "DS": "1500 #4: 1638 / 6659.8 / -3.047 / 1638.3 / 1638.3 / 2 / 115",
+            "TS": "2022-01-10T03:22:07",
+            "TY": "Calibration",
+            "UI": "Admin"
+        },
+        {
+            "DS": "1500 #3: 1639 / 6660.4 / -3.049 / 1639.3 / 1639.3 / 2 / 131",
+            "TS": "2022-01-10T03:19:30",
+            "TY": "Calibration",
+            "UI": "Admin"
+        },
+        {
+            "DS": "1500 #2: 1638 / 6659.9 / -3.048 / 1638.5 / 1638.5 / 2 / 113",
+            "TS": "2022-01-10T03:16:33",
+            "TY": "Calibration",
+            "UI": "Admin"
+        },
+        {
+            "DS": "1500 #1: 1611 / 6644.6 / -2.997 / 1611.3 / 1611.3 / 2 / 113",
+            "TS": "2022-01-10T03:13:56",
+            "TY": "Calibration",
+            "UI": "Admin"
+        },
+        {
+            "DS": "500 #5: 571 / 6089.0 / -1.062 / 571.1 / 571.1 / 2 / 113",
+            "TS": "2022-01-10T03:11:25",
+            "TY": "Calibration",
+            "UI": "Admin"
+        },
+        {
+            "DS": "500 #4: 568 / 6087.3 / -1.056 / 567.8 / 567.8 / 2 / 111",
+            "TS": "2022-01-10T03:08:59",
+            "TY": "Calibration",
+            "UI": "Admin"
+        },
+        {
+            "DS": "500 #3: 569 / 6087.7 / -1.058 / 568.6 / 568.6 / 2 / 113",
+            "TS": "2022-01-10T03:06:35",
+            "TY": "Calibration",
+            "UI": "Admin"
+        },
+        {
+            "DS": "500 #2: 568 / 6087.6 / -1.057 / 568.4 / 568.4 / 2 / 113",
+            "TS": "2022-01-10T03:04:07",
+            "TY": "Calibration",
+            "UI": "Admin"
+        },
+        {
+            "DS": "500 #1: 571 / 6088.7 / -1.061 / 570.5 / 570.5 / 2 / 111",
+            "TS": "2022-01-10T03:01:37",
+            "TY": "Calibration",
+            "UI": "Admin"
+        },
+        {
+            "DS": "0 #5: 13 / 5813.1 / -0.024 / 12.7 / 12.7 / 2 / 110",
+            "TS": "2022-01-10T02:59:09",
+            "TY": "Calibration",
+            "UI": "Admin"
+        },
+        {
+            "DS": "0 #4: 13 / 5813.1 / -0.024 / 12.8 / 12.8 / 2 / 108",
+            "TS": "2022-01-10T02:56:44",
+            "TY": "Calibration",
+            "UI": "Admin"
+        },
+        {
+            "DS": "0 #3: 13 / 5813.1 / -0.024 / 12.7 / 12.7 / 2 / 109",
+            "TS": "2022-01-10T02:54:14",
+            "TY": "Calibration",
+            "UI": "Admin"
+        },
+        {
+            "DS": "0 #2: 13 / 5813.2 / -0.024 / 12.8 / 12.8 / 2 / 112",
+            "TS": "2022-01-10T02:51:41",
+            "TY": "Calibration",
+            "UI": "Admin"
+        },
+        {
+            "DS": "0 #1: 13 / 5813.3 / -0.024 / 13.0 / 13.0 / 2 / 109",
+            "TS": "2022-01-10T02:49:09",
+            "TY": "Calibration",
+            "UI": "Admin"
+        },
+        {
+            "DS": "Changed Operating range from High to Low",
+            "TS": "2022-01-10T02:41:48",
+            "TY": "Setting change",
+            "UI": ""
+        },
+        {
+            "DS": "Changed Operating range from Low to High",
+            "TS": "2022-01-10T02:41:47",
+            "TY": "Setting change",
+            "UI": ""
+        },
+        {
+            "DS": "Changed User ID Required from OFF to ON",
+            "TS": "2022-01-10T02:34:41",
+            "TY": "Setting change",
+            "UI": "Admin"
+        },
+        {
+            "DS": "Changed Sample ID Required from OFF to ON",
+            "TS": "2022-01-10T02:34:40",
+            "TY": "Setting change",
+            "UI": "Admin"
+        },
+        {
+            "DS": "Changed Use 24 Hour Clock Format from OFF to ON",
+            "TS": "2022-01-10T02:33:04",
+            "TY": "Setting change",
+            "UI": "Admin"
+        },
+        {
+            "DS": "Changed Use 4 Digit Year Format from OFF to ON",
+            "TS": "2022-01-10T02:33:03",
+            "TY": "Setting change",
+            "UI": "Admin"
+        },
+        {
+            "DS": "Changed Use 3 Letter Month Format from OFF to ON",
+            "TS": "2022-01-10T02:33:02",
+            "TY": "Setting change",
+            "UI": "Admin"
+        },
+        {
+            "DS": "Changed Use Month First Format from ON to OFF",
+            "TS": "2022-01-10T02:33:01",
+            "TY": "Setting change",
+            "UI": "Admin"
+        },
+        {
+            "DS": "Changed Date/Time from [1/10/22 1:26 AM] to [1/10/22 2:33 AM]",
+            "TS": "2022-01-10T02:33:00",
+            "TY": "Setting change",
+            "UI": "Admin"
+        },
+        {
+            "DS": "Software version: 2.0   Firmware version: 1.2",
+            "TS": "2022-01-10T01:10:20",
+            "TY": "Power Up",
+            "UI": ""
+        },
+        {
+            "DS": "Changed LIS Enabled from ON to OFF",
+            "TS": "2022-01-10T01:08:31",
+            "TY": "Setting change",
+            "UI": "Admin"
+        },
+        {
+            "DS": "Software version: 2.0   Firmware version: 1.2",
+            "TS": "2022-01-10T00:54:35",
+            "TY": "Power Up",
+            "UI": ""
+        },
+        {
+            "DS": "Changed OPC-UA from Disabled to Enabled",
+            "TS": "2022-01-10T00:45:14",
+            "TY": "Setting change",
+            "UI": "Admin"
+        },
+        {
+            "DS": "Changed OPC-UA from Enabled to Disabled",
+            "TS": "2022-01-10T00:44:46",
+            "TY": "Setting change",
+            "UI": "Admin"
+        },
+        {
+            "DS": "Changed LIS Enabled from OFF to ON",
+            "TS": "2022-01-10T00:44:45",
+            "TY": "Setting change",
+            "UI": "Admin"
+        },
+        {
+            "DS": "Changed LIS Enabled from ON to OFF",
+            "TS": "2022-01-10T00:44:36",
+            "TY": "Setting change",
+            "UI": "Admin"
+        },
+        {
+            "DS": "Changed LIS Direction from BIDIRECTIONAL to UNIDIRECTIONAL",
+            "TS": "2022-01-10T00:43:21",
+            "TY": "Setting change",
+            "UI": "Admin"
+        },
+        {
+            "DS": "Changed OPC-UA Device Name from OsmoTECH to OsmoTECH_XT",
+            "TS": "2022-01-10T00:42:13",
+            "TY": "Setting change",
+            "UI": "Admin"
+        },
+        {
+            "DS": "Changed OPC-UA Device Name from OsmoTECH_XT to OsmoTECH",
+            "TS": "2022-01-10T00:41:45",
+            "TY": "Setting change",
+            "UI": "Admin"
+        },
+        {
+            "DS": "Software version: 2.0   Firmware version: 1.2",
+            "TS": "2022-01-10T00:40:54",
+            "TY": "Power Up",
+            "UI": ""
+        },
+        {
+            "DS": "Changed LIS Mode from CLIENT to SERVER",
+            "TS": "2022-01-10T00:33:36",
+            "TY": "Setting change",
+            "UI": "Admin"
+        },
+        {
+            "DS": "Changed LIS Enabled from OFF to ON",
+            "TS": "2022-01-10T00:33:35",
+            "TY": "Setting change",
+            "UI": "Admin"
+        },
+        {
+            "DS": "Software version: 2.0   Firmware version: 1.2",
+            "TS": "2022-01-10T00:20:59",
+            "TY": "Power Up",
+            "UI": ""
+        },
+        {
+            "DS": "Changed OPC-UA from Disabled to Enabled",
+            "TS": "2022-01-10T00:18:36",
+            "TY": "Setting change",
+            "UI": "Admin"
+        },
+        {
+            "DS": "Changed Subnet Mask from 255.255.255.0 to 255.255.0.0",
+            "TS": "2022-01-10T00:18:08",
+            "TY": "Setting change",
+            "UI": "Admin"
+        },
+        {
+            "DS": "Changed Static IP from 0.0.0.0 to 192.168.20.110",
+            "TS": "2022-01-10T00:18:07",
+            "TY": "Setting change",
+            "UI": "Admin"
+        },
+        {
+            "DS": "Changed LAN IP Mode from DHCP to STATIC",
+            "TS": "2022-01-10T00:18:06",
+            "TY": "Setting change",
+            "UI": "Admin"
+        },
+        {
+            "DS": "Software version: 2.0   Firmware version: 1.2",
+            "TS": "2022-01-10T00:15:59",
+            "TY": "Power Up",
+            "UI": ""
+        }
+    ]
+}
