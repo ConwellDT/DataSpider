@@ -52,6 +52,8 @@ namespace DataSpider.PC03.PT
 
         protected string m_strDataFilePath = "";
 
+        protected string m_strETypeName = string.Empty;
+
         public PC03B01()
         {
 
@@ -82,18 +84,18 @@ namespace DataSpider.PC03.PT
             }
         }
 
-        public PC03B01(PC03F01 pOwner, string strEquipType, string strEquipName, int nCurNo, bool bAutoRun, PIInfo m_clsPIInfo)
+        public PC03B01(PC03F01 pOwner, string strEquipType, string strEquipTypeName, string strEquipName, int nCurNo, bool bAutoRun, PIInfo m_clsPIInfo)
         {
             mOwner = pOwner;
             m_strEType = strEquipType;
             m_strEName = strEquipName;
             m_nCurNo = nCurNo;
-
-            if (bAutoRun == true)
-            {
-                m_Thd = new Thread(ThreadJob);
-                m_Thd.Start();
-            }
+            m_strETypeName = strEquipTypeName;
+            //if (bAutoRun == true)
+            //{
+            //    m_Thd = new Thread(ThreadJob);
+            //    m_Thd.Start();
+            //}
 
         }
 

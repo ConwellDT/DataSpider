@@ -668,7 +668,7 @@ namespace DataSpider.PC01.PT
                 // 20220908, SHS, SERVERTIME 중복체크 (시간만 비교할지 값도 비교할지) 옵션 기능 추가
                 // MES 결정에 따라 MCA SERVERTIME 중복체크를 옵션 결정. 
                 // 20220908, SHS, MCA 의 경우 서버타임 별도 보완없이 그대로 처리하기로 협의됨 (SBL ATM, MES)
-                thDataProcess = new PC00M01(this, equipType, equipName, connectionInfo, "", 0, true);
+                thDataProcess = new PC00M01(this, dtEquipment.Rows[0], equipType, equipName, connectionInfo, "", 0, true);
                 // 마지막 파라미터 TRUE 이면 서버타임에 대해 시간으로만 중복체크
                 //thDataProcess = new PC00M01(this, equipType, equipName, connectionInfo, "", 0, true, equipType.Equals("SC_MCA"));
                 //

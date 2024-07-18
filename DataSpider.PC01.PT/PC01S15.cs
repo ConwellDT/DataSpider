@@ -363,6 +363,7 @@ namespace DataSpider.PC01.PT
                                 pValue = pArraySet["value"];
                                 sValueTemp = (string)pValue.ToString();
                             }
+                            // 배열도 $.protocolData.[?(@.key == "Company")].value 이렇게 PATH 를 지정하여 처리 가능 
                             if (cfgObj.DATATYPE == CData.JSON_TYPE.SEARCH)
                             {
                                 if (string.IsNullOrEmpty(cfgObj.KEY_STR) || string.IsNullOrEmpty(cfgObj.VALUE_STR))

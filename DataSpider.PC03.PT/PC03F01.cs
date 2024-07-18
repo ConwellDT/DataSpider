@@ -253,7 +253,7 @@ namespace DataSpider.PC03.PT
                 {
                     string equipType = dr["CODE"].ToString();
                     string equipName = dr["CODE_NM"].ToString();
-                    thProcess[threadIndex] = new PC03S01(this, equipType, $"{Application.ProductName}_{equipName}", threadIndex++, true, m_clsPIInfo);
+                    thProcess[threadIndex] = new PC03S01(this, equipType, equipName, $"{Application.ProductName}_{equipName}", threadIndex++, true, m_clsPIInfo);
                 }
             }
             catch (Exception ex)

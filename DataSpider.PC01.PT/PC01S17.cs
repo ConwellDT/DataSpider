@@ -241,8 +241,8 @@ namespace DataSpider.PC01.PT
 
         private string ResultProcess()
         {
-            string strEqpType = drEquipment.ItemArray[2].ToString();
-            string strEqpID = drEquipment.ItemArray[5].ToString();
+            //string strEqpType = drEquipment.ItemArray[2].ToString();
+            //string strEqpID = drEquipment.ItemArray[5].ToString();
 
             try
             {

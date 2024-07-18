@@ -1,7 +1,10 @@
-﻿using System;
+﻿using OSIsoft.AF.Asset;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
+using System.Text.Json;
 
 namespace DataSpider.PC00.PT
 {
@@ -30,6 +33,8 @@ namespace DataSpider.PC00.PT
 
         public const string SucceededtoPI = "The data transfer to the PI server was successful.[{0}/{1}]";
         public const string FailedtoPI = "Data transfer to PI server failed.[{0}/{1}]";
+        public const string SucceededtoEF = "EventFrame [{0}] transfer to the PI AF DB was successful.";
+        public const string FailedtoEF = "EventFrame [{0}] transfer to the PI AF DB was failed. [{1}]";
 
         public const string MSGTINF = "INFO";
         public const string MSGTERR = "ERROR";
@@ -196,7 +201,54 @@ namespace DataSpider.PC00.PT
 
         public string strPI_PWD { get; set; }    // PI PASSWORD
 
+        public string AF_DB { get; set; }
+        public string AF_USER {  get; set; }
+        public string AF_PWD { get; set; }
+        public string AF_DOMAIN { get; set; }
+
+
     }
+
+    public class EventFrameAttributeData
+    {
+        public string Name { get; set; }
+        public string Value { get; set; }
+    }
+    public class EventFrameData
+    {
+        public string Name { get; set; }
+        public string StartTime { get; set; }
+        public string EndTime { get; set; }
+
+        public List<EventFrameAttributeData> Attributes { get; set; } = new List<EventFrameAttributeData>();
+
+        public string TemplateName { get; set; }
+        public string IFTime { get; set; }
+        /// <summary>
+        /// PI EventFrame I/F Flag
+        /// 초기 : N |
+        /// EventFrame 저장 Disable : D
+        /// EventFrame 저장 성공 : Y |
+        /// EventFrame 저장 실패 : E |
+        /// EventFrame 저장 실패 후 재시도 10회 실패 : F |
+        /// EventFrame 저장 실패 내용 삭제 : Z |
+        /// N, E 에 대해서만 PI 저장 시도
+        /// </summary>
+        public string IFFlag { get; set; }
+        public string IFRemark { get; set; }
+
+        public string EquipmentName { get; set; }
+        public int MessageType { get; set; }
+
+        public string ServerTime { get; set; }
+
+        public string GetSerializedAttributes()
+        {
+            return JsonSerializer.Serialize(Attributes);
+        }
+    }
+
+
     #endregion
 
     public abstract class MSGTYPE

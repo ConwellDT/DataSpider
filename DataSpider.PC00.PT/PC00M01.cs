@@ -2,18 +2,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlTypes;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Management.Automation;
+using System.Net;
+using System.Net.NetworkInformation;
 using System.Text;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-
+using System.Windows.Forms;
+using System.Xml;
 using OSIsoft.AF;
 using OSIsoft.AF.Asset;
+using OSIsoft.AF.EventFrame;
 using OSIsoft.AF.PI;
+using OSIsoft.AF.Search;
 using OSIsoft.AF.Time;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 /// <summary>
 /// 큐 처리 구현
@@ -36,8 +45,10 @@ namespace DataSpider.PC00.PT
 
         // 20220908, SHS, SERVERTIME 중복체크 (시간만 비교할지 값도 비교할지) 옵션 기능 추가
         //public PC00M01(IPC00F00 owner, string equipType, string equipName, string connectionInfo, string extraInfo, int nCurNo, bool bAutoRun = false) : base(owner, equipType, equipName, connectionInfo, extraInfo, nCurNo, bAutoRun)
-        public PC00M01(IPC00F00 owner, string equipType, string equipName, string connectionInfo, string extraInfo, int nCurNo, bool bAutoRun = false, bool bCheckServerTimeDup = false) : base(owner, equipType, equipName, connectionInfo, extraInfo, nCurNo, bAutoRun)
+        public PC00M01(IPC00F00 owner, DataRow dr, string equipType, string equipName, string connectionInfo, string extraInfo, int nCurNo, bool bAutoRun = false, bool bCheckServerTimeDup = false) : base(owner, equipType, equipName, connectionInfo, extraInfo, nCurNo, bAutoRun)
         {
+            drEquipment = dr;
+
             //if (GetTagInfo())
             //{
             //    if (m_AutoRun == true)
@@ -125,7 +136,7 @@ namespace DataSpider.PC00.PT
             listViewMsg.UpdateMsg("Thread started");
 
             //dataProcess = new EquipmentDataProcess(m_ConnectionInfo, dtTagInfo, listViewMsg, dataEncoding);
-            dataProcess = new EquipmentDataProcess(m_ConnectionInfo, dtTagInfo, listViewMsg, dataEncoding, checkServerTimeDup);
+            dataProcess = new EquipmentDataProcess(m_ConnectionInfo, drEquipment, dtTagInfo, listViewMsg, dataEncoding, checkServerTimeDup);
             while (!bTerminal || PC00U01.QueueCount > 0)
             {
                 try
@@ -141,7 +152,7 @@ namespace DataSpider.PC00.PT
                     }
 
                     CheckTagUpdated();
-
+                    
                     QueueMsg msg = PC00U01.ReadQueue();
                     if (msg == null)
                     {
@@ -322,13 +333,13 @@ namespace DataSpider.PC00.PT
         {
             TTVTagName = ttvTagName;
         }
-        public TTVTAG(string tagName, string equipName, int msgType, string piTagName, string ttvTagName, string lastMeasuredValue, string lastMeasuredDateTime) : base(tagName, equipName, msgType, piTagName, lastMeasuredValue, lastMeasuredDateTime)
+        public TTVTAG(string tagName, string equipName, int msgType, string piTagName, string ttvTagName, string efAttributeName, string lastMeasuredValue, string lastMeasuredDateTime) : base(tagName, equipName, msgType, piTagName, efAttributeName,lastMeasuredValue, lastMeasuredDateTime)
         {
             TTVTagName = ttvTagName;
         }
         public override bool DataProcess(string[] data, out string errMessage)
         {
-            IsValueUpdated = false;
+            IsDuplicated = IsValueUpdated = false;
             errMessage = string.Empty;
             //data.ToList().Find(x => x.Split(',')[0].Equals(TTVTagName))
             foreach (string line in data)
@@ -338,8 +349,17 @@ namespace DataSpider.PC00.PT
                 {
                     if (items[0].Trim().Equals(TTVTagName))
                     {
-                        //tagValue.Value = items[2].Trim();
-                        tagValue.Value = string.Join(",", items, 2, items.Length - 2).Replace("'", "''").Trim();
+                        // 20240702, SHS, P5, TTVTagName(OPCTIME_NM) 이 SVR_TIME 이면 장비인터페이스에서 부여한 Value (SVRTIME) 를 공통에서 부여한 현재시간으로 대체 (PI Tag, EventFrame 모두 동일한 SVRTIME 을 사용하기 위해)
+                        //tagValue.Value = string.Join(",", items, 2, items.Length - 2).Replace("'", "''").Trim();
+                        if (TTVTagName.EndsWith("SVRTIME"))
+                        {
+                            tagValue.Value = tagValue.ServerTime.ToString("yyyy-MM-dd HH:mm:ss");
+                        }
+                        else
+                        {
+                            tagValue.Value = string.Join(",", items, 2, items.Length - 2).Replace("'", "''").Trim();
+                        }
+
                         if (!PC00U01.TryParseExact($"{items[1].Trim()}", out dtTimeStamp))
                         {
                             errMessage = $"Parsing TimeStamp failed ({items[1]})";
@@ -362,10 +382,10 @@ namespace DataSpider.PC00.PT
                         {
                             LastMeasureDateTime = TimeStamp;
                             LastMeasureValue = Value;
-                            IsValueUpdated = true;
+                            IsDuplicated = true;
                         }
                         //
-
+                        IsValueUpdated = true;
                         break;
                     }
                 }
@@ -399,6 +419,8 @@ namespace DataSpider.PC00.PT
         public string Value
         {
             get { return tagValue.Value; }
+            // 20240703, SHS, P5, EVENT FRAME 저장 정보 TAG 를 EQUIPMENTDATAPROCESS 에서 처리하기 위해 SET 가능하도록 수정
+            set { tagValue.Value = value; }
         }
         public string TTV
         {
@@ -406,6 +428,17 @@ namespace DataSpider.PC00.PT
         }
 
         // 20220331, SHS, 통합처리구조 변경
+        // InsertResult 프로시져에서 I/F Flag 가 D 인 경우에도 hi_measure_result_BK 테이블 저장하도록 수정 필요
+        /// <summary>
+        /// PI Point I/F Flag
+        ///  초기 : N |
+        ///  PI 저장 Disable : D
+        ///  PI 저장 성공 : Y |
+        ///  PI 저장 실패 : E |
+        ///  PI 저장 실패 후 재시도 10회 실패 : F |
+        ///  PI 저장 실패 내용 삭제 : Z |
+        ///  N, E 에 대해서만 PI 저장 시도
+        /// </summary>
         public string PIIFFlag { get; set; } = "N";
         public DateTime PIIFDateTime { get; set; } = DateTime.MinValue;
         public string PIIFTimeStamp { get { return PIIFDateTime.ToString("yyyy-MM-dd HH:mm:ss.fff"); } }
@@ -425,8 +458,28 @@ namespace DataSpider.PC00.PT
         /// 저장할 EventFrame Attribute Name 
         /// </summary>
         public string EFAttributeName { get; set; } = string.Empty;
+        // InsertResult 프로시져에서 I/F Flag 가 D 인 경우에도 hi_measure_result_BK 테이블 저장하도록 수정 필요
+        /// <summary>
+        /// AF EventFrame I/F Flag
+        ///  초기 : N |
+        ///  AF 저장 Disable : D
+        ///  AF 저장 성공 : Y |
+        ///  AF 저장 실패 : E |
+        ///  AF 저장 실패 후 재시도 10회 실패 : F |
+        ///  AF 저장 실패 내용 삭제 : Z |
+        ///  N, E 에 대해서만 PI 저장 시도
+        /// </summary>
+        public string EFIFFlag { get; internal set; } = "N";
 
+        /// <summary>
+        /// 태그 값이 정상적으로 파싱 처리된 경우
+        /// </summary>
         public bool IsValueUpdated { get; set; }
+
+        /// <summary>
+        /// 최근 처리 데이터와 시간 & 값이 동일한 경우
+        /// </summary>
+        public bool IsDuplicated { get; set; }
 
         public string TagName { get; set; }
         public string EquipName { get; set; }
@@ -469,7 +522,7 @@ namespace DataSpider.PC00.PT
             EquipName = equipName;
             PITagName = piTagName;
         }
-        public TAG(string tagName, string equipName, int msgType, string piTagName, string lastMeasuredValue, string lastMeasuredDateTime)
+        public TAG(string tagName, string equipName, int msgType, string piTagName, string efAttributeName, string lastMeasuredValue, string lastMeasuredDateTime)
         {
             TagName = tagName;
             MsgType = msgType;
@@ -477,6 +530,8 @@ namespace DataSpider.PC00.PT
             PITagName = piTagName;
             LastMeasureValue = lastMeasuredValue;
             LastMeasureDateTime = lastMeasuredDateTime;
+
+            EFAttributeName = efAttributeName;
         }
         public bool UpdateFormat(string dataPosition, string datePosition, string timePosition, out string errMessage)
         {
@@ -499,7 +554,7 @@ namespace DataSpider.PC00.PT
         }
         public virtual bool DataProcess(string[] data, out string errMessage)
         {
-            IsValueUpdated = false;
+            IsDuplicated = IsValueUpdated = false;
 
             if (!tagValue.DataProcess(data, out errMessage))
                 return false;
@@ -550,18 +605,18 @@ namespace DataSpider.PC00.PT
                     {
                         LastMeasureDateTime = TimeStamp;
                         LastMeasureValue = Value;
-                        IsValueUpdated = true;
-
+                        IsDuplicated = true;
                     }
                 }
                 else
                 {
                     LastMeasureDateTime = TimeStamp;
                     LastMeasureValue = Value;
-                    IsValueUpdated = true;
+                    IsDuplicated = true;
                 }
                 //}
             }
+            IsValueUpdated = true;
             //
             return true;
         }
@@ -579,6 +634,15 @@ namespace DataSpider.PC00.PT
         static PISystem _PISystem = null;
         static PIServer _PIServer = null;
         private PIInfo m_clsPIInfo;
+
+        private DataRow drEquipment = null;
+        private bool updateEventFrame = true;
+        private bool updatePIPoint = true;
+        private Dictionary<int, string> dicEFNamePrefix = new Dictionary<int, string>();
+        private Dictionary<int, string> dicEFTemplateName = new Dictionary<int, string>();
+        private static AFDatabase _AFDatabase = null;
+        private static object objLock = new object();
+        private string equipTypeName = string.Empty;
 
         //
         // 20220908, SHS, SERVERTIME 중복체크 (시간만 비교할지 값도 비교할지) 옵션 기능 추가
@@ -599,6 +663,10 @@ namespace DataSpider.PC00.PT
                 {
                     listViewMsg.UpdateMsg($"PI Server Connection Error (PI Server : {m_clsPIInfo.strPI_Server}, Error : {errText})", false, true, true, PC00D01.MSGTERR);
                 }
+                if (!CheckAFDatabase(out string errString))
+                {
+                    listViewMsg.UpdateMsg($"GetAFDatabase ({errString})", false, true, true, PC00D01.MSGTERR);
+                }
             }
             catch (Exception ex)
             {
@@ -607,12 +675,55 @@ namespace DataSpider.PC00.PT
         }
         // 20220908, SHS, SERVERTIME 중복체크 (시간만 비교할지 값도 비교할지) 옵션 기능 추가
         //public EquipmentDataProcess(string filePath, DataTable dtTag, FormListViewMsg listViewMsg, Encoding dataEncoding = null) : this(filePath, listViewMsg, dataEncoding)
-        public EquipmentDataProcess(string filePath, DataTable dtTag, FormListViewMsg listViewMsg, Encoding dataEncoding = null, bool checkServerTimeDup = false) : this(filePath, listViewMsg, dataEncoding)
+        public EquipmentDataProcess(string filePath, DataRow dr, DataTable dtTag, FormListViewMsg listViewMsg, Encoding dataEncoding = null, bool checkServerTimeDup = false) : this(filePath, listViewMsg, dataEncoding)
         {
             // 20220908, SHS, SERVERTIME 중복체크 (시간만 비교할지 값도 비교할지) 옵션 기능 추가
             CheckServerTimeDup = checkServerTimeDup;
             UpdateTag(dtTag);
+
+            drEquipment = dr;
+            updateEventFrame = drEquipment["UPDATE_EVENTFRAME_FLAG"].ToString().ToUpper().Equals("Y");
+            updatePIPoint = drEquipment["UPDATE_PIPOINT_FLAG"].ToString().ToUpper().Equals("Y");
+            equipTypeName = drEquipment["EQUIP_TYPE_NM"].ToString();
+            //LoadEventFrameInfo(drEquipment["EXTRA_INFO"]?.ToString());
         }
+
+        private bool LoadEventFrameInfo(string extraInfo)
+        {
+            dicEFNamePrefix.Clear();
+            dicEFTemplateName.Clear();
+
+            if (string.IsNullOrWhiteSpace(extraInfo)) return false;
+
+            try
+            {
+                JsonDocument jDoc = JsonDocument.Parse(extraInfo);
+                if (!jDoc.RootElement.TryGetProperty("EventFrame", out JsonElement jEle))
+                {
+                    return true;
+                }
+                foreach (JsonElement item in jEle.EnumerateArray())
+                {
+                    // Type 이 숫자로 파싱이 안되면 오류이므로 프로그램 종료 시킴
+                    if (!int.TryParse(item.GetProperty("Type").GetString(), out int msgType))
+                    {
+                        continue;
+                    }
+                    if (!dicEFNamePrefix.ContainsKey(msgType))
+                    {
+                        dicEFNamePrefix.Add(msgType, item.GetProperty("EventFrameNamePrefix").GetString().Trim());
+                        dicEFTemplateName.Add(msgType, item.GetProperty("EventFrameTemplateName").GetString().Trim());
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                listViewMsg.UpdateMsg($"Exception in LoadEventFrameInfo (EXTRA_INFO) - {ex.Message}", true, true, true, PC00D01.MSGTERR);
+                return false;
+            }
+            return true;
+        }
+
         public bool UpdateTag(DataTable dtTag)
         {
             if (dtTag != null && dtTag.Rows.Count > 0)
@@ -656,7 +767,7 @@ namespace DataSpider.PC00.PT
 
             return true;
         }
-        public bool Add(string tagName, string equipName, string msgType, string dataPosition, string datePosition, string timePosition, string piTagName, string opcItemName, string lastMeasuredValue, string lastMeasuredDateTime)
+        public bool Add(string tagName, string equipName, string msgType, string dataPosition, string datePosition, string timePosition, string piTagName, string opcItemName, string efAttributeName, string lastMeasuredValue, string lastMeasuredDateTime)
         {
             if (!int.TryParse(msgType, out int msgTypeNo))
             {
@@ -670,7 +781,7 @@ namespace DataSpider.PC00.PT
             }
             if (string.IsNullOrWhiteSpace(opcItemName))
             {
-                TAG tag = new TAG(tagName, equipName, msgTypeNo, piTagName, lastMeasuredValue, lastMeasuredDateTime);
+                TAG tag = new TAG(tagName, equipName, msgTypeNo, piTagName, efAttributeName, lastMeasuredValue, lastMeasuredDateTime);
                 // 20220908, SHS, SERVERTIME 중복체크 (시간만 비교할지 값도 비교할지) 옵션 기능 추가
                 tag.checkServerTimeDup = CheckServerTimeDup;
                 //
@@ -683,7 +794,7 @@ namespace DataSpider.PC00.PT
             }
             else
             {
-                TTVTAG tag = new TTVTAG(tagName, equipName, msgTypeNo, piTagName, opcItemName, lastMeasuredValue, lastMeasuredDateTime);
+                TTVTAG tag = new TTVTAG(tagName, equipName, msgTypeNo, piTagName, opcItemName, efAttributeName, lastMeasuredValue, lastMeasuredDateTime);
                 DicTAGList[tagKey].Add(tag);
             }
 
@@ -697,7 +808,7 @@ namespace DataSpider.PC00.PT
                 // 20220908, SHS, TAG 설정 정보 UPDATE 시 DB 에 저장된 최근값의 측정시간을 yyyy-MM-dd HH:mm:ss 형식 문자열로 변환 처리 (중복데이터 체크 측정시간 비교 위해)
                 //Add(dr["TAG_NM"].ToString().Trim(), dr["EQUIP_NM"].ToString().Trim(), dr["MSG_TYPE"].ToString().Trim(), dr["DATA_POSITION"].ToString().Trim(), dr["DATE_POSITION"].ToString().Trim(), dr["TIME_POSITION"].ToString().Trim(), dr["PI_TAG_NM"].ToString().Trim(), dr["OPCITEM_NM"].ToString().Trim(), dr["LAST_UPDATED_VALUE"].ToString().Trim(), dr["LAST_MEASURED_DATETIME"].ToString().Trim());
                 DateTime.TryParse(dr["LAST_MEASURED_DATETIME"].ToString().Trim(), out DateTime dt);
-                Add(dr["TAG_NM"].ToString().Trim(), dr["EQUIP_NM"].ToString().Trim(), dr["MSG_TYPE"].ToString().Trim(), dr["DATA_POSITION"].ToString().Trim(), dr["DATE_POSITION"].ToString().Trim(), dr["TIME_POSITION"].ToString().Trim(), dr["PI_TAG_NM"].ToString().Trim(), dr["OPCITEM_NM"].ToString().Trim(), dr["LAST_UPDATED_VALUE"].ToString().Trim(), dt.ToString("yyyy-MM-dd HH:mm:ss.fff"));
+                Add(dr["TAG_NM"].ToString().Trim(), dr["EQUIP_NM"].ToString().Trim(), dr["MSG_TYPE"].ToString().Trim(), dr["DATA_POSITION"].ToString().Trim(), dr["DATE_POSITION"].ToString().Trim(), dr["TIME_POSITION"].ToString().Trim(), dr["PI_TAG_NM"].ToString().Trim(), dr["OPCITEM_NM"].ToString().Trim(), dr["EF_ATTRIBUTE_NM"].ToString().Trim(), dr["LAST_UPDATED_VALUE"].ToString().Trim(), dt.ToString("yyyy-MM-dd HH:mm:ss.fff"));
             }
             return true;
         }
@@ -706,6 +817,7 @@ namespace DataSpider.PC00.PT
             //return DataProcess(msg.m_EqName, msg.m_MsgType, msg.m_Data.Split(new string[] { "\n" }, StringSplitOptions.None));
             return DataProcess(msg.m_EqName, msg.m_MsgType, msg.m_Data.Split(new string[] { Environment.NewLine }, StringSplitOptions.None));
         }
+
         public bool DataProcess(string equipName, int msgType, string[] data)
         {
             if (!DicTAGList.TryGetValue($"{equipName}_{msgType}", out List<TAG> listTAG))
@@ -722,42 +834,28 @@ namespace DataSpider.PC00.PT
                     listViewMsg.UpdateMsg($"An error occurred while processing data for TAG ({tag.TagName}) - {errMessage}", false, true, true, PC00D01.MSGTERR);
                 }
             }
-            /*
-            List<TAG> listresult = listTAG.FindAll(x => x.IsValueUpdated);
-            // 저장할 데이터가 있는 경우에만
-            if (listresult.Count > 0)
-            {
-                string fullFileName;
-                while (true)
-                {
-                    fullFileName = $@"{FilePath}\{DateTime.Now:yyyyMMddHHmmssfff}.ttv";
-                    if (File.Exists(fullFileName))
-                        continue;
-                    //File.AppendAllLines(fullFileName, listTAG.FindAll(x => x.IsValueUpdated).Select(x => x.TTV));
-                    File.AppendAllLines(fullFileName, listresult.Select(x => x.TTV), dataEncoding);
-                    string fileContent=File.ReadAllText(fullFileName);
-                    listViewMsg.UpdateMsg($"File saved. ({fullFileName}) {fileContent}", false, true, true, PC00D01.MSGTINF);
-                    break;
-                }
-            }
-            */
+
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            // PI Point 
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            ///
+            // 값이 처리된 태그와 중복되지 않은 태그만 처리
+            // 20240701, SHS, P5 에서 PI TAG 도 중복체크 하지 않고 수신하는 그대로 저장
+            //List<TAG> listUpdated = listTAG.FindAll(x => x.IsValueUpdated && !x.IsDuplicated);
             List<TAG> listUpdated = listTAG.FindAll(x => x.IsValueUpdated);
             // 저장할 데이터가 있는 경우에만
             if (listUpdated.Count > 0)
             {
                 // 초기화
                 DateTime dtNow = DateTime.Now;
-                listUpdated.ForEach(tag => 
-                { 
-                    tag.PIIFDateTime = dtNow; 
-                    tag.Remark = string.Empty; 
-                    tag.PIIFFlag = "N";
-                    tag.IsDBInserted = false; 
+                listUpdated.ForEach(tag =>
+                {
+                    tag.PIIFDateTime = dtNow;
+                    tag.Remark = string.Empty;
+                    tag.PIIFFlag = "N"; // N -> Y, E -> F, Z
+                    tag.IsDBInserted = false;
                 });
-                //listUpdated.ForEach(x => x.Remark = string.Empty);
-                //listUpdated.ForEach(x => x.PIIFFlag = "N");
-                //listUpdated.ForEach(x => x.IsDBInserted = false);
-                //
+
                 SavePI(listUpdated);
                 SaveDBHistory(listUpdated);
 
@@ -767,7 +865,419 @@ namespace DataSpider.PC00.PT
                     SaveFile(listNotInserted);
                 }
             }
+
+
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            // EventFrame
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            ///
+            // 값이 처리된 태그와 EFAttributeName 이 설정된 태그만 처리
+            List<TAG> listUpdatedEF = listTAG.FindAll(x => x.IsValueUpdated && !string.IsNullOrWhiteSpace(x.EFAttributeName));
+            if (listUpdatedEF.Count > 0)
+            {
+                // AF I/F Time
+                string afIFTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
+                // SVRTIME
+                string serverTime = dtServerTime.ToString("yyyy-MM-dd HH:mm:ss.fff");
+                string eventFrameName = $"{equipName}_{dtServerTime:yyyyMMddHHmmssfff}";
+                string eventFrameTemplateName = $"{equipTypeName}_{msgType:00}_Template_A";                
+                string measureTime = listUpdatedEF[0].dtTimeStamp.ToString("yyyy-MM-dd HH:mm:ss.fff");
+
+                // EventFrame 저장
+                //var efResult = SaveEventFrame(equipName, eventFrameName, eventFrameTemplateName, measureTime, measureTime, listUpdatedEF, listTAG.FindAll(x => !string.IsNullOrWhiteSpace(x.EFAttributeName)));
+                List<string> listAttributeNames = listTAG.Where(x => !string.IsNullOrWhiteSpace(x.EFAttributeName)).Select(x => x.EFAttributeName).ToList();
+
+                EventFrameData efData = new EventFrameData()
+                {
+                    Name = eventFrameName,
+                    StartTime = measureTime,
+                    EndTime = measureTime,
+                    IFTime = afIFTime,
+                    TemplateName = eventFrameTemplateName,
+                    EquipmentName = equipName,
+                    MessageType = msgType,
+                    ServerTime = serverTime
+                };
+                listUpdatedEF.ForEach(tag => efData.Attributes.Add(new EventFrameAttributeData() { Name = tag.EFAttributeName, Value = tag.Value }));
+
+                // AF DB EventFrame 저장
+                var efResult = SaveEventFrame(equipName, eventFrameName, eventFrameTemplateName, measureTime, measureTime, efData.Attributes, listAttributeNames);
+
+                efData.IFFlag = efResult.afIFFlag;
+                efData.IFRemark = efResult.afIFRemark;
+
+                // EventFrame 저장 성공일때만 EventFrame 정보 TAG 저장, 실패 시 PC03 에서 저장 시 처리
+                if (efResult.afIFFlag.Equals("Y"))
+                {
+                    if (DicTAGList.TryGetValue($"{equipName}_0", out List<TAG> listMsgtype0TAGs))
+                    {
+                        TAG tag = listMsgtype0TAGs.Find(x => x.TagName.Equals($"{equipName}_EVENTFRAMENAME"));
+                        if (tag != null)
+                        {
+                            tag.PIIFDateTime = DateTime.Now;
+                            tag.PIIFFlag = "N"; // N -> Y, E -> F, Z
+                            tag.IsDBInserted = false;
+                            tag.dtTimeStamp = listUpdatedEF[0].dtTimeStamp;
+                            tag.Value = eventFrameName;
+
+                            // 최근값 업데이트 
+                            if (!(tag.TimeStamp.Equals(tag.LastMeasureDateTime) && tag.Value.Equals(tag.LastMeasureValue)))
+                            {
+                                tag.LastMeasureDateTime = tag.TimeStamp;
+                                tag.LastMeasureValue = tag.Value;
+                            }
+                            SavePI(new List<TAG> { tag });
+                            SaveDBHistory(new List<TAG> { tag });
+                        }
+                        else
+                        {
+                            listViewMsg.UpdateMsg($"There are no TAGs for EventFrameName : {equipName}, MessageType : 0", false, true, true, PC00D01.MSGTERR);
+                        }
+
+                        tag = listMsgtype0TAGs.Find(x => x.TagName.Equals($"{equipName}_MSGTYPE"));
+                        if (tag != null)
+                        {
+                            tag.PIIFDateTime = DateTime.Now;
+                            tag.Remark = string.Empty;
+                            tag.PIIFFlag = "N"; // N -> Y, E -> F, Z
+                            tag.IsDBInserted = false;
+                            tag.dtTimeStamp = listUpdatedEF[0].dtTimeStamp;
+                            tag.Value = msgType.ToString(); ;
+
+                            // 최근값 업데이트 
+                            if (!(tag.TimeStamp.Equals(tag.LastMeasureDateTime) && tag.Value.Equals(tag.LastMeasureValue)))
+                            {
+                                tag.LastMeasureDateTime = tag.TimeStamp;
+                                tag.LastMeasureValue = tag.Value;
+                            }
+                            SavePI(new List<TAG> { tag });
+                            SaveDBHistory(new List<TAG> { tag });
+                        }
+                        else
+                        {
+                            listViewMsg.UpdateMsg($"There are no TAGs for MSGTYPE : {equipName}, MessageType : 0", false, true, true, PC00D01.MSGTERR);
+                        }
+                    }
+                    else
+                    {
+                        listViewMsg.UpdateMsg($"There are no TAGs for EventFrameName, MSGTYPE : {equipName}, MessageType : 0", false, true, true, PC00D01.MSGTERR);
+                    }
+                }
+
+                //string jsonAttributes = JsonSerializer.Serialize(efData.Attributes);
+
+                // listUpdated 내용을 EventFrame 형식대로 DB 저장 (조회조건에 필요하거나 조회시 표시되어야 할 내용을 컬럼으로)
+                bool dbResult = SaveDBEFHistory(equipName, msgType, eventFrameName, measureTime, measureTime, efData.GetSerializedAttributes(), serverTime, efData.IFTime, efData.IFFlag, efData.IFRemark);
+                if (!dbResult)
+                {
+                    //SaveFileEFHistory(equipName, msgType, dtAFIF.ToString("yyyy-MM-dd HH:mm:ss.fff"), measureTime, measureTime, eventFrameName, jsonAttributes, dtAFIF.ToString("yyyy-MM-dd HH:mm:ss.fff"), efResult.afIFFlag, efResult.afIFRemark);
+                    SaveFileEFHistory(efData);
+                }
+            }
+
             return true;
+        }
+
+        private (string afIFFlag, string afIFRemark) SaveEventFrame(string equipName, string eventFrameName, string eventFrameTemplateName, string startTime, string endTime, List<EventFrameAttributeData> listAttributes, List<string> listAttributeNames)
+        {
+            try
+            {
+                // UpdateEventFrame is disabled
+                if (!updateEventFrame)
+                {
+                    // EventFrame 업데이트 Disabled 상태
+                    listViewMsg.UpdateMsg($"{equipName}-{eventFrameName} - UpdateEventFrame is disabled.", false, true, true, PC00D01.MSGTINF);
+                    return ("D", "UpdateEventFrame is disabled.");
+                }
+
+                // AF 연결 
+                if (!CheckAFDatabase(out string errString))
+                {
+                    listViewMsg.UpdateMsg($"{errString}", false, true, true, PC00D01.MSGTERR);
+                    return ("E", errString);
+                }
+
+                // EventFrame Template 얻기 (없으면 생성, Attribute 가 다르면 새로 생성)
+                AFElementTemplate efTemplate = GetEventFrameTemplate(_AFDatabase, eventFrameTemplateName, listAttributeNames);
+                if (efTemplate == null)
+                {
+                    listViewMsg.UpdateMsg($"Can not get EventFrame Template ({eventFrameTemplateName}).", false, true, true, PC00D01.MSGTERR);
+                    return ("E", $"Can not get EventFrame Template ({eventFrameTemplateName}).");
+                }
+
+                // EF 만들기
+                AFEventFrame ef = null;
+                ef = new AFEventFrame(_AFDatabase, eventFrameName, efTemplate);
+                ef.SetStartTime(startTime);
+                ef.SetEndTime(endTime);
+                
+                //listUpdatedEF.ForEach(tag => ef.Attributes[tag.EFAttributeName]?.SetValue(new AFValue(tag.Value)));
+                //foreach (var attrib in listAttributes)
+                //{
+                //    ef.Attributes[attrib.Name]?.SetValue(new AFValue(attrib.Value));
+                //}
+                listAttributes.ForEach(attrib => ef.Attributes[attrib.Name]?.SetValue(new AFValue(attrib.Value)));
+                ef.CheckIn();
+
+                List<string> listEFAttributes = new List<string>();
+                foreach (EventFrameAttributeData efAttrib in listAttributes)
+                {
+                    listEFAttributes.Add($"{efAttrib.Name} : {efAttrib.Value}");
+                }
+                listViewMsg.UpdateMsg($"EventFrame updated. EventFrameName : {eventFrameName}, EquipName : {equipName}, EventFrameTemplateName : {eventFrameTemplateName}, StartTime : {startTime}, EndTime : {endTime},  Attributes [{string.Join(", ", listEFAttributes)}]", false, true, true, PC00D01.MSGTINF);
+            }
+            catch (Exception ex)
+            {
+                listViewMsg.UpdateMsg($"Exception in SaveEventFrame - ({ex})", false, true, true, PC00D01.MSGTERR);
+                return ("E", $"Exception in SaveEventFrame - ({ex})");
+            }
+            return ("Y", string.Empty);
+        }
+
+        private bool SaveFileEFHistory(EventFrameData efData)// string equipName, int msgType, string equipIFTime, string measureStartTime, string measureEndTime, string eventFrameName, string jsonAttributes, string afIFTime, string afIFFlag, string afIFRemark)
+        {
+            string fullFileName;
+            try
+            {
+                while (true)
+                {
+                    fullFileName = $@"{FilePath}\{efData.Name}.eff";
+                    if (File.Exists(fullFileName))
+                        continue;
+                    File.AppendAllText(fullFileName, JsonSerializer.Serialize(efData), dataEncoding);
+                    string fileContent = File.ReadAllText(fullFileName);
+                    listViewMsg.UpdateMsg($"EventFrame ({efData.Name}) File saved. ({fullFileName}) {fileContent}", false, true, true, PC00D01.MSGTINF);
+                    break;
+                }
+            }
+            catch (Exception ex)
+            {
+                listViewMsg.UpdateMsg($"Exception in SaveFileEFHistory. EventFrame ({efData.Name}) - ({ex})", false, true, true, PC00D01.MSGTERR);
+                return false;
+            }
+
+            return true;
+        }
+
+
+        // HI_EVENTFRAME_RESULT TABLE
+        // (ID), EQUIP_NM, MSG_TYPE, EQUIP_IF_TIME, MEASURE_START_TIME, MEASURE_END_TIME, EVENTFRAME_NAME, EVENTFRAME_DATA, AF_IF_TIME, AF_IF_FLAG, AF_IF_REMARK, (REG_ID), (REG_TIME)
+        private bool SaveDBEFHistory(string equipName, int msgType, string eventFrameName, string measureStartTime, string measureEndTime, string jsonAttributes, string serverTime, string afIFTime, string afIFFlag, string afIFRemark)
+        {
+            bool result = false;
+            string errCode = string.Empty;
+            string errText = string.Empty;
+
+            try
+            {
+                //EventFrameData efJson = new EventFrameData()
+                //{
+                //    name = eventFrameName,
+                //    startTime = measureStartTime,
+                //    endTime = measureEndTime,
+                //};
+
+                if (result = m_sqlBiz.InsertEFResult(equipName, msgType, measureStartTime, measureEndTime, eventFrameName, jsonAttributes, serverTime, afIFTime, afIFFlag, afIFRemark, ref errCode, ref errText))
+                {
+                    listViewMsg.UpdateMsg($"DB inserted. EventFrame ({eventFrameName})", false, true, true, PC00D01.MSGTINF);
+                }
+                else
+                {
+                    listViewMsg.UpdateMsg($"DB insert failed. EventFrame ({eventFrameName}) - {errText}", false, true, true, PC00D01.MSGTERR);
+                }
+            }
+            catch (Exception ex)
+            {
+                listViewMsg.UpdateMsg($"Exception in SaveDBHistoryEF. EventFrame ({eventFrameName}) - ({ex})", false, true, true, PC00D01.MSGTERR);
+                return false;
+            }
+            return result;
+        }
+
+        private bool CheckAFDatabase(out string errText)
+        {
+            errText = string.Empty;
+            lock (objLock)
+            {
+                // AF 연결 
+                if (_AFDatabase == null || !_AFDatabase.PISystem.ConnectionInfo.IsConnected)
+                {
+                    _AFDatabase = GetAFDatabase(m_clsPIInfo.strPI_Server, m_clsPIInfo.AF_DB, m_clsPIInfo.AF_USER, m_clsPIInfo.AF_PWD, m_clsPIInfo.AF_DOMAIN, out string errString);
+                    if (_AFDatabase == null)
+                    {
+                        listViewMsg.UpdateMsg($"AF not connected.", false, true, true, PC00D01.MSGTINF);
+                        errText = $"AF not connected. {(string.IsNullOrWhiteSpace(errString) ? "" : errString)}";
+                        return false;
+                    }
+                }
+                if (!_AFDatabase.PISystem.ConnectionInfo.IsConnected)
+                {
+                    listViewMsg.UpdateMsg($"PISystem not connected.", false, true, true, PC00D01.MSGTINF);
+                    errText = "PISystem not connected.";
+                    return false;
+                }
+            }
+            return true;
+        }
+
+
+        public AFDatabase GetAFDatabase(string serverName, string databaseName, string user, string pwd, string domain, out string errString)
+        {
+            try
+            {
+                errString = string.Empty;
+
+                PISystems systems = new PISystems();
+                PISystem assetServer;
+
+                if (!string.IsNullOrEmpty(serverName))
+                    assetServer = systems[serverName];
+                else
+                    assetServer = systems.DefaultPISystem;
+
+                NetworkCredential credential = new NetworkCredential(user, pwd, domain);
+
+                assetServer.Connect(credential);
+                if (assetServer.ConnectionInfo.IsConnected)
+                {
+                    if (!string.IsNullOrEmpty(databaseName))
+                        return assetServer.Databases[databaseName];
+                    else
+                        return assetServer.Databases.DefaultDatabase;
+                }
+            }
+            catch (Exception ex)
+            {
+                errString = ex.Message;
+            }
+            return null;
+        }
+
+        private AFElementTemplate GetEventFrameTemplate(AFDatabase afDB, string templateName)
+        {
+            AFElementTemplate result = afDB?.ElementTemplates?.Where(x => x.InstanceType.Equals(typeof(AFEventFrame)) && x.Name.Equals(templateName))?.FirstOrDefault();
+            //return afDB?.ElementTemplates?.Where(x => x.InstanceType.Equals(typeof(AFEventFrame)) && x.Name.Equals(templateName)).First();
+            return result;
+        }
+
+        // PC03 은 무조건 기본 템플릿으로 가능한지 확인 후 안될 경우 다른 템플릿으로 확인 후 다 안되면 새로 생성
+        private AFElementTemplate GetEventFrameTemplate(AFDatabase afDB, string efTemplateBaseName, List<string> listAttributeNames)
+        {
+            if (afDB == null) throw new ArgumentNullException(nameof(afDB));
+
+            // 최초 afDB 로드 후 다른 인스턴스에서 변경된 내용은 refresh 해야 한다
+            afDB.Refresh();
+
+            // 기본템플릿 조회
+            AFElementTemplate efTemp = GetEventFrameTemplate(afDB, efTemplateBaseName);
+
+            if (efTemp != null)
+            {
+                List<string> omittedAttributeNames = efTemp.AttributeTemplates.GetOmittedAttributes(listAttributeNames);
+                // 기본 Template 의 Attribute 와 TAG Attribute 일치하면 기본 Template 사용
+                if (omittedAttributeNames.Count == 0)
+                {
+                    return efTemp;
+                }
+                listViewMsg.UpdateMsg($"Base EventFrameTemplate ({efTemplateBaseName}) is not matches. Omitted attribute names : {string.Join(", ", omittedAttributeNames)}.", false, true, true, PC00D01.MSGTINF);
+                // 기본 템플릿은 사용하지 못하므로 이름을 변경
+                string sDateTimeNow = DateTime.Now.ToString("yyyyMMddHHmmssfff");
+                listViewMsg.UpdateMsg($"Rename Base EventFrameTemplate {efTemplateBaseName} -> {efTemplateBaseName}_{sDateTimeNow}", false, true, true, PC00D01.MSGTINF);
+
+            }
+
+            // 기본 템플릿 이름으로 시작하는 템플릿 모두 조회
+            //AFElementTemplates eventFrameTemplate = afDB.ElementTemplates?.Where(x => x.InstanceType.Equals(typeof(AFEventFrame)) && x.Name.StartsWith(efTemplateBaseName)).OrderBy(x => x.Name);
+            IEnumerable<AFElementTemplate> eventFrameTemplates = from temp in afDB.ElementTemplates
+                                                                 where temp.InstanceType.Equals(typeof(AFEventFrame)) && temp.Name.StartsWith(efTemplateBaseName) && !temp.Name.Equals(efTemplateBaseName)
+                                                                 orderby temp.Name descending
+                                                                 select temp;
+
+            efTemp = eventFrameTemplates.FirstOrDefault(x => x.AttributeTemplates.GetOmittedAttributes(listAttributeNames).Count == 0);
+//            listViewMsg.UpdateMsg($"Rename EventFrame Template ({eventFrameTemplateName} -> {eventFrameTemplateName}_{dtNow:yyyyMMddHHmmss.fff}). Create New EventFrame Template.", false, true, true, PC00D01.MSGTINF);
+
+            // 저장가능한 템플릿이 없으면 새로 생성
+            if (efTemp == null)
+            {
+                listViewMsg.UpdateMsg($"There are no matched EventFrameTemplate. Create new Base EventFrameTemplate ({efTemplateBaseName}). AttributeTemplates : {string.Join(", ", listAttributeNames)}.", false, true, true, PC00D01.MSGTINF);
+                efTemp = CreateEventFrameTemplate(afDB, efTemplateBaseName, listAttributeNames);
+            }
+            return efTemp;
+        }
+
+        //private AFElementTemplate GetEventFrameTemplate(AFDatabase afDB, string templateName)
+        //{
+        //    return afDB?.ElementTemplates?[templateName];
+        //}
+
+        //private AFElementTemplate GetEventFrameTemplate(AFDatabase database, string eventFrameTemplateName, List<string> listAttributeNames)
+        //{
+        //    if (database == null) throw new ArgumentNullException(nameof(database));
+
+        //    AFElementTemplate eventFrameTemplate = GetEventFrameTemplate(database, eventFrameTemplateName);
+
+        //    // EventFrame Template 가 없으면 새로 만든다 (EFAttributeName 이 설정된 태그에 대해서만)
+        //    if (eventFrameTemplate == null)
+        //    {
+        //        listViewMsg.UpdateMsg($"{eventFrameTemplateName} EventFrame Template is not exists. Create New EventFrame Template.", false, true, true, PC00D01.MSGTINF);
+        //        eventFrameTemplate = CreateEventFrameTemplate(database, eventFrameTemplateName, listAttributeNames);
+        //    }
+        //    // EventFrame Template 가 있으면 현재 EFAttributeName 이 설정된 태그와 Attribute 비교, Attribute 가 하나라도 맞지 않으면 새로 만든다
+        //    else
+        //    {
+        //        if (eventFrameTemplate.AttributeTemplates.Count != listAttributeNames.Count)
+        //        {
+        //            DateTime dtNow = DateTime.Now;
+        //            listViewMsg.UpdateMsg($"{eventFrameTemplateName} EventFrame Template Attribute count({eventFrameTemplate.AttributeTemplates.Count}) is differnt with TAGList count({listAttributeNames.Count}).", false, true, true, PC00D01.MSGTERR);
+        //            listViewMsg.UpdateMsg($"Rename EventFrame Template ({eventFrameTemplateName} -> {eventFrameTemplateName}_{dtNow:yyyyMMddHHmmss.fff}). Create New EventFrame Template.", false, true, true, PC00D01.MSGTINF);
+        //            eventFrameTemplate.Name = $"{eventFrameTemplateName}_{dtNow:yyyyMMddHHmmss.fff}";
+        //            eventFrameTemplate.CheckIn();
+        //            eventFrameTemplate = CreateEventFrameTemplate(database, eventFrameTemplateName, listAttributeNames);
+        //        }
+        //        else
+        //        {
+        //            foreach (var attribName in listAttributeNames)
+        //            {
+        //                if (eventFrameTemplate.AttributeTemplates[attribName] == null)
+        //                {
+        //                    DateTime dtNow = DateTime.Now;
+        //                    listViewMsg.UpdateMsg($"{eventFrameTemplateName} EventFrame Template Attribute ({attribName}) is not exists.", false, true, true, PC00D01.MSGTERR);
+        //                    listViewMsg.UpdateMsg($"Rename EventFrame Template ({eventFrameTemplateName} -> {eventFrameTemplateName}_{dtNow:yyyyMMddHHmmss.fff}). Create New EventFrame Template.", false, true, true, PC00D01.MSGTINF);
+        //                    eventFrameTemplate.Name = $"{eventFrameTemplateName}_{dtNow:yyyyMMddHHmmss.fff}";
+        //                    eventFrameTemplate.CheckIn();
+        //                    eventFrameTemplate = CreateEventFrameTemplate(database, eventFrameTemplateName, listAttributeNames);
+        //                    break;
+        //                }
+        //            }
+        //        }
+        //    }
+
+        //    return eventFrameTemplate;
+        //}
+
+        private AFElementTemplate CreateEventFrameTemplate(AFDatabase database, string eventFrameTemplateName, List<string> listAttributeNames)
+        {
+            AFElementTemplate eventFrameTemplate = null;
+
+            if (database == null) throw new ArgumentNullException(nameof(database));
+
+            eventFrameTemplate = database.ElementTemplates.Add(eventFrameTemplateName);
+            eventFrameTemplate.InstanceType = typeof(AFEventFrame);
+            eventFrameTemplate.Description = $"{eventFrameTemplateName}";
+
+            listViewMsg.UpdateMsg($"CreateEventFrameTemplate ({eventFrameTemplateName}).", false, true, true, PC00D01.MSGTINF);
+
+            AFAttributeTemplate afAttrib;
+
+            foreach (var attribName in listAttributeNames)
+            {
+                afAttrib = eventFrameTemplate.AttributeTemplates.Add(attribName);
+                afAttrib.Type = typeof(string);
+            }
+
+            eventFrameTemplate.CheckIn();
+
+            return eventFrameTemplate;
         }
 
         private bool CheckPIConnection(out string errText)
@@ -810,17 +1320,35 @@ namespace DataSpider.PC00.PT
             return true;
         }
 
-        private bool SavePI(List<TAG> listResult)
+        // 20240703, SHS, P5, EventFrame 정보 TAG 는 PIPoint 업데이트 Disabled 상태에도 처리해야 함. PIPoint 업데이트 Disabled 를 무시하는 파라미터 추가 (기본은 무시안함)
+        //private bool SavePI(List<TAG> listResult)
+        private bool SavePI(List<TAG> listResult, bool ignoreDisabled = false)
         {
             try
             {
                 string errText;
                 bool result = false;
 
+                // UpdatePIPoint is disabled
+                if (!updatePIPoint && !ignoreDisabled)
+                {
+                    // PIPoint 업데이트 Disabled 상태
+                    listResult.ForEach(tag =>
+                    {
+                        tag.PIIFFlag = "D";
+                        tag.Remark = "UpdatePIPoint is disabled.";
+                    });
+                    listViewMsg.UpdateMsg($"UpdatePIPoint is disabled.", false, true, true, PC00D01.MSGTINF);
+                    return false;
+                }
+
                 if (!CheckPIConnection(out errText))
                 {
-                    listResult.ForEach(x => x.PIIFFlag = "E");
-                    listResult.ForEach(x => x.Remark = errText);
+                    listResult.ForEach(tag =>
+                    {
+                        tag.PIIFFlag = "E";
+                        tag.Remark = errText;
+                    });
                     listViewMsg.UpdateMsg(string.Format(PC00D01.FailedtoPI, $"{errText}", ""), false, true, true, PC00D01.MSGTERR);
                     return false;
                 }

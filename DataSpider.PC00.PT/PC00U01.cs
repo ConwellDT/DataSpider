@@ -17,6 +17,7 @@ using NLog.Targets;
 using System.Text.Json;
 using System.Management.Automation.Language;
 using System.Security.Cryptography;
+using OSIsoft.AF.Asset;
 
 namespace DataSpider.PC00.PT
 {
@@ -676,6 +677,23 @@ namespace DataSpider.PC00.PT
             }
             return default;
         }
+        /// <summary>
+        /// AFAttributeTemplates 에 listAttributeNames 중 존재하지 않는 AttributeName 을 string List 타입으로 리턴
+        /// </summary>
+        /// <param name="attributeTemplates"></param>
+        /// <param name="listAttributeNames"></param>
+        /// <returns></returns>
+        public static List<string> GetOmittedAttributes(this AFAttributeTemplates attributeTemplates, List<string> listAttributeNames)
+        {
+            List<string> omittedAttribute = new List<string>();
+
+            if (attributeTemplates != null || attributeTemplates.Count > 0)
+            {
+                // AttributeTemplate 에 없는 Attribute
+                omittedAttribute = listAttributeNames.FindAll(x => !attributeTemplates.Contains(x));
+            }
+            return omittedAttribute;
+        }
     }
 
     #region app.config 설정을 가져오는 메서드
@@ -732,6 +750,10 @@ namespace DataSpider.PC00.PT
             m_PIInfo.strPI_USER =   GetAppSetting("PI_USER");
             m_PIInfo.strPI_PWD = GetAppSetting("PI_PWD");
 
+            m_PIInfo.AF_DB = GetAppSetting("AF_DB");
+            m_PIInfo.AF_USER = GetAppSetting("AF_USER");
+            m_PIInfo.AF_PWD = GetAppSetting("AF_PWD");
+            m_PIInfo.AF_DOMAIN = GetAppSetting("AF_DOMAIN");
             return m_PIInfo;
         }
 

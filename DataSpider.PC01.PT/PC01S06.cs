@@ -45,6 +45,8 @@ namespace DataSpider.PC01.PT
         string _COMMENT_VAL = string.Empty;
         string _TCODE_VAL = string.Empty;
         string _MESSAGEDATETIME_VAL = string.Empty;
+        StringBuilder ssb = new StringBuilder();
+        string msrDateTime = string.Empty;
 
         public PC01S06() : base()
         {
@@ -69,6 +71,200 @@ namespace DataSpider.PC01.PT
         /// Receiving Device
         /// </summary>
         /// <param name="Msg"></param>
+        //        protected override void ParseMessage(string Msg)
+        //        {
+        //            // listData에 저장용 메시지를 저장함. 
+        //            List<string> listData = new List<string>();
+        //            DateTime dt = new DateTime();
+
+        //            string msgString = string.Empty;
+        //            byte[] sendMsg = new byte[1];
+
+        //            for (int nCh = 0; nCh < Msg.Length; nCh++)
+        //            {
+        //                switch (CommStatus)
+        //                {
+        //                    case A1_CommState.IDLE:
+        //                        if (Msg[nCh] == ASCII.ENQ)// Send Ack and Reset FrameNumber to 1
+        //                        {
+        //                            sendMsg = new byte[1];
+        //                            sendMsg[0] = ASCII.ACK;
+        //                            state.workSocket.Send(sendMsg);
+        //                            state.sb = new StringBuilder();
+        //                            state.sb.Append(Msg.Substring(nCh + 1));
+        //                            nFrameNumber = 1;
+        //                            CommStatus = A1_CommState.WAITING;
+        //                        }
+        //                        break;
+        //                    case A1_CommState.WAITING:
+        //                        // TimeOut Check는 별도의 thread에서
+        //                        if (Msg[nCh] == ASCII.EOT)
+        //                        {
+        //                            state.sb = new StringBuilder();
+        //                            state.sb.Append(Msg.Substring(nCh + 1));
+        //                            CommStatus = A1_CommState.IDLE;
+        //                        }
+        //                        else
+        //                        {
+        //                            msgString += Msg[nCh];
+        //                            if (Msg[nCh] == ASCII.STX)
+        //                            {
+        //                                msgString = string.Empty;
+        //                                msgString += Msg[nCh];
+        //                            }
+        //                            else if (Msg[nCh] == ASCII.LF)
+        //                            {
+        //                                int iResult;
+        //                                string typeName = string.Empty;
+        //                                StringBuilder ssb = new StringBuilder();
+
+        //                                sendMsg = new byte[1];
+
+        //                                if (int.TryParse(msgString.Substring(1, 1), out iResult) == true &&
+        //                                    iResult == nFrameNumber)
+        //                                {
+        //                                    if (AstmCalcedCheckSum(msgString) == AstmRecvedCheckSum(msgString))
+        //                                    {
+        //                                        // 데이터 해석 가능
+        //                                        string[] sp_cr = msgString.Split((char)ASCII.CR);
+        //                                        string[] sp_vert = sp_cr[0].Substring(1).Split('|');
+        //                                        if (sp_vert[0].EndsWith("H"))
+        //                                        {
+        //                                            _LAPID_VAL = string.Empty;
+        //                                            _EXPIRES_VAL = string.Empty;
+        //                                            _SID_VAL = string.Empty;
+        //                                            _ISID_VAL = string.Empty;
+        //                                            _SD_VAL = string.Empty;
+        //                                            _COMMENT_VAL = string.Empty;
+        //                                            _TCODE_VAL = string.Empty;
+        //                                            dtMsrDateTime = DateTime.MinValue;
+
+        //                                            typeName = "HR";
+        //                                            PC00U01.TryParseExact(sp_vert[13], out dtDateTime);
+        ////                                            ssb.AppendLine($"SVRTIME, {dtDateTime:yyyy-MM-dd HH:mm:ss}, {DateTime.Now:yyyy-MM-dd HH:mm:ss}");
+        //                                            _SENDER_NAME_VAL = sp_vert[4];
+        //                                            _VERSION_VAL = sp_vert[12];
+        //                                            //ssb.AppendLine($"{typeName}_SENDER_NAME_VAL, {dtDateTime:yyyy-MM-dd HH:mm:ss}, {sp_vert[4]}");
+        //                                            //ssb.AppendLine($"{typeName}_VERSION_VAL, {dtDateTime:yyyy-MM-dd HH:mm:ss}, {sp_vert[12]}");
+        //                                            _MESSAGEDATETIME_VAL = sp_vert[13];
+        //                                            //ssb.AppendLine($"{typeName}_MESSAGEDATETIME_VAL, {dtDateTime:yyyy-MM-dd HH:mm:ss}, {sp_vert[13]}");
+        //                                        }
+        //                                        if (sp_vert[0].EndsWith("P"))
+        //                                        {
+        //                                            typeName = "PIR";
+        //                                            _LAPID_VAL=sp_vert[3];
+        //                                            if (sp_vert.Length >= 8)
+        //                                                _EXPIRES_VAL = sp_vert[7];
+        //                                            else
+        //                                                _EXPIRES_VAL = " ";
+
+        //                                            //ssb.AppendLine($"{typeName}_LAPID_VAL, {dtDateTime:yyyy-MM-dd HH:mm:ss},  {sp_vert[3]}");
+        //                                            //if (sp_vert.Length >= 8)
+        //                                            //    ssb.AppendLine($"{typeName}_EXPIRES_VAL, {dtDateTime:yyyy-MM-dd HH:mm:ss},  {sp_vert[7]}");
+        //                                            //else
+        //                                            //    ssb.AppendLine($"{typeName}_EXPIRES_VAL, {dtDateTime:yyyy-MM-dd HH:mm:ss},   ");
+        //                                        }
+
+        //                                        if (sp_vert[0].EndsWith("O"))
+        //                                        {
+        //                                            typeName = "TOR";
+        //                                            _SID_VAL = sp_vert[2];
+        //                                            _ISID_VAL = sp_vert[3];
+        //                                            _SD_VAL = sp_vert[15];
+        //                                            //ssb.AppendLine($"{typeName}_SID_VAL, {dtDateTime:yyyy-MM-dd HH:mm:ss}, {sp_vert[2]}");
+        //                                            //ssb.AppendLine($"{typeName}_ISID_VAL, {dtDateTime:yyyy-MM-dd HH:mm:ss}, {sp_vert[3]}");
+        //                                            //ssb.AppendLine($"{typeName}_SD_VAL, {dtDateTime:yyyy-MM-dd HH:mm:ss}, {sp_vert[15]}");
+        //                                        }
+
+
+        //                                        if (sp_vert[0].EndsWith("R"))
+        //                                        {
+        //                                            typeName = "RR";
+        //                                            string[] utid = sp_vert[2].Split('^');
+        //                                            if (dtMsrDateTime == DateTime.MinValue)
+        //                                            {
+        //                                                PC00U01.TryParseExact(sp_vert[11], out dtMsrDateTime);
+        //                                            }
+        //                                            ssb.AppendLine($"{typeName}_{utid[3]}_VAL, {dtMsrDateTime:yyyy-MM-dd HH:mm:ss}, {sp_vert[3]} ");
+        //                                            ssb.AppendLine($"{typeName}_{utid[3]}_UNIT, {dtMsrDateTime:yyyy-MM-dd HH:mm:ss}, {sp_vert[4]}");
+        //                                            // 20210423, SHS, Abnormal Flag 처리 추가
+        //                                            ssb.AppendLine($"{typeName}_{utid[3]}_AFLAG, {dtMsrDateTime:yyyy-MM-dd HH:mm:ss}, {sp_vert[6]}");
+        //                                            ssb.AppendLine($"{typeName}_{utid[3]}_FLAG, {dtMsrDateTime:yyyy-MM-dd HH:mm:ss}, {sp_vert[8]}");
+        //                                            ssb.AppendLine($"{typeName}_{utid[3]}_OID, {dtMsrDateTime:yyyy-MM-dd HH:mm:ss}, {sp_vert[10]}");
+        //                                            ssb.AppendLine($"{typeName}_{utid[3]}_IID, {dtMsrDateTime:yyyy-MM-dd HH:mm:ss}, {sp_vert[13]}");
+        //                                        }
+        //                                        if (sp_vert[0].EndsWith("C"))
+        //                                        {
+        //                                            typeName = "CR";
+
+        //                                            //2021.07.08
+        //                                            //_COMMENT_VAL += sp_vert[3]+" ; ";
+
+        //                                            if(string.IsNullOrEmpty(_COMMENT_VAL))
+        //                                                _COMMENT_VAL += sp_vert[3];
+        //                                            else
+        //                                                _COMMENT_VAL += " ; " + sp_vert[3];
+
+        //                                            //ssb.AppendLine($"{typeName}_COMMENT_VAL, {dtMsrDateTime:yyyy-MM-dd HH:mm:ss}, {sp_vert[3]}");
+        //                                        }
+        //                                        // R이 들어 오지 않은 경우 측정시각을 알수 없으므로 저장하지 않음.
+        //                                        if (sp_vert[0].EndsWith("L") && dtMsrDateTime != DateTime.MinValue)
+        //                                        {
+        //                                            typeName = "HR";
+        //                                            ssb.AppendLine($"SVRTIME, {dtMsrDateTime:yyyy-MM-dd HH:mm:ss}, {DateTime.Now:yyyy-MM-dd HH:mm:ss}");
+        //                                            ssb.AppendLine($"{typeName}_SENDER_NAME_VAL, {dtMsrDateTime:yyyy-MM-dd HH:mm:ss}, {_SENDER_NAME_VAL}");
+        //                                            ssb.AppendLine($"{typeName}_VERSION_VAL, {dtMsrDateTime:yyyy-MM-dd HH:mm:ss}, {_VERSION_VAL}");
+        //                                            ssb.AppendLine($"{typeName}_MESSAGEDATETIME_VAL, {dtMsrDateTime:yyyy-MM-dd HH:mm:ss}, {_MESSAGEDATETIME_VAL}");
+
+        //                                            typeName = "PIR";
+        //                                            ssb.AppendLine($"{typeName}_LAPID_VAL, {dtMsrDateTime:yyyy-MM-dd HH:mm:ss},  {_LAPID_VAL}");                                           
+        //                                            ssb.AppendLine($"{typeName}_EXPIRES_VAL, {dtMsrDateTime:yyyy-MM-dd HH:mm:ss},  {_EXPIRES_VAL}");
+
+        //                                            typeName = "TOR";
+        //                                            ssb.AppendLine($"{typeName}_SID_VAL, {dtMsrDateTime:yyyy-MM-dd HH:mm:ss}, {_SID_VAL}");
+        //                                            ssb.AppendLine($"{typeName}_ISID_VAL, {dtMsrDateTime:yyyy-MM-dd HH:mm:ss}, {_ISID_VAL}");
+        //                                            ssb.AppendLine($"{typeName}_SD_VAL, {dtMsrDateTime:yyyy-MM-dd HH:mm:ss}, {_SD_VAL}");
+
+        //                                            if (!string.IsNullOrEmpty(_COMMENT_VAL))
+        //                                            {
+        //                                                typeName = "CR";
+        //                                                ssb.AppendLine($"{typeName}_COMMENT_VAL, {dtMsrDateTime:yyyy-MM-dd HH:mm:ss}, {_COMMENT_VAL}");
+        //                                            }
+
+        //                                            typeName = "MTR";
+        //                                            ssb.AppendLine($"{typeName}_TCODE_VAL, {dtMsrDateTime:yyyy-MM-dd HH:mm:ss}, {sp_vert[2]}");
+        //                                        }
+
+        //                                        EnQueue(MSGTYPE.MEASURE, ssb.ToString());
+        //                                        sendMsg[0] = ASCII.ACK;
+        //                                        fileLog.WriteData("ACK", "ParseMessage", $"Normal ");
+        //                                        nFrameNumber = (nFrameNumber + 1) % 8;
+        //                                    }
+        //                                    else // CheckSum Error => Send NAK;
+        //                                    {
+        //                                        sendMsg[0] = ASCII.NAK;
+        //                                        fileLog.WriteData("NAK", "ParseMessage", $"CheckSum Error");
+        //                                    }
+        //                                }
+        //                                else
+        //                                { // Bad Frame Error
+        //                                    sendMsg[0] = ASCII.NAK;
+        //                                    fileLog.WriteData("NAK", "ParseMessage", $"Bad Frame Error");
+        //                                }
+        //                                fileLog.WriteData(BitConverter.ToString(sendMsg, 0, sendMsg.Length), "ParseMessage", $"Send BYTE({sendMsg.Length})");
+        //                                state.workSocket.Send(sendMsg);
+        //                                state.sb = new StringBuilder();
+        //                                state.sb.Append(Msg.Substring(nCh + 1));
+        //                            }
+        //                            else { }
+        //                        }
+        //                        break;
+        //                    default:
+        //                        CommStatus = A1_CommState.IDLE;
+        //                        break;
+        //                }
+        //            }
+        //        }
         protected override void ParseMessage(string Msg)
         {
             // listData에 저장용 메시지를 저장함. 
@@ -114,7 +310,6 @@ namespace DataSpider.PC01.PT
                             {
                                 int iResult;
                                 string typeName = string.Empty;
-                                StringBuilder ssb = new StringBuilder();
 
                                 sendMsg = new byte[1];
 
@@ -126,6 +321,8 @@ namespace DataSpider.PC01.PT
                                         // 데이터 해석 가능
                                         string[] sp_cr = msgString.Split((char)ASCII.CR);
                                         string[] sp_vert = sp_cr[0].Substring(1).Split('|');
+
+                                        // Header Record
                                         if (sp_vert[0].EndsWith("H"))
                                         {
                                             _LAPID_VAL = string.Empty;
@@ -136,10 +333,12 @@ namespace DataSpider.PC01.PT
                                             _COMMENT_VAL = string.Empty;
                                             _TCODE_VAL = string.Empty;
                                             dtMsrDateTime = DateTime.MinValue;
+                                            msrDateTime = $"{dtMsrDateTime:yyyy-MM-dd HH:mm:ss}";
+                                            ssb.Clear();
 
                                             typeName = "HR";
                                             PC00U01.TryParseExact(sp_vert[13], out dtDateTime);
-//                                            ssb.AppendLine($"SVRTIME, {dtDateTime:yyyy-MM-dd HH:mm:ss}, {DateTime.Now:yyyy-MM-dd HH:mm:ss}");
+                                            //                                            ssb.AppendLine($"SVRTIME, {dtDateTime:yyyy-MM-dd HH:mm:ss}, {DateTime.Now:yyyy-MM-dd HH:mm:ss}");
                                             _SENDER_NAME_VAL = sp_vert[4];
                                             _VERSION_VAL = sp_vert[12];
                                             //ssb.AppendLine($"{typeName}_SENDER_NAME_VAL, {dtDateTime:yyyy-MM-dd HH:mm:ss}, {sp_vert[4]}");
@@ -147,10 +346,12 @@ namespace DataSpider.PC01.PT
                                             _MESSAGEDATETIME_VAL = sp_vert[13];
                                             //ssb.AppendLine($"{typeName}_MESSAGEDATETIME_VAL, {dtDateTime:yyyy-MM-dd HH:mm:ss}, {sp_vert[13]}");
                                         }
+
+                                        // Patient Information Record
                                         if (sp_vert[0].EndsWith("P"))
                                         {
                                             typeName = "PIR";
-                                            _LAPID_VAL=sp_vert[3];
+                                            _LAPID_VAL = sp_vert[3];
                                             if (sp_vert.Length >= 8)
                                                 _EXPIRES_VAL = sp_vert[7];
                                             else
@@ -163,6 +364,7 @@ namespace DataSpider.PC01.PT
                                             //    ssb.AppendLine($"{typeName}_EXPIRES_VAL, {dtDateTime:yyyy-MM-dd HH:mm:ss},   ");
                                         }
 
+                                        // Test Order Record
                                         if (sp_vert[0].EndsWith("O"))
                                         {
                                             typeName = "TOR";
@@ -174,7 +376,7 @@ namespace DataSpider.PC01.PT
                                             //ssb.AppendLine($"{typeName}_SD_VAL, {dtDateTime:yyyy-MM-dd HH:mm:ss}, {sp_vert[15]}");
                                         }
 
-
+                                        // Result Record
                                         if (sp_vert[0].EndsWith("R"))
                                         {
                                             typeName = "RR";
@@ -182,15 +384,18 @@ namespace DataSpider.PC01.PT
                                             if (dtMsrDateTime == DateTime.MinValue)
                                             {
                                                 PC00U01.TryParseExact(sp_vert[11], out dtMsrDateTime);
+                                                msrDateTime = $"{dtMsrDateTime:yyyy-MM-dd HH:mm:ss}";
                                             }
-                                            ssb.AppendLine($"{typeName}_{utid[3]}_VAL, {dtMsrDateTime:yyyy-MM-dd HH:mm:ss}, {sp_vert[3]} ");
-                                            ssb.AppendLine($"{typeName}_{utid[3]}_UNIT, {dtMsrDateTime:yyyy-MM-dd HH:mm:ss}, {sp_vert[4]}");
+                                            ssb.AppendLine($"{typeName}_{utid[3]}_VAL, {msrDateTime}, {sp_vert[3]} ");
+                                            ssb.AppendLine($"{typeName}_{utid[3]}_UNIT, {msrDateTime}, {sp_vert[4]}");
                                             // 20210423, SHS, Abnormal Flag 처리 추가
-                                            ssb.AppendLine($"{typeName}_{utid[3]}_AFLAG, {dtMsrDateTime:yyyy-MM-dd HH:mm:ss}, {sp_vert[6]}");
-                                            ssb.AppendLine($"{typeName}_{utid[3]}_FLAG, {dtMsrDateTime:yyyy-MM-dd HH:mm:ss}, {sp_vert[8]}");
-                                            ssb.AppendLine($"{typeName}_{utid[3]}_OID, {dtMsrDateTime:yyyy-MM-dd HH:mm:ss}, {sp_vert[10]}");
-                                            ssb.AppendLine($"{typeName}_{utid[3]}_IID, {dtMsrDateTime:yyyy-MM-dd HH:mm:ss}, {sp_vert[13]}");
+                                            ssb.AppendLine($"{typeName}_{utid[3]}_AFLAG, {msrDateTime}, {sp_vert[6]}");
+                                            ssb.AppendLine($"{typeName}_{utid[3]}_FLAG, {msrDateTime}, {sp_vert[8]}");
+                                            ssb.AppendLine($"{typeName}_{utid[3]}_OID, {msrDateTime}, {sp_vert[10]}");
+                                            ssb.AppendLine($"{typeName}_{utid[3]}_IID, {msrDateTime}, {sp_vert[13]}");
                                         }
+
+                                        // Comment Record
                                         if (sp_vert[0].EndsWith("C"))
                                         {
                                             typeName = "CR";
@@ -198,7 +403,7 @@ namespace DataSpider.PC01.PT
                                             //2021.07.08
                                             //_COMMENT_VAL += sp_vert[3]+" ; ";
 
-                                            if(string.IsNullOrEmpty(_COMMENT_VAL))
+                                            if (string.IsNullOrEmpty(_COMMENT_VAL))
                                                 _COMMENT_VAL += sp_vert[3];
                                             else
                                                 _COMMENT_VAL += " ; " + sp_vert[3];
@@ -206,34 +411,36 @@ namespace DataSpider.PC01.PT
                                             //ssb.AppendLine($"{typeName}_COMMENT_VAL, {dtMsrDateTime:yyyy-MM-dd HH:mm:ss}, {sp_vert[3]}");
                                         }
                                         // R이 들어 오지 않은 경우 측정시각을 알수 없으므로 저장하지 않음.
+                                        // Message Terminator Record
                                         if (sp_vert[0].EndsWith("L") && dtMsrDateTime != DateTime.MinValue)
                                         {
                                             typeName = "HR";
-                                            ssb.AppendLine($"SVRTIME, {dtMsrDateTime:yyyy-MM-dd HH:mm:ss}, {DateTime.Now:yyyy-MM-dd HH:mm:ss}");
-                                            ssb.AppendLine($"{typeName}_SENDER_NAME_VAL, {dtMsrDateTime:yyyy-MM-dd HH:mm:ss}, {_SENDER_NAME_VAL}");
-                                            ssb.AppendLine($"{typeName}_VERSION_VAL, {dtMsrDateTime:yyyy-MM-dd HH:mm:ss}, {_VERSION_VAL}");
-                                            ssb.AppendLine($"{typeName}_MESSAGEDATETIME_VAL, {dtMsrDateTime:yyyy-MM-dd HH:mm:ss}, {_MESSAGEDATETIME_VAL}");
+                                            ssb.AppendLine($"SVRTIME, {msrDateTime}, {DateTime.Now:yyyy-MM-dd HH:mm:ss}");
+                                            ssb.AppendLine($"{typeName}_SENDER_NAME_VAL, {msrDateTime}, {_SENDER_NAME_VAL}");
+                                            ssb.AppendLine($"{typeName}_VERSION_VAL, {msrDateTime}, {_VERSION_VAL}");
+                                            ssb.AppendLine($"{typeName}_MESSAGEDATETIME_VAL, {msrDateTime}, {_MESSAGEDATETIME_VAL}");
 
                                             typeName = "PIR";
-                                            ssb.AppendLine($"{typeName}_LAPID_VAL, {dtMsrDateTime:yyyy-MM-dd HH:mm:ss},  {_LAPID_VAL}");                                           
-                                            ssb.AppendLine($"{typeName}_EXPIRES_VAL, {dtMsrDateTime:yyyy-MM-dd HH:mm:ss},  {_EXPIRES_VAL}");
+                                            ssb.AppendLine($"{typeName}_LAPID_VAL, {msrDateTime},  {_LAPID_VAL}");
+                                            ssb.AppendLine($"{typeName}_EXPIRES_VAL, {msrDateTime},  {_EXPIRES_VAL}");
 
                                             typeName = "TOR";
-                                            ssb.AppendLine($"{typeName}_SID_VAL, {dtMsrDateTime:yyyy-MM-dd HH:mm:ss}, {_SID_VAL}");
-                                            ssb.AppendLine($"{typeName}_ISID_VAL, {dtMsrDateTime:yyyy-MM-dd HH:mm:ss}, {_ISID_VAL}");
-                                            ssb.AppendLine($"{typeName}_SD_VAL, {dtMsrDateTime:yyyy-MM-dd HH:mm:ss}, {_SD_VAL}");
+                                            ssb.AppendLine($"{typeName}_SID_VAL, {msrDateTime}, {_SID_VAL}");
+                                            ssb.AppendLine($"{typeName}_ISID_VAL, {msrDateTime}, {_ISID_VAL}");
+                                            ssb.AppendLine($"{typeName}_SD_VAL, {msrDateTime}, {_SD_VAL}");
 
                                             if (!string.IsNullOrEmpty(_COMMENT_VAL))
                                             {
                                                 typeName = "CR";
-                                                ssb.AppendLine($"{typeName}_COMMENT_VAL, {dtMsrDateTime:yyyy-MM-dd HH:mm:ss}, {_COMMENT_VAL}");
+                                                ssb.AppendLine($"{typeName}_COMMENT_VAL, {msrDateTime}, {_COMMENT_VAL}");
                                             }
 
                                             typeName = "MTR";
-                                            ssb.AppendLine($"{typeName}_TCODE_VAL, {dtMsrDateTime:yyyy-MM-dd HH:mm:ss}, {sp_vert[2]}");
+                                            ssb.AppendLine($"{typeName}_TCODE_VAL, {msrDateTime}, {sp_vert[2]}");
+
+                                            EnQueue(MSGTYPE.MEASURE, ssb.ToString());
                                         }
 
-                                        EnQueue(MSGTYPE.MEASURE, ssb.ToString());
                                         sendMsg[0] = ASCII.ACK;
                                         fileLog.WriteData("ACK", "ParseMessage", $"Normal ");
                                         nFrameNumber = (nFrameNumber + 1) % 8;
@@ -278,7 +485,7 @@ namespace DataSpider.PC01.PT
         {
             byte byteCheckSum = 0;
             bool bCheckSum = false;
-            foreach (char ch in Msg.ToCharArray())
+            foreach (char ch in Msg)
             {
                 switch ((int)ch)
                 {
@@ -304,7 +511,8 @@ namespace DataSpider.PC01.PT
         {
             string csString = string.Empty;
             int state = 0;
-            foreach (char ch in Msg.ToCharArray())
+            //foreach (char ch in Msg.ToCharArray())
+            foreach (char ch in Msg)
             {
                 switch (state)
                 {

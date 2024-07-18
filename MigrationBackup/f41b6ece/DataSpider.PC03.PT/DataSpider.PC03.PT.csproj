@@ -134,6 +134,7 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -176,14 +177,6 @@
       <Project>{8f9640e0-96f9-4723-8aec-cd681924f0f9}</Project>
       <Name>DataSpider.PC00.PT</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="NLog">
-      <Version>5.1.1</Version>
-    </PackageReference>
-    <PackageReference Include="NLog.Database">
-      <Version>5.1.1</Version>
-    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

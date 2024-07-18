@@ -123,11 +123,10 @@ namespace DataSpider.PC00.PT
                 {
                     JsonDocument document = JsonDocument.Parse(m_ExtraInfo);
                     // "MessageType" 설정이 없으면 기본 1로 하도록 되어 있어 오류는 아님
-                    if (!document.RootElement.TryGetProperty("MessageType", out JsonElement _))
+                    if (!document.RootElement.TryGetProperty("MessageType", out JsonElement je))
                     {
                         return true;
                     }
-                    JsonElement je = document.RootElement.GetProperty("MessageType");
                     foreach (JsonElement item in je.EnumerateArray())
                     {
                         // Type 이 숫자로 파싱이 안되면 오류이므로 프로그램 종료 시킴

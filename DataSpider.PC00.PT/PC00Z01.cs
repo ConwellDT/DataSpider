@@ -6,6 +6,7 @@ using System.Data;
 using System.Data.SqlClient;
 using CFW.Data;
 using System.Collections;
+using OSIsoft.AF.Time;
 
 namespace DataSpider.PC00.PT
 {
@@ -143,6 +144,25 @@ namespace DataSpider.PC00.PT
                 _strErrText = ex.ToString();
             }
             return false;
+        }
+        //                if (result = m_sqlBiz.InsertEFResult(equipName, msgType, measureStartTime, measureEndTime, eventFrameName, jsonAttributes, serverTime, afIFTime, afIFFlag, afIFRemark, ref errCode, ref errText))
+        public bool InsertEFResult(string equipName, int msgType, string measureStartTime, string measureEndTime, string eventFrameName, string jsonAttributes, string serverTime, string afIFTime, string afIFFlag, string afIFRemark, ref string _strErrCode, ref string _strErrText)
+        {
+            try
+            {
+                StringBuilder strQuery = new StringBuilder();
+                //                strQuery.Append($"EXEC InsertResult '{_strTagName}', '{_strDateTime}', '{_strValue}', '{_piIFFlag}', '{_piIFDateTime}', '{remark}'");
+                // 20230206 KWC  modify to fix UNICODE PROBLEM (α->a )
+                strQuery.Append($"EXEC InsertEventFrameResult '{equipName}', {msgType}, '{measureStartTime}', '{measureEndTime}', '{eventFrameName}', N'{jsonAttributes}', '{serverTime}', '{afIFTime}', '{afIFFlag}', '{afIFRemark}'");
+
+                bool result = CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref _strErrCode, ref _strErrText);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                _strErrText = ex.ToString();
+                return false;
+            }
         }
 
         public bool InsertResult(string _strTagName, string _strDateTime, string _strValue, string _piIFFlag, string _piIFDateTime, string remark, ref string _strErrCode, ref string _strErrText)
@@ -410,6 +430,27 @@ namespace DataSpider.PC00.PT
             }
             return result;
         }
+        public DataTable GetMeasureEventFrameResult(string strEquipType, ref string _strErrCode, ref string _strErrText)
+        {
+            DataTable result = null;
+            try
+            {
+                StringBuilder strQuery = new StringBuilder();
+
+                strQuery.Append($"EXEC GetMeasureEventFrameResult '{strEquipType}'");
+
+                DataSet ds = CFW.Data.MsSqlDbAccess.GetDataSet(strQuery.ToString(), null, CommandType.Text, ref _strErrCode, ref _strErrText);
+                if (ds != null && ds.Tables[0] != null)
+                {
+                    result = ds.Tables[0];
+                }
+            }
+            catch (Exception ex)
+            {
+                _strErrText = ex.ToString();
+            }
+            return result;
+        }
         public DataTable GetMeasureResultForPIConnection(ref string _strErrCode, ref string _strErrText)
         {
             DataTable result = null;
@@ -494,6 +535,22 @@ namespace DataSpider.PC00.PT
             }
         }
 
+        public bool UpdateMeasureEventFrameResult(int hiSeq, string strFlag, int if_count, string errMsg, ref string _strErrCode, ref string _strErrText)
+        {
+            try
+            {
+                StringBuilder strQuery = new StringBuilder();
+                strQuery.Append($"EXEC UpdateMeasureEventFrameResult {hiSeq},'{strFlag}', {if_count}, '{errMsg}' ");
+
+                bool result = CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref _strErrCode, ref _strErrText);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                _strErrText = ex.ToString();
+                return false;
+            }
+        }
         /// <summary>
         /// 장비별 상태를 확인하기 위해 MA_EQUIPMENT_CD.ProgDateTime 에 현재시간을 업데이트
         /// UpdateEquipmentProgDateTime  : 이전 상태와 다르면 상태태그를 RESULT 테이블에 인서트 (PI 저장 처리), EQUIPMENT, FAILOVER 테이블 업데이트, DISCONNECT 상태이면 DISCONNECT COUNT 증가 FAILOVER 테이블 업데이트
