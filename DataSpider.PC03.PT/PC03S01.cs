@@ -28,8 +28,6 @@ namespace DataSpider.PC03.PT
 {
     public class MyClsLog : FileLog
     {
-
-
         public MyClsLog(string fileName = "") : base(fileName)
         {
         }
@@ -38,7 +36,6 @@ namespace DataSpider.PC03.PT
             base.WriteLog(p_strLogMsg, p_strStat, logFileName);
         }
     }
-
 
     public class PC03S01 : PC03B01
     {
@@ -57,8 +54,6 @@ namespace DataSpider.PC03.PT
 
         private static AFDatabase _AFDatabase = null;
         private static object objLock = new object();
-
-        private AFElementTemplate _EFTemplate = null;
 
         public IF_STATUS ThreadStatus
         {
@@ -95,25 +90,8 @@ namespace DataSpider.PC03.PT
             user = m_clsPIInfo.strPI_USER;
             password = m_clsPIInfo.strPI_PWD;
 
-            //if (!string.IsNullOrWhiteSpace(user) && !string.IsNullOrWhiteSpace(password))
-            //{
-            //    try
-            //    {
-            //        NetworkCredential credential = new NetworkCredential(user, password);
-            //        _PISystem = (new PISystems()[serverName]);
-            //        _PISystem.Connect(credential);
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        mOwner.listViewMsg(m_strEName, $"PI System Connection ({serverName}) - {ex.ToString()} ", false, m_nCurNo, 1, true, PC00D01.MSGTINF);
-            //        m_Logger.WriteLog($"PI System Connection ({serverName}) - {ex.ToString()} ", PC00D01.MSGTINF, m_strEName);
-            //    }
-            //}
-            //_AFDB = _PIStstem.Databases[dbName];
             try
             {
-                //_PIserver = PIServer.FindPIServer(_PIStstem, serverName);
-                //_PIserver?.Connect();
                 if (!CheckPIConnection(out string piErrText))
                 {
                     mOwner.listViewMsg(m_strEName, $"PI Server Connection Error ({piErrText})", false, m_nCurNo, 1, true, PC00D01.MSGTERR);
@@ -334,9 +312,9 @@ namespace DataSpider.PC03.PT
                             List<EventFrameAttributeData> listAttributes = JsonSerializer.Deserialize<List<EventFrameAttributeData>>(attributes);
                             List<string> listAttributeNames = listAttributes.Select(x => x.Name).ToList();
 
-                            _EFTemplate = GetEventFrameTemplate(_AFDatabase, $"{m_strETypeName}_{msgType:00}", listAttributeNames);
+                            AFElementTemplate efTemplate = GetEventFrameTemplate(_AFDatabase, m_strETypeName, msgType, listAttributeNames);
 
-                            var (afIFFlag, afIFRemark) = SaveEventFrame(eventFrameName, _EFTemplate, startTime, endTime, listAttributes);
+                            var (afIFFlag, afIFRemark) = SaveEventFrame(eventFrameName, efTemplate, startTime, endTime, listAttributes);
 
                             if (i % 10 == 9) Thread.Sleep(1);
 
@@ -407,47 +385,6 @@ namespace DataSpider.PC03.PT
             return ("Y", string.Empty);
         }
 
-        //private (string afIFFlag, string afIFRemark) SaveEventFrame(string equipName, string eventFrameName, AFElementTemplate eventFrameTemplate, string startTime, string endTime, List<EventFrameAttributeData> listAttributes, List<string> listAttributeNames)
-        //{
-        //    try
-        //    {
-        //        // AF 연결 
-        //        if (!CheckAFDatabase(out string errString))
-        //        {
-        //            mOwner.listViewMsg(m_strEName, $"{errString}", true, m_nCurNo, 3, true, PC00D01.MSGTERR);
-        //            return ("E", errString);
-        //        }
-
-        //        // EventFrame Template 얻기 (없으면 생성, Attribute 가 다르면 새로 생성 -> 저장할 Attribute 가 Template Attribute 에 없으면 해당 Attribute 만 추가? )
-        //        // PC03 에서는 TAG 정보가 없어서.. 저장할 Attribute 기준으로 ???
-        //        AFElementTemplate efTemplate = GetEventFrameTemplate(_AFDatabase, eventFrameTemplateName, listAttributeNames);
-        //        if (efTemplate == null)
-        //        {
-        //            mOwner.listViewMsg(m_strEName, $"Can not get EventFrame Template ({eventFrameTemplateName}).", true, m_nCurNo, 3, true, PC00D01.MSGTERR);
-        //            return ("E", $"Can not get EventFrame Template ({eventFrameTemplateName}).");
-        //        }
-
-        //        // EF 만들기
-        //        AFEventFrame ef = null;
-        //        ef = new AFEventFrame(_AFDatabase, eventFrameName, efTemplate);
-        //        ef.SetStartTime(startTime);
-        //        ef.SetEndTime(endTime);
-
-        //        //listUpdatedEF.ForEach(tag => ef.Attributes[tag.EFAttributeName]?.SetValue(new AFValue(tag.Value)));
-        //        //foreach (var attrib in listAttributes)
-        //        //{
-        //        //    ef.Attributes[attrib.Name]?.SetValue(new AFValue(attrib.Value));
-        //        //}
-        //        listAttributes.ForEach(attrib => ef.Attributes[attrib.Name]?.SetValue(new AFValue(attrib.Value)));
-        //        ef.CheckIn();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        mOwner.listViewMsg(m_strEName, $"Exception in SaveEventFrame - ({ex})", true, m_nCurNo, 3, true, PC00D01.MSGTERR);
-        //        return ("E", $"Exception in SaveEventFrame - ({ex})");
-        //    }
-        //    return ("Y", string.Empty);
-        //}
         private bool CheckAFDatabase(out string errText)
         {
             errText = string.Empty;
@@ -514,31 +451,37 @@ namespace DataSpider.PC03.PT
         }
 
         // PC03 은 무조건 기본 템플릿으로 가능한지 확인 후 안될 경우 다른 템플릿으로 확인 후 다 안되면 새로 생성
-        private AFElementTemplate GetEventFrameTemplate(AFDatabase afDB, string efTemplateBaseName, List<string> listAttributeNames)
+        private AFElementTemplate GetEventFrameTemplate(AFDatabase afDB, string equipTypeName, int msgType, List<string> listAttributeNames)
         {
-            if (afDB == null) throw new ArgumentNullException(nameof(afDB));
+            AFElementTemplate efTemp = null;
+
+            //if (afDB == null) throw new ArgumentNullException(nameof(afDB));
+            string efTemplateName = m_sqlBiz.ReadSTCommon(equipTypeName, "EventFrameTemplateName");
 
             // 최초 afDB 로드 후 다른 인스턴스에서 변경된 내용은 refresh 해야 한다
             afDB.Refresh();
 
-            // 기본템플릿 조회
-            AFElementTemplate efTemp = GetEventFrameTemplate(afDB, efTemplateBaseName);
-
-            if (efTemp != null)
+            if (!string.IsNullOrWhiteSpace(efTemplateName))
             {
-                List<string> omittedAttributeNames = efTemp.AttributeTemplates.GetOmittedAttributes(listAttributeNames);
-                // 기본 Template 의 Attribute 에 저장할 데이터의 Attribute 가 다 있으면 사용 
-                if (omittedAttributeNames.Count == 0)
+                // 설정된 템플릿 조회
+                efTemp = GetEventFrameTemplate(afDB, efTemplateName);
+
+                if (efTemp != null)
                 {
-                    return efTemp;
+                    List<string> omittedAttributeNames = efTemp.AttributeTemplates.GetOmittedAttributes(listAttributeNames);
+                    // Template 의 Attribute 에 저장할 데이터의 Attribute 가 다 있으면 사용 
+                    if (omittedAttributeNames.Count == 0)
+                    {
+                        return efTemp;
+                    }
+                    mOwner.listViewMsg(m_strEName, $"EventFrameTemplate({efTemplateName}) is not matches. Omitted attribute names : {string.Join(", ", omittedAttributeNames)}.", true, m_nCurNo, 3, true, PC00D01.MSGTINF);
                 }
-                mOwner.listViewMsg(m_strEName, $"Base EventFrameTemplate({efTemplateBaseName}) is not matches. Omitted attribute names : {string.Join(", ", omittedAttributeNames)}.", true, m_nCurNo, 3, true, PC00D01.MSGTINF);
             }
 
             // 기본 템플릿 이름으로 시작하는 템플릿 모두 조회
             //AFElementTemplates eventFrameTemplate = afDB.ElementTemplates?.Where(x => x.InstanceType.Equals(typeof(AFEventFrame)) && x.Name.StartsWith(efTemplateBaseName)).OrderBy(x => x.Name);
             IEnumerable<AFElementTemplate> eventFrameTemplates = from temp in afDB.ElementTemplates 
-                                                                 where temp.InstanceType.Equals(typeof(AFEventFrame)) && temp.Name.StartsWith(efTemplateBaseName) && !temp.Name.Equals(efTemplateBaseName)
+                                                                 where temp.InstanceType.Equals(typeof(AFEventFrame)) && temp.Name.StartsWith($"{equipTypeName}_{msgType:00}") && !temp.Name.Equals(efTemplateName)
                                                                  orderby temp.Name descending select temp;
 
             efTemp = eventFrameTemplates.FirstOrDefault(x => x.AttributeTemplates.GetOmittedAttributes(listAttributeNames).Count == 0);
@@ -546,63 +489,14 @@ namespace DataSpider.PC03.PT
             // 저장가능한 템플릿이 없으면 새로 생성
             if (efTemp == null)
             {
-                string eventFrameTemplateName = $"{efTemplateBaseName}_{DateTime.Now:yyyyMMddHHmmssfff}";
-                mOwner.listViewMsg(m_strEName, $"There are no matched EventFrameTemplate. Create new EventFrameTemplate Name : {eventFrameTemplateName}, AttributeTemplates : {string.Join(", ", listAttributeNames)}.", true, m_nCurNo, 3, true, PC00D01.MSGTINF);
+                string eventFrameTemplateName = $"{equipTypeName}_{msgType:00}_{DateTime.Now:yyyyMMddHHmmssfff}";
+                mOwner.listViewMsg(m_strEName, $"There are no matched EventFrameTemplates. Create new EventFrameTemplate Name : {eventFrameTemplateName}, AttributeTemplates : {string.Join(", ", listAttributeNames)}.", true, m_nCurNo, 3, true, PC00D01.MSGTINF);
                 efTemp = CreateEventFrameTemplate(afDB, eventFrameTemplateName, listAttributeNames);
             }
             return efTemp;
             //return efTemp ?? CreateEventFrameTemplate(afDB, $"{efTemplateBaseName}_{DateTime.Now:yyyyMMddHHmmssfff}", listAttributeNames);
         }
 
-        //private AFElementTemplate GetEventFrameTemplate(AFDatabase database, string eventFrameTemplateName, List<string> listAttributeNames)
-        //{
-        //    if (database == null) throw new ArgumentNullException(nameof(database));
-
-        //    AFElementTemplate eventFrameTemplate = GetEventFrameTemplate(database, eventFrameTemplateName);
-
-        //    // EventFrame Template 가 없으면 새로 만든다 (EFAttributeName 이 설정된 태그에 대해서만)
-        //    if (eventFrameTemplate == null)
-        //    {
-        //        mOwner.listViewMsg(m_strEName, $"{eventFrameTemplateName} EventFrame Template A is not exists. Create New EventFrame Template A.", true, m_nCurNo, 3, true, PC00D01.MSGTINF);
-        //        eventFrameTemplate = CreateEventFrameTemplate(database, eventFrameTemplateName, listAttributeNames);
-        //    }
-
-        //    // EventFrame Template A 에 저장하려는 Attribute Template 이 하나라도 없으면 ?
-        //    List<string> omittedAttribute = listAttributeNames.FindAll(x => !eventFrameTemplate.AttributeTemplates.Contains(x));
-        //    if (omittedAttribute.Count > 0)
-        //    {
-        //        mOwner.listViewMsg(m_strEName, $"Attribute {string.Join(", ", omittedAttribute)} is not in {eventFrameTemplateName} EventFrame Template A. Inquiry EventFrame Template B.", true, m_nCurNo, 3, true, PC00D01.MSGTINF);
-
-        //        // EventFrame Template B 를 찾는다
-        //        string eventFrameTemplateNameB = $"{eventFrameTemplateName.Substring(0, eventFrameTemplateName.Length -1)}B";
-        //        eventFrameTemplate = GetEventFrameTemplate(database, eventFrameTemplateNameB);
-                
-        //        // EventFrame Template B 가 없으면 새로 만든다
-        //        if (eventFrameTemplate == null)
-        //        {
-        //            mOwner.listViewMsg(m_strEName, $"{eventFrameTemplateNameB} EventFrame Template B is not exists. Create New EventFrame Template B.", true, m_nCurNo, 3, true, PC00D01.MSGTINF);
-        //            eventFrameTemplate = CreateEventFrameTemplate(database, eventFrameTemplateNameB, listAttributeNames);
-        //        }
-        //        // 조회된 EventFrame Template B 의 Attribute Template 체크
-        //        else
-        //        {
-        //            omittedAttribute = listAttributeNames.FindAll(x => !eventFrameTemplate.AttributeTemplates.Contains(x));
-        //            if (omittedAttribute.Count > 0)
-        //            {
-        //                // EventFrame Template B 에 저장하려는 Attribute Template 이 하나라도 없으면 ? 기존것 Renmae 후 새로 생성
-
-        //                mOwner.listViewMsg(m_strEName, $"Attribute {string.Join(", ", omittedAttribute)} is not in {eventFrameTemplateNameB} EventFrame Template B.", true, m_nCurNo, 3, true, PC00D01.MSGTINF);
-        //                eventFrameTemplate.Name = $"{eventFrameTemplateNameB}_{DateTime.Now:yyyyMMddHHmmssfff}";
-        //                eventFrameTemplate.CheckIn();
-        //                mOwner.listViewMsg(m_strEName, $"Rename EventFrame Template B ({eventFrameTemplateNameB} -> {eventFrameTemplate.Name}). Create New EventFrame Template B.", true, m_nCurNo, 3, true, PC00D01.MSGTINF);
-        //                eventFrameTemplate = CreateEventFrameTemplate(database, eventFrameTemplateNameB, listAttributeNames);
-        //            }
-        //        }
-        //        // 
-        //    }
-
-        //    return eventFrameTemplate;
-        //}
 
         private AFElementTemplate CreateEventFrameTemplate(AFDatabase database, string eventFrameTemplateName, List<string> listAttributeNames)
         {
@@ -666,142 +560,6 @@ namespace DataSpider.PC03.PT
             //mOwner.listViewMsg(m_strEName, PC00D01.OFF, true, m_nCurNo, 1, false, PC00D01.MSGTINF);
             
         }
-
-        /*
-        protected override void ThreadJob()
-        {
-            string errCode = string.Empty;
-            string errText = string.Empty;
-            string pierrText = string.Empty;
-            bool result = true;
-
-            string CurDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-
-            mOwner.listViewMsg(m_strEName, PC00D01.ON, true, m_nCurNo, 1, false, PC00D01.MSGTINF);
-            m_Logger.WriteLog(PC00D01.ON, PC00D01.MSGTINF, m_strEName);
-            mOwner.listViewMsg(m_strEName, "Thread Started", false, m_nCurNo, 1, true, PC00D01.MSGTINF);
-            m_Logger.WriteLog("Thread Started", PC00D01.MSGTINF, m_strEName);
-
-            while (!bTerminal)
-            {
-                try
-                {
-                    if (!CheckPIConnection(out string piErrText))
-                    {
-                        mOwner.listViewMsg(m_strEName, $"PI Server Connection Error ({piErrText})", false, m_nCurNo, 1, true, PC00D01.MSGTERR);
-                        m_Logger.WriteLog("PI Server Connection Error", PC00D01.MSGTERR, m_strEName);
-                        ThreadStatus = IF_STATUS.Disconnected;
-                        Thread.Sleep(1000);
-                        continue;
-                    }
-
-                    DataTable dtResult = m_sqlBiz.GetMeasureResult(m_strEType, ref errCode, ref errText);
-
-                    if (dtResult != null)
-                    {
-                        if (dtResult.Rows.Count > 0)
-                        {
-                            for (int i = 0; i < dtResult.Rows.Count; i++)
-                            {
-                                int strSeq = int.Parse(dtResult.Rows[i]["HI_SEQ"].ToString());
-                                int ifCount = 0; int.TryParse(dtResult.Rows[i]["IF_COUNT"].ToString(), out ifCount);
-                                string pointName = dtResult.Rows[i]["PI_TAG_NM"].ToString();
-                                object pointValue = dtResult.Rows[i]["MEASURE_VALUE"].ToString();
-
-                                //DateTime mTime = DateTime.Parse(dtResult.Rows[i]["MEASURE_DATE"].ToString("yyyyMMddHHmmss.fff"));
-
-                                DateTime mTime = Convert.ToDateTime(dtResult.Rows[i]["MEASURE_DATE"]);
-
-                                string tagName = dtResult.Rows[i]["TAG_NM"].ToString();
-
-                                if (pointName.Trim() != "")
-                                {
-                                    //PI서버 업로드
-                                    bool rVal = SetPIValue(pointName, pointValue, mTime, ref pierrText);
-
-                                    if (i % 10 == 9) Thread.Sleep(1);
-
-                                    //데이타 전송 플래그 업데이트
-                                    string strFlag = "Y";
-                                    string errMsg = "";
-
-                                    if (rVal == false)
-                                    {
-                                        strFlag = "E";
-                                        errMsg = pierrText.Replace("\\", "").Replace("\r\n", "").Replace("'", "");
-                                    }
-
-                                    // 20230406, SHS, SetPIValue 결과에 따른 로그 추가, 에러 로그 추가
-                                    if (rVal)
-                                    {
-                                        mOwner.listViewMsg(m_strEName, string.Format(PC00D01.SucceededtoPI, pointName, pointValue), true, m_nCurNo, 3, true, PC00D01.MSGTINF);
-                                        m_Logger.WriteLog(string.Format(PC00D01.SucceededtoPI, pointName, pointValue), PC00D01.MSGTERR, m_strEName);
-                                        ThreadStatus = IF_STATUS.Normal;
-                                    }
-                                    else
-                                    {
-                                        mOwner.listViewMsg(m_strEName, string.Format(PC00D01.FailedtoPI, $"{errMsg} - {pointName}", pointValue), true, m_nCurNo, 3, true, PC00D01.MSGTERR);
-                                        m_Logger.WriteLog(string.Format(PC00D01.FailedtoPI, $"{errMsg} - {pointName}", pointValue), PC00D01.MSGTERR, m_strEName);
-                                        ThreadStatus = IF_STATUS.InternalError;
-                                    }
-
-
-                                    result = m_sqlBiz.UpdateMeasureResult(strSeq, strFlag, ifCount, errMsg, ref errCode, ref errText);
-
-                                    // 20230406, SHS, SetPIValue 결과 DB UPDATE 결과 따른 로그 내용 변경, 성공이면 로그는 필요 없음
-                                    //if (result)
-                                    //{
-                                    //    //mOwner.listViewMsg(m_strEName, string.Format(PC00D01.SucceededtoPI, pointName, pointValue), true, m_nCurNo, 3, true, PC00D01.MSGTINF);
-                                    //    //m_Logger.WriteLog(string.Format(PC00D01.SucceededtoPI, pointName, pointValue), PC00D01.MSGTERR, m_strEName);
-                                    //    //ThreadStatus = IF_STATUS.Normal;
-                                    //}
-                                    if (!result)
-                                    {
-                                        mOwner.listViewMsg(m_strEName, string.Format("UpdateMeasureResult Failed.", $"{errText} - {pointName}", pointValue), true, m_nCurNo, 3, true, PC00D01.MSGTERR);
-                                        m_Logger.WriteLog(string.Format("UpdateMeasureResult Failed.", $"{errText} - {pointName}", pointValue), PC00D01.MSGTERR, m_strEName);
-                                        ThreadStatus = IF_STATUS.InternalError;
-                                    }
-
-                                }
-                                else
-                                {
-                                    string errMsg = "매핑된 PI 태그명이 없습니다.";
-                                    mOwner.listViewMsg(m_strEName, string.Format(PC00D01.FailedtoPI, $"{errMsg} - {tagName}", pointValue), true, m_nCurNo, 3, true, PC00D01.MSGTERR);
-                                    m_Logger.WriteLog(string.Format(PC00D01.FailedtoPI, $"{errMsg} - {tagName}", pointValue), PC00D01.MSGTERR, m_strEName);
-                                    ThreadStatus = IF_STATUS.NoData;
-                                }
-                            }
-                        }
-                        ThreadStatus = IF_STATUS.Normal;
-                    }
-                    else
-                    {
-                        ThreadStatus = IF_STATUS.InternalError;
-                    }
-
-                }
-                catch (Exception ex)
-                {
-                    mOwner.listViewMsg(m_strEName, ex.ToString(), true, m_nCurNo, 3, true, PC00D01.MSGTERR);
-                    m_Logger.WriteLog($"ThreadJob - {ex.ToString()} ", PC00D01.MSGTERR, m_strEName);
-                    ThreadStatus = IF_STATUS.InternalError;
-                }
-                finally
-                {
-                    //_PIserver?.Disconnect();
-
-                    //if (m_strPgmPara.Trim() == "M")
-                    //    m_Thd.Join(5000);
-                    //else
-                    //m_Thd.Join(1000)
-                }
-                Thread.Sleep(1000);
-            }
-            m_Logger.WriteLog(PC00D01.OFF, PC00D01.MSGTINF, m_strEName);
-            //mOwner.listViewMsg(m_strEName, PC00D01.OFF, true, m_nCurNo, 1, false, PC00D01.MSGTINF);
-            
-        }
-        */
 
         public bool SetPIValue(string pointName, object pointValue, DateTime mTime, ref string _strErrText)
         {

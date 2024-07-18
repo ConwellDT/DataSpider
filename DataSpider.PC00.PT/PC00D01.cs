@@ -222,7 +222,7 @@ namespace DataSpider.PC00.PT
 
         public List<EventFrameAttributeData> Attributes { get; set; } = new List<EventFrameAttributeData>();
 
-        public string TemplateName { get; set; }
+        //public string TemplateName { get; set; }
         public string IFTime { get; set; }
         /// <summary>
         /// PI EventFrame I/F Flag
