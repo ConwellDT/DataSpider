@@ -123,6 +123,8 @@ namespace DataSpider.UserMonitor
                 }
                 comboBox_UseFlag.SelectedIndex = 0;
                 textBox_EquipName.Enabled = true;
+                comboBox_PiPointSave.SelectedIndex = 0;
+                comboBox_EventFrameSave.SelectedIndex = 0;
             }
             else
             {
@@ -147,6 +149,8 @@ namespace DataSpider.UserMonitor
 
                         comboBox_UseFlag.SelectedIndex = 0;
                         textBox_EquipName.Enabled = true;
+                        comboBox_PiPointSave.SelectedIndex = 0;
+                        comboBox_EventFrameSave.SelectedIndex = 0;
                     }
                 }
                 DataTable dtEquipment = sqlBiz.GetEquipmentInfo("", "", true, ref strErrCode, ref strErrText);
@@ -166,7 +170,7 @@ namespace DataSpider.UserMonitor
                 dataGridTagInfo.Rows.Clear();
                 textBox_ConnectionInfo.Text = drEquipment["CONNECTION_INFO"].ToString();
 
-                textBox_ConfigInfo.Text = drEquipment["CONFIG_INFO"].ToString();
+                textBox_ExtraInfo.Text = drEquipment["CONFIG_INFO"].ToString();
 
                 if (EditModeCopy == false)
                 {
@@ -286,6 +290,8 @@ namespace DataSpider.UserMonitor
                 }
 
                 comboBox_UseFlag.Text = drEquipment["USE_FLAG"].ToString().ToUpper();
+                comboBox_PiPointSave.Text = drEquipment["UPDATE_PIPOINT_FLAG"].ToString().ToUpper();
+                comboBox_EventFrameSave.Text = drEquipment["UPDATE_EVENTFRAME_FLAG"].ToString().ToUpper();
 
                 if (EditModeCopy == false)
                 {
@@ -339,7 +345,7 @@ namespace DataSpider.UserMonitor
                 if (AddMode == true || EditModeCopy == true) EQSaveMode = true;
 
                 if (sqlBiz.InsertUpdateEquipmentInfo(EQSaveMode, textBox_EquipName.Text.Trim(), textBox_Description.Text.Trim(), comboBox_EquipType.SelectedValue.ToString(), comboBox_InterfaceType.SelectedValue.ToString(),
-                    textBox_ConnectionInfo.Text, textBox_ExtraInfo.Text, comboBox_ServerName.SelectedValue.ToString(), comboBox_UseFlag.Text, textBox_ConfigInfo.Text, comboBox_ZoneType.SelectedValue.ToString(), ref strErrCode, ref strErrText))
+                    textBox_ConnectionInfo.Text, textBox_ExtraInfo.Text, comboBox_ServerName.SelectedValue.ToString(), comboBox_UseFlag.Text, textBox_ExtraInfo.Text, comboBox_ZoneType.SelectedValue.ToString(), comboBox_PiPointSave.Text, comboBox_EventFrameSave.Text, ref strErrCode, ref strErrText))
                 {
                     // Save Trag Info
                     int nTagSaveFailCount = 0;

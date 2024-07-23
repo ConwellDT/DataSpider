@@ -873,6 +873,41 @@ namespace DataSpider.PC00.PT
                 return false;
             }
         }
+
+        public bool InsertUpdateEquipmentInfo(bool add, string equipName, string description, string equipType, string interfaceType, string connectionInfo, string extraInfo, string serverName, string useFlag, string configInfo, string zoneType, string piPointFlag, string efFlag, ref string _strErrCode, ref string _strErrText)
+        {
+            try
+            {
+                StringBuilder strQuery = new StringBuilder();
+                if (add)
+                {
+                    strQuery.Append($"EXEC InsertEquipmentInfo ");// '{equipName}', '{description}', '{equipType}', '{connectionInfo}', '{extraInfo}', '{serverName}', '{useFalg}', '{UserAuthentication.UserID}'");
+                }
+                else
+                {
+                    strQuery.Append($"EXEC UpdateEquipmentInfo ");// '{equipName}', '{description}', '{equipType}', '{connectionInfo}', '{extraInfo}', '{serverName}', '{useFalg}', '{UserAuthentication.UserID}'");
+                }
+                strQuery.Append($" '{equipName}', '{description}', '{equipType}', '{interfaceType}', '{connectionInfo}', '{extraInfo}', '{serverName}', '{useFlag}', '{UserAuthentication.UserID}', '{configInfo}', '{zoneType}', '{piPointFlag}', '{efFlag}'");
+                bool result = CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref _strErrCode, ref _strErrText);
+
+                if (result)
+                {
+                    int serverId = GetServerId(serverName);
+                    if (serverId == -1) serverId = 0;
+                    strQuery.Clear();
+
+                    strQuery.Append($"EXEC InsertUpdateFailoverInfo '{equipName}', {serverId}");
+                    result = CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref _strErrCode, ref _strErrText);
+                }
+                return result;
+            }
+            catch (Exception ex)
+            {
+                _strErrText = ex.ToString();
+                return false;
+            }
+        }
+
         public bool InsertUpdateTagInfo(bool add, string tagName, string msgType, string equipName, string description, string piTagName, string valuePosition, string datePosition, string timePosition, string itemName, ref string _strErrCode, ref string _strErrText)
         {
             try

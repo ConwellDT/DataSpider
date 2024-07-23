@@ -459,17 +459,6 @@ namespace DataSpider.PC00.PT
         /// </summary>
         public string EFAttributeName { get; set; } = string.Empty;
         // InsertResult 프로시져에서 I/F Flag 가 D 인 경우에도 hi_measure_result_BK 테이블 저장하도록 수정 필요
-        /// <summary>
-        /// AF EventFrame I/F Flag
-        ///  초기 : N |
-        ///  AF 저장 Disable : D
-        ///  AF 저장 성공 : Y |
-        ///  AF 저장 실패 : E |
-        ///  AF 저장 실패 후 재시도 10회 실패 : F |
-        ///  AF 저장 실패 내용 삭제 : Z |
-        ///  N, E 에 대해서만 PI 저장 시도
-        /// </summary>
-        public string EFIFFlag { get; internal set; } = "N";
 
         /// <summary>
         /// 태그 값이 정상적으로 파싱 처리된 경우
