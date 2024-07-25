@@ -94,7 +94,8 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="ViCellBluOpcUaModelDesign">
+    <Reference Include="ViCellBluOpcUaModelDesign, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Assembly\ViCellBluOpcUaModelDesign.dll</HintPath>
     </Reference>
   </ItemGroup>
