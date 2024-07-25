@@ -185,7 +185,7 @@ namespace DataSpider.UserMonitor
 
             dataGridView_Main.DataSource = null;
 
-            DataTable dtProgramStatus = sqlBiz.GetCurrentTagValue(equipType.Trim(), equipName.Trim(), zoneType.Trim(), ref strErrCode, ref strErrText);
+            DataTable dtProgramStatus = sqlBiz.GetCurrentEventFrameData(equipType.Trim(), equipName.Trim(), zoneType.Trim(), ref strErrCode, ref strErrText);
             if (dtProgramStatus == null || dtProgramStatus.Rows.Count < 1)
             {
                 return;

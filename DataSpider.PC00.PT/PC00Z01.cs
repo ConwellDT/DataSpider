@@ -712,7 +712,27 @@ namespace DataSpider.PC00.PT
             }
             return result;
         }
-        
+        public DataTable GetCurrentEventFrameData(string equipType, string equipName, string zoneType, ref string _strErrCode, ref string _strErrText)
+        {
+            DataTable result = null;
+            try
+            {
+                StringBuilder strQuery = new StringBuilder();
+                strQuery.Append($"EXEC GetCurrentEventFrameData '{equipType}', '{equipName}','{zoneType}'");
+
+                DataSet ds = CFW.Data.MsSqlDbAccess.GetDataSet(strQuery.ToString(), null, CommandType.Text, ref _strErrCode, ref _strErrText);
+                if (ds != null && ds.Tables[0] != null)
+                {
+                    result = ds.Tables[0];
+                }
+            }
+            catch (Exception ex)
+            {
+                _strErrText = ex.ToString();
+            }
+            return result;
+        }
+
         public DataTable GetTagValueHistory(string tagName, int periodDays, ref string _strErrCode, ref string _strErrText)
         {
             DataTable result = null;
