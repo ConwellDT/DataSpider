@@ -332,7 +332,7 @@ namespace DataSpider.PC03.PT
                                 ThreadStatus = IF_STATUS.InternalError;
                             }
 
-                            result = m_sqlBiz.UpdateMeasureEventFrameResult(strSeq, afIFFlag, ifCount, afIFRemark, ref errCode, ref errText);
+                            result = m_sqlBiz.UpdateMeasureEventFrameResult(strSeq, afIFFlag, ifCount, afIFRemark, efTemplate.Name, ref errCode, ref errText);
 
                             if (!result)
                             {

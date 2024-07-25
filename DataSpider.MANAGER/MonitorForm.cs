@@ -41,6 +41,8 @@ namespace DataSpider
         string strSvrName = Environment.MachineName;
         string strSvrCode = String.Empty;
 
+        private EventFrameMonitor eventFrameMonitor = null;
+
         public MonitorForm()
         {
             InitializeComponent();
@@ -354,6 +356,14 @@ namespace DataSpider
                 pTreeForm.treeViewEQStatus.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(currentTagValueMonitor.treeView_AfterSelect);
                 pDispView.OnTabControlSelectedIndexChanged += new TabFromCtrl.OnTabControlSelectedIndexChangedDelegate(currentTagValueMonitor.TabControl_SelectedIndexChanged);
                 OnUserLoginChanged += new OnUserLogInChangedDelegate(currentTagValueMonitor.UserLogInChanged);
+
+                //efMonitor
+                eventFrameMonitor = new EventFrameMonitor();
+                eventFrameMonitor.Text = "EventFrame Monitor";
+                pDispView.AddFormToTab(eventFrameMonitor);
+                pTreeForm.treeViewEQStatus.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(eventFrameMonitor.treeView_AfterSelect);
+                pDispView.OnTabControlSelectedIndexChanged += new TabFromCtrl.OnTabControlSelectedIndexChangedDelegate(eventFrameMonitor.TabControl_SelectedIndexChanged);
+                OnUserLoginChanged += new OnUserLogInChangedDelegate(eventFrameMonitor.UserLogInChanged);
 
                 PIMonitor = new PIAlarmMonitor();
                 PIMonitor.Text = "PI Alarm Monitor";

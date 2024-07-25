@@ -146,7 +146,7 @@ namespace DataSpider.UserMonitor
 
         }
 
-        public string ZoneType
+        public override string ZoneType
         {
             get
             {
@@ -276,7 +276,7 @@ namespace DataSpider.UserMonitor
             }
         }
 
-        public string ZoneType
+        public override string ZoneType
         {
             get
             {

@@ -146,14 +146,14 @@ namespace DataSpider.PC00.PT
             return false;
         }
         //                if (result = m_sqlBiz.InsertEFResult(equipName, msgType, measureStartTime, measureEndTime, eventFrameName, jsonAttributes, serverTime, afIFTime, afIFFlag, afIFRemark, ref errCode, ref errText))
-        public bool InsertEFResult(string equipName, int msgType, string measureStartTime, string measureEndTime, string eventFrameName, string jsonAttributes, string serverTime, string afIFTime, string afIFFlag, string afIFRemark, ref string _strErrCode, ref string _strErrText)
+        public bool InsertEFResult(string equipName, int msgType, string measureStartTime, string measureEndTime, string eventFrameName, string jsonAttributes, string serverTime, string templateName, string afIFTime, string afIFFlag, string afIFRemark, ref string _strErrCode, ref string _strErrText)
         {
             try
             {
                 StringBuilder strQuery = new StringBuilder();
                 //                strQuery.Append($"EXEC InsertResult '{_strTagName}', '{_strDateTime}', '{_strValue}', '{_piIFFlag}', '{_piIFDateTime}', '{remark}'");
                 // 20230206 KWC  modify to fix UNICODE PROBLEM (α->a )
-                strQuery.Append($"EXEC InsertEventFrameResult '{equipName}', {msgType}, '{measureStartTime}', '{measureEndTime}', '{eventFrameName}', N'{jsonAttributes}', '{serverTime}', '{afIFTime}', '{afIFFlag}', '{afIFRemark}'");
+                strQuery.Append($"EXEC InsertEventFrameResult '{equipName}', {msgType}, '{measureStartTime}', '{measureEndTime}', '{eventFrameName}', N'{jsonAttributes}', '{serverTime}', '{templateName}', '{afIFTime}', '{afIFFlag}', '{afIFRemark}'");
 
                 bool result = CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref _strErrCode, ref _strErrText);
                 return result;
@@ -535,12 +535,12 @@ namespace DataSpider.PC00.PT
             }
         }
 
-        public bool UpdateMeasureEventFrameResult(int hiSeq, string strFlag, int if_count, string errMsg, ref string _strErrCode, ref string _strErrText)
+        public bool UpdateMeasureEventFrameResult(int hiSeq, string strFlag, int if_count, string errMsg, string templateName, ref string _strErrCode, ref string _strErrText)
         {
             try
             {
                 StringBuilder strQuery = new StringBuilder();
-                strQuery.Append($"EXEC UpdateMeasureEventFrameResult {hiSeq},'{strFlag}', {if_count}, '{errMsg}' ");
+                strQuery.Append($"EXEC UpdateMeasureEventFrameResult {hiSeq},'{strFlag}', {if_count}, '{errMsg}', '{templateName}' ");
 
                 bool result = CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref _strErrCode, ref _strErrText);
                 return result;
@@ -908,7 +908,7 @@ namespace DataSpider.PC00.PT
             }
         }
 
-        public bool InsertUpdateTagInfo(bool add, string tagName, string msgType, string equipName, string description, string piTagName, string valuePosition, string datePosition, string timePosition, string itemName, ref string _strErrCode, ref string _strErrText)
+        public bool InsertUpdateTagInfo(bool add, string tagName, string msgType, string equipName, string description, string piTagName, string efAttributegName, string valuePosition, string datePosition, string timePosition, string itemName, ref string _strErrCode, ref string _strErrText)
         {
             try
             {
@@ -921,7 +921,7 @@ namespace DataSpider.PC00.PT
                 {
                     strQuery.Append($"EXEC UpdateTagInfo ");// '{tagName}', '{msgType}', '{equipName}', '{description}', '{piTagName}', '{valuePosition}', '{datePosition}', '{timePosition}', '{itemName}'");
                 }
-                strQuery.Append($" '{tagName}', '{msgType}', '{equipName}', '{description}', '{piTagName}', '{valuePosition}', '{datePosition}', '{timePosition}', '{itemName}', '{UserAuthentication.UserID}'");
+                strQuery.Append($" '{tagName}', '{msgType}', '{equipName}', '{description}', '{piTagName}', '{efAttributegName}', '{valuePosition}', '{datePosition}', '{timePosition}', '{itemName}', '{UserAuthentication.UserID}'");
                 bool result = CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref _strErrCode, ref _strErrText);
                 return result;
             }

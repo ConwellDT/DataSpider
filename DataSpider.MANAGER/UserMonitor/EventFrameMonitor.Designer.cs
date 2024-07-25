@@ -1,7 +1,7 @@
 ﻿
 namespace DataSpider.UserMonitor
 {
-    partial class CurrentTagValueMonitorDGV
+    partial class EventFrameMonitor
     {
         /// <summary>
         /// 필수 디자이너 변수입니다.
@@ -30,7 +30,7 @@ namespace DataSpider.UserMonitor
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CurrentTagValueMonitorDGV));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EventFrameMonitor));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.imageList2 = new System.Windows.Forms.ImageList(this.components);
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
@@ -439,7 +439,7 @@ namespace DataSpider.UserMonitor
             this.textBox_RefreshInterval.Text = "10";
             this.textBox_RefreshInterval.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // CurrentTagValueMonitorDGV
+            // EventFrameMonitor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.ClientSize = new System.Drawing.Size(1164, 834);
@@ -448,10 +448,10 @@ namespace DataSpider.UserMonitor
             this.Font = new System.Drawing.Font("맑은 고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.Name = "CurrentTagValueMonitorDGV";
+            this.Name = "EventFrameMonitor";
             this.Text = "Monitor";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.EquipmentMonitor_FormClosed);
-            this.Load += new System.EventHandler(this.CurrentTagValueMonitor_Load);
+            this.Load += new System.EventHandler(this.Form_Load);
             this.contextMenuStrip1.ResumeLayout(false);
             this.panel8.ResumeLayout(false);
             this.panel7.ResumeLayout(false);

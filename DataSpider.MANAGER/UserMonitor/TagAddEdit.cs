@@ -82,6 +82,7 @@ namespace DataSpider.UserMonitor
                 textBox_DatePosition.Text = dtTag.Rows[0]["DATE_POSITION"].ToString();
                 textBox_TimePosition.Text = dtTag.Rows[0]["TIME_POSITION"].ToString();
                 textBox_ItemName.Text = dtTag.Rows[0]["OPCITEM_NM"].ToString();
+                textBox_EventFrameAttributeName.Text = dtTag.Rows[0]["EF_ATTRIBUTE_NM"].ToString();
                 textBox_TagName.Enabled = false;
             }
         }
@@ -98,7 +99,7 @@ namespace DataSpider.UserMonitor
                 string strErrCode = string.Empty;
                 string strErrText = string.Empty;
                 if (sqlBiz.InsertUpdateTagInfo(AddMode, textBox_TagName.Text.Trim(), textBox_MessageType.Text.Trim(), comboBox_Equipment.SelectedValue.ToString(), textBox_Description.Text.Trim(),
-                    textBox_PITagName.Text.Trim(), textBox_ValuePosition.Text.Trim(), textBox_DatePosition.Text.Trim(), textBox_TimePosition.Text.Trim(), textBox_ItemName.Text.Trim(), ref strErrCode, ref strErrText))
+                    textBox_PITagName.Text.Trim(), textBox_EventFrameAttributeName.Text.Trim() , textBox_ValuePosition.Text.Trim(), textBox_DatePosition.Text.Trim(), textBox_TimePosition.Text.Trim(), textBox_ItemName.Text.Trim(), ref strErrCode, ref strErrText))
                 {
                     MessageBox.Show($"저장 되었습니다.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     DialogResult = DialogResult.OK;

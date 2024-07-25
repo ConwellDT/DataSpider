@@ -29,5 +29,10 @@ namespace LibraryWH.FormCtrl
 
         }
 
+        public virtual void Find(string find, bool top, bool caseSense)
+        {
+
+        }
+
     }
 }

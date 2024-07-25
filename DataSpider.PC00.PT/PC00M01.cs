@@ -895,6 +895,7 @@ namespace DataSpider.PC00.PT
 
                 efData.IFFlag = efResult.afIFFlag;
                 efData.IFRemark = efResult.afIFRemark;
+                efData.TemplateName = efTemplate.Name;
 
                 // EventFrame 저장 성공일때만 EventFrame 정보 TAG 저장, 실패 시 PC03 에서 저장 시 처리
                 if (efResult.afIFFlag.Equals("Y"))
@@ -916,7 +917,7 @@ namespace DataSpider.PC00.PT
                                 tag.LastMeasureDateTime = tag.TimeStamp;
                                 tag.LastMeasureValue = tag.Value;
                             }
-                            SavePI(new List<TAG> { tag });
+                            SavePI(new List<TAG> { tag }, true);
                             SaveDBHistory(new List<TAG> { tag });
                         }
                         else
@@ -940,7 +941,7 @@ namespace DataSpider.PC00.PT
                                 tag.LastMeasureDateTime = tag.TimeStamp;
                                 tag.LastMeasureValue = tag.Value;
                             }
-                            SavePI(new List<TAG> { tag });
+                            SavePI(new List<TAG> { tag }, true);
                             SaveDBHistory(new List<TAG> { tag });
                         }
                         else
@@ -957,7 +958,7 @@ namespace DataSpider.PC00.PT
                 //string jsonAttributes = JsonSerializer.Serialize(efData.Attributes);
 
                 // listUpdated 내용을 EventFrame 형식대로 DB 저장 (조회조건에 필요하거나 조회시 표시되어야 할 내용을 컬럼으로)
-                bool dbResult = SaveDBEFHistory(equipName, msgType, eventFrameName, measureTime, measureTime, efData.GetSerializedAttributes(), serverTime, efData.IFTime, efData.IFFlag, efData.IFRemark);
+                bool dbResult = SaveDBEFHistory(equipName, msgType, eventFrameName, measureTime, measureTime, efData.GetSerializedAttributes(), serverTime, efTemplate.Name, efData.IFTime, efData.IFFlag, efData.IFRemark);
                 if (!dbResult)
                 {
                     //SaveFileEFHistory(equipName, msgType, dtAFIF.ToString("yyyy-MM-dd HH:mm:ss.fff"), measureTime, measureTime, eventFrameName, jsonAttributes, dtAFIF.ToString("yyyy-MM-dd HH:mm:ss.fff"), efResult.afIFFlag, efResult.afIFRemark);
@@ -971,6 +972,13 @@ namespace DataSpider.PC00.PT
         {
             try
             {
+                // updateEventFrame is disabled
+                if (!updateEventFrame)
+                {
+                    listViewMsg.UpdateMsg($"EventFrame Save is disabled.", false, true, true, PC00D01.MSGTINF);
+                    return ("D", "EventFrame Save is disabled.");
+                }
+
                 // AF 연결 
                 if (!CheckAFDatabase(out string errString))
                 {
@@ -1022,7 +1030,7 @@ namespace DataSpider.PC00.PT
 
         // HI_EVENTFRAME_RESULT TABLE
         // (ID), EQUIP_NM, MSG_TYPE, EQUIP_IF_TIME, MEASURE_START_TIME, MEASURE_END_TIME, EVENTFRAME_NAME, EVENTFRAME_DATA, AF_IF_TIME, AF_IF_FLAG, AF_IF_REMARK, (REG_ID), (REG_TIME)
-        private bool SaveDBEFHistory(string equipName, int msgType, string eventFrameName, string measureStartTime, string measureEndTime, string jsonAttributes, string serverTime, string afIFTime, string afIFFlag, string afIFRemark)
+        private bool SaveDBEFHistory(string equipName, int msgType, string eventFrameName, string measureStartTime, string measureEndTime, string jsonAttributes, string serverTime, string templateName, string afIFTime, string afIFFlag, string afIFRemark)
         {
             bool result = false;
             string errCode = string.Empty;
@@ -1030,7 +1038,7 @@ namespace DataSpider.PC00.PT
 
             try
             {
-                if (result = m_sqlBiz.InsertEFResult(equipName, msgType, measureStartTime, measureEndTime, eventFrameName, jsonAttributes, serverTime, afIFTime, afIFFlag, afIFRemark, ref errCode, ref errText))
+                if (result = m_sqlBiz.InsertEFResult(equipName, msgType, measureStartTime, measureEndTime, eventFrameName, jsonAttributes, serverTime, templateName, afIFTime, afIFFlag, afIFRemark, ref errCode, ref errText))
                 {
                     listViewMsg.UpdateMsg($"DB inserted. EventFrame ({eventFrameName})", false, true, true, PC00D01.MSGTINF);
                 }
@@ -1244,9 +1252,9 @@ namespace DataSpider.PC00.PT
                     listResult.ForEach(tag =>
                     {
                         tag.PIIFFlag = "D";
-                        tag.Remark = "UpdatePIPoint is disabled.";
+                        tag.Remark = "PIPoint Save is disabled.";
                     });
-                    listViewMsg.UpdateMsg($"UpdatePIPoint is disabled.", false, true, true, PC00D01.MSGTINF);
+                    listViewMsg.UpdateMsg($"PIPoint Save is disabled.", false, true, true, PC00D01.MSGTINF);
                     return false;
                 }
 

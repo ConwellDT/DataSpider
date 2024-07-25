@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LibraryWH.FormCtrl;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,15 +11,15 @@ using System.Windows.Forms;
 
 namespace DataSpider.UserMonitor
 {
-    public partial class Form_Find : Form
+    public partial class Form_Find : LibraryWH.FormCtrl.UserForm
     {
-        private CurrentTagValueMonitorDGV owner = null;
+        private UserForm owner = null;
         private bool fin = false;
         public Form_Find()
         {
             InitializeComponent();
         }
-        public Form_Find(CurrentTagValueMonitorDGV _owner)
+        public Form_Find(UserForm _owner)
         {
             InitializeComponent();
             owner = _owner;

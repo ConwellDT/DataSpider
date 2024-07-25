@@ -371,6 +371,7 @@ namespace DataSpider.UserMonitor
                                                             textBox_EquipName.Text.Trim(),
                                                             row.Cells["Description"].Value?.ToString().Trim(),
                                                             row.Cells["PI Tag Name"].Value?.ToString().Trim(),
+                                                            row.Cells["EventFrame Attribute Name"].Value?.ToString().Trim(),
                                                             row.Cells["Value Position"].Value?.ToString().Trim(),
                                                             row.Cells["Date Position"].Value?.ToString().Trim(),
                                                             row.Cells["Time Position"].Value?.ToString().Trim(),

@@ -160,7 +160,7 @@ namespace DataSpider.PC02.PT
 
                         EventFrameData efData = JsonSerializer.Deserialize<EventFrameData>(lineData);
 
-                        result = m_sqlBiz.InsertEFResult(efData.EquipmentName, efData.MessageType, efData.StartTime, efData.EndTime, efData.Name, efData.GetSerializedAttributes(), efData.ServerTime, efData.IFTime, efData.IFFlag, efData.IFRemark, ref errCode, ref errText);
+                        result = m_sqlBiz.InsertEFResult(efData.EquipmentName, efData.MessageType, efData.StartTime, efData.EndTime, efData.Name, efData.GetSerializedAttributes(), efData.ServerTime, efData.TemplateName, efData.IFTime, efData.IFFlag, efData.IFRemark, ref errCode, ref errText);
                         if (!result)
                         {
                             m_Owner.listViewMsg(m_Name, string.Format(PC00D01.FailedDBStore, $"{errText} - {fi.Name}"), false, m_nCurNo, 6, true, PC00D01.MSGTERR);

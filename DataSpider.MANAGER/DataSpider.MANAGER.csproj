@@ -138,6 +138,12 @@
     <Compile Include="UserMonitor\ConfigTagGroup.Designer.cs">
       <DependentUpon>ConfigTagGroup.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserMonitor\EventFrameMonitor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserMonitor\EventFrameMonitor.Designer.cs">
+      <DependentUpon>EventFrameMonitor.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserMonitor\CurrentTagValueMonitorDGV.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -210,18 +216,6 @@
     <Compile Include="UserMonitor\EquipmentAddEdit.Designer.cs">
       <DependentUpon>EquipmentAddEdit.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserMonitor\TAGValueHistoryPopup.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UserMonitor\TAGValueHistoryPopup.Designer.cs">
-      <DependentUpon>TAGValueHistoryPopup.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UserMonitor\CurrentTagValueMonitor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UserMonitor\CurrentTagValueMonitor.Designer.cs">
-      <DependentUpon>CurrentTagValueMonitor.cs</DependentUpon>
-    </Compile>
     <Compile Include="UserMonitor\EquipmentMonitor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -266,6 +260,10 @@
     <EmbeddedResource Include="UserMonitor\ConfigTagGroup.resx">
       <DependentUpon>ConfigTagGroup.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserMonitor\EventFrameMonitor.resx">
+      <DependentUpon>EventFrameMonitor.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserMonitor\CurrentTagValueMonitorDGV.resx">
       <DependentUpon>CurrentTagValueMonitorDGV.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -303,12 +301,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserMonitor\EquipmentAddEdit.resx">
       <DependentUpon>EquipmentAddEdit.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserMonitor\TAGValueHistoryPopup.resx">
-      <DependentUpon>TAGValueHistoryPopup.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserMonitor\CurrentTagValueMonitor.resx">
-      <DependentUpon>CurrentTagValueMonitor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserMonitor\EquipmentMonitor.resx">
       <DependentUpon>EquipmentMonitor.cs</DependentUpon>

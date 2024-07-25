@@ -14,7 +14,7 @@ using System.Reflection;
 
 namespace DataSpider.UserMonitor
 {
-    public partial class CurrentTagValueMonitorDGV : LibraryWH.FormCtrl.UserForm
+    public partial class EventFrameMonitor : LibraryWH.FormCtrl.UserForm
     {
         public delegate bool OnRefreshTreeDataDelegate();
         public event OnRefreshTreeDataDelegate OnRefreshTreeData = null;
@@ -50,11 +50,11 @@ namespace DataSpider.UserMonitor
         private string DescriptionFilter = "";
         private bool autoRefresheChecked = true;
 
-        public CurrentTagValueMonitorDGV()
+        public EventFrameMonitor()
         {
             InitializeComponent();
         }
-        private void CurrentTagValueMonitor_Load(object sender, EventArgs e)
+        private void Form_Load(object sender, EventArgs e)
         {
             buttonFilter.Visible = false;
             threadDataRefresh = new Thread(new ThreadStart(ThreadJob));
@@ -643,6 +643,7 @@ namespace DataSpider.UserMonitor
             //selectedIndex = listView_Main.SelectedIndices.Count > 0 ? listView_Main.SelectedIndices[0] : 0;
             GetProgramStatus();
         }
+
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
 
