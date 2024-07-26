@@ -503,6 +503,11 @@ namespace DataSpider.UserMonitor
             string selectedEquipName = string.Empty;
             string selectedZoneType = string.Empty;
 
+            // 20240726, SHS, 트리에서 ZONE 노드 클릭 시 ZONE TYPE 얻는 부분 누락되어 추가. 
+            if (nodeTag is Zone)
+            {
+                selectedZoneType = (nodeTag as Zone).TypeCode;
+            }
             if (nodeTag is EqType)
             {
                 selectedEquipType = nodeTag.Name;

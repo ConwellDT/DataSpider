@@ -418,26 +418,17 @@ namespace DataSpider.UserMonitor
                     }
                     string strErrCode = string.Empty;
                     string strErrText = string.Empty;
-                    //if (string.IsNullOrWhiteSpace(equipType) && string.IsNullOrWhiteSpace(equipName))
+
+                    //if( string.IsNullOrEmpty(equipType) )
                     //{
-                    //    return;
+                    //    DataTable dtEquiptype = sqlBiz.GetCommonCode("EQUIP_TYPE", ref strErrCode, ref strErrText);
+                    //    equipType = dtEquiptype.Rows[0]["CODE_NM"].ToString();
                     //}
-
-                    //
-                    // 2022. 3. 14 : Han. Ilho
-                    //      Add tag group property
-                    //
-
-                    if( string.IsNullOrEmpty(equipType) )
-                    {
-                        DataTable dtEquiptype = sqlBiz.GetCommonCode("EQUIP_TYPE", ref strErrCode, ref strErrText);
-                        equipType = dtEquiptype.Rows[0]["CODE_NM"].ToString();
-                    }
-                    if (equipTypeCur != equipType)
-                    {
-                        UpdatecomboBoxTagGroupSel();
-                        equipTypeCur = equipType;
-                    }
+                    //if (equipTypeCur != equipType)
+                    //{
+                    //    UpdatecomboBoxTagGroupSel();
+                    //    equipTypeCur = equipType;
+                    //}
                     /////////////////////////////////
                     if( nDBModeCurrent == 1)
                     {
@@ -503,6 +494,10 @@ namespace DataSpider.UserMonitor
             string selectedEquipName = string.Empty;
             string selectedZoneType = string.Empty;
 
+            if (nodeTag is Zone)
+            {
+                selectedZoneType = (nodeTag as Zone).TypeCode;
+            }
             if (nodeTag is EqType)
             {
                 selectedEquipType = nodeTag.Name;
