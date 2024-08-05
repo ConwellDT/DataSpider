@@ -54,6 +54,7 @@ namespace DataSpider
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.panel1 = new System.Windows.Forms.Panel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel_DB_Status = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel_PI_Status = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel_PIPGM_Status = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel_DBPGM_P_Status = new System.Windows.Forms.ToolStripStatusLabel();
@@ -65,7 +66,6 @@ namespace DataSpider
             this.toolStripStatusLabel_MainDBSourceName = new System.Windows.Forms.ToolStripStatusLabel();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.imageList_EquipState = new System.Windows.Forms.ImageList(this.components);
-            this.toolStripStatusLabel_DB_Status = new System.Windows.Forms.ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -91,7 +91,7 @@ namespace DataSpider
             // 
             this.splitContainer1.Panel2.Controls.Add(this.pDispView);
             this.splitContainer1.Size = new System.Drawing.Size(1144, 539);
-            this.splitContainer1.SplitterDistance = 301;
+            this.splitContainer1.SplitterDistance = 250;
             this.splitContainer1.TabIndex = 2;
             // 
             // pPanelView
@@ -101,7 +101,7 @@ namespace DataSpider
             this.pPanelView.Location = new System.Drawing.Point(0, 0);
             this.pPanelView.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.pPanelView.Name = "pPanelView";
-            this.pPanelView.Size = new System.Drawing.Size(301, 539);
+            this.pPanelView.Size = new System.Drawing.Size(250, 539);
             this.pPanelView.TabIndex = 1;
             // 
             // pDispView
@@ -111,7 +111,7 @@ namespace DataSpider
             this.pDispView.Location = new System.Drawing.Point(0, 0);
             this.pDispView.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.pDispView.Name = "pDispView";
-            this.pDispView.Size = new System.Drawing.Size(839, 539);
+            this.pDispView.Size = new System.Drawing.Size(890, 539);
             this.pDispView.TabIndex = 0;
             // 
             // menuStrip1
@@ -311,6 +311,15 @@ namespace DataSpider
             this.statusStrip1.TabIndex = 8;
             this.statusStrip1.Text = "statusStrip1";
             // 
+            // toolStripStatusLabel_DB_Status
+            // 
+            this.toolStripStatusLabel_DB_Status.AutoSize = false;
+            this.toolStripStatusLabel_DB_Status.AutoToolTip = true;
+            this.toolStripStatusLabel_DB_Status.Image = global::DataSpider.Properties.Resources.UnKnown;
+            this.toolStripStatusLabel_DB_Status.Name = "toolStripStatusLabel_DB_Status";
+            this.toolStripStatusLabel_DB_Status.Size = new System.Drawing.Size(100, 26);
+            this.toolStripStatusLabel_DB_Status.Text = "DB Status";
+            // 
             // toolStripStatusLabel_PI_Status
             // 
             this.toolStripStatusLabel_PI_Status.AutoSize = false;
@@ -370,7 +379,7 @@ namespace DataSpider
             // toolStripStatusLabel4
             // 
             this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            this.toolStripStatusLabel4.Size = new System.Drawing.Size(145, 26);
+            this.toolStripStatusLabel4.Size = new System.Drawing.Size(176, 26);
             this.toolStripStatusLabel4.Spring = true;
             this.toolStripStatusLabel4.Text = "  ";
             this.toolStripStatusLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -407,15 +416,6 @@ namespace DataSpider
             this.imageList_EquipState.Images.SetKeyName(5, "InternalError");
             this.imageList_EquipState.Images.SetKeyName(6, "Unknown");
             this.imageList_EquipState.Images.SetKeyName(7, "NetworkError");
-            // 
-            // toolStripStatusLabel_DB_Status
-            // 
-            this.toolStripStatusLabel_DB_Status.AutoSize = false;
-            this.toolStripStatusLabel_DB_Status.AutoToolTip = true;
-            this.toolStripStatusLabel_DB_Status.Image = global::DataSpider.Properties.Resources.UnKnown;
-            this.toolStripStatusLabel_DB_Status.Name = "toolStripStatusLabel_DB_Status";
-            this.toolStripStatusLabel_DB_Status.Size = new System.Drawing.Size(100, 26);
-            this.toolStripStatusLabel_DB_Status.Text = "DB Status";
             // 
             // MonitorForm
             // 

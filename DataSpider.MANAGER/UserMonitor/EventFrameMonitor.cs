@@ -11,6 +11,9 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using System.Reflection;
+using System.Text.Json.Serialization;
+using System.Text.Json;
+using System.Xml.Linq;
 
 namespace DataSpider.UserMonitor
 {
@@ -56,20 +59,32 @@ namespace DataSpider.UserMonitor
         }
         private void Form_Load(object sender, EventArgs e)
         {
-            buttonFilter.Visible = false;
+            //buttonFilter.Visible = false;
             threadDataRefresh = new Thread(new ThreadStart(ThreadJob));
             threadDataRefresh.Start();
 
             UserLogInChanged();
             dataGridView_Main.RowTemplate.MinimumHeight = 30;
             dataGridView_Main.DoubleBuffered(true);
-            dataGridView_Main.CellMouseDoubleClick += DataGridView_Main_CellMouseDoubleClick;
+            //dataGridView_Main.CellMouseDoubleClick += DataGridView_Main_CellMouseDoubleClick;
+            dataGridView_Main.CellMouseClick += DataGridView_Main_CellMouseClick;
             // None 로 해야 사용자 컬럼 사이즈 조절이 가능함. 
             // 바인딩 후 AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells); 처리
             //            dataGridView_Main.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
             dataGridView_Main.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
             dataGridView_Main.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
             dataGridView_Main.AllowUserToResizeRows = dataGridView_Main.AllowUserToResizeColumns = true;
+
+            dataGridView_Attributes.DoubleBuffered(true);
+            dataGridView_Attributes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView_Attributes.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
+            dataGridView_Attributes.AllowUserToResizeRows = dataGridView_Attributes.AllowUserToResizeColumns = true;
+
+            dateTimePicker_StartTime.Value = DateTime.Parse("00:00:00");
+            dateTimePicker_EndTime.Value = DateTime.Parse("23:59:59");
+            dateTimePicker_Start.Value = dateTimePicker_End.Value = DateTime.Now;
+
+            label_MeasureTime.Visible = panel_FromTo.Visible = dateTimePicker_Start.Visible = dateTimePicker_StartTime.Visible = dateTimePicker_End.Visible = dateTimePicker_EndTime.Visible = button_InquireEFDataHistory.Visible = false;
 
             //
             // 2022. 3. 14 : Han, Ilho
@@ -97,33 +112,52 @@ namespace DataSpider.UserMonitor
             logviewProgram = ConfigHelper.GetAppSetting("LogViewProgram").Trim();
         }
 
-        private void DataGridView_Main_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        private void DataGridView_Main_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (e.RowIndex < 0 || e.RowIndex >= dataGridView_Main.Rows.Count)// || nDBModeCurrent==0)
+            if (e.RowIndex < 0 || e.RowIndex >= dataGridView_Main.Rows.Count)
             {
                 return;
             }
-            TAGValueHistoryPopupDGV form = new TAGValueHistoryPopupDGV(radioButtonCurTag.Checked ? dataGridView_Main.Rows[e.RowIndex].Cells[3].Value.ToString() : dataGridView_Main.Rows[e.RowIndex].Cells[1].Value.ToString());
-            form.ShowDialog(this);
+
+            dataGridView_Attributes.Rows.Clear();
+            label_SelectedEventFrameName.Text = "";
+
+            DataView dv = dataGridView_Main.DataSource as DataView;
+            label_SelectedEventFrameName.Text = dv[e.RowIndex]["EventFrame Name"].ToString();
+            string attributes = dv[e.RowIndex]["Attributes"].ToString();
+
+            JsonDocument document = JsonDocument.Parse(attributes);
+            JsonElement root = document.RootElement;
+            if (root.ValueKind != JsonValueKind.Array || root.GetArrayLength() == 0) return;
+
+            //DataTable dt = dataGridView_Attributes.Columns[].DataSource as DataTable;
+
+            foreach (JsonElement jElement in root.EnumerateArray())
+            {
+                //dt.Rows.Add(jElement.GetProperty("Name").GetString(), jElement.GetProperty("Value").GetString());
+                int row = dataGridView_Attributes.Rows.Add();
+                dataGridView_Attributes.Rows[row].Cells["AttributeName"].Value = jElement.GetProperty("Name").GetString();
+                dataGridView_Attributes.Rows[row].Cells["AttributeValue"].Value = jElement.GetProperty("Value").GetString();
+            }
         }
 
         public void UserLogInChanged()
         {
-            switch (UserAuthentication.UserLevel)
-            {
-                case UserLevel.Admin:
-                case UserLevel.Manager:
-                    foreach (ToolStripItem item in contextMenuStrip1.Items)
-                    {
-                        item.Visible = true;
-                    }
-                    contextMenuStrip1.Items["editToolStripMenuItem"].Text = "Edit";
-                    break;
-                default:
-                    contextMenuStrip1.Items["addToolStripMenuItem"].Visible = contextMenuStrip1.Items["deleteToolStripMenuItem"].Visible = false;
-                    contextMenuStrip1.Items["editToolStripMenuItem"].Text = "Tag Info";
-                    break;
-            }
+            //switch (UserAuthentication.UserLevel)
+            //{
+            //    case UserLevel.Admin:
+            //    case UserLevel.Manager:
+            //        foreach (ToolStripItem item in contextMenuStrip1.Items)
+            //        {
+            //            item.Visible = true;
+            //        }
+            //        contextMenuStrip1.Items["editToolStripMenuItem"].Text = "Edit";
+            //        break;
+            //    default:
+            //        contextMenuStrip1.Items["addToolStripMenuItem"].Visible = contextMenuStrip1.Items["deleteToolStripMenuItem"].Visible = false;
+            //        contextMenuStrip1.Items["editToolStripMenuItem"].Text = "Tag Info";
+            //        break;
+            //}
         }
 
         public void TabControl_SelectedIndexChanged(LibraryWH.FormCtrl.UserForm ctrl)
@@ -175,7 +209,7 @@ namespace DataSpider.UserMonitor
             }
         }
 
-        private void GetTagCurrentValues()
+        private void GetCurrentValues()
         {
             string strErrCode = string.Empty;
             string strErrText = string.Empty;
@@ -192,81 +226,6 @@ namespace DataSpider.UserMonitor
             }
 
             DataView dvProgramStatus = dtProgramStatus.DefaultView;
-
-            String strFilterStr = String.Empty;
-
-            if (String.IsNullOrEmpty(TagNameFilter) == false)
-            {
-                strFilterStr = $" [TAG Name] LIKE '%{TagNameFilter}%'";
-            }
-            else
-            {
-                String selGrpName = comboBoxTagGroupSel.SelectedValue.ToString();
-
-                if (selGrpName != "All")
-                {
-                    DataTable dtGropTagNames = sqlBiz.GetTagGroupInfo(selGrpName, ref strErrCode, ref strErrText);
-                    
-                    if (strErrCode == null || strErrCode == string.Empty)
-                    {
-                        if (String.IsNullOrEmpty(equipName.Trim()) == false)
-                        {
-                            for (int nT = 0; nT < dtGropTagNames.Rows.Count; nT++)
-                            {
-                                if (nT == 0)
-                                {
-                                    strFilterStr = $"([TAG Name] = '{equipName.Trim()}_{dtGropTagNames.Rows[nT]["TAG_NM"].ToString()}'";
-                                }
-                                else
-                                {
-                                    strFilterStr += $" OR [TAG Name] = '{equipName.Trim()}_{dtGropTagNames.Rows[nT]["TAG_NM"].ToString()}'";
-                                }
-                            }
-                        }
-                        else
-                        {
-                            for (int nT = 0; nT < dtGropTagNames.Rows.Count; nT++)
-                            {
-                                if (nT == 0)
-                                {
-                                    strFilterStr = $"([TAG Name] LIKE '%{equipName.Trim()}_{dtGropTagNames.Rows[nT]["TAG_NM"].ToString()}%'";
-                                }
-                                else
-                                {
-                                    strFilterStr += $" OR [TAG Name] LIKE '%{equipName.Trim()}_{dtGropTagNames.Rows[nT]["TAG_NM"].ToString()}%'";
-                                }
-                            }
-                        }
-
-                        if (String.IsNullOrEmpty(strFilterStr) == false) strFilterStr += ")";
-                    }
-                }
-            }
-            // 20220420, SHS, 최근값 조회하는데 시간이 왜 필요 ?
-            //if (DateTimeFilterCurMin > DateTime.MinValue && DateTimeFilterCurMax > DateTime.MinValue && DateTimeFilterCurMin < DateTimeFilterCurMax)
-            //{
-            //    if (String.IsNullOrEmpty(strFileterStr) == false) strFileterStr += " AND ";
-            //    if (DateTimeFilterCurMin == DateTimeFilterCurMax)
-            //    {
-            //        strFileterStr += $"([Measure DateTime] = '{DateTimeFilterCurMin.ToString("yyyy-MM-dd HH:mm:ss.fff")}') ";
-            //    }
-            //    else
-            //    {
-            //        strFileterStr += $"([Measure DateTime] > '{DateTimeFilterCurMin.ToString("yyyy-MM-dd HH:mm:ss.fff")}' AND [Measure DateTime] < '{DateTimeFilterCurMax.ToString("yyyy-MM-dd HH:mm:ss.fff")}') ";
-            //    }
-            //}
-            // 20230426, SHS, DescriptionFilter 가 없을때 AND 넣지 않기
-            //if (String.IsNullOrEmpty(strFilterStr) == false) strFilterStr += " AND ";
-            // 20230106, SHS, DescriptionFilter 값이 NULL or WS 일때 LIKE 문 때문에 제외되는 현상으로 인해 수정, strFileterStr -> strFilterStr 오타 수정
-            //strFileterStr += $"[Description] LIKE '%{DescriptionFilter}%'  ";
-            if (!string.IsNullOrWhiteSpace(DescriptionFilter))
-            {
-                if (string.IsNullOrWhiteSpace(strFilterStr) == false) strFilterStr += " AND ";
-                strFilterStr += $"[Description] LIKE '%{DescriptionFilter}%'  ";
-            }
-            dvProgramStatus.RowFilter = strFilterStr;
-
-            dvProgramStatus.Sort = "Measure DateTime DESC";
             
             dataGridView_Main.DataSource = dvProgramStatus;
 
@@ -287,115 +246,43 @@ namespace DataSpider.UserMonitor
             }
         }
 
-        private void GetTagHistoryValues()
+        private void GetHistoryValues()
         {
-            if (String.IsNullOrEmpty(equipName.Trim()) == true)
-            {
-                dataGridView_Main.DataSource = null;//.Rows.Clear();
-                //MessageBox.Show("Equipment is not selected", "History Data Display", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-
             string strErrCode = string.Empty;
             string strErrText = string.Empty;
 
             int nHoriScrollOffset = dataGridView_Main.HorizontalScrollingOffset;
             int nRowIndex = dataGridView_Main.FirstDisplayedScrollingRowIndex;
-            dataGridView_Main.DataSource = null;//.Rows.Clear();
 
-            DataTable dtHistoryData = null;
+            dataGridView_Main.DataSource = null;
 
-            String strFileterStr = String.Empty;
-
-            String selGrpName = comboBoxTagGroupSel.SelectedValue.ToString();
-
-            DateTime minDate;
-            DateTime maxDate;
-            if (DateTimeFilterHistMin > DateTime.MinValue && DateTimeFilterHistMax > DateTime.MinValue && (DateTimeFilterHistMax > DateTimeFilterHistMin))
+            DataTable dtProgramStatus = sqlBiz.GetEventFrameDataHistory($"{dateTimePicker_Start.Value:yyyy-MM-dd} {dateTimePicker_StartTime.Value:HH:mm:ss}.000", $"{dateTimePicker_End.Value:yyyy-MM-dd} {dateTimePicker_EndTime.Value:HH:mm:ss}.000",  equipType.Trim(), equipName.Trim(), zoneType.Trim(), ref strErrCode, ref strErrText);
+            if (dtProgramStatus == null || dtProgramStatus.Rows.Count < 1)
             {
-                minDate = DateTimeFilterHistMin;
-                maxDate = DateTimeFilterHistMax;
-            }
-            else
-            {
-                minDate = DateTime.Now.AddDays(-1);
-                maxDate = DateTime.Now;
+                return;
             }
 
-            if (selGrpName != "All")
-            {
-                DataTable dtGropTagNames = sqlBiz.GetTagGroupInfo(selGrpName, ref strErrCode, ref strErrText);
+            DataView dvProgramStatus = dtProgramStatus.DefaultView;
 
-                if (strErrCode == null || strErrCode == string.Empty)
+            dataGridView_Main.DataSource = dvProgramStatus;
+
+            if (dvProgramStatus.Count > 0)
+            {
+                dataGridView_Main.HorizontalScrollingOffset = nHoriScrollOffset > 0 ? nHoriScrollOffset : 0;
+
+                if (dvProgramStatus.Count > nRowIndex)
                 {
-                    for (int nT = 0; nT < dtGropTagNames.Rows.Count; nT++)
-                    {
-                        String strTagName = equipName.Trim() + "_" + dtGropTagNames.Rows[nT]["TAG_NM"].ToString();
-
-
-                        DataTable dtTagHistory = sqlBiz.GetAllTagHistoryValue(strTagName, minDate.ToString("yyyy-MM-dd HH:mm:ss.fff"), maxDate.ToString("yyyy-MM-dd HH:mm:ss.fff"), ref strErrCode, ref strErrText);
-
-                        if (dtTagHistory != null && dtTagHistory.Rows.Count > 0)
-                        {
-                            if (dtHistoryData == null)
-                            {
-                                dtHistoryData = dtTagHistory.Clone();
-                            }
-                            else
-                            {
-                                dtHistoryData.Merge(dtTagHistory);
-                            }
-                        }
-
-                        if (dtTagHistory != null) dtTagHistory.Dispose();
-                    }
+                    dataGridView_Main.FirstDisplayedScrollingRowIndex = nRowIndex > 0 ? nRowIndex : 0;
                 }
-            }
-            else
-            {
-                DataTable dtTagValueHistory = sqlBiz.GetTagValueHistoryByEquip(equipName, minDate.ToString("yyyy-MM-dd HH:mm:ss.fff"), maxDate.ToString("yyyy-MM-dd HH:mm:ss.fff"), ref strErrCode, ref strErrText);
-
-                if (strErrCode == null || strErrCode == string.Empty)
+                else
                 {
-                    if (dtTagValueHistory != null && dtTagValueHistory.Rows.Count > 0)
-                    {
-                        dtHistoryData = dtTagValueHistory;
-                    }
-
-                    if (dtTagValueHistory != null) dtTagValueHistory.Dispose();
+                    dataGridView_Main.FirstDisplayedScrollingRowIndex = 0;
                 }
-            }
-
-            if (dtHistoryData != null && dtHistoryData.Rows.Count > 0)
-            {
-                dtHistoryData.DefaultView.Sort = "MEASURE_DATE DESC";
-
-                dataGridView_Main.DataSource = dtHistoryData;
-
-                if (dtHistoryData.Rows.Count > 0)
-                {
-                    dataGridView_Main.HorizontalScrollingOffset = nHoriScrollOffset > 0 ? nHoriScrollOffset : 0;
-
-                    if (dtHistoryData.Rows.Count > nRowIndex)
-                    {
-                        dataGridView_Main.FirstDisplayedScrollingRowIndex = nRowIndex > 0 ? nRowIndex : 0;
-                    }
-                    else
-                    {
-                        dataGridView_Main.FirstDisplayedScrollingRowIndex = 0;
-                    }
-
-                    dataGridView_Main.Rows[0].Selected = false;
-                    dataGridView_Main.Rows[selectedIndex].Selected = true;
-                }
-            }
-            else
-            {
-                dataGridView_Main.DataSource = null;
-                //String strMsg = $"Equipment : {equipName}, TagGroup : {selGrpName}, Period : {minDate} ~ {maxDate} - No data exist";
-                //MessageBox.Show(strMsg, "History Data Display", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                dataGridView_Main.Rows[0].Selected = false;
+                dataGridView_Main.Rows[selectedIndex].Selected = true;
             }
         }
+
         private void GetProgramStatus()
         {
             // 20210428, SHS, 값 업데이트 쓰레드 처리위해
@@ -432,11 +319,11 @@ namespace DataSpider.UserMonitor
                     /////////////////////////////////
                     if( nDBModeCurrent == 1)
                     {
-                        GetTagCurrentValues();
+                        GetCurrentValues();
                     }
                     else
                     {
-                        GetTagHistoryValues();
+                        GetHistoryValues();
                     }
                     dataGridView_Main.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells);
                 }
@@ -454,39 +341,7 @@ namespace DataSpider.UserMonitor
                 }
             }
         }
-        public void UpdatecomboBoxTagGroupSel()
-        {
-            string strErrCode = string.Empty;
-            string strErrText = string.Empty;
 
-            DataTable dtEquiptype = sqlBiz.GetCommonCode("EQUIP_TYPE", ref strErrCode, ref strErrText);
-            DataRow[] drEQCodeSel = dtEquiptype.Select($"CD_GRP = 'EQUIP_TYPE' AND CODE_NM = '{equipType.Trim()}'");
-
-            if (drEQCodeSel != null && drEQCodeSel.Length > 0)
-            {
-                String strEQTypeCode = drEQCodeSel[0]["CODE"].ToString();
-                DataTable dtGroups = sqlBiz.GetTagGroupByEQType(strEQTypeCode, ref strErrCode, ref strErrText);
-
-                if (strErrCode == null || strErrCode == string.Empty)
-                {
-                    DataRow row = dtGroups.NewRow();
-
-                    row["GROUP_NM"] = "All";
-                    row["GROUP_DESC"] = "All Tags";
-                    row["GROUP_NM_VALUE"] = "All(All Tags)";
-                    row["EQUIP_TYPE"] = equipType;
-
-                    dtGroups.Rows.InsertAt(row, 0);
-
-                    comboBoxTagGroupSel.SelectedIndexChanged -= comboBoxTagGroupSel_SelectedIndexChanged;
-                    comboBoxTagGroupSel.DataSource = dtGroups;
-                    comboBoxTagGroupSel.DisplayMember = "GROUP_NM_VALUE";
-                    comboBoxTagGroupSel.ValueMember = "GROUP_NM";
-                    comboBoxTagGroupSel.SelectedIndex = 0;
-                    comboBoxTagGroupSel.SelectedIndexChanged += comboBoxTagGroupSel_SelectedIndexChanged;
-                }
-            }
-        }
         public void treeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
             SBL nodeTag = e.Node.Tag as SBL;
@@ -544,66 +399,22 @@ namespace DataSpider.UserMonitor
 
         private void ValueHistoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (dataGridView_Main.SelectedRows.Count < 1)
-            {
-                return;
-            }
-            TAGValueHistoryPopupDGV form = new TAGValueHistoryPopupDGV(radioButtonCurTag.Checked ? dataGridView_Main.SelectedRows[0].Cells[3].Value.ToString() : dataGridView_Main.SelectedRows[0].Cells[1].Value.ToString());
-            form.ShowDialog(this);
+
         }
 
         private void EditToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (dataGridView_Main.SelectedRows.Count < 1)
-            {
-                return;
-            }
-            string tagName = dataGridView_Main.SelectedRows[0].Cells[3].Value.ToString();
-            TagAddEdit form = new TagAddEdit(string.Empty, tagName);
-            if (DialogResult.OK.Equals(form.ShowDialog(this)))
-            {
-                RefreshTreeView();
-            }
+
         }
 
         private void AddToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            TagAddEdit form = new TagAddEdit(equipName);
-            if (DialogResult.OK.Equals(form.ShowDialog(this)))
-            {
-                RefreshTreeView();
-            }
+
         }
 
         private void DeleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try
-            {
-                if (dataGridView_Main.SelectedRows.Count < 1)
-                {
-                    return;
-                }
-                string tagName = dataGridView_Main.SelectedRows[0].Cells[3].Value.ToString();
-                if (DialogResult.Yes.Equals(MessageBox.Show($"{tagName} 태그를 삭제하시겠습니까 ?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)))
-                {
-                    string strErrCode = string.Empty;
-                    string strErrText = string.Empty;
-                    if (sqlBiz.DeleteTagInfo(tagName, ref strErrCode, ref strErrText))
-                    {
-                        MessageBox.Show($"{tagName} 태그가 삭제되었습니다.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        RefreshTreeView();
-                    }
-                    else
-                    {
-                        MessageBox.Show($"태그 삭제 중 오류가 발생하였습니다. {strErrCode} - {strErrText}", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"태그 삭제 중 오류가 발생하였습니다. {ex.Message}", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-            }
         }
 
         private void checkBox_AutoRefresh_CheckedChanged(object sender, EventArgs e)
@@ -736,7 +547,7 @@ namespace DataSpider.UserMonitor
                 if (dgvr != null)
                 {
 
-                    if (!DateTime.TryParse(dgvr.Cells[6].Value.ToString(), out DateTime dtReg))
+                    if (!DateTime.TryParse(dgvr.Cells[7].Value.ToString(), out DateTime dtReg))
                     {
                         dtReg = DateTime.Now;
                     }
@@ -769,6 +580,7 @@ namespace DataSpider.UserMonitor
             {
                 MessageBox.Show(ex.ToString());
             }
+
         }
 
         private void toolStripMenuItemData_Click(object sender, EventArgs e)
@@ -781,46 +593,8 @@ namespace DataSpider.UserMonitor
             {
                 MessageBox.Show(ex.ToString());
             }
-        }
 
-        private void buttonFilter_Click(object sender, EventArgs e)
-        {
-            FilterForm ff = new FilterForm();
-            ff.TagNameFilter = TagNameFilter;
-            if (nDBModeCurrent == 1)
-            {
-                ff.DateTimeFilterCurMin = DateTimeFilterCurMin;
-                ff.DateTimeFilterCurMax = DateTimeFilterCurMax;
-            }
-            else
-            {
-                ff.DateTimeFilterCurMin = DateTimeFilterHistMin;
-                ff.DateTimeFilterCurMax = DateTimeFilterHistMax;
-            }
-            ff.DescriptionFilter = DescriptionFilter;
-            if ( ff.ShowDialog() == DialogResult.OK )
-            {
-                TagNameFilter = ff.TagNameFilter;
-                if (nDBModeCurrent == 1)
-                {
-                    DateTimeFilterCurMin = ff.DateTimeFilterCurMin;
-                    DateTimeFilterCurMax = ff.DateTimeFilterCurMax;
-                }
-                else
-                {
-                    DateTimeFilterHistMin = ff.DateTimeFilterCurMin;
-                    DateTimeFilterHistMax = ff.DateTimeFilterCurMax;
-                }
-                DescriptionFilter = ff.DescriptionFilter;
-                GetProgramStatus();
-            }
         }
-
-        private void comboBoxTagGroupSel_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            GetProgramStatus();
-        }
-
 
         private void radioButtonHistoryTag_CheckedChanged(object sender, EventArgs e)
         {
@@ -830,8 +604,8 @@ namespace DataSpider.UserMonitor
                 nDBModeCurrent = 1;
 
                 checkBox_AutoRefresh.Checked = autoRefresheChecked;
-                checkBox_AutoRefresh.Visible = button_SetInterval.Visible = textBox_RefreshInterval.Visible = label_RefreshInterval.Visible = true;
-                buttonFilter.Visible = false;
+                button_Refresh.Visible = checkBox_AutoRefresh.Visible = button_SetInterval.Visible = textBox_RefreshInterval.Visible = label_RefreshInterval.Visible = true;
+                label_MeasureTime.Visible = panel_FromTo.Visible = dateTimePicker_Start.Visible = dateTimePicker_StartTime.Visible = dateTimePicker_End.Visible = dateTimePicker_EndTime.Visible = button_InquireEFDataHistory.Visible = false;
             }
             // History
             else
@@ -839,9 +613,14 @@ namespace DataSpider.UserMonitor
                 nDBModeCurrent = 0;
 
                 checkBox_AutoRefresh.Checked = false;
-                checkBox_AutoRefresh.Visible = button_SetInterval.Visible = textBox_RefreshInterval.Visible = label_RefreshInterval.Visible = false;
-                buttonFilter.Visible = true;
+                button_Refresh.Visible = checkBox_AutoRefresh.Visible = button_SetInterval.Visible = textBox_RefreshInterval.Visible = label_RefreshInterval.Visible = false;
+                label_MeasureTime.Visible = panel_FromTo.Visible = dateTimePicker_Start.Visible = dateTimePicker_StartTime.Visible = dateTimePicker_End.Visible = dateTimePicker_EndTime.Visible = button_InquireEFDataHistory.Visible = true;
             }
+            GetProgramStatus();
+        }
+
+        private void button_InquireEFDataHistory_Click(object sender, EventArgs e)
+        {
             GetProgramStatus();
         }
 

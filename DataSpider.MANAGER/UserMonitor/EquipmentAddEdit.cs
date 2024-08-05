@@ -84,16 +84,17 @@ namespace DataSpider.UserMonitor
             // 2022. 2. 16 : Han, Ilho
             //      Add tag editor UI
             //
-            dataGridTagInfo.ColumnCount = 8;
+            dataGridTagInfo.ColumnCount = 9;
 
             dataGridTagInfo.Columns[0].Name = "Message Type";   dataGridTagInfo.Columns[0].Width = 80;
             dataGridTagInfo.Columns[1].Name = "Tag Name";       dataGridTagInfo.Columns[1].Width = 120;
             dataGridTagInfo.Columns[2].Name = "Description";    dataGridTagInfo.Columns[2].Width = 400;
             dataGridTagInfo.Columns[3].Name = "Item Name";      dataGridTagInfo.Columns[3].Width = 300;
             dataGridTagInfo.Columns[4].Name = "PI Tag Name";    dataGridTagInfo.Columns[4].Width = 120;
-            dataGridTagInfo.Columns[5].Name = "Value Position"; dataGridTagInfo.Columns[5].Width = 80;
-            dataGridTagInfo.Columns[6].Name = "Date Position";  dataGridTagInfo.Columns[6].Width = 80;
-            dataGridTagInfo.Columns[7].Name = "Time Position";  dataGridTagInfo.Columns[7].Width = 80;
+            dataGridTagInfo.Columns[5].Name = "EventFrame Attribute Name"; dataGridTagInfo.Columns[5].Width = 120;
+            dataGridTagInfo.Columns[6].Name = "Value Position"; dataGridTagInfo.Columns[6].Width = 80;
+            dataGridTagInfo.Columns[7].Name = "Date Position";  dataGridTagInfo.Columns[7].Width = 80;
+            dataGridTagInfo.Columns[8].Name = "Time Position";  dataGridTagInfo.Columns[8].Width = 80;
 
             dataGridTagInfo.EditMode = DataGridViewEditMode.EditOnKeystrokeOrF2;
             dataGridTagInfo.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -170,8 +171,7 @@ namespace DataSpider.UserMonitor
                 dataGridTagInfo.Rows.Clear();
                 textBox_ConnectionInfo.Text = drEquipment["CONNECTION_INFO"].ToString();
 
-                textBox_ExtraInfo.Text = drEquipment["CONFIG_INFO"].ToString();
-
+                textBox_ConfigInfo.Text = drEquipment["CONFIG_INFO"].ToString();
                 if (EditModeCopy == false)
                 {
                     textBox_EquipName.Text = drEquipment["EQUIP_NM"].ToString();
@@ -191,6 +191,7 @@ namespace DataSpider.UserMonitor
                             if (dtTag.Rows[0]["TAG_DESC"] != null) row.Cells["Description"].Value = dtTag.Rows[0]["TAG_DESC"].ToString();
                             if (dtTag.Rows[0]["OPCITEM_NM"] != null) row.Cells["Item Name"].Value = dtTag.Rows[0]["OPCITEM_NM"].ToString();
                             if (dtTag.Rows[0]["PI_TAG_NM"] != null) row.Cells["PI Tag Name"].Value = dtTag.Rows[0]["PI_TAG_NM"].ToString();
+                            if (dtTag.Rows[0]["EF_ATTRIBUTE_NM"] != null) row.Cells["EventFrame Attribute Name"].Value = dtTag.Rows[0]["EF_ATTRIBUTE_NM"].ToString(); 
                             if (dtTag.Rows[0]["DATA_POSITION"] != null) row.Cells["Value Position"].Value = dtTag.Rows[0]["DATA_POSITION"].ToString();
                             if (dtTag.Rows[0]["DATE_POSITION"] != null) row.Cells["Date Position"].Value = dtTag.Rows[0]["DATE_POSITION"].ToString();
                             if (dtTag.Rows[0]["TIME_POSITION"] != null) row.Cells["Time Position"].Value = dtTag.Rows[0]["TIME_POSITION"].ToString();
@@ -267,6 +268,7 @@ namespace DataSpider.UserMonitor
                                 if (nPos > 0) row.Cells["PI Tag Name"].Value = strTag.Substring(nPos, strTag.Length - nPos);
                                 else row.Cells["PI Tag Name"].Value = strTag;
                             }
+                            if (dtTag.Rows[0]["EF_ATTRIBUTE_NM"] != null) row.Cells["EventFrame Attribute Name"].Value = dtTag.Rows[0]["EF_ATTRIBUTE_NM"].ToString();
                             if (dtTag.Rows[0]["DATA_POSITION"] != null) row.Cells["Value Position"].Value = dtTag.Rows[0]["DATA_POSITION"].ToString();
                             if (dtTag.Rows[0]["DATE_POSITION"] != null) row.Cells["Date Position"].Value = dtTag.Rows[0]["DATE_POSITION"].ToString();
                             if (dtTag.Rows[0]["TIME_POSITION"] != null) row.Cells["Time Position"].Value = dtTag.Rows[0]["TIME_POSITION"].ToString();
@@ -344,8 +346,9 @@ namespace DataSpider.UserMonitor
 
                 if (AddMode == true || EditModeCopy == true) EQSaveMode = true;
 
-                if (sqlBiz.InsertUpdateEquipmentInfo(EQSaveMode, textBox_EquipName.Text.Trim(), textBox_Description.Text.Trim(), comboBox_EquipType.SelectedValue.ToString(), comboBox_InterfaceType.SelectedValue.ToString(),
-                    textBox_ConnectionInfo.Text, textBox_ExtraInfo.Text, comboBox_ServerName.SelectedValue.ToString(), comboBox_UseFlag.Text, textBox_ExtraInfo.Text, comboBox_ZoneType.SelectedValue.ToString(), comboBox_PiPointSave.Text, comboBox_EventFrameSave.Text, ref strErrCode, ref strErrText))
+                if (sqlBiz.InsertUpdateEquipmentInfo(EQSaveMode, textBox_EquipName.Text.Trim(), textBox_Description.Text.Trim(), comboBox_EquipType.SelectedValue.ToString(), 
+                    comboBox_InterfaceType.SelectedValue.ToString(), textBox_ConnectionInfo.Text, textBox_ExtraInfo.Text, comboBox_ServerName.SelectedValue.ToString(), 
+                    comboBox_UseFlag.Text, textBox_ConfigInfo.Text, comboBox_ZoneType.SelectedValue.ToString(), comboBox_PiPointSave.Text, comboBox_EventFrameSave.Text, ref strErrCode, ref strErrText))
                 {
                     // Save Trag Info
                     int nTagSaveFailCount = 0;

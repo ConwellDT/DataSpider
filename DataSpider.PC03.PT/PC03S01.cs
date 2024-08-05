@@ -23,6 +23,7 @@ using static System.Runtime.CompilerServices.RuntimeHelpers;
 using System.Linq.Expressions;
 using System.Text.Json;
 using OSIsoft.AF.EventFrame;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace DataSpider.PC03.PT
 {
@@ -289,6 +290,9 @@ namespace DataSpider.PC03.PT
                 string errText = null;
                 string pierrText = null;
 
+                string afIFFlag = string.Empty;
+                string afIFRemark = string.Empty;
+
                 DataTable dtResult = m_sqlBiz.GetMeasureEventFrameResult(m_strEType, ref errCode, ref errText);
 
                 if (dtResult != null)
@@ -312,26 +316,63 @@ namespace DataSpider.PC03.PT
                             List<EventFrameAttributeData> listAttributes = JsonSerializer.Deserialize<List<EventFrameAttributeData>>(attributes);
                             List<string> listAttributeNames = listAttributes.Select(x => x.Name).ToList();
 
-                            AFElementTemplate efTemplate = GetEventFrameTemplate(_AFDatabase, m_strETypeName, msgType, listAttributeNames);
+                            AFElementTemplate efTemplate = GetEventFrameTemplate(m_strETypeName, msgType, listAttributeNames, out string errMessage);
+                            afIFFlag = "E";
 
-                            var (afIFFlag, afIFRemark) = SaveEventFrame(eventFrameName, efTemplate, startTime, endTime, listAttributes);
-
-                            if (i % 10 == 9) Thread.Sleep(1);
-
-                            // 20230406, SHS, SetPIValue 결과에 따른 로그 추가, 에러 로그 추가
-                            if (afIFFlag.Equals("Y"))
-                            { 
-                                mOwner.listViewMsg(m_strEName, string.Format(PC00D01.SucceededtoEF, eventFrameName), true, m_nCurNo, 3, true, PC00D01.MSGTINF);
-                                m_Logger.WriteLog(string.Format(PC00D01.SucceededtoEF, eventFrameName), PC00D01.MSGTINF, m_strEName);
-                                ThreadStatus = IF_STATUS.Normal;
-                            }
-                            else
+                            if (efTemplate == null)
                             {
-                                mOwner.listViewMsg(m_strEName, string.Format(PC00D01.FailedtoEF, eventFrameName, afIFRemark), true, m_nCurNo, 3, true, PC00D01.MSGTERR);
-                                m_Logger.WriteLog(string.Format(PC00D01.FailedtoEF, eventFrameName, afIFRemark), PC00D01.MSGTERR, m_strEName);
-                                ThreadStatus = IF_STATUS.InternalError;
+                                afIFRemark = errMessage.Replace("'", " ");
                             }
+                            else // (efTemplate != null)
+                            {
+                                //var (afIFFlag, afIFRemark) = SaveEventFrame(eventFrameName, efTemplate, startTime, endTime, listAttributes);
+                                var efResult = SaveEventFrame(eventFrameName, efTemplate, startTime, endTime, listAttributes);
 
+                                afIFFlag = efResult.afIFFlag;
+                                afIFRemark = efResult.afIFRemark;
+
+                                if (i % 10 == 9) Thread.Sleep(1);
+
+                                // 20230406, SHS, SetPIValue 결과에 따른 로그 추가, 에러 로그 추가
+                                if (efResult.afIFFlag.Equals("Y"))
+                                {
+                                    mOwner.listViewMsg(m_strEName, string.Format(PC00D01.SucceededtoEF, eventFrameName), true, m_nCurNo, 3, true, PC00D01.MSGTINF);
+                                    m_Logger.WriteLog(string.Format(PC00D01.SucceededtoEF, eventFrameName), PC00D01.MSGTINF, m_strEName);
+                                    ThreadStatus = IF_STATUS.Normal;
+
+                                    //
+                                    // EventFrame 저장 성공일때만 EventFrame 정보 TAG 저장
+                                    // public TAG(string tagName, string equipName, int msgType, string piTagName, string efAttributeName, string lastMeasuredValue, string lastMeasuredDateTime)
+                                    TAG tag = new TAG($"{equipName}_EVENTFRAMENAME", equipName, 0, $"{equipName}_EVENTFRAMENAME.PV", string.Empty, string.Empty, string.Empty);
+                                    tag.PIIFDateTime = DateTime.Now;
+                                    tag.PIIFFlag = "N"; // N -> Y, E -> F, Z
+                                    tag.IsDBInserted = false;
+                                    tag.dtTimeStamp = DateTime.Parse(startTime);
+                                    tag.Value = eventFrameName;
+
+                                    SavePI(new List<TAG> { tag });
+                                    SaveDBHistory(new List<TAG> { tag });
+
+
+                                    tag = new TAG($"{equipName}_MSGTYPE", equipName, 0, $"{equipName}_MSGTYPE.PV", string.Empty, string.Empty, string.Empty);
+                                    tag.PIIFDateTime = DateTime.Now;
+                                    tag.Remark = string.Empty;
+                                    tag.PIIFFlag = "N"; // N -> Y, E -> F, Z
+                                    tag.IsDBInserted = false;
+                                    tag.dtTimeStamp = DateTime.Parse(startTime);
+                                    tag.Value = msgType.ToString(); ;
+
+                                    SavePI(new List<TAG> { tag });
+                                    SaveDBHistory(new List<TAG> { tag });
+                                    ///
+                                }
+                                else
+                                {
+                                    mOwner.listViewMsg(m_strEName, string.Format(PC00D01.FailedtoEF, eventFrameName, efResult.afIFRemark), true, m_nCurNo, 3, true, PC00D01.MSGTERR);
+                                    m_Logger.WriteLog(string.Format(PC00D01.FailedtoEF, eventFrameName, efResult.afIFRemark), PC00D01.MSGTERR, m_strEName);
+                                    ThreadStatus = IF_STATUS.InternalError;
+                                }
+                            }
                             result = m_sqlBiz.UpdateMeasureEventFrameResult(strSeq, afIFFlag, ifCount, afIFRemark, efTemplate.Name, ref errCode, ref errText);
 
                             if (!result)
@@ -357,6 +398,89 @@ namespace DataSpider.PC03.PT
                 result = false;
             }
             return result;
+        }
+
+        private bool SavePI(List<TAG> listResult)
+        {
+            try
+            {
+                string errText;
+                bool result = false;
+
+                if (!CheckPIConnection(out errText))
+                {
+                    listResult.ForEach(tag =>
+                    {
+                        tag.PIIFFlag = "E";
+                        tag.Remark = errText;
+                    });
+                    mOwner.listViewMsg(m_strEName, string.Format(PC00D01.FailedtoPI, $"{errText}", ""), true, m_nCurNo, 3, true, PC00D01.MSGTERR);
+                    return false;
+                }
+
+                foreach (TAG tag in listResult)
+                {
+                    errText = string.Empty;
+                    tag.PIIFFlag = "E";
+                    result = false;
+
+                    if (string.IsNullOrWhiteSpace(tag.PITagName))
+                    {
+                        errText = "Missing PI TAG Name";
+                    }
+                    else
+                    {
+                        result = SetPIValue(tag.PITagName, tag.Value, tag.dtTimeStamp, ref errText);
+                    }
+
+                    if (result)
+                    {
+                        tag.PIIFFlag = "Y";
+                        mOwner.listViewMsg(m_strEName, string.Format(PC00D01.SucceededtoPI, $"{tag.TagName} - {tag.PITagName}", tag.Value), true, m_nCurNo, 3, true, PC00D01.MSGTINF);
+                    }
+                    else
+                    {
+                        tag.PIIFFlag = "E";
+                        tag.Remark = errText;
+                        mOwner.listViewMsg(m_strEName, string.Format(PC00D01.FailedtoPI, $"{errText} - {tag.TagName} - {tag.PITagName}", tag.Value), true, m_nCurNo, 3, true, PC00D01.MSGTERR);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                mOwner.listViewMsg(m_strEName, $"Exception in SavePI - ({ex})", true, m_nCurNo, 3, true, PC00D01.MSGTERR);
+                return false;
+            }
+            return true;
+        }
+        private bool SaveDBHistory(List<TAG> listResult)
+        {
+            string errCode = string.Empty;
+            string errText = string.Empty;
+
+            try
+            {
+                foreach (TAG tag in listResult)
+                {
+                    errCode = string.Empty;
+                    errText = string.Empty;
+
+                    if (tag.IsDBInserted = m_sqlBiz.InsertResult(tag.TagName, tag.TimeStamp, tag.Value, tag.PIIFFlag, tag.PIIFTimeStamp, tag.Remark, ref errCode, ref errText))
+                    {
+                        mOwner.listViewMsg(m_strEName, $"DB inserted. ({tag.TTFTV})", true, m_nCurNo, 3, true, PC00D01.MSGTINF);
+                    }
+                    else
+                    {
+                        mOwner.listViewMsg(m_strEName, $"DB insert failed. ({tag.TTFTV}) - {errText}", true, m_nCurNo, 3, true, PC00D01.MSGTERR);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                mOwner.listViewMsg(m_strEName, $"Exception in SaveDBHistory - ({ex})", true, m_nCurNo, 3, true, PC00D01.MSGTERR);
+                return false;
+            }
+            return true;
         }
         private (string afIFFlag, string afIFRemark) SaveEventFrame(string eventFrameName, AFElementTemplate eventFrameTemplate, string startTime, string endTime, List<EventFrameAttributeData> listAttributes)
         {
@@ -393,7 +517,7 @@ namespace DataSpider.PC03.PT
                 // AF 연결 
                 if (_AFDatabase == null || !_AFDatabase.PISystem.ConnectionInfo.IsConnected)
                 {
-                    _AFDatabase = GetAFDatabase(m_clsPIInfo.strPI_Server, m_clsPIInfo.AF_DB, m_clsPIInfo.AF_USER, m_clsPIInfo.AF_PWD, m_clsPIInfo.AF_DOMAIN, out string errString);
+                    _AFDatabase = GetAFDatabase(m_clsPIInfo.AF_SERVER, m_clsPIInfo.AF_DB, m_clsPIInfo.AF_USER, m_clsPIInfo.AF_PWD, m_clsPIInfo.AF_DOMAIN, out string errString);
                     if (_AFDatabase == null)
                     {
                         mOwner.listViewMsg(m_strEName, $"AF not connected.", true, m_nCurNo, 3, true, PC00D01.MSGTINF);
@@ -443,58 +567,77 @@ namespace DataSpider.PC03.PT
             return null;
         }
 
-        private AFElementTemplate GetEventFrameTemplate(AFDatabase afDB, string templateName)
+        private AFElementTemplate GetEventFrameTemplate(string templateName)
         {
-            AFElementTemplate result = afDB?.ElementTemplates?.Where(x => x.InstanceType.Equals(typeof(AFEventFrame)) && x.Name.Equals(templateName))?.FirstOrDefault();
+            AFElementTemplate result = _AFDatabase?.ElementTemplates?.Where(x => x.InstanceType.Equals(typeof(AFEventFrame)) && x.Name.Equals(templateName))?.FirstOrDefault();
             //return afDB?.ElementTemplates?.Where(x => x.InstanceType.Equals(typeof(AFEventFrame)) && x.Name.Equals(templateName)).First();
             return result;
         }
 
         // PC03 은 무조건 기본 템플릿으로 가능한지 확인 후 안될 경우 다른 템플릿으로 확인 후 다 안되면 새로 생성
-        private AFElementTemplate GetEventFrameTemplate(AFDatabase afDB, string equipTypeName, int msgType, List<string> listAttributeNames)
+        //private AFElementTemplate GetEventFrameTemplate(AFDatabase afDB, string equipTypeName, int msgType, List<string> listAttributeNames)
+        private AFElementTemplate GetEventFrameTemplate(string equipTypeName, int msgType, List<string> listAttributeNames, out string errMessage)
         {
-            AFElementTemplate efTemp = null;
-
-            //if (afDB == null) throw new ArgumentNullException(nameof(afDB));
-            string efTemplateName = m_sqlBiz.ReadSTCommon(equipTypeName, "EventFrameTemplateName");
-
-            // 최초 afDB 로드 후 다른 인스턴스에서 변경된 내용은 refresh 해야 한다
-            afDB.Refresh();
-
-            if (!string.IsNullOrWhiteSpace(efTemplateName))
+            try
             {
-                // 설정된 템플릿 조회
-                efTemp = GetEventFrameTemplate(afDB, efTemplateName);
+                errMessage = string.Empty;
+                AFElementTemplate efTemp = null;
 
-                if (efTemp != null)
+                //if (afDB == null) throw new ArgumentNullException(nameof(afDB));
+                string efTemplateName = m_sqlBiz.ReadSTCommon(equipTypeName, "EventFrameTemplateName");
+
+                // 최초 afDB 로드 후 다른 인스턴스에서 변경된 내용은 refresh 해야 한다
+                // AF 연결 
+                if (!CheckAFDatabase(out string errString))
                 {
-                    List<string> omittedAttributeNames = efTemp.AttributeTemplates.GetOmittedAttributes(listAttributeNames);
-                    // Template 의 Attribute 에 저장할 데이터의 Attribute 가 다 있으면 사용 
-                    if (omittedAttributeNames.Count == 0)
-                    {
-                        return efTemp;
-                    }
-                    mOwner.listViewMsg(m_strEName, $"EventFrameTemplate({efTemplateName}) is not matches. Omitted attribute names : {string.Join(", ", omittedAttributeNames)}.", true, m_nCurNo, 3, true, PC00D01.MSGTINF);
+                    mOwner.listViewMsg(m_strEName, errString, true, m_nCurNo, 3, true, PC00D01.MSGTERR);
+                    errMessage = errString;
+                    return null;
                 }
+                _AFDatabase.Refresh();
+
+                if (!string.IsNullOrWhiteSpace(efTemplateName))
+                {
+                    // 설정된 템플릿 조회
+                    efTemp = GetEventFrameTemplate(efTemplateName);
+
+                    if (efTemp != null)
+                    {
+                        List<string> omittedAttributeNames = efTemp.AttributeTemplates.GetOmittedAttributes(listAttributeNames);
+                        // Template 의 Attribute 에 저장할 데이터의 Attribute 가 다 있으면 사용 
+                        if (omittedAttributeNames.Count == 0)
+                        {
+                            return efTemp;
+                        }
+                        mOwner.listViewMsg(m_strEName, $"EventFrameTemplate({efTemplateName}) is not matches. Omitted attribute names : {string.Join(", ", omittedAttributeNames)}.", true, m_nCurNo, 3, true, PC00D01.MSGTINF);
+                    }
+                }
+
+                // 기본 템플릿 이름으로 시작하는 템플릿 모두 조회
+                //AFElementTemplates eventFrameTemplate = afDB.ElementTemplates?.Where(x => x.InstanceType.Equals(typeof(AFEventFrame)) && x.Name.StartsWith(efTemplateBaseName)).OrderBy(x => x.Name);
+                IEnumerable<AFElementTemplate> eventFrameTemplates = from temp in _AFDatabase.ElementTemplates
+                                                                     where temp.InstanceType.Equals(typeof(AFEventFrame)) && temp.Name.StartsWith($"{equipTypeName}_{msgType:00}") && !temp.Name.Equals(efTemplateName)
+                                                                     orderby temp.Name descending
+                                                                     select temp;
+
+                efTemp = eventFrameTemplates.FirstOrDefault(x => x.AttributeTemplates.GetOmittedAttributes(listAttributeNames).Count == 0);
+
+                // 저장가능한 템플릿이 없으면 새로 생성
+                if (efTemp == null)
+                {
+                    string eventFrameTemplateName = $"{equipTypeName}_{msgType:00}_{DateTime.Now:yyyyMMddHHmmssfff}";
+                    mOwner.listViewMsg(m_strEName, $"There are no matched EventFrameTemplates. Create new EventFrameTemplate Name : {eventFrameTemplateName}, AttributeTemplates : {string.Join(", ", listAttributeNames)}.", true, m_nCurNo, 3, true, PC00D01.MSGTINF);
+                    efTemp = CreateEventFrameTemplate(_AFDatabase, eventFrameTemplateName, listAttributeNames);
+                }
+                return efTemp;
+                //return efTemp ?? CreateEventFrameTemplate(afDB, $"{efTemplateBaseName}_{DateTime.Now:yyyyMMddHHmmssfff}", listAttributeNames);
             }
-
-            // 기본 템플릿 이름으로 시작하는 템플릿 모두 조회
-            //AFElementTemplates eventFrameTemplate = afDB.ElementTemplates?.Where(x => x.InstanceType.Equals(typeof(AFEventFrame)) && x.Name.StartsWith(efTemplateBaseName)).OrderBy(x => x.Name);
-            IEnumerable<AFElementTemplate> eventFrameTemplates = from temp in afDB.ElementTemplates 
-                                                                 where temp.InstanceType.Equals(typeof(AFEventFrame)) && temp.Name.StartsWith($"{equipTypeName}_{msgType:00}") && !temp.Name.Equals(efTemplateName)
-                                                                 orderby temp.Name descending select temp;
-
-            efTemp = eventFrameTemplates.FirstOrDefault(x => x.AttributeTemplates.GetOmittedAttributes(listAttributeNames).Count == 0);
-
-            // 저장가능한 템플릿이 없으면 새로 생성
-            if (efTemp == null)
+            catch (Exception ex)
             {
-                string eventFrameTemplateName = $"{equipTypeName}_{msgType:00}_{DateTime.Now:yyyyMMddHHmmssfff}";
-                mOwner.listViewMsg(m_strEName, $"There are no matched EventFrameTemplates. Create new EventFrameTemplate Name : {eventFrameTemplateName}, AttributeTemplates : {string.Join(", ", listAttributeNames)}.", true, m_nCurNo, 3, true, PC00D01.MSGTINF);
-                efTemp = CreateEventFrameTemplate(afDB, eventFrameTemplateName, listAttributeNames);
+                errMessage = $"Exception in GetEventFrameTemplate - ({ex})";
+                mOwner.listViewMsg(m_strEName, $"Exception in GetEventFrameTemplate - ({ex})", true, m_nCurNo, 3, true, PC00D01.MSGTERR);
+                return null;
             }
-            return efTemp;
-            //return efTemp ?? CreateEventFrameTemplate(afDB, $"{efTemplateBaseName}_{DateTime.Now:yyyyMMddHHmmssfff}", listAttributeNames);
         }
 
 

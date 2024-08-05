@@ -12,7 +12,7 @@ using System.Reflection;
 
 namespace DataSpider.UserMonitor
 {
-    public partial class PIAlarmMonitor : LibraryWH.FormCtrl.UserForm
+    public partial class EventFrameAlarmMonitor : LibraryWH.FormCtrl.UserForm
     {
         public delegate bool OnRefreshTreeDataDelegate();
         public event OnRefreshTreeDataDelegate OnRefreshTreeData = null;
@@ -30,11 +30,11 @@ namespace DataSpider.UserMonitor
         public bool threadStop = false;
         private bool threadPause = false;
         private bool treeSelectedNodeChanged = true;
-        public PIAlarmMonitor()
+        public EventFrameAlarmMonitor()
         {
             InitializeComponent();
         }
-        private void PIAlarmMonitor_Load(object sender, EventArgs e)
+        private void Form_Load(object sender, EventArgs e)
         {
             listView_Main.Clear();
             GetProgramStatus();
@@ -107,7 +107,7 @@ namespace DataSpider.UserMonitor
 
                     SetSelectedIndex();
 
-                    DataTable dtProgramStatus = sqlBiz.GetPIAlarmStatus(equipType.Trim(), equipName.Trim(), zoneType.Trim(), ref strErrCode, ref strErrText);
+                    DataTable dtProgramStatus = sqlBiz.GetEventFrameAlarmStatus(equipType.Trim(), equipName.Trim(), zoneType.Trim(), ref strErrCode, ref strErrText);
 
                     if (dtProgramStatus == null || dtProgramStatus.Rows.Count < 1)
                     {
@@ -322,9 +322,9 @@ namespace DataSpider.UserMonitor
                     }
                 }
 
-                if (DialogResult.Yes.Equals(MessageBox.Show($"Do you want to reset PI I/F flag [{listView_Main.SelectedItems[0].SubItems[1].Text}] and {listView_Main.SelectedItems.Count - 1} others ? It will try to save the PI again.", "PIAlarm", MessageBoxButtons.YesNo)))
+                if (DialogResult.Yes.Equals(MessageBox.Show($"Do you want to reset EventFrame I/F flag [{listView_Main.SelectedItems[0].SubItems[1].Text}] and {listView_Main.SelectedItems.Count - 1} others ? It will try to save the EventFrame again.", "EventFrame PIAlarm", MessageBoxButtons.YesNo)))
                 {
-                    sqlBiz.ResetPIIFFlag(string.Join(",", listSeq));// minSeq, maxSeq);
+                    sqlBiz.ResetEventFrameIFFlag(string.Join(",", listSeq));// minSeq, maxSeq);
                     GetProgramStatus();
                 }
             }
@@ -351,9 +351,9 @@ namespace DataSpider.UserMonitor
                     }
                 }
 
-                if (DialogResult.Yes.Equals(MessageBox.Show($"Do you want to remove PI I/F alarm [{listView_Main.SelectedItems[0].SubItems[1].Text}] and {listView_Main.SelectedItems.Count - 1} others ? Can't handle retries anymore.", "PIAlarm", MessageBoxButtons.YesNo)))
+                if (DialogResult.Yes.Equals(MessageBox.Show($"Do you want to remove EventFrame I/F alarm [{listView_Main.SelectedItems[0].SubItems[1].Text}] and {listView_Main.SelectedItems.Count - 1} others ? Can't handle retries anymore.", "EventFrame Alarm", MessageBoxButtons.YesNo)))
                 {
-                    sqlBiz.RemovePIAlarm(string.Join(",", listSeq));
+                    sqlBiz.RemoveEventFrameAlarm(string.Join(",", listSeq));
                     GetProgramStatus();
                 }
             }

@@ -42,6 +42,7 @@ namespace DataSpider
         string strSvrCode = String.Empty;
 
         private EventFrameMonitor eventFrameMonitor = null;
+        private EventFrameAlarmMonitor eventFrameAlarm = null;
 
         public MonitorForm()
         {
@@ -357,6 +358,13 @@ namespace DataSpider
                 pDispView.OnTabControlSelectedIndexChanged += new TabFromCtrl.OnTabControlSelectedIndexChangedDelegate(currentTagValueMonitor.TabControl_SelectedIndexChanged);
                 OnUserLoginChanged += new OnUserLogInChangedDelegate(currentTagValueMonitor.UserLogInChanged);
 
+                PIMonitor = new PIAlarmMonitor();
+                PIMonitor.Text = "PI Alarm Monitor";
+                pDispView.AddFormToTab(PIMonitor);
+                pTreeForm.treeViewEQStatus.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(PIMonitor.treeView_AfterSelect);
+                pDispView.OnTabControlSelectedIndexChanged += new TabFromCtrl.OnTabControlSelectedIndexChangedDelegate(PIMonitor.TabControl_SelectedIndexChanged);
+                OnUserLoginChanged += new OnUserLogInChangedDelegate(PIMonitor.UserLogInChanged);
+
                 //efMonitor
                 eventFrameMonitor = new EventFrameMonitor();
                 eventFrameMonitor.Text = "EventFrame Monitor";
@@ -365,12 +373,12 @@ namespace DataSpider
                 pDispView.OnTabControlSelectedIndexChanged += new TabFromCtrl.OnTabControlSelectedIndexChangedDelegate(eventFrameMonitor.TabControl_SelectedIndexChanged);
                 OnUserLoginChanged += new OnUserLogInChangedDelegate(eventFrameMonitor.UserLogInChanged);
 
-                PIMonitor = new PIAlarmMonitor();
-                PIMonitor.Text = "PI Alarm Monitor";
-                pDispView.AddFormToTab(PIMonitor);
-                pTreeForm.treeViewEQStatus.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(PIMonitor.treeView_AfterSelect);
-                pDispView.OnTabControlSelectedIndexChanged += new TabFromCtrl.OnTabControlSelectedIndexChangedDelegate(PIMonitor.TabControl_SelectedIndexChanged);
-                OnUserLoginChanged += new OnUserLogInChangedDelegate(PIMonitor.UserLogInChanged);
+                eventFrameAlarm = new EventFrameAlarmMonitor();
+                eventFrameAlarm.Text = "EventFrame Alarm Monitor";
+                pDispView.AddFormToTab(eventFrameAlarm);
+                pTreeForm.treeViewEQStatus.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(eventFrameAlarm.treeView_AfterSelect);
+                pDispView.OnTabControlSelectedIndexChanged += new TabFromCtrl.OnTabControlSelectedIndexChangedDelegate(eventFrameAlarm.TabControl_SelectedIndexChanged);
+                OnUserLoginChanged += new OnUserLogInChangedDelegate(eventFrameAlarm.UserLogInChanged);
 
                 systemLogview = new SystemLogView();
                 systemLogview.Text = "System Log";
@@ -431,18 +439,29 @@ namespace DataSpider
             pDispView.OnTabControlSelectedIndexChanged -= new TabFromCtrl.OnTabControlSelectedIndexChangedDelegate(equipMonitor.TabControl_SelectedIndexChanged);
 
             OnUserLoginChanged -= new OnUserLogInChangedDelegate(equipMonitor.UserLogInChanged);
+
             pTreeForm.treeViewEQStatus.AfterSelect -= new System.Windows.Forms.TreeViewEventHandler(currentTagValueMonitor.treeView_AfterSelect);
             pDispView.OnTabControlSelectedIndexChanged -= new TabFromCtrl.OnTabControlSelectedIndexChangedDelegate(currentTagValueMonitor.TabControl_SelectedIndexChanged);
             OnUserLoginChanged -= new OnUserLogInChangedDelegate(currentTagValueMonitor.UserLogInChanged);
 
+            pTreeForm.treeViewEQStatus.AfterSelect -= new System.Windows.Forms.TreeViewEventHandler(eventFrameMonitor.treeView_AfterSelect);
+            pDispView.OnTabControlSelectedIndexChanged -= new TabFromCtrl.OnTabControlSelectedIndexChangedDelegate(eventFrameMonitor.TabControl_SelectedIndexChanged);
+            OnUserLoginChanged -= new OnUserLogInChangedDelegate(eventFrameMonitor.UserLogInChanged);
+
             pTreeForm.treeViewEQStatus.AfterSelect -= new System.Windows.Forms.TreeViewEventHandler(PIMonitor.treeView_AfterSelect);
             pDispView.OnTabControlSelectedIndexChanged -= new TabFromCtrl.OnTabControlSelectedIndexChangedDelegate(PIMonitor.TabControl_SelectedIndexChanged);
+
+            pTreeForm.treeViewEQStatus.AfterSelect -= new System.Windows.Forms.TreeViewEventHandler(eventFrameAlarm.treeView_AfterSelect);
+            pDispView.OnTabControlSelectedIndexChanged -= new TabFromCtrl.OnTabControlSelectedIndexChangedDelegate(eventFrameAlarm.TabControl_SelectedIndexChanged);
 
             pTreeForm.threadStop = true;
             equipMonitor.threadStop = true;
             currentTagValueMonitor.threadStop = true;
             PIMonitor.threadStop = true;
             systemLogview.threadStop = true;
+
+            eventFrameMonitor.threadStop = true;
+            eventFrameAlarm.threadStop = true;
 
             dbStatus?.Stop();
 
@@ -455,12 +474,14 @@ namespace DataSpider
                 threadStatus.Abort();
             }
 
-            pDispView.Dispose();
-
             pTreeForm.Close();
             equipMonitor.Close();
             currentTagValueMonitor.Close();
             PIMonitor.Close();
+            eventFrameMonitor.Close();
+            eventFrameAlarm.Close();
+
+            pDispView.Dispose();
         }
 
         private void SEIMM정보ToolStripMenuItem_Click(object sender, EventArgs e)

@@ -175,41 +175,41 @@ namespace DataSpider.UserMonitor
             this.toolStripSeparator3,
             this.toolStripMenuItemDataList});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(118, 88);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 110);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(114, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(177, 6);
             // 
             // toolStripMenuItemLog
             // 
             this.toolStripMenuItemLog.Name = "toolStripMenuItemLog";
-            this.toolStripMenuItemLog.Size = new System.Drawing.Size(117, 22);
+            this.toolStripMenuItemLog.Size = new System.Drawing.Size(180, 22);
             this.toolStripMenuItemLog.Text = "Log";
             this.toolStripMenuItemLog.Click += new System.EventHandler(this.toolStripMenuItemLog_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(114, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
             // 
             // toolStripMenuItemData
             // 
             this.toolStripMenuItemData.Name = "toolStripMenuItemData";
-            this.toolStripMenuItemData.Size = new System.Drawing.Size(117, 22);
+            this.toolStripMenuItemData.Size = new System.Drawing.Size(180, 22);
             this.toolStripMenuItemData.Text = "Data";
             this.toolStripMenuItemData.Click += new System.EventHandler(this.toolStripMenuItemData_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(114, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(177, 6);
             // 
             // toolStripMenuItemDataList
             // 
             this.toolStripMenuItemDataList.Name = "toolStripMenuItemDataList";
-            this.toolStripMenuItemDataList.Size = new System.Drawing.Size(117, 22);
+            this.toolStripMenuItemDataList.Size = new System.Drawing.Size(180, 22);
             this.toolStripMenuItemDataList.Text = "DataList";
             this.toolStripMenuItemDataList.Click += new System.EventHandler(this.toolStripMenuItemDataList_Click);
             // 

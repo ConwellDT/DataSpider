@@ -748,12 +748,13 @@ namespace DataSpider.PC00.PT
             m_PIInfo.strPI_Server = GetAppSetting("PI_SERVER");
             m_PIInfo.strPI_DB =     GetAppSetting("PI_DB");
             m_PIInfo.strPI_USER =   GetAppSetting("PI_USER");
-            m_PIInfo.strPI_PWD = GetAppSetting("PI_PWD");
+            m_PIInfo.strPI_PWD =    GetAppSetting("PI_PWD");
 
-            m_PIInfo.AF_DB = GetAppSetting("AF_DB");
-            m_PIInfo.AF_USER = GetAppSetting("AF_USER");
-            m_PIInfo.AF_PWD = GetAppSetting("AF_PWD");
-            m_PIInfo.AF_DOMAIN = GetAppSetting("AF_DOMAIN");
+            m_PIInfo.AF_SERVER =    GetAppSetting("AF_SERVER");
+            m_PIInfo.AF_DB =        GetAppSetting("AF_DB");
+            m_PIInfo.AF_USER =      GetAppSetting("AF_USER");
+            m_PIInfo.AF_PWD =       GetAppSetting("AF_PWD");
+            m_PIInfo.AF_DOMAIN =    GetAppSetting("AF_DOMAIN");
             return m_PIInfo;
         }
 

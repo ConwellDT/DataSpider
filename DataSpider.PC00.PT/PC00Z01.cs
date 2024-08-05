@@ -732,6 +732,26 @@ namespace DataSpider.PC00.PT
             }
             return result;
         }
+        public DataTable GetEventFrameDataHistory(string minDate, string maxDate, string equipType, string equipName, string zoneType, ref string _strErrCode, ref string _strErrText)
+        {
+            DataTable result = null;
+            try
+            {
+                StringBuilder strQuery = new StringBuilder();
+                strQuery.Append($"EXEC GetEventFrameDataHistory '{minDate}', '{maxDate}', '{equipType}', '{equipName}','{zoneType}'");
+
+                DataSet ds = CFW.Data.MsSqlDbAccess.GetDataSet(strQuery.ToString(), null, CommandType.Text, ref _strErrCode, ref _strErrText);
+                if (ds != null && ds.Tables[0] != null)
+                {
+                    result = ds.Tables[0];
+                }
+            }
+            catch (Exception ex)
+            {
+                _strErrText = ex.ToString();
+            }
+            return result;
+        }
 
         public DataTable GetTagValueHistory(string tagName, int periodDays, ref string _strErrCode, ref string _strErrText)
         {
@@ -761,6 +781,26 @@ namespace DataSpider.PC00.PT
             {
                 StringBuilder strQuery = new StringBuilder();
                 strQuery.Append($"EXEC GetPIAlarmStatus '{equipType}', '{equipName}', '{zoneType}'");
+
+                DataSet ds = CFW.Data.MsSqlDbAccess.GetDataSet(strQuery.ToString(), null, CommandType.Text, ref _strErrCode, ref _strErrText);
+                if (ds != null && ds.Tables[0] != null)
+                {
+                    result = ds.Tables[0];
+                }
+            }
+            catch (Exception ex)
+            {
+                _strErrText = ex.ToString();
+            }
+            return result;
+        }
+        public DataTable GetEventFrameAlarmStatus(string equipType, string equipName, string zoneType, ref string _strErrCode, ref string _strErrText)
+        {
+            DataTable result = null;
+            try
+            {
+                StringBuilder strQuery = new StringBuilder();
+                strQuery.Append($"EXEC GetEventFrameAlarmStatus '{equipType}', '{equipName}', '{zoneType}'");
 
                 DataSet ds = CFW.Data.MsSqlDbAccess.GetDataSet(strQuery.ToString(), null, CommandType.Text, ref _strErrCode, ref _strErrText);
                 if (ds != null && ds.Tables[0] != null)
@@ -1373,7 +1413,7 @@ namespace DataSpider.PC00.PT
             }
             return result;
         }
-        public bool RestPIIFFlag(string hiSeq)
+        public bool ResetPIIFFlag(string hiSeq)
         {
             string _strErrCode = string.Empty;
             string _strErrText = string.Empty;
@@ -1415,7 +1455,48 @@ namespace DataSpider.PC00.PT
                 return false;
             }
         }
+        public bool ResetEventFrameIFFlag(string hiSeq)
+        {
+            string _strErrCode = string.Empty;
+            string _strErrText = string.Empty;
 
+            try
+            {
+                StringBuilder strQuery = new StringBuilder();
+                //	UPDATE HI_MEASURE_RESULT SET IF_FLAG = 'N', IF_COUNT = 0 WHERE HI_SEQ IN (SELECT * FROM STRING_SPLIT(@hiSeq, ','))
+                strQuery.Append($"EXEC ResetEventFrameIFFlag '{hiSeq}'");
+
+                bool result = CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref _strErrCode, ref _strErrText);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                _strErrText = ex.ToString();
+                return false;
+            }
+        }
+        public bool RemoveEventFrameAlarm(string hiSeq)
+        {
+            string _strErrCode = string.Empty;
+            string _strErrText = string.Empty;
+
+            try
+            {
+                StringBuilder strQuery = new StringBuilder();
+                //INSERT INTO HI_MEASURE_RESULT_BK SELECT TAG_NM, MEASURE_VALUE, MEASURE_DATE, 'Z', getdate(), getdate(), @regID, REMARK, IF_COUNT
+                //    FROM HI_MEASURE_RESULT WHERE HI_SEQ IN(SELECT* FROM STRING_SPLIT(@hiSeq, ','));
+                //DELETE HI_MEASURE_RESULT WHERE HI_SEQ IN(SELECT * FROM STRING_SPLIT(@hiSeq, ','));
+                strQuery.Append($"EXEC RemoveEventFrameAlarm '{UserAuthentication.UserID}', '{hiSeq}'");
+
+                bool result = CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref _strErrCode, ref _strErrText);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                _strErrText = ex.ToString();
+                return false;
+            }
+        }
         public DataTable GetEquipmentTypeList(ref string _strErrCode, ref string _strErrText)
         {
             DataTable result = null;

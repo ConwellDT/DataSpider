@@ -51,6 +51,8 @@ namespace DataSpider.PC00.PT
 
         private ManualResetEvent connectDone = new ManualResetEvent(false);
 
+        private int connectCallBackStatus = 0;
+
         protected class StateObject
         {
             public Socket workSocket = null;
@@ -79,8 +81,8 @@ namespace DataSpider.PC00.PT
         protected void ThreadJob()
         {
             Thread.Sleep(1000);
-            bool connectedflag = false;
             Connect();
+            bool connectedflag = IsConnected && state.workSocket.Connected;
             Thread.Sleep(1000);
             listViewMsg.UpdateStatus(true);
             listViewMsg.UpdateMsg("Thread started", true, true, true, PC00D01.MSGTINF);
@@ -92,9 +94,10 @@ namespace DataSpider.PC00.PT
                     //connectDone.WaitOne();
                     if (IsConnected == false || state.workSocket.Connected==false)
                     {
-                        connectedflag = false;
                         UpdateEquipmentProgDateTime(IF_STATUS.Disconnected);
-                        listViewMsg.UpdateMsg("Disconnected. Try to connect", true, true, true, PC00D01.MSGTERR);
+                        if (connectedflag)
+                            listViewMsg.UpdateMsg("Disconnected. Try to connect", true, true, true, PC00D01.MSGTERR);
+                        connectedflag = false;
                         Connect();
                         //Thread.Sleep(1000);
                     }
@@ -454,24 +457,29 @@ namespace DataSpider.PC00.PT
                     IsConnected = false;
                     listViewMsg.UpdateMsg($"state.workSocket == null in ConnectCallback", false, true, true, PC00D01.MSGTINF);
                     connectDone.Set();
+                    connectCallBackStatus = 1;
                     return;
                 }
                 if (!state.workSocket.Connected)
                 {
                     IsConnected = false;
-                    listViewMsg.UpdateMsg($"state.workSocket.Connected = FALSE in ConnectCallback", false, true, true, PC00D01.MSGTINF);
+                    if (connectCallBackStatus != 2)
+                        listViewMsg.UpdateMsg($"state.workSocket.Connected = FALSE in ConnectCallback", false, true, true, PC00D01.MSGTINF);
                     connectDone.Set();
+                    connectCallBackStatus = 2;
                     return;
                 }
                 state.workSocket?.EndConnect(ar);
                 IsConnected = true;
                 listViewMsg.UpdateMsg($"state.workSocket.Connected = TRUE in ConnectCallback ", false, true, true, PC00D01.MSGTINF);
+                connectCallBackStatus = 3;
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.ToString(), "ConnectCallback");
                 listViewMsg.UpdateMsg($"Exception in ConnectCallback - ({ex})", false, true, true, PC00D01.MSGTERR);
                 IsConnected = false;
+                connectCallBackStatus = 4;
             }
             finally
             {

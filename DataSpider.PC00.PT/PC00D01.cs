@@ -201,6 +201,7 @@ namespace DataSpider.PC00.PT
 
         public string strPI_PWD { get; set; }    // PI PASSWORD
 
+        public string AF_SERVER { get; set; }
         public string AF_DB { get; set; }
         public string AF_USER {  get; set; }
         public string AF_PWD { get; set; }
