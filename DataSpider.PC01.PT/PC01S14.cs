@@ -529,6 +529,12 @@ namespace DataSpider.PC01.PT
                             //        listViewMsg.UpdateMsg($" Network Error Time > 1 Hr, Ua Client Reset ", false, true, true, PC00D01.MSGTERR);
                             //    }
                             //}
+                            // 20240806, SHS, ProcessMethodDaqStartInfo return false 시 상태 업데이트 해야 함
+                            else
+                            {
+                                UpdateEquipmentProgDateTime(IF_STATUS.NetworkError);
+                            }
+
                             Thread.Sleep(1 * 1000); // 1회 처리 후 10초가 휴식
                         }
                     }
