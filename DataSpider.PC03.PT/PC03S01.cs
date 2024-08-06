@@ -321,7 +321,7 @@ namespace DataSpider.PC03.PT
 
                             if (efTemplate == null)
                             {
-                                afIFRemark = errMessage.Replace("'", " ");
+                                afIFRemark = errMessage = errMessage.Replace("'", " ");
                             }
                             else // (efTemplate != null)
                             {
@@ -329,7 +329,7 @@ namespace DataSpider.PC03.PT
                                 var efResult = SaveEventFrame(eventFrameName, efTemplate, startTime, endTime, listAttributes);
 
                                 afIFFlag = efResult.afIFFlag;
-                                afIFRemark = efResult.afIFRemark;
+                                afIFRemark = efResult.afIFRemark = efResult.afIFRemark.Replace("'", " ");
 
                                 if (i % 10 == 9) Thread.Sleep(1);
 
@@ -351,6 +351,7 @@ namespace DataSpider.PC03.PT
                                     tag.Value = eventFrameName;
 
                                     SavePI(new List<TAG> { tag });
+                                    tag.Remark = tag.Remark.Replace("'", " ");
                                     SaveDBHistory(new List<TAG> { tag });
 
 
@@ -363,6 +364,7 @@ namespace DataSpider.PC03.PT
                                     tag.Value = msgType.ToString(); ;
 
                                     SavePI(new List<TAG> { tag });
+                                    tag.Remark = tag.Remark.Replace("'", " ");
                                     SaveDBHistory(new List<TAG> { tag });
                                     ///
                                 }
@@ -374,7 +376,7 @@ namespace DataSpider.PC03.PT
                                 }
                             }
                             result = m_sqlBiz.UpdateMeasureEventFrameResult(strSeq, afIFFlag, ifCount, afIFRemark, efTemplate.Name, ref errCode, ref errText);
-
+                            errText = errText?.Replace("'", " ");
                             if (!result)
                             {
                                 mOwner.listViewMsg(m_strEName, $"UpdateMeasureEventFrameResult Failed. [{eventFrameName}] - {errText}", true, m_nCurNo, 3, true, PC00D01.MSGTERR);
