@@ -88,10 +88,10 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="NLog">
-      <Version>5.2.3</Version>
+      <Version>5.1.1</Version>
     </PackageReference>
     <PackageReference Include="NLog.Database">
-      <Version>5.2.3</Version>
+      <Version>5.1.1</Version>
     </PackageReference>
     <PackageReference Include="System.Text.Json">
       <Version>6.0.4</Version>

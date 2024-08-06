@@ -281,7 +281,7 @@
       <Version>5.1.1</Version>
     </PackageReference>
     <PackageReference Include="OPCFoundation.NetStandard.Opc.Ua">
-      <Version>1.4.368.53</Version>
+      <Version>1.4.368.58</Version>
     </PackageReference>
     <PackageReference Include="Portable.BouncyCastle">
       <Version>1.9.0</Version>
