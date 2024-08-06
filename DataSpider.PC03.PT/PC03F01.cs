@@ -1119,7 +1119,7 @@ namespace DataSpider.PC03.PT
                                     if (rVal == false)
                                     {
                                         strFlag = "E";
-                                        errMsg = pierrText.Replace("\\", "").Replace("\r\n", "").Replace("'", "");
+                                        errMsg = pierrText.Replace("\\", " ").Replace("\r\n", " ").Replace("'", " ");
                                     }
 
                                     result = m_SqlBiz.UpdateMeasureResult(strSeq, strFlag, ifCount, errMsg, ref errCode, ref errText);

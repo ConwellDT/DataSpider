@@ -1348,7 +1348,7 @@ namespace DataSpider.PC00.PT
             }
             catch (Exception ex)
             {
-                _strErrText = ex.ToString().Replace("\\", "").Replace("\r\n", "").Replace("'", ""); ;
+                _strErrText = ex.ToString().Replace("\\", " ").Replace("\r\n", " ").Replace("'", " ");
                 return false;
             }
             return true; ;

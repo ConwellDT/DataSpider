@@ -213,7 +213,7 @@ namespace DataSpider.PC03.PT
                                 if (rVal == false)
                                 {
                                     strFlag = "E";
-                                    errMsg = pierrText.Replace("\\", "").Replace("\r\n", "").Replace("'", "");
+                                    errMsg = pierrText.Replace("\\", " ").Replace("\r\n", " ").Replace("'", " ");
                                 }
 
                                 // 20230406, SHS, SetPIValue 결과에 따른 로그 추가, 에러 로그 추가
@@ -321,7 +321,7 @@ namespace DataSpider.PC03.PT
 
                             if (efTemplate == null)
                             {
-                                afIFRemark = errMessage = errMessage.Replace("\\", "").Replace("\r\n", "").Replace("'", "");
+                                afIFRemark = errMessage = errMessage.Replace("\\", " ").Replace("\r\n", " ").Replace("'", " ");
                             }
                             else // (efTemplate != null)
                             {
@@ -329,7 +329,7 @@ namespace DataSpider.PC03.PT
                                 var efResult = SaveEventFrame(eventFrameName, efTemplate, startTime, endTime, listAttributes);
 
                                 afIFFlag = efResult.afIFFlag;
-                                afIFRemark = efResult.afIFRemark = efResult.afIFRemark.Replace("\\", "").Replace("\r\n", "").Replace("'", "");
+                                afIFRemark = efResult.afIFRemark = efResult.afIFRemark.Replace("\\", " ").Replace("\r\n", " ").Replace("'", " ");
 
                                 if (i % 10 == 9) Thread.Sleep(1);
 
@@ -351,7 +351,7 @@ namespace DataSpider.PC03.PT
                                     tag.Value = eventFrameName;
 
                                     SavePI(new List<TAG> { tag });
-                                    tag.Remark = tag.Remark.Replace("\\", "").Replace("\r\n", "").Replace("'", "");
+                                    tag.Remark = tag.Remark.Replace("\\", " ").Replace("\r\n", " ").Replace("'", " ");
                                     SaveDBHistory(new List<TAG> { tag });
 
 
@@ -364,7 +364,7 @@ namespace DataSpider.PC03.PT
                                     tag.Value = msgType.ToString(); ;
 
                                     SavePI(new List<TAG> { tag });
-                                    tag.Remark = tag.Remark.Replace("\\", "").Replace("\r\n", "").Replace("'", "");
+                                    tag.Remark = tag.Remark.Replace("\\", " ").Replace("\r\n", " ").Replace("'", " ");
                                     SaveDBHistory(new List<TAG> { tag });
                                     ///
                                 }
@@ -376,7 +376,7 @@ namespace DataSpider.PC03.PT
                                 }
                             }
                             result = m_sqlBiz.UpdateMeasureEventFrameResult(strSeq, afIFFlag, ifCount, afIFRemark, efTemplate.Name, ref errCode, ref errText);
-                            errText = errText?.Replace("\\", "").Replace("\r\n", "").Replace("'", "");
+                            errText = errText?.Replace("\\", " ").Replace("\r\n", " ").Replace("'", " ");
                             if (!result)
                             {
                                 mOwner.listViewMsg(m_strEName, $"UpdateMeasureEventFrameResult Failed. [{eventFrameName}] - {errText}", true, m_nCurNo, 3, true, PC00D01.MSGTERR);
