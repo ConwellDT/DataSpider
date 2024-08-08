@@ -205,6 +205,7 @@ namespace DataSpider.PC00.PT
 
         /// <summary>
         /// extrainfo 예 { TimeFormat : "yyyy-MM-dd HH:mm:ss, dd-MM-yyyy HH:mm:ss" } 형태로 저장된 포맷들 사용
+        /// OSMO 3320 도 P5 부터 위 설정 사용
         /// </summary>
         public static string EquipmentDateTimeFomatSetting { get; set; } = string.Empty;
 
