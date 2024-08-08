@@ -196,7 +196,16 @@ namespace DataSpider.PC00.PT
             "d M yyyy h:m:s tt", "dd.MM.yyyy HH:mm", "yyMMdd HHmm",
             "yyyy-MM-dd tt h:mm:ss", "dd/MM/yyyy HH.mm.ss", "dd.MM.yyyy HH:mm:ss", "yyyyMMddHHmmss.fff"
         };
+
+        /// <summary>
+        /// MA_COMMON_CD 테이블 TIMEFORMAT 에 "," 로 구분하여 설정된 시간포멧들
+        /// EquipmentDateTimeFomatSetting 가 없을때 파싱 시 사용 
+        /// </summary>
         public static string DateTimeFomatSetting { get; set; } = "dd.MM.yyyy HH:mm:ss, yyyyMMddHHmmss.fff, yyyy M d H m s, ddMMMyy HH:mm, dd-MMM-yy HH:mm";
+
+        /// <summary>
+        /// extrainfo 예 { TimeFormat : "yyyy-MM-dd HH:mm:ss, dd-MM-yyyy HH:mm:ss" } 형태로 저장된 포맷들 사용
+        /// </summary>
         public static string EquipmentDateTimeFomatSetting { get; set; } = string.Empty;
 
         public static bool TryParseExact(string strDateTime, out DateTime dtDateTime)
