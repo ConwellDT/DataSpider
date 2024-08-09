@@ -44,6 +44,8 @@ namespace DataSpider
         private EventFrameMonitor eventFrameMonitor = null;
         private EventFrameAlarmMonitor eventFrameAlarm = null;
 
+        private int MY_ID = -1;
+
         public MonitorForm()
         {
             InitializeComponent();
@@ -223,7 +225,14 @@ namespace DataSpider
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+            MY_ID = sqlBiz.GetServerId(Environment.MachineName);
+            if (MY_ID == -1)
+            {
+                MessageBox.Show($"Server Code does not exists in database. The program will terminate", this.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Application.Exit();
+                return;
+            }
+
             if (ConfigHelper.GetAppSetting("SPLASH").Trim().ToUpper().Equals("Y"))//.Contains("y") )
             {
                 Thread threadSplash = new Thread(SplashThread);
@@ -263,12 +272,6 @@ namespace DataSpider
             string strErrCode = string.Empty;
             string strErrText = string.Empty;
 
-            int MY_ID = sqlBiz.GetServerId(Environment.MachineName);
-            if (MY_ID == -1)
-            {
-                MessageBox.Show($"Server Code does not exist in database", this.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                Application.Exit();
-            }
             strSvrCode = (MY_ID == 0) ? "P" : "S";
             toolStripStatusLabel_ServerName.Text = $"Server = {strSvrName}({strSvrCode})";
 
@@ -421,6 +424,8 @@ namespace DataSpider
 
         private void MonitorForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (MY_ID == -1) return;
+
             DialogResult dialogResult = MessageBox.Show(PC00D01.MSGP0001, PC00D01.MSGP0002, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (!dialogResult.Equals(DialogResult.Yes))
@@ -428,7 +433,6 @@ namespace DataSpider
                 e.Cancel = true;
                 return;
             }
-
 
             m_pSBLDataCtrl.OnChangeDataEvent -= new EquipCtrl.OnChangeDataHandler(pTreeForm.OnChangeTreeData);
             pTreeForm.OnRefreshTreeData -= new TreeForm.OnRefreshTreeDataDelegate(m_pSBLDataCtrl.InitData);
