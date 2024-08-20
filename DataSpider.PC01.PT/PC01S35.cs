@@ -268,7 +268,7 @@ namespace DataSpider.PC01.PT
             listViewMsg.UpdateStatus(true);
             listViewMsg.UpdateMsg("Thread started");
 
-            GetLastEnqueuedDateTime(out dtLastEnqueuedEvent, "Event");
+            //GetLastEnqueuedDateTime(out dtLastEnqueuedEvent, "Event");
             GetLastEnqueuedDateTime(out dtLastEnqueuedResult, "Result");
 
             while (!bTerminal)
@@ -293,7 +293,7 @@ namespace DataSpider.PC01.PT
                             UpdateEquipmentProgDateTime(IF_STATUS.Normal);
 
                             ProcessMethodRemoteResults();
-                            ProcessMethodRemoteEvents();
+                            //ProcessMethodRemoteEvents();
                         }
                     }
                 }
