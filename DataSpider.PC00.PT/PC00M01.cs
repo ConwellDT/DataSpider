@@ -906,9 +906,12 @@ namespace DataSpider.PC00.PT
                     // EventFrame 저장 성공일때만 EventFrame 정보 TAG 저장, 실패 시 PC03 에서 저장 시 처리
                     if (efResult.afIFFlag.Equals("Y"))
                     {
+                        // EventFrameName 저장 TAG 는 MSGTYPE 0, 태그명 장비명_EVENTID 로 태그가 있어야 함
+                        // MessageType 저장 TAG 는 MSGTYPE 0, 태그명 장비명_MSGTYPE 로 태그가 있어야 함
                         if (DicTAGList.TryGetValue($"{equipName}_0", out List<TAG> listMsgtype0TAGs))
                         {
-                            TAG tag = listMsgtype0TAGs.Find(x => x.TagName.Equals($"{equipName}_EVENTFRAMENAME"));
+                            // 20240819, SHS, EventFrameName 저장 TAG NAme : 장비명_EVENTFRAMENAME -> 장비명_EVENTID
+                            TAG tag = listMsgtype0TAGs.Find(x => x.TagName.Equals($"{equipName}_EVENTID"));
                             if (tag != null)
                             {
                                 tag.PIIFDateTime = DateTime.Now;
