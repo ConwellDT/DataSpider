@@ -71,7 +71,7 @@ namespace DataSpider.PC01.PT
             {
                 List<object> InputArguments = new List<object>();
 
-                listViewMsg.UpdateMsg($"ProcessMethodRemoteResults. OPC Call remoteResults - Result Requestd : {dtLastEnqueuedResult:yyyy-MM-dd HH:mm:ss}", false, true, true, PC00D01.MSGTERR);
+                listViewMsg.UpdateMsg($"ProcessMethodRemoteResults. OPC Call remoteResults - Result Requestd : {dtLastEnqueuedResult:yyyy-MM-dd HH:mm:ss}", false, true, true, PC00D01.MSGTINF);
 
                 outputArguments = myUaClient.m_session.Call(new NodeId("ns=3;s=OsmoTECH_XT"),
                                                             new NodeId("ns=3;s=remoteResults"),
@@ -160,7 +160,7 @@ namespace DataSpider.PC01.PT
             {
                 List<object> InputArguments = new List<object>();
 
-                listViewMsg.UpdateMsg($"ProcessMethodRemoteResults. OPC Call remoteResults - Result Requestd : {dtLastEnqueuedEvent:yyyy-MM-dd HH:mm:ss}", false, true, true, PC00D01.MSGTERR);
+                listViewMsg.UpdateMsg($"ProcessMethodRemoteResults. OPC Call remoteResults - Result Requestd : {dtLastEnqueuedEvent:yyyy-MM-dd HH:mm:ss}", false, true, true, PC00D01.MSGTINF);
 
                 outputArguments = myUaClient.m_session.Call(new NodeId("ns=3;s=OsmoTECH_XT"),
                                                             new NodeId("ns=3;s=remoteEvents"),

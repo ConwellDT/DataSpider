@@ -312,11 +312,15 @@ namespace DataSpider.PC03.PT
                             string endTime = dtResult.Rows[i]["END_TIME"].ToString();
                             string attributes = dtResult.Rows[i]["ATTRIBUTES"].ToString();
                             string afIFTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
+                            string eventFrameTemplateName = dtResult.Rows[i]["EVENTFRAME_TEMPLATE_NAME"].ToString();// $"{m_strETypeName}_{msgType:00}";
 
                             List<EventFrameAttributeData> listAttributes = JsonSerializer.Deserialize<List<EventFrameAttributeData>>(attributes);
                             List<string> listAttributeNames = listAttributes.Select(x => x.Name).ToList();
+                            
+                            if (string.IsNullOrWhiteSpace(eventFrameTemplateName))
+                                eventFrameTemplateName = $"{m_strETypeName}_{msgType:00}";
 
-                            AFElementTemplate efTemplate = GetEventFrameTemplate(m_strETypeName, msgType, listAttributeNames, out string errMessage);
+                            AFElementTemplate efTemplate = GetEventFrameTemplate(eventFrameTemplateName, listAttributeNames, out string errMessage);
                             afIFFlag = "E";
 
                             if (efTemplate == null)
@@ -343,26 +347,27 @@ namespace DataSpider.PC03.PT
                                     //
                                     // EventFrame 저장 성공일때만 EventFrame 정보 TAG 저장
                                     // public TAG(string tagName, string equipName, int msgType, string piTagName, string efAttributeName, string lastMeasuredValue, string lastMeasuredDateTime)
-                                    TAG tag = new TAG($"{equipName}_EVENTFRAMENAME", equipName, 0, $"{equipName}_EVENTFRAMENAME.PV", string.Empty, string.Empty, string.Empty);
-                                    tag.PIIFDateTime = DateTime.Now;
-                                    tag.PIIFFlag = "N"; // N -> Y, E -> F, Z
-                                    tag.IsDBInserted = false;
-                                    tag.dtTimeStamp = DateTime.Parse(startTime);
-                                    tag.Value = eventFrameName;
-
+                                    TAG tag = new TAG($"{equipName}_EVENTID", equipName, 0, $"{equipName}_EVENTID.PV", string.Empty, string.Empty, string.Empty)
+                                    {
+                                        PIIFDateTime = DateTime.Now,
+                                        PIIFFlag = "N", // N -> Y, E -> F, Z
+                                        IsDBInserted = false,
+                                        dtTimeStamp = DateTime.Parse(startTime),
+                                        Value = eventFrameName
+                                    };
                                     SavePI(new List<TAG> { tag });
                                     tag.Remark = tag.Remark.Replace("\\", " ").Replace("\r\n", " ").Replace("'", " ");
                                     SaveDBHistory(new List<TAG> { tag });
 
-
-                                    tag = new TAG($"{equipName}_MSGTYPE", equipName, 0, $"{equipName}_MSGTYPE.PV", string.Empty, string.Empty, string.Empty);
-                                    tag.PIIFDateTime = DateTime.Now;
-                                    tag.Remark = string.Empty;
-                                    tag.PIIFFlag = "N"; // N -> Y, E -> F, Z
-                                    tag.IsDBInserted = false;
-                                    tag.dtTimeStamp = DateTime.Parse(startTime);
-                                    tag.Value = msgType.ToString(); ;
-
+                                    tag = new TAG($"{equipName}_MSGTYPE", equipName, 0, $"{equipName}_MSGTYPE.PV", string.Empty, string.Empty, string.Empty)
+                                    {
+                                        PIIFDateTime = DateTime.Now,
+                                        Remark = string.Empty,
+                                        PIIFFlag = "N", // N -> Y, E -> F, Z
+                                        IsDBInserted = false,
+                                        dtTimeStamp = DateTime.Parse(startTime),
+                                        Value = msgType.ToString()
+                                    };
                                     SavePI(new List<TAG> { tag });
                                     tag.Remark = tag.Remark.Replace("\\", " ").Replace("\r\n", " ").Replace("'", " ");
                                     SaveDBHistory(new List<TAG> { tag });
@@ -375,7 +380,7 @@ namespace DataSpider.PC03.PT
                                     ThreadStatus = IF_STATUS.InternalError;
                                 }
                             }
-                            result = m_sqlBiz.UpdateMeasureEventFrameResult(strSeq, afIFFlag, ifCount, afIFRemark, efTemplate.Name, ref errCode, ref errText);
+                            result = m_sqlBiz.UpdateMeasureEventFrameResult(strSeq, afIFFlag, ifCount, afIFRemark, eventFrameTemplateName, ref errCode, ref errText);
                             errText = errText?.Replace("\\", " ").Replace("\r\n", " ").Replace("'", " ");
                             if (!result)
                             {
@@ -578,15 +583,74 @@ namespace DataSpider.PC03.PT
 
         // PC03 은 무조건 기본 템플릿으로 가능한지 확인 후 안될 경우 다른 템플릿으로 확인 후 다 안되면 새로 생성
         //private AFElementTemplate GetEventFrameTemplate(AFDatabase afDB, string equipTypeName, int msgType, List<string> listAttributeNames)
-        private AFElementTemplate GetEventFrameTemplate(string equipTypeName, int msgType, List<string> listAttributeNames, out string errMessage)
+        //private AFElementTemplate GetEventFrameTemplate(string equipTypeName, int msgType, List<string> listAttributeNames, out string errMessage)
+        //{
+        //    try
+        //    {
+        //        errMessage = string.Empty;
+        //        AFElementTemplate efTemp = null;
+
+        //        //if (afDB == null) throw new ArgumentNullException(nameof(afDB));
+        //        string efTemplateName = m_sqlBiz.ReadSTCommon(equipTypeName, "EventFrameTemplateName");
+
+        //        // 최초 afDB 로드 후 다른 인스턴스에서 변경된 내용은 refresh 해야 한다
+        //        // AF 연결 
+        //        if (!CheckAFDatabase(out string errString))
+        //        {
+        //            mOwner.listViewMsg(m_strEName, errString, true, m_nCurNo, 3, true, PC00D01.MSGTERR);
+        //            errMessage = errString;
+        //            return null;
+        //        }
+        //        _AFDatabase.Refresh();
+
+        //        if (!string.IsNullOrWhiteSpace(efTemplateName))
+        //        {
+        //            // 설정된 템플릿 조회
+        //            efTemp = GetEventFrameTemplate(efTemplateName);
+
+        //            if (efTemp != null)
+        //            {
+        //                List<string> omittedAttributeNames = efTemp.AttributeTemplates.GetOmittedAttributes(listAttributeNames);
+        //                // Template 의 Attribute 에 저장할 데이터의 Attribute 가 다 있으면 사용 
+        //                if (omittedAttributeNames.Count == 0)
+        //                {
+        //                    return efTemp;
+        //                }
+        //                mOwner.listViewMsg(m_strEName, $"EventFrameTemplate({efTemplateName}) is not matches. Omitted attribute names : {string.Join(", ", omittedAttributeNames)}.", true, m_nCurNo, 3, true, PC00D01.MSGTINF);
+        //            }
+        //        }
+
+        //        // 기본 템플릿 이름으로 시작하는 템플릿 모두 조회
+        //        //AFElementTemplates eventFrameTemplate = afDB.ElementTemplates?.Where(x => x.InstanceType.Equals(typeof(AFEventFrame)) && x.Name.StartsWith(efTemplateBaseName)).OrderBy(x => x.Name);
+        //        IEnumerable<AFElementTemplate> eventFrameTemplates = from temp in _AFDatabase.ElementTemplates
+        //                                                             where temp.InstanceType.Equals(typeof(AFEventFrame)) && temp.Name.StartsWith($"{equipTypeName}_{msgType:00}") && !temp.Name.Equals(efTemplateName)
+        //                                                             orderby temp.Name descending
+        //                                                             select temp;
+
+        //        efTemp = eventFrameTemplates.FirstOrDefault(x => x.AttributeTemplates.GetOmittedAttributes(listAttributeNames).Count == 0);
+
+        //        // 저장가능한 템플릿이 없으면 새로 생성
+        //        if (efTemp == null)
+        //        {
+        //            string eventFrameTemplateName = $"{equipTypeName}_{msgType:00}_{DateTime.Now:yyyyMMddHHmmssfff}";
+        //            mOwner.listViewMsg(m_strEName, $"There are no matched EventFrameTemplates. Create new EventFrameTemplate Name : {eventFrameTemplateName}, AttributeTemplates : {string.Join(", ", listAttributeNames)}.", true, m_nCurNo, 3, true, PC00D01.MSGTINF);
+        //            efTemp = CreateEventFrameTemplate(_AFDatabase, eventFrameTemplateName, listAttributeNames);
+        //        }
+        //        return efTemp;
+        //        //return efTemp ?? CreateEventFrameTemplate(afDB, $"{efTemplateBaseName}_{DateTime.Now:yyyyMMddHHmmssfff}", listAttributeNames);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        errMessage = $"Exception in GetEventFrameTemplate - ({ex})";
+        //        mOwner.listViewMsg(m_strEName, $"Exception in GetEventFrameTemplate - ({ex})", true, m_nCurNo, 3, true, PC00D01.MSGTERR);
+        //        return null;
+        //    }
+        //}
+        private AFElementTemplate GetEventFrameTemplate(string efTemplateName, List<string> listAttributeNames, out string errMessage)
         {
             try
             {
                 errMessage = string.Empty;
-                AFElementTemplate efTemp = null;
-
-                //if (afDB == null) throw new ArgumentNullException(nameof(afDB));
-                string efTemplateName = m_sqlBiz.ReadSTCommon(equipTypeName, "EventFrameTemplateName");
 
                 // 최초 afDB 로드 후 다른 인스턴스에서 변경된 내용은 refresh 해야 한다
                 // AF 연결 
@@ -596,43 +660,29 @@ namespace DataSpider.PC03.PT
                     errMessage = errString;
                     return null;
                 }
+                if (string.IsNullOrWhiteSpace(efTemplateName))
+                {
+                    errMessage = $"EventFrame Template Name is empty";
+                    return null;
+                }
+
                 _AFDatabase.Refresh();
 
-                if (!string.IsNullOrWhiteSpace(efTemplateName))
-                {
-                    // 설정된 템플릿 조회
-                    efTemp = GetEventFrameTemplate(efTemplateName);
+                // 설정된 템플릿 조회
+                AFElementTemplate efTemplate = GetEventFrameTemplate(efTemplateName);
 
-                    if (efTemp != null)
-                    {
-                        List<string> omittedAttributeNames = efTemp.AttributeTemplates.GetOmittedAttributes(listAttributeNames);
-                        // Template 의 Attribute 에 저장할 데이터의 Attribute 가 다 있으면 사용 
-                        if (omittedAttributeNames.Count == 0)
-                        {
-                            return efTemp;
-                        }
-                        mOwner.listViewMsg(m_strEName, $"EventFrameTemplate({efTemplateName}) is not matches. Omitted attribute names : {string.Join(", ", omittedAttributeNames)}.", true, m_nCurNo, 3, true, PC00D01.MSGTINF);
-                    }
+                if (efTemplate != null)
+                {
+                    mOwner.listViewMsg(m_strEName, $"GetEventFrameTemplate({efTemplateName}) success.", true, m_nCurNo, 3, true, PC00D01.MSGTINF);
+                }
+                else
+                {
+                    // Template 이 없으면 저장하지 못함 (pc03 은 템플릿을 생성하지 않음)
+                    errMessage = $"There is no EventFrameTemplate({efTemplateName}).";
+                    mOwner.listViewMsg(m_strEName, $"There is no EventFrameTemplate({efTemplateName}).", true, m_nCurNo, 3, true, PC00D01.MSGTERR);
                 }
 
-                // 기본 템플릿 이름으로 시작하는 템플릿 모두 조회
-                //AFElementTemplates eventFrameTemplate = afDB.ElementTemplates?.Where(x => x.InstanceType.Equals(typeof(AFEventFrame)) && x.Name.StartsWith(efTemplateBaseName)).OrderBy(x => x.Name);
-                IEnumerable<AFElementTemplate> eventFrameTemplates = from temp in _AFDatabase.ElementTemplates
-                                                                     where temp.InstanceType.Equals(typeof(AFEventFrame)) && temp.Name.StartsWith($"{equipTypeName}_{msgType:00}") && !temp.Name.Equals(efTemplateName)
-                                                                     orderby temp.Name descending
-                                                                     select temp;
-
-                efTemp = eventFrameTemplates.FirstOrDefault(x => x.AttributeTemplates.GetOmittedAttributes(listAttributeNames).Count == 0);
-
-                // 저장가능한 템플릿이 없으면 새로 생성
-                if (efTemp == null)
-                {
-                    string eventFrameTemplateName = $"{equipTypeName}_{msgType:00}_{DateTime.Now:yyyyMMddHHmmssfff}";
-                    mOwner.listViewMsg(m_strEName, $"There are no matched EventFrameTemplates. Create new EventFrameTemplate Name : {eventFrameTemplateName}, AttributeTemplates : {string.Join(", ", listAttributeNames)}.", true, m_nCurNo, 3, true, PC00D01.MSGTINF);
-                    efTemp = CreateEventFrameTemplate(_AFDatabase, eventFrameTemplateName, listAttributeNames);
-                }
-                return efTemp;
-                //return efTemp ?? CreateEventFrameTemplate(afDB, $"{efTemplateBaseName}_{DateTime.Now:yyyyMMddHHmmssfff}", listAttributeNames);
+                return efTemplate;
             }
             catch (Exception ex)
             {
@@ -641,7 +691,6 @@ namespace DataSpider.PC03.PT
                 return null;
             }
         }
-
 
         private AFElementTemplate CreateEventFrameTemplate(AFDatabase database, string eventFrameTemplateName, List<string> listAttributeNames)
         {

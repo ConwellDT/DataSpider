@@ -449,7 +449,7 @@ namespace DataSpider.PC00.PT
         public bool IsDBInserted { get; set; } = false;
         public string PITagName { get; set; }
         // PI I/F Error Text
-        public string Remark { get; set; }
+        public string Remark { get; set; } = string.Empty;
         public string LastMeasureDateTime { get; set; } = string.Empty;
         public string LastMeasureValue { get; set; } = string.Empty;
         // ---
@@ -885,8 +885,10 @@ namespace DataSpider.PC00.PT
                     EquipmentName = equipName,
                     MessageType = msgType,
                     ServerTime = serverTime, 
-                    IFFlag = "E"
+                    IFFlag = "E", 
+                    TemplateName = $"{equipTypeName}_{msgType:00}"
                 };
+
                 listUpdatedEF.ForEach(tag => efData.Attributes.Add(new EventFrameAttributeData() { Name = tag.EFAttributeName, Value = tag.Value }));
 
                 AFElementTemplate efTemplate = GetEventFrameTemplate(equipTypeName, msgType, listAttributeNames, out string errMessage);
@@ -901,7 +903,7 @@ namespace DataSpider.PC00.PT
 
                     efData.IFFlag = efResult.afIFFlag;
                     efData.IFRemark = efResult.afIFRemark.Replace("'", " "); 
-                    efData.TemplateName = efTemplate.Name;
+                    //efData.TemplateName = efTemplate.Name;
 
                     // EventFrame 저장 성공일때만 EventFrame 정보 TAG 저장, 실패 시 PC03 에서 저장 시 처리
                     if (efResult.afIFFlag.Equals("Y"))
