@@ -242,8 +242,9 @@ namespace DataSpider.PC01.PT
                         if (kvp.Key == "MSR_SVRTIME")
                         {
                             //EnQueue(MSGTYPE.MEASURE, $" {kvp.Key},{svrtime.ToString("yyyy-MM-dd HH:mm:ss")}, {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}");
-                            listData.Add($"{kvp.Key}, {svrtime:yyyy-MM-dd HH:mm:ss}, {DateTime.Now:yyyy-MM-dd HH:mm:ss}");
-                            listViewMsg.UpdateMsg($" {kvp.Key}, {svrtime:yyyy-MM-dd HH:mm:ss}, {strValue}, {DateTime.Now:yyyy-MM-dd HH:mm:ss} ", false, true, true, PC00D01.MSGTINF);
+                            string currentTime = $"{DateTime.Now:yyyy-MM-dd HH:mm:ss}";
+                            listData.Add($"{kvp.Key}, {svrtime:yyyy-MM-dd HH:mm:ss}, {currentTime}");
+                            listViewMsg.UpdateMsg($" {kvp.Key}, {svrtime:yyyy-MM-dd HH:mm:ss}, {strValue}, {currentTime}", false, true, true, PC00D01.MSGTINF);
                         }
                         else
                         {
