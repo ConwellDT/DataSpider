@@ -312,14 +312,11 @@ namespace DataSpider.PC03.PT
                             string endTime = dtResult.Rows[i]["END_TIME"].ToString();
                             string attributes = dtResult.Rows[i]["ATTRIBUTES"].ToString();
                             string afIFTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
-                            string eventFrameTemplateName = dtResult.Rows[i]["EVENTFRAME_TEMPLATE_NAME"].ToString();// $"{m_strETypeName}_{msgType:00}";
+                            string eventFrameTemplateName = $"{m_strETypeName}_{msgType:00}"; // dtResult.Rows[i]["EVENTFRAME_TEMPLATE_NAME"].ToString();// 
 
                             List<EventFrameAttributeData> listAttributes = JsonSerializer.Deserialize<List<EventFrameAttributeData>>(attributes);
                             List<string> listAttributeNames = listAttributes.Select(x => x.Name).ToList();
                             
-                            if (string.IsNullOrWhiteSpace(eventFrameTemplateName))
-                                eventFrameTemplateName = $"{m_strETypeName}_{msgType:00}";
-
                             AFElementTemplate efTemplate = GetEventFrameTemplate(eventFrameTemplateName, listAttributeNames, out string errMessage);
                             afIFFlag = "E";
 
