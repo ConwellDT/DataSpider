@@ -71,9 +71,11 @@ namespace DataSpider.PC01.PT
             {
                 List<object> InputArguments = new List<object>();
 
+                listViewMsg.UpdateMsg($"ProcessMethodRemoteResults. OPC Call remoteResults - Result Requestd : {dtLastEnqueuedResult:yyyy-MM-dd HH:mm:ss}", false, true, true, PC00D01.MSGTERR);
+
                 outputArguments = myUaClient.m_session.Call(new NodeId("ns=3;s=OsmoTECH_XT"),
                                                             new NodeId("ns=3;s=remoteResults"),
-                                                            dtLastEnqueuedResult
+                                                            $"{dtLastEnqueuedResult:yyyy-MM-dd HH:mm:ss}"
                                                          );
             }
             catch (Opc.Ua.ServiceResultException ex)
@@ -158,9 +160,11 @@ namespace DataSpider.PC01.PT
             {
                 List<object> InputArguments = new List<object>();
 
+                listViewMsg.UpdateMsg($"ProcessMethodRemoteResults. OPC Call remoteResults - Result Requestd : {dtLastEnqueuedEvent:yyyy-MM-dd HH:mm:ss}", false, true, true, PC00D01.MSGTERR);
+
                 outputArguments = myUaClient.m_session.Call(new NodeId("ns=3;s=OsmoTECH_XT"),
                                                             new NodeId("ns=3;s=remoteEvents"),
-                                                            dtLastEnqueuedEvent
+                                                            $"{dtLastEnqueuedEvent:yyyy-MM-dd HH:mm:ss}"
                                                          );
             }
             catch (Opc.Ua.ServiceResultException ex)
