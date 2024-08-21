@@ -86,6 +86,8 @@ namespace DataSpider.PC01.PT
             {
                 if (outputArguments != null && outputArguments.Count > 0)
                 {
+                    fileLog.WriteData(outputArguments[0].ToString(), "ResultData", "remoteResults");
+
                     JsonDocument jDoc = JsonDocument.Parse(outputArguments[0].ToString());
                     JsonElement jElement = jDoc.RootElement.GetProperty("Results");
                     if (jElement.ValueKind != JsonValueKind.Array)
@@ -103,7 +105,6 @@ namespace DataSpider.PC01.PT
                         return false;
                     }
                     noResultDataCount = 0;
-                    fileLog.WriteData(outputArguments[0].ToString(), "ResultData", "remoteResults");
 
                     StringBuilder sbResult = new StringBuilder();
                     string TS = string.Empty;
@@ -172,6 +173,8 @@ namespace DataSpider.PC01.PT
             {
                 if (outputArguments != null && outputArguments.Count > 0)
                 {
+                    fileLog.WriteData(outputArguments[0].ToString(), "EventData", "remoteEvents");
+
                     JsonDocument jDoc = JsonDocument.Parse(outputArguments[0].ToString());
                     JsonElement jElement = jDoc.RootElement.GetProperty("Events");
                     if (jElement.ValueKind != JsonValueKind.Array)
@@ -189,7 +192,6 @@ namespace DataSpider.PC01.PT
                         return false;
                     }
                     noEventDataCount = 0;
-                    fileLog.WriteData(outputArguments[0].ToString(), "EventData", "remoteEvents");
 
                     StringBuilder sbResult = new StringBuilder();
                     string TS = string.Empty;
