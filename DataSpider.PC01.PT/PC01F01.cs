@@ -373,6 +373,8 @@ namespace DataSpider.PC01.PT
                         // Scale :
                     case "SC_CAS":
                     case "SC_ICS":
+                    // SC_MCA 출력항목이 고정된 버전
+                    case "SC_MCA_V2":
                         thProcess = new PC01S11[dtEquipment.Rows.Count];
                         foreach (DataRow dr in dtEquipment.Rows)
                         {
