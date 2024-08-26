@@ -118,10 +118,14 @@ namespace DataSpider.PC01.PT
 
                         TS = element.GetProperty("TS").GetDateTime().ToString("yyyy-MM-dd HH:mm:ss");
                         sbResult.AppendLine($"MSR_SVRTIME, {TS}, {DateTime.Now:yyyy-MM-dd HH:mm:ss}");
-                        sbResult.AppendLine($"MSR_DS, {TS}, {element.GetProperty("DS")}");
-                        sbResult.AppendLine($"MSR_RS, {TS}, {element.GetProperty("RS")}");
-                        sbResult.AppendLine($"MSR_SI, {TS}, {element.GetProperty("SI")}");
-                        sbResult.AppendLine($"MSR_UI, {TS}, {element.GetProperty("UI")}");
+                        //sbResult.AppendLine($"MSR_DS, {TS}, {element.GetProperty("DS")}");
+                        //sbResult.AppendLine($"MSR_RS, {TS}, {element.GetProperty("RS")}");
+                        //sbResult.AppendLine($"MSR_SI, {TS}, {element.GetProperty("SI")}");
+                        //sbResult.AppendLine($"MSR_UI, {TS}, {element.GetProperty("UI")}");
+                        sbResult.AppendLine($"TEST_DETAILS, {TS}, {element.GetProperty("DS")}");    // Description
+                        sbResult.AppendLine($"MSR_VAL, {TS}, {element.GetProperty("RS")}");  // Value
+                        sbResult.AppendLine($"MSR_SAMPLE_ID, {TS}, {element.GetProperty("SI")}");  // Sample ID
+                        sbResult.AppendLine($"MSR_USER_ID, {TS}, {element.GetProperty("UI")}");  // User ID
 
                         foreach (KeyValuePair<string, string> kvp in dicOpcItem)
                         {
