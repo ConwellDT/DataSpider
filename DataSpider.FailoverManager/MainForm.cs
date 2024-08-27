@@ -598,6 +598,7 @@ namespace DataSpider.FailoverManager
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             m_Logger.WriteLog($"MainForm_FormClosed!");
+            this.Dispose();
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -625,14 +626,6 @@ namespace DataSpider.FailoverManager
 
         private void 종료ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DialogResult dialogResult = MessageBox.Show(PC00D01.MSGP0001, PC00D01.MSGP0002, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (!dialogResult.Equals(DialogResult.Yes))
-            {
-                return;
-            }
-            m_bTermial = true;
-            Thread.Sleep(10000);
-            notifyIcon1.Visible = false;
             m_Logger.WriteLog($"Application.Exit");
             Application.Exit();
         }
