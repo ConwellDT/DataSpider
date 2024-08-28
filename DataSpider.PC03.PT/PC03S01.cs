@@ -94,7 +94,7 @@ namespace DataSpider.PC03.PT
             user = m_clsPIInfo.strPI_USER;
             password = m_clsPIInfo.strPI_PWD;
 
-            FilePath = $@"{Environment.CurrentDirectory}\Data\{strEquipType}";
+            FilePath = $@"{Environment.CurrentDirectory}\Data\{equipTypeName}";
             if (!Directory.Exists(FilePath))
             {
                 Directory.CreateDirectory(FilePath);
