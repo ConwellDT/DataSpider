@@ -943,9 +943,6 @@ namespace DataSpider.UserMonitor
             this.comboBox_FailoverMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_FailoverMode.Font = new System.Drawing.Font("맑은 고딕", 10F);
             this.comboBox_FailoverMode.FormattingEnabled = true;
-            this.comboBox_FailoverMode.Items.AddRange(new object[] {
-            "Y",
-            "N"});
             this.comboBox_FailoverMode.Location = new System.Drawing.Point(0, 0);
             this.comboBox_FailoverMode.Name = "comboBox_FailoverMode";
             this.comboBox_FailoverMode.Size = new System.Drawing.Size(337, 25);

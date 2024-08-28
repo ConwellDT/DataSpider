@@ -1,4 +1,5 @@
 ﻿using DataSpider.PC00.PT;
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -52,6 +53,12 @@ namespace DataSpider.UserMonitor
             InitControls();
         }
 
+        private class ComboBoxItem
+        {
+            public int Value { get; set; }
+            public string Text { get; set; }
+        }
+
         private void InitControls()
         {
             string strErrCode = string.Empty;
@@ -77,15 +84,29 @@ namespace DataSpider.UserMonitor
             comboBox_ZoneType.DisplayMember = "CODE_NM_VALUE";
             comboBox_ZoneType.ValueMember = "CODE";
 
-            DataTable dtFailoverMode = sqlBiz.GetCommonCode("FailoverMode", ref strErrCode, ref strErrText);
-            comboBox_FailoverMode.DataSource = dtFailoverMode;
-            comboBox_FailoverMode.DisplayMember = "CODE_NM_VALUE";
-            comboBox_FailoverMode.ValueMember = "CODE";
+            var failoverModeItems = new List<ComboBoxItem>
+            {
+                new ComboBoxItem { Value = 0, Text = "Manual" },
+                new ComboBoxItem { Value = 1, Text = "Auto" }
+            };
 
-            DataTable dtFailover = sqlBiz.GetCommonCode("Failover", ref strErrCode, ref strErrText);
-            comboBox_Failover.DataSource = dtFailover;
-            comboBox_Failover.DisplayMember = "CODE_NM_VALUE";
-            comboBox_Failover.ValueMember = "CODE";
+            var failoverItems = new List<ComboBoxItem>
+            {
+                new ComboBoxItem { Value = 0, Text = "Y" },
+                new ComboBoxItem { Value = 1, Text = "N" }
+            };
+
+            comboBox_FailoverMode.DataSource = failoverModeItems;
+
+            // ValueMember와 DisplayMember 설정
+            comboBox_FailoverMode.ValueMember = "Value";
+            comboBox_FailoverMode.DisplayMember = "Text";
+
+            comboBox_Failover.DataSource = failoverItems;
+
+            // ValueMember와 DisplayMember 설정
+            comboBox_Failover.ValueMember = "Value";
+            comboBox_Failover.DisplayMember = "Text";
 
             dataGridTagInfo.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
             dataGridTagInfo.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
@@ -96,15 +117,15 @@ namespace DataSpider.UserMonitor
             //
             dataGridTagInfo.ColumnCount = 9;
 
-            dataGridTagInfo.Columns[0].Name = "Message Type";   dataGridTagInfo.Columns[0].Width = 80;
-            dataGridTagInfo.Columns[1].Name = "Tag Name";       dataGridTagInfo.Columns[1].Width = 120;
-            dataGridTagInfo.Columns[2].Name = "Description";    dataGridTagInfo.Columns[2].Width = 400;
-            dataGridTagInfo.Columns[3].Name = "Item Name";      dataGridTagInfo.Columns[3].Width = 300;
-            dataGridTagInfo.Columns[4].Name = "PI Tag Name";    dataGridTagInfo.Columns[4].Width = 120;
+            dataGridTagInfo.Columns[0].Name = "Message Type"; dataGridTagInfo.Columns[0].Width = 80;
+            dataGridTagInfo.Columns[1].Name = "Tag Name"; dataGridTagInfo.Columns[1].Width = 120;
+            dataGridTagInfo.Columns[2].Name = "Description"; dataGridTagInfo.Columns[2].Width = 400;
+            dataGridTagInfo.Columns[3].Name = "Item Name"; dataGridTagInfo.Columns[3].Width = 300;
+            dataGridTagInfo.Columns[4].Name = "PI Tag Name"; dataGridTagInfo.Columns[4].Width = 120;
             dataGridTagInfo.Columns[5].Name = "EventFrame Attribute Name"; dataGridTagInfo.Columns[5].Width = 120;
             dataGridTagInfo.Columns[6].Name = "Value Position"; dataGridTagInfo.Columns[6].Width = 80;
-            dataGridTagInfo.Columns[7].Name = "Date Position";  dataGridTagInfo.Columns[7].Width = 80;
-            dataGridTagInfo.Columns[8].Name = "Time Position";  dataGridTagInfo.Columns[8].Width = 80;
+            dataGridTagInfo.Columns[7].Name = "Date Position"; dataGridTagInfo.Columns[7].Width = 80;
+            dataGridTagInfo.Columns[8].Name = "Time Position"; dataGridTagInfo.Columns[8].Width = 80;
 
             dataGridTagInfo.EditMode = DataGridViewEditMode.EditOnKeystrokeOrF2;
             dataGridTagInfo.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -164,6 +185,8 @@ namespace DataSpider.UserMonitor
                         this.Text = "Copy Equipmemt";
                         label_Title.Text = $"Copy Equipmemt [ {EquipName} ]";
 
+                        comboBox_Failover.SelectedValue = 0;
+                        comboBox_FailoverMode.SelectedValue = 0;
                         comboBox_UseFlag.SelectedIndex = 0;
                         textBox_EquipName.Enabled = true;
                         comboBox_PiPointSave.SelectedIndex = 0;
@@ -210,7 +233,7 @@ namespace DataSpider.UserMonitor
                             if (dtTag.Rows[0]["TAG_DESC"] != null) row.Cells["Description"].Value = dtTag.Rows[0]["TAG_DESC"].ToString();
                             if (dtTag.Rows[0]["OPCITEM_NM"] != null) row.Cells["Item Name"].Value = dtTag.Rows[0]["OPCITEM_NM"].ToString();
                             if (dtTag.Rows[0]["PI_TAG_NM"] != null) row.Cells["PI Tag Name"].Value = dtTag.Rows[0]["PI_TAG_NM"].ToString();
-                            if (dtTag.Rows[0]["EF_ATTRIBUTE_NM"] != null) row.Cells["EventFrame Attribute Name"].Value = dtTag.Rows[0]["EF_ATTRIBUTE_NM"].ToString(); 
+                            if (dtTag.Rows[0]["EF_ATTRIBUTE_NM"] != null) row.Cells["EventFrame Attribute Name"].Value = dtTag.Rows[0]["EF_ATTRIBUTE_NM"].ToString();
                             if (dtTag.Rows[0]["DATA_POSITION"] != null) row.Cells["Value Position"].Value = dtTag.Rows[0]["DATA_POSITION"].ToString();
                             if (dtTag.Rows[0]["DATE_POSITION"] != null) row.Cells["Date Position"].Value = dtTag.Rows[0]["DATE_POSITION"].ToString();
                             if (dtTag.Rows[0]["TIME_POSITION"] != null) row.Cells["Time Position"].Value = dtTag.Rows[0]["TIME_POSITION"].ToString();
@@ -260,7 +283,7 @@ namespace DataSpider.UserMonitor
 
                     textBox_EquipName.Text = String.Empty;
 
-                    for( int nR = 0; nR < dtTagList.Rows.Count; nR ++ )
+                    for (int nR = 0; nR < dtTagList.Rows.Count; nR++)
                     {
                         int rowId = dataGridTagInfo.Rows.Add();
 
@@ -353,13 +376,13 @@ namespace DataSpider.UserMonitor
 
                 DataRow[] drSelectEquip = null;
 
-                if ( AddMode == true || EditModeCopy == true ) // Check EQ Exist
+                if (AddMode == true || EditModeCopy == true) // Check EQ Exist
                 {
                     DataTable dtEquipment = sqlBiz.GetEquipmentInfo("", "", true, ref strErrCode, ref strErrText);
 
                     //drSelectEquip = dtEquipment.Select($"EQUIP_NM = '{textBox_EquipName.Text.Trim()}' AND EQUIP_TYPE = '{comboBox_EquipType.SelectedValue.ToString()}'");
                     drSelectEquip = dtEquipment.Select($"EQUIP_NM = '{textBox_EquipName.Text.Trim()}'");
-                    if (drSelectEquip  != null && drSelectEquip.Length > 0 )
+                    if (drSelectEquip != null && drSelectEquip.Length > 0)
                     {
                         MessageBox.Show($"Equipment Name ({textBox_EquipName.Text}) already exists", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return;
@@ -370,9 +393,9 @@ namespace DataSpider.UserMonitor
 
                 if (AddMode == true || EditModeCopy == true) EQSaveMode = true;
 
-                if (sqlBiz.InsertUpdateEquipmentInfo(EQSaveMode, textBox_EquipName.Text.Trim(), textBox_Description.Text.Trim(), comboBox_EquipType.SelectedValue.ToString(), 
-                    comboBox_InterfaceType.SelectedValue.ToString(), textBox_ConnectionInfo.Text, textBox_ExtraInfo.Text, comboBox_ServerName.SelectedValue.ToString(), 
-                    comboBox_UseFlag.Text, textBox_ConfigInfo.Text, comboBox_ZoneType.SelectedValue.ToString(), comboBox_PiPointSave.Text, 
+                if (sqlBiz.InsertUpdateEquipmentInfo(EQSaveMode, textBox_EquipName.Text.Trim(), textBox_Description.Text.Trim(), comboBox_EquipType.SelectedValue.ToString(),
+                    comboBox_InterfaceType.SelectedValue.ToString(), textBox_ConnectionInfo.Text, textBox_ExtraInfo.Text, comboBox_ServerName.SelectedValue.ToString(),
+                    comboBox_UseFlag.Text, textBox_ConfigInfo.Text, comboBox_ZoneType.SelectedValue.ToString(), comboBox_PiPointSave.Text,
                     comboBox_EventFrameSave.Text, Convert.ToInt32(textBox_FailWait.Text), Convert.ToInt32(comboBox_FailoverMode.SelectedValue.ToString()), Convert.ToInt32(comboBox_Failover.SelectedValue.ToString()), Convert.ToInt32(textBox_DisconnectSet.Text), ref strErrCode, ref strErrText))
                 {
                     // Save Trag Info
@@ -381,7 +404,7 @@ namespace DataSpider.UserMonitor
 
                     List<String> tagNameList = new List<string>();
 
-                    for ( int nR = 0; nR < dataGridTagInfo.Rows.Count; nR ++ )
+                    for (int nR = 0; nR < dataGridTagInfo.Rows.Count; nR++)
                     {
                         DataGridViewRow row = dataGridTagInfo.Rows[nR];
 
@@ -417,16 +440,16 @@ namespace DataSpider.UserMonitor
 
                     DataTable dtTagInDB = sqlBiz.GetTagInfoByEquip(textBox_EquipName.Text.Trim(), ref strErrCode, ref strErrText);
 
-                    for( int nR = 0; nR < dtTagInDB.Rows.Count; nR ++ )
+                    for (int nR = 0; nR < dtTagInDB.Rows.Count; nR++)
                     {
                         DataRow rowInDB = dtTagInDB.Rows[nR];
 
                         String strTagFound = tagNameList.Find(s => s == rowInDB["Tag Name"].ToString().Trim());
 
-                        if( strTagFound == null )
+                        if (strTagFound == null)
                         {
-                           if( sqlBiz.DeleteTagInfo(rowInDB["Tag Name"].ToString().Trim(), ref strErrCode, ref strErrText) == false )
-                           {
+                            if (sqlBiz.DeleteTagInfo(rowInDB["Tag Name"].ToString().Trim(), ref strErrCode, ref strErrText) == false)
+                            {
                                 MessageBox.Show($"Tag {rowInDB["Tag Name"].ToString().Trim()} 삭제 중 {strErrText} 오류가 발생하였습니다.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
                         }
@@ -506,13 +529,13 @@ namespace DataSpider.UserMonitor
 
         private void textBox_EquipName_TextChanged(object sender, EventArgs e)
         {
-            if( EditModeCopy == true)
+            if (EditModeCopy == true)
             {
                 for (int nR = 0; nR < dataGridTagInfo.Rows.Count; nR++)
                 {
                     DataGridViewRow row = dataGridTagInfo.Rows[nR];
 
-                    if (row != null && row.Cells.Count > 0 )
+                    if (row != null && row.Cells.Count > 0)
                     {
                         if (row.Cells["Tag Name"].Value != null)
                         {
