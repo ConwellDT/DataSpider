@@ -89,7 +89,7 @@ namespace DataSpider
             string errText = string.Empty;
             DataTable dtStatus = sqlBiz.GetProgramStatus2(ref errCode, ref errText);
 
-            foreach (DataRow dr in dtStatus.Rows)
+            foreach (DataRow dr in dtStatus?.Rows)
             {
                 int nStatus = Convert.ToInt16(dr[2].ToString());
                 string strEqName = dr[1].ToString();
