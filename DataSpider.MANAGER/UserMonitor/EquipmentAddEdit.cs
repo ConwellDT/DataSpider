@@ -126,6 +126,11 @@ namespace DataSpider.UserMonitor
                 textBox_EquipName.Enabled = true;
                 comboBox_PiPointSave.SelectedIndex = 0;
                 comboBox_EventFrameSave.SelectedIndex = 0;
+
+                textBox_FailWait.Text = "60";
+                textBox_FailoverMode.Text = "0";
+                textBox_DisconnectSet.Text = "0";
+                textBox_DefaultServer.Text = "0";
             }
             else
             {
@@ -295,6 +300,12 @@ namespace DataSpider.UserMonitor
                 comboBox_PiPointSave.Text = drEquipment["UPDATE_PIPOINT_FLAG"].ToString().ToUpper();
                 comboBox_EventFrameSave.Text = drEquipment["UPDATE_EVENTFRAME_FLAG"].ToString().ToUpper();
 
+                //20240828 dayeong
+                textBox_FailWait.Text = drEquipment["FAIL_WAIT"].ToString();
+                textBox_FailoverMode.Text = drEquipment["FAILOVER_MODE"].ToString();
+                textBox_DisconnectSet.Text = drEquipment["DISCONNECT_SET"].ToString();
+                textBox_DefaultServer.Text = drEquipment["DEFAULT_SERVER"].ToString();
+
                 if (EditModeCopy == false)
                 {
                     textBox_EquipName.Enabled = false;
@@ -348,7 +359,8 @@ namespace DataSpider.UserMonitor
 
                 if (sqlBiz.InsertUpdateEquipmentInfo(EQSaveMode, textBox_EquipName.Text.Trim(), textBox_Description.Text.Trim(), comboBox_EquipType.SelectedValue.ToString(), 
                     comboBox_InterfaceType.SelectedValue.ToString(), textBox_ConnectionInfo.Text, textBox_ExtraInfo.Text, comboBox_ServerName.SelectedValue.ToString(), 
-                    comboBox_UseFlag.Text, textBox_ConfigInfo.Text, comboBox_ZoneType.SelectedValue.ToString(), comboBox_PiPointSave.Text, comboBox_EventFrameSave.Text, ref strErrCode, ref strErrText))
+                    comboBox_UseFlag.Text, textBox_ConfigInfo.Text, comboBox_ZoneType.SelectedValue.ToString(), comboBox_PiPointSave.Text, 
+                    comboBox_EventFrameSave.Text, Convert.ToInt32(textBox_FailWait.Text), Convert.ToInt32(textBox_FailoverMode.Text), Convert.ToInt32(textBox_DisconnectSet.Text), ref strErrCode, ref strErrText))
                 {
                     // Save Trag Info
                     int nTagSaveFailCount = 0;
