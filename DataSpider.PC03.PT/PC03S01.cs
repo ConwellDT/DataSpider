@@ -56,6 +56,9 @@ namespace DataSpider.PC03.PT
         private static AFDatabase _AFDatabase = null;
         private static object objLock = new object();
 
+        private string FilePath = string.Empty;
+        protected Encoding dataEncoding = Encoding.UTF8;
+
         public IF_STATUS ThreadStatus
         {
             get
@@ -90,6 +93,12 @@ namespace DataSpider.PC03.PT
             dbName = m_clsPIInfo.strPI_DB;
             user = m_clsPIInfo.strPI_USER;
             password = m_clsPIInfo.strPI_PWD;
+
+            FilePath = $@"{Environment.CurrentDirectory}\Data\{strEquipType}";
+            if (!Directory.Exists(FilePath))
+            {
+                Directory.CreateDirectory(FilePath);
+            }
 
             try
             {
@@ -355,6 +364,10 @@ namespace DataSpider.PC03.PT
                                     SavePI(new List<TAG> { tag });
                                     tag.Remark = tag.Remark.Replace("\\", " ").Replace("\r\n", " ").Replace("'", " ");
                                     SaveDBHistory(new List<TAG> { tag });
+                                    if (!tag.IsDBInserted)
+                                    {
+                                        SaveFile(new List<TAG> { tag });
+                                    }
 
                                     tag = new TAG($"{equipName}_MSGTYPE", equipName, 0, $"{equipName}_MSGTYPE.PV", string.Empty, string.Empty, string.Empty)
                                     {
@@ -368,6 +381,10 @@ namespace DataSpider.PC03.PT
                                     SavePI(new List<TAG> { tag });
                                     tag.Remark = tag.Remark.Replace("\\", " ").Replace("\r\n", " ").Replace("'", " ");
                                     SaveDBHistory(new List<TAG> { tag });
+                                    if (!tag.IsDBInserted)
+                                    {
+                                        SaveFile(new List<TAG> { tag });
+                                    }
                                     ///
                                 }
                                 else
@@ -402,6 +419,31 @@ namespace DataSpider.PC03.PT
                 result = false;
             }
             return result;
+        }
+
+        private bool SaveFile(List<TAG> listResult)
+        {
+            string fullFileName;
+            try
+            {
+                while (true)
+                {
+                    fullFileName = $@"{FilePath}\{DateTime.Now:yyyyMMddHHmmssfff}.ttv";
+                    if (File.Exists(fullFileName))
+                        continue;
+                    File.AppendAllLines(fullFileName, listResult.Select(x => x.TTFTV), dataEncoding);
+                    string fileContent = File.ReadAllText(fullFileName);
+                    mOwner.listViewMsg(m_strEName, $"File saved. ({fullFileName}) {fileContent}", true, m_nCurNo, 3, true, PC00D01.MSGTINF);
+                    break;
+                }
+            }
+            catch (Exception ex)
+            {
+                mOwner.listViewMsg(m_strEName, $"Exception in SaveFile - ({ex})", true, m_nCurNo, 3, true, PC00D01.MSGTERR);
+                return false;
+            }
+
+            return true;
         }
 
         private bool SavePI(List<TAG> listResult)
