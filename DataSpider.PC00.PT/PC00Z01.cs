@@ -368,6 +368,26 @@ namespace DataSpider.PC00.PT
             return result;
         }
         // --------------------------------------
+        public DataTable GetAllCommonCode( ref string _strErrCode, ref string _strErrText)
+        {
+            DataTable result = null;
+            try
+            {
+                StringBuilder strQuery = new StringBuilder();
+                strQuery.Append($"EXEC GetAllCommonCode");
+
+                DataSet ds = CFW.Data.MsSqlDbAccess.GetDataSet(strQuery.ToString(), null, CommandType.Text, ref _strErrCode, ref _strErrText);
+                if (ds != null && ds.Tables[0] != null)
+                {
+                    result = ds.Tables[0];
+                }
+            }
+            catch (Exception ex)
+            {
+                _strErrText = ex.ToString();
+            }
+            return result;
+        }
 
         public DataTable GetCommonCode(string codeGroup, ref string _strErrCode, ref string _strErrText)
         {
@@ -934,7 +954,7 @@ namespace DataSpider.PC00.PT
             }
         }
 
-        public bool InsertUpdateEquipmentInfo(bool add, string equipName, string description, string equipType, string interfaceType, string connectionInfo, string extraInfo, string serverName, string useFlag, string configInfo, string zoneType, string piPointFlag, string efFlag, int failWait, int failoverMode, int disconnectSet, ref string _strErrCode, ref string _strErrText)
+        public bool InsertUpdateEquipmentInfo(bool add, string equipName, string description, string equipType, string interfaceType, string connectionInfo, string extraInfo, string serverName, string useFlag, string configInfo, string zoneType, string piPointFlag, string efFlag, int failWait, int failoverMode, int failover, int disconnectSet, ref string _strErrCode, ref string _strErrText)
         {
             try
             {
@@ -956,7 +976,7 @@ namespace DataSpider.PC00.PT
                     if (serverId == -1) serverId = 0;
                     strQuery.Clear();
 
-                    strQuery.Append($"EXEC InsertUpdateFailoverInfo '{equipName}', {serverId}, {failWait}, {failoverMode}, {disconnectSet}");
+                    strQuery.Append($"EXEC InsertUpdateFailoverInfo '{equipName}', {serverId}, {failWait}, '{failoverMode}','{failover}', {disconnectSet}");
                     result = CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref _strErrCode, ref _strErrText);
                 }
                 return result;
