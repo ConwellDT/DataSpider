@@ -930,6 +930,10 @@ namespace DataSpider.PC00.PT
                                 }
                                 SavePI(new List<TAG> { tag }, true);
                                 SaveDBHistory(new List<TAG> { tag });
+                                if (!tag.IsDBInserted)
+                                {
+                                    SaveFile(new List<TAG> { tag });
+                                }
                             }
                             else
                             {
@@ -954,6 +958,10 @@ namespace DataSpider.PC00.PT
                                 }
                                 SavePI(new List<TAG> { tag }, true);
                                 SaveDBHistory(new List<TAG> { tag });
+                                if (!tag.IsDBInserted)
+                                {
+                                    SaveFile(new List<TAG> { tag });
+                                }
                             }
                             else
                             {
