@@ -132,6 +132,12 @@
     <Compile Include="UserMonitor\ConfigSystem.Designer.cs">
       <DependentUpon>ConfigSystem.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserMonitor\CommonCodeConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserMonitor\CommonCodeConfig.Designer.cs">
+      <DependentUpon>CommonCodeConfig.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserMonitor\ConfigTagGroup.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -262,6 +268,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserMonitor\ConfigSystem.resx">
       <DependentUpon>ConfigSystem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserMonitor\CommonCodeConfig.resx">
+      <DependentUpon>CommonCodeConfig.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserMonitor\ConfigTagGroup.resx">
       <DependentUpon>ConfigTagGroup.cs</DependentUpon>
