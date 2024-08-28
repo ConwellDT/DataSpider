@@ -934,7 +934,7 @@ namespace DataSpider.PC00.PT
             }
         }
 
-        public bool InsertUpdateEquipmentInfo(bool add, string equipName, string description, string equipType, string interfaceType, string connectionInfo, string extraInfo, string serverName, string useFlag, string configInfo, string zoneType, string piPointFlag, string efFlag, ref string _strErrCode, ref string _strErrText)
+        public bool InsertUpdateEquipmentInfo(bool add, string equipName, string description, string equipType, string interfaceType, string connectionInfo, string extraInfo, string serverName, string useFlag, string configInfo, string zoneType, string piPointFlag, string efFlag, int failWait, int failoverMode, int disconnectSet, ref string _strErrCode, ref string _strErrText)
         {
             try
             {
@@ -956,7 +956,7 @@ namespace DataSpider.PC00.PT
                     if (serverId == -1) serverId = 0;
                     strQuery.Clear();
 
-                    strQuery.Append($"EXEC InsertUpdateFailoverInfo '{equipName}', {serverId}");
+                    strQuery.Append($"EXEC InsertUpdateFailoverInfo '{equipName}', {serverId}, {failWait}, {failoverMode}, {disconnectSet}");
                     result = CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref _strErrCode, ref _strErrText);
                 }
                 return result;
