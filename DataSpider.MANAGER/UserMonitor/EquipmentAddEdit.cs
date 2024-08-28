@@ -77,6 +77,16 @@ namespace DataSpider.UserMonitor
             comboBox_ZoneType.DisplayMember = "CODE_NM_VALUE";
             comboBox_ZoneType.ValueMember = "CODE";
 
+            DataTable dtFailoverMode = sqlBiz.GetCommonCode("FailoverMode", ref strErrCode, ref strErrText);
+            comboBox_FailoverMode.DataSource = dtFailoverMode;
+            comboBox_FailoverMode.DisplayMember = "CODE_NM_VALUE";
+            comboBox_FailoverMode.ValueMember = "CODE";
+
+            DataTable dtFailover = sqlBiz.GetCommonCode("Failover", ref strErrCode, ref strErrText);
+            comboBox_Failover.DataSource = dtFailover;
+            comboBox_Failover.DisplayMember = "CODE_NM_VALUE";
+            comboBox_Failover.ValueMember = "CODE";
+
             dataGridTagInfo.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
             dataGridTagInfo.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
             dataGridTagInfo.AllowUserToResizeRows = dataGridTagInfo.AllowUserToResizeColumns = true;
@@ -114,6 +124,8 @@ namespace DataSpider.UserMonitor
                     //comboBox_InterfaceType.SelectedValue = dtInterfacetype.Select($"CODE_NM = '{EquipTypeName}'")[0]["CODE"].ToString();
                     comboBox_InterfaceType.SelectedIndex = 0;
                     comboBox_ZoneType.SelectedIndex = 0;
+                    comboBox_FailoverMode.SelectedIndex = 0;
+                    comboBox_Failover.SelectedIndex = 0;
                 }
                 foreach (Control ctrl in this.Controls)
                 {
@@ -128,7 +140,6 @@ namespace DataSpider.UserMonitor
                 comboBox_EventFrameSave.SelectedIndex = 0;
 
                 textBox_FailWait.Text = "60";
-                textBox_FailoverMode.Text = "0";
                 textBox_DisconnectSet.Text = "0";
                 textBox_DefaultServer.Text = "0";
             }
@@ -172,6 +183,9 @@ namespace DataSpider.UserMonitor
                 comboBox_EquipType.SelectedValue = int.Parse(drEquipment["EQUIP_TYPE"].ToString());
                 comboBox_InterfaceType.SelectedValue = int.Parse(drEquipment["IF_TYPE"].ToString());
                 comboBox_ZoneType.SelectedValue = int.Parse(drEquipment["ZONE_TYPE"].ToString());
+                comboBox_FailoverMode.SelectedValue = int.Parse(drEquipment["FAILOVER_MODE"].ToString());
+                comboBox_Failover.SelectedValue = int.Parse(drEquipment["FAILOVER"].ToString());
+
 
                 dataGridTagInfo.Rows.Clear();
                 textBox_ConnectionInfo.Text = drEquipment["CONNECTION_INFO"].ToString();
@@ -302,7 +316,6 @@ namespace DataSpider.UserMonitor
 
                 //20240828 dayeong
                 textBox_FailWait.Text = drEquipment["FAIL_WAIT"].ToString();
-                textBox_FailoverMode.Text = drEquipment["FAILOVER_MODE"].ToString();
                 textBox_DisconnectSet.Text = drEquipment["DISCONNECT_SET"].ToString();
                 textBox_DefaultServer.Text = drEquipment["DEFAULT_SERVER"].ToString();
 
@@ -360,7 +373,7 @@ namespace DataSpider.UserMonitor
                 if (sqlBiz.InsertUpdateEquipmentInfo(EQSaveMode, textBox_EquipName.Text.Trim(), textBox_Description.Text.Trim(), comboBox_EquipType.SelectedValue.ToString(), 
                     comboBox_InterfaceType.SelectedValue.ToString(), textBox_ConnectionInfo.Text, textBox_ExtraInfo.Text, comboBox_ServerName.SelectedValue.ToString(), 
                     comboBox_UseFlag.Text, textBox_ConfigInfo.Text, comboBox_ZoneType.SelectedValue.ToString(), comboBox_PiPointSave.Text, 
-                    comboBox_EventFrameSave.Text, Convert.ToInt32(textBox_FailWait.Text), Convert.ToInt32(textBox_FailoverMode.Text), Convert.ToInt32(textBox_DisconnectSet.Text), ref strErrCode, ref strErrText))
+                    comboBox_EventFrameSave.Text, Convert.ToInt32(textBox_FailWait.Text), Convert.ToInt32(comboBox_FailoverMode.SelectedValue.ToString()), Convert.ToInt32(comboBox_Failover.SelectedValue.ToString()), Convert.ToInt32(textBox_DisconnectSet.Text), ref strErrCode, ref strErrText))
                 {
                     // Save Trag Info
                     int nTagSaveFailCount = 0;
