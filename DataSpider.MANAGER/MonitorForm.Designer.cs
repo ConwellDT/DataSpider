@@ -66,6 +66,7 @@ namespace DataSpider
             this.toolStripStatusLabel_MainDBSourceName = new System.Windows.Forms.ToolStripStatusLabel();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.imageList_EquipState = new System.Windows.Forms.ImageList(this.components);
+            this.commonCodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -158,7 +159,8 @@ namespace DataSpider
             // configCToolStripMenuItem
             // 
             this.configCToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tagGroupToolStripMenuItem});
+            this.tagGroupToolStripMenuItem,
+            this.commonCodeToolStripMenuItem});
             this.configCToolStripMenuItem.Name = "configCToolStripMenuItem";
             this.configCToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.C)));
             this.configCToolStripMenuItem.Size = new System.Drawing.Size(71, 19);
@@ -169,7 +171,7 @@ namespace DataSpider
             this.tagGroupToolStripMenuItem.Name = "tagGroupToolStripMenuItem";
             this.tagGroupToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.T)));
             this.tagGroupToolStripMenuItem.ShowShortcutKeys = false;
-            this.tagGroupToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.tagGroupToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.tagGroupToolStripMenuItem.Text = "Tag Group (T)";
             this.tagGroupToolStripMenuItem.Click += new System.EventHandler(this.tagGroupToolStripMenuItem_Click);
             // 
@@ -417,6 +419,13 @@ namespace DataSpider
             this.imageList_EquipState.Images.SetKeyName(6, "Unknown");
             this.imageList_EquipState.Images.SetKeyName(7, "NetworkError");
             // 
+            // commonCodeToolStripMenuItem
+            // 
+            this.commonCodeToolStripMenuItem.Name = "commonCodeToolStripMenuItem";
+            this.commonCodeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.commonCodeToolStripMenuItem.Text = "Common Code";
+            this.commonCodeToolStripMenuItem.Click += new System.EventHandler(this.commonCodeToolStripMenuItem_Click);
+            // 
             // MonitorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -486,6 +495,7 @@ namespace DataSpider
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel_DBPGM_P_ErrorFile;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel_DBPGM_S_ErrorFile;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel_DB_Status;
+        private System.Windows.Forms.ToolStripMenuItem commonCodeToolStripMenuItem;
     }
 }
 
