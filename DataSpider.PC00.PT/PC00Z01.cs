@@ -1561,7 +1561,7 @@ namespace DataSpider.PC00.PT
             {
                 StringBuilder strQuery = new StringBuilder();
 
-                strQuery.Append($"EXEC InsertUpdateCommonCode '{cdGrp}', '{code}'");
+                strQuery.Append($"EXEC DeleteCommonCode '{cdGrp}', '{code}'");
                 bool result = CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref _strErrCode, ref _strErrText);
 
                 return result;

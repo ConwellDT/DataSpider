@@ -28,8 +28,6 @@ namespace DataSpider.UserMonitor
 
             DataTable dtCommonCd = sqlBiz.GetAllCommonCode(ref strErrCode, ref strErrText);
 
-            dataGridCommonCode.Rows.Clear();
-
             if (dtCommonCd.Rows.Count > 0)
             {
                 for (int nR = 0; nR < dtCommonCd.Rows.Count; nR++)
@@ -38,6 +36,7 @@ namespace DataSpider.UserMonitor
 
                     DataGridViewRow row = dataGridCommonCode.Rows[rowId];
 
+                    row.Cells["Selected"].Value = "false";
                     row.Cells["CodeGroup"].Value = dtCommonCd.Rows[nR]["CD_GRP"].ToString();
                     row.Cells["Code"].Value = dtCommonCd.Rows[nR]["CODE"].ToString();
                     row.Cells["CodeName"].Value = dtCommonCd.Rows[nR]["CODE_NM"].ToString();
@@ -51,12 +50,10 @@ namespace DataSpider.UserMonitor
         }
         private void button_Add_Click(object sender, EventArgs e)
         {
-            string strErrCode = string.Empty;
-            string strErrText = string.Empty;
-
             CommonCodenfoEdit dlg = new CommonCodenfoEdit("", "", "", "", "", "", CommonCodenfoEdit.EDIT_MODE_ADD);
             if (dlg.ShowDialog() == DialogResult.OK)
             {
+                dataGridCommonCode.Rows.Clear();
                 InitControls();
             }
         }
@@ -64,22 +61,48 @@ namespace DataSpider.UserMonitor
         private void button_Edit_Click(object sender, EventArgs e)
         {
 
-
         }
 
         private void button_Remove_Click(object sender, EventArgs e)
         {
             string strErrCode = string.Empty;
             string strErrText = string.Empty;
+            bool isRowSelected = false;
 
-            // Load data into DataGridView
-            DataTable dtCommonCd = sqlBiz.GetAllCommonCode(ref strErrCode, ref strErrText);
-            if (dtCommonCd != null)
+            foreach (DataGridViewRow row in dataGridCommonCode.Rows)
             {
-                dataGridCommonCode.DataSource = dtCommonCd;
+                if (Convert.ToBoolean(row.Cells[0].Value))
+                {
+                    isRowSelected = true;
+                    break;
+                }
+            }
+
+            if (!isRowSelected)
+            {
+                MessageBox.Show("CheckBox is not selected", $"Common Code Delete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            if (MessageBox.Show("Are you sure you want to delete the selected rows?", $"Delete CommonCode", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.OK)
+            {
+                for (int i = dataGridCommonCode.Rows.Count - 1; i >= 0; i--)
+                {
+                    DataGridViewRow row = dataGridCommonCode.Rows[i];
+                    if (Convert.ToBoolean(row.Cells[0].Value))
+                    {
+                        if(sqlBiz.DeleteCommonCode(row.Cells[1].Value.ToString(), row.Cells[2].Value.ToString(), ref strErrCode, ref strErrText) != true)
+                        {
+                            MessageBox.Show(strErrText, $"Common Code remove fail", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            return;
+                        }
+                    }
+                }
+                MessageBox.Show("Common Code Removed.", $"Common Code", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                dataGridCommonCode.Rows.Clear();
+                InitControls();
             }
         }
-
 
         private void button_Close_Click(object sender, EventArgs e)
         {

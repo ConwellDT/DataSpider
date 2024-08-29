@@ -43,7 +43,7 @@ namespace DataSpider.UserMonitor
             this.panel6 = new System.Windows.Forms.Panel();
             this.button_Close = new System.Windows.Forms.Button();
             this.dataGridCommonCode = new System.Windows.Forms.DataGridView();
-            this.Chk = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Selected = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.CodeGroup = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CodeName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -219,7 +219,6 @@ namespace DataSpider.UserMonitor
             // dataGridCommonCode
             // 
             this.dataGridCommonCode.AllowUserToAddRows = false;
-            this.dataGridCommonCode.AllowUserToDeleteRows = false;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
@@ -230,7 +229,7 @@ namespace DataSpider.UserMonitor
             this.dataGridCommonCode.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridCommonCode.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridCommonCode.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Chk,
+            this.Selected,
             this.CodeGroup,
             this.Code,
             this.CodeName,
@@ -247,13 +246,13 @@ namespace DataSpider.UserMonitor
             this.dataGridCommonCode.TabIndex = 3;
             this.dataGridCommonCode.DoubleClick += new System.EventHandler(this.button_Edit_Click);
             // 
-            // Chk
+            // Selected
             // 
-            this.Chk.FalseValue = "false";
-            this.Chk.HeaderText = "";
-            this.Chk.Name = "Chk";
-            this.Chk.TrueValue = "true";
-            this.Chk.Width = 40;
+            this.Selected.FalseValue = "false";
+            this.Selected.HeaderText = "";
+            this.Selected.Name = "Selected";
+            this.Selected.TrueValue = "true";
+            this.Selected.Width = 50;
             // 
             // CodeGroup
             // 
@@ -347,7 +346,7 @@ namespace DataSpider.UserMonitor
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Button button_Close;
         private System.Windows.Forms.DataGridView dataGridCommonCode;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Chk;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Selected;
         private System.Windows.Forms.DataGridViewTextBoxColumn CodeGroup;
         private System.Windows.Forms.DataGridViewTextBoxColumn Code;
         private System.Windows.Forms.DataGridViewTextBoxColumn CodeName;
