@@ -579,12 +579,12 @@ namespace DataSpider.PC00.PT
         /// <param name="_strErrCode"></param>
         /// <param name="_strErrText"></param>
         /// <returns></returns>
-        public bool UpdateEquipmentProgDateTime(string equipName, int status, ref string _strErrCode, ref string _strErrText)
+        public bool UpdateEquipmentProgDateTime(string equipName, int status, string ifFlag, ref string _strErrCode, ref string _strErrText)
         {
             try
             {
                 StringBuilder strQuery = new StringBuilder();
-                strQuery.Append($"EXEC UpdateEquipmentProgDateTime '{equipName}', {status} ");
+                strQuery.Append($"EXEC UpdateEquipmentProgDateTime '{equipName}', {status} '{ifFlag}'");
 
                 bool result = CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref _strErrCode, ref _strErrText);
                 return result;

@@ -41,11 +41,14 @@ namespace DataSpider.PC00.PT
         private DateTime dtLastUpdateProgDateTime = DateTime.MinValue;
         protected Encoding dataEncoding = Encoding.UTF8;
 
+        protected string piPointFlag = "N";
+
         public PC00B01()
         {
         }
         public PC00B01(IPC00F00 pOwner, string equipType, string equipName, string connectionInfo, string extraInfo, int nCurNo, bool bAutoRun)
         {
+            piPointFlag = drEquipment["UPDATE_PIPOINT_FLAG"].ToString().ToUpper().Equals("Y") ? "N" : "D";
             m_Owner = pOwner;
             m_Name = equipName.Trim();
             m_Type = equipType.Trim();
@@ -102,7 +105,7 @@ namespace DataSpider.PC00.PT
             {
                 dtLastUpdateProgDateTime = dtNow;
                 lastStatus = status;
-                return m_sqlBiz.UpdateEquipmentProgDateTime(m_Name, (int)status, ref errCode, ref errText);
+                return m_sqlBiz.UpdateEquipmentProgDateTime(m_Name, (int)status, piPointFlag, ref errCode, ref errText);
             }
             return true;
         }
