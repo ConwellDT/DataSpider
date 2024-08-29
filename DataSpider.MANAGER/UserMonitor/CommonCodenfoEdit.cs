@@ -53,6 +53,7 @@ namespace DataSpider.UserMonitor
             }
 
             textBoxDate.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            textBoxUserId.Text = $"{UserAuthentication.UserID}";
         }
 
         private void button_OK_Click(object sender, EventArgs e)
@@ -65,7 +66,7 @@ namespace DataSpider.UserMonitor
             codeNm = textBoxCodeName.Text;
             codeVal = textBoxCodeValue.Text;
             date = textBoxDate.Text;    
-            Id = textBox_UserId.Text;
+            Id = textBoxUserId.Text;
 
             if (cdGrp == string.Empty)
             {
@@ -88,6 +89,17 @@ namespace DataSpider.UserMonitor
                 return;
             }
 
+            DataTable dtCommonCode = sqlBiz.GetAllCommonCode(ref strErrCode, ref strErrText);
+            if(strErrCode == null || strErrCode == string.Empty)
+            {
+                DataRow[] drCommonCode = dtCommonCode.Select($"CD_GRP = '{cdGrp}' AND CODE = '{code}'");
+
+                if(drCommonCode != null && drCommonCode.Length > 0)
+                {
+                    MessageBox.Show($"Code Group: " + cdGrp + $", Code: " + code + $" already exist", $"Common Code invalid", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                } 
+            }
 
             if (sqlBiz.InsertUpdateCommonCode(cdGrp, code, codeNm, codeVal, date, Id, ref strErrCode, ref strErrText))
             {

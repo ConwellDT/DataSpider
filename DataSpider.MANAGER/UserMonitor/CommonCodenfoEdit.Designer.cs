@@ -33,7 +33,7 @@ namespace DataSpider.UserMonitor
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
             this.label4 = new System.Windows.Forms.Label();
             this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
-            this.textBox_UserId = new System.Windows.Forms.TextBox();
+            this.textBoxUserId = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.label3 = new System.Windows.Forms.Label();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
@@ -133,7 +133,7 @@ namespace DataSpider.UserMonitor
             this.tableLayoutPanel8.BackColor = System.Drawing.Color.White;
             this.tableLayoutPanel8.ColumnCount = 1;
             this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel8.Controls.Add(this.textBox_UserId, 0, 0);
+            this.tableLayoutPanel8.Controls.Add(this.textBoxUserId, 0, 0);
             this.tableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel8.Location = new System.Drawing.Point(122, 1);
             this.tableLayoutPanel8.Margin = new System.Windows.Forms.Padding(0);
@@ -144,16 +144,16 @@ namespace DataSpider.UserMonitor
             this.tableLayoutPanel8.Size = new System.Drawing.Size(697, 40);
             this.tableLayoutPanel8.TabIndex = 2;
             // 
-            // textBox_UserId
+            // textBoxUserId
             // 
-            this.textBox_UserId.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox_UserId.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox_UserId.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.textBox_UserId.Location = new System.Drawing.Point(3, 9);
-            this.textBox_UserId.Margin = new System.Windows.Forms.Padding(3, 9, 3, 3);
-            this.textBox_UserId.Name = "textBox_UserId";
-            this.textBox_UserId.Size = new System.Drawing.Size(691, 22);
-            this.textBox_UserId.TabIndex = 3;
+            this.textBoxUserId.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBoxUserId.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBoxUserId.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.textBoxUserId.Location = new System.Drawing.Point(3, 9);
+            this.textBoxUserId.Margin = new System.Windows.Forms.Padding(3, 9, 3, 3);
+            this.textBoxUserId.Name = "textBoxUserId";
+            this.textBoxUserId.Size = new System.Drawing.Size(691, 22);
+            this.textBoxUserId.TabIndex = 3;
             // 
             // tableLayoutPanel5
             // 
@@ -530,7 +530,7 @@ namespace DataSpider.UserMonitor
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel7;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel8;
-        private System.Windows.Forms.TextBox textBox_UserId;
+        private System.Windows.Forms.TextBox textBoxUserId;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
