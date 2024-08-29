@@ -37,7 +37,7 @@ namespace DataSpider.PC00.PT
         #region GetDeviceInfo 프로그램 장비 정보 취득
         public DataSet GetDeviceInfo(string p_strEquipType, string p_strPgmType, MsSqlDbAccess p_clsDbTrans, ref string p_strErrCode, ref string p_strErrTxt)
         {
-            
+
             DataSet ds = new DataSet();
             DataCollection dc = new DataCollection();
 
@@ -242,7 +242,7 @@ namespace DataSpider.PC00.PT
                 }
                 if (result.Rows.Count > 0)
                 {
-                    if (result.Rows[0][$"STOP_REQ{serverCode}"].Equals(1) )
+                    if (result.Rows[0][$"STOP_REQ{serverCode}"].Equals(1))
                     {
                         strQuery.Clear();
                         // SET STOP_REQ{ServerCode} = 0
@@ -368,7 +368,7 @@ namespace DataSpider.PC00.PT
             return result;
         }
         // --------------------------------------
-        public DataTable GetAllCommonCode( ref string _strErrCode, ref string _strErrText)
+        public DataTable GetAllCommonCode(ref string _strErrCode, ref string _strErrText)
         {
             DataTable result = null;
             try
@@ -437,7 +437,7 @@ namespace DataSpider.PC00.PT
                 StringBuilder strQuery = new StringBuilder();
 
                 strQuery.Append($"EXEC GetMeasureResult '{strEquipType}'");
-                
+
                 DataSet ds = CFW.Data.MsSqlDbAccess.GetDataSet(strQuery.ToString(), null, CommandType.Text, ref _strErrCode, ref _strErrText);
                 if (ds != null && ds.Tables[0] != null)
                 {
@@ -855,7 +855,7 @@ namespace DataSpider.PC00.PT
             }
             return result;
         }
-        
+
         public bool DeleteEquipmentInfo(string equipName, ref string _strErrCode, ref string _strErrText)
         {
             try
@@ -894,7 +894,7 @@ namespace DataSpider.PC00.PT
                 StringBuilder strQuery = new StringBuilder();
                 strQuery.Append($"EXEC DeleteEquipmentTypeInfo '{equipName}', '{zoneType}'");
                 bool result = CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref _strErrCode, ref _strErrText);
-                               
+
                 return result;
             }
             catch (Exception ex)
@@ -924,9 +924,9 @@ namespace DataSpider.PC00.PT
                 // 2022. 3. 30: Han, Ilho
                 //      Add row to MA_FAILOVER_CD
                 //
-                if(result)
+                if (result)
                 {
-                    int serverId= GetServerId(serverName);
+                    int serverId = GetServerId(serverName);
                     if (serverId == -1) serverId = 0;
                     strQuery.Clear();
 
@@ -1169,7 +1169,7 @@ namespace DataSpider.PC00.PT
             }
             return result;
         }
-        
+
         public DataTable GetTagValueHistoryByEquip(string equipName, string minDate, string maxDate, ref string _strErrCode, ref string _strErrText)
         {
             DataTable result = null;
@@ -1210,7 +1210,7 @@ namespace DataSpider.PC00.PT
             }
             return result;
         }
-        public DataTable GetSystemLog(string minDate, string maxDate, string equipName,  string level, ref string _strErrCode, ref string _strErrText)
+        public DataTable GetSystemLog(string minDate, string maxDate, string equipName, string level, ref string _strErrCode, ref string _strErrText)
         {
             DataTable result = null;
             try
@@ -1232,7 +1232,7 @@ namespace DataSpider.PC00.PT
         }
 
 
-        public bool InsertTagGroupInfo(string groupName, List <String> tagNames, ref string _strErrCode, ref string _strErrText)
+        public bool InsertTagGroupInfo(string groupName, List<String> tagNames, ref string _strErrCode, ref string _strErrText)
         {
             try
             {
@@ -1253,7 +1253,7 @@ namespace DataSpider.PC00.PT
 
                     var parameters = new[]
                     {
-                        new SqlParameter 
+                        new SqlParameter
                         {
                             ParameterName = "listTGIP",
                             Value = tvTagInfo,
@@ -1388,7 +1388,7 @@ namespace DataSpider.PC00.PT
             }
             return result;
         }
-        
+
         public bool ExecuteNonQuery(string strQuery, ref string _strErrCode, ref string _strErrText)
         {
             try
@@ -1537,6 +1537,40 @@ namespace DataSpider.PC00.PT
             }
             return result;
         }
+        public bool InsertUpdateCommonCode(string cdGrp, string code, string codeNm, string codeVal, string date, string Id, ref string _strErrCode, ref string _strErrText)
+        {
+            try
+            {
+                StringBuilder strQuery = new StringBuilder();
+
+                strQuery.Append($"EXEC InsertUpdateCommonCode '{cdGrp}', '{code}', '{codeNm}', '{codeVal}', '{date}', '{Id}'");
+                bool result = CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref _strErrCode, ref _strErrText);
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                _strErrText = ex.ToString();
+                return false;
+            }
+        }
+
+        public bool DeleteCommonCode(string cdGrp, string code, ref string _strErrCode, ref string _strErrText)
+        {
+            try
+            {
+                StringBuilder strQuery = new StringBuilder();
+
+                strQuery.Append($"EXEC InsertUpdateCommonCode '{cdGrp}', '{code}'");
+                bool result = CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref _strErrCode, ref _strErrText);
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                _strErrText = ex.ToString();
+                return false;
+            }
+        }
     }
 }
-    

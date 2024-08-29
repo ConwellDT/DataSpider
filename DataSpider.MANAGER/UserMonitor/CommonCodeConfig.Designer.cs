@@ -43,6 +43,7 @@ namespace DataSpider.UserMonitor
             this.panel6 = new System.Windows.Forms.Panel();
             this.button_Close = new System.Windows.Forms.Button();
             this.dataGridCommonCode = new System.Windows.Forms.DataGridView();
+            this.Chk = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.CodeGroup = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CodeName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -93,7 +94,7 @@ namespace DataSpider.UserMonitor
             // 
             this.tableLayoutContents.ColumnCount = 2;
             this.tableLayoutContents.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutContents.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
+            this.tableLayoutContents.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 136F));
             this.tableLayoutContents.Controls.Add(this.tableLayoutPanel1, 1, 0);
             this.tableLayoutContents.Controls.Add(this.dataGridCommonCode, 0, 0);
             this.tableLayoutContents.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -114,7 +115,7 @@ namespace DataSpider.UserMonitor
             this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.panel6, 0, 4);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(673, 3);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(737, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 5;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
@@ -124,7 +125,7 @@ namespace DataSpider.UserMonitor
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(194, 528);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(130, 528);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
             // panel3
@@ -133,7 +134,7 @@ namespace DataSpider.UserMonitor
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(3, 123);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(188, 54);
+            this.panel3.Size = new System.Drawing.Size(124, 54);
             this.panel3.TabIndex = 2;
             // 
             // button_Remove
@@ -143,7 +144,7 @@ namespace DataSpider.UserMonitor
             this.button_Remove.Location = new System.Drawing.Point(0, 0);
             this.button_Remove.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button_Remove.Name = "button_Remove";
-            this.button_Remove.Size = new System.Drawing.Size(188, 54);
+            this.button_Remove.Size = new System.Drawing.Size(124, 54);
             this.button_Remove.TabIndex = 5;
             this.button_Remove.Text = "Remove";
             this.button_Remove.UseVisualStyleBackColor = true;
@@ -155,7 +156,7 @@ namespace DataSpider.UserMonitor
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(3, 63);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(188, 54);
+            this.panel2.Size = new System.Drawing.Size(124, 54);
             this.panel2.TabIndex = 1;
             // 
             // button_Edit
@@ -165,7 +166,7 @@ namespace DataSpider.UserMonitor
             this.button_Edit.Location = new System.Drawing.Point(0, 0);
             this.button_Edit.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button_Edit.Name = "button_Edit";
-            this.button_Edit.Size = new System.Drawing.Size(188, 54);
+            this.button_Edit.Size = new System.Drawing.Size(124, 54);
             this.button_Edit.TabIndex = 5;
             this.button_Edit.Text = "Edit";
             this.button_Edit.UseVisualStyleBackColor = true;
@@ -177,7 +178,7 @@ namespace DataSpider.UserMonitor
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(188, 54);
+            this.panel1.Size = new System.Drawing.Size(124, 54);
             this.panel1.TabIndex = 0;
             // 
             // button_Add
@@ -187,7 +188,7 @@ namespace DataSpider.UserMonitor
             this.button_Add.Location = new System.Drawing.Point(0, 0);
             this.button_Add.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button_Add.Name = "button_Add";
-            this.button_Add.Size = new System.Drawing.Size(188, 54);
+            this.button_Add.Size = new System.Drawing.Size(124, 54);
             this.button_Add.TabIndex = 4;
             this.button_Add.Text = "Add";
             this.button_Add.UseVisualStyleBackColor = true;
@@ -199,7 +200,7 @@ namespace DataSpider.UserMonitor
             this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel6.Location = new System.Drawing.Point(3, 471);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(188, 54);
+            this.panel6.Size = new System.Drawing.Size(124, 54);
             this.panel6.TabIndex = 5;
             // 
             // button_Close
@@ -209,7 +210,7 @@ namespace DataSpider.UserMonitor
             this.button_Close.Location = new System.Drawing.Point(0, 0);
             this.button_Close.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button_Close.Name = "button_Close";
-            this.button_Close.Size = new System.Drawing.Size(188, 54);
+            this.button_Close.Size = new System.Drawing.Size(124, 54);
             this.button_Close.TabIndex = 7;
             this.button_Close.Text = "Close";
             this.button_Close.UseVisualStyleBackColor = true;
@@ -217,6 +218,8 @@ namespace DataSpider.UserMonitor
             // 
             // dataGridCommonCode
             // 
+            this.dataGridCommonCode.AllowUserToAddRows = false;
+            this.dataGridCommonCode.AllowUserToDeleteRows = false;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
@@ -227,6 +230,7 @@ namespace DataSpider.UserMonitor
             this.dataGridCommonCode.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridCommonCode.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridCommonCode.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Chk,
             this.CodeGroup,
             this.Code,
             this.CodeName,
@@ -235,33 +239,42 @@ namespace DataSpider.UserMonitor
             this.UpdateRegId,
             this.RegDate,
             this.RegId});
-            this.dataGridCommonCode.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridCommonCode.Location = new System.Drawing.Point(3, 3);
             this.dataGridCommonCode.Name = "dataGridCommonCode";
+            this.dataGridCommonCode.RowHeadersVisible = false;
             this.dataGridCommonCode.RowTemplate.Height = 23;
-            this.dataGridCommonCode.Size = new System.Drawing.Size(664, 528);
+            this.dataGridCommonCode.Size = new System.Drawing.Size(728, 528);
             this.dataGridCommonCode.TabIndex = 3;
+            this.dataGridCommonCode.DoubleClick += new System.EventHandler(this.button_Edit_Click);
+            // 
+            // Chk
+            // 
+            this.Chk.FalseValue = "false";
+            this.Chk.HeaderText = "";
+            this.Chk.Name = "Chk";
+            this.Chk.TrueValue = "true";
+            this.Chk.Width = 40;
             // 
             // CodeGroup
             // 
             this.CodeGroup.HeaderText = "Code Group";
             this.CodeGroup.Name = "CodeGroup";
             this.CodeGroup.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.CodeGroup.Width = 180;
+            this.CodeGroup.Width = 110;
             // 
             // Code
             // 
             this.Code.HeaderText = "Code";
             this.Code.Name = "Code";
             this.Code.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Code.Width = 180;
+            this.Code.Width = 145;
             // 
             // CodeName
             // 
             this.CodeName.HeaderText = "Code Name";
             this.CodeName.Name = "CodeName";
             this.CodeName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.CodeName.Width = 200;
+            this.CodeName.Width = 145;
             // 
             // CodeValue
             // 
@@ -305,7 +318,7 @@ namespace DataSpider.UserMonitor
             this.ClientSize = new System.Drawing.Size(870, 582);
             this.Controls.Add(this.tableLayoutConfigtagGroupMain);
             this.Name = "CommonCodeConfig";
-            this.Text = "ConfigTagGroup";
+            this.Text = "Common Code Config";
             this.Load += new System.EventHandler(this.CommonCodeConfig_Load);
             this.tableLayoutConfigtagGroupMain.ResumeLayout(false);
             this.tableLayoutContents.ResumeLayout(false);
@@ -334,6 +347,7 @@ namespace DataSpider.UserMonitor
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Button button_Close;
         private System.Windows.Forms.DataGridView dataGridCommonCode;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Chk;
         private System.Windows.Forms.DataGridViewTextBoxColumn CodeGroup;
         private System.Windows.Forms.DataGridViewTextBoxColumn Code;
         private System.Windows.Forms.DataGridViewTextBoxColumn CodeName;
