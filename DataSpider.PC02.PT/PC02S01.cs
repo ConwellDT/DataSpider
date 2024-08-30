@@ -13,6 +13,7 @@ using System.Text.RegularExpressions;
 using DataSpider.PC00.PT;
 using static System.Runtime.CompilerServices.RuntimeHelpers;
 using System.Text.Json;
+using System.Data;
 
 namespace DataSpider.PC02.PT
 {
@@ -53,7 +54,7 @@ namespace DataSpider.PC02.PT
         //{
         //}
 
-        public PC02S01(IPC00F00 pOwner, string equipType, string equipName, string connectionInfo, string extraInfo, int nCurNo, bool bAutoRun = false) : base(pOwner, equipType, equipName, connectionInfo, extraInfo, nCurNo, bAutoRun)
+        public PC02S01(IPC00F00 pOwner, DataRow dr, string equipType, string equipName, string connectionInfo, string extraInfo, int nCurNo, bool bAutoRun = false) : base(pOwner, dr, equipType, equipName, connectionInfo, extraInfo, nCurNo, bAutoRun)
         {
             Init();
 

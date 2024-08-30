@@ -252,7 +252,7 @@ namespace DataSpider.PC02.PT
                 foreach (DataRow dr in dtEquipmentType.Rows)
                 {
                     string equipType = dr["CODE_NM"].ToString();
-                    thProcess[threadIndex] = new PC02S01(this, equipType, $"{Application.ProductName}_{equipType}", $@"{Environment.CurrentDirectory}\Data\{equipType}", string.Empty, threadIndex++, true);
+                    thProcess[threadIndex] = new PC02S01(this, dr, equipType, $"{Application.ProductName}_{equipType}", $@"{Environment.CurrentDirectory}\Data\{equipType}", string.Empty, threadIndex++, true);
                     listDataFilePath.Add($@"{Environment.CurrentDirectory}\Data\{equipType}");
                 }
             }
