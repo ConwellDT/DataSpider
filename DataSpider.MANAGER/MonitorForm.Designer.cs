@@ -40,6 +40,7 @@ namespace DataSpider
             this.종료ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.configCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tagGroupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.commonCodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.userToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.userInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.도움말ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -66,7 +67,6 @@ namespace DataSpider
             this.toolStripStatusLabel_MainDBSourceName = new System.Windows.Forms.ToolStripStatusLabel();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.imageList_EquipState = new System.Windows.Forms.ImageList(this.components);
-            this.commonCodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -174,6 +174,15 @@ namespace DataSpider
             this.tagGroupToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.tagGroupToolStripMenuItem.Text = "Tag Group (T)";
             this.tagGroupToolStripMenuItem.Click += new System.EventHandler(this.tagGroupToolStripMenuItem_Click);
+            // 
+            // commonCodeToolStripMenuItem
+            // 
+            this.commonCodeToolStripMenuItem.Name = "commonCodeToolStripMenuItem";
+            this.commonCodeToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.O)));
+            this.commonCodeToolStripMenuItem.ShowShortcutKeys = false;
+            this.commonCodeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.commonCodeToolStripMenuItem.Text = "Common Code (O)";
+            this.commonCodeToolStripMenuItem.Click += new System.EventHandler(this.commonCodeToolStripMenuItem_Click);
             // 
             // userToolStripMenuItem
             // 
@@ -418,13 +427,6 @@ namespace DataSpider
             this.imageList_EquipState.Images.SetKeyName(5, "InternalError");
             this.imageList_EquipState.Images.SetKeyName(6, "Unknown");
             this.imageList_EquipState.Images.SetKeyName(7, "NetworkError");
-            // 
-            // commonCodeToolStripMenuItem
-            // 
-            this.commonCodeToolStripMenuItem.Name = "commonCodeToolStripMenuItem";
-            this.commonCodeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.commonCodeToolStripMenuItem.Text = "Common Code";
-            this.commonCodeToolStripMenuItem.Click += new System.EventHandler(this.commonCodeToolStripMenuItem_Click);
             // 
             // MonitorForm
             // 
