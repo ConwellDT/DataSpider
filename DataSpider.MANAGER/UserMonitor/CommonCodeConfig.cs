@@ -60,7 +60,51 @@ namespace DataSpider.UserMonitor
 
         private void button_Edit_Click(object sender, EventArgs e)
         {
+            string selCdGrp = string.Empty;
+            string selCode  = string.Empty;
+            string selCodeName = string.Empty;
+            string selCodeValue = string.Empty;
+            string selDate = string.Empty;
+            string selId = string.Empty;
 
+            if (dataGridCommonCode.CurrentRow == null)
+            {
+                MessageBox.Show("Common Code is not selected", $"Common Code", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            // DataSource가 null인 경우 데이터는 Cells를 통해 접근
+            if (dataGridCommonCode.DataSource == null)
+            {
+                DataGridViewRow currentRow = dataGridCommonCode.CurrentRow;
+                if (currentRow != null)
+                {
+                    selCdGrp = currentRow.Cells["CodeGroup"].Value?.ToString() ?? string.Empty;
+                    selCode = currentRow.Cells["Code"].Value?.ToString() ?? string.Empty;
+                    selCodeName = currentRow.Cells["CodeName"].Value?.ToString() ?? string.Empty;
+                    selCodeValue = currentRow.Cells["CodeValue"].Value?.ToString() ?? string.Empty;
+                }
+            }
+            else
+            {
+                // DataSource가 설정되어 있으면 DataBoundItem을 통해 접근
+                DataRowView selRow = dataGridCommonCode.CurrentRow.DataBoundItem as DataRowView;
+                if (selRow != null)
+                {
+                    selCdGrp = selRow["CodeGroup"].ToString();
+                    selCode = selRow["Code"].ToString();
+                    selCodeName = selRow["CodeName"].ToString();
+                    selCodeValue = selRow["CodeValue"].ToString();
+                }
+            }
+
+            // 선택된 데이터를 사용하여 편집 창 열기
+            CommonCodenfoEdit dlg = new CommonCodenfoEdit(selCdGrp, selCode, selCodeName, selCodeValue, "", "", CommonCodenfoEdit.EDIT_MODE_UPDATE);
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                dataGridCommonCode.Rows.Clear();
+                InitControls();
+            }
         }
 
         private void button_Remove_Click(object sender, EventArgs e)

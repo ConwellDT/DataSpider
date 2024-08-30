@@ -89,18 +89,21 @@ namespace DataSpider.UserMonitor
                 return;
             }
 
-            DataTable dtCommonCode = sqlBiz.GetAllCommonCode(ref strErrCode, ref strErrText);
-            if(strErrCode == null || strErrCode == string.Empty)
+            //ADD 추가 유효성 체크
+            if(EditMode == EDIT_MODE_ADD)
             {
-                DataRow[] drCommonCode = dtCommonCode.Select($"CD_GRP = '{cdGrp}' AND CODE = '{code}'");
-
-                if(drCommonCode != null && drCommonCode.Length > 0)
+                DataTable dtCommonCode = sqlBiz.GetAllCommonCode(ref strErrCode, ref strErrText);
+                if (strErrCode == null || strErrCode == string.Empty)
                 {
-                    MessageBox.Show($"Code Group: " + cdGrp + $", Code: " + code + $" already exist", $"Common Code invalid", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return;
-                } 
-            }
+                    DataRow[] drCommonCode = dtCommonCode.Select($"CD_GRP = '{cdGrp}' AND CODE = '{code}'");
 
+                    if (drCommonCode != null && drCommonCode.Length > 0)
+                    {
+                        MessageBox.Show($"Code Group: " + cdGrp + $", Code: " + code + $" already exist", $"Common Code invalid", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return;
+                    }
+                }
+            }
             if (sqlBiz.InsertUpdateCommonCode(cdGrp, code, codeNm, codeVal, date, Id, ref strErrCode, ref strErrText))
             {
                 MessageBox.Show($"CommonCode has been saved.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
