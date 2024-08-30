@@ -44,7 +44,9 @@ namespace DataSpider.UserMonitor
             this.textBox_DisconnectSet = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.panel29 = new System.Windows.Forms.Panel();
+            this.comboBox_Failover = new System.Windows.Forms.ComboBox();
             this.panel28 = new System.Windows.Forms.Panel();
+            this.comboBox_FailoverMode = new System.Windows.Forms.ComboBox();
             this.label13 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.comboBox_InterfaceType = new System.Windows.Forms.ComboBox();
@@ -88,6 +90,8 @@ namespace DataSpider.UserMonitor
             this.textBox_FailWait = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.textBox_DefaultServer = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel18 = new System.Windows.Forms.Panel();
@@ -97,10 +101,6 @@ namespace DataSpider.UserMonitor
             this.label11 = new System.Windows.Forms.Label();
             this.panel21 = new System.Windows.Forms.Panel();
             this.textBox_ConfigInfo = new System.Windows.Forms.TextBox();
-            this.label17 = new System.Windows.Forms.Label();
-            this.textBox_DefaultServer = new System.Windows.Forms.TextBox();
-            this.comboBox_FailoverMode = new System.Windows.Forms.ComboBox();
-            this.comboBox_Failover = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel_Main.SuspendLayout();
             this.panelBottomMenu.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -367,6 +367,20 @@ namespace DataSpider.UserMonitor
             this.panel29.Size = new System.Drawing.Size(337, 24);
             this.panel29.TabIndex = 28;
             // 
+            // comboBox_Failover
+            // 
+            this.comboBox_Failover.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboBox_Failover.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_Failover.Font = new System.Drawing.Font("맑은 고딕", 10F);
+            this.comboBox_Failover.FormattingEnabled = true;
+            this.comboBox_Failover.Items.AddRange(new object[] {
+            "Y",
+            "N"});
+            this.comboBox_Failover.Location = new System.Drawing.Point(0, 0);
+            this.comboBox_Failover.Name = "comboBox_Failover";
+            this.comboBox_Failover.Size = new System.Drawing.Size(337, 25);
+            this.comboBox_Failover.TabIndex = 6;
+            // 
             // panel28
             // 
             this.panel28.Controls.Add(this.comboBox_FailoverMode);
@@ -375,6 +389,16 @@ namespace DataSpider.UserMonitor
             this.panel28.Name = "panel28";
             this.panel28.Size = new System.Drawing.Size(337, 24);
             this.panel28.TabIndex = 27;
+            // 
+            // comboBox_FailoverMode
+            // 
+            this.comboBox_FailoverMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_FailoverMode.Font = new System.Drawing.Font("맑은 고딕", 10F);
+            this.comboBox_FailoverMode.FormattingEnabled = true;
+            this.comboBox_FailoverMode.Location = new System.Drawing.Point(0, 0);
+            this.comboBox_FailoverMode.Name = "comboBox_FailoverMode";
+            this.comboBox_FailoverMode.Size = new System.Drawing.Size(337, 25);
+            this.comboBox_FailoverMode.TabIndex = 5;
             // 
             // label13
             // 
@@ -819,6 +843,27 @@ namespace DataSpider.UserMonitor
             this.label16.Text = "Disconnect Set";
             this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label17.Font = new System.Drawing.Font("맑은 고딕", 12F);
+            this.label17.Location = new System.Drawing.Point(4, 435);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(144, 35);
+            this.label17.TabIndex = 32;
+            this.label17.Text = "Default Server";
+            this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // textBox_DefaultServer
+            // 
+            this.textBox_DefaultServer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox_DefaultServer.Font = new System.Drawing.Font("맑은 고딕", 10F);
+            this.textBox_DefaultServer.Location = new System.Drawing.Point(155, 438);
+            this.textBox_DefaultServer.Name = "textBox_DefaultServer";
+            this.textBox_DefaultServer.Size = new System.Drawing.Size(337, 25);
+            this.textBox_DefaultServer.TabIndex = 33;
+            // 
             // panel2
             // 
             this.panel2.Controls.Add(this.tableLayoutPanel1);
@@ -916,51 +961,6 @@ namespace DataSpider.UserMonitor
             this.textBox_ConfigInfo.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.textBox_ConfigInfo.Size = new System.Drawing.Size(560, 138);
             this.textBox_ConfigInfo.TabIndex = 2;
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label17.Font = new System.Drawing.Font("맑은 고딕", 12F);
-            this.label17.Location = new System.Drawing.Point(4, 435);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(144, 35);
-            this.label17.TabIndex = 32;
-            this.label17.Text = "Default Server";
-            this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // textBox_DefaultServer
-            // 
-            this.textBox_DefaultServer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox_DefaultServer.Font = new System.Drawing.Font("맑은 고딕", 10F);
-            this.textBox_DefaultServer.Location = new System.Drawing.Point(155, 438);
-            this.textBox_DefaultServer.Name = "textBox_DefaultServer";
-            this.textBox_DefaultServer.Size = new System.Drawing.Size(337, 25);
-            this.textBox_DefaultServer.TabIndex = 33;
-            // 
-            // comboBox_FailoverMode
-            // 
-            this.comboBox_FailoverMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox_FailoverMode.Font = new System.Drawing.Font("맑은 고딕", 10F);
-            this.comboBox_FailoverMode.FormattingEnabled = true;
-            this.comboBox_FailoverMode.Location = new System.Drawing.Point(0, 0);
-            this.comboBox_FailoverMode.Name = "comboBox_FailoverMode";
-            this.comboBox_FailoverMode.Size = new System.Drawing.Size(337, 25);
-            this.comboBox_FailoverMode.TabIndex = 5;
-            // 
-            // comboBox_Failover
-            // 
-            this.comboBox_Failover.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.comboBox_Failover.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox_Failover.Font = new System.Drawing.Font("맑은 고딕", 10F);
-            this.comboBox_Failover.FormattingEnabled = true;
-            this.comboBox_Failover.Items.AddRange(new object[] {
-            "Y",
-            "N"});
-            this.comboBox_Failover.Location = new System.Drawing.Point(0, 0);
-            this.comboBox_Failover.Name = "comboBox_Failover";
-            this.comboBox_Failover.Size = new System.Drawing.Size(337, 25);
-            this.comboBox_Failover.TabIndex = 6;
             // 
             // EquipmentAddEdit
             // 
