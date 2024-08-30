@@ -67,7 +67,7 @@ namespace DataSpider.PC00.PT
         public PC00B02()
         {
         }
-        public PC00B02(IPC00F00 pOwner, string equipType, string equipName, string connectionInfo, string extraInfo, int nCurNo, bool bAutoRun) : base(pOwner, equipType, equipName, connectionInfo, extraInfo, nCurNo, bAutoRun)
+        public PC00B02(IPC00F00 pOwner, DataRow dr, string equipType, string equipName, string connectionInfo, string extraInfo, int nCurNo, bool bAutoRun) : base(pOwner, dr, equipType, equipName, connectionInfo, extraInfo, nCurNo, bAutoRun)
         {
         }
         protected void SendControlMessage(byte controlChar)

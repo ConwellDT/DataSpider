@@ -39,7 +39,7 @@ namespace DataSpider.PC00.PT
         public PC00B03()
         {
         }
-        public PC00B03(IPC00F00 pOwner, string equipType, string equipName, string connectionInfo, string extraInfo, int nCurNo, bool bAutoRun = false) : base(pOwner, equipType, equipName, connectionInfo, extraInfo, nCurNo, bAutoRun)
+        public PC00B03(IPC00F00 pOwner, DataRow dr, string equipType, string equipName, string connectionInfo, string extraInfo, int nCurNo, bool bAutoRun = false) : base(pOwner, dr, equipType, equipName, connectionInfo, extraInfo, nCurNo, bAutoRun)
         {
             string[] conn = m_ConnectionInfo.Split(',');
             if (conn.Length < 1 || string.IsNullOrWhiteSpace(conn[0]))
