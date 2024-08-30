@@ -35,13 +35,12 @@ namespace DataSpider.PC01.PT
         {
         }
 
-        public PC01S33(PC01F01 pOwner, string equipType, string equipName, string connectionInfo, string extraInfo, int nCurNo, bool bAutoRun = false) : base(pOwner, equipType, equipName, connectionInfo, extraInfo, nCurNo, bAutoRun)
+        public PC01S33(PC01F01 pOwner, DataRow dr, string equipType, string equipName, string connectionInfo, string extraInfo, int nCurNo, bool bAutoRun = false) : base(pOwner, dr, equipType, equipName, connectionInfo, extraInfo, nCurNo, bAutoRun)
         {
         }
 
-        public PC01S33(PC01F01 pOwner, DataRow dr, int nCurNo, bool bAutoRun = false) : this(pOwner, dr["EQUIP_TYPE_NM"].ToString(), dr["EQUIP_NM"].ToString(), dr["CONNECTION_INFO"].ToString(), dr["EXTRA_INFO"].ToString(), nCurNo, bAutoRun)
+        public PC01S33(PC01F01 pOwner, DataRow dr, int nCurNo, bool bAutoRun = false) : this(pOwner, dr, dr["EQUIP_TYPE_NM"].ToString(), dr["EQUIP_NM"].ToString(), dr["CONNECTION_INFO"].ToString(), dr["EXTRA_INFO"].ToString(), nCurNo, bAutoRun)
         {
-            drEquipment = dr;
             // 20240315, SHS, 최초 PC01S07.cs_PCM_S470-K_PCM_PC220 은 PCM_S470-K, PCM_PC220 가 같이 사용하여서 PCM_S470-K 장비만 utf7 변경 처리 하는데 PCM_S470-K_V2 부터는 PCM_S470-K 장비만 사용하므로 무조건 UTF7 처리로 변경
             //if (m_Type.Equals("PCM_S470-K_V2"))
             //{

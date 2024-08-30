@@ -46,8 +46,9 @@ namespace DataSpider.PC00.PT
         public PC00B01()
         {
         }
-        public PC00B01(IPC00F00 pOwner, string equipType, string equipName, string connectionInfo, string extraInfo, int nCurNo, bool bAutoRun)
+        public PC00B01(IPC00F00 pOwner, DataRow dr, string equipType, string equipName, string connectionInfo, string extraInfo, int nCurNo, bool bAutoRun)
         {
+            drEquipment = dr;
             piPointFlag = drEquipment["UPDATE_PIPOINT_FLAG"].ToString().ToUpper().Equals("Y") ? "N" : "D";
             m_Owner = pOwner;
             m_Name = equipName.Trim();

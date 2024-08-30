@@ -45,10 +45,8 @@ namespace DataSpider.PC00.PT
 
         // 20220908, SHS, SERVERTIME 중복체크 (시간만 비교할지 값도 비교할지) 옵션 기능 추가
         //public PC00M01(IPC00F00 owner, string equipType, string equipName, string connectionInfo, string extraInfo, int nCurNo, bool bAutoRun = false) : base(owner, equipType, equipName, connectionInfo, extraInfo, nCurNo, bAutoRun)
-        public PC00M01(IPC00F00 owner, DataRow dr, string equipType, string equipName, string connectionInfo, string extraInfo, int nCurNo, bool bAutoRun = false, bool bCheckServerTimeDup = false) : base(owner, equipType, equipName, connectionInfo, extraInfo, nCurNo, bAutoRun)
+        public PC00M01(IPC00F00 owner, DataRow dr, string equipType, string equipName, string connectionInfo, string extraInfo, int nCurNo, bool bAutoRun = false, bool bCheckServerTimeDup = false) : base(owner, dr, equipType, equipName, connectionInfo, extraInfo, nCurNo, bAutoRun)
         {
-            drEquipment = dr;
-
             //if (GetTagInfo())
             //{
             //    if (m_AutoRun == true)
