@@ -4,8 +4,6 @@ using System.Windows.Forms;
 
 using DataSpider.PC00.PT;
 
-using DevExpress.XtraPrinting;
-
 namespace DataSpider.UserMonitor
 {
     public partial class CommonCodenfoEdit : Form

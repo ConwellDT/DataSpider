@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Data;
 using System.Data.SqlClient;
+using System.Text;
+
 using CFW.Data;
-using System.Collections;
-using OSIsoft.AF.Time;
 
 namespace DataSpider.PC00.PT
 {
