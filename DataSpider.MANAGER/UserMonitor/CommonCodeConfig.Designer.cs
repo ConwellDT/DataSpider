@@ -74,7 +74,7 @@ namespace DataSpider.UserMonitor
             this.tableLayoutConfigtagGroupMain.RowCount = 2;
             this.tableLayoutConfigtagGroupMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.253359F));
             this.tableLayoutConfigtagGroupMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 91.74664F));
-            this.tableLayoutConfigtagGroupMain.Size = new System.Drawing.Size(870, 582);
+            this.tableLayoutConfigtagGroupMain.Size = new System.Drawing.Size(1264, 611);
             this.tableLayoutConfigtagGroupMain.TabIndex = 0;
             // 
             // label_Title
@@ -85,7 +85,7 @@ namespace DataSpider.UserMonitor
             this.label_Title.Location = new System.Drawing.Point(0, 0);
             this.label_Title.Margin = new System.Windows.Forms.Padding(0);
             this.label_Title.Name = "label_Title";
-            this.label_Title.Size = new System.Drawing.Size(870, 48);
+            this.label_Title.Size = new System.Drawing.Size(1264, 50);
             this.label_Title.TabIndex = 1;
             this.label_Title.Text = "Common Code Config";
             this.label_Title.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -98,12 +98,12 @@ namespace DataSpider.UserMonitor
             this.tableLayoutContents.Controls.Add(this.tableLayoutPanel1, 1, 0);
             this.tableLayoutContents.Controls.Add(this.dataGridCommonCode, 0, 0);
             this.tableLayoutContents.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutContents.Location = new System.Drawing.Point(0, 48);
+            this.tableLayoutContents.Location = new System.Drawing.Point(0, 50);
             this.tableLayoutContents.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutContents.Name = "tableLayoutContents";
             this.tableLayoutContents.RowCount = 1;
             this.tableLayoutContents.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutContents.Size = new System.Drawing.Size(870, 534);
+            this.tableLayoutContents.Size = new System.Drawing.Size(1264, 561);
             this.tableLayoutContents.TabIndex = 2;
             // 
             // tableLayoutPanel1
@@ -115,7 +115,7 @@ namespace DataSpider.UserMonitor
             this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.panel6, 0, 4);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(737, 3);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(1131, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 5;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
@@ -125,7 +125,7 @@ namespace DataSpider.UserMonitor
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(130, 528);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(130, 555);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
             // panel3
@@ -198,7 +198,7 @@ namespace DataSpider.UserMonitor
             // 
             this.panel6.Controls.Add(this.button_Close);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel6.Location = new System.Drawing.Point(3, 471);
+            this.panel6.Location = new System.Drawing.Point(3, 498);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(124, 54);
             this.panel6.TabIndex = 5;
@@ -238,11 +238,12 @@ namespace DataSpider.UserMonitor
             this.UpdateRegId,
             this.RegDate,
             this.RegId});
+            this.dataGridCommonCode.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridCommonCode.Location = new System.Drawing.Point(3, 3);
             this.dataGridCommonCode.Name = "dataGridCommonCode";
             this.dataGridCommonCode.RowHeadersVisible = false;
             this.dataGridCommonCode.RowTemplate.Height = 23;
-            this.dataGridCommonCode.Size = new System.Drawing.Size(728, 528);
+            this.dataGridCommonCode.Size = new System.Drawing.Size(1122, 555);
             this.dataGridCommonCode.TabIndex = 3;
             this.dataGridCommonCode.DoubleClick += new System.EventHandler(this.button_Edit_Click);
             // 
@@ -258,6 +259,7 @@ namespace DataSpider.UserMonitor
             // 
             this.CodeGroup.HeaderText = "Code Group";
             this.CodeGroup.Name = "CodeGroup";
+            this.CodeGroup.ReadOnly = true;
             this.CodeGroup.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.CodeGroup.Width = 110;
             // 
@@ -265,6 +267,7 @@ namespace DataSpider.UserMonitor
             // 
             this.Code.HeaderText = "Code";
             this.Code.Name = "Code";
+            this.Code.ReadOnly = true;
             this.Code.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.Code.Width = 145;
             // 
@@ -272,6 +275,7 @@ namespace DataSpider.UserMonitor
             // 
             this.CodeName.HeaderText = "Code Name";
             this.CodeName.Name = "CodeName";
+            this.CodeName.ReadOnly = true;
             this.CodeName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.CodeName.Width = 145;
             // 
@@ -279,6 +283,7 @@ namespace DataSpider.UserMonitor
             // 
             this.CodeValue.HeaderText = "Code Value";
             this.CodeValue.Name = "CodeValue";
+            this.CodeValue.ReadOnly = true;
             this.CodeValue.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.CodeValue.Width = 350;
             // 
@@ -286,6 +291,7 @@ namespace DataSpider.UserMonitor
             // 
             this.UpdateRegDate.HeaderText = "Update Reg Date";
             this.UpdateRegDate.Name = "UpdateRegDate";
+            this.UpdateRegDate.ReadOnly = true;
             this.UpdateRegDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.UpdateRegDate.Width = 80;
             // 
@@ -293,6 +299,7 @@ namespace DataSpider.UserMonitor
             // 
             this.UpdateRegId.HeaderText = "Update Reg Id";
             this.UpdateRegId.Name = "UpdateRegId";
+            this.UpdateRegId.ReadOnly = true;
             this.UpdateRegId.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.UpdateRegId.Width = 80;
             // 
@@ -300,6 +307,7 @@ namespace DataSpider.UserMonitor
             // 
             this.RegDate.HeaderText = "Reg Date";
             this.RegDate.Name = "RegDate";
+            this.RegDate.ReadOnly = true;
             this.RegDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.RegDate.Width = 80;
             // 
@@ -307,6 +315,7 @@ namespace DataSpider.UserMonitor
             // 
             this.RegId.HeaderText = "Reg Id";
             this.RegId.Name = "RegId";
+            this.RegId.ReadOnly = true;
             this.RegId.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.RegId.Width = 80;
             // 
@@ -314,8 +323,9 @@ namespace DataSpider.UserMonitor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(870, 582);
+            this.ClientSize = new System.Drawing.Size(1264, 611);
             this.Controls.Add(this.tableLayoutConfigtagGroupMain);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "CommonCodeConfig";
             this.Text = "Common Code Config";
             this.Load += new System.EventHandler(this.CommonCodeConfig_Load);
