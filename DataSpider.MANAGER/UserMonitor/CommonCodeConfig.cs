@@ -43,8 +43,6 @@ namespace DataSpider.UserMonitor
                     row.Cells["CodeValue"].Value = dtCommonCd.Rows[nR]["CODE_VALUE"].ToString();
                     row.Cells["UpdateRegDate"].Value = dtCommonCd.Rows[nR]["UPDATE_REG_DATE"].ToString();
                     row.Cells["UpdateRegId"].Value = dtCommonCd.Rows[nR]["UPDATE_REG_ID"].ToString();
-                    row.Cells["RegDate"].Value = dtCommonCd.Rows[nR]["REG_DATE"].ToString();
-                    row.Cells["RegId"].Value = dtCommonCd.Rows[nR]["REG_ID"].ToString();
                 }
             }
         }
@@ -64,8 +62,6 @@ namespace DataSpider.UserMonitor
             string selCode  = string.Empty;
             string selCodeName = string.Empty;
             string selCodeValue = string.Empty;
-            string selDate = string.Empty;
-            string selId = string.Empty;
 
             if (dataGridCommonCode.CurrentRow == null)
             {

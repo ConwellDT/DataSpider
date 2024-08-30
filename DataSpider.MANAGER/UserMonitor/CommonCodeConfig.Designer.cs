@@ -30,6 +30,7 @@ namespace DataSpider.UserMonitor
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutConfigtagGroupMain = new System.Windows.Forms.TableLayoutPanel();
             this.label_Title = new System.Windows.Forms.Label();
             this.tableLayoutContents = new System.Windows.Forms.TableLayoutPanel();
@@ -50,8 +51,6 @@ namespace DataSpider.UserMonitor
             this.CodeValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.UpdateRegDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.UpdateRegId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RegDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RegId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutConfigtagGroupMain.SuspendLayout();
             this.tableLayoutContents.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -219,6 +218,7 @@ namespace DataSpider.UserMonitor
             // dataGridCommonCode
             // 
             this.dataGridCommonCode.AllowUserToAddRows = false;
+            this.dataGridCommonCode.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
@@ -235,9 +235,7 @@ namespace DataSpider.UserMonitor
             this.CodeName,
             this.CodeValue,
             this.UpdateRegDate,
-            this.UpdateRegId,
-            this.RegDate,
-            this.RegId});
+            this.UpdateRegId});
             this.dataGridCommonCode.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridCommonCode.Location = new System.Drawing.Point(3, 3);
             this.dataGridCommonCode.Name = "dataGridCommonCode";
@@ -253,7 +251,7 @@ namespace DataSpider.UserMonitor
             this.Selected.HeaderText = "";
             this.Selected.Name = "Selected";
             this.Selected.TrueValue = "true";
-            this.Selected.Width = 50;
+            this.Selected.Width = 30;
             // 
             // CodeGroup
             // 
@@ -281,11 +279,13 @@ namespace DataSpider.UserMonitor
             // 
             // CodeValue
             // 
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.CodeValue.DefaultCellStyle = dataGridViewCellStyle2;
             this.CodeValue.HeaderText = "Code Value";
             this.CodeValue.Name = "CodeValue";
             this.CodeValue.ReadOnly = true;
             this.CodeValue.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.CodeValue.Width = 350;
+            this.CodeValue.Width = 535;
             // 
             // UpdateRegDate
             // 
@@ -303,27 +303,12 @@ namespace DataSpider.UserMonitor
             this.UpdateRegId.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.UpdateRegId.Width = 80;
             // 
-            // RegDate
-            // 
-            this.RegDate.HeaderText = "Reg Date";
-            this.RegDate.Name = "RegDate";
-            this.RegDate.ReadOnly = true;
-            this.RegDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.RegDate.Width = 80;
-            // 
-            // RegId
-            // 
-            this.RegId.HeaderText = "Reg Id";
-            this.RegId.Name = "RegId";
-            this.RegId.ReadOnly = true;
-            this.RegId.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.RegId.Width = 80;
-            // 
             // CommonCodeConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1264, 611);
+            this.ControlBox = false;
             this.Controls.Add(this.tableLayoutConfigtagGroupMain);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "CommonCodeConfig";
@@ -363,7 +348,5 @@ namespace DataSpider.UserMonitor
         private System.Windows.Forms.DataGridViewTextBoxColumn CodeValue;
         private System.Windows.Forms.DataGridViewTextBoxColumn UpdateRegDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn UpdateRegId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn RegDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn RegId;
     }
 }
