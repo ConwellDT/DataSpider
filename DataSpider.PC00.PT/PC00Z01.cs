@@ -1535,13 +1535,31 @@ namespace DataSpider.PC00.PT
             }
             return result;
         }
-        public bool InsertUpdateCommonCode(string cdGrp, string code, string codeNm, string codeVal, string date, string Id, ref string _strErrCode, ref string _strErrText)
+        public bool InsertCommonCode(string cdGrp, string code, string codeNm, string codeVal, string date, string Id, ref string _strErrCode, ref string _strErrText)
         {
             try
             {
                 StringBuilder strQuery = new StringBuilder();
 
-                strQuery.Append($"EXEC InsertUpdateCommonCode '{cdGrp}', '{code}', '{codeNm}', '{codeVal}', '{date}', '{Id}'");
+                strQuery.Append($"EXEC InsertCommonCode '{cdGrp}', '{code}', '{codeNm}', '{codeVal}', '{date}', '{Id}'");
+                bool result = CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref _strErrCode, ref _strErrText);
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                _strErrText = ex.ToString();
+                return false;
+            }
+        }
+
+        public bool UpdateCommonCode(string cdGrp, string code, string codeNm, string codeVal, string date, string Id, string beforeCdGrp, string beforeCode, ref string _strErrCode, ref string _strErrText)
+        {
+            try
+            {
+                StringBuilder strQuery = new StringBuilder();
+
+                strQuery.Append($"EXEC UpdateCommonCode '{cdGrp}', '{code}', '{codeNm}', '{codeVal}', '{date}', '{Id}', '{beforeCdGrp}', '{beforeCode}'");
                 bool result = CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref _strErrCode, ref _strErrText);
 
                 return result;

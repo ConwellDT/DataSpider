@@ -12,7 +12,8 @@ namespace DataSpider.UserMonitor
 
         public const int EDIT_MODE_ADD = 0;
         public const int EDIT_MODE_UPDATE = 1;
-
+        public string beforecdGrp = string.Empty;
+        public string beforecode = string.Empty;
         public string cdGrp = string.Empty;
         public string code = string.Empty;
         public string codeNm = string.Empty;
@@ -30,14 +31,14 @@ namespace DataSpider.UserMonitor
 
             if (string.IsNullOrEmpty(cdGrp) == false)
             {
+                beforecdGrp = cdGrp;
                 textBoxCodeGrp.Text = cdGrp;
-                if (edMode == EDIT_MODE_UPDATE) textBoxCodeGrp.Enabled = false;
             }
 
             if (string.IsNullOrEmpty(code) == false)
             {
+                beforecode = code;
                 textBoxCode.Text = code;
-                if (edMode == EDIT_MODE_UPDATE) textBoxCode.Enabled = false;
             }
 
             if (string.IsNullOrEmpty(codeNm) == false)
@@ -87,31 +88,46 @@ namespace DataSpider.UserMonitor
                 return;
             }
 
-            //ADD 추가 유효성 체크
-            if(EditMode == EDIT_MODE_ADD)
+            DataTable dtCommonCode = sqlBiz.GetAllCommonCode(ref strErrCode, ref strErrText);
+            if (strErrCode == null || strErrCode == string.Empty)
             {
-                DataTable dtCommonCode = sqlBiz.GetAllCommonCode(ref strErrCode, ref strErrText);
-                if (strErrCode == null || strErrCode == string.Empty)
-                {
-                    DataRow[] drCommonCode = dtCommonCode.Select($"CD_GRP = '{cdGrp}' AND CODE = '{code}'");
+                DataRow[] drCommonCode = dtCommonCode.Select($"CD_GRP = '{cdGrp}' AND CODE = '{code}'");
 
-                    if (drCommonCode != null && drCommonCode.Length > 0)
-                    {
-                        MessageBox.Show($"Code Group: " + cdGrp + $", Code: " + code + $" already exist", $"Common Code invalid", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        return;
-                    }
+                if (drCommonCode != null && drCommonCode.Length > 0)
+                {
+                    MessageBox.Show($"Code Group: " + cdGrp + $", Code: " + code + $" already exist", $"Common Code invalid", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
                 }
             }
-            if (sqlBiz.InsertUpdateCommonCode(cdGrp, code, codeNm, codeVal, date, Id, ref strErrCode, ref strErrText))
+
+            //ADD 추가 유효성 체크
+            if (EditMode == EDIT_MODE_ADD)
             {
-                MessageBox.Show($"CommonCode has been saved.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                DialogResult = DialogResult.OK;
-                this.Close();
+                if (sqlBiz.InsertCommonCode(cdGrp, code, codeNm, codeVal, date, Id, ref strErrCode, ref strErrText))
+                {
+                    MessageBox.Show($"CommonCode has been saved.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    DialogResult = DialogResult.OK;
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show($"An error occurred while saving. [{strErrText}]", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-            else
+            else if(EditMode == EDIT_MODE_UPDATE)
             {
-                MessageBox.Show($"An error occurred while saving. [{strErrText}]", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (sqlBiz.UpdateCommonCode(cdGrp, code, codeNm, codeVal, date, Id, beforecdGrp, beforecode, ref strErrCode, ref strErrText))
+                {
+                    MessageBox.Show($"CommonCode has been saved.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    DialogResult = DialogResult.OK;
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show($"An error occurred while saving. [{strErrText}]", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
+            
         }
 
         private void button_Cancel_Click(object sender, EventArgs e)
