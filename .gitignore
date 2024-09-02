@@ -49,3 +49,4 @@ DataSpider.PC03.PT/bin/
 DataSpider.SampleCollector/bin/
 LibraryWH/bin/
 OpcUaClient/bin/
+/DataSpider.MANAGER/App.config
