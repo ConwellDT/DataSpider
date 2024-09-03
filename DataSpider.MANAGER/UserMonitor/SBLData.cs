@@ -107,13 +107,13 @@ namespace DataSpider.UserMonitor
         /// 장비정보 업데이트 하여 트리뷰 데이터 조회, 장비 추가/수정/삭제 시 호출
         /// </summary>
         /// <returns></returns>
-        public bool InitData()
+        public bool InitData(bool status)
         {
             bool bReturn = false;
             try
             {
                 GetZoneList();
-                GetEquipmentList();
+                GetEquipmentList(status);
                 GetEquipmentTypeList();
 
                 foreach (Zone zType in m_zList)
@@ -180,6 +180,37 @@ namespace DataSpider.UserMonitor
                 string strErrCode = string.Empty;
                 string strErrText = string.Empty;
                 DataTable dtEquipment = this.m_SqlBiz.GetEquipmentInfo("", "", true, ref strErrCode, ref strErrText);
+
+                m_pList.Clear();
+                if (dtEquipment == null || dtEquipment.Rows.Count <= 0)
+                {
+                    MessageBox.Show("No equipment information exist!! Check DB connection!!");
+                    return false;
+                }
+                else
+                {
+                    foreach (DataRow dr in dtEquipment.Rows)
+                    {
+                        m_pList.Add(new Eq(dr));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+                return false;
+            }
+            return true;
+        }
+
+        public bool GetEquipmentList(bool status)
+        {
+            try
+            {
+                string strErrCode = string.Empty;
+                string strErrText = string.Empty;
+                
+                DataTable dtEquipment = this.m_SqlBiz.GetEquipmentInfo("", "", status, ref strErrCode, ref strErrText);
 
                 m_pList.Clear();
                 if (dtEquipment == null || dtEquipment.Rows.Count <= 0)
