@@ -351,8 +351,10 @@ namespace DataSpider.PC01.PT
                         try
                         {
                             pValue = pjTokenObj.SelectToken(cfgObj.PATH);
+
                             if (pValue == null)
                                 continue;
+                            // 배열도 $.protocolData.[?(@.key == "Company")].value 이렇게 PATH 를 지정하여 처리 가능 
                             if (cfgObj.DATATYPE == CData.JSON_TYPE.KEY)
                             {
                                 var pArraySet = pValue.ToList().Find(p => (p["key"] == null ? "" : p["key"].ToString()) == cfgObj.KEYVALUE);// ("")
@@ -361,7 +363,6 @@ namespace DataSpider.PC01.PT
                                 pValue = pArraySet["value"];
                                 sValueTemp = (string)pValue.ToString();
                             }
-                            // 배열도 $.protocolData.[?(@.key == "Company")].value 이렇게 PATH 를 지정하여 처리 가능 
                             if (cfgObj.DATATYPE == CData.JSON_TYPE.SEARCH)
                             {
                                 if (string.IsNullOrEmpty(cfgObj.KEY_STR) || string.IsNullOrEmpty(cfgObj.VALUE_STR))
@@ -379,6 +380,7 @@ namespace DataSpider.PC01.PT
                                 if (!string.IsNullOrEmpty(sTimeStr))
                                 {
                                     nTimeOffset = Convert.ToInt64(sTimeStr);                                                //1640015936                
+                                    //DateTimeOffset.FromUnixTimeSeconds(nTimeOffset).ToLocalTime().ToString();
                                     pTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc).AddSeconds(nTimeOffset); // 1640015936);
                                     sValueTemp = pTime.ToLocalTime().ToString();
 
