@@ -1,14 +1,9 @@
-﻿using DataSpider.PC00.PT;
-
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+
+using DataSpider.PC00.PT;
 
 namespace DataSpider.UserMonitor
 {
@@ -193,7 +188,7 @@ namespace DataSpider.UserMonitor
                         comboBox_EventFrameSave.SelectedIndex = 0;
                     }
                 }
-                DataTable dtEquipment = sqlBiz.GetEquipmentInfo("", "", true, ref strErrCode, ref strErrText);
+                DataTable dtEquipment = sqlBiz.GetEquipmentInfo("", "", MonitorForm.showAllEquipmtStatus, ref strErrCode, ref strErrText);
 
                 //
                 // 2022. 2. 16 : Han, Ilho
@@ -378,7 +373,7 @@ namespace DataSpider.UserMonitor
 
                 if (AddMode == true || EditModeCopy == true) // Check EQ Exist
                 {
-                    DataTable dtEquipment = sqlBiz.GetEquipmentInfo("", "", true, ref strErrCode, ref strErrText);
+                    DataTable dtEquipment = sqlBiz.GetEquipmentInfo("", "", MonitorForm.showAllEquipmtStatus, ref strErrCode, ref strErrText);
 
                     //drSelectEquip = dtEquipment.Select($"EQUIP_NM = '{textBox_EquipName.Text.Trim()}' AND EQUIP_TYPE = '{comboBox_EquipType.SelectedValue.ToString()}'");
                     drSelectEquip = dtEquipment.Select($"EQUIP_NM = '{textBox_EquipName.Text.Trim()}'");

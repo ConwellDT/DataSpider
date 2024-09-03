@@ -689,13 +689,13 @@ namespace DataSpider.PC00.PT
             return result;
         }
 
-        public DataTable GetEquipmentModifiedInfo(ref string _strErrCode, ref string _strErrText)
+        public DataTable GetEquipmentModifiedInfo(string status, ref string _strErrCode, ref string _strErrText)
         {
             DataTable result = null;
             try
             {
                 StringBuilder strQuery = new StringBuilder();
-                strQuery.Append($"EXEC GetEquipmentModifiedInfo");
+                strQuery.Append($"EXEC GetEquipmentModifiedInfo {status}");
 
                 DataSet ds = CFW.Data.MsSqlDbAccess.GetDataSet(strQuery.ToString(), null, CommandType.Text, ref _strErrCode, ref _strErrText);
                 if (ds != null && ds.Tables[0] != null)

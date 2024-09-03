@@ -26,6 +26,7 @@ namespace DataSpider
         private PC00Z01 sqlBiz = new PC00Z01();
         public delegate void OnUserLogInChangedDelegate();
         public event OnUserLogInChangedDelegate OnUserLoginChanged = null;
+        public static bool showAllEquipmtStatus { get; set; }
 
         private CheckDBStatus dbStatus = null;
         EquipmentMonitor equipMonitor = null;
@@ -257,6 +258,7 @@ namespace DataSpider
 
             Text = $"{AssemblyTitle} V.{AssemblyVersion}";
             configCToolStripMenuItem.Visible = userToolStripMenuItem.Visible = false;
+            viewToolStripMenuItem.Visible = userToolStripMenuItem.Visible = false;
 
             SetSBL();
 
@@ -330,11 +332,11 @@ namespace DataSpider
                 m_pSBLDataCtrl = new EquipCtrl();
                 pTreeForm = new TreeForm(this);
                 pPanelView.SetFormToPanel(pTreeForm);
-
+                showAllEquipmtStatus = showAllEquipmtToolStripMenuItem.Checked == false ? true : false;
                 // TreeView 왼쪽 표시
                 m_pSBLDataCtrl.OnChangeDataEvent += new EquipCtrl.OnChangeDataHandler(pTreeForm.OnChangeTreeData);
                 pTreeForm.OnRefreshTreeData += new TreeForm.OnRefreshTreeDataDelegate(m_pSBLDataCtrl.InitData);
-                m_pSBLDataCtrl.InitData();
+                m_pSBLDataCtrl.InitData(showAllEquipmtStatus);
                 // 오른쪽. TabControl 
                 //ListForm pListForm = new ListForm();
                 //pDispView.AddFormToTab(pListForm);
@@ -408,7 +410,8 @@ namespace DataSpider
 
         private void 초기화ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            m_pSBLDataCtrl.InitData();
+            showAllEquipmtStatus = showAllEquipmtToolStripMenuItem.Checked == false ? true : false;
+            m_pSBLDataCtrl.InitData(showAllEquipmtStatus);
         }
 
         private void 큰ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -515,7 +518,8 @@ namespace DataSpider
                     toolStripButton_Log.Text = "Log In";
                     OnUserLoginChanged?.Invoke();
                     configCToolStripMenuItem.Visible = userToolStripMenuItem.Visible = false;
-                     
+                    viewToolStripMenuItem.Visible = userToolStripMenuItem.Visible = false;
+
                 }
             }
             else
@@ -530,6 +534,7 @@ namespace DataSpider
                         OnUserLoginChanged?.Invoke();
                         userToolStripMenuItem.Visible = true;
                         configCToolStripMenuItem.Visible = UserAuthentication.UserLevel.Equals(UserLevel.Admin);
+                        viewToolStripMenuItem.Visible = UserAuthentication.UserLevel.Equals(UserLevel.Admin);
                     }
                 }
             }
@@ -603,6 +608,29 @@ namespace DataSpider
                     currentTagValueMonitor.UpdatecomboBoxTagGroupSel();
                 }
             }
+        }
+
+        private void showAllEquipmtToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            showAllEquipmtStatus = showAllEquipmtToolStripMenuItem.Checked == false ? true : false;
+            if (!showAllEquipmtToolStripMenuItem.Checked) //false
+            {
+               
+                m_pSBLDataCtrl.InitData(showAllEquipmtStatus);
+            }
+            else
+            {
+                if (DialogResult.Yes.Equals(MessageBox.Show("Want to see all the equipmt ?", "Show All Equipmt", MessageBoxButtons.YesNo)))
+                {
+                    m_pSBLDataCtrl.InitData(showAllEquipmtStatus);
+                }
+                else
+                {
+                    showAllEquipmtToolStripMenuItem.Checked = false;
+                }
+                
+            }
+
         }
     }
 }

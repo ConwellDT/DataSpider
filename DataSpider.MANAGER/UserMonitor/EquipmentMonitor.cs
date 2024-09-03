@@ -14,7 +14,7 @@ namespace DataSpider.UserMonitor
 {
     public partial class EquipmentMonitor : LibraryWH.FormCtrl.UserForm
     {
-        public delegate bool OnRefreshTreeDataDelegate();
+        public delegate bool OnRefreshTreeDataDelegate(bool status);
         public event OnRefreshTreeDataDelegate OnRefreshTreeData = null;
 
         private System.Windows.Forms.Timer timerRefresh = new System.Windows.Forms.Timer();
@@ -286,7 +286,7 @@ namespace DataSpider.UserMonitor
         {
             if (OnRefreshTreeData != null)
             {
-                OnRefreshTreeData();
+                OnRefreshTreeData(MonitorForm.showAllEquipmtStatus);
             }
         }
 

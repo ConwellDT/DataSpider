@@ -13,6 +13,8 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+
 namespace DataSpider.UserMonitor
 {
     public partial class TreeForm : LibraryWH.FormCtrl.UserForm
@@ -30,7 +32,7 @@ namespace DataSpider.UserMonitor
 
         delegate void ChangeAllTreeInformation_Callback(EquipCtrl pObj);
         private PC00Z01 sqlBiz = new PC00Z01();
-        public delegate bool OnRefreshTreeDataDelegate();
+        public delegate bool OnRefreshTreeDataDelegate(bool status);
         public event OnRefreshTreeDataDelegate OnRefreshTreeData = null;
         private TreeNode treeNodeLastSelected = null;
         //private System.Windows.Forms.Timer timerTreeViewState = null;
@@ -114,10 +116,14 @@ namespace DataSpider.UserMonitor
 
         private bool IsEquipmentUpdated()
         {
+            string bool_status = string.Empty;
+            bool status = MonitorForm.showAllEquipmtStatus;
+            if (status) bool_status = "Y";
+            else bool_status = "N";
             bool result = false;
             string errCode = string.Empty;
             string errText = string.Empty;
-            DataTable dtEqMod = sql.GetEquipmentModifiedInfo(ref errCode, ref errText);
+            DataTable dtEqMod = sql.GetEquipmentModifiedInfo(bool_status, ref errCode, ref errText);
             if (dtEqMod != null && dtEqMod.Rows.Count > 0)
             {
                 if (!DateTime.TryParse(dtEqMod.Rows[0][0].ToString(), out DateTime dt))
@@ -402,7 +408,7 @@ namespace DataSpider.UserMonitor
         {
             if (OnRefreshTreeData != null)
             {
-                OnRefreshTreeData();
+                OnRefreshTreeData(MonitorForm.showAllEquipmtStatus);
                 // 주기적으로 장비설정 변경을 체크하여 리프레시 하는 것과 사용자가 장비설정 변경을 하여 리프레시 하는 것 이 있음
                 // 사용자가 변경하여 리프레시 되었을 때 장비변경 정보를 업데이트 하여 주기적으로 장비설정 변경 체크하여 실행하는 것을 제한
                 IsEquipmentUpdated();
@@ -479,7 +485,7 @@ namespace DataSpider.UserMonitor
                         string strErrCode = string.Empty;
                         string strErrText = string.Empty;
 
-                        DataTable dtEquipment = sqlBiz.GetEquipmentInfo("", "", true, ref strErrCode, ref strErrText);
+                        DataTable dtEquipment = sqlBiz.GetEquipmentInfo("", "", MonitorForm.showAllEquipmtStatus, ref strErrCode, ref strErrText);
 
                         DataRow[] drSelectEquip = dtEquipment.Select($"EQUIP_NM = '{nodeTag.Name}'");
                         if (drSelectEquip != null && drSelectEquip.Length > 0)
