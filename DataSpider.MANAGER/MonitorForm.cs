@@ -259,6 +259,7 @@ namespace DataSpider
             Text = $"{AssemblyTitle} V.{AssemblyVersion}";
             configCToolStripMenuItem.Visible = userToolStripMenuItem.Visible = false;
             viewToolStripMenuItem.Visible = userToolStripMenuItem.Visible = false;
+            toolsToolStripMenuItem.Visible = userToolStripMenuItem.Visible = false;
 
             SetSBL();
 
@@ -519,6 +520,7 @@ namespace DataSpider
                     OnUserLoginChanged?.Invoke();
                     configCToolStripMenuItem.Visible = userToolStripMenuItem.Visible = false;
                     viewToolStripMenuItem.Visible = userToolStripMenuItem.Visible = false;
+                    toolsToolStripMenuItem.Visible = userToolStripMenuItem.Visible = false;
 
                 }
             }
@@ -535,6 +537,7 @@ namespace DataSpider
                         userToolStripMenuItem.Visible = true;
                         configCToolStripMenuItem.Visible = UserAuthentication.UserLevel.Equals(UserLevel.Admin);
                         viewToolStripMenuItem.Visible = UserAuthentication.UserLevel.Equals(UserLevel.Admin);
+                        toolsToolStripMenuItem.Visible = UserAuthentication.UserLevel.Equals(UserLevel.Admin);
                     }
                 }
             }
@@ -631,6 +634,18 @@ namespace DataSpider
                 
             }
 
+        }
+
+        private void dateTimeParsingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (UserAuthentication.IsAuthorized)
+            {
+                if (UserAuthentication.UserLevel == UserLevel.Admin || UserAuthentication.UserLevel == UserLevel.Manager)
+                {
+                    DateTimeParse frm = new DateTimeParse();
+                    frm.ShowDialog(this);
+                }
+            }
         }
     }
 }

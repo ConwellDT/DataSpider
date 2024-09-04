@@ -132,6 +132,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="UserMonitor\DateTimeParse.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserMonitor\DateTimeParse.Designer.cs">
+      <DependentUpon>DateTimeParse.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserMonitor\ConfigSystem.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -277,6 +283,9 @@
       <SubType>Designer</SubType>
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserMonitor\DateTimeParse.resx">
+      <DependentUpon>DateTimeParse.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserMonitor\ConfigSystem.resx">
       <DependentUpon>ConfigSystem.cs</DependentUpon>
