@@ -60,7 +60,7 @@ namespace DataSpider.UserMonitor
                 equipmentName = currentRow.Cells["EquipmentName"].Value?.ToString() ?? string.Empty;
             }
 
-            DataTable dtEquipment = sqlBiz.GetEquipmentDateTimeInfo("", "", MonitorForm.showAllEquipmtStatus, equipmentName, ref strErrCode, ref strErrText);
+            DataTable dtEquipment = sqlBiz.GetEquipmentDateTimeInfo( equipmentName, ref strErrCode, ref strErrText);
 
             if (dtEquipment.Rows.Count > 0)
             {
