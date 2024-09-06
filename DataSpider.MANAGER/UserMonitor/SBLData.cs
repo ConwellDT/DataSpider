@@ -114,6 +114,7 @@ namespace DataSpider.UserMonitor
             {
                 GetZoneList();
                 GetEquipmentList(status);
+
                 GetEquipmentTypeList();
 
                 foreach (Zone zType in m_zList)
@@ -173,36 +174,7 @@ namespace DataSpider.UserMonitor
             return true;
         }
 
-        public bool GetEquipmentList()
-        {
-            try
-            {
-                string strErrCode = string.Empty;
-                string strErrText = string.Empty;
-                DataTable dtEquipment = this.m_SqlBiz.GetEquipmentInfo("", "", true, ref strErrCode, ref strErrText);
-
-                m_pList.Clear();
-                if (dtEquipment == null || dtEquipment.Rows.Count <= 0)
-                {
-                    MessageBox.Show("No equipment information exist!! Check DB connection!!");
-                    return false;
-                }
-                else
-                {
-                    foreach (DataRow dr in dtEquipment.Rows)
-                    {
-                        m_pList.Add(new Eq(dr));
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-                return false;
-            }
-            return true;
-        }
-
+     
         public bool GetEquipmentList(bool status)
         {
             try
@@ -234,11 +206,6 @@ namespace DataSpider.UserMonitor
             return true;
         }
 
-        private void Sd_OnChange(object sender, SqlNotificationEventArgs e)
-        {
-            //Eq 정보가 변경되었음
-            GetEquipmentList();
-        }
         private void GetEquipmentTypeList()
         {
             try

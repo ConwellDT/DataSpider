@@ -45,32 +45,33 @@ namespace DataSpider
             this.userInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showAllEquipmtToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dateTimeParsingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.도움말ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sEIMM정보ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.toolStripButton_ExpandAll = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton_CollapseAll = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButton_Log = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel_User = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.panel1 = new System.Windows.Forms.Panel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel_DB_Status = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel_PI_Status = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel_PIPGM_Status = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel_DBPGM_P_Status = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel_DBPGM_P_ErrorFile = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel_DBPGM_S_Status = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel_DBPGM_S_ErrorFile = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel_ServerName = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel_MainDBSourceName = new System.Windows.Forms.ToolStripStatusLabel();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.imageList_EquipState = new System.Windows.Forms.ImageList(this.components);
-            this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dateTimeParsingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripButton_ExpandAll = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton_CollapseAll = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton_Log = new System.Windows.Forms.ToolStripButton();
-            this.toolStripStatusLabel_DB_Status = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel_PI_Status = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel_PIPGM_Status = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel_DBPGM_P_Status = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel_DBPGM_S_Status = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -202,14 +203,15 @@ namespace DataSpider
             // userInfoToolStripMenuItem
             // 
             this.userInfoToolStripMenuItem.Name = "userInfoToolStripMenuItem";
-            this.userInfoToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            this.userInfoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.userInfoToolStripMenuItem.Text = "User info";
             this.userInfoToolStripMenuItem.Click += new System.EventHandler(this.userInfoToolStripMenuItem_Click);
             // 
             // viewToolStripMenuItem
             // 
             this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.showAllEquipmtToolStripMenuItem});
+            this.showAllEquipmtToolStripMenuItem,
+            this.toolStripSeparator5});
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
             this.viewToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.V)));
             this.viewToolStripMenuItem.Size = new System.Drawing.Size(61, 19);
@@ -219,9 +221,25 @@ namespace DataSpider
             // 
             this.showAllEquipmtToolStripMenuItem.CheckOnClick = true;
             this.showAllEquipmtToolStripMenuItem.Name = "showAllEquipmtToolStripMenuItem";
-            this.showAllEquipmtToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.showAllEquipmtToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.showAllEquipmtToolStripMenuItem.Text = "Show All Equipmt";
             this.showAllEquipmtToolStripMenuItem.Click += new System.EventHandler(this.showAllEquipmtToolStripMenuItem_Click);
+            // 
+            // toolsToolStripMenuItem
+            // 
+            this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.dateTimeParsingToolStripMenuItem});
+            this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
+            this.toolsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.S)));
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(66, 19);
+            this.toolsToolStripMenuItem.Text = "Tools (S)";
+            // 
+            // dateTimeParsingToolStripMenuItem
+            // 
+            this.dateTimeParsingToolStripMenuItem.Name = "dateTimeParsingToolStripMenuItem";
+            this.dateTimeParsingToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.dateTimeParsingToolStripMenuItem.Text = "DateTime Parsing";
+            this.dateTimeParsingToolStripMenuItem.Click += new System.EventHandler(this.dateTimeParsingToolStripMenuItem_Click);
             // 
             // 도움말ToolStripMenuItem
             // 
@@ -259,10 +277,42 @@ namespace DataSpider
             this.toolStrip2.TabIndex = 6;
             this.toolStrip2.Text = "toolStrip2";
             // 
+            // toolStripButton_ExpandAll
+            // 
+            this.toolStripButton_ExpandAll.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton_ExpandAll.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton_ExpandAll.Image")));
+            this.toolStripButton_ExpandAll.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_ExpandAll.Name = "toolStripButton_ExpandAll";
+            this.toolStripButton_ExpandAll.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButton_ExpandAll.Text = "Expand All";
+            this.toolStripButton_ExpandAll.ToolTipText = "Expand All";
+            this.toolStripButton_ExpandAll.Click += new System.EventHandler(this.toolStripButton_ExpandAll_Click);
+            // 
+            // toolStripButton_CollapseAll
+            // 
+            this.toolStripButton_CollapseAll.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton_CollapseAll.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton_CollapseAll.Image")));
+            this.toolStripButton_CollapseAll.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_CollapseAll.Name = "toolStripButton_CollapseAll";
+            this.toolStripButton_CollapseAll.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButton_CollapseAll.Text = "Collapse All";
+            this.toolStripButton_CollapseAll.ToolTipText = "Collapse All";
+            this.toolStripButton_CollapseAll.Click += new System.EventHandler(this.toolStripButton_CollapseAll_Click);
+            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 27);
+            // 
+            // toolStripButton_Log
+            // 
+            this.toolStripButton_Log.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButton_Log.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton_Log.Image")));
+            this.toolStripButton_Log.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_Log.Name = "toolStripButton_Log";
+            this.toolStripButton_Log.Size = new System.Drawing.Size(45, 24);
+            this.toolStripButton_Log.Text = "Log In";
+            this.toolStripButton_Log.Click += new System.EventHandler(this.toolStripButton_Log_Click);
             // 
             // toolStripSeparator2
             // 
@@ -313,6 +363,42 @@ namespace DataSpider
             this.statusStrip1.TabIndex = 8;
             this.statusStrip1.Text = "statusStrip1";
             // 
+            // toolStripStatusLabel_DB_Status
+            // 
+            this.toolStripStatusLabel_DB_Status.AutoSize = false;
+            this.toolStripStatusLabel_DB_Status.AutoToolTip = true;
+            this.toolStripStatusLabel_DB_Status.Image = global::DataSpider.Properties.Resources.UnKnown;
+            this.toolStripStatusLabel_DB_Status.Name = "toolStripStatusLabel_DB_Status";
+            this.toolStripStatusLabel_DB_Status.Size = new System.Drawing.Size(100, 26);
+            this.toolStripStatusLabel_DB_Status.Text = "DB Status";
+            // 
+            // toolStripStatusLabel_PI_Status
+            // 
+            this.toolStripStatusLabel_PI_Status.AutoSize = false;
+            this.toolStripStatusLabel_PI_Status.AutoToolTip = true;
+            this.toolStripStatusLabel_PI_Status.Image = global::DataSpider.Properties.Resources.UnKnown;
+            this.toolStripStatusLabel_PI_Status.Name = "toolStripStatusLabel_PI_Status";
+            this.toolStripStatusLabel_PI_Status.Size = new System.Drawing.Size(100, 26);
+            this.toolStripStatusLabel_PI_Status.Text = "PI Status";
+            // 
+            // toolStripStatusLabel_PIPGM_Status
+            // 
+            this.toolStripStatusLabel_PIPGM_Status.AutoSize = false;
+            this.toolStripStatusLabel_PIPGM_Status.AutoToolTip = true;
+            this.toolStripStatusLabel_PIPGM_Status.Image = global::DataSpider.Properties.Resources.UnKnown;
+            this.toolStripStatusLabel_PIPGM_Status.Name = "toolStripStatusLabel_PIPGM_Status";
+            this.toolStripStatusLabel_PIPGM_Status.Size = new System.Drawing.Size(110, 26);
+            this.toolStripStatusLabel_PIPGM_Status.Text = "PI PGM Status";
+            // 
+            // toolStripStatusLabel_DBPGM_P_Status
+            // 
+            this.toolStripStatusLabel_DBPGM_P_Status.AutoSize = false;
+            this.toolStripStatusLabel_DBPGM_P_Status.AutoToolTip = true;
+            this.toolStripStatusLabel_DBPGM_P_Status.Image = global::DataSpider.Properties.Resources.UnKnown;
+            this.toolStripStatusLabel_DBPGM_P_Status.Name = "toolStripStatusLabel_DBPGM_P_Status";
+            this.toolStripStatusLabel_DBPGM_P_Status.Size = new System.Drawing.Size(130, 26);
+            this.toolStripStatusLabel_DBPGM_P_Status.Text = "DB PGM[P] Status";
+            // 
             // toolStripStatusLabel_DBPGM_P_ErrorFile
             // 
             this.toolStripStatusLabel_DBPGM_P_ErrorFile.AutoSize = false;
@@ -322,6 +408,15 @@ namespace DataSpider
             this.toolStripStatusLabel_DBPGM_P_ErrorFile.Size = new System.Drawing.Size(150, 26);
             this.toolStripStatusLabel_DBPGM_P_ErrorFile.Text = "No ErrorFile";
             this.toolStripStatusLabel_DBPGM_P_ErrorFile.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // toolStripStatusLabel_DBPGM_S_Status
+            // 
+            this.toolStripStatusLabel_DBPGM_S_Status.AutoSize = false;
+            this.toolStripStatusLabel_DBPGM_S_Status.AutoToolTip = true;
+            this.toolStripStatusLabel_DBPGM_S_Status.Image = global::DataSpider.Properties.Resources.UnKnown;
+            this.toolStripStatusLabel_DBPGM_S_Status.Name = "toolStripStatusLabel_DBPGM_S_Status";
+            this.toolStripStatusLabel_DBPGM_S_Status.Size = new System.Drawing.Size(130, 26);
+            this.toolStripStatusLabel_DBPGM_S_Status.Text = "DB PGM[S] Status";
             // 
             // toolStripStatusLabel_DBPGM_S_ErrorFile
             // 
@@ -374,98 +469,10 @@ namespace DataSpider
             this.imageList_EquipState.Images.SetKeyName(6, "Unknown");
             this.imageList_EquipState.Images.SetKeyName(7, "NetworkError");
             // 
-            // toolsToolStripMenuItem
+            // toolStripSeparator5
             // 
-            this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.dateTimeParsingToolStripMenuItem});
-            this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.S)));
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(66, 19);
-            this.toolsToolStripMenuItem.Text = "Tools (S)";
-            // 
-            // dateTimeParsingToolStripMenuItem
-            // 
-            this.dateTimeParsingToolStripMenuItem.Name = "dateTimeParsingToolStripMenuItem";
-            this.dateTimeParsingToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.dateTimeParsingToolStripMenuItem.Text = "DateTime Parsing";
-            this.dateTimeParsingToolStripMenuItem.Click += new System.EventHandler(this.dateTimeParsingToolStripMenuItem_Click);
-            // 
-            // toolStripButton_ExpandAll
-            // 
-            this.toolStripButton_ExpandAll.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton_ExpandAll.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton_ExpandAll.Image")));
-            this.toolStripButton_ExpandAll.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton_ExpandAll.Name = "toolStripButton_ExpandAll";
-            this.toolStripButton_ExpandAll.Size = new System.Drawing.Size(24, 24);
-            this.toolStripButton_ExpandAll.Text = "Expand All";
-            this.toolStripButton_ExpandAll.ToolTipText = "Expand All";
-            this.toolStripButton_ExpandAll.Click += new System.EventHandler(this.toolStripButton_ExpandAll_Click);
-            // 
-            // toolStripButton_CollapseAll
-            // 
-            this.toolStripButton_CollapseAll.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton_CollapseAll.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton_CollapseAll.Image")));
-            this.toolStripButton_CollapseAll.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton_CollapseAll.Name = "toolStripButton_CollapseAll";
-            this.toolStripButton_CollapseAll.Size = new System.Drawing.Size(24, 24);
-            this.toolStripButton_CollapseAll.Text = "Collapse All";
-            this.toolStripButton_CollapseAll.ToolTipText = "Collapse All";
-            this.toolStripButton_CollapseAll.Click += new System.EventHandler(this.toolStripButton_CollapseAll_Click);
-            // 
-            // toolStripButton_Log
-            // 
-            this.toolStripButton_Log.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton_Log.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton_Log.Image")));
-            this.toolStripButton_Log.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton_Log.Name = "toolStripButton_Log";
-            this.toolStripButton_Log.Size = new System.Drawing.Size(45, 24);
-            this.toolStripButton_Log.Text = "Log In";
-            this.toolStripButton_Log.Click += new System.EventHandler(this.toolStripButton_Log_Click);
-            // 
-            // toolStripStatusLabel_DB_Status
-            // 
-            this.toolStripStatusLabel_DB_Status.AutoSize = false;
-            this.toolStripStatusLabel_DB_Status.AutoToolTip = true;
-            this.toolStripStatusLabel_DB_Status.Image = global::DataSpider.Properties.Resources.UnKnown;
-            this.toolStripStatusLabel_DB_Status.Name = "toolStripStatusLabel_DB_Status";
-            this.toolStripStatusLabel_DB_Status.Size = new System.Drawing.Size(100, 26);
-            this.toolStripStatusLabel_DB_Status.Text = "DB Status";
-            // 
-            // toolStripStatusLabel_PI_Status
-            // 
-            this.toolStripStatusLabel_PI_Status.AutoSize = false;
-            this.toolStripStatusLabel_PI_Status.AutoToolTip = true;
-            this.toolStripStatusLabel_PI_Status.Image = global::DataSpider.Properties.Resources.UnKnown;
-            this.toolStripStatusLabel_PI_Status.Name = "toolStripStatusLabel_PI_Status";
-            this.toolStripStatusLabel_PI_Status.Size = new System.Drawing.Size(100, 26);
-            this.toolStripStatusLabel_PI_Status.Text = "PI Status";
-            // 
-            // toolStripStatusLabel_PIPGM_Status
-            // 
-            this.toolStripStatusLabel_PIPGM_Status.AutoSize = false;
-            this.toolStripStatusLabel_PIPGM_Status.AutoToolTip = true;
-            this.toolStripStatusLabel_PIPGM_Status.Image = global::DataSpider.Properties.Resources.UnKnown;
-            this.toolStripStatusLabel_PIPGM_Status.Name = "toolStripStatusLabel_PIPGM_Status";
-            this.toolStripStatusLabel_PIPGM_Status.Size = new System.Drawing.Size(110, 26);
-            this.toolStripStatusLabel_PIPGM_Status.Text = "PI PGM Status";
-            // 
-            // toolStripStatusLabel_DBPGM_P_Status
-            // 
-            this.toolStripStatusLabel_DBPGM_P_Status.AutoSize = false;
-            this.toolStripStatusLabel_DBPGM_P_Status.AutoToolTip = true;
-            this.toolStripStatusLabel_DBPGM_P_Status.Image = global::DataSpider.Properties.Resources.UnKnown;
-            this.toolStripStatusLabel_DBPGM_P_Status.Name = "toolStripStatusLabel_DBPGM_P_Status";
-            this.toolStripStatusLabel_DBPGM_P_Status.Size = new System.Drawing.Size(130, 26);
-            this.toolStripStatusLabel_DBPGM_P_Status.Text = "DB PGM[P] Status";
-            // 
-            // toolStripStatusLabel_DBPGM_S_Status
-            // 
-            this.toolStripStatusLabel_DBPGM_S_Status.AutoSize = false;
-            this.toolStripStatusLabel_DBPGM_S_Status.AutoToolTip = true;
-            this.toolStripStatusLabel_DBPGM_S_Status.Image = global::DataSpider.Properties.Resources.UnKnown;
-            this.toolStripStatusLabel_DBPGM_S_Status.Name = "toolStripStatusLabel_DBPGM_S_Status";
-            this.toolStripStatusLabel_DBPGM_S_Status.Size = new System.Drawing.Size(130, 26);
-            this.toolStripStatusLabel_DBPGM_S_Status.Text = "DB PGM[S] Status";
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(177, 6);
             // 
             // MonitorForm
             // 
@@ -541,6 +548,7 @@ namespace DataSpider
         public System.Windows.Forms.ToolStripMenuItem showAllEquipmtToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem dateTimeParsingToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
     }
 }
 

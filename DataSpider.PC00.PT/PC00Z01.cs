@@ -1610,5 +1610,53 @@ namespace DataSpider.PC00.PT
                 return false;
             }
         }
+
+        public DataTable GetEquipType(ref string _strErrCode, ref string _strErrText)
+        {
+            DataTable result = null;
+            try
+            {
+                StringBuilder strQuery = new StringBuilder();
+                strQuery.Append($"EXEC GetEquipType ");
+
+                DataSet ds = CFW.Data.MsSqlDbAccess.GetDataSet(strQuery.ToString(), null, CommandType.Text, ref _strErrCode, ref _strErrText);
+                if (ds != null && ds.Tables[0] != null)
+                {
+                    result = ds.Tables[0];
+                }
+            }
+            catch (Exception ex)
+            {
+                _strErrText = ex.ToString();
+            }
+            return result;
+        }
+
+        public bool UpdateEquipTypeFlag(string equipType, bool onlyuseFlag, ref string _strErrCode, ref string _strErrText)
+        {
+            try
+            {
+                StringBuilder strQuery = new StringBuilder();
+                string useFlag = onlyuseFlag ? "Y" : "N";
+                int index = equipType.IndexOf("(");
+                string equipTypeNm = equipType.Substring(0,index).Trim().ToString();
+                string equipTypeDesc = equipType.Substring(index).Trim().ToString();
+                if (equipTypeDesc.StartsWith("(") && equipTypeDesc.EndsWith(")"))
+                {
+                    equipTypeDesc = equipTypeDesc.Substring(1, equipTypeDesc.Length - 2).Trim();
+                }
+
+
+                strQuery.Append($"EXEC UpdateEquipTypeFlag '{equipTypeNm}','{equipTypeDesc}', '{useFlag}'");
+                bool result = CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref _strErrCode, ref _strErrText);
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                _strErrText = ex.ToString();
+                return false;
+            }
+        }
     }
 }

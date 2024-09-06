@@ -12,6 +12,7 @@ using CFW.Common;
 using System.Configuration;
 using DataSpider.PC00.PT;
 using System.IO;
+using static System.Runtime.CompilerServices.RuntimeHelpers;
 
 namespace DataSpider.PC02.PT
 {
@@ -175,7 +176,7 @@ namespace DataSpider.PC02.PT
         {
             string strErrCode = string.Empty;
             string strErrText = string.Empty;
-            dtEquipmentType = this.m_SqlBiz.GetCommonCode("EQUIP_TYPE", ref strErrCode, ref strErrText);
+            dtEquipmentType = this.m_SqlBiz.GetEquipType(ref strErrCode, ref strErrText);
         }
 
         #region PC01F01_FormClosing 폼 닫기 이벤트 

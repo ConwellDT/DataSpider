@@ -9,6 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using static System.Runtime.CompilerServices.RuntimeHelpers;
+
 namespace DataSpider.UserMonitor
 {
     public partial class ConfigTagGroup : Form
@@ -30,12 +32,12 @@ namespace DataSpider.UserMonitor
             string strErrCode = string.Empty;
             string strErrText = string.Empty;
 
-            DataTable dtEquiptype = sqlBiz.GetCommonCode("EQUIP_TYPE", ref strErrCode, ref strErrText);
+            DataTable dtEquiptype = sqlBiz.GetEquipType(ref strErrCode, ref strErrText);
             if (strErrCode == null || strErrCode == string.Empty)
             {
                 comboBox_EquipType.DataSource = dtEquiptype;
-                comboBox_EquipType.DisplayMember = "CODE_NM_VALUE";
-                comboBox_EquipType.ValueMember = "CODE";
+                comboBox_EquipType.DisplayMember = "EQUIP_NM_VALUE";
+                comboBox_EquipType.ValueMember = "EQUIPTYPE_CD";
                 comboBox_EquipType.SelectedIndex = 0;
             }
             else
@@ -69,10 +71,10 @@ namespace DataSpider.UserMonitor
 
                 label_GroupDesc.Text = selGrpDesc;
 
-                DataTable dtEquiptype = sqlBiz.GetCommonCode("EQUIP_TYPE", ref strErrCode, ref strErrText);
+                DataTable dtEquiptype = sqlBiz.GetEquipType( ref strErrCode, ref strErrText);
 
-                string strSelEQTypeCD = dtEquiptype.Rows[comboBox_EquipType.SelectedIndex]["CODE"].ToString();
-                string strSelEQTypeNM = dtEquiptype.Rows[comboBox_EquipType.SelectedIndex]["CODE_NM"].ToString();
+                string strSelEQTypeCD = dtEquiptype.Rows[comboBox_EquipType.SelectedIndex]["EQUIPTYPE_CD"].ToString();
+                string strSelEQTypeNM = dtEquiptype.Rows[comboBox_EquipType.SelectedIndex]["EQUIPTYPE_NM"].ToString();
 
                 DataTable dtGroups = sqlBiz.GetTagGroupByEQType(strSelEQTypeCD, ref strErrCode, ref strErrText);
 
@@ -106,15 +108,15 @@ namespace DataSpider.UserMonitor
             if (checkedLBoxTagList.Items.Count > 0) checkedLBoxTagList.Items.Clear();
             //if(comboBoxGroupSel.Items.Count > 0 ) comboBoxGroupSel.Items.Clear();
 
-            DataTable dtEquiptype = sqlBiz.GetCommonCode("EQUIP_TYPE", ref strErrCode, ref strErrText);
+            DataTable dtEquiptype = sqlBiz.GetEquipType(ref strErrCode, ref strErrText);
             if (strErrCode == null || strErrCode == string.Empty)
             {
                 if (dtEquiptype.Rows.Count > 0)
                 {
-                    string strSelEQTypeCD = dtEquiptype.Rows[comboBox_EquipType.SelectedIndex]["CODE"].ToString();
-                    string strSelEQTypeNM = dtEquiptype.Rows[comboBox_EquipType.SelectedIndex]["CODE_NM"].ToString();
+                    string strSelEQTypeCD = dtEquiptype.Rows[comboBox_EquipType.SelectedIndex]["EQUIPTYPE_CD"].ToString();
+                    string strSelEQTypeNM = dtEquiptype.Rows[comboBox_EquipType.SelectedIndex]["EQUIPTYPE_NM"].ToString();
 
-                    DataTable dtEquipment = sqlBiz.GetEquipmentInfo(strSelEQTypeNM, "", true, ref strErrCode, ref strErrText);
+                    DataTable dtEquipment = sqlBiz.GetEquipmentInfo(strSelEQTypeNM, "", MonitorForm.showAllEquipmtStatus, ref strErrCode, ref strErrText);
 
                     if (strErrCode == null || strErrCode == string.Empty)
                     {
@@ -180,8 +182,8 @@ namespace DataSpider.UserMonitor
                 return;
             }
 
-            DataTable dtEquiptype = sqlBiz.GetCommonCode("EQUIP_TYPE", ref strErrCode, ref strErrText);
-            string strSelEQTypeCD = dtEquiptype.Rows[comboBox_EquipType.SelectedIndex]["CODE"].ToString();
+            DataTable dtEquiptype = sqlBiz.GetEquipType(ref strErrCode, ref strErrText);
+            string strSelEQTypeCD = dtEquiptype.Rows[comboBox_EquipType.SelectedIndex]["EQUIPTYPE_CD"].ToString();
 
             TagGroupInfoEdit dlg = new TagGroupInfoEdit(strSelEQTypeCD, "", "", TagGroupInfoEdit.EDIT_MODE_ADD);
             if (dlg.ShowDialog() == DialogResult.OK)
@@ -239,8 +241,8 @@ namespace DataSpider.UserMonitor
                 return;
             }
 
-            DataTable dtEquiptype = sqlBiz.GetCommonCode("EQUIP_TYPE", ref strErrCode, ref strErrText);
-            string strSelEQTypeCD = dtEquiptype.Rows[comboBox_EquipType.SelectedIndex]["CODE"].ToString();
+            DataTable dtEquiptype = sqlBiz.GetEquipType(ref strErrCode, ref strErrText);
+            string strSelEQTypeCD = dtEquiptype.Rows[comboBox_EquipType.SelectedIndex]["EQUIPTYPE_CD"].ToString();
 
             DataRowView selRow = (DataRowView)comboBoxGroupSel.SelectedItem;
             string selGrpName = selRow["GROUP_NM"].ToString();
@@ -360,8 +362,8 @@ namespace DataSpider.UserMonitor
                 return;
             }
 
-            DataTable dtEquiptype = sqlBiz.GetCommonCode("EQUIP_TYPE", ref strErrCode, ref strErrText);
-            string strSelEQTypeCD = dtEquiptype.Rows[comboBox_EquipType.SelectedIndex]["CODE"].ToString();
+            DataTable dtEquiptype = sqlBiz.GetEquipType(ref strErrCode, ref strErrText);
+            string strSelEQTypeCD = dtEquiptype.Rows[comboBox_EquipType.SelectedIndex]["EQUIPTYPE_CD"].ToString();
 
             DataRowView selRow = (DataRowView)comboBoxGroupSel.SelectedItem;
             string selGrpName = selRow["GROUP_NM"].ToString();

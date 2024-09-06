@@ -124,7 +124,7 @@ namespace DataSpider.UserMonitor
             {
                 if (m_pRow == null)
                     return "NULL";
-                return $"{m_pRow["CODE_NM"]}";// ({m_pRow["CODE_VALUE"]})";
+                return $"{m_pRow["EQUIPTYPE_NM"]}";// ({m_pRow["CODE_VALUE"]})";
             }
         }
         public override string Description 
@@ -133,7 +133,7 @@ namespace DataSpider.UserMonitor
             {
                 if (m_pRow == null)
                     return "NULL";
-                return $"{m_pRow["CODE_VALUE"]}";
+                return $"{m_pRow["EQUIPTYPE_DESC"]}";
             }
 
         }
@@ -141,7 +141,7 @@ namespace DataSpider.UserMonitor
         {
             get
             {
-                return m_pRow["CODE"].ToString();
+                return m_pRow["EQUIPTYPE_CD"].ToString().Trim();
             }
 
         }

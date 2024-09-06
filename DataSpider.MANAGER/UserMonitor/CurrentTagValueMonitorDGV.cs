@@ -430,8 +430,8 @@ namespace DataSpider.UserMonitor
 
                     if( string.IsNullOrEmpty(equipType) )
                     {
-                        DataTable dtEquiptype = sqlBiz.GetCommonCode("EQUIP_TYPE", ref strErrCode, ref strErrText);
-                        equipType = dtEquiptype.Rows[0]["CODE_NM"].ToString();
+                        DataTable dtEquiptype = sqlBiz.GetEquipType(ref strErrCode, ref strErrText);
+                        equipType = dtEquiptype.Rows[0]["EQUIPTYPE_NM"].ToString();
                     }
                     if (equipTypeCur != equipType)
                     {
@@ -468,8 +468,8 @@ namespace DataSpider.UserMonitor
             string strErrCode = string.Empty;
             string strErrText = string.Empty;
 
-            DataTable dtEquiptype = sqlBiz.GetCommonCode("EQUIP_TYPE", ref strErrCode, ref strErrText);
-            DataRow[] drEQCodeSel = dtEquiptype.Select($"CD_GRP = 'EQUIP_TYPE' AND CODE_NM = '{equipType.Trim()}'");
+            DataTable dtEquiptype = sqlBiz.GetEquipType(ref strErrCode, ref strErrText);
+            DataRow[] drEQCodeSel = dtEquiptype.Select($"EQUIPTYPE_NM = '{equipType.Trim()}'");
 
             if (drEQCodeSel != null && drEQCodeSel.Length > 0)
             {

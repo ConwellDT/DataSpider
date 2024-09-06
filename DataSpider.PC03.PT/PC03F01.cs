@@ -239,7 +239,7 @@ namespace DataSpider.PC03.PT
         {
             string strErrCode = string.Empty;
             string strErrText = string.Empty;
-            dtEquipmentType = this.m_SqlBiz.GetCommonCode("EQUIP_TYPE", ref strErrCode, ref strErrText);
+            dtEquipmentType = this.m_SqlBiz.GetEquipType(ref strErrCode, ref strErrText);
         }
 
         #region CreateProcess 각 설비별로 PLC 데이타 수집 클래스 생성        

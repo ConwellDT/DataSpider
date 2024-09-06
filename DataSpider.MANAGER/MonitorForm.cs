@@ -1,18 +1,14 @@
-﻿using LibraryWH.FormCtrl;
+﻿using System;
+using System.Data;
+using System.Drawing;
+using System.Reflection;
+using System.Threading;
+using System.Windows.Forms;
+
 using DataSpider.PC00.PT;
 using DataSpider.UserMonitor;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+
+using LibraryWH.FormCtrl;
 
 namespace DataSpider
 {
@@ -20,14 +16,14 @@ namespace DataSpider
     {
         EquipCtrl m_pSBLDataCtrl;
         TreeForm pTreeForm;
-        bool m_bSprash = false;       
+        bool m_bSprash = false;
         SysUser pUser = new SysUser();
 
         private PC00Z01 sqlBiz = new PC00Z01();
         public delegate void OnUserLogInChangedDelegate();
         public event OnUserLogInChangedDelegate OnUserLoginChanged = null;
         public static bool showAllEquipmtStatus { get; set; }
-
+        private ToolStripMenuItem clickedToolStripMenuItem;
         private CheckDBStatus dbStatus = null;
         EquipmentMonitor equipMonitor = null;
         CurrentTagValueMonitorDGV currentTagValueMonitor = null;
@@ -35,6 +31,7 @@ namespace DataSpider
         SystemLogView systemLogview = null;
         Form_Splash splash = null;
         public bool bTerminal = false;
+        public bool isChecked = true; 
         Thread threadStatus = null;
         bool m_bDbPgmStatusEnable = true;
         bool m_bPiPgmStatusEnable = true;
@@ -51,8 +48,58 @@ namespace DataSpider
         {
             InitializeComponent();
             ReadStatusConfig();
+            toolToolsInit();
         }
 
+        public void toolToolsInit()
+        {
+            string errCode = string.Empty;
+            string errText = string.Empty;
+            string equipmentType = string.Empty;
+            string useFlag = string.Empty;
+
+            DataTable equipmentTypes = sqlBiz.GetEquipType(ref errCode, ref errText);
+
+            if (equipmentTypes != null && equipmentTypes.Rows.Count > 0)
+            {
+                ToolStripMenuItem existingMenuItem = viewToolStripMenuItem;
+
+                // equipment type 항목 추가
+                foreach (DataRow row in equipmentTypes.Rows)
+                {
+                    equipmentType = row["EQUIP_NM_VALUE"].ToString();
+                    useFlag = row["USE_FLAG"].ToString();
+
+                    ToolStripMenuItem item = new ToolStripMenuItem(equipmentType);
+                    item.CheckOnClick = true;
+
+                    item.Checked = useFlag.Equals("Y", StringComparison.OrdinalIgnoreCase);
+                    item.ForeColor = item.Checked ? Color.Black : Color.DarkGray;
+
+                    //이벤트 핸들러 추가
+                    item.Click += EquipmentType_Click;
+                    existingMenuItem.DropDownItems.Add(item);
+                }
+                this.Refresh();
+            }
+        }
+
+        private void EquipmentType_Click(object sender, EventArgs e)
+        {
+            string errCode = string.Empty;
+            string errText = string.Empty;
+            ToolStripMenuItem clickedItem = sender as ToolStripMenuItem;
+            if (clickedItem != null)
+            {
+                clickedToolStripMenuItem = clickedItem;
+                clickedToolStripMenuItem.ForeColor = clickedToolStripMenuItem.Checked ? Color.Black : Color.DarkGray;
+                isChecked = clickedToolStripMenuItem.Checked;
+
+                sqlBiz.UpdateEquipTypeFlag(clickedToolStripMenuItem.ToString(), isChecked, ref errCode, ref errText);
+            }
+            SetSBL();
+
+        }
         public string AssemblyTitle
         {
             get
@@ -299,7 +346,7 @@ namespace DataSpider
         {
             if (this.InvokeRequired)
             {
-                this.Invoke((MethodInvoker) delegate { OnDBStatusChanged(name, status); });
+                this.Invoke((MethodInvoker)delegate { OnDBStatusChanged(name, status); });
             }
             else
             {
@@ -308,7 +355,7 @@ namespace DataSpider
             }
         }
 
-        
+
 
         private void SetSBL()
         {
@@ -333,7 +380,9 @@ namespace DataSpider
                 m_pSBLDataCtrl = new EquipCtrl();
                 pTreeForm = new TreeForm(this);
                 pPanelView.SetFormToPanel(pTreeForm);
+
                 showAllEquipmtStatus = showAllEquipmtToolStripMenuItem.Checked == false ? true : false;
+               
                 // TreeView 왼쪽 표시
                 m_pSBLDataCtrl.OnChangeDataEvent += new EquipCtrl.OnChangeDataHandler(pTreeForm.OnChangeTreeData);
                 pTreeForm.OnRefreshTreeData += new TreeForm.OnRefreshTreeDataDelegate(m_pSBLDataCtrl.InitData);
@@ -411,8 +460,8 @@ namespace DataSpider
 
         private void 초기화ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            showAllEquipmtStatus = showAllEquipmtToolStripMenuItem.Checked == false ? true : false;
-            m_pSBLDataCtrl.InitData(showAllEquipmtStatus);
+            //showAllEquipmtStatus = showAllEquipmtToolStripMenuItem.Checked == false ? true : false;
+            //m_pSBLDataCtrl.InitData(showAllEquipmtStatus);
         }
 
         private void 큰ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -576,7 +625,7 @@ namespace DataSpider
 
         private void tagGroupToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (UserAuthentication.IsAuthorized )
+            if (UserAuthentication.IsAuthorized)
             {
                 if (UserAuthentication.UserLevel == UserLevel.Admin || UserAuthentication.UserLevel == UserLevel.Manager)
                 {
@@ -625,13 +674,14 @@ namespace DataSpider
             {
                 if (DialogResult.Yes.Equals(MessageBox.Show("Want to see all the equipmt ?", "Show All Equipmt", MessageBoxButtons.YesNo)))
                 {
+
                     m_pSBLDataCtrl.InitData(showAllEquipmtStatus);
                 }
                 else
                 {
                     showAllEquipmtToolStripMenuItem.Checked = false;
                 }
-                
+
             }
 
         }
