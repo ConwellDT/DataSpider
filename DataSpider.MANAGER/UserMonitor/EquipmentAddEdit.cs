@@ -59,10 +59,10 @@ namespace DataSpider.UserMonitor
             string strErrCode = string.Empty;
             string strErrText = string.Empty;
 
-            DataTable dtEquiptype = sqlBiz.GetCommonCode("EQUIP_TYPE", ref strErrCode, ref strErrText);
+            DataTable dtEquiptype = sqlBiz.GetEquipType(ref strErrCode, ref strErrText);
             comboBox_EquipType.DataSource = dtEquiptype;
-            comboBox_EquipType.DisplayMember = "CODE_NM_VALUE";
-            comboBox_EquipType.ValueMember = "CODE";
+            comboBox_EquipType.DisplayMember = "EQUIP_NM_VALUE";
+            comboBox_EquipType.ValueMember = "EQUIPTYPE_CD";
 
             DataTable dtInterfacetype = sqlBiz.GetCommonCode("IF_TYPE", ref strErrCode, ref strErrText);
             comboBox_InterfaceType.DataSource = dtInterfacetype;
