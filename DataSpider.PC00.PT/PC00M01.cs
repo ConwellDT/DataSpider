@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlTypes;
 using System.Diagnostics;
+using System.Diagnostics.Eventing.Reader;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -883,92 +884,101 @@ namespace DataSpider.PC00.PT
                     EquipmentName = equipName,
                     MessageType = msgType,
                     ServerTime = serverTime, 
-                    IFFlag = "E", 
+                    IFFlag = updateEventFrame ? "E" : "D", 
                     TemplateName = $"{equipTypeName}_{msgType:00}"
                 };
 
                 listUpdatedEF.ForEach(tag => efData.Attributes.Add(new EventFrameAttributeData() { Name = tag.EFAttributeName, Value = tag.Value }));
 
-                AFElementTemplate efTemplate = GetEventFrameTemplate(equipTypeName, msgType, listAttributeNames, out string errMessage);
-                if (efTemplate == null)
+                // updateEventFrame is disabled
+                if (!updateEventFrame)
                 {
-                    efData.IFRemark = errMessage.Replace("'", " ");
+                    listViewMsg.UpdateMsg($"EventFrame Save is disabled.", false, true, true, PC00D01.MSGTINF);
+                    efData.IFRemark = "EventFrame Save is disabled.";
                 }
-                else // (efTemplate != null)
+                else
                 {
-                    // AF DB EventFrame 저장
-                    var efResult = SaveEventFrame(eventFrameName, efTemplate, measureTime, measureTime, efData.Attributes);
-
-                    efData.IFFlag = efResult.afIFFlag;
-                    efData.IFRemark = efResult.afIFRemark.Replace("'", " "); 
-                    //efData.TemplateName = efTemplate.Name;
-
-                    // EventFrame 저장 성공일때만 EventFrame 정보 TAG 저장, 실패 시 PC03 에서 저장 시 처리
-                    if (efResult.afIFFlag.Equals("Y"))
+                    AFElementTemplate efTemplate = GetEventFrameTemplate(equipTypeName, msgType, listAttributeNames, out string errMessage);
+                    if (efTemplate == null)
                     {
-                        // EventFrameName 저장 TAG 는 MSGTYPE 0, 태그명 장비명_EVENTID 로 태그가 있어야 함
-                        // MessageType 저장 TAG 는 MSGTYPE 0, 태그명 장비명_MSGTYPE 로 태그가 있어야 함
-                        if (DicTAGList.TryGetValue($"{equipName}_0", out List<TAG> listMsgtype0TAGs))
-                        {
-                            // 20240819, SHS, EventFrameName 저장 TAG NAme : 장비명_EVENTFRAMENAME -> 장비명_EVENTID
-                            TAG tag = listMsgtype0TAGs.Find(x => x.TagName.Equals($"{equipName}_EVENTID"));
-                            if (tag != null)
-                            {
-                                tag.PIIFDateTime = DateTime.Now;
-                                tag.PIIFFlag = "N"; // N -> Y, E -> F, Z
-                                tag.IsDBInserted = false;
-                                tag.dtTimeStamp = listUpdatedEF[0].dtTimeStamp;
-                                tag.Value = eventFrameName;
+                        efData.IFRemark = errMessage.Replace("'", " ");
+                    }
+                    else // (efTemplate != null)
+                    {
+                        // AF DB EventFrame 저장
+                        var efResult = SaveEventFrame(eventFrameName, efTemplate, measureTime, measureTime, efData.Attributes);
 
-                                // 최근값 업데이트 
-                                if (!(tag.TimeStamp.Equals(tag.LastMeasureDateTime) && tag.Value.Equals(tag.LastMeasureValue)))
+                        efData.IFFlag = efResult.afIFFlag;
+                        efData.IFRemark = efResult.afIFRemark.Replace("'", " ");
+                        //efData.TemplateName = efTemplate.Name;
+
+                        // EventFrame 저장 성공일때만 EventFrame 정보 TAG 저장, 실패 시 PC03 에서 저장 시 처리
+                        if (efResult.afIFFlag.Equals("Y"))
+                        {
+                            // EventFrameName 저장 TAG 는 MSGTYPE 0, 태그명 장비명_EVENTID 로 태그가 있어야 함
+                            // MessageType 저장 TAG 는 MSGTYPE 0, 태그명 장비명_MSGTYPE 로 태그가 있어야 함
+                            if (DicTAGList.TryGetValue($"{equipName}_0", out List<TAG> listMsgtype0TAGs))
+                            {
+                                // 20240819, SHS, EventFrameName 저장 TAG NAme : 장비명_EVENTFRAMENAME -> 장비명_EVENTID
+                                TAG tag = listMsgtype0TAGs.Find(x => x.TagName.Equals($"{equipName}_EVENTID"));
+                                if (tag != null)
                                 {
-                                    tag.LastMeasureDateTime = tag.TimeStamp;
-                                    tag.LastMeasureValue = tag.Value;
+                                    tag.PIIFDateTime = DateTime.Now;
+                                    tag.PIIFFlag = "N"; // N -> Y, E -> F, Z
+                                    tag.IsDBInserted = false;
+                                    tag.dtTimeStamp = listUpdatedEF[0].dtTimeStamp;
+                                    tag.Value = eventFrameName;
+
+                                    // 최근값 업데이트 
+                                    if (!(tag.TimeStamp.Equals(tag.LastMeasureDateTime) && tag.Value.Equals(tag.LastMeasureValue)))
+                                    {
+                                        tag.LastMeasureDateTime = tag.TimeStamp;
+                                        tag.LastMeasureValue = tag.Value;
+                                    }
+                                    SavePI(new List<TAG> { tag }, true);
+                                    SaveDBHistory(new List<TAG> { tag });
+                                    if (!tag.IsDBInserted)
+                                    {
+                                        SaveFile(new List<TAG> { tag });
+                                    }
                                 }
-                                SavePI(new List<TAG> { tag }, true);
-                                SaveDBHistory(new List<TAG> { tag });
-                                if (!tag.IsDBInserted)
+                                else
                                 {
-                                    SaveFile(new List<TAG> { tag });
+                                    listViewMsg.UpdateMsg($"There are no TAGs for EventFrameName : {equipName}, MessageType : 0", false, true, true, PC00D01.MSGTERR);
+                                }
+
+                                tag = listMsgtype0TAGs.Find(x => x.TagName.Equals($"{equipName}_MSGTYPE"));
+                                if (tag != null)
+                                {
+                                    tag.PIIFDateTime = DateTime.Now;
+                                    tag.Remark = string.Empty;
+                                    tag.PIIFFlag = "N"; // N -> Y, E -> F, Z
+                                    tag.IsDBInserted = false;
+                                    tag.dtTimeStamp = listUpdatedEF[0].dtTimeStamp;
+                                    tag.Value = msgType.ToString(); ;
+
+                                    // 최근값 업데이트 
+                                    if (!(tag.TimeStamp.Equals(tag.LastMeasureDateTime) && tag.Value.Equals(tag.LastMeasureValue)))
+                                    {
+                                        tag.LastMeasureDateTime = tag.TimeStamp;
+                                        tag.LastMeasureValue = tag.Value;
+                                    }
+                                    SavePI(new List<TAG> { tag }, true);
+                                    SaveDBHistory(new List<TAG> { tag });
+                                    if (!tag.IsDBInserted)
+                                    {
+                                        SaveFile(new List<TAG> { tag });
+                                    }
+                                }
+                                else
+                                {
+                                    listViewMsg.UpdateMsg($"There are no TAGs for MSGTYPE : {equipName}, MessageType : 0", false, true, true, PC00D01.MSGTERR);
                                 }
                             }
                             else
                             {
-                                listViewMsg.UpdateMsg($"There are no TAGs for EventFrameName : {equipName}, MessageType : 0", false, true, true, PC00D01.MSGTERR);
+                                listViewMsg.UpdateMsg($"There are no TAGs for EventFrameName, MSGTYPE : {equipName}, MessageType : 0", false, true, true, PC00D01.MSGTERR);
                             }
-
-                            tag = listMsgtype0TAGs.Find(x => x.TagName.Equals($"{equipName}_MSGTYPE"));
-                            if (tag != null)
-                            {
-                                tag.PIIFDateTime = DateTime.Now;
-                                tag.Remark = string.Empty;
-                                tag.PIIFFlag = "N"; // N -> Y, E -> F, Z
-                                tag.IsDBInserted = false;
-                                tag.dtTimeStamp = listUpdatedEF[0].dtTimeStamp;
-                                tag.Value = msgType.ToString(); ;
-
-                                // 최근값 업데이트 
-                                if (!(tag.TimeStamp.Equals(tag.LastMeasureDateTime) && tag.Value.Equals(tag.LastMeasureValue)))
-                                {
-                                    tag.LastMeasureDateTime = tag.TimeStamp;
-                                    tag.LastMeasureValue = tag.Value;
-                                }
-                                SavePI(new List<TAG> { tag }, true);
-                                SaveDBHistory(new List<TAG> { tag });
-                                if (!tag.IsDBInserted)
-                                {
-                                    SaveFile(new List<TAG> { tag });
-                                }
-                            }
-                            else
-                            {
-                                listViewMsg.UpdateMsg($"There are no TAGs for MSGTYPE : {equipName}, MessageType : 0", false, true, true, PC00D01.MSGTERR);
-                            }
-                        }
-                        else
-                        {
-                            listViewMsg.UpdateMsg($"There are no TAGs for EventFrameName, MSGTYPE : {equipName}, MessageType : 0", false, true, true, PC00D01.MSGTERR);
                         }
                     }
                 }
@@ -989,12 +999,12 @@ namespace DataSpider.PC00.PT
         {
             try
             {
-                // updateEventFrame is disabled
-                if (!updateEventFrame)
-                {
-                    listViewMsg.UpdateMsg($"EventFrame Save is disabled.", false, true, true, PC00D01.MSGTINF);
-                    return ("D", "EventFrame Save is disabled.");
-                }
+                //// updateEventFrame is disabled
+                //if (!updateEventFrame)
+                //{
+                //    listViewMsg.UpdateMsg($"EventFrame Save is disabled.", false, true, true, PC00D01.MSGTINF);
+                //    return ("D", "EventFrame Save is disabled.");
+                //}
 
                 // AF 연결 
                 if (!CheckAFDatabase(out string errString))

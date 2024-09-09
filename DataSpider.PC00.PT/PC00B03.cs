@@ -165,7 +165,7 @@ namespace DataSpider.PC00.PT
                     FileInfo fi = GetTargetFile();
                     if (fi == null)
                     {
-                        Thread.Sleep(10000);
+                        Thread.Sleep(1000);
                         continue;
                     }
                     // 파일이름 패턴으로 MessageType 을 얻도록 설정되어 있으면
@@ -185,18 +185,20 @@ namespace DataSpider.PC00.PT
                         msgType = 1;
                     }
                     string sData = GetFileRawData(fi);
+                    fileLog.WriteData(sData, "GetFileRawData", "RawData");
                     dtLastEnQueuedFileWriteTime = dtCurrFileWriteTime;
                     SetLastEnqueuedFileWriteTime(dtLastEnQueuedFileWriteTime);
                     if (string.IsNullOrWhiteSpace(sData))
                     {
-                        listViewMsg.UpdateMsg("Failed to get data from file", true, false);
+                        listViewMsg.UpdateMsg("Failed to get data from file", true, false, true);
                         UpdateEquipmentProgDateTime(IF_STATUS.InvalidData);
                         Thread.Sleep(10);
                         continue;
                     }
+
                     string data = GetFileData(sData);
                     EnQueue(msgType, data);
-                    listViewMsg.UpdateMsg($"{m_Name}({msgType}) Data has been enqueued", true, true);
+                    listViewMsg.UpdateMsg($"{m_Name}({msgType}) Data has been enqueued", true, true, true);
                     fileLog.WriteData(data, "EnQ", $"{m_Name}({msgType})");
                     //UpdateEquipmentProgDateTime(IF_STATUS.Normal);
                 }
@@ -227,7 +229,7 @@ namespace DataSpider.PC00.PT
             return -1;
         }
 
-        private FileInfo GetTargetFile()
+        protected FileInfo GetTargetFile()
         {
             try
             {
@@ -251,6 +253,7 @@ namespace DataSpider.PC00.PT
                     return null;
                 }
 
+                //listFileInfo.AddRange(fileInfo.Where(x => dtLastEnQueuedFileWriteTime.CompareTo(x.LastWriteTime) < 0).ToArray());
                 foreach (FileInfo fi in fileInfo)
                 {
                     if (dtLastEnQueuedFileWriteTime.CompareTo(fi.LastWriteTime) < 0)
@@ -270,14 +273,15 @@ namespace DataSpider.PC00.PT
                 listFileInfo.Sort((x, y) => x.LastWriteTime.CompareTo(y.LastWriteTime));
 
                 UpdateEquipmentProgDateTime(IF_STATUS.Normal);
-                listViewMsg.UpdateMsg($"Last Enqueued file write time ({dtLastEnQueuedFileWriteTime:yyyy-MM-dd HH:mm:ss.fffffff}). ({listFileInfo.Count}/{fileInfo.Length}) files.", false, true);
+                listViewMsg.UpdateMsg($"Get Target File ({listFileInfo[0].FullName})", false, true, true);
+                listViewMsg.UpdateMsg($"Last Enqueued file write time ({dtLastEnQueuedFileWriteTime:yyyy-MM-dd HH:mm:ss.fffffff}). ({listFileInfo.Count}/{fileInfo.Length}) files.", false, true, true);
                 return listFileInfo[0];
             }
             catch (Exception ex)
             {
                 listViewMsg.UpdateMsg("Exception in GetTargetFile", true, false);
                 UpdateEquipmentProgDateTime(IF_STATUS.InternalError);
-                listViewMsg.UpdateMsg(ex.ToString(), false, true, true, PC00D01.MSGTERR);
+                listViewMsg.UpdateMsg($"Exception in GetTargetFile - {ex}", false, true, true, PC00D01.MSGTERR);
             }
             return null;
         }
@@ -343,7 +347,7 @@ namespace DataSpider.PC00.PT
                 {
                     if (fs != null)
                     {
-                        listViewMsg.UpdateMsg($"Open File {fileInfo.Name} ({fileInfo.LastWriteTime:yyyy-MM-dd HH:mm:ss.fffffff})", false, true);
+                        listViewMsg.UpdateMsg($"Open File {fileInfo.Name} ({fileInfo.LastWriteTime:yyyy-MM-dd HH:mm:ss.fffffff})", false, true, true);
 
                         StringBuilder sbData = new StringBuilder();
                         byte[] b = new byte[1024];
@@ -414,7 +418,7 @@ namespace DataSpider.PC00.PT
             string dtString = m_sqlBiz.ReadSTCommon(m_Name, "LastEnqueuedFileWriteTime");//  PC00U01.ReadConfigValue("LastEnqueudFileWriteTime", m_Name, $@".\CFG\{m_Type}.ini");
             //PC00U01.TryParseExact(dtString, out DateTime dt);
             DateTime.TryParse(dtString, out DateTime dt);
-            listViewMsg.UpdateMsg($"Read last enqueued file write time : {dt:yyyy-MM-dd HH:mm:ss.fffffff})", false, true);
+            listViewMsg.UpdateMsg($"Read last enqueued file write time : {dt:yyyy-MM-dd HH:mm:ss.fffffff}", false, true);
             return dt;
         }
 
@@ -426,7 +430,7 @@ namespace DataSpider.PC00.PT
                 listViewMsg.UpdateMsg($"Error to write last enqueued file write time to INI file", false, true);
                 return false;
             }
-            listViewMsg.UpdateMsg($"Write last enqueued file write time : {dt:yyyy-MM-dd HH:mm:ss.fffffff})", false, true);
+            listViewMsg.UpdateMsg($"Write last enqueued file write time : {dt:yyyy-MM-dd HH:mm:ss.fffffff}", false, true);
             return true;
         }
     }

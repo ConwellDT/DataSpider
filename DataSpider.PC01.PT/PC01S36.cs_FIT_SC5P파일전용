@@ -1,0 +1,22 @@
+﻿{
+	"MEASURE_DATETIME_NAME" : "_timestamp", 
+	"WORK_FLOW_TYPE": 
+	[
+		{
+			"NAME": "BPT",
+			"MSG_TYPE": "1"
+		},
+		{
+			"NAME": "DIF",
+			"MSG_TYPE": "2"
+		},
+		{
+			"NAME": "PDT",
+			"MSG_TYPE": "3"
+		},
+		{
+			"NAME": "WIT",
+			"MSG_TYPE": "4"
+		}
+	]
+}
