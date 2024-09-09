@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Reflection;
@@ -694,6 +695,19 @@ namespace DataSpider
                 {
                     DateTimeParse frm = new DateTimeParse();
                     frm.ShowDialog(this);
+                }
+            }
+        }
+
+        private void configurationManagerAppSettingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (UserAuthentication.IsAuthorized)
+            {
+                if (UserAuthentication.UserLevel == UserLevel.Admin || UserAuthentication.UserLevel == UserLevel.Manager)
+                {
+                    ConfigurationManagerAppSetting frm = new ConfigurationManagerAppSetting();
+                    frm.ShowDialog(this);
+                    currentTagValueMonitor.UpdatecomboBoxTagGroupSel();
                 }
             }
         }

@@ -20,7 +20,7 @@ namespace DataSpider.UserMonitor
             InitializeComponent();
         }
 
-        private void CommonCodeConfig_Load(object sender, EventArgs e)
+        private void DateTimeParsing_Load(object sender, EventArgs e)
         {
             InitControls();
         }

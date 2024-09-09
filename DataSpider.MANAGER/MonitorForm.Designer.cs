@@ -45,6 +45,7 @@ namespace DataSpider
             this.userInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showAllEquipmtToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dateTimeParsingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.도움말ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -71,7 +72,7 @@ namespace DataSpider
             this.toolStripStatusLabel_MainDBSourceName = new System.Windows.Forms.ToolStripStatusLabel();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.imageList_EquipState = new System.Windows.Forms.ImageList(this.components);
-            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.configurationManagerAppSettingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -152,14 +153,14 @@ namespace DataSpider
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(98, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(177, 6);
             // 
             // 종료ToolStripMenuItem
             // 
             this.종료ToolStripMenuItem.Name = "종료ToolStripMenuItem";
             this.종료ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.X)));
             this.종료ToolStripMenuItem.ShowShortcutKeys = false;
-            this.종료ToolStripMenuItem.Size = new System.Drawing.Size(101, 22);
+            this.종료ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.종료ToolStripMenuItem.Text = "Exit(X)";
             this.종료ToolStripMenuItem.Click += new System.EventHandler(this.종료ToolStripMenuItem_Click);
             // 
@@ -167,7 +168,8 @@ namespace DataSpider
             // 
             this.configCToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tagGroupToolStripMenuItem,
-            this.commonCodeToolStripMenuItem});
+            this.commonCodeToolStripMenuItem,
+            this.configurationManagerAppSettingToolStripMenuItem});
             this.configCToolStripMenuItem.Name = "configCToolStripMenuItem";
             this.configCToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.C)));
             this.configCToolStripMenuItem.Size = new System.Drawing.Size(71, 19);
@@ -178,7 +180,7 @@ namespace DataSpider
             this.tagGroupToolStripMenuItem.Name = "tagGroupToolStripMenuItem";
             this.tagGroupToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.T)));
             this.tagGroupToolStripMenuItem.ShowShortcutKeys = false;
-            this.tagGroupToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.tagGroupToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
             this.tagGroupToolStripMenuItem.Text = "Tag Group (T)";
             this.tagGroupToolStripMenuItem.Click += new System.EventHandler(this.tagGroupToolStripMenuItem_Click);
             // 
@@ -187,7 +189,7 @@ namespace DataSpider
             this.commonCodeToolStripMenuItem.Name = "commonCodeToolStripMenuItem";
             this.commonCodeToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.O)));
             this.commonCodeToolStripMenuItem.ShowShortcutKeys = false;
-            this.commonCodeToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.commonCodeToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
             this.commonCodeToolStripMenuItem.Text = "Common Code (O)";
             this.commonCodeToolStripMenuItem.Click += new System.EventHandler(this.commonCodeToolStripMenuItem_Click);
             // 
@@ -224,6 +226,11 @@ namespace DataSpider
             this.showAllEquipmtToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.showAllEquipmtToolStripMenuItem.Text = "Show All Equipmt";
             this.showAllEquipmtToolStripMenuItem.Click += new System.EventHandler(this.showAllEquipmtToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(177, 6);
             // 
             // toolsToolStripMenuItem
             // 
@@ -469,10 +476,12 @@ namespace DataSpider
             this.imageList_EquipState.Images.SetKeyName(6, "Unknown");
             this.imageList_EquipState.Images.SetKeyName(7, "NetworkError");
             // 
-            // toolStripSeparator5
+            // configurationManagerAppSettingToolStripMenuItem
             // 
-            this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(177, 6);
+            this.configurationManagerAppSettingToolStripMenuItem.Name = "configurationManagerAppSettingToolStripMenuItem";
+            this.configurationManagerAppSettingToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
+            this.configurationManagerAppSettingToolStripMenuItem.Text = "ConfigurationManagerAppSetting";
+            this.configurationManagerAppSettingToolStripMenuItem.Click += new System.EventHandler(this.configurationManagerAppSettingToolStripMenuItem_Click);
             // 
             // MonitorForm
             // 
@@ -549,6 +558,7 @@ namespace DataSpider
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem dateTimeParsingToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.ToolStripMenuItem configurationManagerAppSettingToolStripMenuItem;
     }
 }
 
