@@ -49,6 +49,37 @@ namespace DataSpider.PC00.PT
                                 string val,
                                 string filePath);
 
+        public static bool TryParseEpochSeconds(long longEpochSeconds, out DateTime dt)
+        {
+            dt = DateTime.MinValue;
+            try
+            {
+                dt = DateTimeOffset.FromUnixTimeSeconds(longEpochSeconds).DateTime.ToLocalTime();
+                return true;
+            }
+            catch (Exception ex)
+            {
+            }
+            return false;
+        }
+
+        public static bool TryParseEpochSeconds(string stringEpochSeconds, out DateTime dt)
+        {
+            dt = DateTime.MinValue;
+            try
+            {
+                if (long.TryParse(stringEpochSeconds, out long epochSeconds))
+                {
+                    dt = DateTimeOffset.FromUnixTimeSeconds(epochSeconds).DateTime.ToLocalTime();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+            return false;
+        }
+
         //extrainfo 예 { TimeFormat : "yyyy-MM-dd HH:mm:ss, dd-MM-yyyy HH:mm:ss" }
         public static void SetEquipmentDateTimeFormat(string extraInfo)
         {

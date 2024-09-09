@@ -248,7 +248,6 @@ namespace DataSpider.UserMonitor
         //    }
 
         //}
-
        
         public string Type
         {
@@ -261,8 +260,8 @@ namespace DataSpider.UserMonitor
                     return m_pRow["EQUIP_TYPE"].ToString().Trim(); 
                 return "NULL EQUIP_TYPE";
             }
-
         }
+
         public override IF_STATUS State
         {
             get { return m_nState; }

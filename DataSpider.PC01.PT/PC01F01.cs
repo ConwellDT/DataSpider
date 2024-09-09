@@ -192,7 +192,6 @@ namespace DataSpider.PC01.PT
             Thread.Sleep(3000);
             string errCode = string.Empty, errText = string.Empty;
             m_SqlBiz.ExecuteNonQuery($" UPDATE MA_FAILOVER_CD SET HIDE_SHOW=0  WHERE EQUIP_NM='{equipName}'  ", ref errCode, ref errText);
-            ShowHideForm(false);
 
             while (!bTerminated)
             {
@@ -498,6 +497,13 @@ namespace DataSpider.PC01.PT
                         foreach (DataRow dr in dtEquipment.Rows)
                         {
                             thProcess[i++] = new PC01S35(this, dr, i, true);
+                        }
+                        break;
+                    case "FIT_SC5P":
+                        thProcess = new PC01S36[dtEquipment.Rows.Count];
+                        foreach (DataRow dr in dtEquipment.Rows)
+                        {
+                            thProcess[i++] = new PC01S36(this, dr, i, true);
                         }
                         break;
                     default:

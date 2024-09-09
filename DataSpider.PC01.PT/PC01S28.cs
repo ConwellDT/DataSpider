@@ -16,7 +16,7 @@ using System.Data;
 // WildcardPattern
 using System.Management.Automation;
 using System.Runtime.InteropServices.ComTypes;
-using static DataSpider.PC01.PT.PC01S14;
+//using static DataSpider.PC01.PT.PC01S14;
 
 namespace DataSpider.PC01.PT
 {

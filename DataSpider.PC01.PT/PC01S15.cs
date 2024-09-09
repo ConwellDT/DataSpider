@@ -19,6 +19,7 @@ using System.Web.Script.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Xml.Serialization;
+using System.Runtime.InteropServices.ComTypes;
 
 namespace DataSpider.PC01.PT
 {
@@ -668,6 +669,8 @@ namespace DataSpider.PC01.PT
                         Thread.Sleep(10);
                         continue;
                     }
+                    fileLog.WriteData(sData, "GetFileRawData", "RawData");
+
                     string data = GetFileData(sData);
 
                     //EnQueue(msgType, data);  = GetFileData로 이동
