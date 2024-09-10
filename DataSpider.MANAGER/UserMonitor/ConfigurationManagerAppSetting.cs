@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.Data;
+using System.Data.Linq.Mapping;
 using System.IO;
 using System.Windows.Forms;
 
@@ -37,7 +38,6 @@ namespace DataSpider.UserMonitor
             //인스턴스를 생성하고 설정 파일의 경로 지정
             ExeConfigurationFileMap configFileMap = new ExeConfigurationFileMap();
             configFileMap.ExeConfigFilename = configFilePath;
-
             Configuration config = ConfigurationManager.OpenMappedExeConfiguration(configFileMap, ConfigurationUserLevel.None);
 
             foreach (KeyValueConfigurationElement kvConf in config.AppSettings.Settings)
@@ -85,8 +85,36 @@ namespace DataSpider.UserMonitor
                 }
             }
 
+            DataTable dataTable = new DataTable();
+            dataTable.Columns.Add("Key", typeof(string));
+            dataTable.Columns.Add("Value", typeof(string));
+
+            if (dataGridView_AppConfig.DataSource == null)
+            {
+                // Collect rows from DataGridView if DataSource is null
+                foreach (DataGridViewRow row in dataGridView_AppConfig.Rows)
+                {
+                    if (row.Cells["Key"].Value != null && row.Cells["Value"].Value != null)
+                    {
+                        DataRow dataRow = dataTable.NewRow();
+                        dataRow["Key"] = row.Cells["Key"].Value.ToString();
+                        dataRow["Value"] = row.Cells["Value"].Value.ToString();
+                        dataTable.Rows.Add(dataRow);
+                    }
+                }
+            }
+            else
+            {
+                // Collect rows from DataSource if DataSource is set
+                DataTable boundTable = dataGridView_AppConfig.DataSource as DataTable;
+                if (boundTable != null)
+                {
+                    dataTable = boundTable.Copy();
+                }
+            }
+
             // 선택된 데이터를 사용하여 편집 창 열기
-            ConfiguraionManagerAppSettingEdit dlg = new ConfiguraionManagerAppSettingEdit(selKey, selValue, CommonCodenfoEdit.EDIT_MODE_UPDATE);
+            ConfiguraionManagerAppSettingEdit dlg = new ConfiguraionManagerAppSettingEdit(selKey, selValue, dataTable, CommonCodenfoEdit.EDIT_MODE_UPDATE);
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 dataGridView_AppConfig.Rows.Clear();
@@ -96,7 +124,35 @@ namespace DataSpider.UserMonitor
 
         private void button_Append_Click(object sender, EventArgs e)
         {
-            ConfiguraionManagerAppSettingEdit dlg = new ConfiguraionManagerAppSettingEdit("", "", CommonCodenfoEdit.EDIT_MODE_ADD);
+            DataTable dataTable = new DataTable();
+            dataTable.Columns.Add("Key", typeof(string));
+            dataTable.Columns.Add("Value", typeof(string));
+
+            if (dataGridView_AppConfig.DataSource == null)
+            {
+                // Collect rows from DataGridView if DataSource is null
+                foreach (DataGridViewRow row in dataGridView_AppConfig.Rows)
+                {
+                    if (row.Cells["Key"].Value != null && row.Cells["Value"].Value != null)
+                    {
+                        DataRow dataRow = dataTable.NewRow();
+                        dataRow["Key"] = row.Cells["Key"].Value.ToString();
+                        dataRow["Value"] = row.Cells["Value"].Value.ToString();
+                        dataTable.Rows.Add(dataRow);
+                    }
+                }
+            }
+            else
+            {
+                // Collect rows from DataSource if DataSource is set
+                DataTable boundTable = dataGridView_AppConfig.DataSource as DataTable;
+                if (boundTable != null)
+                {
+                    dataTable = boundTable.Copy();
+                }
+            }
+
+            ConfiguraionManagerAppSettingEdit dlg = new ConfiguraionManagerAppSettingEdit("", "", dataTable, CommonCodenfoEdit.EDIT_MODE_ADD);
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 dataGridView_AppConfig.Rows.Clear();
