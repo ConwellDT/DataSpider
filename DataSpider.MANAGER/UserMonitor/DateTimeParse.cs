@@ -63,20 +63,10 @@ namespace DataSpider.UserMonitor
             {
                 string extraInfo = dtEquipment.Rows[0]["EXTRA_INFO"].ToString();
 
-                if (string.IsNullOrWhiteSpace(extraInfo))
+                if (!string.IsNullOrWhiteSpace(extraInfo))
                 {
                     JsonDocument document = JsonDocument.Parse(extraInfo);
                     result = document.RootElement.GetProperty("TimeFormat").GetString();
-
-                    if(result == null)
-                    {
-                        DataTable dt = sqlBiz.GetCommonCode("TIMEFORMAT", ref strErrCode, ref strErrText);
-                        if (dt != null && dt.Rows.Count > 0)
-                        {
-                            result = dt.Rows[0]["CODE_VALUE"].ToString();
-                        }
-                    }
-
                 }
                 else
                 {
