@@ -251,8 +251,8 @@ namespace DataSpider.PC03.PT
                 int threadIndex = 0;
                 foreach (DataRow dr in dtEquipmentType.Rows)
                 {
-                    string equipType = dr["CODE"].ToString();
-                    string equipName = dr["CODE_NM"].ToString();
+                    string equipType = dr["EQUIPTYPE_CD"].ToString();
+                    string equipName = dr["EQUIPTYPE_NM"].ToString();
                     thProcess[threadIndex] = new PC03S01(this, equipType, equipName, $"{Application.ProductName}_{equipName}", threadIndex++, true, m_clsPIInfo);
                 }
             }
@@ -640,7 +640,7 @@ namespace DataSpider.PC03.PT
                 int i = 0;
                 foreach (DataRow dr in dtEquipmentType.Rows)
                 {
-                    lvi = new ListViewItem($"{dr["CODE_NM"]}");                                        
+                    lvi = new ListViewItem($"{dr["EQUIPTYPE_NM"]}");                                        
                     lvi.SubItems.Add(PC00D01.OFF);
                     lvi.SubItems.Add("");
                     lvi.SubItems.Add("");

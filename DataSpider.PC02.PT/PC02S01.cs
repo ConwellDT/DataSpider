@@ -1,19 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Runtime.InteropServices;
-using System.Collections;
-using System.Threading;
-using System.Reflection;
-using CFW.Common;
-using System.IO;
-using System.Text.RegularExpressions;
-using DataSpider.PC00.PT;
-using static System.Runtime.CompilerServices.RuntimeHelpers;
-using System.Text.Json;
 using System.Data;
+using System.IO;
+using System.Linq;
+using System.Text.Json;
+using System.Threading;
+
+using DataSpider.PC00.PT;
 
 namespace DataSpider.PC02.PT
 {

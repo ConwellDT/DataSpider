@@ -96,7 +96,11 @@ namespace DataSpider
                 clickedToolStripMenuItem.ForeColor = clickedToolStripMenuItem.Checked ? Color.Black : Color.DarkGray;
                 isChecked = clickedToolStripMenuItem.Checked;
 
-                sqlBiz.UpdateEquipTypeFlag(clickedToolStripMenuItem.ToString(), isChecked, ref errCode, ref errText);
+                string equipType = clickedToolStripMenuItem.Text.ToString();
+                int index = equipType.IndexOf("(");
+                string equipTypeNm = equipType.Substring(0, index).Trim().ToString();
+
+                sqlBiz.UpdateEquipTypeFlag(equipTypeNm, isChecked, ref errCode, ref errText);
             }
             SetSBL();
 

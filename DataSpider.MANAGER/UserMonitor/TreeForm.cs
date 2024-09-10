@@ -535,13 +535,13 @@ namespace DataSpider.UserMonitor
             strQuery.Clear();
             if (bVal == true)
             {
-                strQuery.Append($" UPDATE MA_FAILOVER_CD SET HIDE_SHOW = 1 FROM MA_EQUIPMENT_CD E,MA_COMMON_CD C ");
-                strQuery.Append($" WHERE E.EQUIP_NM = MA_FAILOVER_CD.EQUIP_NM AND C.CODE = E.EQUIP_TYPE AND C.CODE_NM = '{equipTypeName}' ");
+                strQuery.Append($" UPDATE MA_FAILOVER_CD SET HIDE_SHOW = 1 FROM MA_EQUIPMENT_CD E,MA_EQUIPTYPE_CD C  ");
+                strQuery.Append($" WHERE E.EQUIP_NM = MA_FAILOVER_CD.EQUIP_NM AND C.EQUIPTYPE_CD = E.EQUIP_TYPE AND C.EQUIPTYPE_NM = '{equipTypeName}'  ");
             }
             else
             {
-                strQuery.Append($" UPDATE MA_FAILOVER_CD SET HIDE_SHOW = 0 FROM MA_EQUIPMENT_CD E,MA_COMMON_CD C ");
-                strQuery.Append($" WHERE E.EQUIP_NM = MA_FAILOVER_CD.EQUIP_NM AND C.CODE = E.EQUIP_TYPE AND C.CODE_NM = '{equipTypeName}' ");
+                strQuery.Append($" UPDATE MA_FAILOVER_CD SET HIDE_SHOW = 0 FROM MA_EQUIPMENT_CD E,MA_EQUIPTYPE_CD C ");
+                strQuery.Append($" WHERE E.EQUIP_NM = MA_FAILOVER_CD.EQUIP_NM AND C.EQUIPTYPE_CD = E.EQUIP_TYPE AND C.EQUIPTYPE_NM = '{equipTypeName}' ");
             }
             sqlBiz.ExecuteNonQuery(strQuery.ToString(), ref errCode, ref errText);
         }
