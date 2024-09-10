@@ -136,7 +136,7 @@ namespace DataSpider.UserMonitor
                 this.Text = label_Title.Text = "Add Equipment";
                 if (!string.IsNullOrWhiteSpace(EquipTypeName))
                 {
-                    comboBox_EquipType.SelectedValue = dtEquiptype.Select($"CODE_NM = '{EquipTypeName}'")[0]["CODE"].ToString();
+                    comboBox_EquipType.SelectedValue = dtEquiptype.Select($"EQUIPTYPE_NM = '{EquipTypeName}'")[0]["EQUIPTYPE_CD"].ToString();
                     //comboBox_InterfaceType.SelectedValue = dtInterfacetype.Select($"CODE_NM = '{EquipTypeName}'")[0]["CODE"].ToString();
                     comboBox_InterfaceType.SelectedIndex = 0;
                     comboBox_ZoneType.SelectedIndex = 0;

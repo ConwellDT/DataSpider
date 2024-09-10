@@ -473,7 +473,7 @@ namespace DataSpider.UserMonitor
 
             if (drEQCodeSel != null && drEQCodeSel.Length > 0)
             {
-                String strEQTypeCode = drEQCodeSel[0]["CODE"].ToString();
+                String strEQTypeCode = drEQCodeSel[0]["EQUIPTYPE_CD"].ToString();
                 DataTable dtGroups = sqlBiz.GetTagGroupByEQType(strEQTypeCode, ref strErrCode, ref strErrText);
 
                 if (strErrCode == null || strErrCode == string.Empty)

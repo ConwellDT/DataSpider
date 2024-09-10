@@ -252,7 +252,7 @@ namespace DataSpider.PC02.PT
                 int threadIndex = 0;
                 foreach (DataRow dr in dtEquipmentType.Rows)
                 {
-                    string equipType = dr["CODE_NM"].ToString();
+                    string equipType = dr["EQUIPTYPE_NM"].ToString();
                     thProcess[threadIndex] = new PC02S01(this, dr, equipType, $"{Application.ProductName}_{equipType}", $@"{Environment.CurrentDirectory}\Data\{equipType}", string.Empty, threadIndex++, true);
                     listDataFilePath.Add($@"{Environment.CurrentDirectory}\Data\{equipType}");
                 }
@@ -602,9 +602,9 @@ namespace DataSpider.PC02.PT
                 int i = 0;
                 foreach (DataRow dr in dtEquipmentType.Rows)
                 {
-                    lvi = new ListViewItem($"{dr["CODE_NM"]}");
+                    lvi = new ListViewItem($"{dr["EQUIPTYPE_NM"]}");
                     //lvi.SubItems.Add("");
-                    lvi.SubItems.Add($@"{Environment.CurrentDirectory}\Data\{dr["CODE_NM"]}");
+                    lvi.SubItems.Add($@"{Environment.CurrentDirectory}\Data\{dr["EQUIPTYPE_NM"]}");
                     lvi.SubItems.Add("");
                     lvi.SubItems.Add(PC00D01.OFF);
                     lvi.SubItems.Add("");

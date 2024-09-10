@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Reflection;
@@ -95,7 +96,11 @@ namespace DataSpider
                 clickedToolStripMenuItem.ForeColor = clickedToolStripMenuItem.Checked ? Color.Black : Color.DarkGray;
                 isChecked = clickedToolStripMenuItem.Checked;
 
-                sqlBiz.UpdateEquipTypeFlag(clickedToolStripMenuItem.ToString(), isChecked, ref errCode, ref errText);
+                string equipType = clickedToolStripMenuItem.Text.ToString();
+                int index = equipType.IndexOf("(");
+                string equipTypeNm = equipType.Substring(0, index).Trim().ToString();
+
+                sqlBiz.UpdateEquipTypeFlag(equipTypeNm, isChecked, ref errCode, ref errText);
             }
             SetSBL();
 
@@ -694,6 +699,19 @@ namespace DataSpider
                 {
                     DateTimeParse frm = new DateTimeParse();
                     frm.ShowDialog(this);
+                }
+            }
+        }
+
+        private void configurationManagerAppSettingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (UserAuthentication.IsAuthorized)
+            {
+                if (UserAuthentication.UserLevel == UserLevel.Admin || UserAuthentication.UserLevel == UserLevel.Manager)
+                {
+                    ConfigurationManagerAppSetting frm = new ConfigurationManagerAppSetting();
+                    frm.ShowDialog(this);
+                    currentTagValueMonitor.UpdatecomboBoxTagGroupSel();
                 }
             }
         }

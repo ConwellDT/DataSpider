@@ -106,6 +106,7 @@
     <Compile Include="AboutBox.Designer.cs">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="AppSetting.cs" />
     <Compile Include="CheckDBStatus.cs" />
     <Compile Include="Form_LogIn.cs">
       <SubType>Form</SubType>
@@ -131,6 +132,18 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="UserMonitor\ConfiguraionManagerAppSettingEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserMonitor\ConfiguraionManagerAppSettingEdit.Designer.cs">
+      <DependentUpon>ConfiguraionManagerAppSettingEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserMonitor\ConfigurationManagerAppSetting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserMonitor\ConfigurationManagerAppSetting.Designer.cs">
+      <DependentUpon>ConfigurationManagerAppSetting.cs</DependentUpon>
     </Compile>
     <Compile Include="UserMonitor\DateTimeParse.cs">
       <SubType>Form</SubType>
@@ -283,6 +296,12 @@
       <SubType>Designer</SubType>
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserMonitor\ConfiguraionManagerAppSettingEdit.resx">
+      <DependentUpon>ConfiguraionManagerAppSettingEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserMonitor\ConfigurationManagerAppSetting.resx">
+      <DependentUpon>ConfigurationManagerAppSetting.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserMonitor\DateTimeParse.resx">
       <DependentUpon>DateTimeParse.cs</DependentUpon>

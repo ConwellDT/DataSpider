@@ -1632,22 +1632,16 @@ namespace DataSpider.PC00.PT
             return result;
         }
 
-        public bool UpdateEquipTypeFlag(string equipType, bool onlyuseFlag, ref string _strErrCode, ref string _strErrText)
+        public bool UpdateEquipTypeFlag(string equipTypeNm, bool onlyuseFlag, ref string _strErrCode, ref string _strErrText)
         {
             try
             {
                 StringBuilder strQuery = new StringBuilder();
                 string useFlag = onlyuseFlag ? "Y" : "N";
-                int index = equipType.IndexOf("(");
-                string equipTypeNm = equipType.Substring(0,index).Trim().ToString();
-                string equipTypeDesc = equipType.Substring(index).Trim().ToString();
-                if (equipTypeDesc.StartsWith("(") && equipTypeDesc.EndsWith(")"))
-                {
-                    equipTypeDesc = equipTypeDesc.Substring(1, equipTypeDesc.Length - 2).Trim();
-                }
+               
 
 
-                strQuery.Append($"EXEC UpdateEquipTypeFlag '{equipTypeNm}','{equipTypeDesc}', '{useFlag}'");
+                strQuery.Append($"EXEC UpdateEquipTypeFlag '{equipTypeNm}', '{useFlag}'");
                 bool result = CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref _strErrCode, ref _strErrText);
 
                 return result;
