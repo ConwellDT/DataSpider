@@ -68,7 +68,7 @@ namespace DataSpider.UserMonitor
                     JsonDocument document = JsonDocument.Parse(extraInfo);
                     result = document.RootElement.GetProperty("TimeFormat").GetString();
                 }
-                else
+                if(string.IsNullOrWhiteSpace(result))
                 {
                     DataTable dt = sqlBiz.GetCommonCode("TIMEFORMAT", ref strErrCode, ref strErrText);
                     if (dt != null && dt.Rows.Count > 0)
