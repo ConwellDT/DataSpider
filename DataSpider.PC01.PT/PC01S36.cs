@@ -204,7 +204,7 @@ namespace DataSpider.PC01.PT
                         if (item.Parent is JProperty)
                         {
                             JProperty jp = item.Parent as JProperty;
-                            AddData(jp.Path, jp.Value.ToString());
+                            AddData(jp.Path, jp.Value.ToString().Replace("\r\n", string.Empty));
                         }
                     }
 

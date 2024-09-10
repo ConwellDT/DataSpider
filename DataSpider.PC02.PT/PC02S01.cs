@@ -114,7 +114,11 @@ namespace DataSpider.PC02.PT
                         // 20210416, SHS, 값이 ',' 가 포함된 경우 ',' 로 splite 되므로 첫번째 값만 값으로 처리되는 것 보완
                         // ',' 로 split 후 3번째 부터 마지막까지 데이터는 다시 ',' 로 join 하여 처리
                         //result = m_sqlBiz.InsertResult(data[0], data[1], data[2], ref errCode, ref errText);
-                        string value = string.Join(",", data, 4, 1).Replace("'", "''");
+                        // 20240910, SHS, LENGTH 가 1 이 아니라 5 ~ 끝까지 갯수 아닌가 ?
+                        //string value = string.Join(",", data, 4, 1).Replace("'", "''");
+                        string value = string.Join(",", data, 4, data.Length - 4).Replace("'", "''");
+                        //tagValue.Value = string.Join(",", items, 2, items.Length - 2).Replace("'", "''").Trim();
+
                         //listViewMsg.UpdateMsg($"Value : |{value}|", false, true, true, PC00D01.MSGTINF);
 
                         result = m_sqlBiz.InsertResult(data[0], data[1], value, data[2], data[3], "", ref errCode, ref errText);
