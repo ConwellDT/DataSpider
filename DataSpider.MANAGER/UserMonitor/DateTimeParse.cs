@@ -32,7 +32,7 @@ namespace DataSpider.UserMonitor
 
             textBox_Input.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
-            DataTable dtCommonCd = sqlBiz.GetEquipmentInfo("","", MonitorForm.showAllEquipmtStatus, ref strErrCode, ref strErrText);
+            DataTable dtCommonCd = sqlBiz.GetEquipmentInfo("", "", MonitorForm.showAllEquipmtStatus, ref strErrCode, ref strErrText);
 
             if (dtCommonCd.Rows.Count > 0)
             {
@@ -51,25 +51,31 @@ namespace DataSpider.UserMonitor
         {
             string strErrCode = string.Empty;
             string strErrText = string.Empty;
-            string equipmentName = string.Empty;
             string result = string.Empty;
 
             DataGridViewRow currentRow = dataGridEquipmentName.CurrentRow;
-            if(currentRow != null)
-            {
-                equipmentName = currentRow.Cells["EquipmentName"].Value?.ToString() ?? string.Empty;
-            }
+            if (currentRow == null) return;
 
-            DataTable dtEquipment = sqlBiz.GetEquipmentDateTimeInfo( equipmentName, ref strErrCode, ref strErrText);
+            string equipmentName = currentRow.Cells["EquipmentName"].Value?.ToString() ?? string.Empty;
+            DataTable dtEquipment = sqlBiz.GetEquipmentDateTimeInfo(equipmentName, ref strErrCode, ref strErrText);
 
             if (dtEquipment.Rows.Count > 0)
             {
                 string extraInfo = dtEquipment.Rows[0]["EXTRA_INFO"].ToString();
 
-                if (extraInfo != "" && string.IsNullOrWhiteSpace(extraInfo))
+                if (string.IsNullOrWhiteSpace(extraInfo))
                 {
                     JsonDocument document = JsonDocument.Parse(extraInfo);
                     result = document.RootElement.GetProperty("TimeFormat").GetString();
+
+                    if(result == null)
+                    {
+                        DataTable dt = sqlBiz.GetCommonCode("TIMEFORMAT", ref strErrCode, ref strErrText);
+                        if (dt != null && dt.Rows.Count > 0)
+                        {
+                            result = dt.Rows[0]["CODE_VALUE"].ToString();
+                        }
+                    }
 
                 }
                 else
@@ -77,7 +83,7 @@ namespace DataSpider.UserMonitor
                     DataTable dt = sqlBiz.GetCommonCode("TIMEFORMAT", ref strErrCode, ref strErrText);
                     if (dt != null && dt.Rows.Count > 0)
                     {
-                         result = dt.Rows[0]["CODE_VALUE"].ToString();
+                        result = dt.Rows[0]["CODE_VALUE"].ToString();
                     }
                 }
 
