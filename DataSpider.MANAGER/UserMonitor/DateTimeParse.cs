@@ -66,7 +66,7 @@ namespace DataSpider.UserMonitor
                 if (!string.IsNullOrWhiteSpace(extraInfo))
                 {
                     JsonDocument document = JsonDocument.Parse(extraInfo);
-                    result = document.RootElement.GetProperty("TimeFormat").GetString();
+                    result = document.RootElement.TryGetProperty("TimeFormat", out JsonElement timeFormatElement) ? timeFormatElement.GetString() : string.Empty;
                 }
                 if(string.IsNullOrWhiteSpace(result))
                 {
