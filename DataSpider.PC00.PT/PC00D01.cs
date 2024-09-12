@@ -274,7 +274,7 @@ namespace DataSpider.PC00.PT
 
     public class ReplaceTagDef
     {
-        public const string SERVER_TIME_TAG = "SERVER_TIME";
+        public const string SERVER_TIME_TAG = "#SERVER_TIME";
     }
 
     public interface IPC00F00

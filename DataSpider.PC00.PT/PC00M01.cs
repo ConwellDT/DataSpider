@@ -232,7 +232,8 @@ namespace DataSpider.PC00.PT
 
             if (posInfo.Trim().StartsWith("#"))
             {
-                ReplaceTag = posInfo.Trim().Substring(1);
+                // 20240912, SHS, ReplaceTag 는 #으로 시작. # 을 제거하지 않고 처리. # 만 설정 시 공백으로 VALUE 처리 하게 됨
+                ReplaceTag = posInfo.Trim();//.Substring(1);
                 return true;
             }
 
