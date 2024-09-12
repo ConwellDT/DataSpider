@@ -1,7 +1,7 @@
 ﻿
 namespace DataSpider.UserMonitor
 {
-    partial class TagPositionEdit
+    partial class TagPositionDelimeterEdit
     {
         /// <summary>
         /// Required designer variable.
@@ -30,23 +30,16 @@ namespace DataSpider.UserMonitor
         private void InitializeComponent()
         {
             this.tableLayoutTagEditMain = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
-            this.label4 = new System.Windows.Forms.Label();
-            this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
-            this.textBoxUserId = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.label3 = new System.Windows.Forms.Label();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             this.textBoxDate = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.button = new System.Windows.Forms.Button();
-            this.textBoxSize = new System.Windows.Forms.TextBox();
-            this.labelSize = new System.Windows.Forms.Label();
             this.tableLayoutGroupDescEdit = new System.Windows.Forms.TableLayoutPanel();
             this.labelOffset = new System.Windows.Forms.Label();
             this.tableLayoutGroupDescInput = new System.Windows.Forms.TableLayoutPanel();
-            this.textBoxOffset = new System.Windows.Forms.TextBox();
+            this.textBoxDelimeter = new System.Windows.Forms.TextBox();
             this.tableLayoutGroupNameEdit = new System.Windows.Forms.TableLayoutPanel();
             this.labelLine = new System.Windows.Forms.Label();
             this.tableLayoutGroupNameInput = new System.Windows.Forms.TableLayoutPanel();
@@ -54,9 +47,18 @@ namespace DataSpider.UserMonitor
             this.tableLayoutGroupEditMenu = new System.Windows.Forms.TableLayoutPanel();
             this.button_Cancel = new System.Windows.Forms.Button();
             this.button_OK = new System.Windows.Forms.Button();
+            this.textBoxItemIndex = new System.Windows.Forms.TextBox();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
+            this.textBoxOffset = new System.Windows.Forms.TextBox();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
+            this.buttonTimePosition = new System.Windows.Forms.Button();
+            this.textBoxSize = new System.Windows.Forms.TextBox();
             this.tableLayoutTagEditMain.SuspendLayout();
-            this.tableLayoutPanel7.SuspendLayout();
-            this.tableLayoutPanel8.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -66,88 +68,37 @@ namespace DataSpider.UserMonitor
             this.tableLayoutGroupNameEdit.SuspendLayout();
             this.tableLayoutGroupNameInput.SuspendLayout();
             this.tableLayoutGroupEditMenu.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
+            this.tableLayoutPanel7.SuspendLayout();
+            this.tableLayoutPanel4.SuspendLayout();
+            this.tableLayoutPanel8.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutTagEditMain
             // 
             this.tableLayoutTagEditMain.ColumnCount = 1;
             this.tableLayoutTagEditMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutTagEditMain.Controls.Add(this.tableLayoutPanel7, 0, 4);
-            this.tableLayoutTagEditMain.Controls.Add(this.tableLayoutPanel5, 0, 3);
+            this.tableLayoutTagEditMain.Controls.Add(this.tableLayoutPanel4, 0, 4);
+            this.tableLayoutTagEditMain.Controls.Add(this.tableLayoutPanel3, 0, 3);
+            this.tableLayoutTagEditMain.Controls.Add(this.tableLayoutPanel5, 0, 6);
             this.tableLayoutTagEditMain.Controls.Add(this.tableLayoutPanel1, 0, 2);
             this.tableLayoutTagEditMain.Controls.Add(this.tableLayoutGroupDescEdit, 0, 1);
             this.tableLayoutTagEditMain.Controls.Add(this.tableLayoutGroupNameEdit, 0, 0);
-            this.tableLayoutTagEditMain.Controls.Add(this.tableLayoutGroupEditMenu, 0, 5);
+            this.tableLayoutTagEditMain.Controls.Add(this.tableLayoutGroupEditMenu, 0, 7);
             this.tableLayoutTagEditMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutTagEditMain.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutTagEditMain.Name = "tableLayoutTagEditMain";
-            this.tableLayoutTagEditMain.RowCount = 6;
+            this.tableLayoutTagEditMain.RowCount = 8;
+            this.tableLayoutTagEditMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 42F));
+            this.tableLayoutTagEditMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 42F));
             this.tableLayoutTagEditMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 42F));
             this.tableLayoutTagEditMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 42F));
             this.tableLayoutTagEditMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 42F));
             this.tableLayoutTagEditMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 1F));
             this.tableLayoutTagEditMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 1F));
             this.tableLayoutTagEditMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 42F));
-            this.tableLayoutTagEditMain.Size = new System.Drawing.Size(533, 183);
+            this.tableLayoutTagEditMain.Size = new System.Drawing.Size(533, 259);
             this.tableLayoutTagEditMain.TabIndex = 0;
-            // 
-            // tableLayoutPanel7
-            // 
-            this.tableLayoutPanel7.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
-            this.tableLayoutPanel7.ColumnCount = 2;
-            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
-            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel7.Controls.Add(this.label4, 0, 0);
-            this.tableLayoutPanel7.Controls.Add(this.tableLayoutPanel8, 1, 0);
-            this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel7.Location = new System.Drawing.Point(0, 127);
-            this.tableLayoutPanel7.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel7.Name = "tableLayoutPanel7";
-            this.tableLayoutPanel7.RowCount = 1;
-            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 1F));
-            this.tableLayoutPanel7.Size = new System.Drawing.Size(533, 1);
-            this.tableLayoutPanel7.TabIndex = 7;
-            // 
-            // label4
-            // 
-            this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label4.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label4.Location = new System.Drawing.Point(4, 1);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(114, 1);
-            this.label4.TabIndex = 1;
-            this.label4.Text = "User Id";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label4.Visible = false;
-            // 
-            // tableLayoutPanel8
-            // 
-            this.tableLayoutPanel8.BackColor = System.Drawing.Color.White;
-            this.tableLayoutPanel8.ColumnCount = 1;
-            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel8.Controls.Add(this.textBoxUserId, 0, 0);
-            this.tableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel8.Location = new System.Drawing.Point(122, 1);
-            this.tableLayoutPanel8.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel8.Name = "tableLayoutPanel8";
-            this.tableLayoutPanel8.RowCount = 1;
-            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 1F));
-            this.tableLayoutPanel8.Size = new System.Drawing.Size(410, 1);
-            this.tableLayoutPanel8.TabIndex = 2;
-            // 
-            // textBoxUserId
-            // 
-            this.textBoxUserId.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBoxUserId.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBoxUserId.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.textBoxUserId.Location = new System.Drawing.Point(3, 9);
-            this.textBoxUserId.Margin = new System.Windows.Forms.Padding(3, 9, 3, 3);
-            this.textBoxUserId.Name = "textBoxUserId";
-            this.textBoxUserId.Size = new System.Drawing.Size(404, 22);
-            this.textBoxUserId.TabIndex = 0;
-            this.textBoxUserId.Visible = false;
             // 
             // tableLayoutPanel5
             // 
@@ -158,7 +109,7 @@ namespace DataSpider.UserMonitor
             this.tableLayoutPanel5.Controls.Add(this.label3, 0, 0);
             this.tableLayoutPanel5.Controls.Add(this.tableLayoutPanel6, 1, 0);
             this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel5.Location = new System.Drawing.Point(0, 126);
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(0, 211);
             this.tableLayoutPanel5.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             this.tableLayoutPanel5.RowCount = 1;
@@ -193,7 +144,7 @@ namespace DataSpider.UserMonitor
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 1F));
             this.tableLayoutPanel6.Size = new System.Drawing.Size(410, 1);
-            this.tableLayoutPanel6.TabIndex = 2;
+            this.tableLayoutPanel6.TabIndex = 0;
             // 
             // textBoxDate
             // 
@@ -206,7 +157,7 @@ namespace DataSpider.UserMonitor
             this.textBoxDate.Name = "textBoxDate";
             this.textBoxDate.ReadOnly = true;
             this.textBoxDate.Size = new System.Drawing.Size(404, 22);
-            this.textBoxDate.TabIndex = 4;
+            this.textBoxDate.TabIndex = 0;
             this.textBoxDate.Visible = false;
             // 
             // tableLayoutPanel1
@@ -215,8 +166,8 @@ namespace DataSpider.UserMonitor
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.labelSize, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 1, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 84);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
@@ -228,53 +179,19 @@ namespace DataSpider.UserMonitor
             // 
             // tableLayoutPanel2
             // 
-            this.tableLayoutPanel2.ColumnCount = 2;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
-            this.tableLayoutPanel2.Controls.Add(this.button, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.textBoxSize, 0, 0);
+            this.tableLayoutPanel2.BackColor = System.Drawing.Color.White;
+            this.tableLayoutPanel2.ColumnCount = 1;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.Controls.Add(this.textBoxItemIndex, 0, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(125, 4);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(122, 1);
+            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(404, 34);
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(410, 40);
             this.tableLayoutPanel2.TabIndex = 2;
-            // 
-            // button
-            // 
-            this.button.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button.Font = new System.Drawing.Font("맑은 고딕", 12F);
-            this.button.Location = new System.Drawing.Point(287, 3);
-            this.button.Name = "button";
-            this.button.Size = new System.Drawing.Size(114, 28);
-            this.button.TabIndex = 3;
-            this.button.Text = "button";
-            this.button.UseVisualStyleBackColor = true;
-            this.button.Click += new System.EventHandler(this.button_Click);
-            // 
-            // textBoxSize
-            // 
-            this.textBoxSize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxSize.BackColor = System.Drawing.Color.White;
-            this.textBoxSize.Font = new System.Drawing.Font("맑은 고딕", 12F);
-            this.textBoxSize.ForeColor = System.Drawing.Color.Black;
-            this.textBoxSize.Location = new System.Drawing.Point(3, 3);
-            this.textBoxSize.Name = "textBoxSize";
-            this.textBoxSize.ReadOnly = true;
-            this.textBoxSize.Size = new System.Drawing.Size(278, 29);
-            this.textBoxSize.TabIndex = 2;
-            // 
-            // labelSize
-            // 
-            this.labelSize.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelSize.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.labelSize.Location = new System.Drawing.Point(4, 1);
-            this.labelSize.Name = "labelSize";
-            this.labelSize.Size = new System.Drawing.Size(114, 40);
-            this.labelSize.TabIndex = 1;
-            this.labelSize.Text = "Size";
-            this.labelSize.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tableLayoutGroupDescEdit
             // 
@@ -295,13 +212,12 @@ namespace DataSpider.UserMonitor
             // 
             // labelOffset
             // 
-            this.labelOffset.Dock = System.Windows.Forms.DockStyle.Fill;
             this.labelOffset.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.labelOffset.Location = new System.Drawing.Point(4, 1);
             this.labelOffset.Name = "labelOffset";
             this.labelOffset.Size = new System.Drawing.Size(114, 40);
             this.labelOffset.TabIndex = 1;
-            this.labelOffset.Text = "Offset";
+            this.labelOffset.Text = "Delimeter";
             this.labelOffset.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tableLayoutGroupDescInput
@@ -309,7 +225,7 @@ namespace DataSpider.UserMonitor
             this.tableLayoutGroupDescInput.BackColor = System.Drawing.Color.White;
             this.tableLayoutGroupDescInput.ColumnCount = 1;
             this.tableLayoutGroupDescInput.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutGroupDescInput.Controls.Add(this.textBoxOffset, 0, 0);
+            this.tableLayoutGroupDescInput.Controls.Add(this.textBoxDelimeter, 0, 0);
             this.tableLayoutGroupDescInput.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutGroupDescInput.Location = new System.Drawing.Point(122, 1);
             this.tableLayoutGroupDescInput.Margin = new System.Windows.Forms.Padding(0);
@@ -320,16 +236,16 @@ namespace DataSpider.UserMonitor
             this.tableLayoutGroupDescInput.Size = new System.Drawing.Size(410, 40);
             this.tableLayoutGroupDescInput.TabIndex = 2;
             // 
-            // textBoxOffset
+            // textBoxDelimeter
             // 
-            this.textBoxOffset.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBoxOffset.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBoxOffset.Font = new System.Drawing.Font("맑은 고딕", 14.25F);
-            this.textBoxOffset.Location = new System.Drawing.Point(3, 9);
-            this.textBoxOffset.Margin = new System.Windows.Forms.Padding(3, 9, 3, 3);
-            this.textBoxOffset.Name = "textBoxOffset";
-            this.textBoxOffset.Size = new System.Drawing.Size(404, 26);
-            this.textBoxOffset.TabIndex = 1;
+            this.textBoxDelimeter.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBoxDelimeter.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBoxDelimeter.Font = new System.Drawing.Font("맑은 고딕", 14.25F);
+            this.textBoxDelimeter.Location = new System.Drawing.Point(3, 9);
+            this.textBoxDelimeter.Margin = new System.Windows.Forms.Padding(3, 9, 3, 3);
+            this.textBoxDelimeter.Name = "textBoxDelimeter";
+            this.textBoxDelimeter.Size = new System.Drawing.Size(404, 26);
+            this.textBoxDelimeter.TabIndex = 1;
             // 
             // tableLayoutGroupNameEdit
             // 
@@ -355,7 +271,7 @@ namespace DataSpider.UserMonitor
             this.labelLine.Location = new System.Drawing.Point(4, 1);
             this.labelLine.Name = "labelLine";
             this.labelLine.Size = new System.Drawing.Size(114, 40);
-            this.labelLine.TabIndex = 1;
+            this.labelLine.TabIndex = 0;
             this.labelLine.Text = "Line";
             this.labelLine.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -372,7 +288,7 @@ namespace DataSpider.UserMonitor
             this.tableLayoutGroupNameInput.RowCount = 1;
             this.tableLayoutGroupNameInput.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutGroupNameInput.Size = new System.Drawing.Size(410, 40);
-            this.tableLayoutGroupNameInput.TabIndex = 2;
+            this.tableLayoutGroupNameInput.TabIndex = 1;
             // 
             // textBoxLine
             // 
@@ -393,13 +309,13 @@ namespace DataSpider.UserMonitor
             this.tableLayoutGroupEditMenu.Controls.Add(this.button_Cancel, 0, 0);
             this.tableLayoutGroupEditMenu.Controls.Add(this.button_OK, 0, 0);
             this.tableLayoutGroupEditMenu.Dock = System.Windows.Forms.DockStyle.Right;
-            this.tableLayoutGroupEditMenu.Location = new System.Drawing.Point(245, 128);
+            this.tableLayoutGroupEditMenu.Location = new System.Drawing.Point(245, 212);
             this.tableLayoutGroupEditMenu.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutGroupEditMenu.Name = "tableLayoutGroupEditMenu";
             this.tableLayoutGroupEditMenu.RowCount = 1;
             this.tableLayoutGroupEditMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutGroupEditMenu.Size = new System.Drawing.Size(288, 55);
-            this.tableLayoutGroupEditMenu.TabIndex = 3;
+            this.tableLayoutGroupEditMenu.Size = new System.Drawing.Size(288, 47);
+            this.tableLayoutGroupEditMenu.TabIndex = 0;
             // 
             // button_Cancel
             // 
@@ -408,8 +324,8 @@ namespace DataSpider.UserMonitor
             this.button_Cancel.Location = new System.Drawing.Point(147, 4);
             this.button_Cancel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button_Cancel.Name = "button_Cancel";
-            this.button_Cancel.Size = new System.Drawing.Size(138, 47);
-            this.button_Cancel.TabIndex = 5;
+            this.button_Cancel.Size = new System.Drawing.Size(138, 39);
+            this.button_Cancel.TabIndex = 6;
             this.button_Cancel.Text = "CANCEL";
             this.button_Cancel.UseVisualStyleBackColor = true;
             this.button_Cancel.Click += new System.EventHandler(this.button_Cancel_Click);
@@ -421,25 +337,162 @@ namespace DataSpider.UserMonitor
             this.button_OK.Location = new System.Drawing.Point(3, 4);
             this.button_OK.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button_OK.Name = "button_OK";
-            this.button_OK.Size = new System.Drawing.Size(138, 47);
-            this.button_OK.TabIndex = 4;
+            this.button_OK.Size = new System.Drawing.Size(138, 39);
+            this.button_OK.TabIndex = 5;
             this.button_OK.Text = "OK";
             this.button_OK.UseVisualStyleBackColor = true;
             this.button_OK.Click += new System.EventHandler(this.button_OK_Click);
             // 
-            // TagPositionEdit
+            // textBoxItemIndex
+            // 
+            this.textBoxItemIndex.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBoxItemIndex.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBoxItemIndex.Font = new System.Drawing.Font("맑은 고딕", 14.25F);
+            this.textBoxItemIndex.Location = new System.Drawing.Point(3, 9);
+            this.textBoxItemIndex.Margin = new System.Windows.Forms.Padding(3, 9, 3, 3);
+            this.textBoxItemIndex.Name = "textBoxItemIndex";
+            this.textBoxItemIndex.Size = new System.Drawing.Size(404, 26);
+            this.textBoxItemIndex.TabIndex = 2;
+            // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+            this.tableLayoutPanel3.ColumnCount = 2;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.Controls.Add(this.label2, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel7, 1, 0);
+            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 126);
+            this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 1;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(533, 42);
+            this.tableLayoutPanel3.TabIndex = 9;
+            // 
+            // tableLayoutPanel7
+            // 
+            this.tableLayoutPanel7.BackColor = System.Drawing.Color.White;
+            this.tableLayoutPanel7.ColumnCount = 1;
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel7.Controls.Add(this.textBoxOffset, 0, 0);
+            this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel7.Location = new System.Drawing.Point(122, 1);
+            this.tableLayoutPanel7.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel7.Name = "tableLayoutPanel7";
+            this.tableLayoutPanel7.RowCount = 1;
+            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tableLayoutPanel7.Size = new System.Drawing.Size(410, 40);
+            this.tableLayoutPanel7.TabIndex = 0;
+            // 
+            // textBoxOffset
+            // 
+            this.textBoxOffset.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBoxOffset.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBoxOffset.Font = new System.Drawing.Font("맑은 고딕", 14.25F);
+            this.textBoxOffset.Location = new System.Drawing.Point(3, 9);
+            this.textBoxOffset.Margin = new System.Windows.Forms.Padding(3, 9, 3, 3);
+            this.textBoxOffset.Name = "textBoxOffset";
+            this.textBoxOffset.Size = new System.Drawing.Size(404, 26);
+            this.textBoxOffset.TabIndex = 3;
+            // 
+            // tableLayoutPanel4
+            // 
+            this.tableLayoutPanel4.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+            this.tableLayoutPanel4.ColumnCount = 2;
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 121F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel4.Controls.Add(this.tableLayoutPanel8, 0, 0);
+            this.tableLayoutPanel4.Controls.Add(this.label4, 0, 0);
+            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 168);
+            this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            this.tableLayoutPanel4.RowCount = 1;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(533, 42);
+            this.tableLayoutPanel4.TabIndex = 10;
+            // 
+            // label1
+            // 
+            this.label1.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label1.Location = new System.Drawing.Point(4, 1);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(114, 40);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Item Index";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label2
+            // 
+            this.label2.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label2.Location = new System.Drawing.Point(4, 1);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(114, 40);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Offset";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label4
+            // 
+            this.label4.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label4.Location = new System.Drawing.Point(4, 1);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(114, 40);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "Size";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tableLayoutPanel8
+            // 
+            this.tableLayoutPanel8.ColumnCount = 2;
+            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
+            this.tableLayoutPanel8.Controls.Add(this.buttonTimePosition, 0, 0);
+            this.tableLayoutPanel8.Controls.Add(this.textBoxSize, 0, 0);
+            this.tableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel8.Location = new System.Drawing.Point(126, 4);
+            this.tableLayoutPanel8.Name = "tableLayoutPanel8";
+            this.tableLayoutPanel8.RowCount = 1;
+            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel8.Size = new System.Drawing.Size(403, 34);
+            this.tableLayoutPanel8.TabIndex = 4;
+            // 
+            // buttonTimePosition
+            // 
+            this.buttonTimePosition.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonTimePosition.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.buttonTimePosition.Location = new System.Drawing.Point(286, 3);
+            this.buttonTimePosition.Name = "buttonTimePosition";
+            this.buttonTimePosition.Size = new System.Drawing.Size(114, 28);
+            this.buttonTimePosition.TabIndex = 6;
+            this.buttonTimePosition.Text = "button";
+            this.buttonTimePosition.UseVisualStyleBackColor = true;
+            this.buttonTimePosition.Click += new System.EventHandler(this.buttonTimePosition_Click);
+            // 
+            // textBoxSize
+            // 
+            this.textBoxSize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxSize.BackColor = System.Drawing.Color.White;
+            this.textBoxSize.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.textBoxSize.ForeColor = System.Drawing.Color.Black;
+            this.textBoxSize.Location = new System.Drawing.Point(3, 3);
+            this.textBoxSize.Name = "textBoxSize";
+            this.textBoxSize.ReadOnly = true;
+            this.textBoxSize.Size = new System.Drawing.Size(277, 29);
+            this.textBoxSize.TabIndex = 4;
+            // 
+            // TagPositionDelimeterEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(533, 183);
+            this.ClientSize = new System.Drawing.Size(533, 259);
             this.ControlBox = false;
             this.Controls.Add(this.tableLayoutTagEditMain);
-            this.Name = "TagPositionEdit";
-            this.Text = "Tag Positon Edit";
+            this.Name = "TagPositionDelimeterEdit";
             this.tableLayoutTagEditMain.ResumeLayout(false);
-            this.tableLayoutPanel7.ResumeLayout(false);
-            this.tableLayoutPanel8.ResumeLayout(false);
-            this.tableLayoutPanel8.PerformLayout();
             this.tableLayoutPanel5.ResumeLayout(false);
             this.tableLayoutPanel6.ResumeLayout(false);
             this.tableLayoutPanel6.PerformLayout();
@@ -453,6 +506,12 @@ namespace DataSpider.UserMonitor
             this.tableLayoutGroupNameInput.ResumeLayout(false);
             this.tableLayoutGroupNameInput.PerformLayout();
             this.tableLayoutGroupEditMenu.ResumeLayout(false);
+            this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanel7.ResumeLayout(false);
+            this.tableLayoutPanel7.PerformLayout();
+            this.tableLayoutPanel4.ResumeLayout(false);
+            this.tableLayoutPanel8.ResumeLayout(false);
+            this.tableLayoutPanel8.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -463,7 +522,7 @@ namespace DataSpider.UserMonitor
         private System.Windows.Forms.TableLayoutPanel tableLayoutGroupDescEdit;
         private System.Windows.Forms.Label labelOffset;
         private System.Windows.Forms.TableLayoutPanel tableLayoutGroupDescInput;
-        private System.Windows.Forms.TextBox textBoxOffset;
+        private System.Windows.Forms.TextBox textBoxDelimeter;
         private System.Windows.Forms.TableLayoutPanel tableLayoutGroupNameEdit;
         private System.Windows.Forms.Label labelLine;
         private System.Windows.Forms.TableLayoutPanel tableLayoutGroupNameInput;
@@ -472,17 +531,21 @@ namespace DataSpider.UserMonitor
         private System.Windows.Forms.Button button_Cancel;
         private System.Windows.Forms.Button button_OK;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Label labelSize;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel7;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel8;
-        private System.Windows.Forms.TextBox textBoxUserId;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
         private System.Windows.Forms.TextBox textBoxDate;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.Button button;
+        private System.Windows.Forms.TextBox textBoxItemIndex;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel7;
+        private System.Windows.Forms.TextBox textBoxOffset;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel8;
+        private System.Windows.Forms.Button buttonTimePosition;
         private System.Windows.Forms.TextBox textBoxSize;
     }
 }

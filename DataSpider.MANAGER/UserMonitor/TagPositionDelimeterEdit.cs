@@ -1,25 +1,26 @@
 ﻿using System;
-using System.Globalization;
 using System.Windows.Forms;
 
 using DataSpider.PC00.PT;
 
-using static DevExpress.Drawing.Printing.Internal.DXPageSizeInfo;
-
 namespace DataSpider.UserMonitor
 {
-    public partial class TagPositionEdit : Form
+    public partial class TagPositionDelimeterEdit : Form
     {
         public string LineValue { get; set; }
+        public string DelimeterVale { get; set; }
+
+        public string ItemIndexValue { get; set; }
+
         public string OffsetValue { get; set; }
         public string SizeValue { get; set; }
 
         private PC00Z01 sqlBiz = new PC00Z01();
-        public TagPositionEdit()
+        public TagPositionDelimeterEdit()
         {
             InitializeComponent();
         }
-        public TagPositionEdit(string line, string offset, string size)
+        public TagPositionDelimeterEdit(string line, string delimeter, string itemindex, string offset, string size)
         {
 
             InitializeComponent();
@@ -27,6 +28,14 @@ namespace DataSpider.UserMonitor
             if (string.IsNullOrEmpty(line) == false)
             {
                 textBoxLine.Text = line;
+            }
+            if (string.IsNullOrEmpty(delimeter) == false)
+            {
+                textBoxDelimeter.Text = delimeter;
+            }
+            if (string.IsNullOrEmpty(itemindex) == false)
+            {
+                textBoxItemIndex.Text = itemindex;
             }
             if (string.IsNullOrEmpty(offset) == false)
             {
@@ -41,6 +50,8 @@ namespace DataSpider.UserMonitor
         private void button_OK_Click(object sender, EventArgs e)
         {
             LineValue = textBoxLine.Text;
+            DelimeterVale = textBoxDelimeter.Text;
+            ItemIndexValue = textBoxItemIndex.Text; 
             OffsetValue = textBoxOffset.Text;
             SizeValue = textBoxSize.Text;
 
@@ -54,7 +65,7 @@ namespace DataSpider.UserMonitor
             this.Close();
         }
 
-        private void button_Click(object sender, EventArgs e)
+        private void buttonTimePosition_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(textBoxSize.Text))
             {

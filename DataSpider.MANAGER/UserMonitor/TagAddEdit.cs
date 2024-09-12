@@ -15,6 +15,7 @@ namespace DataSpider.UserMonitor
         private PC00Z01 sqlBiz = new PC00Z01();
         private readonly string TagName = string.Empty;
         private readonly string EquipName = string.Empty;
+        private bool isLoading = true; // 폼 로드 중인지 여부를 나타내는 플래그
         private bool AddMode { get { return string.IsNullOrWhiteSpace(TagName); } }
 
         public TagAddEdit(string equipName, string tagName = "")
@@ -26,6 +27,7 @@ namespace DataSpider.UserMonitor
         private void TagAddEdit_Load(object sender, EventArgs e)
         {
             InitControls();
+            isLoading = false; // 폼 로드가 완료되면 플래그를 false로 설정
         }
 
         private void InitControls()
@@ -77,11 +79,14 @@ namespace DataSpider.UserMonitor
                 textBox_MessageType.Text = dtTag.Rows[0]["MSG_TYPE"].ToString();
                 textBox_Description.Text = dtTag.Rows[0]["TAG_DESC"].ToString();
                 textBox_PITagName.Text = dtTag.Rows[0]["PI_TAG_NM"].ToString();
-                buttonEdit_ValuePosition.Text = dtTag.Rows[0]["DATA_POSITION"].ToString();
-                buttonEdit_DatePosition.Text = dtTag.Rows[0]["DATE_POSITION"].ToString();
-                buttonEdit_TimePosition.Text = dtTag.Rows[0]["TIME_POSITION"].ToString();
+                textBoxValuePosition.Text = dtTag.Rows[0]["DATA_POSITION"].ToString();
+                textBoxDatePosition.Text = dtTag.Rows[0]["DATE_POSITION"].ToString();
+                textBoxTimePosition.Text = dtTag.Rows[0]["TIME_POSITION"].ToString();
                 textBox_ItemName.Text = dtTag.Rows[0]["OPCITEM_NM"].ToString();
                 textBox_EventFrameAttributeName.Text = dtTag.Rows[0]["EF_ATTRIBUTE_NM"].ToString();
+
+                string[] values = textBoxValuePosition.Text.Split(',');
+                comboBox_DelimeterUse.Text = values.Length == 5 ? "Y" : "N";
                 textBox_TagName.Enabled = false;
             }
         }
@@ -98,7 +103,7 @@ namespace DataSpider.UserMonitor
                 string strErrCode = string.Empty;
                 string strErrText = string.Empty;
                 if (sqlBiz.InsertUpdateTagInfo(AddMode, textBox_TagName.Text.Trim(), textBox_MessageType.Text.Trim(), comboBox_Equipment.SelectedValue.ToString(), textBox_Description.Text.Trim(),
-                    textBox_PITagName.Text.Trim(), textBox_EventFrameAttributeName.Text.Trim(), buttonEdit_ValuePosition.Text.Trim(), buttonEdit_DatePosition.Text.Trim(), buttonEdit_TimePosition.Text.Trim(), textBox_ItemName.Text.Trim(), ref strErrCode, ref strErrText))
+                    textBox_PITagName.Text.Trim(), textBox_EventFrameAttributeName.Text.Trim(), textBoxValuePosition.Text.Trim(), textBoxDatePosition.Text.Trim(), textBoxTimePosition.Text.Trim(), textBox_ItemName.Text.Trim(), ref strErrCode, ref strErrText))
                 {
                     MessageBox.Show($"저장 되었습니다.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     DialogResult = DialogResult.OK;
@@ -123,24 +128,29 @@ namespace DataSpider.UserMonitor
                 MessageBox.Show($"Message Type 을 입력하세요.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return false;
             }
-            if (string.IsNullOrWhiteSpace(textBox_ItemName.Text) && (string.IsNullOrWhiteSpace(buttonEdit_ValuePosition.Text) || string.IsNullOrWhiteSpace(buttonEdit_DatePosition.Text)))
+            if (string.IsNullOrWhiteSpace(comboBox_DelimeterUse.Text))
+            {
+                MessageBox.Show($"Delimeter 사용여부를 체크해주세요.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(textBox_ItemName.Text) && (string.IsNullOrWhiteSpace(textBoxValuePosition.Text) || string.IsNullOrWhiteSpace(textBoxDatePosition.Text)))
             {
                 MessageBox.Show($"Value, Date Position 또는 Item Name 을 입력하세요.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return false;
             }
             if (string.IsNullOrWhiteSpace(textBox_ItemName.Text))
             {
-                if (!PC00U01.CheckPosInfo(buttonEdit_ValuePosition.Text.Trim(), out string errMessage))
+                if (!PC00U01.CheckPosInfo(textBoxValuePosition.Text.Trim(), out string errMessage))
                 {
                     MessageBox.Show($"Value Position 설정 오류 입니다. [ {errMessage} ]", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
                 }
-                if (!PC00U01.CheckPosInfo(buttonEdit_DatePosition.Text.Trim(), out errMessage))
+                if (!PC00U01.CheckPosInfo(textBoxDatePosition.Text.Trim(), out errMessage))
                 {
                     MessageBox.Show($"Date Position 설정 오류 입니다. [ {errMessage} ]", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
                 }
-                if (!string.IsNullOrWhiteSpace(buttonEdit_TimePosition.Text) && !PC00U01.CheckPosInfo(buttonEdit_TimePosition.Text.Trim(), out errMessage))
+                if (!string.IsNullOrWhiteSpace(textBoxTimePosition.Text) && !PC00U01.CheckPosInfo(textBoxTimePosition.Text.Trim(), out errMessage))
                 {
                     MessageBox.Show($"Time Position 설정 오류 입니다. [ {errMessage} ]", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
@@ -158,59 +168,100 @@ namespace DataSpider.UserMonitor
             }
         }
 
-        private void buttonEdit_ValuePosition_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        private void ShowTagPositionEditDialog(TextBox textcontrol, string delimiterUse)
         {
-            ShowTagPositionEditDialog(buttonEdit_ValuePosition);
-        }
-
-        private void buttonEdit_DatePosition_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
-        {
-            ShowTagPositionEditDialog(buttonEdit_DatePosition);
-        }
-
-        private void buttonEdit_TimePosition_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
-        {
-            ShowTagPositionEditDialog(buttonEdit_TimePosition);
-        }
-
-        private void ShowTagPositionEditDialog(ButtonEdit buttonEditControl)
-        {
-            if (string.IsNullOrWhiteSpace(buttonEditControl.Text))
+            if (delimiterUse.Equals("Y", StringComparison.OrdinalIgnoreCase))
             {
-                TagPositionEdit dlg = new TagPositionEdit();
-                if (dlg.ShowDialog() == DialogResult.OK)
-                {
-                    // Retrieve the updated values from the dialog
-                    string updatedLine = dlg.LineValue;
-                    string updatedOffset = dlg.OffsetValue;
-                    string updatedSize = dlg.SizeValue;
-
-                    // Update the text of the button control
-                    buttonEditControl.Text = $"{updatedLine},{updatedOffset},{updatedSize}";
-                }
+                ShowTagPositionDelimeterEditDialog(textcontrol);
             }
             else
             {
-                string[] values = buttonEditControl.Text.Split(',');
-                int line, offset, size;
-                string parseLine = int.TryParse(values[0], out line) ? int.Parse(values[0]).ToString() : string.Empty;
-                string parseOffset = int.TryParse(values[1], out offset) ? int.Parse(values[1]).ToString() : string.Empty;
-                string parseSize = int.TryParse(values[2], out size) ? int.Parse(values[2]).ToString() : string.Empty;
-
-                // Create and show the dialog
-                TagPositionEdit dlg = new TagPositionEdit(parseLine, parseOffset, parseSize);
-                if (dlg.ShowDialog() == DialogResult.OK)
-                {
-                    // Retrieve the updated values from the dialog
-                    string updatedLine = dlg.LineValue;
-                    string updatedOffset = dlg.OffsetValue;
-                    string updatedSize = dlg.SizeValue;
-
-                    // Update the text of the button control
-                    buttonEditControl.Text = $"{updatedLine},{updatedOffset},{updatedSize}";
-                }
+                ShowTagPositionEditDialog(textcontrol);
             }
-           
+        }
+
+        private void ShowTagPositionDelimeterEditDialog(TextBox textcontrol)
+        {
+            TagPositionDelimeterEdit dlg = CreateTagPositionDelimeterEditFromText(textcontrol.Text);
+
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                textcontrol.Text = FormatTagPositionDelimeterValues(dlg);
+            }
+        }
+
+        private TagPositionDelimeterEdit CreateTagPositionDelimeterEditFromText(string text)
+        {
+            var values = ParseValues(text, 5);
+            return new TagPositionDelimeterEdit(values[0], values[1], values[2], values[3], values[4]);
+        }
+
+        private void ShowTagPositionEditDialog(TextBox textcontrol)
+        {
+            TagPositionEdit dlg = CreateTagPositionEditFromText(textcontrol.Text);
+
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                textcontrol.Text = FormatTagPositionEditValues(dlg);
+            }
+        }
+
+        private TagPositionEdit CreateTagPositionEditFromText(string text)
+        {
+            var values = ParseValues(text, 3);
+            return new TagPositionEdit(values[0], values[1], values[2]);
+        }
+
+        private string[] ParseValues(string text, int expectedLength)
+        {
+            var values = text.Split(',');
+            var result = new string[expectedLength];
+            for (int i = 0; i < expectedLength; i++)
+            {
+                result[i] = i < values.Length ? values[i].Trim() : string.Empty;
+            }
+            return result;
+        }
+
+        private string FormatTagPositionDelimeterValues(TagPositionDelimeterEdit dlg)
+        {
+            return $"{dlg.LineValue},{dlg.DelimeterVale},{dlg.ItemIndexValue},{dlg.OffsetValue},{dlg.SizeValue}";
+        }
+
+        private string FormatTagPositionEditValues(TagPositionEdit dlg)
+        {
+            return $"{dlg.LineValue},{dlg.OffsetValue},{dlg.SizeValue}";
+        }
+
+        private void comboBox_DelimeterUse_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (isLoading)
+                return; // 폼 로드 중에는 이벤트 핸들러를 건너뛰기
+
+            textBoxValuePosition.Text = string.Empty;
+
+        }
+
+        private void button_ValuePosition_ButtonClick(object sender, EventArgs e)
+        {
+
+            if (string.IsNullOrWhiteSpace(comboBox_DelimeterUse.Text))
+            {
+                MessageBox.Show("Delimeter 사용여부를 체크해주세요.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            ShowTagPositionEditDialog(textBoxValuePosition, comboBox_DelimeterUse.SelectedItem.ToString());
+        }
+
+        private void buttonDatePosition_Click(object sender, EventArgs e)
+        {
+            ShowTagPositionEditDialog(textBoxDatePosition, "N");
+        }
+
+        private void buttonTimePosition_Click(object sender, EventArgs e)
+        {
+            ShowTagPositionEditDialog(textBoxTimePosition, "N");
         }
     }
 }
