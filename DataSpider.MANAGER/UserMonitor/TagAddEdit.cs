@@ -1,13 +1,12 @@
-﻿using DataSpider.PC00.PT;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+
+using DataSpider.PC00.PT;
+
+using DevExpress.XtraEditors;
+
+using static DevExpress.Drawing.Printing.Internal.DXPageSizeInfo;
 
 namespace DataSpider.UserMonitor
 {
@@ -78,9 +77,9 @@ namespace DataSpider.UserMonitor
                 textBox_MessageType.Text = dtTag.Rows[0]["MSG_TYPE"].ToString();
                 textBox_Description.Text = dtTag.Rows[0]["TAG_DESC"].ToString();
                 textBox_PITagName.Text = dtTag.Rows[0]["PI_TAG_NM"].ToString();
-                textBox_ValuePosition.Text = dtTag.Rows[0]["DATA_POSITION"].ToString();
-                textBox_DatePosition.Text = dtTag.Rows[0]["DATE_POSITION"].ToString();
-                textBox_TimePosition.Text = dtTag.Rows[0]["TIME_POSITION"].ToString();
+                buttonEdit_ValuePosition.Text = dtTag.Rows[0]["DATA_POSITION"].ToString();
+                buttonEdit_DatePosition.Text = dtTag.Rows[0]["DATE_POSITION"].ToString();
+                buttonEdit_TimePosition.Text = dtTag.Rows[0]["TIME_POSITION"].ToString();
                 textBox_ItemName.Text = dtTag.Rows[0]["OPCITEM_NM"].ToString();
                 textBox_EventFrameAttributeName.Text = dtTag.Rows[0]["EF_ATTRIBUTE_NM"].ToString();
                 textBox_TagName.Enabled = false;
@@ -99,7 +98,7 @@ namespace DataSpider.UserMonitor
                 string strErrCode = string.Empty;
                 string strErrText = string.Empty;
                 if (sqlBiz.InsertUpdateTagInfo(AddMode, textBox_TagName.Text.Trim(), textBox_MessageType.Text.Trim(), comboBox_Equipment.SelectedValue.ToString(), textBox_Description.Text.Trim(),
-                    textBox_PITagName.Text.Trim(), textBox_EventFrameAttributeName.Text.Trim() , textBox_ValuePosition.Text.Trim(), textBox_DatePosition.Text.Trim(), textBox_TimePosition.Text.Trim(), textBox_ItemName.Text.Trim(), ref strErrCode, ref strErrText))
+                    textBox_PITagName.Text.Trim(), textBox_EventFrameAttributeName.Text.Trim(), buttonEdit_ValuePosition.Text.Trim(), buttonEdit_DatePosition.Text.Trim(), buttonEdit_TimePosition.Text.Trim(), textBox_ItemName.Text.Trim(), ref strErrCode, ref strErrText))
                 {
                     MessageBox.Show($"저장 되었습니다.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     DialogResult = DialogResult.OK;
@@ -124,24 +123,24 @@ namespace DataSpider.UserMonitor
                 MessageBox.Show($"Message Type 을 입력하세요.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return false;
             }
-            if (string.IsNullOrWhiteSpace(textBox_ItemName.Text) && (string.IsNullOrWhiteSpace(textBox_ValuePosition.Text) || string.IsNullOrWhiteSpace(textBox_DatePosition.Text)))
+            if (string.IsNullOrWhiteSpace(textBox_ItemName.Text) && (string.IsNullOrWhiteSpace(buttonEdit_ValuePosition.Text) || string.IsNullOrWhiteSpace(buttonEdit_DatePosition.Text)))
             {
                 MessageBox.Show($"Value, Date Position 또는 Item Name 을 입력하세요.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return false;
             }
             if (string.IsNullOrWhiteSpace(textBox_ItemName.Text))
             {
-                if (!PC00U01.CheckPosInfo(textBox_ValuePosition.Text.Trim(), out string errMessage))
+                if (!PC00U01.CheckPosInfo(buttonEdit_ValuePosition.Text.Trim(), out string errMessage))
                 {
                     MessageBox.Show($"Value Position 설정 오류 입니다. [ {errMessage} ]", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
                 }
-                if (!PC00U01.CheckPosInfo(textBox_DatePosition.Text.Trim(), out errMessage))
+                if (!PC00U01.CheckPosInfo(buttonEdit_DatePosition.Text.Trim(), out errMessage))
                 {
                     MessageBox.Show($"Date Position 설정 오류 입니다. [ {errMessage} ]", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
                 }
-                if (!string.IsNullOrWhiteSpace(textBox_TimePosition.Text) && !PC00U01.CheckPosInfo(textBox_TimePosition.Text.Trim(), out errMessage))
+                if (!string.IsNullOrWhiteSpace(buttonEdit_TimePosition.Text) && !PC00U01.CheckPosInfo(buttonEdit_TimePosition.Text.Trim(), out errMessage))
                 {
                     MessageBox.Show($"Time Position 설정 오류 입니다. [ {errMessage} ]", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
@@ -157,6 +156,61 @@ namespace DataSpider.UserMonitor
                 DialogResult = DialogResult.Cancel;
                 this.Close();
             }
+        }
+
+        private void buttonEdit_ValuePosition_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            ShowTagPositionEditDialog(buttonEdit_ValuePosition);
+        }
+
+        private void buttonEdit_DatePosition_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            ShowTagPositionEditDialog(buttonEdit_DatePosition);
+        }
+
+        private void buttonEdit_TimePosition_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            ShowTagPositionEditDialog(buttonEdit_TimePosition);
+        }
+
+        private void ShowTagPositionEditDialog(ButtonEdit buttonEditControl)
+        {
+            if (string.IsNullOrWhiteSpace(buttonEditControl.Text))
+            {
+                TagPositionEdit dlg = new TagPositionEdit();
+                if (dlg.ShowDialog() == DialogResult.OK)
+                {
+                    // Retrieve the updated values from the dialog
+                    string updatedLine = dlg.LineValue;
+                    string updatedOffset = dlg.OffsetValue;
+                    string updatedSize = dlg.SizeValue;
+
+                    // Update the text of the button control
+                    buttonEditControl.Text = $"{updatedLine},{updatedOffset},{updatedSize}";
+                }
+            }
+            else
+            {
+                string[] values = buttonEditControl.Text.Split(',');
+                int line, offset, size;
+                string parseLine = int.TryParse(values[0], out line) ? int.Parse(values[0]).ToString() : string.Empty;
+                string parseOffset = int.TryParse(values[1], out offset) ? int.Parse(values[1]).ToString() : string.Empty;
+                string parseSize = int.TryParse(values[2], out size) ? int.Parse(values[2]).ToString() : string.Empty;
+
+                // Create and show the dialog
+                TagPositionEdit dlg = new TagPositionEdit(parseLine, parseOffset, parseSize);
+                if (dlg.ShowDialog() == DialogResult.OK)
+                {
+                    // Retrieve the updated values from the dialog
+                    string updatedLine = dlg.LineValue;
+                    string updatedOffset = dlg.OffsetValue;
+                    string updatedSize = dlg.SizeValue;
+
+                    // Update the text of the button control
+                    buttonEditControl.Text = $"{updatedLine},{updatedOffset},{updatedSize}";
+                }
+            }
+           
         }
     }
 }

@@ -63,6 +63,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Assembly\CFW.Data.dll</HintPath>
     </Reference>
+    <Reference Include="DevExpress.Data.Desktop.v24.1, Version=24.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Data.v24.1, Version=24.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Drawing.v24.1, Version=24.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Printing.v24.1.Core, Version=24.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Sparkline.v24.1.Core, Version=24.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Utils.v24.1, Version=24.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraEditors.v24.1, Version=24.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="LibraryWH, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Assembly\LibraryWH.dll</HintPath>
@@ -132,6 +139,18 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="UserMonitor\TagSizeEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserMonitor\TagSizeEdit.Designer.cs">
+      <DependentUpon>TagSizeEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserMonitor\TagPositionEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserMonitor\TagPositionEdit.Designer.cs">
+      <DependentUpon>TagPositionEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="UserMonitor\ConfiguraionManagerAppSettingEdit.cs">
       <SubType>Form</SubType>
@@ -292,10 +311,17 @@
     <EmbeddedResource Include="MonitorForm.resx">
       <DependentUpon>MonitorForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <SubType>Designer</SubType>
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserMonitor\TagSizeEdit.resx">
+      <DependentUpon>TagSizeEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserMonitor\TagPositionEdit.resx">
+      <DependentUpon>TagPositionEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserMonitor\ConfiguraionManagerAppSettingEdit.resx">
       <DependentUpon>ConfiguraionManagerAppSettingEdit.cs</DependentUpon>
