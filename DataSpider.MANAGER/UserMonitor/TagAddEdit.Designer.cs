@@ -29,6 +29,22 @@ namespace DataSpider.UserMonitor
         /// </summary>
         private void InitializeComponent()
         {
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions1 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TagAddEdit));
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions2 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject5 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject6 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject7 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject8 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions3 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject9 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject10 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject11 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject12 = new DevExpress.Utils.SerializableAppearanceObject();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label_Title = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -40,7 +56,9 @@ namespace DataSpider.UserMonitor
             this.panel2 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.panel13 = new System.Windows.Forms.Panel();
+            this.textBox_EventFrameAttributeName = new System.Windows.Forms.TextBox();
             this.panel12 = new System.Windows.Forms.Panel();
+            this.label7 = new System.Windows.Forms.Label();
             this.panel11 = new System.Windows.Forms.Panel();
             this.textBox_PITagName = new System.Windows.Forms.TextBox();
             this.panel10 = new System.Windows.Forms.Panel();
@@ -61,23 +79,21 @@ namespace DataSpider.UserMonitor
             this.panel19 = new System.Windows.Forms.Panel();
             this.label8 = new System.Windows.Forms.Label();
             this.panel20 = new System.Windows.Forms.Panel();
+            this.buttonEdit_ValuePosition = new DevExpress.XtraEditors.ButtonEdit();
             this.panel21 = new System.Windows.Forms.Panel();
+            this.buttonEdit_DatePosition = new DevExpress.XtraEditors.ButtonEdit();
             this.panel22 = new System.Windows.Forms.Panel();
-            this.panel23 = new System.Windows.Forms.Panel();
-            this.panel24 = new System.Windows.Forms.Panel();
-            this.panel25 = new System.Windows.Forms.Panel();
-            this.panel14 = new System.Windows.Forms.Panel();
-            this.panel15 = new System.Windows.Forms.Panel();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
+            this.panel23 = new System.Windows.Forms.Panel();
+            this.buttonEdit_TimePosition = new DevExpress.XtraEditors.ButtonEdit();
+            this.panel24 = new System.Windows.Forms.Panel();
+            this.label9 = new System.Windows.Forms.Label();
+            this.panel25 = new System.Windows.Forms.Panel();
+            this.label10 = new System.Windows.Forms.Label();
+            this.panel14 = new System.Windows.Forms.Panel();
+            this.label6 = new System.Windows.Forms.Label();
+            this.panel15 = new System.Windows.Forms.Panel();
             this.textBox_ItemName = new System.Windows.Forms.TextBox();
-            this.textBox_TimePosition = new System.Windows.Forms.TextBox();
-            this.textBox_DatePosition = new System.Windows.Forms.TextBox();
-            this.textBox_ValuePosition = new System.Windows.Forms.TextBox();
-            this.textBox_EventFrameAttributeName = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -97,9 +113,12 @@ namespace DataSpider.UserMonitor
             this.panel18.SuspendLayout();
             this.panel19.SuspendLayout();
             this.panel20.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.buttonEdit_ValuePosition.Properties)).BeginInit();
             this.panel21.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.buttonEdit_DatePosition.Properties)).BeginInit();
             this.panel22.SuspendLayout();
             this.panel23.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.buttonEdit_TimePosition.Properties)).BeginInit();
             this.panel24.SuspendLayout();
             this.panel25.SuspendLayout();
             this.panel14.SuspendLayout();
@@ -268,6 +287,15 @@ namespace DataSpider.UserMonitor
             this.panel13.Size = new System.Drawing.Size(672, 47);
             this.panel13.TabIndex = 9;
             // 
+            // textBox_EventFrameAttributeName
+            // 
+            this.textBox_EventFrameAttributeName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox_EventFrameAttributeName.Font = new System.Drawing.Font("맑은 고딕", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.textBox_EventFrameAttributeName.Location = new System.Drawing.Point(0, 7);
+            this.textBox_EventFrameAttributeName.Name = "textBox_EventFrameAttributeName";
+            this.textBox_EventFrameAttributeName.Size = new System.Drawing.Size(672, 33);
+            this.textBox_EventFrameAttributeName.TabIndex = 3;
+            // 
             // panel12
             // 
             this.panel12.Controls.Add(this.label7);
@@ -276,6 +304,17 @@ namespace DataSpider.UserMonitor
             this.panel12.Name = "panel12";
             this.panel12.Size = new System.Drawing.Size(229, 47);
             this.panel12.TabIndex = 8;
+            // 
+            // label7
+            // 
+            this.label7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label7.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label7.Location = new System.Drawing.Point(0, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(229, 47);
+            this.label7.TabIndex = 5;
+            this.label7.Text = "EventFrame Attribute Name";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel11
             // 
@@ -462,21 +501,49 @@ namespace DataSpider.UserMonitor
             // 
             // panel20
             // 
-            this.panel20.Controls.Add(this.textBox_ValuePosition);
+            this.panel20.Controls.Add(this.buttonEdit_ValuePosition);
             this.panel20.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel20.Location = new System.Drawing.Point(240, 328);
             this.panel20.Name = "panel20";
             this.panel20.Size = new System.Drawing.Size(672, 47);
             this.panel20.TabIndex = 16;
             // 
+            // buttonEdit_ValuePosition
+            // 
+            this.buttonEdit_ValuePosition.Location = new System.Drawing.Point(0, 7);
+            this.buttonEdit_ValuePosition.Name = "buttonEdit_ValuePosition";
+            this.buttonEdit_ValuePosition.Properties.Appearance.Font = new System.Drawing.Font("맑은 고딕", 14.25F);
+            this.buttonEdit_ValuePosition.Properties.Appearance.Options.UseFont = true;
+            editorButtonImageOptions1.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("editorButtonImageOptions1.SvgImage")));
+            this.buttonEdit_ValuePosition.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions1, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            this.buttonEdit_ValuePosition.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.buttonEdit_ValuePosition.Size = new System.Drawing.Size(672, 40);
+            this.buttonEdit_ValuePosition.TabIndex = 5;
+            this.buttonEdit_ValuePosition.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.buttonEdit_ValuePosition_ButtonClick);
+            // 
             // panel21
             // 
-            this.panel21.Controls.Add(this.textBox_DatePosition);
+            this.panel21.Controls.Add(this.buttonEdit_DatePosition);
             this.panel21.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel21.Location = new System.Drawing.Point(240, 382);
             this.panel21.Name = "panel21";
             this.panel21.Size = new System.Drawing.Size(672, 47);
             this.panel21.TabIndex = 17;
+            // 
+            // buttonEdit_DatePosition
+            // 
+            this.buttonEdit_DatePosition.Location = new System.Drawing.Point(0, 3);
+            this.buttonEdit_DatePosition.Name = "buttonEdit_DatePosition";
+            this.buttonEdit_DatePosition.Properties.Appearance.Font = new System.Drawing.Font("맑은 고딕", 14.25F);
+            this.buttonEdit_DatePosition.Properties.Appearance.Options.UseFont = true;
+            editorButtonImageOptions2.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("editorButtonImageOptions2.SvgImage")));
+            this.buttonEdit_DatePosition.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions2, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject5, serializableAppearanceObject6, serializableAppearanceObject7, serializableAppearanceObject8, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            this.buttonEdit_DatePosition.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.buttonEdit_DatePosition.Size = new System.Drawing.Size(672, 40);
+            this.buttonEdit_DatePosition.TabIndex = 6;
+            this.buttonEdit_DatePosition.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.buttonEdit_DatePosition_ButtonClick);
             // 
             // panel22
             // 
@@ -486,84 +553,6 @@ namespace DataSpider.UserMonitor
             this.panel22.Name = "panel22";
             this.panel22.Size = new System.Drawing.Size(229, 47);
             this.panel22.TabIndex = 18;
-            // 
-            // panel23
-            // 
-            this.panel23.Controls.Add(this.textBox_TimePosition);
-            this.panel23.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel23.Location = new System.Drawing.Point(240, 436);
-            this.panel23.Name = "panel23";
-            this.panel23.Size = new System.Drawing.Size(672, 47);
-            this.panel23.TabIndex = 19;
-            // 
-            // panel24
-            // 
-            this.panel24.Controls.Add(this.label9);
-            this.panel24.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel24.Location = new System.Drawing.Point(4, 382);
-            this.panel24.Name = "panel24";
-            this.panel24.Size = new System.Drawing.Size(229, 47);
-            this.panel24.TabIndex = 20;
-            // 
-            // panel25
-            // 
-            this.panel25.Controls.Add(this.label10);
-            this.panel25.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel25.Location = new System.Drawing.Point(4, 436);
-            this.panel25.Name = "panel25";
-            this.panel25.Size = new System.Drawing.Size(229, 47);
-            this.panel25.TabIndex = 21;
-            // 
-            // panel14
-            // 
-            this.panel14.Controls.Add(this.label6);
-            this.panel14.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel14.Location = new System.Drawing.Point(4, 490);
-            this.panel14.Name = "panel14";
-            this.panel14.Size = new System.Drawing.Size(229, 55);
-            this.panel14.TabIndex = 22;
-            // 
-            // panel15
-            // 
-            this.panel15.Controls.Add(this.textBox_ItemName);
-            this.panel15.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel15.Location = new System.Drawing.Point(240, 490);
-            this.panel15.Name = "panel15";
-            this.panel15.Size = new System.Drawing.Size(672, 55);
-            this.panel15.TabIndex = 23;
-            // 
-            // label6
-            // 
-            this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label6.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label6.Location = new System.Drawing.Point(0, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(229, 55);
-            this.label6.TabIndex = 6;
-            this.label6.Text = "Item Name";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label10
-            // 
-            this.label10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label10.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label10.Location = new System.Drawing.Point(0, 0);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(229, 47);
-            this.label10.TabIndex = 6;
-            this.label10.Text = "Time Position";
-            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label9
-            // 
-            this.label9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label9.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label9.Location = new System.Drawing.Point(0, 0);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(229, 47);
-            this.label9.TabIndex = 6;
-            this.label9.Text = "Date Position";
-            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label5
             // 
@@ -576,16 +565,97 @@ namespace DataSpider.UserMonitor
             this.label5.Text = "Value Position";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label7
+            // panel23
             // 
-            this.label7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label7.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label7.Location = new System.Drawing.Point(0, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(229, 47);
-            this.label7.TabIndex = 5;
-            this.label7.Text = "EventFrame Attribute Name";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.panel23.Controls.Add(this.buttonEdit_TimePosition);
+            this.panel23.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel23.Location = new System.Drawing.Point(240, 436);
+            this.panel23.Name = "panel23";
+            this.panel23.Size = new System.Drawing.Size(672, 47);
+            this.panel23.TabIndex = 19;
+            // 
+            // buttonEdit_TimePosition
+            // 
+            this.buttonEdit_TimePosition.Location = new System.Drawing.Point(0, 3);
+            this.buttonEdit_TimePosition.Name = "buttonEdit_TimePosition";
+            this.buttonEdit_TimePosition.Properties.Appearance.Font = new System.Drawing.Font("맑은 고딕", 14.25F);
+            this.buttonEdit_TimePosition.Properties.Appearance.Options.UseFont = true;
+            editorButtonImageOptions3.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("editorButtonImageOptions3.SvgImage")));
+            this.buttonEdit_TimePosition.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions3, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject9, serializableAppearanceObject10, serializableAppearanceObject11, serializableAppearanceObject12, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            this.buttonEdit_TimePosition.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.buttonEdit_TimePosition.Size = new System.Drawing.Size(672, 40);
+            this.buttonEdit_TimePosition.TabIndex = 6;
+            this.buttonEdit_TimePosition.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.buttonEdit_TimePosition_ButtonClick);
+            // 
+            // panel24
+            // 
+            this.panel24.Controls.Add(this.label9);
+            this.panel24.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel24.Location = new System.Drawing.Point(4, 382);
+            this.panel24.Name = "panel24";
+            this.panel24.Size = new System.Drawing.Size(229, 47);
+            this.panel24.TabIndex = 20;
+            // 
+            // label9
+            // 
+            this.label9.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label9.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label9.Location = new System.Drawing.Point(0, 0);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(229, 47);
+            this.label9.TabIndex = 6;
+            this.label9.Text = "Date Position";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // panel25
+            // 
+            this.panel25.Controls.Add(this.label10);
+            this.panel25.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel25.Location = new System.Drawing.Point(4, 436);
+            this.panel25.Name = "panel25";
+            this.panel25.Size = new System.Drawing.Size(229, 47);
+            this.panel25.TabIndex = 21;
+            // 
+            // label10
+            // 
+            this.label10.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label10.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label10.Location = new System.Drawing.Point(0, 0);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(229, 47);
+            this.label10.TabIndex = 6;
+            this.label10.Text = "Time Position";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // panel14
+            // 
+            this.panel14.Controls.Add(this.label6);
+            this.panel14.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel14.Location = new System.Drawing.Point(4, 490);
+            this.panel14.Name = "panel14";
+            this.panel14.Size = new System.Drawing.Size(229, 55);
+            this.panel14.TabIndex = 22;
+            // 
+            // label6
+            // 
+            this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label6.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label6.Location = new System.Drawing.Point(0, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(229, 55);
+            this.label6.TabIndex = 6;
+            this.label6.Text = "Item Name";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // panel15
+            // 
+            this.panel15.Controls.Add(this.textBox_ItemName);
+            this.panel15.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel15.Location = new System.Drawing.Point(240, 490);
+            this.panel15.Name = "panel15";
+            this.panel15.Size = new System.Drawing.Size(672, 55);
+            this.panel15.TabIndex = 23;
             // 
             // textBox_ItemName
             // 
@@ -595,42 +665,6 @@ namespace DataSpider.UserMonitor
             this.textBox_ItemName.Name = "textBox_ItemName";
             this.textBox_ItemName.Size = new System.Drawing.Size(672, 33);
             this.textBox_ItemName.TabIndex = 5;
-            // 
-            // textBox_TimePosition
-            // 
-            this.textBox_TimePosition.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_TimePosition.Font = new System.Drawing.Font("맑은 고딕", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.textBox_TimePosition.Location = new System.Drawing.Point(0, 7);
-            this.textBox_TimePosition.Name = "textBox_TimePosition";
-            this.textBox_TimePosition.Size = new System.Drawing.Size(672, 33);
-            this.textBox_TimePosition.TabIndex = 5;
-            // 
-            // textBox_DatePosition
-            // 
-            this.textBox_DatePosition.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_DatePosition.Font = new System.Drawing.Font("맑은 고딕", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.textBox_DatePosition.Location = new System.Drawing.Point(0, 7);
-            this.textBox_DatePosition.Name = "textBox_DatePosition";
-            this.textBox_DatePosition.Size = new System.Drawing.Size(672, 33);
-            this.textBox_DatePosition.TabIndex = 5;
-            // 
-            // textBox_ValuePosition
-            // 
-            this.textBox_ValuePosition.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_ValuePosition.Font = new System.Drawing.Font("맑은 고딕", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.textBox_ValuePosition.Location = new System.Drawing.Point(0, 7);
-            this.textBox_ValuePosition.Name = "textBox_ValuePosition";
-            this.textBox_ValuePosition.Size = new System.Drawing.Size(672, 33);
-            this.textBox_ValuePosition.TabIndex = 4;
-            // 
-            // textBox_EventFrameAttributeName
-            // 
-            this.textBox_EventFrameAttributeName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_EventFrameAttributeName.Font = new System.Drawing.Font("맑은 고딕", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.textBox_EventFrameAttributeName.Location = new System.Drawing.Point(0, 7);
-            this.textBox_EventFrameAttributeName.Name = "textBox_EventFrameAttributeName";
-            this.textBox_EventFrameAttributeName.Size = new System.Drawing.Size(672, 33);
-            this.textBox_EventFrameAttributeName.TabIndex = 3;
             // 
             // TagAddEdit
             // 
@@ -670,12 +704,12 @@ namespace DataSpider.UserMonitor
             this.panel18.PerformLayout();
             this.panel19.ResumeLayout(false);
             this.panel20.ResumeLayout(false);
-            this.panel20.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.buttonEdit_ValuePosition.Properties)).EndInit();
             this.panel21.ResumeLayout(false);
-            this.panel21.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.buttonEdit_DatePosition.Properties)).EndInit();
             this.panel22.ResumeLayout(false);
             this.panel23.ResumeLayout(false);
-            this.panel23.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.buttonEdit_TimePosition.Properties)).EndInit();
             this.panel24.ResumeLayout(false);
             this.panel25.ResumeLayout(false);
             this.panel14.ResumeLayout(false);
@@ -726,15 +760,15 @@ namespace DataSpider.UserMonitor
         private System.Windows.Forms.Panel panel25;
         private System.Windows.Forms.TextBox textBox_EventFrameAttributeName;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox textBox_ValuePosition;
-        private System.Windows.Forms.TextBox textBox_DatePosition;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox_TimePosition;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Panel panel14;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Panel panel15;
         private System.Windows.Forms.TextBox textBox_ItemName;
+        private DevExpress.XtraEditors.ButtonEdit buttonEdit_ValuePosition;
+        private DevExpress.XtraEditors.ButtonEdit buttonEdit_DatePosition;
+        private DevExpress.XtraEditors.ButtonEdit buttonEdit_TimePosition;
     }
 }
