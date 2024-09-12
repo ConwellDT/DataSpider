@@ -10,39 +10,118 @@ namespace DataSpider.UserMonitor
 {
     public partial class TagPositionEdit : Form
     {
+        public string DelimeterUse { get; set; }
         public string LineValue { get; set; }
+        public string DelimeterVale { get; set; }
+        public string ItemIndexValue { get; set; }
         public string OffsetValue { get; set; }
         public string SizeValue { get; set; }
 
         private PC00Z01 sqlBiz = new PC00Z01();
-        public TagPositionEdit()
-        {
-            InitializeComponent();
-        }
-        public TagPositionEdit(string line, string offset, string size)
+
+        public TagPositionEdit(string use, string line, string delimeter, string itemindex, string offset, string size)
         {
 
             InitializeComponent();
 
-            if (string.IsNullOrEmpty(line) == false)
+            comboBox_DelimeterUse.Text = use;
+
+            if (use.Equals("Y"))
             {
-                textBoxLine.Text = line;
+                textBoxDelimeter.Enabled = true;
+                textBoxItemIndex.Enabled = true;
+
+                if (string.IsNullOrEmpty(line) == false)
+                {
+                    textBoxLine.Text = line;
+                }
+                if (string.IsNullOrEmpty(offset) == false)
+                {
+                    textBoxOffset.Text = offset;
+                }
+                if (string.IsNullOrEmpty(size) == false)
+                {
+                    textBoxSize.Text = size;
+                }
+                if (string.IsNullOrEmpty(delimeter) == false)
+                {
+                    textBoxDelimeter.Text = delimeter;
+                }
+                if (string.IsNullOrEmpty(itemindex) == false)
+                {
+                    textBoxItemIndex.Text = itemindex;
+                }
             }
-            if (string.IsNullOrEmpty(offset) == false)
+            else
             {
-                textBoxOffset.Text = offset;
-            }
-            if (string.IsNullOrEmpty(size) == false)
-            {
-                textBoxSize.Text = size;
+                textBoxDelimeter.Enabled = false;
+                textBoxItemIndex.Enabled = false;
+
+                textBoxDelimeter.Text = string.Empty; 
+                textBoxItemIndex.Text = string.Empty;  
+
+                if (string.IsNullOrEmpty(line) == false)
+                {
+                    textBoxLine.Text = line;
+                }
+                if (string.IsNullOrEmpty(delimeter) == false)
+                {
+                    textBoxOffset.Text = delimeter;
+                }
+                if (string.IsNullOrEmpty(itemindex) == false)
+                {
+                    textBoxSize.Text = itemindex;
+                }
             }
         }
 
         private void button_OK_Click(object sender, EventArgs e)
         {
-            LineValue = textBoxLine.Text;
-            OffsetValue = textBoxOffset.Text;
-            SizeValue = textBoxSize.Text;
+            if (string.IsNullOrWhiteSpace(comboBox_DelimeterUse.Text))
+            {
+                MessageBox.Show($"Delimeter Use를 선택하세요.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return ;
+            }
+
+            if (string.IsNullOrWhiteSpace(textBoxLine.Text))
+            {
+                MessageBox.Show($"Line을 입력하세요.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return ;
+            }
+
+            if (string.IsNullOrWhiteSpace(textBoxOffset.Text))
+            {
+                MessageBox.Show($"Offset을 입력하세요.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(textBoxSize.Text))
+            {
+                MessageBox.Show($"Size를 입력하세요.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            if (comboBox_DelimeterUse.SelectedItem.ToString().Equals("Y"))
+            {
+                if (string.IsNullOrWhiteSpace(textBoxItemIndex.Text))
+                {
+                    MessageBox.Show($"Item Index를 입력하세요.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                DelimeterUse = comboBox_DelimeterUse.Text;
+                LineValue = textBoxLine.Text;
+                DelimeterVale = textBoxDelimeter.Text;
+                ItemIndexValue = textBoxItemIndex.Text;
+                OffsetValue = textBoxOffset.Text;
+                SizeValue = textBoxSize.Text;
+            }
+            else
+            {
+                DelimeterUse = comboBox_DelimeterUse.Text;
+                LineValue = textBoxLine.Text;
+                OffsetValue = textBoxOffset.Text;
+                SizeValue = textBoxSize.Text;
+            }
 
             this.DialogResult = DialogResult.OK;
             this.Close();
@@ -71,6 +150,23 @@ namespace DataSpider.UserMonitor
                 {
                     textBoxSize.Text = dlg.SizeEdit;
                 }
+            }
+        }
+
+        private void comboBox_DelimeterUse_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            textBoxDelimeter.Text = string.Empty;
+            textBoxItemIndex.Text = string.Empty;
+
+            if (comboBox_DelimeterUse.SelectedItem.ToString().Equals("Y"))
+            {
+                textBoxDelimeter.Enabled = true;
+                textBoxItemIndex.Enabled = true;
+            }
+            else
+            {
+                textBoxDelimeter.Enabled = false;
+                textBoxItemIndex.Enabled = false;
             }
         }
     }
