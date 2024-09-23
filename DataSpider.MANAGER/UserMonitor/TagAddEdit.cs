@@ -4,10 +4,6 @@ using System.Windows.Forms;
 
 using DataSpider.PC00.PT;
 
-using DevExpress.XtraEditors;
-
-using static DevExpress.Drawing.Printing.Internal.DXPageSizeInfo;
-
 namespace DataSpider.UserMonitor
 {
     public partial class TagAddEdit : Form
