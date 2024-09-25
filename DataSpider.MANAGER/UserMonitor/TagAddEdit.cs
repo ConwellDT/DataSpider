@@ -4,11 +4,6 @@ using System.Windows.Forms;
 
 using DataSpider.PC00.PT;
 
-using DevExpress.Export.Xl;
-using DevExpress.XtraEditors;
-
-using static DevExpress.Drawing.Printing.Internal.DXPageSizeInfo;
-
 namespace DataSpider.UserMonitor
 {
     public partial class TagAddEdit : Form
@@ -173,7 +168,7 @@ namespace DataSpider.UserMonitor
         private TagPositionEdit CreateTagPositionEditFromText(string text)
         {
             string use = string.Empty;
-            string[] useValues = textBoxValuePosition.Text.Split(',');
+            string[] useValues = text.Split(',');
             if (!string.IsNullOrEmpty(text))
             {
                 use = useValues.Length == 5 ? "Y" : "N";

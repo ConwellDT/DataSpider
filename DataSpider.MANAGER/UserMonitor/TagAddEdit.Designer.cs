@@ -282,9 +282,9 @@ namespace DataSpider.UserMonitor
             // 
             this.tableLayoutPanel4.ColumnCount = 2;
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
-            this.tableLayoutPanel4.Controls.Add(this.textBoxValuePosition, 0, 0);
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel4.Controls.Add(this.button_ValuePosition, 1, 0);
+            this.tableLayoutPanel4.Controls.Add(this.textBoxValuePosition, 0, 0);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
@@ -295,25 +295,24 @@ namespace DataSpider.UserMonitor
             // 
             // textBoxValuePosition
             // 
-            this.textBoxValuePosition.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxValuePosition.BackColor = System.Drawing.Color.White;
             this.textBoxValuePosition.Font = new System.Drawing.Font("맑은 고딕", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.textBoxValuePosition.ForeColor = System.Drawing.Color.Black;
-            this.textBoxValuePosition.Location = new System.Drawing.Point(3, 7);
+            this.textBoxValuePosition.Location = new System.Drawing.Point(3, 3);
             this.textBoxValuePosition.Name = "textBoxValuePosition";
             this.textBoxValuePosition.ReadOnly = true;
-            this.textBoxValuePosition.Size = new System.Drawing.Size(546, 33);
+            this.textBoxValuePosition.Size = new System.Drawing.Size(616, 33);
             this.textBoxValuePosition.TabIndex = 7;
             // 
             // button_ValuePosition
             // 
             this.button_ValuePosition.Dock = System.Windows.Forms.DockStyle.Fill;
             this.button_ValuePosition.Font = new System.Drawing.Font("맑은 고딕", 14.25F);
-            this.button_ValuePosition.Location = new System.Drawing.Point(555, 3);
+            this.button_ValuePosition.Location = new System.Drawing.Point(625, 3);
             this.button_ValuePosition.Name = "button_ValuePosition";
-            this.button_ValuePosition.Size = new System.Drawing.Size(114, 41);
+            this.button_ValuePosition.Size = new System.Drawing.Size(44, 41);
             this.button_ValuePosition.TabIndex = 8;
-            this.button_ValuePosition.Text = "button";
+            this.button_ValuePosition.Text = "...";
             this.button_ValuePosition.UseVisualStyleBackColor = true;
             this.button_ValuePosition.Click += new System.EventHandler(this.button_ValuePosition_ButtonClick);
             // 
@@ -551,7 +550,7 @@ namespace DataSpider.UserMonitor
             // 
             this.tableLayoutPanel5.ColumnCount = 2;
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel5.Controls.Add(this.buttonDatePosition, 0, 0);
             this.tableLayoutPanel5.Controls.Add(this.textBoxDatePosition, 0, 0);
             this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -566,11 +565,11 @@ namespace DataSpider.UserMonitor
             // 
             this.buttonDatePosition.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonDatePosition.Font = new System.Drawing.Font("맑은 고딕", 14.25F);
-            this.buttonDatePosition.Location = new System.Drawing.Point(555, 3);
+            this.buttonDatePosition.Location = new System.Drawing.Point(625, 3);
             this.buttonDatePosition.Name = "buttonDatePosition";
-            this.buttonDatePosition.Size = new System.Drawing.Size(114, 41);
+            this.buttonDatePosition.Size = new System.Drawing.Size(44, 41);
             this.buttonDatePosition.TabIndex = 10;
-            this.buttonDatePosition.Text = "button";
+            this.buttonDatePosition.Text = "...";
             this.buttonDatePosition.UseVisualStyleBackColor = true;
             this.buttonDatePosition.Click += new System.EventHandler(this.buttonDatePosition_Click);
             // 
@@ -583,7 +582,7 @@ namespace DataSpider.UserMonitor
             this.textBoxDatePosition.Location = new System.Drawing.Point(3, 7);
             this.textBoxDatePosition.Name = "textBoxDatePosition";
             this.textBoxDatePosition.ReadOnly = true;
-            this.textBoxDatePosition.Size = new System.Drawing.Size(546, 33);
+            this.textBoxDatePosition.Size = new System.Drawing.Size(616, 33);
             this.textBoxDatePosition.TabIndex = 9;
             // 
             // panel23
@@ -599,7 +598,7 @@ namespace DataSpider.UserMonitor
             // 
             this.tableLayoutPanel6.ColumnCount = 2;
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel6.Controls.Add(this.buttonTimePosition, 0, 0);
             this.tableLayoutPanel6.Controls.Add(this.textBoxTimePosition, 0, 0);
             this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -614,11 +613,11 @@ namespace DataSpider.UserMonitor
             // 
             this.buttonTimePosition.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonTimePosition.Font = new System.Drawing.Font("맑은 고딕", 14.25F);
-            this.buttonTimePosition.Location = new System.Drawing.Point(555, 3);
+            this.buttonTimePosition.Location = new System.Drawing.Point(625, 3);
             this.buttonTimePosition.Name = "buttonTimePosition";
-            this.buttonTimePosition.Size = new System.Drawing.Size(114, 41);
+            this.buttonTimePosition.Size = new System.Drawing.Size(44, 41);
             this.buttonTimePosition.TabIndex = 12;
-            this.buttonTimePosition.Text = "button";
+            this.buttonTimePosition.Text = "...";
             this.buttonTimePosition.UseVisualStyleBackColor = true;
             this.buttonTimePosition.Click += new System.EventHandler(this.buttonTimePosition_Click);
             // 
@@ -631,7 +630,7 @@ namespace DataSpider.UserMonitor
             this.textBoxTimePosition.Location = new System.Drawing.Point(3, 7);
             this.textBoxTimePosition.Name = "textBoxTimePosition";
             this.textBoxTimePosition.ReadOnly = true;
-            this.textBoxTimePosition.Size = new System.Drawing.Size(546, 33);
+            this.textBoxTimePosition.Size = new System.Drawing.Size(616, 33);
             this.textBoxTimePosition.TabIndex = 11;
             // 
             // panel24

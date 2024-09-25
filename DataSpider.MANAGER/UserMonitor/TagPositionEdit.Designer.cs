@@ -30,6 +30,18 @@ namespace DataSpider.UserMonitor
         private void InitializeComponent()
         {
             this.tableLayoutTagEditMain = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
+            this.label5 = new System.Windows.Forms.Label();
+            this.tableLayoutPanel12 = new System.Windows.Forms.TableLayoutPanel();
+            this.textBoxItemIndex = new System.Windows.Forms.TextBox();
+            this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
+            this.textBoxDelimeter = new System.Windows.Forms.TextBox();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.comboBox_DelimeterUse = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
             this.label4 = new System.Windows.Forms.Label();
             this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
@@ -48,25 +60,19 @@ namespace DataSpider.UserMonitor
             this.tableLayoutGroupDescInput = new System.Windows.Forms.TableLayoutPanel();
             this.textBoxOffset = new System.Windows.Forms.TextBox();
             this.tableLayoutGroupNameEdit = new System.Windows.Forms.TableLayoutPanel();
-            this.labelLine = new System.Windows.Forms.Label();
             this.tableLayoutGroupNameInput = new System.Windows.Forms.TableLayoutPanel();
             this.textBoxLine = new System.Windows.Forms.TextBox();
+            this.labelLine = new System.Windows.Forms.Label();
             this.tableLayoutGroupEditMenu = new System.Windows.Forms.TableLayoutPanel();
             this.button_Cancel = new System.Windows.Forms.Button();
             this.button_OK = new System.Windows.Forms.Button();
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
-            this.textBoxDelimeter = new System.Windows.Forms.TextBox();
-            this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
-            this.label5 = new System.Windows.Forms.Label();
-            this.tableLayoutPanel12 = new System.Windows.Forms.TableLayoutPanel();
-            this.textBoxItemIndex = new System.Windows.Forms.TextBox();
-            this.comboBox_DelimeterUse = new System.Windows.Forms.ComboBox();
             this.tableLayoutTagEditMain.SuspendLayout();
+            this.tableLayoutPanel11.SuspendLayout();
+            this.tableLayoutPanel12.SuspendLayout();
+            this.tableLayoutPanel9.SuspendLayout();
+            this.tableLayoutPanel10.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
+            this.tableLayoutPanel4.SuspendLayout();
             this.tableLayoutPanel7.SuspendLayout();
             this.tableLayoutPanel8.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
@@ -78,12 +84,6 @@ namespace DataSpider.UserMonitor
             this.tableLayoutGroupNameEdit.SuspendLayout();
             this.tableLayoutGroupNameInput.SuspendLayout();
             this.tableLayoutGroupEditMenu.SuspendLayout();
-            this.tableLayoutPanel3.SuspendLayout();
-            this.tableLayoutPanel4.SuspendLayout();
-            this.tableLayoutPanel9.SuspendLayout();
-            this.tableLayoutPanel10.SuspendLayout();
-            this.tableLayoutPanel11.SuspendLayout();
-            this.tableLayoutPanel12.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutTagEditMain
@@ -115,6 +115,174 @@ namespace DataSpider.UserMonitor
             this.tableLayoutTagEditMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutTagEditMain.Size = new System.Drawing.Size(533, 300);
             this.tableLayoutTagEditMain.TabIndex = 0;
+            // 
+            // tableLayoutPanel11
+            // 
+            this.tableLayoutPanel11.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+            this.tableLayoutPanel11.ColumnCount = 2;
+            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
+            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel11.Controls.Add(this.label5, 0, 0);
+            this.tableLayoutPanel11.Controls.Add(this.tableLayoutPanel12, 1, 0);
+            this.tableLayoutPanel11.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel11.Location = new System.Drawing.Point(0, 126);
+            this.tableLayoutPanel11.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel11.Name = "tableLayoutPanel11";
+            this.tableLayoutPanel11.RowCount = 1;
+            this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel11.Size = new System.Drawing.Size(533, 42);
+            this.tableLayoutPanel11.TabIndex = 10;
+            // 
+            // label5
+            // 
+            this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label5.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label5.Location = new System.Drawing.Point(4, 1);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(144, 40);
+            this.label5.TabIndex = 3;
+            this.label5.Text = "Item Index";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tableLayoutPanel12
+            // 
+            this.tableLayoutPanel12.BackColor = System.Drawing.Color.White;
+            this.tableLayoutPanel12.ColumnCount = 1;
+            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel12.Controls.Add(this.textBoxItemIndex, 0, 0);
+            this.tableLayoutPanel12.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel12.Location = new System.Drawing.Point(152, 1);
+            this.tableLayoutPanel12.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel12.Name = "tableLayoutPanel12";
+            this.tableLayoutPanel12.RowCount = 1;
+            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel12.Size = new System.Drawing.Size(380, 40);
+            this.tableLayoutPanel12.TabIndex = 2;
+            // 
+            // textBoxItemIndex
+            // 
+            this.textBoxItemIndex.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBoxItemIndex.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBoxItemIndex.Enabled = false;
+            this.textBoxItemIndex.Font = new System.Drawing.Font("맑은 고딕", 14.25F);
+            this.textBoxItemIndex.Location = new System.Drawing.Point(3, 9);
+            this.textBoxItemIndex.Margin = new System.Windows.Forms.Padding(3, 9, 3, 3);
+            this.textBoxItemIndex.Name = "textBoxItemIndex";
+            this.textBoxItemIndex.Size = new System.Drawing.Size(374, 26);
+            this.textBoxItemIndex.TabIndex = 0;
+            // 
+            // tableLayoutPanel9
+            // 
+            this.tableLayoutPanel9.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+            this.tableLayoutPanel9.ColumnCount = 2;
+            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
+            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel9.Controls.Add(this.label2, 0, 0);
+            this.tableLayoutPanel9.Controls.Add(this.tableLayoutPanel10, 1, 0);
+            this.tableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel9.Location = new System.Drawing.Point(0, 84);
+            this.tableLayoutPanel9.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel9.Name = "tableLayoutPanel9";
+            this.tableLayoutPanel9.RowCount = 1;
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel9.Size = new System.Drawing.Size(533, 42);
+            this.tableLayoutPanel9.TabIndex = 9;
+            // 
+            // label2
+            // 
+            this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label2.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label2.Location = new System.Drawing.Point(4, 1);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(144, 40);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Delimeter";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tableLayoutPanel10
+            // 
+            this.tableLayoutPanel10.BackColor = System.Drawing.Color.White;
+            this.tableLayoutPanel10.ColumnCount = 1;
+            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel10.Controls.Add(this.textBoxDelimeter, 0, 0);
+            this.tableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel10.Location = new System.Drawing.Point(152, 1);
+            this.tableLayoutPanel10.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel10.Name = "tableLayoutPanel10";
+            this.tableLayoutPanel10.RowCount = 1;
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel10.Size = new System.Drawing.Size(380, 40);
+            this.tableLayoutPanel10.TabIndex = 2;
+            // 
+            // textBoxDelimeter
+            // 
+            this.textBoxDelimeter.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBoxDelimeter.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBoxDelimeter.Enabled = false;
+            this.textBoxDelimeter.Font = new System.Drawing.Font("맑은 고딕", 14.25F);
+            this.textBoxDelimeter.Location = new System.Drawing.Point(3, 9);
+            this.textBoxDelimeter.Margin = new System.Windows.Forms.Padding(3, 9, 3, 3);
+            this.textBoxDelimeter.Name = "textBoxDelimeter";
+            this.textBoxDelimeter.Size = new System.Drawing.Size(374, 26);
+            this.textBoxDelimeter.TabIndex = 0;
+            // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+            this.tableLayoutPanel3.ColumnCount = 2;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.Controls.Add(this.label1, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel4, 1, 0);
+            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 1;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(533, 42);
+            this.tableLayoutPanel3.TabIndex = 8;
+            // 
+            // label1
+            // 
+            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label1.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label1.Location = new System.Drawing.Point(4, 1);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(144, 40);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Delimeter Use";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tableLayoutPanel4
+            // 
+            this.tableLayoutPanel4.BackColor = System.Drawing.Color.White;
+            this.tableLayoutPanel4.ColumnCount = 1;
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel4.Controls.Add(this.comboBox_DelimeterUse, 0, 0);
+            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(152, 1);
+            this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            this.tableLayoutPanel4.RowCount = 1;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(380, 40);
+            this.tableLayoutPanel4.TabIndex = 2;
+            // 
+            // comboBox_DelimeterUse
+            // 
+            this.comboBox_DelimeterUse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBox_DelimeterUse.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_DelimeterUse.Font = new System.Drawing.Font("맑은 고딕", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.comboBox_DelimeterUse.FormattingEnabled = true;
+            this.comboBox_DelimeterUse.Items.AddRange(new object[] {
+            "Y",
+            "N"});
+            this.comboBox_DelimeterUse.Location = new System.Drawing.Point(3, 3);
+            this.comboBox_DelimeterUse.Name = "comboBox_DelimeterUse";
+            this.comboBox_DelimeterUse.Size = new System.Drawing.Size(374, 33);
+            this.comboBox_DelimeterUse.TabIndex = 1;
+            this.comboBox_DelimeterUse.SelectedIndexChanged += new System.EventHandler(this.comboBox_DelimeterUse_SelectedIndexChanged);
             // 
             // tableLayoutPanel7
             // 
@@ -255,7 +423,7 @@ namespace DataSpider.UserMonitor
             // 
             this.tableLayoutPanel2.ColumnCount = 2;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel2.Controls.Add(this.button, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.textBoxSize, 0, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -270,11 +438,11 @@ namespace DataSpider.UserMonitor
             // 
             this.button.Dock = System.Windows.Forms.DockStyle.Fill;
             this.button.Font = new System.Drawing.Font("맑은 고딕", 12F);
-            this.button.Location = new System.Drawing.Point(287, 3);
+            this.button.Location = new System.Drawing.Point(327, 3);
             this.button.Name = "button";
-            this.button.Size = new System.Drawing.Size(84, 28);
+            this.button.Size = new System.Drawing.Size(44, 28);
             this.button.TabIndex = 3;
-            this.button.Text = "button";
+            this.button.Text = "...";
             this.button.UseVisualStyleBackColor = true;
             this.button.Click += new System.EventHandler(this.button_Click);
             // 
@@ -287,7 +455,7 @@ namespace DataSpider.UserMonitor
             this.textBoxSize.Location = new System.Drawing.Point(3, 3);
             this.textBoxSize.Name = "textBoxSize";
             this.textBoxSize.ReadOnly = true;
-            this.textBoxSize.Size = new System.Drawing.Size(278, 29);
+            this.textBoxSize.Size = new System.Drawing.Size(318, 29);
             this.textBoxSize.TabIndex = 2;
             // 
             // labelSize
@@ -372,17 +540,6 @@ namespace DataSpider.UserMonitor
             this.tableLayoutGroupNameEdit.Size = new System.Drawing.Size(533, 42);
             this.tableLayoutGroupNameEdit.TabIndex = 1;
             // 
-            // labelLine
-            // 
-            this.labelLine.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelLine.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.labelLine.Location = new System.Drawing.Point(4, 1);
-            this.labelLine.Name = "labelLine";
-            this.labelLine.Size = new System.Drawing.Size(144, 40);
-            this.labelLine.TabIndex = 1;
-            this.labelLine.Text = "Line";
-            this.labelLine.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // tableLayoutGroupNameInput
             // 
             this.tableLayoutGroupNameInput.BackColor = System.Drawing.Color.White;
@@ -408,6 +565,17 @@ namespace DataSpider.UserMonitor
             this.textBoxLine.Name = "textBoxLine";
             this.textBoxLine.Size = new System.Drawing.Size(374, 26);
             this.textBoxLine.TabIndex = 0;
+            // 
+            // labelLine
+            // 
+            this.labelLine.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelLine.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.labelLine.Location = new System.Drawing.Point(4, 1);
+            this.labelLine.Name = "labelLine";
+            this.labelLine.Size = new System.Drawing.Size(144, 40);
+            this.labelLine.TabIndex = 1;
+            this.labelLine.Text = "Line";
+            this.labelLine.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tableLayoutGroupEditMenu
             // 
@@ -451,174 +619,6 @@ namespace DataSpider.UserMonitor
             this.button_OK.UseVisualStyleBackColor = true;
             this.button_OK.Click += new System.EventHandler(this.button_OK_Click);
             // 
-            // tableLayoutPanel3
-            // 
-            this.tableLayoutPanel3.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
-            this.tableLayoutPanel3.ColumnCount = 2;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Controls.Add(this.label1, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel4, 1, 0);
-            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 1;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(533, 42);
-            this.tableLayoutPanel3.TabIndex = 8;
-            // 
-            // tableLayoutPanel4
-            // 
-            this.tableLayoutPanel4.BackColor = System.Drawing.Color.White;
-            this.tableLayoutPanel4.ColumnCount = 1;
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel4.Controls.Add(this.comboBox_DelimeterUse, 0, 0);
-            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(152, 1);
-            this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-            this.tableLayoutPanel4.RowCount = 1;
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(380, 40);
-            this.tableLayoutPanel4.TabIndex = 2;
-            // 
-            // label1
-            // 
-            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label1.Location = new System.Drawing.Point(4, 1);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(144, 40);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Delimeter Use";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // tableLayoutPanel9
-            // 
-            this.tableLayoutPanel9.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
-            this.tableLayoutPanel9.ColumnCount = 2;
-            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
-            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel9.Controls.Add(this.label2, 0, 0);
-            this.tableLayoutPanel9.Controls.Add(this.tableLayoutPanel10, 1, 0);
-            this.tableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel9.Location = new System.Drawing.Point(0, 84);
-            this.tableLayoutPanel9.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel9.Name = "tableLayoutPanel9";
-            this.tableLayoutPanel9.RowCount = 1;
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel9.Size = new System.Drawing.Size(533, 42);
-            this.tableLayoutPanel9.TabIndex = 9;
-            // 
-            // label2
-            // 
-            this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label2.Location = new System.Drawing.Point(4, 1);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(144, 40);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Delimeter";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // tableLayoutPanel10
-            // 
-            this.tableLayoutPanel10.BackColor = System.Drawing.Color.White;
-            this.tableLayoutPanel10.ColumnCount = 1;
-            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel10.Controls.Add(this.textBoxDelimeter, 0, 0);
-            this.tableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel10.Location = new System.Drawing.Point(152, 1);
-            this.tableLayoutPanel10.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel10.Name = "tableLayoutPanel10";
-            this.tableLayoutPanel10.RowCount = 1;
-            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel10.Size = new System.Drawing.Size(380, 40);
-            this.tableLayoutPanel10.TabIndex = 2;
-            // 
-            // textBoxDelimeter
-            // 
-            this.textBoxDelimeter.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBoxDelimeter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBoxDelimeter.Enabled = false;
-            this.textBoxDelimeter.Font = new System.Drawing.Font("맑은 고딕", 14.25F);
-            this.textBoxDelimeter.Location = new System.Drawing.Point(3, 9);
-            this.textBoxDelimeter.Margin = new System.Windows.Forms.Padding(3, 9, 3, 3);
-            this.textBoxDelimeter.Name = "textBoxDelimeter";
-            this.textBoxDelimeter.Size = new System.Drawing.Size(374, 26);
-            this.textBoxDelimeter.TabIndex = 0;
-            // 
-            // tableLayoutPanel11
-            // 
-            this.tableLayoutPanel11.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
-            this.tableLayoutPanel11.ColumnCount = 2;
-            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
-            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel11.Controls.Add(this.label5, 0, 0);
-            this.tableLayoutPanel11.Controls.Add(this.tableLayoutPanel12, 1, 0);
-            this.tableLayoutPanel11.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel11.Location = new System.Drawing.Point(0, 126);
-            this.tableLayoutPanel11.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel11.Name = "tableLayoutPanel11";
-            this.tableLayoutPanel11.RowCount = 1;
-            this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel11.Size = new System.Drawing.Size(533, 42);
-            this.tableLayoutPanel11.TabIndex = 10;
-            // 
-            // label5
-            // 
-            this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label5.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label5.Location = new System.Drawing.Point(4, 1);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(144, 40);
-            this.label5.TabIndex = 3;
-            this.label5.Text = "Item Index";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // tableLayoutPanel12
-            // 
-            this.tableLayoutPanel12.BackColor = System.Drawing.Color.White;
-            this.tableLayoutPanel12.ColumnCount = 1;
-            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel12.Controls.Add(this.textBoxItemIndex, 0, 0);
-            this.tableLayoutPanel12.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel12.Location = new System.Drawing.Point(152, 1);
-            this.tableLayoutPanel12.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel12.Name = "tableLayoutPanel12";
-            this.tableLayoutPanel12.RowCount = 1;
-            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel12.Size = new System.Drawing.Size(380, 40);
-            this.tableLayoutPanel12.TabIndex = 2;
-            // 
-            // textBoxItemIndex
-            // 
-            this.textBoxItemIndex.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBoxItemIndex.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBoxItemIndex.Enabled = false;
-            this.textBoxItemIndex.Font = new System.Drawing.Font("맑은 고딕", 14.25F);
-            this.textBoxItemIndex.Location = new System.Drawing.Point(3, 9);
-            this.textBoxItemIndex.Margin = new System.Windows.Forms.Padding(3, 9, 3, 3);
-            this.textBoxItemIndex.Name = "textBoxItemIndex";
-            this.textBoxItemIndex.Size = new System.Drawing.Size(374, 26);
-            this.textBoxItemIndex.TabIndex = 0;
-            // 
-            // comboBox_DelimeterUse
-            // 
-            this.comboBox_DelimeterUse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox_DelimeterUse.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox_DelimeterUse.Font = new System.Drawing.Font("맑은 고딕", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.comboBox_DelimeterUse.FormattingEnabled = true;
-            this.comboBox_DelimeterUse.Items.AddRange(new object[] {
-            "Y",
-            "N"});
-            this.comboBox_DelimeterUse.Location = new System.Drawing.Point(3, 3);
-            this.comboBox_DelimeterUse.Name = "comboBox_DelimeterUse";
-            this.comboBox_DelimeterUse.Size = new System.Drawing.Size(374, 33);
-            this.comboBox_DelimeterUse.TabIndex = 1;
-            this.comboBox_DelimeterUse.SelectedIndexChanged += new System.EventHandler(this.comboBox_DelimeterUse_SelectedIndexChanged);
-            // 
             // TagPositionEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -629,6 +629,14 @@ namespace DataSpider.UserMonitor
             this.Name = "TagPositionEdit";
             this.Text = "Tag Positon Edit";
             this.tableLayoutTagEditMain.ResumeLayout(false);
+            this.tableLayoutPanel11.ResumeLayout(false);
+            this.tableLayoutPanel12.ResumeLayout(false);
+            this.tableLayoutPanel12.PerformLayout();
+            this.tableLayoutPanel9.ResumeLayout(false);
+            this.tableLayoutPanel10.ResumeLayout(false);
+            this.tableLayoutPanel10.PerformLayout();
+            this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel7.ResumeLayout(false);
             this.tableLayoutPanel8.ResumeLayout(false);
             this.tableLayoutPanel8.PerformLayout();
@@ -645,14 +653,6 @@ namespace DataSpider.UserMonitor
             this.tableLayoutGroupNameInput.ResumeLayout(false);
             this.tableLayoutGroupNameInput.PerformLayout();
             this.tableLayoutGroupEditMenu.ResumeLayout(false);
-            this.tableLayoutPanel3.ResumeLayout(false);
-            this.tableLayoutPanel4.ResumeLayout(false);
-            this.tableLayoutPanel9.ResumeLayout(false);
-            this.tableLayoutPanel10.ResumeLayout(false);
-            this.tableLayoutPanel10.PerformLayout();
-            this.tableLayoutPanel11.ResumeLayout(false);
-            this.tableLayoutPanel12.ResumeLayout(false);
-            this.tableLayoutPanel12.PerformLayout();
             this.ResumeLayout(false);
 
         }

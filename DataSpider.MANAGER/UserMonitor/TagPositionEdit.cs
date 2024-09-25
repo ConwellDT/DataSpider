@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Globalization;
 using System.Windows.Forms;
 
 using DataSpider.PC00.PT;
-
-using static DevExpress.Drawing.Printing.Internal.DXPageSizeInfo;
 
 namespace DataSpider.UserMonitor
 {

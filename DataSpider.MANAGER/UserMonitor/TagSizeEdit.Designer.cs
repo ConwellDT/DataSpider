@@ -37,15 +37,15 @@ namespace DataSpider.UserMonitor
             this.radioButton5 = new System.Windows.Forms.RadioButton();
             this.richTextBoxScript = new System.Windows.Forms.RichTextBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.button_OK = new System.Windows.Forms.Button();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.button_Cancel = new System.Windows.Forms.Button();
             this.textBoxDefault = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // radioButton2
@@ -97,9 +97,9 @@ namespace DataSpider.UserMonitor
             this.radioButton6.AutoSize = true;
             this.radioButton6.Location = new System.Drawing.Point(257, 16);
             this.radioButton6.Name = "radioButton6";
-            this.radioButton6.Size = new System.Drawing.Size(60, 16);
+            this.radioButton6.Size = new System.Drawing.Size(47, 16);
             this.radioButton6.TabIndex = 12;
-            this.radioButton6.Text = "default";
+            this.radioButton6.Text = "size";
             this.radioButton6.UseVisualStyleBackColor = true;
             this.radioButton6.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
             // 
@@ -133,23 +133,6 @@ namespace DataSpider.UserMonitor
             this.panel1.Size = new System.Drawing.Size(554, 45);
             this.panel1.TabIndex = 15;
             // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.button_Cancel);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel2.Location = new System.Drawing.Point(452, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(102, 45);
-            this.panel2.TabIndex = 0;
-            // 
-            // panel3
-            // 
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel3.Location = new System.Drawing.Point(447, 0);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(5, 45);
-            this.panel3.TabIndex = 1;
-            // 
             // panel4
             // 
             this.panel4.Controls.Add(this.button_OK);
@@ -171,6 +154,23 @@ namespace DataSpider.UserMonitor
             this.button_OK.Text = "OK";
             this.button_OK.UseVisualStyleBackColor = true;
             this.button_OK.Click += new System.EventHandler(this.button_OK_Click);
+            // 
+            // panel3
+            // 
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel3.Location = new System.Drawing.Point(447, 0);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(5, 45);
+            this.panel3.TabIndex = 1;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.button_Cancel);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel2.Location = new System.Drawing.Point(452, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(102, 45);
+            this.panel2.TabIndex = 0;
             // 
             // button_Cancel
             // 
@@ -215,8 +215,8 @@ namespace DataSpider.UserMonitor
             this.Text = "Tag Size Edit";
             this.TopMost = true;
             this.panel1.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
