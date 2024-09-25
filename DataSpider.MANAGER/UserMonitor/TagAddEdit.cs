@@ -11,7 +11,6 @@ namespace DataSpider.UserMonitor
         private PC00Z01 sqlBiz = new PC00Z01();
         private readonly string TagName = string.Empty;
         private readonly string EquipName = string.Empty;
-        private bool isLoading = true; // 폼 로드 중인지 여부를 나타내는 플래그
         private bool AddMode { get { return string.IsNullOrWhiteSpace(TagName); } }
 
         public TagAddEdit(string equipName, string tagName = "")
@@ -23,7 +22,6 @@ namespace DataSpider.UserMonitor
         private void TagAddEdit_Load(object sender, EventArgs e)
         {
             InitControls();
-            isLoading = false; // 폼 로드가 완료되면 플래그를 false로 설정
         }
 
         private void InitControls()
@@ -81,8 +79,6 @@ namespace DataSpider.UserMonitor
                 textBox_ItemName.Text = dtTag.Rows[0]["OPCITEM_NM"].ToString();
                 textBox_EventFrameAttributeName.Text = dtTag.Rows[0]["EF_ATTRIBUTE_NM"].ToString();
 
-                string[] values = textBoxValuePosition.Text.Split(',');
-                comboBox_DelimeterUse.Text = values.Length == 5 ? "Y" : "N";
                 textBox_TagName.Enabled = false;
             }
         }
@@ -124,11 +120,6 @@ namespace DataSpider.UserMonitor
                 MessageBox.Show($"Message Type 을 입력하세요.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return false;
             }
-            if (string.IsNullOrWhiteSpace(comboBox_DelimeterUse.Text))
-            {
-                MessageBox.Show($"Delimeter 사용여부를 체크해주세요.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return false;
-            }
             if (string.IsNullOrWhiteSpace(textBox_ItemName.Text) && (string.IsNullOrWhiteSpace(textBoxValuePosition.Text) || string.IsNullOrWhiteSpace(textBoxDatePosition.Text)))
             {
                 MessageBox.Show($"Value, Date Position 또는 Item Name 을 입력하세요.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -164,34 +155,6 @@ namespace DataSpider.UserMonitor
             }
         }
 
-        private void ShowTagPositionEditDialog(TextBox textcontrol, string delimiterUse)
-        {
-            if (delimiterUse.Equals("Y", StringComparison.OrdinalIgnoreCase))
-            {
-                ShowTagPositionDelimeterEditDialog(textcontrol);
-            }
-            else
-            {
-                ShowTagPositionEditDialog(textcontrol);
-            }
-        }
-
-        private void ShowTagPositionDelimeterEditDialog(TextBox textcontrol)
-        {
-            TagPositionDelimeterEdit dlg = CreateTagPositionDelimeterEditFromText(textcontrol.Text);
-
-            if (dlg.ShowDialog() == DialogResult.OK)
-            {
-                textcontrol.Text = FormatTagPositionDelimeterValues(dlg);
-            }
-        }
-
-        private TagPositionDelimeterEdit CreateTagPositionDelimeterEditFromText(string text)
-        {
-            var values = ParseValues(text, 5);
-            return new TagPositionDelimeterEdit(values[0], values[1], values[2], values[3], values[4]);
-        }
-
         private void ShowTagPositionEditDialog(TextBox textcontrol)
         {
             TagPositionEdit dlg = CreateTagPositionEditFromText(textcontrol.Text);
@@ -204,8 +167,14 @@ namespace DataSpider.UserMonitor
 
         private TagPositionEdit CreateTagPositionEditFromText(string text)
         {
-            var values = ParseValues(text, 3);
-            return new TagPositionEdit(values[0], values[1], values[2]);
+            string use = string.Empty;
+            string[] useValues = text.Split(',');
+            if (!string.IsNullOrEmpty(text))
+            {
+                use = useValues.Length == 5 ? "Y" : "N";
+            }
+            var values = ParseValues(text, 5);
+            return new TagPositionEdit(use, values[0], values[1], values[2], values[3], values[4]);
         }
 
         private string[] ParseValues(string text, int expectedLength)
@@ -219,45 +188,34 @@ namespace DataSpider.UserMonitor
             return result;
         }
 
-        private string FormatTagPositionDelimeterValues(TagPositionDelimeterEdit dlg)
-        {
-            return $"{dlg.LineValue},{dlg.DelimeterVale},{dlg.ItemIndexValue},{dlg.OffsetValue},{dlg.SizeValue}";
-        }
-
         private string FormatTagPositionEditValues(TagPositionEdit dlg)
         {
-            return $"{dlg.LineValue},{dlg.OffsetValue},{dlg.SizeValue}";
-        }
-
-        private void comboBox_DelimeterUse_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (isLoading)
-                return; // 폼 로드 중에는 이벤트 핸들러를 건너뛰기
-
-            textBoxValuePosition.Text = string.Empty;
-
+            if (dlg.DelimeterUse.Equals("Y"))
+            {
+                // Return the formatted string with all values
+                return $"{dlg.LineValue},{dlg.DelimeterVale},{dlg.ItemIndexValue},{dlg.OffsetValue},{dlg.SizeValue}";
+            }
+            else
+            {
+                // Return the formatted string without Delimeter and ItemIndex
+                return $"{dlg.LineValue},{dlg.OffsetValue},{dlg.SizeValue}";
+            }
         }
 
         private void button_ValuePosition_ButtonClick(object sender, EventArgs e)
         {
 
-            if (string.IsNullOrWhiteSpace(comboBox_DelimeterUse.Text))
-            {
-                MessageBox.Show("Delimeter 사용여부를 체크해주세요.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-
-            ShowTagPositionEditDialog(textBoxValuePosition, comboBox_DelimeterUse.SelectedItem.ToString());
+            ShowTagPositionEditDialog(textBoxValuePosition);
         }
 
         private void buttonDatePosition_Click(object sender, EventArgs e)
         {
-            ShowTagPositionEditDialog(textBoxDatePosition, "N");
+            ShowTagPositionEditDialog(textBoxDatePosition);
         }
 
         private void buttonTimePosition_Click(object sender, EventArgs e)
         {
-            ShowTagPositionEditDialog(textBoxTimePosition, "N");
+            ShowTagPositionEditDialog(textBoxTimePosition);
         }
     }
 }
