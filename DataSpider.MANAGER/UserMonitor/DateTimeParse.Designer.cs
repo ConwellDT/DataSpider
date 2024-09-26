@@ -499,6 +499,7 @@ namespace DataSpider.UserMonitor
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "DateTimeParse";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Datetime Parsing";
             this.Load += new System.EventHandler(this.DateTimeParsing_Load);
             this.tableLayoutConfigtagGroupMain.ResumeLayout(false);
