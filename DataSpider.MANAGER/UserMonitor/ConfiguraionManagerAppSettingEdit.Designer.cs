@@ -326,7 +326,7 @@ namespace DataSpider.UserMonitor
             this.tableLayoutGroupEditMenu.Controls.Add(this.button_Encryption, 0, 0);
             this.tableLayoutGroupEditMenu.Controls.Add(this.button_Cancel, 3, 0);
             this.tableLayoutGroupEditMenu.Controls.Add(this.button_OK, 3, 0);
-            this.tableLayoutGroupEditMenu.Dock = System.Windows.Forms.DockStyle.Right;
+            this.tableLayoutGroupEditMenu.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutGroupEditMenu.Location = new System.Drawing.Point(0, 86);
             this.tableLayoutGroupEditMenu.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutGroupEditMenu.Name = "tableLayoutGroupEditMenu";
@@ -392,6 +392,7 @@ namespace DataSpider.UserMonitor
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(820, 139);
+            this.ControlBox = false;
             this.Controls.Add(this.tableLayoutTagEditMain);
             this.Name = "ConfiguraionManagerAppSettingEdit";
             this.Text = "Configuration Manager App Setting Edit";

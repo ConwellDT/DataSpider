@@ -17,7 +17,6 @@ namespace DataSpider.UserMonitor
         public const int EDIT_MODE_UPDATE = 1;
         public string key = string.Empty;
         public string value = string.Empty;
-        string EnValue = string.Empty;
         public DataTable DT;
 
         private PC00Z01 sqlBiz = new PC00Z01();
@@ -96,21 +95,26 @@ namespace DataSpider.UserMonitor
 
         private void button_Encryption_Click(object sender, EventArgs e)
         {
-            textBoxValue.Text =  CFW.Common.SecurityUtil.EncryptString(textBoxValue.Text);
+            string originalValue = textBoxValue.Text;
+            string encryptValue = CFW.Common.SecurityUtil.EncryptString(originalValue);
+            if (textBoxValue.MaxLength < encryptValue.Length)
+            {
+                MessageBox.Show("Encryption failed because the string is out of range", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            textBoxValue.Text = encryptValue;
         }
 
         private void button_Decryption_Click(object sender, EventArgs e)
         {
-            EnValue = textBoxValue.Text;
-         
-            textBoxValue.Text = CFW.Common.SecurityUtil.DecryptString(textBoxValue.Text);
-            if (string.IsNullOrWhiteSpace(textBoxValue.Text))
+            string originalValue = textBoxValue.Text;
+            string decryptedValue = CFW.Common.SecurityUtil.DecryptString(originalValue);
+            if (string.IsNullOrWhiteSpace(decryptedValue))
             {
                 MessageBox.Show("It's plain text. The default value has been set.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                textBoxValue.Text = EnValue;
                 return;
-
             }
+            textBoxValue.Text = decryptedValue;
         }
     }
 }

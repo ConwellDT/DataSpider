@@ -49,6 +49,7 @@ namespace DataSpider.UserMonitor
         private void button_Add_Click(object sender, EventArgs e)
         {
             CommonCodenfoEdit dlg = new CommonCodenfoEdit("", "", "", "", "", "", CommonCodenfoEdit.EDIT_MODE_ADD);
+            dlg.StartPosition = FormStartPosition.CenterParent;
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 dataGridCommonCode.Rows.Clear();
@@ -96,6 +97,7 @@ namespace DataSpider.UserMonitor
 
             // 선택된 데이터를 사용하여 편집 창 열기
             CommonCodenfoEdit dlg = new CommonCodenfoEdit(selCdGrp, selCode, selCodeName, selCodeValue, "", "", CommonCodenfoEdit.EDIT_MODE_UPDATE);
+            dlg.StartPosition = FormStartPosition.CenterParent;
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 dataGridCommonCode.Rows.Clear();
