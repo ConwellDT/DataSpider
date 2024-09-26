@@ -17,7 +17,6 @@ namespace DataSpider.UserMonitor
         public const int EDIT_MODE_UPDATE = 1;
         public string key = string.Empty;
         public string value = string.Empty;
-        string DcValue = string.Empty;
         string EnValue = string.Empty;
         public DataTable DT;
 
@@ -37,7 +36,6 @@ namespace DataSpider.UserMonitor
 
             if (string.IsNullOrEmpty(value) == false)
             {
-                DcValue = value;
                 textBoxValue.Text = value;
             }
             if (dt != null)
@@ -65,16 +63,16 @@ namespace DataSpider.UserMonitor
                 return;
             }
 
-            DataRow[] dr = DT.Select($"Key = '{key}'");
-
-            if (dr != null && dr.Length > 0)
-            {
-                MessageBox.Show($"Key: " + key +  $" already exist", $"App Config invalid", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-
             if (EditMode == EDIT_MODE_ADD)
             {
+                DataRow[] dr = DT.Select($"Key = '{key}'");
+
+                if (dr != null && dr.Length > 0)
+                {
+                    MessageBox.Show($"Key: " + key + $" already exist", $"App Config invalid", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
                 AppSetting.Append(textBoxKey.Text.Trim(), textBoxValue.Text.Trim());
                 MessageBox.Show($"App Config Setting Value has been saved.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 DialogResult = DialogResult.OK;
@@ -98,17 +96,21 @@ namespace DataSpider.UserMonitor
 
         private void button_Encryption_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(EnValue)) return;
-
-            textBoxValue.Text = CFW.Common.SecurityUtil.EncryptString(EnValue);
-            DcValue = textBoxValue.Text;
+            textBoxValue.Text =  CFW.Common.SecurityUtil.EncryptString(textBoxValue.Text);
         }
 
         private void button_Decryption_Click(object sender, EventArgs e)
         {
-
-            textBoxValue.Text = CFW.Common.SecurityUtil.DecryptString(DcValue);
             EnValue = textBoxValue.Text;
+         
+            textBoxValue.Text = CFW.Common.SecurityUtil.DecryptString(textBoxValue.Text);
+            if (string.IsNullOrWhiteSpace(textBoxValue.Text))
+            {
+                MessageBox.Show("It's plain text. The default value has been set.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                textBoxValue.Text = EnValue;
+                return;
+
+            }
         }
     }
 }
