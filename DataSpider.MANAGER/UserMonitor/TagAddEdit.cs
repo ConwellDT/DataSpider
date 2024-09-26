@@ -158,7 +158,6 @@ namespace DataSpider.UserMonitor
         private void ShowTagPositionEditDialog(TextBox textcontrol)
         {
             TagPositionEdit dlg = CreateTagPositionEditFromText(textcontrol.Text);
-            dlg.StartPosition = FormStartPosition.CenterParent;
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 textcontrol.Text = FormatTagPositionEditValues(dlg);

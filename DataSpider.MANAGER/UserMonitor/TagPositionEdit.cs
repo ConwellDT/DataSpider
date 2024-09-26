@@ -135,7 +135,6 @@ namespace DataSpider.UserMonitor
             if (string.IsNullOrWhiteSpace(textBoxSize.Text))
             {
                 TagSizeEdit dlg = new TagSizeEdit();
-                dlg.StartPosition = FormStartPosition.CenterParent;
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
                     textBoxSize.Text = dlg.SizeEdit;
@@ -144,7 +143,6 @@ namespace DataSpider.UserMonitor
             else
             {
                 TagSizeEdit dlg = new TagSizeEdit(textBoxSize.Text);
-                dlg.StartPosition = FormStartPosition.CenterParent;
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
                     textBoxSize.Text = dlg.SizeEdit;

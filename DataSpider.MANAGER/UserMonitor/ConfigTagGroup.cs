@@ -186,7 +186,6 @@ namespace DataSpider.UserMonitor
             string strSelEQTypeCD = dtEquiptype.Rows[comboBox_EquipType.SelectedIndex]["EQUIPTYPE_CD"].ToString();
 
             TagGroupInfoEdit dlg = new TagGroupInfoEdit(strSelEQTypeCD, "", "", TagGroupInfoEdit.EDIT_MODE_ADD);
-            dlg.StartPosition = FormStartPosition.CenterParent;
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 String strGrpName = dlg.strGroupName;
@@ -250,7 +249,6 @@ namespace DataSpider.UserMonitor
             string selGrpDesc = selRow["GROUP_DESC"].ToString();
 
             TagGroupInfoEdit dlg = new TagGroupInfoEdit(strSelEQTypeCD, selGrpName, selGrpDesc, TagGroupInfoEdit.EDIT_MODE_UPDATE);
-            dlg.StartPosition = FormStartPosition.CenterParent;
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 String strGrpName = dlg.strGroupName;

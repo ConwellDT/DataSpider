@@ -395,6 +395,7 @@ namespace DataSpider.UserMonitor
             this.ControlBox = false;
             this.Controls.Add(this.tableLayoutTagEditMain);
             this.Name = "ConfiguraionManagerAppSettingEdit";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Configuration Manager App Setting Edit";
             this.tableLayoutTagEditMain.ResumeLayout(false);
             this.tableLayoutPanel7.ResumeLayout(false);

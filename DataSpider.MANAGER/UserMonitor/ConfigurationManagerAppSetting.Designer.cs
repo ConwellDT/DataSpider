@@ -489,6 +489,7 @@ namespace DataSpider.UserMonitor
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ConfigurationManagerAppSetting";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "AppSetting";
             this.Load += new System.EventHandler(this.ConfigurationManagerAppSetting_Load);
             this.tableLayoutConfigtagGroupMain.ResumeLayout(false);

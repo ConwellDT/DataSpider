@@ -627,6 +627,7 @@ namespace DataSpider.UserMonitor
             this.ControlBox = false;
             this.Controls.Add(this.tableLayoutTagEditMain);
             this.Name = "TagPositionEdit";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Tag Positon Edit";
             this.tableLayoutTagEditMain.ResumeLayout(false);
             this.tableLayoutPanel11.ResumeLayout(false);

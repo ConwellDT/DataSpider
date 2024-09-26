@@ -116,7 +116,6 @@ namespace DataSpider.UserMonitor
 
             // 선택된 데이터를 사용하여 편집 창 열기
             ConfiguraionManagerAppSettingEdit dlg = new ConfiguraionManagerAppSettingEdit(selKey, selValue, dataTable, CommonCodenfoEdit.EDIT_MODE_UPDATE);
-            dlg.StartPosition = FormStartPosition.CenterParent;
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 dataGridView_AppConfig.Rows.Clear();
@@ -155,7 +154,6 @@ namespace DataSpider.UserMonitor
             }
 
             ConfiguraionManagerAppSettingEdit dlg = new ConfiguraionManagerAppSettingEdit("", "", dataTable, CommonCodenfoEdit.EDIT_MODE_ADD);
-            dlg.StartPosition = FormStartPosition.CenterParent;
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 dataGridView_AppConfig.Rows.Clear();

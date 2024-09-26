@@ -225,6 +225,7 @@ namespace DataSpider.UserMonitor
             this.ClientSize = new System.Drawing.Size(820, 128);
             this.Controls.Add(this.tableLayoutTagEditMain);
             this.Name = "TagGroupInfoEdit";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Tag Group Info Edit";
             this.tableLayoutTagEditMain.ResumeLayout(false);
             this.tableLayoutGroupDescEdit.ResumeLayout(false);
