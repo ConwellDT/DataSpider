@@ -17,6 +17,8 @@ namespace DataSpider.UserMonitor
         public const int EDIT_MODE_UPDATE = 1;
         public string key = string.Empty;
         public string value = string.Empty;
+        string DcValue = string.Empty;
+        string EnValue = string.Empty;
         public DataTable DT;
 
         private PC00Z01 sqlBiz = new PC00Z01();
@@ -35,6 +37,7 @@ namespace DataSpider.UserMonitor
 
             if (string.IsNullOrEmpty(value) == false)
             {
+                DcValue = value;
                 textBoxValue.Text = value;
             }
             if (dt != null)
@@ -91,6 +94,21 @@ namespace DataSpider.UserMonitor
         {
             DialogResult = DialogResult.Cancel;
             this.Close();
+        }
+
+        private void button_Encryption_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(EnValue)) return;
+
+            textBoxValue.Text = CFW.Common.SecurityUtil.EncryptString(EnValue);
+            DcValue = textBoxValue.Text;
+        }
+
+        private void button_Decryption_Click(object sender, EventArgs e)
+        {
+
+            textBoxValue.Text = CFW.Common.SecurityUtil.DecryptString(DcValue);
+            EnValue = textBoxValue.Text;
         }
     }
 }

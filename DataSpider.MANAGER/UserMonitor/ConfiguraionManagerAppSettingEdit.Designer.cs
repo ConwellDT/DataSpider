@@ -47,6 +47,8 @@ namespace DataSpider.UserMonitor
             this.tableLayoutGroupNameInput = new System.Windows.Forms.TableLayoutPanel();
             this.textBoxKey = new System.Windows.Forms.TextBox();
             this.tableLayoutGroupEditMenu = new System.Windows.Forms.TableLayoutPanel();
+            this.button_Decryption = new System.Windows.Forms.Button();
+            this.button_Encryption = new System.Windows.Forms.Button();
             this.button_Cancel = new System.Windows.Forms.Button();
             this.button_OK = new System.Windows.Forms.Button();
             this.tableLayoutTagEditMain.SuspendLayout();
@@ -314,28 +316,59 @@ namespace DataSpider.UserMonitor
             // 
             // tableLayoutGroupEditMenu
             // 
-            this.tableLayoutGroupEditMenu.ColumnCount = 2;
-            this.tableLayoutGroupEditMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutGroupEditMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutGroupEditMenu.Controls.Add(this.button_Cancel, 0, 0);
-            this.tableLayoutGroupEditMenu.Controls.Add(this.button_OK, 0, 0);
+            this.tableLayoutGroupEditMenu.ColumnCount = 5;
+            this.tableLayoutGroupEditMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 18F));
+            this.tableLayoutGroupEditMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 18F));
+            this.tableLayoutGroupEditMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 28F));
+            this.tableLayoutGroupEditMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 18F));
+            this.tableLayoutGroupEditMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 18F));
+            this.tableLayoutGroupEditMenu.Controls.Add(this.button_Decryption, 0, 0);
+            this.tableLayoutGroupEditMenu.Controls.Add(this.button_Encryption, 0, 0);
+            this.tableLayoutGroupEditMenu.Controls.Add(this.button_Cancel, 3, 0);
+            this.tableLayoutGroupEditMenu.Controls.Add(this.button_OK, 3, 0);
             this.tableLayoutGroupEditMenu.Dock = System.Windows.Forms.DockStyle.Right;
-            this.tableLayoutGroupEditMenu.Location = new System.Drawing.Point(532, 86);
+            this.tableLayoutGroupEditMenu.Location = new System.Drawing.Point(0, 86);
             this.tableLayoutGroupEditMenu.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutGroupEditMenu.Name = "tableLayoutGroupEditMenu";
             this.tableLayoutGroupEditMenu.RowCount = 1;
             this.tableLayoutGroupEditMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutGroupEditMenu.Size = new System.Drawing.Size(288, 53);
+            this.tableLayoutGroupEditMenu.Size = new System.Drawing.Size(820, 53);
             this.tableLayoutGroupEditMenu.TabIndex = 3;
+            // 
+            // button_Decryption
+            // 
+            this.button_Decryption.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.button_Decryption.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.button_Decryption.Location = new System.Drawing.Point(150, 4);
+            this.button_Decryption.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.button_Decryption.Name = "button_Decryption";
+            this.button_Decryption.Size = new System.Drawing.Size(141, 45);
+            this.button_Decryption.TabIndex = 7;
+            this.button_Decryption.Text = "Decryption";
+            this.button_Decryption.UseVisualStyleBackColor = true;
+            this.button_Decryption.Click += new System.EventHandler(this.button_Decryption_Click);
+            // 
+            // button_Encryption
+            // 
+            this.button_Encryption.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.button_Encryption.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.button_Encryption.Location = new System.Drawing.Point(3, 4);
+            this.button_Encryption.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.button_Encryption.Name = "button_Encryption";
+            this.button_Encryption.Size = new System.Drawing.Size(141, 45);
+            this.button_Encryption.TabIndex = 6;
+            this.button_Encryption.Text = "Encryption";
+            this.button_Encryption.UseVisualStyleBackColor = true;
+            this.button_Encryption.Click += new System.EventHandler(this.button_Encryption_Click);
             // 
             // button_Cancel
             // 
             this.button_Cancel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.button_Cancel.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.button_Cancel.Location = new System.Drawing.Point(147, 4);
+            this.button_Cancel.Location = new System.Drawing.Point(673, 4);
             this.button_Cancel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button_Cancel.Name = "button_Cancel";
-            this.button_Cancel.Size = new System.Drawing.Size(138, 45);
+            this.button_Cancel.Size = new System.Drawing.Size(144, 45);
             this.button_Cancel.TabIndex = 5;
             this.button_Cancel.Text = "CANCEL";
             this.button_Cancel.UseVisualStyleBackColor = true;
@@ -345,10 +378,10 @@ namespace DataSpider.UserMonitor
             // 
             this.button_OK.Dock = System.Windows.Forms.DockStyle.Fill;
             this.button_OK.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.button_OK.Location = new System.Drawing.Point(3, 4);
+            this.button_OK.Location = new System.Drawing.Point(526, 4);
             this.button_OK.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button_OK.Name = "button_OK";
-            this.button_OK.Size = new System.Drawing.Size(138, 45);
+            this.button_OK.Size = new System.Drawing.Size(141, 45);
             this.button_OK.TabIndex = 4;
             this.button_OK.Text = "OK";
             this.button_OK.UseVisualStyleBackColor = true;
@@ -402,5 +435,7 @@ namespace DataSpider.UserMonitor
         private System.Windows.Forms.TableLayoutPanel tableLayoutGroupEditMenu;
         private System.Windows.Forms.Button button_Cancel;
         private System.Windows.Forms.Button button_OK;
+        private System.Windows.Forms.Button button_Decryption;
+        private System.Windows.Forms.Button button_Encryption;
     }
 }
