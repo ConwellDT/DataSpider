@@ -715,5 +715,17 @@ namespace DataSpider
                 }
             }
         }
+
+        private void tagParsingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (UserAuthentication.IsAuthorized)
+            {
+                if (UserAuthentication.UserLevel == UserLevel.Admin || UserAuthentication.UserLevel == UserLevel.Manager)
+                {
+                    TagParsing frm = new TagParsing();
+                    frm.ShowDialog(this);
+                }
+            }
+        }
     }
 }
