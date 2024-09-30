@@ -1652,5 +1652,48 @@ namespace DataSpider.PC00.PT
                 return false;
             }
         }
+
+        public DataTable GetMsgTypeTagValue(string equipType, string equipName, string zoneType, string msgType, ref string _strErrCode, ref string _strErrText)
+        {
+            DataTable result = null;
+            try
+            {
+                StringBuilder strQuery = new StringBuilder();
+                strQuery.Append($"EXEC GetMsgTypeTagValue '{equipType}', '{equipName}','{zoneType}', '{msgType}'");
+
+                DataSet ds = CFW.Data.MsSqlDbAccess.GetDataSet(strQuery.ToString(), null, CommandType.Text, ref _strErrCode, ref _strErrText);
+                if (ds != null && ds.Tables[0] != null)
+                {
+                    result = ds.Tables[0];
+                }
+            }
+            catch (Exception ex)
+            {
+                _strErrText = ex.ToString();
+            }
+            return result;
+        }
+
+        public DataTable GetEquipmentMsgType(string equipmentName, bool onlyUseflag, ref string _strErrCode, ref string _strErrText)
+        {
+            DataTable result = null;
+            try
+            {
+                string useFlag = onlyUseflag ? "Y" : string.Empty;
+                StringBuilder strQuery = new StringBuilder();
+                strQuery.Append($"EXEC GetEquipmentMsgType  '{equipmentName}', '{useFlag}'");
+
+                DataSet ds = CFW.Data.MsSqlDbAccess.GetDataSet(strQuery.ToString(), null, CommandType.Text, ref _strErrCode, ref _strErrText);
+                if (ds != null && ds.Tables[0] != null)
+                {
+                    result = ds.Tables[0];
+                }
+            }
+            catch (Exception ex)
+            {
+                _strErrText = ex.ToString();
+            }
+            return result;
+        }
     }
 }

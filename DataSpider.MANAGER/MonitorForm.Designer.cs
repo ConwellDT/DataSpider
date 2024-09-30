@@ -41,6 +41,7 @@ namespace DataSpider
             this.configCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tagGroupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.commonCodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.configurationManagerAppSettingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.userToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.userInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -72,7 +73,7 @@ namespace DataSpider
             this.toolStripStatusLabel_MainDBSourceName = new System.Windows.Forms.ToolStripStatusLabel();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.imageList_EquipState = new System.Windows.Forms.ImageList(this.components);
-            this.configurationManagerAppSettingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tagParsingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -153,14 +154,14 @@ namespace DataSpider
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(98, 6);
             // 
             // 종료ToolStripMenuItem
             // 
             this.종료ToolStripMenuItem.Name = "종료ToolStripMenuItem";
             this.종료ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.X)));
             this.종료ToolStripMenuItem.ShowShortcutKeys = false;
-            this.종료ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.종료ToolStripMenuItem.Size = new System.Drawing.Size(101, 22);
             this.종료ToolStripMenuItem.Text = "Exit(X)";
             this.종료ToolStripMenuItem.Click += new System.EventHandler(this.종료ToolStripMenuItem_Click);
             // 
@@ -193,6 +194,13 @@ namespace DataSpider
             this.commonCodeToolStripMenuItem.Text = "Common Code (O)";
             this.commonCodeToolStripMenuItem.Click += new System.EventHandler(this.commonCodeToolStripMenuItem_Click);
             // 
+            // configurationManagerAppSettingToolStripMenuItem
+            // 
+            this.configurationManagerAppSettingToolStripMenuItem.Name = "configurationManagerAppSettingToolStripMenuItem";
+            this.configurationManagerAppSettingToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
+            this.configurationManagerAppSettingToolStripMenuItem.Text = "ConfigurationManagerAppSetting";
+            this.configurationManagerAppSettingToolStripMenuItem.Click += new System.EventHandler(this.configurationManagerAppSettingToolStripMenuItem_Click);
+            // 
             // userToolStripMenuItem
             // 
             this.userToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -205,7 +213,7 @@ namespace DataSpider
             // userInfoToolStripMenuItem
             // 
             this.userInfoToolStripMenuItem.Name = "userInfoToolStripMenuItem";
-            this.userInfoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.userInfoToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.userInfoToolStripMenuItem.Text = "User info";
             this.userInfoToolStripMenuItem.Click += new System.EventHandler(this.userInfoToolStripMenuItem_Click);
             // 
@@ -223,19 +231,20 @@ namespace DataSpider
             // 
             this.showAllEquipmtToolStripMenuItem.CheckOnClick = true;
             this.showAllEquipmtToolStripMenuItem.Name = "showAllEquipmtToolStripMenuItem";
-            this.showAllEquipmtToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.showAllEquipmtToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.showAllEquipmtToolStripMenuItem.Text = "Show All Equipmt";
             this.showAllEquipmtToolStripMenuItem.Click += new System.EventHandler(this.showAllEquipmtToolStripMenuItem_Click);
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(168, 6);
             // 
             // toolsToolStripMenuItem
             // 
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.dateTimeParsingToolStripMenuItem});
+            this.dateTimeParsingToolStripMenuItem,
+            this.tagParsingToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.S)));
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(66, 19);
@@ -263,7 +272,7 @@ namespace DataSpider
             // 
             this.sEIMM정보ToolStripMenuItem.Name = "sEIMM정보ToolStripMenuItem";
             this.sEIMM정보ToolStripMenuItem.ShowShortcutKeys = false;
-            this.sEIMM정보ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sEIMM정보ToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.sEIMM정보ToolStripMenuItem.Text = "About DataSpider";
             this.sEIMM정보ToolStripMenuItem.Click += new System.EventHandler(this.SEIMM정보ToolStripMenuItem_Click);
             // 
@@ -476,12 +485,12 @@ namespace DataSpider
             this.imageList_EquipState.Images.SetKeyName(6, "Unknown");
             this.imageList_EquipState.Images.SetKeyName(7, "NetworkError");
             // 
-            // configurationManagerAppSettingToolStripMenuItem
+            // tagParsingToolStripMenuItem
             // 
-            this.configurationManagerAppSettingToolStripMenuItem.Name = "configurationManagerAppSettingToolStripMenuItem";
-            this.configurationManagerAppSettingToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
-            this.configurationManagerAppSettingToolStripMenuItem.Text = "ConfigurationManagerAppSetting";
-            this.configurationManagerAppSettingToolStripMenuItem.Click += new System.EventHandler(this.configurationManagerAppSettingToolStripMenuItem_Click);
+            this.tagParsingToolStripMenuItem.Name = "tagParsingToolStripMenuItem";
+            this.tagParsingToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.tagParsingToolStripMenuItem.Text = "Tag Parsing";
+            this.tagParsingToolStripMenuItem.Click += new System.EventHandler(this.tagParsingToolStripMenuItem_Click);
             // 
             // MonitorForm
             // 
@@ -559,6 +568,7 @@ namespace DataSpider
         private System.Windows.Forms.ToolStripMenuItem dateTimeParsingToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripMenuItem configurationManagerAppSettingToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tagParsingToolStripMenuItem;
     }
 }
 
