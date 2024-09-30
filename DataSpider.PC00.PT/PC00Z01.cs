@@ -604,7 +604,7 @@ namespace DataSpider.PC00.PT
             try
             {
                 StringBuilder strQuery = new StringBuilder();
-                strQuery.Append($"EXEC UpdateEquipmentProgDateTime '{equipName}', {status} '{ifFlag}'");
+                strQuery.Append($"EXEC UpdateEquipmentProgDateTime '{equipName}', {status}, '{ifFlag}'");
 
                 bool result = CFW.Data.MsSqlDbAccess.ExecuteNonQuery(strQuery.ToString(), null, CommandType.Text, ref _strErrCode, ref _strErrText);
                 return result;
