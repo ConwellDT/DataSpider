@@ -53,8 +53,6 @@ namespace DataSpider.UserMonitor
             //form.ClientSize = new Size((int)Math.Round((float)180 * dialogUnits.Width / 4),
             //                            (int)Math.Round((float)63 * dialogUnits.Height / 8));
 
-            form.StartPosition = FormStartPosition.CenterScreen;
-
             System.Windows.Forms.Label lblPrompt;
             lblPrompt = new System.Windows.Forms.Label();
             lblPrompt.Parent = form;

@@ -211,7 +211,7 @@ namespace DataSpider.UserMonitor
             this.Controls.Add(this.radioButton1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "TagSizeEdit";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Tag Size Edit";
             this.TopMost = true;
             this.panel1.ResumeLayout(false);

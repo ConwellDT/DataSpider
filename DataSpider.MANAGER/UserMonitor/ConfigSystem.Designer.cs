@@ -82,6 +82,7 @@ namespace DataSpider.UserMonitor
             this.Controls.Add(this.textBox_DBConnString);
             this.Controls.Add(this.labelDBConnStr);
             this.Name = "ConfigSystem";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ConfigSystem";
             this.Load += new System.EventHandler(this.ConfigSystem_Load);
             this.ResumeLayout(false);

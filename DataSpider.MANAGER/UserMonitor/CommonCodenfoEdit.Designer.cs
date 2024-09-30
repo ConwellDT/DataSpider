@@ -487,6 +487,7 @@ namespace DataSpider.UserMonitor
             this.ClientSize = new System.Drawing.Size(820, 213);
             this.Controls.Add(this.tableLayoutTagEditMain);
             this.Name = "CommonCodenfoEdit";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Common Code Info Edit";
             this.tableLayoutTagEditMain.ResumeLayout(false);
             this.tableLayoutPanel7.ResumeLayout(false);

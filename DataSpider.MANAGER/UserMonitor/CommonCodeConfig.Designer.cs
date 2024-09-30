@@ -312,6 +312,7 @@ namespace DataSpider.UserMonitor
             this.Controls.Add(this.tableLayoutConfigtagGroupMain);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "CommonCodeConfig";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Common Code Config";
             this.Load += new System.EventHandler(this.CommonCodeConfig_Load);
             this.tableLayoutConfigtagGroupMain.ResumeLayout(false);

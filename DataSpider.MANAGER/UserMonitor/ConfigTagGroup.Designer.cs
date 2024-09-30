@@ -437,6 +437,7 @@ namespace DataSpider.UserMonitor
             this.ClientSize = new System.Drawing.Size(870, 582);
             this.Controls.Add(this.tableLayoutConfigtagGroupMain);
             this.Name = "ConfigTagGroup";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "ConfigTagGroup";
             this.Load += new System.EventHandler(this.ConfigTagGroup_Load);
             this.tableLayoutConfigtagGroupMain.ResumeLayout(false);

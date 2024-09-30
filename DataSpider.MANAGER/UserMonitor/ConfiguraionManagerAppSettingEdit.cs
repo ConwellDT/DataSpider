@@ -62,16 +62,16 @@ namespace DataSpider.UserMonitor
                 return;
             }
 
-            DataRow[] dr = DT.Select($"Key = '{key}'");
-
-            if (dr != null && dr.Length > 0)
-            {
-                MessageBox.Show($"Key: " + key +  $" already exist", $"App Config invalid", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-
             if (EditMode == EDIT_MODE_ADD)
             {
+                DataRow[] dr = DT.Select($"Key = '{key}'");
+
+                if (dr != null && dr.Length > 0)
+                {
+                    MessageBox.Show($"Key: " + key + $" already exist", $"App Config invalid", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
                 AppSetting.Append(textBoxKey.Text.Trim(), textBoxValue.Text.Trim());
                 MessageBox.Show($"App Config Setting Value has been saved.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 DialogResult = DialogResult.OK;
@@ -91,6 +91,30 @@ namespace DataSpider.UserMonitor
         {
             DialogResult = DialogResult.Cancel;
             this.Close();
+        }
+
+        private void button_Encryption_Click(object sender, EventArgs e)
+        {
+            string originalValue = textBoxValue.Text;
+            string encryptValue = CFW.Common.SecurityUtil.EncryptString(originalValue);
+            if (textBoxValue.MaxLength < encryptValue.Length)
+            {
+                MessageBox.Show("Encryption failed because the string is out of range", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            textBoxValue.Text = encryptValue;
+        }
+
+        private void button_Decryption_Click(object sender, EventArgs e)
+        {
+            string originalValue = textBoxValue.Text;
+            string decryptedValue = CFW.Common.SecurityUtil.DecryptString(originalValue);
+            if (string.IsNullOrWhiteSpace(decryptedValue))
+            {
+                MessageBox.Show("It's plain text. The default value has been set.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            textBoxValue.Text = decryptedValue;
         }
     }
 }
