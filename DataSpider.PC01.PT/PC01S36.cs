@@ -74,7 +74,7 @@ namespace DataSpider.PC01.PT
                         continue;
                     }
 
-                    ProcessSC5P(sRawData);
+                    ProcessData(sRawData);
                 }
                 catch (Exception ex)
                 {
@@ -91,22 +91,44 @@ namespace DataSpider.PC01.PT
             listViewMsg.UpdateMsg("Thread finished");
         }
 
-        private bool ProcessSC5P(string rawData)
+        private bool ProcessData(string rawData)
         {
             dicData.Clear();
             JToken jtData = JToken.Parse(rawData);
 
             JToken jtFirst = jtData.AsJEnumerable().First();
-            if (jtFirst is JProperty) 
+            if (jtFirst is JProperty)
             {
                 if ((jtFirst as JProperty).Name == "payload")
                 {
                     listViewMsg.UpdateMsg($"Info file. Skip parsing. ", false, true, true, PC00D01.MSGTINF);
                     return false;
                 }
-            }
 
-            bool result = Extract_SC5P(jtData);
+                // manualExport Result 
+                if ((jtFirst as JProperty).Name == "arraySize")
+                {
+                    int dataCount = (int)jtData["arraySize"];
+
+                    listViewMsg.UpdateMsg($"manualExport_result file processing. Data count : {dataCount}", false, true, true, PC00D01.MSGTINF);
+
+                    foreach (var data in jtData["data"])
+                    {
+                        ExtractData(data);
+                    }
+                }
+                else
+                {
+                    ExtractData(jtData);
+                }
+            }
+            return true;
+        }
+
+        private bool ExtractData(JToken jtData)
+        { 
+
+            bool result = ExtractJToken(jtData);
 
             // WorkFlowType (MessageType)
             if (!dicData.TryGetValue("WORKFLOWTYPE", out string workFlowType))
@@ -178,7 +200,7 @@ namespace DataSpider.PC01.PT
                 listViewMsg.UpdateMsg($"{key} is duplicated property name. Skip this one.", false, true, true, PC00D01.MSGTERR);
             }
         }
-        private bool Extract_SC5P(JToken json)
+        private bool ExtractJToken(JToken json)
         {
             try
             {
@@ -219,7 +241,7 @@ namespace DataSpider.PC01.PT
                         }
                     }
 
-                    Extract_SC5P(item);
+                    ExtractJToken(item);
                 }
             }
             catch (Exception ex)
