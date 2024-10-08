@@ -168,7 +168,7 @@ namespace DataSpider.UserMonitor
         {
             string use = string.Empty;
             string[] useValues = text.Split(',');
-            if (!string.IsNullOrEmpty(text))
+            if (!string.IsNullOrWhiteSpace(text))
             {
                 use = useValues.Length == 5 ? "Y" : "N";
             }
@@ -182,7 +182,7 @@ namespace DataSpider.UserMonitor
             var result = new string[expectedLength];
             for (int i = 0; i < expectedLength; i++)
             {
-                result[i] = i < values.Length ? values[i].Trim() : string.Empty;
+                result[i] = i < values.Length ? values[i] : string.Empty;
             }
             return result;
         }

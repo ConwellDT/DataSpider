@@ -28,25 +28,24 @@ namespace DataSpider.UserMonitor
                 textBoxDelimeter.Enabled = true;
                 textBoxItemIndex.Enabled = true;
 
-                if (string.IsNullOrEmpty(line) == false)
+                if (string.IsNullOrWhiteSpace(line) == false)
                 {
-                    textBoxLine.Text = line;
+                    textBoxLine.Text = line.Trim();
                 }
-                if (string.IsNullOrEmpty(offset) == false)
+                if (string.IsNullOrWhiteSpace(offset) == false)
                 {
-                    textBoxOffset.Text = offset;
+                    textBoxOffset.Text = offset.Trim();
                 }
-                if (string.IsNullOrEmpty(size) == false)
+                if (string.IsNullOrWhiteSpace(size) == false)
                 {
-                    textBoxSize.Text = size;
+                    textBoxSize.Text = size.Trim();
                 }
-                if (string.IsNullOrEmpty(delimeter) == false)
+
+                textBoxDelimeter.Text = delimeter;
+
+                if (string.IsNullOrWhiteSpace(itemindex) == false)
                 {
-                    textBoxDelimeter.Text = delimeter;
-                }
-                if (string.IsNullOrEmpty(itemindex) == false)
-                {
-                    textBoxItemIndex.Text = itemindex;
+                    textBoxItemIndex.Text = itemindex.Trim();
                 }
             }
             else
@@ -54,20 +53,20 @@ namespace DataSpider.UserMonitor
                 textBoxDelimeter.Enabled = false;
                 textBoxItemIndex.Enabled = false;
 
-                textBoxDelimeter.Text = string.Empty; 
-                textBoxItemIndex.Text = string.Empty;  
+                textBoxDelimeter.Text = string.Empty;
+                textBoxItemIndex.Text = string.Empty;
 
                 if (string.IsNullOrEmpty(line) == false)
                 {
-                    textBoxLine.Text = line;
+                    textBoxLine.Text = line.Trim();
                 }
                 if (string.IsNullOrEmpty(delimeter) == false)
                 {
-                    textBoxOffset.Text = delimeter;
+                    textBoxOffset.Text = delimeter.Trim();
                 }
                 if (string.IsNullOrEmpty(itemindex) == false)
                 {
-                    textBoxSize.Text = itemindex;
+                    textBoxSize.Text = itemindex.Trim();
                 }
             }
         }
@@ -77,13 +76,13 @@ namespace DataSpider.UserMonitor
             if (string.IsNullOrWhiteSpace(comboBox_DelimeterUse.Text))
             {
                 MessageBox.Show($"Delimeter Use를 선택하세요.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return ;
+                return;
             }
 
             if (string.IsNullOrWhiteSpace(textBoxLine.Text))
             {
                 MessageBox.Show($"Line을 입력하세요.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return ;
+                return;
             }
 
             if (string.IsNullOrWhiteSpace(textBoxOffset.Text))
@@ -105,12 +104,12 @@ namespace DataSpider.UserMonitor
                     return;
                 }
 
-                DelimeterUse = comboBox_DelimeterUse.Text;
-                LineValue = textBoxLine.Text;
+                DelimeterUse = comboBox_DelimeterUse.Text.Trim();
+                LineValue = textBoxLine.Text.Trim();
                 DelimeterVale = textBoxDelimeter.Text;
-                ItemIndexValue = textBoxItemIndex.Text;
-                OffsetValue = textBoxOffset.Text;
-                SizeValue = textBoxSize.Text;
+                ItemIndexValue = textBoxItemIndex.Text.Trim();
+                OffsetValue = textBoxOffset.Text.Trim();
+                SizeValue = textBoxSize.Text.Trim();
             }
             else
             {
