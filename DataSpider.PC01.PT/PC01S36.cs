@@ -19,6 +19,7 @@ using System.Management.Automation;
 using Newtonsoft.Json.Linq;
 using NLog.Fluent;
 using System.Runtime.InteropServices.ComTypes;
+using Org.BouncyCastle.Cms;
 
 namespace DataSpider.PC01.PT
 {
@@ -93,7 +94,6 @@ namespace DataSpider.PC01.PT
 
         private bool ProcessData(string rawData)
         {
-            dicData.Clear();
             JToken jtData = JToken.Parse(rawData);
 
             JToken jtFirst = jtData.AsJEnumerable().First();
@@ -114,7 +114,8 @@ namespace DataSpider.PC01.PT
 
                     foreach (var data in jtData["data"])
                     {
-                        ExtractData(data);
+                        string tempString = data.ToString();
+                        ExtractData(JToken.Parse(tempString));
                     }
                 }
                 else
@@ -126,7 +127,8 @@ namespace DataSpider.PC01.PT
         }
 
         private bool ExtractData(JToken jtData)
-        { 
+        {
+            dicData.Clear();
 
             bool result = ExtractJToken(jtData);
 
@@ -197,8 +199,10 @@ namespace DataSpider.PC01.PT
             key = key.ToUpper();
             if (!dicData.TryAdd(key, val))
             {
-                listViewMsg.UpdateMsg($"{key} is duplicated property name. Skip this one.", false, true, true, PC00D01.MSGTERR);
-            }
+                //listViewMsg.UpdateMsg($"{key} is duplicated property name. Skip this one.", false, true, true, PC00D01.MSGTERR);
+                listViewMsg.UpdateMsg($"{key} is duplicated property name. value = {dicData[key]}. Overwrite this to {val}.", false, true, true, PC00D01.MSGTERR);
+                dicData[key] = val;
+           }
         }
         private bool ExtractJToken(JToken json)
         {
