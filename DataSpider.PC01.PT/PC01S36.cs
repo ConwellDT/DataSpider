@@ -118,8 +118,10 @@ namespace DataSpider.PC01.PT
                         ExtractData(JToken.Parse(tempString));
                     }
                 }
+                // autoExport Result
                 else
                 {
+                    listViewMsg.UpdateMsg($"autoExport_result file processing.", false, true, true, PC00D01.MSGTINF);
                     ExtractData(jtData);
                 }
             }
@@ -250,7 +252,7 @@ namespace DataSpider.PC01.PT
             }
             catch (Exception ex)
             {
-                listViewMsg.UpdateMsg($"Exception in Extract_SC5P - {ex}", false, true, true, PC00D01.MSGTERR);
+                listViewMsg.UpdateMsg($"Exception in ExtractJToken - {ex}", false, true, true, PC00D01.MSGTERR);
                 return false;
             }
 
