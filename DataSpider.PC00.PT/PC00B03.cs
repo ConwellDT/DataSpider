@@ -36,6 +36,9 @@ namespace DataSpider.PC00.PT
         protected string winID = string.Empty;
         protected string winPW = string.Empty;
 
+        // 20241007, SHS, 하위폴더 파일 처리 옵션 추가
+        protected SearchOption searchOption = SearchOption.TopDirectoryOnly;
+
         public PC00B03()
         {
         }
@@ -54,11 +57,20 @@ namespace DataSpider.PC00.PT
                 fileSearchPattern = conn[1].Trim();
             }
             // 네트워크 공유 폴더의 경우 3, 4 번째에 각각 ID, PW 설정
-            if (conn.Length == 4)
+            //if (conn.Length == 4)
+            if (conn.Length >= 4)
             {
                 winID = conn[2].Trim();
                 winPW = conn[3].Trim();
                 PC00U01.ExecuteNetUse(filePath, winID, winPW);
+            }
+
+            if (conn.Length >= 5)
+            {
+                if (!string.IsNullOrWhiteSpace(conn[4]))
+                {
+                    searchOption = conn[4].Trim().ToUpper().Equals("ALL") ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly;
+                }
             }
 
             // 20240611, SHS, EXTRA_INFO JSON 포맷으로 변경, 1 = *dif*.*, 2 = *wti*.*, 3 = *aif*.* 형태의 msgType = wildCardPattern
@@ -239,7 +251,8 @@ namespace DataSpider.PC00.PT
                 FileInfo[] fileInfo = null;
                 try
                 {
-                    fileInfo = di.GetFilesMP(fileSearchPattern);
+                    //fileInfo = di.GetFilesMP(fileSearchPattern);
+                    fileInfo = di.GetFilesMP(fileSearchPattern, searchOption);
                 }
                 catch (Exception ex)
                 {
