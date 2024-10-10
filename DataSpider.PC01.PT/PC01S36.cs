@@ -19,6 +19,7 @@ using System.Management.Automation;
 using Newtonsoft.Json.Linq;
 using NLog.Fluent;
 using System.Runtime.InteropServices.ComTypes;
+using Org.BouncyCastle.Cms;
 
 namespace DataSpider.PC01.PT
 {
@@ -74,7 +75,7 @@ namespace DataSpider.PC01.PT
                         continue;
                     }
 
-                    ProcessSC5P(sRawData);
+                    ProcessData(sRawData);
                 }
                 catch (Exception ex)
                 {
@@ -91,22 +92,47 @@ namespace DataSpider.PC01.PT
             listViewMsg.UpdateMsg("Thread finished");
         }
 
-        private bool ProcessSC5P(string rawData)
+        private bool ProcessData(string rawData)
         {
-            dicData.Clear();
             JToken jtData = JToken.Parse(rawData);
 
             JToken jtFirst = jtData.AsJEnumerable().First();
-            if (jtFirst is JProperty) 
+            if (jtFirst is JProperty)
             {
                 if ((jtFirst as JProperty).Name == "payload")
                 {
                     listViewMsg.UpdateMsg($"Info file. Skip parsing. ", false, true, true, PC00D01.MSGTINF);
                     return false;
                 }
-            }
 
-            bool result = Extract_SC5P(jtData);
+                // manualExport Result 
+                if ((jtFirst as JProperty).Name == "arraySize")
+                {
+                    int dataCount = (int)jtData["arraySize"];
+
+                    listViewMsg.UpdateMsg($"manualExport_result file processing. Data count : {dataCount}", false, true, true, PC00D01.MSGTINF);
+
+                    foreach (var data in jtData["data"])
+                    {
+                        string tempString = data.ToString();
+                        ExtractData(JToken.Parse(tempString));
+                    }
+                }
+                // autoExport Result
+                else
+                {
+                    listViewMsg.UpdateMsg($"autoExport_result file processing.", false, true, true, PC00D01.MSGTINF);
+                    ExtractData(jtData);
+                }
+            }
+            return true;
+        }
+
+        private bool ExtractData(JToken jtData)
+        {
+            dicData.Clear();
+
+            bool result = ExtractJToken(jtData);
 
             // WorkFlowType (MessageType)
             if (!dicData.TryGetValue("WORKFLOWTYPE", out string workFlowType))
@@ -175,10 +201,12 @@ namespace DataSpider.PC01.PT
             key = key.ToUpper();
             if (!dicData.TryAdd(key, val))
             {
-                listViewMsg.UpdateMsg($"{key} is duplicated property name. Skip this one.", false, true, true, PC00D01.MSGTERR);
-            }
+                //listViewMsg.UpdateMsg($"{key} is duplicated property name. Skip this one.", false, true, true, PC00D01.MSGTERR);
+                listViewMsg.UpdateMsg($"{key} is duplicated property name. value = {dicData[key]}. Overwrite this to {val}.", false, true, true, PC00D01.MSGTERR);
+                dicData[key] = val;
+           }
         }
-        private bool Extract_SC5P(JToken json)
+        private bool ExtractJToken(JToken json)
         {
             try
             {
@@ -219,12 +247,12 @@ namespace DataSpider.PC01.PT
                         }
                     }
 
-                    Extract_SC5P(item);
+                    ExtractJToken(item);
                 }
             }
             catch (Exception ex)
             {
-                listViewMsg.UpdateMsg($"Exception in Extract_SC5P - {ex}", false, true, true, PC00D01.MSGTERR);
+                listViewMsg.UpdateMsg($"Exception in ExtractJToken - {ex}", false, true, true, PC00D01.MSGTERR);
                 return false;
             }
 
