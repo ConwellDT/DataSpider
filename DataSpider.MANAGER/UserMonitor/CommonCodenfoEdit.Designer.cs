@@ -378,6 +378,7 @@ namespace DataSpider.UserMonitor
             this.textBoxCode.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxCode.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBoxCode.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.textBoxCode.ForeColor = System.Drawing.Color.Black;
             this.textBoxCode.Location = new System.Drawing.Point(3, 9);
             this.textBoxCode.Margin = new System.Windows.Forms.Padding(3, 9, 3, 3);
             this.textBoxCode.Name = "textBoxCode";
@@ -432,6 +433,7 @@ namespace DataSpider.UserMonitor
             this.textBoxCodeGrp.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxCodeGrp.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBoxCodeGrp.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.textBoxCodeGrp.ForeColor = System.Drawing.Color.Black;
             this.textBoxCodeGrp.Location = new System.Drawing.Point(3, 9);
             this.textBoxCodeGrp.Margin = new System.Windows.Forms.Padding(3, 9, 3, 3);
             this.textBoxCodeGrp.Name = "textBoxCodeGrp";
