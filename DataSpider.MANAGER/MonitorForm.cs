@@ -102,7 +102,9 @@ namespace DataSpider
 
                 sqlBiz.UpdateEquipTypeFlag(equipTypeNm, isChecked, ref errCode, ref errText);
             }
-            SetSBL();
+            // 20241010, SHS, SetSBL 은 최초 1회만 해야 함
+            //SetSBL();
+            m_pSBLDataCtrl.InitData(!showAllEquipmtToolStripMenuItem.Checked);
 
         }
         public string AssemblyTitle
