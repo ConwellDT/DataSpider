@@ -161,7 +161,7 @@ namespace DataSpider.PC01.PT
             { 
                 if (!PC00U01.TryParseEpochSeconds(longMeasureDateTime, out dtMeasureDateTime))
                 {
-                    listViewMsg.UpdateMsg($"Failed to Parse _timestamp to DateTime : {rawMeasureDateTime}. Failed to process file. ", false, true, true, PC00D01.MSGTERR);
+                    listViewMsg.UpdateMsg($"Failed to Parse {measureDateTimeName}({rawMeasureDateTime}) to DateTime : {rawMeasureDateTime}. Failed to process file. ", false, true, true, PC00D01.MSGTERR);
                     return false;
                 }
             }
@@ -170,7 +170,7 @@ namespace DataSpider.PC01.PT
             {
                 if (!PC00U01.TryParseExact(rawMeasureDateTime, out dtMeasureDateTime))
                 {
-                    listViewMsg.UpdateMsg($"Failed to Parse _timestamp to DateTime : {rawMeasureDateTime}. Failed to process file. ", false, true, true, PC00D01.MSGTERR);
+                    listViewMsg.UpdateMsg($"Failed to Parse {measureDateTimeName}({rawMeasureDateTime}) to DateTime : {rawMeasureDateTime}. Failed to process file. ", false, true, true, PC00D01.MSGTERR);
                     return false;
                 }
             }
