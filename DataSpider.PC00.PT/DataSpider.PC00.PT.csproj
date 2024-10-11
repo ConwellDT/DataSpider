@@ -74,6 +74,7 @@
     <Compile Include="PC00B04.cs" />
     <Compile Include="PC00B02.cs" />
     <Compile Include="PC00B03.cs" />
+    <Compile Include="PC00M02.cs" />
     <Compile Include="PC00M01.cs" />
     <Compile Include="PC00D01.cs" />
     <Compile Include="PC00U01.cs" />

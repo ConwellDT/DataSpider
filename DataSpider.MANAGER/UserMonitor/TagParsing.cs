@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 
 using DataSpider.PC00.PT;
@@ -13,6 +11,7 @@ namespace DataSpider.UserMonitor
         public delegate bool OnRefreshTreeDataDelegate();
         public event OnRefreshTreeDataDelegate OnRefreshTreeData = null;
         private PC00Z01 sqlBiz = new PC00Z01();
+        private PC00M02 dataProcess = new PC00M02();
         private string equipType;
         private string equipmentName;
         private string zoneType;
@@ -119,18 +118,6 @@ namespace DataSpider.UserMonitor
             }
         }
 
-        private void button_Parse_Click(object sender, EventArgs e)
-        {
-            string strErrCode = string.Empty;
-            string strErrText = string.Empty;
-
-            if (string.IsNullOrWhiteSpace(comboBoxMsgType.Text))
-            {
-                MessageBox.Show("Message Type is not exist", $"Message Type invalid", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-        }
-
         private void EditToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (dataGridView_Main.SelectedRows.Count < 1)
@@ -183,6 +170,35 @@ namespace DataSpider.UserMonitor
                 MessageBox.Show($"태그 삭제 중 오류가 발생하였습니다. {ex.Message}", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             }
+        }
+
+        private void button_Parse_Click(object sender, EventArgs e)
+        {
+            string strErrCode = string.Empty;
+            string strErrText = string.Empty;
+
+            if (string.IsNullOrWhiteSpace(comboBoxMsgType.Text))
+            {
+                MessageBox.Show("Message Type is not exist", $"Message Type invalid", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            string queueMessage = textBox1.Text;
+            if (string.IsNullOrWhiteSpace(queueMessage))
+            {
+                MessageBox.Show("Queue message type is empty", "Queue Message Type Invalid", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            QueueMsg msg = new QueueMsg
+            {
+                m_EqName = equipmentName,
+                m_MsgType = Convert.ToInt32(comboBoxMsgType.Text),
+                m_Data = queueMessage
+            };
+            PC00U01.WriteQueue(msg);
+            dataProcess.ProcessData();
+            GetTagCurrentValues(equipType, equipmentName, zoneType, comboBoxMsgType.Text.Equals("") ? "%" : comboBoxMsgType.Text);
         }
 
         private void RefreshTreeView()

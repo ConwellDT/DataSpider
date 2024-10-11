@@ -21,6 +21,7 @@ namespace DataSpider.PC01.PT
 
         #region 전역 변수 설정
         PC00M01 thDataProcess = null;
+        PC00M02 thDataProcess2 = null;
         PC00B01[] thProcess = null;
         public bool bTerminated = false;
 
@@ -677,6 +678,7 @@ namespace DataSpider.PC01.PT
                 // MES 결정에 따라 MCA SERVERTIME 중복체크를 옵션 결정. 
                 // 20220908, SHS, MCA 의 경우 서버타임 별도 보완없이 그대로 처리하기로 협의됨 (SBL ATM, MES)
                 thDataProcess = new PC00M01(this, dtEquipment.Rows[0], equipType, equipName, connectionInfo, "", 0, true);
+                thDataProcess2 = new PC00M02();
                 // 마지막 파라미터 TRUE 이면 서버타임에 대해 시간으로만 중복체크
                 //thDataProcess = new PC00M01(this, equipType, equipName, connectionInfo, "", 0, true, equipType.Equals("SC_MCA"));
                 //
