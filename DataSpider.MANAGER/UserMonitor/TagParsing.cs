@@ -11,7 +11,7 @@ namespace DataSpider.UserMonitor
         public delegate bool OnRefreshTreeDataDelegate();
         public event OnRefreshTreeDataDelegate OnRefreshTreeData = null;
         private PC00Z01 sqlBiz = new PC00Z01();
-        private PC00M02 dataProcess = new PC00M02();
+        private PC00M02 dataProcess;
         private string equipType;
         private string equipmentName;
         private string zoneType;
@@ -19,6 +19,7 @@ namespace DataSpider.UserMonitor
         public TagParsing()
         {
             InitializeComponent();
+            dataProcess = new PC00M02(dataGridView_Main);
         }
 
         private void DateTimeParsing_Load(object sender, EventArgs e)
@@ -44,10 +45,15 @@ namespace DataSpider.UserMonitor
                     row.Cells["EquipmentName"].Value = dtCommonCd.Rows[nR]["EQUIP_NM"].ToString();
                 }
             }
-            dataGridEquipmentName_CellClick(null, null);
+            EquipmentMsgType();
         }
 
         private void dataGridEquipmentName_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            EquipmentMsgType();
+        }
+
+        private void EquipmentMsgType()
         {
             string strErrCode = string.Empty;
             string strErrText = string.Empty;
@@ -197,8 +203,7 @@ namespace DataSpider.UserMonitor
                 m_Data = queueMessage
             };
             PC00U01.WriteQueue(msg);
-            dataProcess.ProcessData();
-            GetTagCurrentValues(equipType, equipmentName, zoneType, comboBoxMsgType.Text.Equals("") ? "%" : comboBoxMsgType.Text);
+            dataProcess.ProcessData(dataGridView_Main);
         }
 
         private void RefreshTreeView()

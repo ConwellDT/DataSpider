@@ -30,8 +30,8 @@ namespace DataSpider.UserMonitor
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutConfigtagGroupMain = new System.Windows.Forms.TableLayoutPanel();
             this.label_Title = new System.Windows.Forms.Label();
             this.tableLayoutContents = new System.Windows.Forms.TableLayoutPanel();
@@ -46,7 +46,6 @@ namespace DataSpider.UserMonitor
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.button_Parse = new System.Windows.Forms.Button();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
@@ -55,6 +54,7 @@ namespace DataSpider.UserMonitor
             this.comboBoxMsgType = new System.Windows.Forms.ComboBox();
             this.dataGridEquipmentName = new System.Windows.Forms.DataGridView();
             this.EquipmentName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.textBox1 = new System.Windows.Forms.RichTextBox();
             this.tableLayoutConfigtagGroupMain.SuspendLayout();
             this.tableLayoutContents.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -145,8 +145,8 @@ namespace DataSpider.UserMonitor
             // 
             this.dataGridView_Main.AllowUserToAddRows = false;
             this.dataGridView_Main.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(221)))), ((int)(((byte)(235)))), ((int)(((byte)(247)))));
-            this.dataGridView_Main.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(221)))), ((int)(((byte)(235)))), ((int)(((byte)(247)))));
+            this.dataGridView_Main.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView_Main.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_Main.ContextMenuStrip = this.contextMenuStrip1;
             this.dataGridView_Main.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -247,17 +247,6 @@ namespace DataSpider.UserMonitor
             this.tableLayoutPanel4.Size = new System.Drawing.Size(367, 422);
             this.tableLayoutPanel4.TabIndex = 14;
             // 
-            // textBox1
-            // 
-            this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox1.Font = new System.Drawing.Font("굴림", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.textBox1.Location = new System.Drawing.Point(3, 32);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox1.Size = new System.Drawing.Size(361, 387);
-            this.textBox1.TabIndex = 12;
-            // 
             // panel2
             // 
             this.panel2.Controls.Add(this.label1);
@@ -331,14 +320,14 @@ namespace DataSpider.UserMonitor
             this.dataGridEquipmentName.AllowUserToAddRows = false;
             this.dataGridEquipmentName.AllowUserToDeleteRows = false;
             this.dataGridEquipmentName.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridEquipmentName.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridEquipmentName.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridEquipmentName.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridEquipmentName.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.EquipmentName});
@@ -359,6 +348,16 @@ namespace DataSpider.UserMonitor
             this.EquipmentName.ReadOnly = true;
             this.EquipmentName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.EquipmentName.Width = 200;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox1.Font = new System.Drawing.Font("굴림", 12F);
+            this.textBox1.Location = new System.Drawing.Point(3, 32);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(361, 387);
+            this.textBox1.TabIndex = 3;
+            this.textBox1.Text = "";
             // 
             // TagParsing
             // 
@@ -382,7 +381,6 @@ namespace DataSpider.UserMonitor
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
-            this.tableLayoutPanel4.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.tableLayoutPanel5.ResumeLayout(false);
@@ -403,7 +401,6 @@ namespace DataSpider.UserMonitor
         private System.Windows.Forms.DataGridView dataGridEquipmentName;
         private System.Windows.Forms.DataGridViewTextBoxColumn EquipmentName;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Button button_Parse;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
@@ -418,5 +415,6 @@ namespace DataSpider.UserMonitor
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
+        private System.Windows.Forms.RichTextBox textBox1;
     }
 }

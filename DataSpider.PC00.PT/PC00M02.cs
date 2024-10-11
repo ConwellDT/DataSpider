@@ -2,17 +2,13 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
-using System.Net;
 using System.Text;
 using System.Text.Json;
+using System.Windows.Forms;
 
 using OSIsoft.AF;
-using OSIsoft.AF.Asset;
-using OSIsoft.AF.EventFrame;
 using OSIsoft.AF.PI;
-using OSIsoft.AF.Time;
 
 /// <summary>
 /// 큐 처리 구현
@@ -23,6 +19,7 @@ namespace DataSpider.PC00.PT
     public class PC00M02 : PC00B01
     {
         private EquipmentDataProcess2 dataProcess = null;
+        private DataGridView dataGridView_Main;
         private DataTable dtTagInfo = null;
         private DateTime dtLastTagUpdated = DateTime.MinValue;
         private DateTime dtCheckTagUpdate = DateTime.MinValue;
@@ -31,17 +28,17 @@ namespace DataSpider.PC00.PT
 
         // 20220908, SHS, SERVERTIME 중복체크 (시간만 비교할지 값도 비교할지) 옵션 기능 추가
         private bool checkServerTimeDup = false;
-        //
 
         // 20220908, SHS, SERVERTIME 중복체크 (시간만 비교할지 값도 비교할지) 옵션 기능 추가
-        public PC00M02()
+        public PC00M02(DataGridView dataGridView)
         {
-            ProcessData();
+            dataGridView_Main = dataGridView;
+            ProcessData(dataGridView_Main);
         }
-        public void ProcessData()
+        public void ProcessData(DataGridView dataGridView)
         {
             GetTagInfo();
-            Job();
+            Job(dataGridView);
         }
         public bool GetTagInfo()
         {
@@ -89,7 +86,7 @@ namespace DataSpider.PC00.PT
                 }
             }
         }
-        private void Job()
+        private void Job(DataGridView dataGridView)
         {
             dataProcess = new EquipmentDataProcess2(m_ConnectionInfo, drEquipment, dtTagInfo, listViewMsg, dataEncoding, checkServerTimeDup);
             try
@@ -101,7 +98,7 @@ namespace DataSpider.PC00.PT
                 {
                     return;
                 }
-                if (dataProcess.DataProcess(msg))
+                if (dataProcess.DataProcess(msg, dataGridView))
                 {
                 }
                 else
@@ -520,21 +517,6 @@ namespace DataSpider.PC00.PT
             FilePath = filePath;
             listViewMsg = _listViewMsg;
             dataEncoding = _dataEncoding == null ? Encoding.UTF8 : _dataEncoding;
-
-            try
-            {
-                m_clsPIInfo = ConfigHelper.GetPIInfo();
-                if (!CheckPIConnection(out string errText))
-                {
-                }
-                if (!CheckAFDatabase(out string errString))
-                {
-                }
-            }
-            catch (Exception ex)
-            {
-  
-            }
         }
         // 20220908, SHS, SERVERTIME 중복체크 (시간만 비교할지 값도 비교할지) 옵션 기능 추가
         public EquipmentDataProcess2(string filePath, DataRow dr, DataTable dtTag, FormListViewMsg listViewMsg, Encoding dataEncoding = null, bool checkServerTimeDup = false) : this(filePath, listViewMsg, dataEncoding)
@@ -658,13 +640,13 @@ namespace DataSpider.PC00.PT
             }
             return true;
         }
-        public bool DataProcess(QueueMsg msg)
+        public bool DataProcess(QueueMsg msg, DataGridView dataGridView)
         {
             if (msg == null) return false;
-            else return DataProcess(msg.m_EqName, msg.m_MsgType, msg.m_Data.Split(new string[] { Environment.NewLine }, StringSplitOptions.None));
+            else return DataProcess(msg.m_EqName, msg.m_MsgType, msg.m_Data.Split(new string[] { "\r\n", "\n" }, StringSplitOptions.None), dataGridView);
         }
 
-        public bool DataProcess(string equipName, int msgType, string[] data)
+        public bool DataProcess(string equipName, int msgType, string[] data, DataGridView dataGridView)
         {
             if (!DicTAGList.TryGetValue($"{equipName}_{msgType}", out List<TAG2> listTAG))
             {
@@ -698,15 +680,21 @@ namespace DataSpider.PC00.PT
                     tag.Remark = string.Empty;
                     tag.PIIFFlag = "N"; // N -> Y, E -> F, Z
                     tag.IsDBInserted = false;
-                });
+                }); ;
 
-                SavePI(listUpdated);
-                SaveDBHistory(listUpdated);
-
-                List<TAG2> listNotInserted = listUpdated.FindAll(x => !x.IsDBInserted);
-                if (listNotInserted.Count > 0)
+                // DataGridView에 업데이트된 태그 값을 설정
+                foreach (var tag in listUpdated)
                 {
-                    SaveFile(listNotInserted);
+                    foreach (DataGridViewRow row in dataGridView.Rows)
+                    {
+                        if (row.Cells["TAG Name"].Value.ToString() == tag.TagName) // 태그 이름 비교
+                        {
+                            row.Cells["Last Value"].Value = tag.Value; // 태그 값 업데이트
+                            row.Cells["Measure DateTime"].Value = tag.TimeStamp; // PIIF 시간 업데이트
+                            row.Cells["Update DateTime"].Value = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                            break; // 일치하는 태그가 업데이트되면 루프 종료
+                        }
+                    }
                 }
             }
 
@@ -750,410 +738,42 @@ namespace DataSpider.PC00.PT
                 }
                 else
                 {
-                    AFElementTemplate efTemplate = GetEventFrameTemplate(equipTypeName, msgType, listAttributeNames, out string errMessage);
-                    if (efTemplate == null)
+                    if (DicTAGList.TryGetValue($"{equipName}_0", out List<TAG2> listMsgtype0TAGs))
                     {
-                        efData.IFRemark = errMessage.Replace("'", " ");
-                    }
-                    else 
-                    {
-                        var efResult = SaveEventFrame(eventFrameName, efTemplate, measureTime, measureTime, efData.Attributes);
-
-                        efData.IFFlag = efResult.afIFFlag;
-                        efData.IFRemark = efResult.afIFRemark.Replace("'", " ");
-
-                        if (efResult.afIFFlag.Equals("Y"))
+                        TAG2 tag = listMsgtype0TAGs.Find(x => x.TagName.Equals($"{equipName}_EVENTID"));
+                        if (tag != null)
                         {
-                            if (DicTAGList.TryGetValue($"{equipName}_0", out List<TAG2> listMsgtype0TAGs))
+                            tag.PIIFDateTime = DateTime.Now;
+                            tag.PIIFFlag = "N"; // N -> Y, E -> F, Z
+                            tag.IsDBInserted = false;
+                            tag.dtTimeStamp = listUpdatedEF[0].dtTimeStamp;
+                            tag.Value = eventFrameName;
+
+                            if (!(tag.TimeStamp.Equals(tag.LastMeasureDateTime) && tag.Value.Equals(tag.LastMeasureValue)))
                             {
-                                TAG2 tag = listMsgtype0TAGs.Find(x => x.TagName.Equals($"{equipName}_EVENTID"));
-                                if (tag != null)
-                                {
-                                    tag.PIIFDateTime = DateTime.Now;
-                                    tag.PIIFFlag = "N"; // N -> Y, E -> F, Z
-                                    tag.IsDBInserted = false;
-                                    tag.dtTimeStamp = listUpdatedEF[0].dtTimeStamp;
-                                    tag.Value = eventFrameName;
+                                tag.LastMeasureDateTime = tag.TimeStamp;
+                                tag.LastMeasureValue = tag.Value;
+                            }
+                        }
 
-                                    if (!(tag.TimeStamp.Equals(tag.LastMeasureDateTime) && tag.Value.Equals(tag.LastMeasureValue)))
-                                    {
-                                        tag.LastMeasureDateTime = tag.TimeStamp;
-                                        tag.LastMeasureValue = tag.Value;
-                                    }
-                                    SavePI(new List<TAG2> { tag }, true);
-                                    SaveDBHistory(new List<TAG2> { tag });
-                                    if (!tag.IsDBInserted)
-                                    {
-                                        SaveFile(new List<TAG2> { tag });
-                                    }
-                                }
+                        tag = listMsgtype0TAGs.Find(x => x.TagName.Equals($"{equipName}_MSGTYPE"));
+                        if (tag != null)
+                        {
+                            tag.PIIFDateTime = DateTime.Now;
+                            tag.Remark = string.Empty;
+                            tag.PIIFFlag = "N"; // N -> Y, E -> F, Z
+                            tag.IsDBInserted = false;
+                            tag.dtTimeStamp = listUpdatedEF[0].dtTimeStamp;
+                            tag.Value = msgType.ToString(); ;
 
-                                tag = listMsgtype0TAGs.Find(x => x.TagName.Equals($"{equipName}_MSGTYPE"));
-                                if (tag != null)
-                                {
-                                    tag.PIIFDateTime = DateTime.Now;
-                                    tag.Remark = string.Empty;
-                                    tag.PIIFFlag = "N"; // N -> Y, E -> F, Z
-                                    tag.IsDBInserted = false;
-                                    tag.dtTimeStamp = listUpdatedEF[0].dtTimeStamp;
-                                    tag.Value = msgType.ToString(); ;
-
-                                    if (!(tag.TimeStamp.Equals(tag.LastMeasureDateTime) && tag.Value.Equals(tag.LastMeasureValue)))
-                                    {
-                                        tag.LastMeasureDateTime = tag.TimeStamp;
-                                        tag.LastMeasureValue = tag.Value;
-                                    }
-                                    SavePI(new List<TAG2> { tag }, true);
-                                    SaveDBHistory(new List<TAG2> { tag });
-                                    if (!tag.IsDBInserted)
-                                    {
-                                        SaveFile(new List<TAG2> { tag });
-                                    }
-                                }
+                            if (!(tag.TimeStamp.Equals(tag.LastMeasureDateTime) && tag.Value.Equals(tag.LastMeasureValue)))
+                            {
+                                tag.LastMeasureDateTime = tag.TimeStamp;
+                                tag.LastMeasureValue = tag.Value;
                             }
                         }
                     }
                 }
-                bool dbResult = SaveDBEFHistory(equipName, msgType, eventFrameName, measureTime, measureTime, efData.GetSerializedAttributes(), serverTime, efData.TemplateName, efData.IFTime, efData.IFFlag, efData.IFRemark);
-                if (!dbResult)
-                {
-                    SaveFileEFHistory(efData);
-                }
-            }
-            return true;
-        }
-        private (string afIFFlag, string afIFRemark) SaveEventFrame(string eventFrameName, AFElementTemplate eventFrameTemplate, string startTime, string endTime, List<EventFrameAttributeData> listAttributes)
-        {
-            try
-            {
-                // AF 연결 
-                if (!CheckAFDatabase(out string errString))
-                {
-                    return ("E", errString);
-                }
-                // EF 만들기
-                AFEventFrame ef = new AFEventFrame(_AFDatabase, eventFrameName, eventFrameTemplate);
-                ef.SetStartTime(startTime);
-                ef.SetEndTime(endTime);
-
-                listAttributes.ForEach(attrib => ef.Attributes[attrib.Name]?.SetValue(new AFValue(attrib.Value)));
-                ef.CheckIn();
-            }
-            catch (Exception ex)
-            {
-                return ("E", $"Exception in SaveEventFrame - ({ex})");
-            }
-            return ("Y", string.Empty);
-        }
-
-        private bool SaveFileEFHistory(EventFrameData efData)
-        {
-            string fullFileName;
-            try
-            {
-                while (true)
-                {
-                    fullFileName = $@"{FilePath}\{efData.Name}.eff";
-                    if (File.Exists(fullFileName))
-                        continue;
-                    File.AppendAllText(fullFileName, JsonSerializer.Serialize(efData), dataEncoding);
-                    string fileContent = File.ReadAllText(fullFileName);
-                    break;
-                }
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
-            return true;
-        }
-
-        private bool SaveDBEFHistory(string equipName, int msgType, string eventFrameName, string measureStartTime, string measureEndTime, string jsonAttributes, string serverTime, string templateName, string afIFTime, string afIFFlag, string afIFRemark)
-        {
-            bool result = false;
-            string errCode = string.Empty;
-            string errText = string.Empty;
-
-            try
-            {
-                if (result = m_sqlBiz.InsertEFResult(equipName, msgType, measureStartTime, measureEndTime, eventFrameName, jsonAttributes, serverTime, templateName, afIFTime, afIFFlag, afIFRemark, ref errCode, ref errText))
-                {
-                }
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
-            return result;
-        }
-
-        private bool CheckAFDatabase(out string errText)
-        {
-            errText = string.Empty;
-            lock (objLock)
-            {
-                if (_AFDatabase == null || !_AFDatabase.PISystem.ConnectionInfo.IsConnected)
-                {
-                    _AFDatabase = GetAFDatabase(m_clsPIInfo.AF_SERVER, m_clsPIInfo.AF_DB, m_clsPIInfo.AF_USER, m_clsPIInfo.AF_PWD, m_clsPIInfo.AF_DOMAIN, out string errString);
-                    if (_AFDatabase == null)
-                    {
-                        errText = $"AF not connected. {(string.IsNullOrWhiteSpace(errString) ? "" : errString)}";
-                        return false;
-                    }
-                }
-                if (!_AFDatabase.PISystem.ConnectionInfo.IsConnected)
-                {
-                    errText = "PISystem not connected.";
-                    return false;
-                }
-            }
-            return true;
-        }
-
-        public AFDatabase GetAFDatabase(string serverName, string databaseName, string user, string pwd, string domain, out string errString)
-        {
-            try
-            {
-                errString = string.Empty;
-
-                PISystems systems = new PISystems();
-                PISystem assetServer;
-
-                if (!string.IsNullOrEmpty(serverName))
-                    assetServer = systems[serverName];
-                else
-                    assetServer = systems.DefaultPISystem;
-
-                NetworkCredential credential = new NetworkCredential(user, pwd, domain);
-            }
-            catch (Exception ex)
-            {
-                errString = ex.Message;
-            }
-            return null;
-        }
-
-        private AFElementTemplate GetEventFrameTemplate(string templateName)
-        {
-            AFElementTemplate result = _AFDatabase?.ElementTemplates?.Where(x => x.InstanceType.Equals(typeof(AFEventFrame)) && x.Name.Equals(templateName))?.FirstOrDefault();
-            return result;
-        }
-
-        private AFElementTemplate GetEventFrameTemplate(string equipTypeName, int msgType, List<string> listAttributeNames, out string errMessage)
-        {
-            try
-            {
-                errMessage = string.Empty;
-
-                // 최초 afDB 로드 후 다른 인스턴스에서 변경된 내용은 refresh 해야 한다
-                // AF 연결 
-                if (!CheckAFDatabase(out string errString))
-                {
-                    errMessage = errString;
-                    return null;
-                }
-
-                AFElementTemplate efTemplate = null;
-                string efTemplateName = $"{equipTypeName}_{msgType:00}";
-
-                _AFDatabase.Refresh();
-                // 템플릿 조회
-                efTemplate = GetEventFrameTemplate(efTemplateName);
-                if (efTemplate != null)
-                {
-                }
-                else
-                {
-                    efTemplate = CreateEventFrameTemplate(_AFDatabase, efTemplateName, listAttributeNames);
-                }
-                return efTemplate;
-            }
-            catch (Exception ex)
-            {
-                errMessage = $"Exception in GetEventFrameTemplate - ({ex})";
-                return null;
-            }
-        }
-
-        private AFElementTemplate CreateEventFrameTemplate(AFDatabase database, string eventFrameTemplateName, List<string> listAttributeNames)
-        {
-            AFElementTemplate eventFrameTemplate = null;
-
-            if (database == null) throw new ArgumentNullException(nameof(database));
-
-            eventFrameTemplate = database.ElementTemplates.Add(eventFrameTemplateName);
-            eventFrameTemplate.InstanceType = typeof(AFEventFrame);
-            eventFrameTemplate.Description = $"{eventFrameTemplateName}";
-
-            AFAttributeTemplate afAttrib;
-
-            foreach (var attribName in listAttributeNames)
-            {
-                afAttrib = eventFrameTemplate.AttributeTemplates.Add(attribName);
-                afAttrib.Type = typeof(string);
-            }
-
-            eventFrameTemplate.CheckIn();
-
-            return eventFrameTemplate;
-        }
-
-        private bool CheckPIConnection(out string errText)
-        {
-            errText = string.Empty;
-
-            if (string.IsNullOrWhiteSpace(m_clsPIInfo.strPI_Server))
-            {
-                errText = "No PI Server info.";
-                return false;
-            }
-
-            if (_PIServer == null)
-            {
-                _PIServer = PIServer.FindPIServer(_PISystem, m_clsPIInfo.strPI_Server);
-                if (_PIServer == null)
-                {
-                    errText = "FindPIServer Returned Null.";
-                    return false;
-                }
-            }
-            if (!_PIServer.ConnectionInfo.IsConnected)
-            {
-                try
-                {
-                    _PIServer.Connect();
-                }
-                catch (Exception ex)
-                {
-                    errText = $"Exception PI Server Connection ({m_clsPIInfo.strPI_Server})";
-                    return false;
-                }
-
-                if (!_PIServer.ConnectionInfo.IsConnected)
-                {
-                    errText = "PI Not Connected.";
-                    return false;
-                }
-            }
-            return true;
-        }
-
-        private bool SavePI(List<TAG2> listResult, bool ignoreDisabled = false)
-        {
-            try
-            {
-                string errText;
-                bool result = false;
-
-                if (!updatePIPoint && !ignoreDisabled)
-                {
-                    listResult.ForEach(tag =>
-                    {
-                        tag.PIIFFlag = "D";
-                        tag.Remark = "PIPoint Save is disabled.";
-                    });
-                    return false;
-                }
-
-                if (!CheckPIConnection(out errText))
-                {
-                    listResult.ForEach(tag =>
-                    {
-                        tag.PIIFFlag = "E";
-                        tag.Remark = errText;
-                    });
-                    return false;
-                }
-
-                foreach (TAG2 tag in listResult)
-                {
-                    errText = string.Empty;
-                    tag.PIIFFlag = "E";
-                    result = false;
-
-                    if (string.IsNullOrWhiteSpace(tag.PITagName))
-                    {
-                        errText = "Missing PI TAG Name";
-                    }
-                    else
-                    {
-                        result = SetPIValue(tag.PITagName, tag.Value, tag.dtTimeStamp, ref errText);
-                    }
-
-                    if (result)
-                    {
-                        tag.PIIFFlag = "Y";                    
-                    }
-                    else
-                    {
-                        tag.PIIFFlag = "E";
-                        tag.Remark = errText;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
-            return true;
-        }
-        public bool SetPIValue(string pointName, object pointValue, DateTime mTime, ref string _strErrText)
-        {
-            try
-            {
-                PIPoint point = PIPoint.FindPIPoint(_PIServer, pointName);
-                AFTime aTime = new AFTime(mTime.ToUniversalTime());
-                AFValue value = new AFValue(pointValue, aTime);
-                point.UpdateValue(value, OSIsoft.AF.Data.AFUpdateOption.Insert, OSIsoft.AF.Data.AFBufferOption.Buffer);
-            }
-            catch (Exception ex)
-            {
-                _strErrText = ex.ToString().Replace("\\", " ").Replace("\r\n", " ").Replace("'", " ");
-                return false;
-            }
-            return true; ;
-        }
-        private bool SaveDBHistory(List<TAG2> listResult)
-        {
-            string errCode = string.Empty;
-            string errText = string.Empty;
-
-            try
-            {
-                foreach (TAG2 tag in listResult)
-                {
-                    errCode = string.Empty;
-                    errText = string.Empty;
-
-                    if (tag.IsDBInserted = m_sqlBiz.InsertResult(tag.TagName, tag.TimeStamp, tag.Value, tag.PIIFFlag, tag.PIIFTimeStamp, tag.Remark, ref errCode, ref errText))
-                    {
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
-            return true;
-        }
-        private bool SaveFile(List<TAG2> listResult)
-        {
-            string fullFileName;
-            try
-            {
-                while (true)
-                {
-                    fullFileName = $@"{FilePath}\{DateTime.Now:yyyyMMddHHmmssfff}.ttv";
-                    if (File.Exists(fullFileName))
-                        continue;
-                    File.AppendAllLines(fullFileName, listResult.Select(x => x.TTFTV), dataEncoding);
-                    string fileContent = File.ReadAllText(fullFileName);
-                    break;
-                }
-            }
-            catch (Exception ex)
-            {
-                return false;
             }
             return true;
         }
