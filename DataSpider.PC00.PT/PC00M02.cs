@@ -30,10 +30,8 @@ namespace DataSpider.PC00.PT
         private bool checkServerTimeDup = false;
 
         // 20220908, SHS, SERVERTIME 중복체크 (시간만 비교할지 값도 비교할지) 옵션 기능 추가
-        public PC00M02(DataGridView dataGridView)
+        public PC00M02()
         {
-            dataGridView_Main = dataGridView;
-            ProcessData(dataGridView_Main);
         }
         public void ProcessData(DataGridView dataGridView)
         {
@@ -661,18 +659,10 @@ namespace DataSpider.PC00.PT
                 }
             }
 
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            // PI Point 
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            ///
-            // 값이 처리된 태그와 중복되지 않은 태그만 처리
-            // 20240701, SHS, P5 에서 PI TAG 도 중복체크 하지 않고 수신하는 그대로 저장
-            //List<TAG> listUpdated = listTAG.FindAll(x => x.IsValueUpdated && !x.IsDuplicated);
             List<TAG2> listUpdated = listTAG.FindAll(x => x.IsValueUpdated);
             // 저장할 데이터가 있는 경우에만
             if (listUpdated.Count > 0)
             {
-                // 초기화
                 DateTime dtNow = DateTime.Now;
                 listUpdated.ForEach(tag =>
                 {

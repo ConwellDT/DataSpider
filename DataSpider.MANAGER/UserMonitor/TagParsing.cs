@@ -11,7 +11,7 @@ namespace DataSpider.UserMonitor
         public delegate bool OnRefreshTreeDataDelegate();
         public event OnRefreshTreeDataDelegate OnRefreshTreeData = null;
         private PC00Z01 sqlBiz = new PC00Z01();
-        private PC00M02 dataProcess;
+        private PC00M02 dataProcess = new PC00M02();
         private string equipType;
         private string equipmentName;
         private string zoneType;
@@ -19,7 +19,6 @@ namespace DataSpider.UserMonitor
         public TagParsing()
         {
             InitializeComponent();
-            dataProcess = new PC00M02(dataGridView_Main);
         }
 
         private void DateTimeParsing_Load(object sender, EventArgs e)
