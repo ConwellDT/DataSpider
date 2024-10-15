@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.Text.Json;
 using System.Windows.Forms;
 
 using DataSpider.PC00.PT;
@@ -83,36 +84,81 @@ namespace DataSpider.UserMonitor
             string strErrCode = string.Empty;
             string strErrText = string.Empty;
 
-            int nHoriScrollOffset = dataGridView_Main.HorizontalScrollingOffset;
-            int nRowIndex = dataGridView_Main.FirstDisplayedScrollingRowIndex;
-
-            dataGridView_Main.RowTemplate.MinimumHeight = 30;
-            dataGridView_Main.DoubleBuffered(true);
-            dataGridView_Main.DataSource = null;
+            InitializeDataGridView(dataGridView_Main);
+            InitializeDataGridView(dataGridView_EventFrame);
 
             DataTable dtProgramStatus = sqlBiz.GetMsgTypeTagValue(equipType.Trim(), equipName.Trim(), zoneType, msgType, ref strErrCode, ref strErrText);
             if (dtProgramStatus == null || dtProgramStatus.Rows.Count < 1)
             {
+
                 return;
             }
+            dataGridView_Main.DataSource = dtProgramStatus.DefaultView;
 
-            DataView dvProgramStatus = dtProgramStatus.DefaultView;
-
-            dataGridView_Main.DataSource = dvProgramStatus;
-
-            if (dvProgramStatus.Count > 0)
+            DataTable dtProgramStatus2 = sqlBiz.GetCurrentMsgTypeEventFrameData(equipType.Trim(), equipName.Trim(), zoneType.Trim(), msgType, ref strErrCode, ref strErrText);
+            if (dtProgramStatus2 == null || dtProgramStatus2.Rows.Count < 1)
             {
-                dataGridView_Main.HorizontalScrollingOffset = nHoriScrollOffset > 0 ? nHoriScrollOffset : 0;
+                dataGridView_Attributes.Rows.Clear();
+                return;
+            }
+            dataGridView_EventFrame.DataSource = dtProgramStatus2.DefaultView;
 
-                if (dvProgramStatus.Count > nRowIndex)
+            dataGridView_Attributes.Rows.Clear();
+            AttributesGrid(dataGridView_EventFrame);
+
+            RestoreScrollPosition(dataGridView_Main);
+            RestoreScrollPosition(dataGridView_EventFrame);
+        }
+
+        private void InitializeDataGridView(DataGridView gridView)
+        {
+            gridView.RowTemplate.MinimumHeight = 30;
+            gridView.DoubleBuffered(true);
+            gridView.DataSource = null;
+        }
+
+        private void AttributesGrid(DataGridView eventFrameGrid)
+        {
+
+            DataView dv = eventFrameGrid.DataSource as DataView;
+            if (dv == null) return;
+
+            string attributes = dv[eventFrameGrid.SelectedCells[0].RowIndex]["Attributes"].ToString();
+            using (JsonDocument document = JsonDocument.Parse(attributes))
+            {
+                JsonElement root = document.RootElement;
+                if (root.ValueKind != JsonValueKind.Array || root.GetArrayLength() == 0) return;
+
+                foreach (JsonElement jElement in root.EnumerateArray())
                 {
-                    dataGridView_Main.FirstDisplayedScrollingRowIndex = nRowIndex > 0 ? nRowIndex : 0;
-                }
-                else
-                {
-                    dataGridView_Main.FirstDisplayedScrollingRowIndex = 0;
+                    int row = dataGridView_Attributes.Rows.Add();
+                    dataGridView_Attributes.Rows[row].Cells["AttributeName"].Value = jElement.GetProperty("Name").GetString();
+                    dataGridView_Attributes.Rows[row].Cells["AttributeValue"].Value = jElement.GetProperty("Value").GetString();
                 }
             }
+        }
+
+        private void RestoreScrollPosition(DataGridView gridView)
+        {
+            if (gridView.DataSource != null)
+            {
+                int nHoriScrollOffset = gridView.HorizontalScrollingOffset;
+                int nRowIndex = gridView.FirstDisplayedScrollingRowIndex;
+
+                gridView.HorizontalScrollingOffset = Math.Max(nHoriScrollOffset, 0);
+
+                if (gridView.Rows.Count > 0)
+                {
+                    int maxIndex = gridView.Rows.Count - 1;
+                    gridView.FirstDisplayedScrollingRowIndex = Clamp(nRowIndex, 0, maxIndex);
+                }
+            }
+        }
+
+        // Custom clamp method
+        private int Clamp(int value, int min, int max)
+        {
+            return Math.Max(min, Math.Min(value, max));
         }
 
         private void comboBoxMsgType_SelectedIndexChanged(object sender, EventArgs e)
@@ -202,7 +248,7 @@ namespace DataSpider.UserMonitor
                 m_Data = queueMessage
             };
             PC00U01.WriteQueue(msg);
-            dataProcess.ProcessData(dataGridView_Main);
+            dataProcess.ProcessData(dataGridView_Main, dataGridView_EventFrame ,dataGridView_Attributes);
         }
 
         private void RefreshTreeView()
