@@ -145,6 +145,22 @@ namespace DataSpider.PC01.PT
                 listViewMsg.UpdateMsg($"Not defined WorkFlowType : {workFlowType}. Failed to process file", false, true, true, PC00D01.MSGTERR);
                 return false;
             }
+            /*
+            int msgType;
+
+            if (dicMsgType.Count == 0)
+            {
+                listViewMsg.UpdateMsg($"Message types are not defined. Use default message type 1.", false, true, true, PC00D01.MSGTERR);
+                msgType = 1;
+            }
+            else if (!dicMsgType.TryGetValue(workFlowType, out msgType))
+            {
+                //listViewMsg.UpdateMsg($"Not defined WorkFlowType : {workFlowType}. Failed to process file", false, true, true, PC00D01.MSGTERR);
+                //return false;
+                listViewMsg.UpdateMsg($"Not defined message type. WorkFlowType : {workFlowType}. Use default message type 1.", false, true, true, PC00D01.MSGTERR);
+                msgType = 1;
+            }
+            */
 
             // Measure DateTime
             //if (!dicData.TryGetValue("_TIMESTAMP", out string rawMeasureDateTime))
