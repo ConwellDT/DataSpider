@@ -144,20 +144,18 @@ namespace DataSpider.UserMonitor
                 try
                 {
                     selectedIndex = listView_Main.SelectedIndices.Count > 0 ? listView_Main.SelectedIndices[0] : 0;
-                    //if (checkBox_AutoRefresh.Checked)
-                    //{
-                    //    timerRefresh.Stop();
-                    //}
+
                     if (!formSelected)
                     {
                         return;
                     }
                     string strErrCode = string.Empty;
                     string strErrText = string.Empty;
+
                     //23.09.07 zone Type 추가
-                    //DataTable dtProgramStatus = sqlBiz.GetProgramStatus(equipType.Trim(), ref strErrCode, ref strErrText);
                     listView_Main.Items.Clear();
-                    DataTable dtProgramStatus = sqlBiz.GetProgramStatus3(equipType.Trim(), zoneType.Trim(), ref strErrCode, ref strErrText);
+
+                    DataTable dtProgramStatus = sqlBiz.GetProgramStatus3(equipType.Trim(), zoneType.Trim(), MonitorForm.showAllEquipmtStatus,  ref strErrCode, ref strErrText);
                     if (dtProgramStatus == null || dtProgramStatus.Rows.Count < 1 || dtProgramStatus.Columns.Count < 1)
                     {
                         return;
@@ -172,11 +170,9 @@ namespace DataSpider.UserMonitor
                             listView_Main.Columns.Add(dc.ColumnName);
                         }
                     }
-                    //listView_Main.Items.Clear();
                     foreach (DataRow dr in dtProgramStatus.Rows)
                     {
                         ListViewItem lvi = new ListViewItem();
-                        //lvi.Text = lvi.ImageKey = dr[0].ToString();
                         lvi.Text = lvi.ImageKey = dr[0].ToString();
 
                         for (int i = 1; i < dtProgramStatus.Columns.Count; i++)
@@ -196,13 +192,11 @@ namespace DataSpider.UserMonitor
                                 break;
                         }
 
-                        //lvi.BackColor = listView_Main.Items.Count % 2 == 0 ? Color.FromKnownColor(KnownColor.AliceBlue) : Color.Transparent;
                         lvi.BackColor = listView_Main.Items.Count % 2 == 0 ? Color.FromArgb(221, 235, 247) : Color.Transparent;
                         listView_Main.Items.Add(lvi);
                     }
                     if (needResizeColumn)
                     {
-                        //listView_Main.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
                         listView_Main.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
                         needResizeColumn = false;
                     }

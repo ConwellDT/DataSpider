@@ -690,13 +690,14 @@ namespace DataSpider.PC00.PT
             return result;
         }
 
-        public DataTable GetProgramStatus3(string equipType, string zoneType, ref string _strErrCode, ref string _strErrText)
+        public DataTable GetProgramStatus3(string equipType, string zoneType, bool useShowAllflag, ref string _strErrCode, ref string _strErrText)
         {
             DataTable result = null;
             try
             {
+                string use_flag = useShowAllflag ? "Y" : string.Empty;
                 StringBuilder strQuery = new StringBuilder();
-                strQuery.Append($"EXEC GetProgramStatus3 '{equipType}','{zoneType}'");
+                strQuery.Append($"EXEC GetProgramStatus3 '{equipType}','{zoneType}', '{use_flag}'");
 
                 DataSet ds = CFW.Data.MsSqlDbAccess.GetDataSet(strQuery.ToString(), null, CommandType.Text, ref _strErrCode, ref _strErrText);
                 if (ds != null && ds.Tables[0] != null)
