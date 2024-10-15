@@ -772,6 +772,27 @@ namespace DataSpider.PC00.PT
             }
             return result;
         }
+
+        public DataTable GetCurrentMsgTypeEventFrameData(string equipType, string equipName, string zoneType, string msgType, ref string _strErrCode, ref string _strErrText)
+        {
+            DataTable result = null;
+            try
+            {
+                StringBuilder strQuery = new StringBuilder();
+                strQuery.Append($"EXEC GetCurrentMsgTypeEventFrameData '{equipType}', '{equipName}','{zoneType}', '{msgType}'");
+
+                DataSet ds = CFW.Data.MsSqlDbAccess.GetDataSet(strQuery.ToString(), null, CommandType.Text, ref _strErrCode, ref _strErrText);
+                if (ds != null && ds.Tables[0] != null)
+                {
+                    result = ds.Tables[0];
+                }
+            }
+            catch (Exception ex)
+            {
+                _strErrText = ex.ToString();
+            }
+            return result;
+        }
         public DataTable GetEventFrameDataHistory(string minDate, string maxDate, string equipType, string equipName, string zoneType, ref string _strErrCode, ref string _strErrText)
         {
             DataTable result = null;

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
-using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Windows.Forms;
@@ -20,6 +19,7 @@ namespace DataSpider.PC00.PT
     {
         private EquipmentDataProcess2 dataProcess = null;
         private DataGridView dataGridView_Main;
+        private DataGridView dataGridView_Attributes;
         private DataTable dtTagInfo = null;
         private DateTime dtLastTagUpdated = DateTime.MinValue;
         private DateTime dtCheckTagUpdate = DateTime.MinValue;
@@ -33,10 +33,10 @@ namespace DataSpider.PC00.PT
         public PC00M02()
         {
         }
-        public void ProcessData(DataGridView dataGridView)
+        public void ProcessData(DataGridView dataGridView, DataGridView dataGridView_EventFrame, DataGridView dataGridView_Attributes)
         {
             GetTagInfo();
-            Job(dataGridView);
+            Job(dataGridView, dataGridView_EventFrame, dataGridView_Attributes);
         }
         public bool GetTagInfo()
         {
@@ -84,7 +84,7 @@ namespace DataSpider.PC00.PT
                 }
             }
         }
-        private void Job(DataGridView dataGridView)
+        private void Job(DataGridView dataGridView, DataGridView dataGridView_EventFrame, DataGridView dataGridView_Attributes)
         {
             dataProcess = new EquipmentDataProcess2(m_ConnectionInfo, drEquipment, dtTagInfo, listViewMsg, dataEncoding, checkServerTimeDup);
             try
@@ -96,7 +96,7 @@ namespace DataSpider.PC00.PT
                 {
                     return;
                 }
-                if (dataProcess.DataProcess(msg, dataGridView))
+                if (dataProcess.DataProcess(msg, dataGridView, dataGridView_EventFrame, dataGridView_Attributes))
                 {
                 }
                 else
@@ -638,13 +638,13 @@ namespace DataSpider.PC00.PT
             }
             return true;
         }
-        public bool DataProcess(QueueMsg msg, DataGridView dataGridView)
+        public bool DataProcess(QueueMsg msg, DataGridView dataGridView, DataGridView dataGridView_EventFrame, DataGridView dataGridView_Attributes)
         {
             if (msg == null) return false;
-            else return DataProcess(msg.m_EqName, msg.m_MsgType, msg.m_Data.Split(new string[] { "\r\n", "\n" }, StringSplitOptions.None), dataGridView);
+            else return DataProcess(msg.m_EqName, msg.m_MsgType, msg.m_Data.Split(new string[] { "\r\n", "\n" }, StringSplitOptions.None), dataGridView, dataGridView_EventFrame, dataGridView_Attributes);
         }
 
-        public bool DataProcess(string equipName, int msgType, string[] data, DataGridView dataGridView)
+        public bool DataProcess(string equipName, int msgType, string[] data, DataGridView dataGridView, DataGridView dataGridView_EventFrame, DataGridView dataGridView_Attributes)
         {
             if (!DicTAGList.TryGetValue($"{equipName}_{msgType}", out List<TAG2> listTAG))
             {
@@ -691,76 +691,56 @@ namespace DataSpider.PC00.PT
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             // EventFrame
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            ///
-            // 값이 처리된 태그와 EFAttributeName 이 설정된 태그만 처리
-            List<TAG2> listUpdatedEF = listTAG.FindAll(x => x.IsValueUpdated && !string.IsNullOrWhiteSpace(x.EFAttributeName));
+
+            List<TAG2> listUpdatedEF = listUpdated.FindAll(x => !string.IsNullOrWhiteSpace(x.EFAttributeName));
             if (listUpdatedEF.Count > 0)
             {
-                // AF I/F Time
-                string afIFTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
-                // SVRTIME
                 string serverTime = dtServerTime.ToString("yyyy-MM-dd HH:mm:ss.fff");
                 string eventFrameName = $"{equipName}_{dtServerTime:yyyyMMddHHmmssfff}";
-                //string eventFrameTemplateName = $"{equipTypeName}_{msgType:00}_Template_A";                
                 string measureTime = listUpdatedEF[0].dtTimeStamp.ToString("yyyy-MM-dd HH:mm:ss.fff");
-
-                // EventFrame 저장
-                //var efResult = SaveEventFrame(equipName, eventFrameName, eventFrameTemplateName, measureTime, measureTime, listUpdatedEF, listTAG.FindAll(x => !string.IsNullOrWhiteSpace(x.EFAttributeName)));
-                List<string> listAttributeNames = listTAG.Where(x => !string.IsNullOrWhiteSpace(x.EFAttributeName)).Select(x => x.EFAttributeName).ToList();
 
                 EventFrameData efData = new EventFrameData()
                 {
                     Name = eventFrameName,
                     StartTime = measureTime,
                     EndTime = measureTime,
-                    IFTime = afIFTime,
                     EquipmentName = equipName,
                     MessageType = msgType,
                     ServerTime = serverTime,
-                    IFFlag = updateEventFrame ? "E" : "D",
                     TemplateName = $"{equipTypeName}_{msgType:00}"
                 };
 
+                ///
+                // 값이 처리된 태그와 EFAttributeName 이 설정된 태그만 처리
                 listUpdatedEF.ForEach(tag => efData.Attributes.Add(new EventFrameAttributeData() { Name = tag.EFAttributeName, Value = tag.Value }));
-                if (!updateEventFrame)
+
+                foreach (DataGridViewRow row in dataGridView_EventFrame.Rows)
                 {
-                    efData.IFRemark = "EventFrame Save is disabled.";
+                    row.Cells["Measure DateTime"].Value = measureTime;
+                    row.Cells["EventFrame Name"].Value = eventFrameName;
+                    row.Cells["Server DateTime"].Value = serverTime;
+
+                    string attributesJson = JsonSerializer.Serialize(efData.Attributes);
+                    row.Cells["Attributes"].Value = attributesJson;
+
+                    row.Cells["Update DateTime"].Value = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+
+                    string equipmentType = row.Cells["Equipment Type"].Value?.ToString().Trim();
+                    row.Cells["EventFrame Template"].Value = !string.IsNullOrEmpty(equipmentType)
+                        ? $"{equipmentType}_{msgType:00}" 
+                        : $"{msgType:00}"; 
+
+                    break;
                 }
-                else
+
+                foreach (var tag in listUpdatedEF)
                 {
-                    if (DicTAGList.TryGetValue($"{equipName}_0", out List<TAG2> listMsgtype0TAGs))
+                    foreach (DataGridViewRow row in dataGridView_Attributes.Rows)
                     {
-                        TAG2 tag = listMsgtype0TAGs.Find(x => x.TagName.Equals($"{equipName}_EVENTID"));
-                        if (tag != null)
+                        if (row.Cells["AttributeName"].Value.ToString() == tag.EFAttributeName)
                         {
-                            tag.PIIFDateTime = DateTime.Now;
-                            tag.PIIFFlag = "N"; // N -> Y, E -> F, Z
-                            tag.IsDBInserted = false;
-                            tag.dtTimeStamp = listUpdatedEF[0].dtTimeStamp;
-                            tag.Value = eventFrameName;
-
-                            if (!(tag.TimeStamp.Equals(tag.LastMeasureDateTime) && tag.Value.Equals(tag.LastMeasureValue)))
-                            {
-                                tag.LastMeasureDateTime = tag.TimeStamp;
-                                tag.LastMeasureValue = tag.Value;
-                            }
-                        }
-
-                        tag = listMsgtype0TAGs.Find(x => x.TagName.Equals($"{equipName}_MSGTYPE"));
-                        if (tag != null)
-                        {
-                            tag.PIIFDateTime = DateTime.Now;
-                            tag.Remark = string.Empty;
-                            tag.PIIFFlag = "N"; // N -> Y, E -> F, Z
-                            tag.IsDBInserted = false;
-                            tag.dtTimeStamp = listUpdatedEF[0].dtTimeStamp;
-                            tag.Value = msgType.ToString(); ;
-
-                            if (!(tag.TimeStamp.Equals(tag.LastMeasureDateTime) && tag.Value.Equals(tag.LastMeasureValue)))
-                            {
-                                tag.LastMeasureDateTime = tag.TimeStamp;
-                                tag.LastMeasureValue = tag.Value;
-                            }
+                            row.Cells["AttributeValue"].Value = tag.Value;
+                            break;
                         }
                     }
                 }

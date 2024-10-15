@@ -1,19 +1,12 @@
-﻿using DataSpider.PC00.PT;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System;
 using System.Data;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
-using System.Text;
+using System.Text.Json;
 using System.Threading;
 using System.Windows.Forms;
-using System.Reflection;
-using System.Text.Json.Serialization;
-using System.Text.Json;
-using System.Xml.Linq;
+
+using DataSpider.PC00.PT;
 
 namespace DataSpider.UserMonitor
 {
